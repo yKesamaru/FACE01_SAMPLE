@@ -1,0 +1,44 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "FACE01_2022年5月20日",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python"
+    },
+    {
+      "name": "2022年4月16日",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01GRAPHICS_129",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01GRAPHICS_129/bin/python"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "/home/terms/bin/FACE01GRAPHICS_129",
+      "environment": [],
+      "program": "/home/terms/bin/FACE01GRAPHICS_129/build/Debug/outDebug",
+      "internalConsoleOptions": "openOnSessionStart",
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "console": "integratedTerminal",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}

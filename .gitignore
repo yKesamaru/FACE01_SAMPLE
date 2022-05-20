@@ -1,0 +1,6 @@
+lib/*
+bin/*
+check_images/*
+face01lib/__pycache__/*
+priset_face_images/*
+share/*
