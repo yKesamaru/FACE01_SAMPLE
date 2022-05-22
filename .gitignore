@@ -4,3 +4,5 @@ check_images/*
 face01lib/__pycache__/*
 priset_face_images/*
 share/*
+noFace/*
+output/*

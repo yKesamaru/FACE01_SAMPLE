@@ -1,18 +1,13 @@
-__author__ = """y.kesamaru"""
-__email__ = 'y.kesamaru@tokai-kaoninsho.com'
-__version__ = '1.3.01'
-
-
 import configparser
 import datetime
 import os
+from pickle import NONE
 import platform
 import shutil
 import sys
 import time
 from cgitb import small
 from functools import lru_cache
-from lib2to3.pgen2 import driver
 from typing import Dict, List, Tuple
 
 import cv2
@@ -26,149 +21,13 @@ from face01lib.load_priset_image import load_priset_image
 from face01lib.similar_percentage_to_tolerance import to_tolerance
 from face01lib.video_capture import video_capture
 
-"""開発想定環境
-    Distributor ID: Ubuntu
-    Description:    Ubuntu 20.04.4 LTS
-    Release:        20.04
-    Codename:       focal
-    Python 3.8.10
-
-    > pip freeze
-        bandit==1.7.4
-        click==8.1.2
-        Cython==0.29.28
-        dlib==19.23.1
-        face-recognition==1.3.0
-        face-recognition-models==0.3.0
-        gitdb==4.0.9
-        GitPython==3.1.27
-        GPUtil==1.4.0
-        mypy==0.950
-        mypy-extensions==0.4.3
-        numpy==1.22.3
-        opencv-python==4.5.5.64
-        pbr==5.9.0
-        Pillow==9.1.0
-        pkg_resources==0.0.0
-        PySimpleGUI==4.59.0
-        PyYAML==6.0
-        smmap==5.0.0
-        snakeviz==2.1.1
-        stevedore==3.5.0
-        tk==0.1.0
-        tomli==2.0.1
-        tornado==6.1
-        typing_extensions==4.2.0
-
-# 環境構築
- terms  terms-Desks  ~/bin/FACE01  python3 -V
-Python 3.8.10
- terms  terms-Desks  ~/bin/FACE01  python3 -m venv ./
-
- terms  terms-Desks  ~/bin/FACE01  . bin/activate
-(FACE01) 
- terms  terms-Desks  ~/bin/FACE01   pip -V
-pip 20.0.2 from /home/terms/bin/FACE01/lib/python3.8/site-packages/pip (python 3.8)
-(FACE01) 
- terms  terms-Desks  ~/bin/FACE01  pip install -U pip
-...
-      Successfully uninstalled pip-20.0.2
-Successfully installed pip-22.1
-(FACE01) 
- terms  terms-Desks  ~/bin/FACE01  pip install -U setuptools
-...
-      Successfully uninstalled setuptools-44.0.0
-Successfully installed setuptools-62.3.2
-(FACE01) 
- terms  terms-Desks  ~/bin/FACE01  pip install -r requirements.txt 
-...
- terms  terms-Desks  ~/bin/FACE01  python -V
-Python 3.8.10
-(FACE01) 
- terms  terms-Desks  ~/bin/FACE01  python
- ...
->>> import dlib
->>> dlib.DLIB_USE_CUDA
-True
->>> import tkinter
->>> 
-
-
-
-
-
-
-
-
-# 備考 =================================================================
-# face_recognitionをpip installせず、自前のsimple_face_recognitionにすることは諦めた
-#   →pip installしたdlibをsimple_face_recognition内で参照(import)することが出来ないため
-# （2021年9月9日）
-# 録画処理←子アプリでやればいいのでは？
-# ======================================================================
-
-# To Do ================================================================
-# FACE01 GRAPHICSのリファクタリング
-# target_rectangleをもっと大きく→dlibまわり
-# <要修正>箇所の修正
-# テロップとロゴマークがクロップ画像に入り込まないようにする
-# Macintoshに対応させるには？Fontの選択は？
-# ======================================================================
-
-# 高速化プロジェクト リリースノート =========================
-# masterから高速化プロジェクトブランチを作成
-# ======================================================================
-
-# version 1.2.9 Linux & Windows リリースノート =========================
-# similar_percentageからtoleranceの算出をモジュール化してFACE01IMAGERでも使えるようにした
-# {name:default_image_ndarray}という辞書的変数を作りメモリに格納するのはどうか→ver.1.2.9で。←実装完了
-# ======================================================================
-
-# version 1.2.8 Linux & Windows リリースノート =========================
-# face01lib128のload_priset_image.pyのバグフィックス→face01lib126は使用不可になりました
-# バグフィックス
-# 各機能をON/OFF変更可能に変更
-# 複数顔検出機能追加
-# face_learning機能の除去←復活させたい場合はver.127を参照
-# tolerance指定をパーセント指定に変更
-# 下部エリアを新設→顔認証専用タブレットのようなインターフェースを選択可能に。
-# ======================================================================
-
-# version 1.2.7 Linux & Windows リリースノート =========================
-# config_FACE01GRAPHICS127.iniによりEXE版のための外部からの変数変更を可能にした
-# webカメラUSBデバイス番号の自動取得
-# ======================================================================
-
-# version 1.2.6 Linux & Windows リリースノート =========================
-# 顔が映っていない場合に例外エラーが発生することがあったバグをフィックス
-# バグフィックスとそれによる呼び出し方法の変更
-# パイプ機能をオミット
-# ======================================================================
-
-# version 1.2.5 Linux & Windows リリースノート =========================
-# マルチプロセスへ対応
-# 引数→TrueからTrueへ変更
-# 映像幅(setwidth)を変更可能化
-# コメント削除→参照したい場合はver.124参照のこと
-# 半自動フレームスキップ（マシンの処理速度に合わせる）
-# ======================================================================
-
-# 標準出力を日本語に。(python3系の場合）==================================
-# 標準出力のバッファリングをオフに。
-sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', buffering=1)
-# ======================================================================
-"""
-
-# 環境変数の確認
-# print('openCV->os.environ: ', os.environ.get('OPENCV_FFMPEG_CAPTURE_OPTIONS'));
-# exit(0)
 
 # opencvの環境変数変更
 os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;udp"
 
 # configファイル読み込み
-conf=configparser.ConfigParser()
-conf.read('config_FACE01GRAPHICS129.ini', 'utf-8')
+conf = configparser.ConfigParser()
+conf.read('config.ini', 'utf-8')
 similar_percentage: float =         float(conf.get('DEFAULT','similar_percentage'))
 jitters: int  =int(conf.get('DEFAULT','jitters'))
 priset_face_images_jitters: int =int(conf.get('DEFAULT','priset_face_images_jitters'))
@@ -191,6 +50,7 @@ crop_face_image: bool = conf.getboolean('DEFAULT', 'crop_face_image')
 show_name: bool = conf.getboolean('DEFAULT', 'show_name')
 should_not_be_multiple_faces: bool = conf.getboolean('DEFAULT', 'should_not_be_multiple_faces')
 bottom_area: bool = conf.getboolean('DEFAULT', 'bottom_area')
+draw_telop_and_logo: bool = conf.getboolean('DEFAULT', 'draw_telop_and_logo')
 
 def cal_specify_date() -> None:
     """指定日付計算
@@ -202,13 +62,13 @@ def cal_specify_date() -> None:
     def limit_date_alart() -> None:
         if today >= limit_date:
             print('指定日付を過ぎました')
-            sg.popup( 'サンプルアプリケーションをお使いいただきありがとうございます','使用可能期限を過ぎました', '引き続きご利用になる場合は下記までご連絡下さい', '東海顔認証　担当：袈裟丸','y.kesamaru@tokai-kaoninsho.com', '', 'アプリケーションを終了します', title='', button_type=POPUP_BUTTONS_OK, modal=True, keep_on_top=True)
+            sg.popup( 'サンプルアプリケーションをお使いいただきありがとうございます','使用可能期限を過ぎました', '引き続きご利用になる場合は下記までご連絡下さい', '東海顔認証　担当：袈裟丸','y.kesamaru@tokai-kaoninsho.com', '', 'アプリケーションを終了します', title='', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
             exit()
         elif today < limit_date:
             remaining_days = limit_date - today
             if remaining_days.days < 30:
                 dialog_text = 'お使い頂ける残日数は' + str(remaining_days.days) + '日です'
-                sg.popup( 'サンプルアプリケーションをお使いいただきありがとうございます', dialog_text, title='', button_type=POPUP_BUTTONS_OK, modal=True, keep_on_top=True)
+                sg.popup( 'サンプルアプリケーションをお使いいただきありがとうございます', dialog_text, title='', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
     limit_date_alart()
 
 # ホームディレクトリ固定
@@ -259,7 +119,7 @@ def initialize(SET_WIDTH):
 
     return date, rect01_png, telop_image, logo_image, vcap, unregistered_face_image, SET_WIDTH, fps, height, width, SET_HEIGHT, kaoninshoDir, priset_face_imagesDir
 
-@lru_cache(maxsize=128)
+@lru_cache(maxsize = 128)
 def return_fontpath():
     # フォントの設定(フォントファイルのパスと文字の大きさ)
     operating_system: str  = platform.system()
@@ -278,15 +138,15 @@ def return_frame_coordinate(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, B
     if set_area=='NONE':
         pass
     elif set_area=='TOP_LEFT':
-        frame=frame[TOP_LEFT[0]:TOP_LEFT[1],TOP_LEFT[2]:TOP_LEFT[3]]
+        frame = frame[TOP_LEFT[0]:TOP_LEFT[1],TOP_LEFT[2]:TOP_LEFT[3]]
     elif set_area=='TOP_RIGHT':
-        frame=frame[TOP_RIGHT[0]:TOP_RIGHT[1],TOP_RIGHT[2]:TOP_RIGHT[3]]
+        frame = frame[TOP_RIGHT[0]:TOP_RIGHT[1],TOP_RIGHT[2]:TOP_RIGHT[3]]
     elif set_area=='BOTTOM_LEFT':
-        frame=frame[BOTTOM_LEFT[0]:BOTTOM_LEFT[1],BOTTOM_LEFT[2]:BOTTOM_LEFT[3]]
+        frame = frame[BOTTOM_LEFT[0]:BOTTOM_LEFT[1],BOTTOM_LEFT[2]:BOTTOM_LEFT[3]]
     elif set_area=='BOTTOM_RIGHT':
-        frame=frame[BOTTOM_RIGHT[0]:BOTTOM_RIGHT[1],BOTTOM_RIGHT[2]:BOTTOM_RIGHT[3]]
+        frame = frame[BOTTOM_RIGHT[0]:BOTTOM_RIGHT[1],BOTTOM_RIGHT[2]:BOTTOM_RIGHT[3]]
     elif set_area=='CENTER':
-        frame=frame[CENTER[0]:CENTER[1],CENTER[2]:CENTER[3]]
+        frame = frame[CENTER[0]:CENTER[1],CENTER[2]:CENTER[3]]
     return frame
 
 def resize_frame(SET_WIDTH, SET_HEIGHT, frame):
@@ -307,7 +167,7 @@ def draw_logo(small_frame,logo_image,  SET_HEIGHT,SET_WIDTH):
     ## ロゴマークを合成　画面右下
     logoHeight, logoWidth = logo_image.shape[:2]
     logoRatio = SET_WIDTH / logoWidth / 10
-    logo_image = cv2.resize(logo_image, None, fx=logoRatio, fy=logoRatio)
+    logo_image = cv2.resize(logo_image, None, fx = logoRatio, fy = logoRatio)
     x1, y1, x2, y2 = SET_WIDTH - logo_image.shape[1], SET_HEIGHT - logo_image.shape[0], SET_WIDTH, SET_HEIGHT
     try:
         small_frame[y1:y2, x1:x2] = small_frame[y1:y2, x1:x2] * (1 - logo_image[:,:,3:] / 255) + logo_image[:,:,:3] * (logo_image[:,:,3:] / 255)
@@ -317,7 +177,7 @@ def draw_logo(small_frame,logo_image,  SET_HEIGHT,SET_WIDTH):
     return logo_counter, small_frame
 
 # python版
-@lru_cache(maxsize=128)
+@lru_cache(maxsize = 128)
 def cal_angle_coordinate(height:int, width:int) -> tuple:
     """画角(TOP_LEFT,TOP_RIGHT)予めを算出
 
@@ -336,7 +196,7 @@ def cal_angle_coordinate(height:int, width:int) -> tuple:
     return TOP_LEFT,TOP_RIGHT,BOTTOM_LEFT,BOTTOM_RIGHT,CENTER
 
 def return_movie_property(SET_WIDTH: int, vcap) -> tuple:
-    SET_WIDTH=SET_WIDTH
+    SET_WIDTH = SET_WIDTH
     fps: int    = vcap.get(cv2.CAP_PROP_FPS)
     height: int = vcap.get(cv2.CAP_PROP_FRAME_HEIGHT)
     width: int  = vcap.get(cv2.CAP_PROP_FRAME_WIDTH)
@@ -345,7 +205,7 @@ def return_movie_property(SET_WIDTH: int, vcap) -> tuple:
     width = int(width)
     # widthが400pxより小さい場合警告を出す
     if width < 400:
-        sg.popup( '入力指定された映像データ幅が小さすぎます','width: {}px'.format(width), 'このまま処理を続けますが', '性能が発揮できない場合があります','OKを押すと続行します', title='警告', button_type=POPUP_BUTTONS_OK, modal=True, keep_on_top=True)
+        sg.popup( '入力指定された映像データ幅が小さすぎます','width: {}px'.format(width), 'このまま処理を続けますが', '性能が発揮できない場合があります','OKを押すと続行します', title='警告', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
     # しかしながらパイプ処理の際フレームサイズがわからなくなるので決め打ちする
     SET_HEIGHT: int = int((SET_WIDTH * height) / width)
     return SET_WIDTH,fps,height,width,SET_HEIGHT
@@ -412,12 +272,13 @@ def display_percentage(percentage_and_symbol,small_frame, p, left, right, bottom
 def adjust_display_area(default_face_image,top,left,right):
     _, default_face_image_width = default_face_image.shape[:2]
     default_face_image_ratio = ((right - left) / default_face_image_width / 1.5)
-    default_face_small_image = cv2.resize(default_face_image, None, fx=default_face_image_ratio, fy=default_face_image_ratio)  # type: ignore
+    default_face_small_image = cv2.resize(default_face_image, None, fx = default_face_image_ratio, fy = default_face_image_ratio)  # type: ignore
     x1, y1, x2, y2 = right+5, top, right+5+default_face_small_image.shape[1], top + default_face_small_image.shape[0]
     return x1, y1, x2, y2, default_face_small_image
 
 # 顔部分の領域をクロップ画像ファイルとして出力
 def make_crop_face_image(name, date, dis, pil_img_obj_rgb, top, left, right, bottom, number_of_crops, frequency_crop_image):
+    date = datetime.datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
     imgCroped = pil_img_obj_rgb.crop((left -20,top -20,right +20,bottom +20)).resize((200, 200))
     filename = "output/%s_%s_%s.png" % (name, date, dis)
     imgCroped.save(filename)
@@ -475,7 +336,7 @@ def draw_bottom_area(name,small_frame):
     WIDTH = 120
     h = int(h * (WIDTH / w))
     try:
-        # unregistered_face_image = cv2.resize(unregistered_face_image, None, fx=width_ratio, fy=height_ratio)
+        # unregistered_face_image = cv2.resize(unregistered_face_image, None, fx = width_ratio, fy = height_ratio)
         unregistered_face_image = cv2.resize(unregistered_face_image, dsize=(WIDTH, h))
     except:
         pass
@@ -492,6 +353,7 @@ def draw_bottom_area(name,small_frame):
 
 # ボトムエリア内テキスト描画
 def draw_text_in_bottom_area(draw, inner_bottom_area_char_left, inner_bottom_area_char_top,name,percentage_and_symbol,date):
+    date = datetime.datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
     """TODO 動作未確認"""
     fontpath = return_fontpath()
     fontsize = 30
@@ -501,15 +363,15 @@ def draw_text_in_bottom_area(draw, inner_bottom_area_char_left, inner_bottom_are
     # position = (pos, bottom + (fontsize * 2))
     position = (inner_bottom_area_char_left, inner_bottom_area_char_top)
     # nameとpercentage_and_symbolの描画
-    draw.text(position, name, fill=(255, 255, 255, 255), font=font)
+    draw.text(position, name, fill=(255, 255, 255, 255), font = font)
     fontsize = 25
     position = (inner_bottom_area_char_left, inner_bottom_area_char_top + fontsize + 5)
-    draw.text(position, percentage_and_symbol, fill=(255, 255, 255, 255), font=font)
+    draw.text(position, percentage_and_symbol, fill=(255, 255, 255, 255), font = font)
     # dateの描画
     position = (inner_bottom_area_char_left, inner_bottom_area_char_top + fontsize * 2 + 20)
     fontsize = 12
     font = ImageFont.truetype(fontpath, fontsize, encoding = 'utf-8')
-    draw.text(position, date, fill=(255, 255, 255, 255), font=font)
+    draw.text(position, date, fill=(255, 255, 255, 255), font = font)
 
 # pil_imgオブジェクトを生成
 def pil_img_instance(small_frame):
@@ -537,11 +399,13 @@ def convert_pil_img_to_ndarray(pil_img_obj):
     return small_frame
 
 def face_names_append(matches, best_match_index, min_face_distance, face_names, name):
-    if matches[best_match_index]:  # torelance以下の人物しかここは通らない。
+    if matches[best_match_index]:  # tolerance以下の人物しかここは通らない。
         file_name = known_face_names[best_match_index]
         name = file_name + ':' + min_face_distance
+    """TODO
     else:
         print("debug")
+    """
     face_names.append(name)
     return face_names
 
@@ -557,9 +421,13 @@ def decide_text_position(error_messg_rectangle_bottom,error_messg_rectangle_left
     return error_messg_rectangle_position
 
 def draw_error_messg_rectangle_messg(draw, error_messg_rectangle_position, error_messg_rectangle_messg, error_messg_rectangle_font):
-    draw.text(error_messg_rectangle_position, error_messg_rectangle_messg, fill=(255, 255, 255, 255), font=error_messg_rectangle_font)
+    draw.text(error_messg_rectangle_position, error_messg_rectangle_messg, fill=(255, 255, 255, 255), font = error_messg_rectangle_font)
 
-def make_frame_datas_array(frame_datas_array,small_frame):
+def make_frame_datas_array(name,filename,date,top,right,bottom,left,percentage_and_symbol,person_datas,frame_datas_array,small_frame):
+    date = datetime.datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
+    person_data = {'name': name, 'pict':filename,  'date':date, 'location':(top,right,bottom,left), 'percentage_and_symbol': percentage_and_symbol}
+    person_datas.append(person_data)
+    frame_datas = {'img':small_frame, 'person_datas': person_datas}
     frame_datas_array.append(frame_datas)
     return frame_datas_array
 
@@ -596,7 +464,7 @@ def draw_rectangle_for_name(name,small_frame, left, right,bottom):
     if name == 'Unknown':   # nameがUnknownだった場合
         small_frame = cv2.rectangle(small_frame, (left-25, bottom + 25), (right+25, bottom+50), (255, 87, 243), cv2.FILLED) # pink
     else:                   # nameが既知だった場合
-        # cv2.rectangle(small_frame, (left-25, bottom + 25), (right+25, bottom+50), (211, 173, 54), thickness=1) # 濃い水色の線
+        # cv2.rectangle(small_frame, (left-25, bottom + 25), (right+25, bottom+50), (211, 173, 54), thickness = 1) # 濃い水色の線
         small_frame = cv2.rectangle(small_frame, (left-25, bottom + 25), (right+25, bottom+50), (211, 173, 54), cv2.FILLED) # 濃い水色
     return small_frame
 
@@ -616,15 +484,15 @@ def draw_text_for_name(left,right,bottom,name, p,tolerance,pil_img_obj):
 def draw_name(name,pil_img_obj, Unknown_position, font, p, tolerance, position):
     local_draw_obj = ImageDraw.Draw(pil_img_obj)
     if name == 'Unknown':  ## nameがUnknownだった場合
-        # draw.text(Unknown_position, '照合不一致', fill=(255, 255, 255, 255), font=font)
-        local_draw_obj.text(Unknown_position, '　未登録', fill=(255, 255, 255, 255), font=font)
+        # draw.text(Unknown_position, '照合不一致', fill=(255, 255, 255, 255), font = font)
+        local_draw_obj.text(Unknown_position, '　未登録', fill=(255, 255, 255, 255), font = font)
     else:  ## nameが既知の場合
         # if percentage > 99.0:
         if p < tolerance:
             # nameの描画
-            local_draw_obj.text(position, name, fill=(255, 255, 255, 255), font=font)
+            local_draw_obj.text(position, name, fill=(255, 255, 255, 255), font = font)
         else:
-            local_draw_obj.text(position, name, fill=(255, 87, 243, 255), font=font)
+            local_draw_obj.text(position, name, fill=(255, 87, 243, 255), font = font)
     return pil_img_obj
 
 # target_rectangleの描画
@@ -640,7 +508,7 @@ def draw_target_rectangle(rect01_png,small_frame,target_rectangle,top,bottom,lef
             orgHeight, orgWidth = rect01_png.shape[:2]
             width_ratio = 1.0 * (face_width / orgWidth)
             height_ratio = 1.0 * (face_height / orgHeight)
-            rect01_png = cv2.resize(rect01_png, None, fx=width_ratio, fy=height_ratio)  # type: ignore
+            rect01_png = cv2.resize(rect01_png, None, fx = width_ratio, fy = height_ratio)  # type: ignore
             x1, y1, x2, y2 = left, top, left + rect01_png.shape[1], top + rect01_png.shape[0]
             # TODO ---------------------
             try:
@@ -657,7 +525,7 @@ def draw_target_rectangle(rect01_png,small_frame,target_rectangle,top,bottom,lef
             orgHeight, orgWidth = rect01_NG_png.shape[:2]
             width_ratio = 1.0 * (face_width / orgWidth)
             height_ratio = 1.0 * (face_height / orgHeight)
-            rect01_NG_png = cv2.resize(rect01_NG_png, None, fx=width_ratio, fy=height_ratio)
+            rect01_NG_png = cv2.resize(rect01_NG_png, None, fx = width_ratio, fy = height_ratio)
             x1, y1, x2, y2 = left, top, left + rect01_NG_png.shape[1], top + rect01_NG_png.shape[0]
             try:
                 small_frame[y1:y2, x1:x2] = small_frame[y1:y2, x1:x2] * (1 - rect01_NG_png[:,:,3:] / 255) + \
@@ -674,6 +542,16 @@ def return_percentage(p):  # python版
     percentage = -4.76190475 *(p**2)-(0.380952375*p)+100
     return percentage
 
+# 処理時間の測定
+def Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR):
+        HANDLING_FRAME_TIME = (HANDLING_FRAME_TIME_REAR - HANDLING_FRAME_TIME_FRONT)  ## 小数点以下がミリ秒
+        print(f'1frameあたりの処理時間: {round(HANDLING_FRAME_TIME * 1000, 2)}[ミリ秒]')
+        # fps_ms = fps
+        # if frame_skip > 0:
+        #     HANDLING_FRAME_TIME / (frame_skip - 1)  < fps_ms
+        # elif frame_skip == 0:
+        #     HANDLING_FRAME_TIME < fps_ms
+        # time.sleep((fps_ms - (HANDLING_FRAME_TIME / (frame_skip - 1))) / 1000)
 
 """初期設定"""
 # 使用期限算出
@@ -703,7 +581,6 @@ def face_attestation(
     known_face_names: List[int],
     # デフォルト値を持つ変数 ----------
     jitters: int =  0,
-    # tolerance=0.5,
     similar_percentage: float = 99.0,
     mode: str = 'cnn',
     model: str = 'small',
@@ -722,7 +599,7 @@ def face_attestation(
     frequency_crop_image: int = 80,
     # デフォルト顔画像ファイル読み込みON/OFF
     default_face_image_draw: bool = True,
-    output_frame_data: bool = False,
+    # output_frame_data: bool = False,
     # 半透明表示ON/OFF
     show_overlay: bool = True,
     # パーセンテージ描画のON/OFF
@@ -737,7 +614,7 @@ def face_attestation(
     bottom_area: bool = False,
     ## ========================================
     ):
-
+    
     # 画角値（四隅の座標:Tuple）算出
     # Python版
     # if not 'TOP_LEFT' in locals():
@@ -755,6 +632,8 @@ def face_attestation(
     # Initialize variables (Inner frame)
     percentage:float = 0.0
     person_datas: List = []
+    # 半透明値
+    alpha: float = 0.3
     # ###################################################
 
     # toleranceの算出
@@ -763,12 +642,9 @@ def face_attestation(
 
     # ⭐️各frameを処理⭐️ -------------------------------------------
     while True:
-        # frame処理前の時刻 ===============
-        """TODO"""
-        HANDLING_FRAME_TIME_FRONT=0
-        if calculate_time==True:
+        # 処理時間の測定（前半）
+        if calculate_time == True:
             HANDLING_FRAME_TIME_FRONT = time.perf_counter()
-        # =================================
 
         """TODO"""
         # frame内変数初期化 ========
@@ -786,6 +662,7 @@ def face_attestation(
         left: int =0
         right: int =0
         frame_datas_array: List = []
+        percentage_and_symbol:str = ''
         # ==========================
         ret: bool
         frame: List[np.ndarray]
@@ -829,7 +706,6 @@ def face_attestation(
             small_frame = cv2.copyMakeBorder(small_frame, 0, 180, 0, 0, cv2.BORDER_CONSTANT, value=(255,255,255))
     
         # 半透明処理（前半）
-        alpha: float = 0.3
         if show_overlay==True:
             overlay: cv2.Mat = small_frame.copy()
 
@@ -838,37 +714,39 @@ def face_attestation(
             テロップとロゴマークの合成
             貼り付け先座標を左上にセット
             """
-            orgHeight: int
-            orgWidth: int
-            orgHeight, orgWidth = telop_image.shape[:2]
-            ratio: float = SET_WIDTH / orgWidth / 1.5  ## テロップ幅は横幅の半分に設定
-            telop_image = cv2.resize(telop_image, None, fx=ratio, fy=ratio)  # type: ignore
-            # python版
-            logo_counter, small_frame =  draw_telop(SET_WIDTH, telop_image, small_frame)
-            # cython版
-            # small_frame = draw_telop(SET_WIDTH, telop_image, small_frame)
-            logo_counter, small_frame = draw_logo(small_frame,logo_image,  SET_HEIGHT,SET_WIDTH)
+            if draw_telop_and_logo == True:
+                orgHeight: int
+                orgWidth: int
+                orgHeight, orgWidth = telop_image.shape[:2]
+                ratio: float = SET_WIDTH / orgWidth / 1.5  ## テロップ幅は横幅の半分に設定
+                telop_image = cv2.resize(telop_image, None, fx = ratio, fy = ratio)  # type: ignore
+                # python版
+                logo_counter, small_frame =  draw_telop(SET_WIDTH, telop_image, small_frame)
+                # cython版
+                # small_frame = draw_telop(SET_WIDTH, telop_image, small_frame)
+                logo_counter, small_frame = draw_logo(small_frame,logo_image,  SET_HEIGHT,SET_WIDTH)
         # End if logo_counter
 
         # 顔認証処理 ここから ====================================================
         # 顔ロケーションを求める
         face_location_list = face_recognition.face_locations(small_frame, upsampling, mode)
         
-        """TODO"""
+        """BUG
+        顔がない時テロップが表示されない
+        """
         # 顔がなかったら以降のエンコード処理を行わない
         if len(face_location_list) == 0:
-            frame_datas = {'name': None, 'pict': None,  'date': None, 'img': small_frame, 'location': None, 'percentage_and_symbol': None}
-            frame_datas_array.append(frame_datas)
+            frame_datas_array = make_frame_datas_array(name,filename,date,top,right,bottom,left,percentage_and_symbol,person_datas,frame_datas_array,small_frame)
             yield frame_datas_array
             continue
 
-        """TODO"""
-        # 顔が一定数以上なら以降のエンコード処理を行わない（試験的）
+        """TODO
+        顔が一定数以上なら以降のエンコード処理を行わない（試験的）
+        """
         number_of_people: int = 5
         if len(face_location_list) >= number_of_people:
             print(f'{number_of_people}人以上を検出しました')
-            frame_datas = {'name': None, 'pict': None,  'date': None, 'img': small_frame, 'location': None, 'percentage_and_symbol': None}
-            frame_datas_array.append(frame_datas)
+            frame_datas_array = make_frame_datas_array(name,filename,date,top,right,bottom,left,percentage_and_symbol,person_datas,frame_datas_array,small_frame)
             yield frame_datas_array
             continue
 
@@ -888,7 +766,7 @@ def face_attestation(
                 draw_error_messg_rectangle_messg(draw, error_messg_rectangle_position, error_messg_rectangle_messg, error_messg_rectangle_font)
                 # PILをnumpy配列に変換
                 small_frame = convert_pil_img_to_ndarray(pil_img_obj)
-                frame_datas_array = make_frame_datas_array(frame_datas_array,small_frame)
+                frame_datas_array = make_frame_datas_array(name,filename,date,top,right,bottom,left,percentage_and_symbol,person_datas,frame_datas_array,small_frame)
                 # frame_datas_array.append(frame_datas)
                 yield frame_datas_array
                 continue
@@ -907,7 +785,7 @@ def face_attestation(
                 if frame_skip == -1:
                     # 人数 - 1
                     frame_skip = len(face_encodings)
-                    # 人数が1人の時はframe_skip=1
+                    # 人数が1人の時はframe_skip = 1
                     if len(face_encodings)==1:
                         frame_skip = 2
                 else:
@@ -931,7 +809,6 @@ def face_attestation(
                 matches = check_compare_faces(known_face_encodings, face_encoding, tolerance)
                 # 名前リスト(face_names)生成
                 face_names = return_face_names(face_names, known_face_encodings, face_encoding, known_face_names, matches, name)
-            """DEBUG ここまでOK"""
 
             # face_location_listについて繰り返し処理→frame_datas_array作成
             for (top, right, bottom, left), name in zip(face_location_list, face_names):
@@ -939,7 +816,7 @@ def face_attestation(
                 default_name_png = ''
                 default_face_image_name_png = ''
                 if name == 'Unknown':
-                    percentage_and_symbol: str = ''
+                    # percentage_and_symbol: str = ''
                     dis: str = ''
                     p: float = 1.0
                 else:  # nameが誰かの名前の場合
@@ -952,9 +829,9 @@ def face_attestation(
                     percentage = return_percentage(p)
                     percentage = round(percentage, 1)
                     percentage_and_symbol = str(percentage) + '%'
-                    # ファイル名を最初のアンダーバーで区切る（アンダーバーは複数なのでmaxsplit=1）
+                    # ファイル名を最初のアンダーバーで区切る（アンダーバーは複数なのでmaxsplit = 1）
                     try:
-                        name, _ = name.split('_', maxsplit=1)
+                        name, _ = name.split('_', maxsplit = 1)
                     except:
                         sg.popup_error('ファイル名に異常が見つかりました',name,'NAME_default.png あるいはNAME_001.png (001部分は001からはじまる連番)にしてください','noFaceフォルダに移動します')
                         shutil.move(name, './noFace/')
@@ -962,7 +839,8 @@ def face_attestation(
 
                 # tolerance未満の場合、変数nameの両端に!をつける
                 if p > tolerance:
-                    name = '！'+name+'！'  # （Windowsでファイル名に?は使用不可）
+                    # name = '！'+name+'！'  # （Windowsでファイル名に?は使用不可）
+                    name = '顔画像未登録'  # （Windowsでファイル名に?は使用不可）
                 # デフォルト顔画像の描写
                 if p <= tolerance:  # ディスタンスpがtolerance以下の場合
                     if default_face_image_draw == True:
@@ -981,7 +859,9 @@ def face_attestation(
                     # cv2.imshow(small_frame)
 
                 # クロップ画像保存
-                """TODO 非同期処理"""
+                """TODO 
+                画像ファイル保存の非同期処理
+                """
                 if crop_face_image==True:
                     if frequency_crop_image < number_of_crops:
                         pil_img_obj_rgb = pil_img_rgb_instance(small_frame)
@@ -1018,6 +898,7 @@ def face_attestation(
                     cv2.addWeighted(overlay, alpha, small_frame, 1-alpha, 0, small_frame)
         
                 # small_frame以外をperson_datasに格納
+                date = datetime.datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
                 person_data = {'name': name, 'pict':filename,  'date':date, 'location':(top,right,bottom,left), 'percentage_and_symbol': percentage_and_symbol}
                 person_datas.append(person_data)
 
@@ -1031,22 +912,7 @@ def face_attestation(
         # End if len(face_encodings) > 0
 
         """機能停止
-        # cv2.imshow()描画 ===============
-        if show_video==True:
-            cv2.imshow('FACE01 GRAPHICS', frame_datas['img'])
-            # print(frame_datas['img'])
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                print('停止されました')
-                break
-        elif show_video==False:
-            pass
-        else:
-            print('オプション変数show_videoはTrueかFalseで指定してください')
-            break
-        # ================================
-
         # yield出力ブロック ===================================
-        ## <要修正>
         ## パイプ出力機構も含む
         ## TODO: frame_datas_arrayから値を取り出す処理に変えること
         if not frame_datas == None:
@@ -1075,25 +941,17 @@ def face_attestation(
             print('frame size: ', small_frame.size) ## 1080000←450*800*3
             exit()
         # =====================================
-
-        # 経過時間の測定 ======================
-        if calculate_time==True:
-            HANDLING_FRAME_TIME_REAR = time.perf_counter()
-            HANDLING_FRAME_TIME = (HANDLING_FRAME_TIME_REAR - HANDLING_FRAME_TIME_FRONT)  ## 小数点以下がミリ秒
-            # print(f'whileブロック: {round(HANDLING_FRAME_TIME * 1000, 2)}[ミリ秒]')
-            # fps_ms = fps
-            # if frame_skip > 0:
-            #     HANDLING_FRAME_TIME / (frame_skip - 1)  < fps_ms
-            # elif frame_skip == 0:
-            #     HANDLING_FRAME_TIME < fps_ms
-            # time.sleep((fps_ms - (HANDLING_FRAME_TIME / (frame_skip - 1))) / 1000)
-        # =====================================
         """
         
         # Reset frame_skip_counter to 0
         frame_skip_counter = 0
         # Reset logo_counter
         logo_counter = 0
+
+        # 処理時間の測定（後半）
+        if calculate_time == True:
+            HANDLING_FRAME_TIME_REAR = time.perf_counter()
+            Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR)
 
     # End of while ---------------------------------------------
 
@@ -1108,7 +966,6 @@ if __name__ == '__main__':
     date, rect01_png, telop_image, logo_image, vcap, unregistered_face_image, \
         SET_WIDTH, fps, height, width, SET_HEIGHT, kaoninshoDir, priset_face_imagesDir = \
             initialize(SET_WIDTH)
-    os.chdir(kaoninshoDir)
 
     """TODO
     # Confirm system GPU
@@ -1119,14 +976,14 @@ if __name__ == '__main__':
     #     print(gpu.memoryTotal)
     #     print(gpu.driver)
     # # print(GPUtil.getGPUs())
-    # print(GPUtil.showUtilization(all=False, attrList=None, useOldCode=False))
+    # print(GPUtil.showUtilization(all = False, attrList = None, useOldCode = False))
     # exit()
     """
 
-    known_face_encodings, known_face_names=load_priset_image(
+    known_face_encodings, known_face_names = load_priset_image(
         kaoninshoDir,
         priset_face_imagesDir,
-        jitters=priset_face_images_jitters,
+        jitters = priset_face_images_jitters,
     )
 
     # Make an object of generator
@@ -1140,60 +997,35 @@ if __name__ == '__main__':
         kaoninshoDir,
         known_face_encodings,
         known_face_names,
-        similar_percentage=                                 similar_percentage,
-        jitters=                                    jitters,
-        upsampling=                                                 upsampling,
-        mode=                                                               mode,
-        model=                                                                  'small',
-        frame_skip=frame_skip,
-        movie=movie,
-        rectangle=rectangle,
-        target_rectangle=target_rectangle,
-        show_video=show_video,
-        frequency_crop_image=frequency_crop_image,
-        set_area=set_area,
-        print_property=print_property,
-        calculate_time=calculate_time,
-        SET_WIDTH=SET_WIDTH,
-        default_face_image_draw=default_face_image_draw,
-        show_overlay=show_overlay,
-        show_percentage=show_percentage,
-        crop_face_image=crop_face_image,
-        show_name=show_name,
-        should_not_be_multiple_faces=should_not_be_multiple_faces,
-        bottom_area=bottom_area,
+        jitters = jitters,
+        similar_percentage = similar_percentage,
+        upsampling = upsampling,
+        mode = mode,
+        model = 'small',
+        frame_skip = frame_skip,
+        movie = movie,
+        set_area = set_area,
+        SET_WIDTH = SET_WIDTH,
+        rectangle = rectangle,
+        target_rectangle = target_rectangle,
+        show_video = show_video,
+        crop_face_image = crop_face_image,
+        frequency_crop_image = frequency_crop_image,
+        default_face_image_draw = default_face_image_draw,
+        show_overlay = show_overlay,
+        show_percentage = show_percentage,
+        show_name = show_name,
+        print_property = print_property,
+        calculate_time = calculate_time,
+        should_not_be_multiple_faces = should_not_be_multiple_faces,
+        bottom_area = bottom_area,
     )
 
-    """
-    # 動作テストブロック
-    # for array_x in xs:
-    #     for x in array_x:
-    #         if not x['img'] is None:
-    #             cv2.imshow('TEST WINDOW FOR SINGLE CPU', x['img'])
-    #             if cv2.waitKey(1) & 0xFF == ord('q'):
-    #                 print('停止されました')
-    #                 cv2.destroyAllWindows()
-    #                 exit(0)
 
-    # 動作テストブロックその２
-    # print('テスト開始')
-    # # image = cv2.imread('test.png')
-    # image = cv2.imread('test2.jpg')
-    # # print(image)
-    # cv2.imshow('test', image)
-    # cv2.waitKey(5000)
-    # cv2.destroyWindow('test')
-
-    #     name, pict, date, img, location, percentage_and_symbol = x['name'], x['pict'], x['date'], x['img'], x['location'], x['percentage_and_symbol']
-    #     print(name, percentage_and_symbol, location, date)
-    """
-
-    """
-    # マルチプロセスはver.125から ==================================
+    """ 並行処理用コード_1
     from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
     # pool = ProcessPoolExecutor()
     pool = ThreadPoolExecutor()
-
     # window実装
     layout = [
         # [sg.Text('FACE01 GRAPHICS ver.1.2.8', font=('BIZ-UDGOTHICB.TTC', 15)), sg.Text('GUI実装例', font=('BIZ-UDGOTHICB.TTC', 10))],
@@ -1201,72 +1033,141 @@ if __name__ == '__main__':
         [sg.Button('終了', key='terminate', pad=(0,10))]
     ]
     window = sg.Window(
-        'window1', layout, alpha_channel=1, margins=(0, 0),
-
-        no_titlebar=True, grab_anywhere=True,
-        location=(350,130), modal=True
+        'window1', layout, alpha_channel = 1, margins=(0, 0),
+        no_titlebar = True, grab_anywhere = True,
+        location=(350,130), modal = True
     )
-
     # 並行処理
     def multi(x):
-        name, pict, date, img, location, percentage_and_symbol = x['name'], x['pict'], x['date'], x['img'], x['location'], x['percentage_and_symbol']
-        if not name==None:
-            print(name, percentage_and_symbol, location, date)
-        return img
-
+        img, person_datas = x['img'], x['person_datas']
+        for person_data in person_datas:
+            name, pict, date,  location, percentage_and_symbol = person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
+            if not name == 'Unknown':
+                print(
+                    "並行処理用コード_1が動作しています", "\n",
+                    name, "\n",
+                    "\t", "類似度\t", percentage_and_symbol, "\n",
+                    "\t", "座標\t", location, "\n",
+                    "\t", "時刻\t", date, "\n",
+                    "\t", "出力\t", pict, "\n",
+                    "-------\n"
+                )
+            person_datas.pop(0)
+            return img
     for array_x in xs:
         for x in array_x:
+            event, _ = window.read(timeout = 1)
             # befor_time = time.perf_counter()
-            # <DEBUG>
-            if x=={}:
-                continue
-
             result = pool.submit(multi, x)
-            event, _ = window.read(timeout=1)
-
             if  not result.result() is None:
-                imgbytes=cv2.imencode(".png", result.result())[1].tobytes()
-                window["cam1"].update(data=imgbytes)
-                # after_time=time.perf_counter()
+                imgbytes = cv2.imencode(".png", result.result())[1].tobytes()
+                window["cam1"].update(data = imgbytes)
+                # after_time = time.perf_counter()
                 # print(f'xs処理時間: {round((after_time - befor_time) * 1000, 2)}[ミリ秒]')
-
-            if event=='terminate':
-                break
-        else:
-            continue
-        break
-
+        if event=='terminate':
+            break
     window.close()
     print('終了します')
-    ## ==============================================================
     """
 
-    ## ==============================================================
-    # プロファイリング用
-    ## ==============================================================
-    import cProfile as pr
 
+    """ 並行処理用コード_2
+    from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
+    # pool = ProcessPoolExecutor()
+    pool = ThreadPoolExecutor()
+    # window実装
+    layout = [
+        # [sg.Text('FACE01 GRAPHICS ver.1.2.8', font=('BIZ-UDGOTHICB.TTC', 15)), sg.Text('GUI実装例', font=('BIZ-UDGOTHICB.TTC', 10))],
+        [sg.Image(filename='', key='cam1', pad=(0,0))],
+        [sg.Button('終了', key='terminate', pad=(0,10))]
+    ]
+    window = sg.Window(
+        'window1', layout, alpha_channel = 1, margins=(0, 0),
+        no_titlebar = True, grab_anywhere = True,
+        location=(350,130), modal = True
+    )
+    # 並行処理
+    def multi(array_x):
+        for x in array_x:
+            img, person_datas = x['img'], x['person_datas']
+            for person_data in person_datas:
+                name, pict, date,  location, percentage_and_symbol = person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
+                if not name == 'Unknown':
+                    print(
+                        "並行処理用コード_2が動作しています", "\n",
+                        name, "\n",
+                        "\t", "類似度\t", percentage_and_symbol, "\n",
+                        "\t", "座標\t", location, "\n",
+                        "\t", "時刻\t", date, "\n",
+                        "\t", "出力\t", pict, "\n",
+                        "-------\n"
+                    )
+                person_datas.pop(0)
+                return img
+    # main処理
+    for array_x in xs:
+        event, _ = window.read(timeout = 1)
+        result = pool.submit(multi, array_x)
+        if  not result.result() is None:
+            imgbytes = cv2.imencode(".png", result.result())[1].tobytes()
+            window["cam1"].update(data = imgbytes)
+            # after_time = time.perf_counter()
+            # print(f'xs処理時間: {round((after_time - befor_time) * 1000, 2)}[ミリ秒]')
+        if event=='terminate':
+            break
+    window.close()
+    print('終了します')
+    """
+
+
+    """BUG 並行処理用コード_3
+    from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
+    pool = ProcessPoolExecutor()
+    # pool = ThreadPoolExecutor()
+    # 並行処理
+    def multi(xs):
+        for array_x in xs:
+            for x in array_x:
+                img, person_datas = x['img'], x['person_datas']
+                for person_data in person_datas:
+                    name, pict, date,  location, percentage_and_symbol = person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
+                    if not name == 'Unknown':
+                        print(
+                            "並行処理用コード_3が動作しています", "\n",
+                            name, "\n",
+                            "\t", "類似度\t", percentage_and_symbol, "\n",
+                            "\t", "座標\t", location, "\n",
+                            "\t", "時刻\t", date, "\n",
+                            "\t", "出力\t", pict, "\n",
+                            "-------\n"
+                        )
+                    person_datas.pop(0)
+                    return img
+        print('終了します')
+    while True:
+        result = pool.submit(multi, xs)
+    """
+
+
+# """プロファイリング用コード
+    import cProfile as pr
     layout = [
         [sg.Image(filename='', key='display', pad=(0,0))],
         [sg.Button('終了', key='terminate', pad=(0,10))]
     ]
-
     window = sg.Window(
-        'CALL_FACE01GRAPHICS', layout, alpha_channel=1, margins=(0, 0),
-
-        no_titlebar=True, grab_anywhere=True,
-        location=(350,130), modal=True
+        'CALL_FACE01GRAPHICS', layout, alpha_channel = 1, margins=(0, 0),
+        no_titlebar = True, grab_anywhere = True,
+        location=(350,130), modal = True
     )
-
     def profile():
         for array_x in xs:
             for x in array_x:
-                event, _ = window.read(timeout=1)
-                # name, pict, date, img, location, percentage_and_symbol = x['name'], x['pict'], x['date'], x['img'], x['location'], x['percentage_and_symbol']
+                event, _ = window.read(timeout = 1)
                 img, person_datas = x['img'], x['person_datas']
                 for person_data in person_datas:
                     name, pict, date,  location, percentage_and_symbol = person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
-                    if not name==None:
+                    if not name == 'Unknown':
                         print(
                             "プロファイリング用コードが動作しています", "\n",
                             "statsファイルが出力されます", "\n",
@@ -1277,16 +1178,13 @@ if __name__ == '__main__':
                             "\t", "出力\t", pict, "\n",
                             "-------\n"
                         )
-                imgbytes=cv2.imencode(".png", img)[1].tobytes()
-                window["display"].update(data=imgbytes)
+                    person_datas.pop(0)
+                imgbytes = cv2.imencode(".png", img)[1].tobytes()
+                window["display"].update(data = imgbytes)
             if event=='terminate':
                 break
-
         window.close()
         print('終了します')
 
     pr.run('profile()', 'speed_restats')
-
-
-
-
+# """

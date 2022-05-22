@@ -1,9 +1,7 @@
+import face_recognition
+import numpy as np
 import os
 import shutil
-
-import numpy as np
-
-import face_recognition
 
 # FACE01GRAPHICS127への対応 =========================================
 # priset_face_imagesに新しい顔を登録した時にnpKnown.npzに反映されないバグをフィックス
@@ -31,8 +29,11 @@ def load_priset_image(
     known_face_encodings_list = []
     new_files = []
     cnt = 1  # cnt：何番目のファイルかを表す変数
+    cd = False
 
-    os.chdir(kaoninshoDir)
+    if cd == False:
+        os.chdir(kaoninshoDir)
+        cd = True
 
     print("Loading npKnown.npz")
     print("...")
