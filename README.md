@@ -9,12 +9,15 @@ Codename:       focal
 Python 3.8.10
 ```bash
 # System infomation
-$ inxi -SGx
-System:    Host: terms-Desks Kernel: 5.13.0-39-generic x86_64 bits: 64 compiler: N/A Desktop: Unity 
+$ inxi -SCG
+System:    Host: terms-Desks Kernel: 5.13.0-41-generic x86_64 bits: 64 Desktop: Gnome 3.36.9 
            Distro: Ubuntu 20.04.4 LTS (Focal Fossa) 
-Graphics:  Device-1: NVIDIA TU116 [GeForce GTX 1660 Ti] vendor: Micro-Star MSI driver: nvidia v: 510.47.03 bus ID: 08:00.0 
+CPU:       Topology: Quad Core model: AMD Ryzen 5 1400 bits: 64 type: MT MCP L2 cache: 2048 KiB 
+           Speed: 1375 MHz min/max: 1550/3200 MHz Core speeds (MHz): 1: 1375 2: 1397 3: 1375 4: 1375 5: 1374 6: 1378 7: 1374 
+           8: 1453 
+Graphics:  Device-1: NVIDIA TU116 [GeForce GTX 1660 Ti] driver: nvidia v: 510.47.03 
            Display: x11 server: X.Org 1.20.13 driver: fbdev,nouveau unloaded: modesetting,vesa resolution: 1440x900~60Hz 
-           OpenGL: renderer: NVIDIA GeForce GTX 1660 Ti/PCIe/SSE2 v: 4.6.0 NVIDIA 510.47.03 direct render: Yes 
+           OpenGL: renderer: NVIDIA GeForce GTX 1660 Ti/PCIe/SSE2 v: 4.6.0 NVIDIA 510.47.03 
 
 # System python version
 $ python3 -V
@@ -51,7 +54,8 @@ Python 3.8.10
 # 環境構築
 ## 参照
 [Ubuntu 20.04 実行環境作成方法](https://tokai-kaoninsho.com/face-recognition-software/ubuntu-20-04-%e5%ae%9f%e8%a1%8c%e7%92%b0%e5%a2%83%e4%bd%9c%e6%88%90%e6%96%b9%e6%b3%95/)
-## 必要なソフトウェアのインストール
+## 必要なパッケージやライブラリのインストール
+ ### apt install
 ```bash
 # Install system software
 $ sudo apt update && sudo apt upgrade -y
@@ -71,7 +75,7 @@ $ sudo apt install -y \
         python3-tk \
         python3-venv 
 ```
-
+### pip install
 ```python
 $ python3 -V
 Python 3.8.10
@@ -142,5 +146,5 @@ True
 - 半自動フレームスキップ（マシンの処理速度に合わせる）
 
 ## 標準出力を日本語に。(python3系の場合）
-- 標準出力のバッファリングをオフに。
-  - sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', buffering=1)
+- 標準出力のバッファリングをオフに
+- sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', buffering=1)

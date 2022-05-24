@@ -1178,13 +1178,14 @@ if __name__ == '__main__':
                             "\t", "出力\t", pict, "\n",
                             "-------\n"
                         )
-                    person_datas.pop(0)
+                    # person_datas.pop(0)
+                    # del person_datas[0]
+                del person_datas
                 imgbytes = cv2.imencode(".png", img)[1].tobytes()
                 window["display"].update(data = imgbytes)
             if event=='terminate':
                 break
         window.close()
         print('終了します')
-
     pr.run('profile()', 'speed_restats')
 # """
