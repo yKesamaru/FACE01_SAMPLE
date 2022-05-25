@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+from numba import njit
 
 import PIL.Image
 import dlib
@@ -89,6 +89,7 @@ def load_image_file(file, mode='RGB'):
     return np.array(im)
 
 
+# @njit(cache=True)
 def _raw_face_locations(img, number_of_times_to_upsample=1, model="hog"):
     """
     Returns an array of bounding boxes of human faces in a image
@@ -105,6 +106,7 @@ def _raw_face_locations(img, number_of_times_to_upsample=1, model="hog"):
         return face_detector(img, number_of_times_to_upsample)
 
 
+# @njit(cache=True)
 def face_locations(img, number_of_times_to_upsample=1, model="hog"):
     """
     Returns an array of bounding boxes of human faces in a image

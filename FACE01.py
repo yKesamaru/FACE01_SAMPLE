@@ -11,7 +11,8 @@ from functools import lru_cache
 from typing import Dict, List, Tuple
 
 import cv2
-import face_recognition
+import face01lib.api as face_recognition
+# import face_recognition
 import numpy as np
 import PySimpleGUI as sg
 from PIL import Image, ImageDraw, ImageFont
@@ -51,6 +52,7 @@ show_name: bool = conf.getboolean('DEFAULT', 'show_name')
 should_not_be_multiple_faces: bool = conf.getboolean('DEFAULT', 'should_not_be_multiple_faces')
 bottom_area: bool = conf.getboolean('DEFAULT', 'bottom_area')
 draw_telop_and_logo: bool = conf.getboolean('DEFAULT', 'draw_telop_and_logo')
+
 
 def cal_specify_date() -> None:
     """指定日付計算
@@ -545,7 +547,7 @@ def return_percentage(p):  # python版
 # 処理時間の測定
 def Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR):
         HANDLING_FRAME_TIME = (HANDLING_FRAME_TIME_REAR - HANDLING_FRAME_TIME_FRONT)  ## 小数点以下がミリ秒
-        print(f'1frameあたりの処理時間: {round(HANDLING_FRAME_TIME * 1000, 2)}[ミリ秒]')
+        print(f'(1frameあたりの)処理時間: {round(HANDLING_FRAME_TIME * 1000, 2)}[ミリ秒]')
         # fps_ms = fps
         # if frame_skip > 0:
         #     HANDLING_FRAME_TIME / (frame_skip - 1)  < fps_ms
@@ -1160,32 +1162,41 @@ if __name__ == '__main__':
         no_titlebar = True, grab_anywhere = True,
         location=(350,130), modal = True
     )
-    def profile():
+    exec_times: int = 10
+    def profile(exec_times):
         for array_x in xs:
-            for x in array_x:
-                event, _ = window.read(timeout = 1)
-                img, person_datas = x['img'], x['person_datas']
-                for person_data in person_datas:
-                    name, pict, date,  location, percentage_and_symbol = person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
-                    if not name == 'Unknown':
-                        print(
-                            "プロファイリング用コードが動作しています", "\n",
-                            "statsファイルが出力されます", "\n",
-                            name, "\n",
-                            "\t", "類似度\t", percentage_and_symbol, "\n",
-                            "\t", "座標\t", location, "\n",
-                            "\t", "時刻\t", date, "\n",
-                            "\t", "出力\t", pict, "\n",
-                            "-------\n"
-                        )
-                    # person_datas.pop(0)
-                    # del person_datas[0]
-                del person_datas
-                imgbytes = cv2.imencode(".png", img)[1].tobytes()
-                window["display"].update(data = imgbytes)
-            if event=='terminate':
+            if not exec_times == 0:
+                HANDLING_FRAME_TIME_FRONT = time.perf_counter()
+                exec_times - 1
+                print(f'exec_times: {exec_times}')
+                for x in array_x:
+                    event, _ = window.read(timeout = 1)
+                    img, person_datas = x['img'], x['person_datas']
+                    for person_data in person_datas:
+                        name, pict, date,  location, percentage_and_symbol = person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
+                        if not name == 'Unknown':
+                            print(
+                                "プロファイリング用コードが動作しています", "\n",
+                                "statsファイルが出力されます", "\n",
+                                name, "\n",
+                                "\t", "類似度\t", percentage_and_symbol, "\n",
+                                "\t", "座標\t", location, "\n",
+                                "\t", "時刻\t", date, "\n",
+                                "\t", "出力\t", pict, "\n",
+                                "-------\n"
+                            )
+                        # person_datas.pop(0)
+                        # del person_datas[0]
+                    del person_datas
+                    imgbytes = cv2.imencode(".png", img)[1].tobytes()
+                    window["display"].update(data = imgbytes)
+                if event=='terminate':
+                    break
+            else:
+                HANDLING_FRAME_TIME_REAR = time.perf_counter()
+                Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR)
                 break
         window.close()
         print('終了します')
-    pr.run('profile()', 'speed_restats')
+    pr.run('profile(exec_times)', 'speed_restats')
 # """
