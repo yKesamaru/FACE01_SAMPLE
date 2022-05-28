@@ -9,6 +9,7 @@ import time
 from cgitb import small
 from functools import lru_cache
 from typing import Dict, List, Tuple
+from numba import njit, f8, i8
 
 import cv2
 import face01lib.api as face_recognition
@@ -22,6 +23,7 @@ from face01lib.load_priset_image import load_priset_image
 from face01lib.similar_percentage_to_tolerance import to_tolerance
 from face01lib.video_capture import video_capture
 
+import mediapipe as mp
 
 # opencvの環境変数変更
 os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;udp"
@@ -218,6 +220,18 @@ def finalize(vcap):
     # ウィンドウの除去
     cv2.destroyAllWindows()
 
+
+# ---------------------------------------
+# mediapipe face detection
+# ---------------------------------------
+# mp_face_detection = mp.solutions.face_detection
+# def mp_face_detection_func(small_frame):
+#     face_detection = mp_face_detection.FaceDetection(min_detection_confidence=0.5)
+#     results = face_detection.process(small_frame)
+
+
+
+
 def check_compare_faces(known_face_encodings, face_encoding, tolerance):
     try:
         matches = face_recognition.compare_faces(known_face_encodings, face_encoding, tolerance)
@@ -225,7 +239,7 @@ def check_compare_faces(known_face_encodings, face_encoding, tolerance):
     except:
         print('DEBUG: npKnown.npzが壊れているか予期しないエラーが発生しました。')
         print('npKnown.npzの自動削除は行われません。原因を特定の上、必要な場合npKnown.npzを削除して下さい。')
-        print('処理を終了します。FACE01 GRAPHICSを再起動して下さい。')
+        print('処理を終了します。FACE01を再起動して下さい。')
         print('問題が解決しない場合システム管理者にお問い合わせください。')
         exit()
 
@@ -777,6 +791,12 @@ def face_attestation(
 
         """ ⭐️顔がある場合の処理ここから⭐️ """
         # 顔ロケーションからエンコーディングを求める
+        # import dlib
+        # import face_recognition_models
+        # cnn_face_detection_model = face_recognition_models.cnn_face_detector_model_location()
+        # face_recognition_model = face_recognition_models.face_recognition_model_location()
+        # face_encoder = dlib.face_recognition_model_v1(face_recognition_model)
+        # compu_face = face_encoder.compute_face_descriptor(small_frame, raw_landmark_set, jitters)
         face_encodings = face_recognition.face_encodings(small_frame, face_location_list, jitters, model)
 
         """ BUG & TODO frame_skip変数 半自動設定
@@ -1162,12 +1182,17 @@ if __name__ == '__main__':
         no_titlebar = True, grab_anywhere = True,
         location=(350,130), modal = True
     )
-    exec_times: int = 10
+    
+    exec_times: int = 20
+    HANDLING_FRAME_TIME: float = 0.0
+    HANDLING_FRAME_TIME_FRONT: float = 0.0
+    HANDLING_FRAME_TIME_REAR: float = 0.0
+
     def profile(exec_times):
+        HANDLING_FRAME_TIME_FRONT = time.perf_counter()
         for array_x in xs:
-            if not exec_times == 0:
-                HANDLING_FRAME_TIME_FRONT = time.perf_counter()
-                exec_times - 1
+            if  exec_times >= 0:
+                exec_times = exec_times - 1
                 print(f'exec_times: {exec_times}')
                 for x in array_x:
                     event, _ = window.read(timeout = 1)
@@ -1193,10 +1218,15 @@ if __name__ == '__main__':
                 if event=='terminate':
                     break
             else:
-                HANDLING_FRAME_TIME_REAR = time.perf_counter()
-                Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR)
                 break
         window.close()
         print('終了します')
-    pr.run('profile(exec_times)', 'speed_restats')
+        HANDLING_FRAME_TIME_REAR = time.perf_counter()
+        HANDLING_FRAME_TIME = (HANDLING_FRAME_TIME_REAR - HANDLING_FRAME_TIME_FRONT) 
+        print(f'profile()関数の処理時間合計: {round(HANDLING_FRAME_TIME , 3)}[秒]')
+    pr.run('profile(exec_times)', 'restats')
 # """
+
+"""mediapipe実験用コード
+
+"""
