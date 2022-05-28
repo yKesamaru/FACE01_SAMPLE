@@ -1,5 +1,7 @@
 import mediapipe as mp
-# from mediapipe  import solutions as mp
+    """mediapipe for python, see bellow
+    https://github.com/google/mediapipe/tree/master/mediapipe/python
+    """
 from face01lib.video_capture import video_capture
 import configparser
 import cv2
@@ -170,6 +172,19 @@ if __name__ == '__main__':
     HANDLING_FRAME_TIME_FRONT: float = 0.0
     HANDLING_FRAME_TIME_REAR: float = 0.0
 
+    # h, w, c = sample_img.shape
+    # print('width:  ', w)
+    # print('height: ', h)
+
+    # xleft = data.xmin*w
+    # xleft = int(xleft)
+    # xtop = data.ymin*h
+    # xtop = int(xtop)
+    # xright = data.width*w + xleft
+    # xright = int(xright)
+    # xbottom = data.height*h + xtop
+    # xbottom = int(xbottom)
+
     def profile(exec_times):
         HANDLING_FRAME_TIME_FRONT = time.perf_counter()
         xs = test(vcap, SET_WIDTH, SET_HEIGHT)
@@ -178,12 +193,20 @@ if __name__ == '__main__':
                 continue
             if  exec_times >= 0:
                 exec_times = exec_times - 1
+                print('\n------------')
                 print(f'人数: {len(result.detections)}人')
                 print(f'exec_times: {exec_times}')
                 for detection in result.detections:
                     event, _ = window.read(timeout = 1)
+                    xleft = int(detection.location_data.relative_bounding_box.xmin * SET_WIDTH)
+                    xtop = int(detection.location_data.relative_bounding_box.ymin * SET_HEIGHT)
+                    xright = int(detection.location_data.relative_bounding_box.width * SET_WIDTH + xleft)
+                    xbottom = int(detection.location_data.relative_bounding_box.height * SET_HEIGHT + xtop)
+                    """see bellow
+                    https://stackoverflow.com/questions/71094744/how-to-crop-face-detected-via-mediapipe-in-python
+                    """
                     print(f'信頼度: {round(detection.score[0]*100, 2)}%')
-                    print(detection.location_data.relative_bounding_box)
+                    print(f'座標: {(xleft,xtop,xright,xbottom)}')
                     # small_frame.flags.writeable = True
                     mp_drawing.draw_detection(small_frame, detection)
                     imgbytes = cv2.imencode(".png", small_frame)[1].tobytes()
