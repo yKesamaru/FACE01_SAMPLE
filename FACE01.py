@@ -24,6 +24,10 @@ from face01lib.similar_percentage_to_tolerance import to_tolerance
 from face01lib.video_capture import video_capture
 
 import mediapipe as mp
+"""mediapipe for python, see bellow
+https://github.com/google/mediapipe/tree/master/mediapipe/python
+"""
+
 
 # opencvの環境変数変更
 os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;udp"
@@ -54,6 +58,9 @@ show_name: bool = conf.getboolean('DEFAULT', 'show_name')
 should_not_be_multiple_faces: bool = conf.getboolean('DEFAULT', 'should_not_be_multiple_faces')
 bottom_area: bool = conf.getboolean('DEFAULT', 'bottom_area')
 draw_telop_and_logo: bool = conf.getboolean('DEFAULT', 'draw_telop_and_logo')
+use_mediapipe: bool = conf.getboolean('DEFAULT','use_mediapipe')
+model_selection = int(conf.get('DEFAULT','model_selection'))
+min_detection_confidence = float(conf.get('DEFAULT','min_detection_confidence'))
 
 
 def cal_specify_date() -> None:
@@ -138,7 +145,7 @@ def return_fontpath():
     return fontpath
 
 # frameに対してエリア指定
-def return_frame_coordinate(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER):
+def angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER):
     if set_area=='NONE':
         pass
     elif set_area=='TOP_LEFT':
@@ -223,12 +230,56 @@ def finalize(vcap):
 
 # ---------------------------------------
 # mediapipe face detection
-# ---------------------------------------
-# mp_face_detection = mp.solutions.face_detection
-# def mp_face_detection_func(small_frame):
-#     face_detection = mp_face_detection.FaceDetection(min_detection_confidence=0.5)
-#     results = face_detection.process(small_frame)
+def mp_face_detection_func(small_frame, model_selection=0, min_detection_confidence=0.4):
+    face = mp.solutions.face_detection.FaceDetection(
+        model_selection=model_selection,
+        min_detection_confidence=min_detection_confidence
+    )
+    """refer to
+    https://solutions.mediapipe.dev/face_detection#python-solution-api
+    """    
+    # 推論処理
+    inference = face.process(small_frame)
+    """
+    Processes an RGB image and returns a list of the detected face location data.
+    Args:
+          image: An RGB image represented as a numpy ndarray.
+    Raises:
+          RuntimeError: If the underlying graph throws any error.
+    ValueError: 
+          If the input image is not three channel RGB.
+     Returns:
+           A NamedTuple object with a "detections" field that contains a list of the
+           detected face location data.'
+    """
+    return inference
 
+def return_face_coordinates(small_frame, SET_WIDTH, SET_HEIGHT, model_selection, min_detection_confidence):
+    small_frame.flags.writeable = False
+    face_location_list = []
+    # small_frame.flags.writeable = False
+    result = mp_face_detection_func(small_frame, model_selection, min_detection_confidence)
+    if not result.detections:
+        return [()]
+    else:
+        # print('\n------------')
+        # print(f'人数: {len(result.detections)}人')
+        # print(f'exec_times: {exec_times}')
+        for detection in result.detections:
+            xleft = int(detection.location_data.relative_bounding_box.xmin * SET_WIDTH)
+            xtop = int(detection.location_data.relative_bounding_box.ymin * SET_HEIGHT)
+            xright = int(detection.location_data.relative_bounding_box.width * SET_WIDTH + xleft)
+            xbottom = int(detection.location_data.relative_bounding_box.height * SET_HEIGHT + xtop)
+            """see bellow
+            https://stackoverflow.com/questions/71094744/how-to-crop-face-detected-via-mediapipe-in-python
+            """
+            # print(f'信頼度: {round(detection.score[0]*100, 2)}%')
+            # print(f'座標: {(xtop,xright,xbottom,xleft)}')
+            face_location_list.append((xtop,xright,xbottom,xleft))
+        small_frame.flags.writeable = True
+        return face_location_list
+
+# ---------------------------------------
 
 
 
@@ -628,6 +679,10 @@ def face_attestation(
     should_not_be_multiple_faces: bool = True,
     # bottom area描画ON/OFF
     bottom_area: bool = False,
+    draw_telop_and_logo: bool = True,
+    use_mediapipe: bool = True,
+    model_selection:int = 0,
+    min_detection_confidence:float = 0.4
     ## ========================================
     ):
     
@@ -707,12 +762,11 @@ def face_attestation(
             frame_skip_counter += 1
             continue
 
-        # 画角値をもとに各frameを加工
+        # 画角値をもとに各frameを縮小
         # python版
-        frame = return_frame_coordinate(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)
+        frame = angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)
         # cython版→1桁遅くなる
         # frame = return_frame_coordinate(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)
-
         # 各frameリサイズ
         small_frame = resize_frame(SET_WIDTH, SET_HEIGHT, frame)
 
@@ -745,8 +799,15 @@ def face_attestation(
 
         # 顔認証処理 ここから ====================================================
         # 顔ロケーションを求める
-        face_location_list = face_recognition.face_locations(small_frame, upsampling, mode)
-        
+        if use_mediapipe == True:
+            face_location_list = return_face_coordinates(small_frame, SET_WIDTH, SET_HEIGHT, model_selection, min_detection_confidence)
+        else:
+            face_location_list = face_recognition.face_locations(small_frame, upsampling, mode)
+        """face_location_list
+        [(144, 197, 242, 99), (97, 489, 215, 371)]
+        """
+
+
         """BUG
         顔がない時テロップが表示されない
         """
@@ -1041,6 +1102,10 @@ if __name__ == '__main__':
         calculate_time = calculate_time,
         should_not_be_multiple_faces = should_not_be_multiple_faces,
         bottom_area = bottom_area,
+        draw_telop_and_logo = draw_telop_and_logo,
+        use_mediapipe = use_mediapipe,
+        model_selection = model_selection,
+        min_detection_confidence = min_detection_confidence
     )
 
 
@@ -1183,7 +1248,7 @@ if __name__ == '__main__':
         location=(350,130), modal = True
     )
     
-    exec_times: int = 20
+    exec_times: int = 500
     HANDLING_FRAME_TIME: float = 0.0
     HANDLING_FRAME_TIME_FRONT: float = 0.0
     HANDLING_FRAME_TIME_REAR: float = 0.0

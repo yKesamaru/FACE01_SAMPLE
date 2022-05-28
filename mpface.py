@@ -1,7 +1,7 @@
 import mediapipe as mp
-    """mediapipe for python, see bellow
-    https://github.com/google/mediapipe/tree/master/mediapipe/python
-    """
+"""mediapipe for python, see bellow
+https://github.com/google/mediapipe/tree/master/mediapipe/python
+"""
 from face01lib.video_capture import video_capture
 import configparser
 import cv2
@@ -117,18 +117,13 @@ date, rect01_png, telop_image, logo_image, vcap, unregistered_face_image, \
         initialize(SET_WIDTH)
 
 
-def mp_face_detection_func(small_frame):
+def mp_face_detection_func(small_frame, model_selection=0, min_detection_confidence=0.4):
     face = mp.solutions.face_detection.FaceDetection(
-        model_selection=0,
-        min_detection_confidence=0.4
+        model_selection=model_selection,
+        min_detection_confidence=min_detection_confidence
     )
-    """
-    MediaPipe Face Detection.
-    MediaPipe Face Detection processes an RGB image and returns a list of the
-    detected face location data.
-    Please refer to
+    """refer to
     https://solutions.mediapipe.dev/face_detection#python-solution-api
-    for usage examples.
     """    
     # 推論処理
     results = face.process(small_frame)
@@ -146,7 +141,7 @@ def mp_face_detection_func(small_frame):
     """
     return results
 
-def test(vcap, SET_WIDTH, SET_HEIGHT):
+def return_face_coordinates(vcap, SET_WIDTH, SET_HEIGHT):
     while True:
         ret, frame = vcap.read()
         small_frame = resize_frame(SET_WIDTH, SET_HEIGHT, frame)
@@ -172,22 +167,10 @@ if __name__ == '__main__':
     HANDLING_FRAME_TIME_FRONT: float = 0.0
     HANDLING_FRAME_TIME_REAR: float = 0.0
 
-    # h, w, c = sample_img.shape
-    # print('width:  ', w)
-    # print('height: ', h)
-
-    # xleft = data.xmin*w
-    # xleft = int(xleft)
-    # xtop = data.ymin*h
-    # xtop = int(xtop)
-    # xright = data.width*w + xleft
-    # xright = int(xright)
-    # xbottom = data.height*h + xtop
-    # xbottom = int(xbottom)
 
     def profile(exec_times):
         HANDLING_FRAME_TIME_FRONT = time.perf_counter()
-        xs = test(vcap, SET_WIDTH, SET_HEIGHT)
+        xs = return_face_coordinates(vcap, SET_WIDTH, SET_HEIGHT)
         for result, small_frame in xs:
             if not result.detections:
                 continue
