@@ -51,6 +51,7 @@ Python 3.8.10
     tornado==6.1
     typing_extensions==4.2.0
     numba(numbaをインストールする場合には通常のnumpyはアンインストールされる)
+    mediapipe
 ```
 # 環境構築
 ## 参照
