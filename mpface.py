@@ -116,14 +116,36 @@ date, rect01_png, telop_image, logo_image, vcap, unregistered_face_image, \
 
 
 def mp_face_detection_func(small_frame):
-    face = mp.solutions.face_detection.FaceDetection(min_detection_confidence=0.5)
+    face = mp.solutions.face_detection.FaceDetection(min_detection_confidence=0.4)
+    """
+    MediaPipe Face Detection.
+    MediaPipe Face Detection processes an RGB image and returns a list of the
+    detected face location data.
+    Please refer to
+    https://solutions.mediapipe.dev/face_detection#python-solution-api
+    for usage examples.
+    """    
+    # 推論処理
     results = face.process(small_frame)
+    """
+    Processes an RGB image and returns a list of the detected face location data.
+    Args:
+          image: An RGB image represented as a numpy ndarray.
+    Raises:
+          RuntimeError: If the underlying graph throws any error.
+    ValueError: 
+          If the input image is not three channel RGB.
+     Returns:
+           A NamedTuple object with a "detections" field that contains a list of the
+           detected face location data.'
+    """
     return results
 
 def test(vcap, SET_WIDTH, SET_HEIGHT):
     while True:
         ret, frame = vcap.read()
         small_frame = resize_frame(SET_WIDTH, SET_HEIGHT, frame)
+        small_frame.flags.writeable = False
         results = mp_face_detection_func(small_frame)
         yield results, small_frame
 
@@ -149,6 +171,8 @@ if __name__ == '__main__':
         HANDLING_FRAME_TIME_FRONT = time.perf_counter()
         xs = test(vcap, SET_WIDTH, SET_HEIGHT)
         for result, small_frame in xs:
+            if not result.detections:
+                continue
             if  exec_times >= 0:
                 exec_times = exec_times - 1
                 print(f'exec_times: {exec_times}')
@@ -156,6 +180,7 @@ if __name__ == '__main__':
                     event, _ = window.read(timeout = 1)
                     print(detection.score)
                     print(detection.location_data.relative_bounding_box)
+                    # small_frame.flags.writeable = True
                     mp_drawing.draw_detection(small_frame, detection)
                     imgbytes = cv2.imencode(".png", small_frame)[1].tobytes()
                     window["display"].update(data = imgbytes)
@@ -170,7 +195,41 @@ if __name__ == '__main__':
         print(f'profile()関数の処理時間合計: {round(HANDLING_FRAME_TIME , 3)}[秒]')
 
     pr.run('profile(exec_times)', 'restats')
-        
+
+"""detection.location_data
+
+format: RELATIVE_BOUNDING_BOX
+relative_bounding_box {
+  xmin: 0.11177106201648712
+  ymin: 0.3772536516189575
+  width: 0.1854635626077652
+  height: 0.3302779793739319
+}
+relative_keypoints {
+  x: 0.17963822185993195
+  y: 0.4780540466308594
+}
+relative_keypoints {
+  x: 0.2510705888271332
+  y: 0.48258280754089355
+}
+relative_keypoints {
+  x: 0.22213803231716156
+  y: 0.5638952851295471
+}
+relative_keypoints {
+  x: 0.21596230566501617
+  y: 0.6227309107780457
+}
+relative_keypoints {
+  x: 0.1223718449473381
+  y: 0.48676401376724243
+}
+relative_keypoints {
+  x: 0.2783607244491577
+  y: 0.4942516088485718
+}
+"""
 
 
 
