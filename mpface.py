@@ -116,7 +116,10 @@ date, rect01_png, telop_image, logo_image, vcap, unregistered_face_image, \
 
 
 def mp_face_detection_func(small_frame):
-    face = mp.solutions.face_detection.FaceDetection(min_detection_confidence=0.4)
+    face = mp.solutions.face_detection.FaceDetection(
+        model_selection=0,
+        min_detection_confidence=0.4
+    )
     """
     MediaPipe Face Detection.
     MediaPipe Face Detection processes an RGB image and returns a list of the
@@ -175,10 +178,11 @@ if __name__ == '__main__':
                 continue
             if  exec_times >= 0:
                 exec_times = exec_times - 1
+                print(f'人数: {len(result.detections)}人')
                 print(f'exec_times: {exec_times}')
                 for detection in result.detections:
                     event, _ = window.read(timeout = 1)
-                    print(detection.score)
+                    print(f'信頼度: {round(detection.score[0]*100, 2)}%')
                     print(detection.location_data.relative_bounding_box)
                     # small_frame.flags.writeable = True
                     mp_drawing.draw_detection(small_frame, detection)
