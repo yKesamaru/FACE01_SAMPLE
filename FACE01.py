@@ -952,7 +952,7 @@ def face_attestation(
         """ ⭐️顔がある場合の処理ここから⭐️ """
         # 顔ロケーションからエンコーディングを求める
         if use_mediapipe == True and  person_frame_face_encoding == True:
-            """TODO
+            """FIX
             人数分を繰り返し処理しているので時間がかかる。
             dlibは一つの画像に複数の座標を与えて一度に処理をする。
             なので各person_frameをくっつけて一つの画像にすれば処理時間は短くなる。
@@ -972,9 +972,9 @@ def face_attestation(
             print(f'concatenate_face_location_list: {concatenate_face_location_list}')
             print("---------------------------------")
             """
-            face_encodings = face_recognition.face_encodings( person_frame_face_encoding, concatenate_person_frame, concatenate_face_location_list, jitters, model)
+            face_encodings = face_recognition.face_encodings(concatenate_person_frame, concatenate_face_location_list, jitters, model)
         elif use_mediapipe == True and  person_frame_face_encoding == False:
-            face_encodings = face_recognition.face_encodings( person_frame_face_encoding, small_frame, face_location_list, jitters, model)
+            face_encodings = face_recognition.face_encodings(small_frame, face_location_list, jitters, model)
         elif use_mediapipe == False and  person_frame_face_encoding == True:
             print("\n---------------------------------")
             print("config.ini:")
@@ -984,7 +984,7 @@ def face_attestation(
             print("---------------------------------")
             quit()
         elif use_mediapipe == False and  person_frame_face_encoding == False:
-            face_encodings = face_recognition.face_encodings( person_frame_face_encoding, small_frame, face_location_list, jitters, model)
+            face_encodings = face_recognition.face_encodings(small_frame, face_location_list, jitters, model)
 
 
         """ BUG & TODO frame_skip変数 半自動設定
@@ -1047,10 +1047,9 @@ def face_attestation(
                         shutil.move(name, './noFace/')
                         continue
 
-                # tolerance未満の場合、変数nameの両端に!をつける
+                # tolerance未満の場合、'顔画像未登録'に。
                 if p > tolerance:
-                    # name = '！'+name+'！'  # （Windowsでファイル名に?は使用不可）
-                    name = '顔画像未登録'  # （Windowsでファイル名に?は使用不可）
+                    name = '顔画像未登録'
                 # デフォルト顔画像の描写
                 if p <= tolerance:  # ディスタンスpがtolerance以下の場合
                     if default_face_image_draw == True:
@@ -1419,7 +1418,3 @@ if __name__ == '__main__':
         print(f'profile()関数の処理時間合計: {round(HANDLING_FRAME_TIME , 3)}[秒]')
     pr.run('profile(exec_times)', 'restats')
 # """
-
-"""mediapipe実験用コード
-
-"""

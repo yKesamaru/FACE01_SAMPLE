@@ -1,5 +1,22 @@
 # FACE01について
 
+# TODO
+- Logging
+- GPU環境識別
+- 画像ファイル保存の非同期処理
+- frame_skip変数 半自動設定
+- load_priset_image.pyリファクタリング
+  - マルチスレッド化
+- opencv
+  - pip -> system install
+  - USE GPU
+  - libopencv-calib3d4.2コンピュータビジョンカメラ較正ライブラリ
+- Python3-vlc調査
+
+## FIX
+- config.iniリファクタリング
+
+
 # 環境構築方法
 ## 開発想定環境
 Distributor ID: Ubuntu
