@@ -7,8 +7,10 @@
       "request": "launch",
       "cwd": "/home/terms/bin/FACE01",
       "program": "${file}",
+      // "program": "/home/terms/bin/FACE01/FACE01.py",
       "console": "integratedTerminal",
-      "python": "/home/terms/bin/FACE01/bin/python"
+      "python": "/home/terms/bin/FACE01/bin/python",
+      // "justMyCode": false
     },
     {
       "name": "2022年4月16日",
