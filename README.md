@@ -25,33 +25,46 @@ Python 3.8.10
 ```
 ```python
 > pip freeze
-    bandit==1.7.4
-    click==8.1.2
-    Cython==0.29.28
-    dlib==19.23.1
-    face-recognition==1.3.0
-    face-recognition-models==0.3.0
-    gitdb==4.0.9
-    GitPython==3.1.27
-    GPUtil==1.4.0
-    mypy==0.950
-    mypy-extensions==0.4.3
-    numpy==1.22.3
-    opencv-python==4.5.5.64
-    pbr==5.9.0
-    Pillow==9.1.0
-    pkg_resources==0.0.0
-    PySimpleGUI==4.59.0
-    PyYAML==6.0
-    smmap==5.0.0
-    snakeviz==2.1.1
-    stevedore==3.5.0
-    tk==0.1.0
-    tomli==2.0.1
-    tornado==6.1
-    typing_extensions==4.2.0
-    numba(numbaをインストールする場合には通常のnumpyはアンインストールされる)
-    mediapipe
+      absl-py==1.0.0
+      attrs==21.4.0
+      bandit==1.7.4
+      click==8.1.3
+      cycler==0.11.0
+      Cython==0.29.28
+      dlib==19.24.0
+      fonttools==4.33.3
+      gitdb==4.0.9
+      GitPython==3.1.27
+      GPUtil==1.4.0
+      kiwisolver==1.4.2
+      llvmlite==0.38.1
+      matplotlib==3.5.2
+      mediapipe==0.8.10
+      mypy-extensions==0.4.3
+      mypy==0.950
+      numba==0.55.1(numbaをインストールする場合には通常のnumpyはアンインストールされる)
+      numpy==1.21.6
+      opencv-contrib-python==4.5.5.64
+      opencv-python==4.5.5.64
+      packaging==21.3
+      pbr==5.9.0
+      pep8==1.7.1
+      Pillow==9.1.1
+      pkg_resources==0.0.0
+      protobuf==3.20.1
+      pyparsing==3.0.9
+      PySimpleGUI==4.60.0
+      python-dateutil==2.8.2
+      PyYAML==6.0
+      six==1.16.0
+      smmap==5.0.0
+      snakeviz==2.1.1
+      stevedore==3.5.0
+      tk==0.1.0
+      tomli==2.0.1
+      tornado==6.1
+      typing_extensions==4.2.0
+
 ```
 # 環境構築
 ## 参照
@@ -115,6 +128,10 @@ True
 >>> 
 ```
 # バージョン履歴
+## version 1.3.02 Linux リリースノート
+- mediapipeによる高速化
+- face_recognitionライブラリの機能追加
+  - インストール版を使用不可へ。
 ## version 1.3.01 Linux リリースノート
 - リファクタリング
 - 呼び出し方法の変更
