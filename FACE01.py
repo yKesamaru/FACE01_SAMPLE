@@ -29,6 +29,13 @@ from face01lib.video_capture import video_capture
 """mediapipe for python, see bellow
 https://github.com/google/mediapipe/tree/master/mediapipe/python
 """
+"""about coordinate order
+dlib: (Left, Top, Right, Bottom,)
+face_recognition: (top, right, bottom, left)
+see bellow
+https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
+"""
+
 
 
 # opencvの環境変数変更
@@ -239,8 +246,6 @@ def finalize(vcap):
     cv2.destroyAllWindows()
 
 
-# ---------------------------------------
-# mediapipe face detection
 def mp_face_detection_func(small_frame, model_selection=0, min_detection_confidence=0.4):
     face = mp.solutions.face_detection.FaceDetection(
         model_selection=model_selection,
@@ -265,13 +270,19 @@ def mp_face_detection_func(small_frame, model_selection=0, min_detection_confide
     """
     return inference
 
+# ---------------------------------------
+# mediapipe face detection
+# ---------------------------------------
 def return_face_coordinates(small_frame, SET_WIDTH, SET_HEIGHT, model_selection, min_detection_confidence) -> Tuple:
     """
     return:
-                face_location_list, person_frame_list
+                face_location_list
+                concatenate_face_location_list
+                person_frame_list
     """
     small_frame.flags.writeable = False
-    face_location_list: List = []
+    face_location_list: List = list()
+    concatenate_face_location_list = list()
     person_frame = np.empty([0,0])
     person_frame_list: List = list()
     result = mp_face_detection_func(small_frame, model_selection, min_detection_confidence)
@@ -281,20 +292,27 @@ def return_face_coordinates(small_frame, SET_WIDTH, SET_HEIGHT, model_selection,
         # print('\n------------')
         # print(f'人数: {len(result.detections)}人')
         # print(f'exec_times: {exec_times}')
+
+        detection_counter:int = 0
         for detection in result.detections:
-            xleft = int(detection.location_data.relative_bounding_box.xmin * SET_WIDTH)
-            xtop = int(detection.location_data.relative_bounding_box.ymin * SET_HEIGHT)
-            xright = int(detection.location_data.relative_bounding_box.width * SET_WIDTH + xleft)
-            xbottom = int(detection.location_data.relative_bounding_box.height * SET_HEIGHT + xtop)
+            xleft:int = int(detection.location_data.relative_bounding_box.xmin * SET_WIDTH)
+            xtop :int= int(detection.location_data.relative_bounding_box.ymin * SET_HEIGHT)
+            xright:int = int(detection.location_data.relative_bounding_box.width * SET_WIDTH + xleft)
+            xbottom:int = int(detection.location_data.relative_bounding_box.height * SET_HEIGHT + xtop)
             """see bellow
             https://stackoverflow.com/questions/71094744/how-to-crop-face-detected-via-mediapipe-in-python
             """
             # print(f'信頼度: {round(detection.score[0]*100, 2)}%')
             # print(f'座標: {(xtop,xright,xbottom,xleft)}')
             face_location_list.append((xtop,xright,xbottom,xleft))  # face_recognition order
+            """face_location_listはsmall_frame上の顔座標"""
 
             # person_frame用コード
-            expand_size = 25
+            person_frame = small_frame[xtop:xbottom, xleft:xright]
+            finally_height_size:int = 200
+
+            """# person_frameの顔周りを拡張する
+            expand_size:int = 25  # px
             if xtop - expand_size <= 0:
                 xtop = 0
             else:
@@ -311,16 +329,45 @@ def return_face_coordinates(small_frame, SET_WIDTH, SET_HEIGHT, model_selection,
                 xright = SET_WIDTH
             else:
                 xright = xright + expand_size
-            # person_frame
-            person_frame = small_frame[xtop:xbottom, xleft:xright]
+            """
+
+            # person_frameをリサイズする
+            height:int = xbottom - xtop
+            width:int = xright - xleft
+            # 拡大・縮小率を算出
+            fy:float = finally_height_size / height
+            finally_width_size:int = int(width * fy)
+            # fx:float = finally_width_size / width
+            person_frame = cv2.resize(person_frame, dsize=(finally_width_size, finally_height_size))
             """DEBUG
             cv2.imshow("cut off", person_frame)
             cv2.waitKey(5000)
             cv2.destroyAllWindows()
             """
             person_frame_list.append(person_frame)
+
+            # 拡大率に合わせて各座標を再計算する
+            # person_frame上の各座標
+            person_frame_xtop:int = 0
+            person_frame_xright:int = finally_width_size
+            person_frame_xbottom:int = finally_height_size
+            person_frame_xleft:int = 0
+            # 連結されたperson_frame上の各座標
+            concatenated_xtop:int = person_frame_xtop
+            concatenated_xright:int = person_frame_xright + (finally_width_size * detection_counter)
+            concatenated_xbottom:int = person_frame_xbottom 
+            concatenated_xleft:int = person_frame_xleft + (finally_width_size * detection_counter)
+
+            concatenate_face_location_list.append((concatenated_xtop,concatenated_xright,concatenated_xbottom,concatenated_xleft))  # face_recognition order
+            detection_counter += 1
+            """about coordinate order
+            dlib: (Left, Top, Right, Bottom,)
+            face_recognition: (top, right, bottom, left)
+            see bellow
+            https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
+            """
         small_frame.flags.writeable = True
-        return face_location_list, person_frame_list
+        return face_location_list, concatenate_face_location_list,person_frame_list
 """
     x1 = inner_bottom_area_left
     y1 = inner_bottom_area_top
@@ -329,8 +376,6 @@ def return_face_coordinates(small_frame, SET_WIDTH, SET_HEIGHT, model_selection,
     try:
         small_frame[y1:y2, x1:x2] = small_frame[y1:y2, x1:x2]
 """
-# ---------------------------------------
-
 
 
 def check_compare_faces(known_face_encodings, face_encoding, tolerance):
@@ -854,7 +899,8 @@ def face_attestation(
         # 顔認証処理 ここから ====================================================
         # 顔ロケーションを求める
         if use_mediapipe == True:
-            face_location_list, person_frame_list = return_face_coordinates(small_frame, SET_WIDTH, SET_HEIGHT, model_selection, min_detection_confidence)
+            face_location_list, concatenate_face_location_list, person_frame_list = \
+                return_face_coordinates(small_frame, SET_WIDTH, SET_HEIGHT, model_selection, min_detection_confidence)
         else:
             face_location_list = face_recognition.face_locations(small_frame, upsampling, mode)
         """face_location_list
@@ -906,25 +952,27 @@ def face_attestation(
         """ ⭐️顔がある場合の処理ここから⭐️ """
         # 顔ロケーションからエンコーディングを求める
         if use_mediapipe == True and  person_frame_face_encoding == True:
-            for person_frame in person_frame_list:
-                """DEBUG
-                cv2.imshow("face_encodings", person_frame)
-                cv2.waitKey(5000)
-                cv2.destroyAllWindows()
-                """
-                """TODO
-                人数分を繰り返し処理しているので時間がかかる。
-                dlibは一つの画像に複数の座標を与えて一度に処理をする。
-                なので各person_frameをくっつけて一つの画像にすれば処理時間は短くなる。
-                 numpy.hstack(tup)[source]
-                    Stack arrays in sequence horizontally (column wise).
-                    https://numpy.org/doc/stable/reference/generated/numpy.hstack.html
-                """
-
-
-                
-                face_encoding = face_recognition.face_encodings( person_frame_face_encoding, person_frame, face_location_list, jitters, model)
-                face_encodings.append(face_encoding)
+            """TODO
+            人数分を繰り返し処理しているので時間がかかる。
+            dlibは一つの画像に複数の座標を与えて一度に処理をする。
+            なので各person_frameをくっつけて一つの画像にすれば処理時間は短くなる。
+                numpy.hstack(tup)[source]
+                Stack arrays in sequence horizontally (column wise).
+                https://numpy.org/doc/stable/reference/generated/numpy.hstack.html
+            """
+            # concatenate person_frame
+            concatenate_person_frame = np.hstack(person_frame_list)
+            """DEBUG
+            cv2.imshow("face_encodings", concatenate_person_frame)
+            cv2.moveWindow("face_encodings", 800,600)
+            cv2.waitKey(500)
+            cv2.destroyAllWindows()
+            quit()
+            print("---------------------------------")
+            print(f'concatenate_face_location_list: {concatenate_face_location_list}')
+            print("---------------------------------")
+            """
+            face_encodings = face_recognition.face_encodings( person_frame_face_encoding, concatenate_person_frame, concatenate_face_location_list, jitters, model)
         elif use_mediapipe == True and  person_frame_face_encoding == False:
             face_encodings = face_recognition.face_encodings( person_frame_face_encoding, small_frame, face_location_list, jitters, model)
         elif use_mediapipe == False and  person_frame_face_encoding == True:
@@ -937,8 +985,6 @@ def face_attestation(
             quit()
         elif use_mediapipe == False and  person_frame_face_encoding == False:
             face_encodings = face_recognition.face_encodings( person_frame_face_encoding, small_frame, face_location_list, jitters, model)
-
-
 
 
         """ BUG & TODO frame_skip変数 半自動設定

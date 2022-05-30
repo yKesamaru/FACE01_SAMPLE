@@ -22,6 +22,12 @@ https://github.com/davisking/dlib
 https://github.com/davisking/dlib-models
 https://github.com/ageitgey/face_recognition
 """
+"""about coordinate order
+dlib: (Left, Top, Right, Bottom,)
+face_recognition: (top, right, bottom, left)
+see bellow
+https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
+"""
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
@@ -209,10 +215,10 @@ def face_encodings( person_frame_face_encoding, face_image, known_face_locations
         see bellow
         https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
         """
-        known_face_locations=[(0, face_image.shape[0], face_image.shape[1], 0)]  # face_recognition order
+        # known_face_locations=[(0, face_image.shape[0], face_image.shape[1], 0)]  # face_recognition order
         # known_face_locations=[(0, 0, face_image.shape[0], face_image.shape[1])]
         raw_landmarks = _raw_face_landmarks(face_image, known_face_locations, model)
-        return np.array(face_encoder.compute_face_descriptor(face_image, raw_landmarks[0], num_jitters))
+        return [np.array(face_encoder.compute_face_descriptor(face_image, raw_landmark_set, num_jitters)) for raw_landmark_set in raw_landmarks]
     else:
         raw_landmarks = _raw_face_landmarks(face_image, known_face_locations, model)
         return [np.array(face_encoder.compute_face_descriptor(face_image, raw_landmark_set, num_jitters)) for raw_landmark_set in raw_landmarks]
