@@ -23,11 +23,11 @@ def video_capture(kaoninshoDir, movie):
         vcap = cv2.VideoCapture(movie, cv2.CAP_FFMPEG)
     
     if not vcap.isOpened():
-        sg.popup( '不正な映像データのため終了します', 'FACE01 GRAPHICSを再起動して下さい', movie, title='警告', button_type=POPUP_BUTTONS_OK, modal=True, keep_on_top=True)
+        sg.popup( '不正な映像データのため終了します', 'システム管理者にお問い合わせください', movie, title='警告', button_type=POPUP_BUTTONS_OK, modal=True, keep_on_top=True)
         sys.exit(0)
     ret, frame = vcap.read()
     if ret == False:
-        sg.popup( '映像データが不正に途切れたので終了します', 'FACE01 GRAPHICSを再起動して下さい', movie, title='警告', button_type=POPUP_BUTTONS_OK, modal=True, keep_on_top=True)
+        sg.popup( '映像データが不正に途切れたので終了します', 'FACE01 システム管理者にお問い合わせください', movie, title='警告', button_type=POPUP_BUTTONS_OK, modal=True, keep_on_top=True)
         sys.exit(0)
     return vcap
 

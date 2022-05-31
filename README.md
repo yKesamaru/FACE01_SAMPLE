@@ -1,10 +1,20 @@
 # FACE01について
 
 # TODO
-- Logging
 - GPU環境識別
+- main関数のさらなる関数細分化
+- os.popenなどによるパイプ作成
+  - FACE01のヘッドレス運用に用いる
+- Logging
 - 画像ファイル保存の非同期処理
 - frame_skip変数 半自動設定
+- main関数化
+- 関数のマルチスレッド化
+- faceapi.compare_facesとreturn_face_namesに冗長がある
+- 計算式の効率化
+  - 調査
+    - mathライブラリ
+    - numpy化
 - load_priset_image.pyリファクタリング
   - マルチスレッド化
 - opencv
@@ -81,6 +91,7 @@ Python 3.8.10
       tomli==2.0.1
       tornado==6.1
       typing_extensions==4.2.0
+      psutil==5.9.1
 
 ```
 # 環境構築

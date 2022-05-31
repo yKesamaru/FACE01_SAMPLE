@@ -178,6 +178,8 @@ def face_distance(face_encodings, face_to_compare):
 # @njit(list(bool)((f8[:,:], f8[:,:], f8)), cache=False)
 # @njit
 def compare_faces(known_face_encodings, face_encoding_to_check, tolerance=0.6):
+    """TODO
+    compare_facesとreturn_face_namesに冗長がある"""
     """
     Compare a list of face encodings against a candidate encoding to see if they match.
 

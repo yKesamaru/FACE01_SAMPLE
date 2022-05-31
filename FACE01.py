@@ -1,10 +1,77 @@
+"""CHECK SYSTEM INFORMATION"""
+from GPUtil import getGPUs
+import PySimpleGUI as sg
+import face01lib.api as faceapi
+import platform
+import psutil
+import sys
+
+sg.theme('LightGray')
+def system_check():
+    """TODO
+    解決できるURLを指定すること
+    標準出力にも同様の文を出力すること
+    """
+    sg.popup(
+        'FACE01の推奨動作環境を満たしているかシステムチェックを実行します', 
+        'Python 3.8以上をお使いください', 
+        '現在のバージョン',
+        sys.version,
+        title='INFORMATION', button_type =sg. POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+    # CPU
+    if psutil.cpu_freq().max < 3000 or psutil.cpu_count(logical=False) < 4:
+        sg.popup(
+            'CPU性能が足りません',
+            '3GHz以上のCPUが必要です',
+            '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        exit()
+    # MEMORY
+    if psutil.virtual_memory().total < 8000000000:
+        sg.popup(
+        'メモリーが足りません',
+        '少なくとも8GB以上が必要です',
+        '終了します', 
+        title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        exit()
+    # GPU
+    if faceapi.dlib.cuda.get_num_devices() == 0:
+        sg.popup(
+        'CUDAが有効なデバイスが見つかりません',
+        '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        exit()
+    if faceapi.dlib.DLIB_USE_CUDA == False:
+        sg.popup('dlibビルド時にCUDAが有効化されていません',
+        '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        exit()
+    if faceapi.dlib.DLIB_USE_BLAS == False or faceapi.dlib.DLIB_USE_LAPACK == False:
+        sg.popup(
+            'BLASまたはLAPACKのいずれか、あるいは両方がインストールされていません',
+            'パッケージマネージャーでインストールしてください',
+            'CUBLAS native runtime libraries(Basic Linear Algebra Subroutines: 基本線形代数サブルーチン)',
+            'LAPACK バージョン 3.X(線形代数演算を行う総合的な FORTRAN ライブラリ)',
+            'インストール後にdlibを改めて再インストールしてください',
+            '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        exit()
+    for gpu in getGPUs():
+        gpu_memory = gpu.memoryTotal
+        gpu_name = gpu.name
+    if gpu_memory < 3000:
+        sg.popup(
+            'GPUデバイスの性能が足りません',
+            '現在のGPUデバイス',
+            [gpu_name],
+            'NVIDIA GeForce GTX 1660 Ti以上をお使いください',
+            '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        # exit()
+
+system_check()
+
+
 import configparser
 import datetime
 import os
 from pickletools import uint8
-import platform
 import shutil
-import sys
 import time
 from cgitb import small
 from collections import defaultdict
@@ -14,14 +81,10 @@ from typing import Dict, List, Tuple
 import traceback
 import cv2
 import mediapipe as mp
-# import face_recognition
 import numpy as np
-import PySimpleGUI as sg
 from numba import f8, i8, njit
 from PIL import Image, ImageDraw, ImageFont
-from PySimpleGUI.PySimpleGUI import POPUP_BUTTONS_OK
 
-import face01lib.api as face_recognition
 from face01lib.load_priset_image import load_priset_image
 from face01lib.similar_percentage_to_tolerance import to_tolerance
 from face01lib.video_capture import video_capture
@@ -31,11 +94,10 @@ https://github.com/google/mediapipe/tree/master/mediapipe/python
 """
 """about coordinate order
 dlib: (Left, Top, Right, Bottom,)
-face_recognition: (top, right, bottom, left)
+faceapi: (top, right, bottom, left)
 see bellow
-https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
+https://github.com/davisking/dlib/blob/master/python_examples/faceapi.py
 """
-
 
 
 # opencvの環境変数変更
@@ -91,13 +153,13 @@ def cal_specify_date() -> None:
     def limit_date_alart() -> None:
         if today >= limit_date:
             print('指定日付を過ぎました')
-            sg.popup( 'サンプルアプリケーションをお使いいただきありがとうございます','使用可能期限を過ぎました', '引き続きご利用になる場合は下記までご連絡下さい', '東海顔認証　担当：袈裟丸','y.kesamaru@tokai-kaoninsho.com', '', 'アプリケーションを終了します', title='', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+            sg.popup('サンプルアプリケーションをお使いいただきありがとうございます','使用可能期限を過ぎました', '引き続きご利用になる場合は下記までご連絡下さい', '東海顔認証　担当：袈裟丸','y.kesamaru@tokai-kaoninsho.com', '', 'アプリケーションを終了します', title='', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
             exit()
         elif today < limit_date:
             remaining_days = limit_date - today
             if remaining_days.days < 30:
                 dialog_text = 'お使い頂ける残日数は' + str(remaining_days.days) + '日です'
-                sg.popup( 'サンプルアプリケーションをお使いいただきありがとうございます', dialog_text, title='', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+                sg.popup('サンプルアプリケーションをお使いいただきありがとうございます', dialog_text, title='', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
     limit_date_alart()
 
 # ホームディレクトリ固定
@@ -234,7 +296,7 @@ def return_movie_property(SET_WIDTH: int, vcap) -> tuple:
     width = int(width)
     # widthが400pxより小さい場合警告を出す
     if width < 400:
-        sg.popup( '入力指定された映像データ幅が小さすぎます','width: {}px'.format(width), 'このまま処理を続けますが', '性能が発揮できない場合があります','OKを押すと続行します', title='警告', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        sg.popup('入力指定された映像データ幅が小さすぎます','width: {}px'.format(width), 'このまま処理を続けますが', '性能が発揮できない場合があります','OKを押すと続行します', title='警告', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
     # しかしながらパイプ処理の際フレームサイズがわからなくなるので決め打ちする
     SET_HEIGHT: int = int((SET_WIDTH * height) / width)
     return SET_WIDTH,fps,height,width,SET_HEIGHT
@@ -304,7 +366,7 @@ def return_face_coordinates(small_frame, SET_WIDTH, SET_HEIGHT, model_selection,
             """
             # print(f'信頼度: {round(detection.score[0]*100, 2)}%')
             # print(f'座標: {(xtop,xright,xbottom,xleft)}')
-            face_location_list.append((xtop,xright,xbottom,xleft))  # face_recognition order
+            face_location_list.append((xtop,xright,xbottom,xleft))  # faceapi order
             """face_location_listはsmall_frame上の顔座標"""
 
             # person_frame用コード
@@ -358,13 +420,13 @@ def return_face_coordinates(small_frame, SET_WIDTH, SET_HEIGHT, model_selection,
             concatenated_xbottom:int = person_frame_xbottom 
             concatenated_xleft:int = person_frame_xleft + (finally_width_size * detection_counter)
 
-            concatenate_face_location_list.append((concatenated_xtop,concatenated_xright,concatenated_xbottom,concatenated_xleft))  # face_recognition order
+            concatenate_face_location_list.append((concatenated_xtop,concatenated_xright,concatenated_xbottom,concatenated_xleft))  # faceapi order
             detection_counter += 1
             """about coordinate order
             dlib: (Left, Top, Right, Bottom,)
-            face_recognition: (top, right, bottom, left)
+            faceapi: (top, right, bottom, left)
             see bellow
-            https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
+            https://github.com/davisking/dlib/blob/master/python_examples/faceapi.py
             """
         small_frame.flags.writeable = True
         return face_location_list, concatenate_face_location_list,person_frame_list
@@ -380,7 +442,7 @@ def return_face_coordinates(small_frame, SET_WIDTH, SET_HEIGHT, model_selection,
 
 def check_compare_faces(known_face_encodings, face_encoding, tolerance):
     try:
-        matches = face_recognition.compare_faces(known_face_encodings, face_encoding, tolerance)
+        matches = faceapi.compare_faces(known_face_encodings, face_encoding, tolerance)
         return matches
     except:
         print('DEBUG: npKnown.npzが壊れているか予期しないエラーが発生しました。')
@@ -395,7 +457,7 @@ def check_compare_faces(known_face_encodings, face_encoding, tolerance):
 # Get face_names
 def return_face_names(face_names, known_face_encodings, face_encoding, known_face_names, matches, name):
     # 各プリセット顔画像のエンコーディングと動画中の顔画像エンコーディングとの各顔距離を要素としたアレイを算出
-    face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)  ## face_distances -> shape:(677,), face_encoding -> shape:(128,)
+    face_distances = faceapi.face_distance(known_face_encodings, face_encoding)  ## face_distances -> shape:(677,), face_encoding -> shape:(128,)
     # プリセット顔画像と動画中顔画像との各顔距離を要素とした配列に含まれる要素のうち、最小の要素のインデックスを求める
     best_match_index: int = np.argmin(face_distances)
     # プリセット顔画像と動画中顔画像との各顔距離を要素とした配列に含まれる要素のうち、最小の要素の値を求める
@@ -902,7 +964,7 @@ def face_attestation(
             face_location_list, concatenate_face_location_list, person_frame_list = \
                 return_face_coordinates(small_frame, SET_WIDTH, SET_HEIGHT, model_selection, min_detection_confidence)
         else:
-            face_location_list = face_recognition.face_locations(small_frame, upsampling, mode)
+            face_location_list = faceapi.face_locations(small_frame, upsampling, mode)
         """face_location_list
         [(144, 197, 242, 99), (97, 489, 215, 371)]
         """
@@ -972,9 +1034,9 @@ def face_attestation(
             print(f'concatenate_face_location_list: {concatenate_face_location_list}')
             print("---------------------------------")
             """
-            face_encodings = face_recognition.face_encodings(concatenate_person_frame, concatenate_face_location_list, jitters, model)
+            face_encodings = faceapi.face_encodings(concatenate_person_frame, concatenate_face_location_list, jitters, model)
         elif use_mediapipe == True and  person_frame_face_encoding == False:
-            face_encodings = face_recognition.face_encodings(small_frame, face_location_list, jitters, model)
+            face_encodings = faceapi.face_encodings(small_frame, face_location_list, jitters, model)
         elif use_mediapipe == False and  person_frame_face_encoding == True:
             print("\n---------------------------------")
             print("config.ini:")
@@ -984,7 +1046,7 @@ def face_attestation(
             print("---------------------------------")
             quit()
         elif use_mediapipe == False and  person_frame_face_encoding == False:
-            face_encodings = face_recognition.face_encodings(small_frame, face_location_list, jitters, model)
+            face_encodings = faceapi.face_encodings(small_frame, face_location_list, jitters, model)
 
 
         """ BUG & TODO frame_skip変数 半自動設定
@@ -1176,18 +1238,7 @@ if __name__ == '__main__':
         SET_WIDTH, fps, height, width, SET_HEIGHT, kaoninshoDir, priset_face_imagesDir = \
             initialize(SET_WIDTH)
 
-    """TODO
-    # Confirm system GPU
-    GPUありなしでGRAPHICSかIMAGERかを分ける
-    # from GPUtil import getGPUs
-    # # import GPUtil
-    # for gpu in getGPUs():
-    #     print(gpu.memoryTotal)
-    #     print(gpu.driver)
-    # # print(GPUtil.getGPUs())
-    # print(GPUtil.showUtilization(all = False, attrList = None, useOldCode = False))
-    # exit()
-    """
+
 
     known_face_encodings, known_face_names = load_priset_image(
         kaoninshoDir,
