@@ -7,10 +7,12 @@ import psutil
 import sys
 
 sg.theme('LightGray')
+
 def system_check():
     """TODO
     解決できるURLを指定すること
     標準出力にも同様の文を出力すること
+    テキストファイルを生成して同じ処理を繰り返させないこと
     """
     sg.popup(
         'FACE01の推奨動作環境を満たしているかシステムチェックを実行します', 
@@ -65,14 +67,12 @@ def system_check():
         # exit()
 # system_check()
 
-
 import configparser
 import datetime
 import os
 from pickletools import uint8
 import shutil
 import time
-from cgitb import small
 from collections import defaultdict
 from functools import lru_cache
 from pickle import NONE
@@ -147,13 +147,11 @@ def load_config_ini():
         print("---------------------------------------------")
         quit()
 
-
 def cal_specify_date() -> None:
     """指定日付計算
     """
     limit_date = datetime.datetime(2022, 12, 1, 0, 0, 0)   # 指定日付
     today = datetime.datetime.now()
-    sg.theme('LightGray')
 
     def limit_date_alart() -> None:
         if today >= limit_date:
@@ -166,6 +164,7 @@ def cal_specify_date() -> None:
                 dialog_text = 'お使い頂ける残日数は' + str(remaining_days.days) + '日です'
                 sg.popup('サンプルアプリケーションをお使いいただきありがとうございます', dialog_text, title='', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
     limit_date_alart()
+cal_specify_date()
 
 # ホームディレクトリ固定
 def home() -> tuple:
@@ -523,7 +522,7 @@ def check_compare_faces(known_face_encodings, face_encoding, tolerance):
         exit()
 
 # Get face_names
-def return_face_names(face_names, known_face_encodings, face_encoding, known_face_names, matches, name):
+def return_face_names(args_dict, face_names, known_face_encodings, face_encoding, known_face_names, matches, name):
     # 各プリセット顔画像のエンコーディングと動画中の顔画像エンコーディングとの各顔距離を要素としたアレイを算出
     face_distances = faceapi.face_distance(known_face_encodings, face_encoding)  ## face_distances -> shape:(677,), face_encoding -> shape:(128,)
     # プリセット顔画像と動画中顔画像との各顔距離を要素とした配列に含まれる要素のうち、最小の要素のインデックスを求める
@@ -531,7 +530,7 @@ def return_face_names(face_names, known_face_encodings, face_encoding, known_fac
     # プリセット顔画像と動画中顔画像との各顔距離を要素とした配列に含まれる要素のうち、最小の要素の値を求める
     min_face_distance: str = str(min(face_distances))  # あとでファイル名として文字列として加工するので予めstr型にしておく
     # アレイ中のインデックスからknown_face_names中の同インデックスの要素を算出
-    face_names = face_names_append(matches, best_match_index, min_face_distance, face_names, name)
+    face_names = face_names_append(args_dict, matches, best_match_index, min_face_distance, face_names, name)
     return face_names
 
 def draw_pink_rectangle(small_frame, top,bottom,left,right):
@@ -699,7 +698,7 @@ def convert_pil_img_to_ndarray(pil_img_obj):
     frame = np.array(pil_img_obj)
     return frame
 
-def face_names_append(matches, best_match_index, min_face_distance, face_names, name):
+def face_names_append(args_dict, matches, best_match_index, min_face_distance, face_names, name):
     if matches[best_match_index]:  # tolerance以下の人物しかここは通らない。
         """TODO
         arg: known_face_names
@@ -862,9 +861,6 @@ def Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR):
 """初期設定"""
 # 使用期限算出
 cal_specify_date()
-# 変数初期化
-conf_dict = load_config_ini()
-args_dict = initialize(conf_dict)
 
 # Initialize variables (Outer frame)
 frame_datas: Dict = {}
@@ -1103,7 +1099,7 @@ def main(args_dict):
                 name = "Unknown"
                 matches = check_compare_faces(args_dict["known_face_encodings"], face_encoding, tolerance)
                 # 名前リスト(face_names)生成
-                face_names = return_face_names(face_names, args_dict["known_face_encodings"], face_encoding, args_dict["known_face_names"], matches, name)
+                face_names = return_face_names(args_dict, face_names, args_dict["known_face_encodings"], face_encoding, args_dict["known_face_names"], matches, name)
 
             # face_location_listについて繰り返し処理→frame_datas_array作成
             for (top, right, bottom, left), name in zip(face_location_list, face_names):
@@ -1260,15 +1256,6 @@ def main(args_dict):
 
 # main =================================================================
 if __name__ == '__main__':
-    # 使用期限設定
-    cal_specify_date()
-    # 変数初期化
-    args_dict = initialize(conf_dict)
-
-    # Make an object of generator
-    xs = main(args_dict)
-
-
     """ 並行処理用コード_1
     from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
     # pool = ProcessPoolExecutor()
@@ -1403,19 +1390,19 @@ if __name__ == '__main__':
         [sg.Button('終了', key='terminate', pad=(0,10))]
     ]
     window = sg.Window(
-        'CALL_FACE01GRAPHICS', layout, alpha_channel = 1, margins=(0, 0),
-        no_titlebar = True, grab_anywhere = True,
+        'CALL_FACE01GRAPHICS', layout, alpha_channel = 1, margins=(10, 10),
         location=(350,130), modal = True
     )
     
-    exec_times: int = 500
+    exec_times: int = 50
     HANDLING_FRAME_TIME: float = 0.0
     HANDLING_FRAME_TIME_FRONT: float = 0.0
     HANDLING_FRAME_TIME_REAR: float = 0.0
 
     def profile(exec_times):
         HANDLING_FRAME_TIME_FRONT = time.perf_counter()
-        for array_x in xs:
+        for array_x in main(initialize(load_config_ini())):
+        # for array_x in xs:
             if  exec_times >= 0:
                 exec_times = exec_times - 1
                 print(f'exec_times: {exec_times}')

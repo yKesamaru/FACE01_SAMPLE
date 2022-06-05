@@ -1,15 +1,18 @@
 # FACE01について
 
 # TODO
-- video_capture.pyをイテレーターオブジェクトにしてframe送出自体をマルチスレッド化する
+- ヘッドレス機能実装
+  - os.popenなどによるパイプ作成
+- video_capture.py
+  - RTSPを受け付けるように実装
+  - イテレーターオブジェクトにしてframe送出自体をマルチスレッド化する
 - 何回も再計算している箇所を効率化する
+- ライブラリの内包化
+  - PySimpleGUI以外
+  - インストール負担軽減と使用ライブラリ隠蔽化
 - GPU環境識別
   - config.iniで設定可能にする
-- configparser部分を関数化
-  - returnは辞書形式で。
 - main関数のさらなる関数細分化
-- os.popenなどによるパイプ作成
-  - FACE01のヘッドレス運用に用いる
 - Logging
 - 画像ファイル保存の非同期処理
 - frame_skip変数 半自動設定
@@ -30,6 +33,8 @@
 ## FIX
 - main関数化
 - config.iniリファクタリング
+- configparser部分を関数化
+  - returnは辞書形式で。
 
 
 # 環境構築方法

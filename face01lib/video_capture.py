@@ -5,7 +5,9 @@ from functools import lru_cache
 import cv2
 import PySimpleGUI as sg
 
-"""マルチスレッド化
+"""TODO
+RTSPを受け付けるようにする
+マルチスレッド化
 イテレーターオブジェクトをマルチスレッドでyieldすることにより
 frame送出単位でマルチスレッド化する
 see README.md
