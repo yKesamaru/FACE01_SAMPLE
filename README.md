@@ -1,5 +1,42 @@
 # FACE01について
 
+# TODO
+- ヘッドレス機能実装
+  - os.popenなどによるパイプ作成
+- video_capture.py
+  - RTSPを受け付けるように実装
+  - イテレーターオブジェクトにしてframe送出自体をマルチスレッド化する
+- 何回も再計算している箇所を効率化する
+- ライブラリの内包化
+  - PySimpleGUI以外
+  - インストール負担軽減と使用ライブラリ隠蔽化
+- GPU環境識別
+  - config.iniで設定可能にする
+- main関数のさらなる関数細分化
+- Logging
+- 画像ファイル保存の非同期処理
+- frame_skip変数 半自動設定
+- 関数のマルチスレッド化
+- faceapi.compare_facesとreturn_face_namesに冗長がある
+- 計算式の効率化
+  - 調査
+    - mathライブラリ
+    - numpy化
+- load_priset_image.pyリファクタリング
+  - マルチスレッド化
+- opencv
+  - pip -> system install
+  - USE GPU
+  - libopencv-calib3d4.2コンピュータビジョンカメラ較正ライブラリ
+- Python3-vlc調査
+
+## FIX
+- main関数化
+- config.iniリファクタリング
+- configparser部分を関数化
+  - returnは辞書形式で。
+
+
 # 環境構築方法
 ## 開発想定環境
 Distributor ID: Ubuntu
@@ -64,6 +101,7 @@ Python 3.8.10
       tomli==2.0.1
       tornado==6.1
       typing_extensions==4.2.0
+      psutil==5.9.1
 
 ```
 # 環境構築

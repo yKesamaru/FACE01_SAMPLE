@@ -1,12 +1,78 @@
+"""CHECK SYSTEM INFORMATION"""
+from GPUtil import getGPUs
+import PySimpleGUI as sg
+import face01lib.api as faceapi
+import platform
+import psutil
+import sys
+
+sg.theme('LightGray')
+
+def system_check():
+    """TODO
+    解決できるURLを指定すること
+    標準出力にも同様の文を出力すること
+    テキストファイルを生成して同じ処理を繰り返させないこと
+    """
+    sg.popup(
+        'FACE01の推奨動作環境を満たしているかシステムチェックを実行します', 
+        'Python 3.8以上をお使いください', 
+        '現在のバージョン',
+        sys.version,
+        title='INFORMATION', button_type =sg. POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+    # CPU
+    if psutil.cpu_freq().max < 3000 or psutil.cpu_count(logical=False) < 4:
+        sg.popup(
+            'CPU性能が足りません',
+            '3GHz以上のCPUが必要です',
+            '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        exit()
+    # MEMORY
+    if psutil.virtual_memory().total < 8000000000:
+        sg.popup(
+        'メモリーが足りません',
+        '少なくとも8GB以上が必要です',
+        '終了します', 
+        title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        exit()
+    # GPU
+    if faceapi.dlib.cuda.get_num_devices() == 0:
+        sg.popup(
+        'CUDAが有効なデバイスが見つかりません',
+        '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        exit()
+    if faceapi.dlib.DLIB_USE_CUDA == False:
+        sg.popup('dlibビルド時にCUDAが有効化されていません',
+        '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        exit()
+    if faceapi.dlib.DLIB_USE_BLAS == False or faceapi.dlib.DLIB_USE_LAPACK == False:
+        sg.popup(
+            'BLASまたはLAPACKのいずれか、あるいは両方がインストールされていません',
+            'パッケージマネージャーでインストールしてください',
+            'CUBLAS native runtime libraries(Basic Linear Algebra Subroutines: 基本線形代数サブルーチン)',
+            'LAPACK バージョン 3.X(線形代数演算を行う総合的な FORTRAN ライブラリ)',
+            'インストール後にdlibを改めて再インストールしてください',
+            '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        exit()
+    for gpu in getGPUs():
+        gpu_memory = gpu.memoryTotal
+        gpu_name = gpu.name
+    if gpu_memory < 3000:
+        sg.popup(
+            'GPUデバイスの性能が足りません',
+            '現在のGPUデバイス',
+            [gpu_name],
+            'NVIDIA GeForce GTX 1660 Ti以上をお使いください',
+            '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        # exit()
+# system_check()
+
 import configparser
 import datetime
 import os
 from pickletools import uint8
-import platform
 import shutil
-import sys
 import time
-from cgitb import small
 from collections import defaultdict
 from functools import lru_cache
 from pickle import NONE
@@ -14,91 +80,91 @@ from typing import Dict, List, Tuple
 import traceback
 import cv2
 import mediapipe as mp
-# import face_recognition
 import numpy as np
-import PySimpleGUI as sg
 from numba import f8, i8, njit
 from PIL import Image, ImageDraw, ImageFont
-from PySimpleGUI.PySimpleGUI import POPUP_BUTTONS_OK
 
-import face01lib.api as face_recognition
 from face01lib.load_priset_image import load_priset_image
 from face01lib.similar_percentage_to_tolerance import to_tolerance
-from face01lib.video_capture import video_capture
+from face01lib.video_capture import video_capture, return_vcap
 
 """mediapipe for python, see bellow
 https://github.com/google/mediapipe/tree/master/mediapipe/python
 """
 """about coordinate order
 dlib: (Left, Top, Right, Bottom,)
-face_recognition: (top, right, bottom, left)
+faceapi: (top, right, bottom, left)
 see bellow
-https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
+https://github.com/davisking/dlib/blob/master/python_examples/faceapi.py
 """
-
 
 
 # opencvの環境変数変更
 os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;udp"
 
 # configファイル読み込み
-conf = configparser.ConfigParser()
-try:
-    conf.read('config.ini', 'utf-8')
-except:
-    print("エラーが発生しました")
-    print("以下のエラーをシステム管理者へお伝えください")
-    print("---------------------------------------------")
-    print(traceback.format_exc(limit=None, chain=True))
-    print("---------------------------------------------")
-    quit()
-similar_percentage: float =         float(conf.get('DEFAULT','similar_percentage'))
-jitters: int  =int(conf.get('DEFAULT','jitters'))
-priset_face_images_jitters: int =int(conf.get('DEFAULT','priset_face_images_jitters'))
-upsampling: int =int(conf.get('DEFAULT','upsampling'))
-mode: str =                       conf.get('DEFAULT','mode')
-frame_skip: int =int(conf.get('DEFAULT','frame_skip'))
-movie: str =                      conf.get('DEFAULT','movie')
-rectangle: bool = conf.getboolean('DEFAULT','rectangle')
-target_rectangle: bool = conf.getboolean('DEFAULT','target_rectangle')
-show_video: bool = conf.getboolean('DEFAULT','show_video')
-frequency_crop_image: int =int(conf.get('DEFAULT','frequency_crop_image'))
-set_area: str =                   conf.get('DEFAULT','set_area')
-print_property: bool = conf.getboolean('DEFAULT','print_property')
-calculate_time: bool = conf.getboolean('DEFAULT','calculate_time')
-SET_WIDTH: int =int(conf.get('DEFAULT','SET_WIDTH'))
-default_face_image_draw: bool = conf.getboolean('DEFAULT', 'default_face_image_draw')
-show_overlay: bool = conf.getboolean('DEFAULT', 'show_overlay')
-show_percentage: bool = conf.getboolean('DEFAULT', 'show_percentage')
-crop_face_image: bool = conf.getboolean('DEFAULT', 'crop_face_image')
-show_name: bool = conf.getboolean('DEFAULT', 'show_name')
-should_not_be_multiple_faces: bool = conf.getboolean('DEFAULT', 'should_not_be_multiple_faces')
-bottom_area: bool = conf.getboolean('DEFAULT', 'bottom_area')
-draw_telop_and_logo: bool = conf.getboolean('DEFAULT', 'draw_telop_and_logo')
-use_mediapipe: bool = conf.getboolean('DEFAULT','use_mediapipe')
-model_selection = int(conf.get('DEFAULT','model_selection'))
-min_detection_confidence: float = float(conf.get('DEFAULT','min_detection_confidence'))
-person_frame_face_encoding: bool = conf.getboolean('DEFAULT','person_frame_face_encoding')
-
+def load_config_ini():
+    try:
+        conf = configparser.ConfigParser()
+        conf.read('config.ini', 'utf-8')
+        # dict作成
+        conf_dict = {
+            'model' : conf.get('DEFAULT','model'),
+            'similar_percentage' : float(conf.get('DEFAULT','similar_percentage')),
+            'jitters' : int(conf.get('DEFAULT','jitters')),
+            'priset_face_images_jitters' : int(conf.get('DEFAULT','priset_face_images_jitters')),
+            'upsampling' : int(conf.get('DEFAULT','upsampling')),
+            'mode' : conf.get('DEFAULT','mode'),
+            'frame_skip' : int(conf.get('DEFAULT','frame_skip')),
+            'movie' : conf.get('DEFAULT','movie'),
+            'rectangle' : conf.getboolean('DEFAULT','rectangle'),
+            'target_rectangle' : conf.getboolean('DEFAULT','target_rectangle'),
+            'show_video' : conf.getboolean('DEFAULT','show_video'),
+            'frequency_crop_image' : int(conf.get('DEFAULT','frequency_crop_image')),
+            'set_area' : conf.get('DEFAULT','set_area'),
+            'print_property' : conf.getboolean('DEFAULT','print_property'),
+            'calculate_time' : conf.getboolean('DEFAULT','calculate_time'),
+            'SET_WIDTH' : int(conf.get('DEFAULT','SET_WIDTH')),
+            'default_face_image_draw' : conf.getboolean('DEFAULT', 'default_face_image_draw'),
+            'show_overlay' : conf.getboolean('DEFAULT', 'show_overlay'),
+            'show_percentage' : conf.getboolean('DEFAULT', 'show_percentage'),
+            'crop_face_image' : conf.getboolean('DEFAULT', 'crop_face_image'),
+            'show_name' : conf.getboolean('DEFAULT', 'show_name'),
+            'should_not_be_multiple_faces' : conf.getboolean('DEFAULT', 'should_not_be_multiple_faces'),
+            'bottom_area' : conf.getboolean('DEFAULT', 'bottom_area'),
+            'draw_telop_and_logo' : conf.getboolean('DEFAULT', 'draw_telop_and_logo'),
+            'use_mediapipe' : conf.getboolean('DEFAULT','use_mediapipe'),
+            'model_selection' : int(conf.get('DEFAULT','model_selection')),
+            'min_detection_confidence' : float(conf.get('DEFAULT','min_detection_confidence')),
+            'person_frame_face_encoding' : conf.getboolean('DEFAULT','person_frame_face_encoding'),
+        }
+        return conf_dict
+    except:
+        print("config.ini 読み込み中にエラーが発生しました")
+        print("以下のエラーをシステム管理者へお伝えください")
+        print("---------------------------------------------")
+        print(traceback.format_exc(limit=None, chain=True))
+        print("---------------------------------------------")
+        quit()
 
 def cal_specify_date() -> None:
     """指定日付計算
     """
     limit_date = datetime.datetime(2022, 12, 1, 0, 0, 0)   # 指定日付
     today = datetime.datetime.now()
-    sg.theme('LightGray')
 
     def limit_date_alart() -> None:
         if today >= limit_date:
             print('指定日付を過ぎました')
-            sg.popup( 'サンプルアプリケーションをお使いいただきありがとうございます','使用可能期限を過ぎました', '引き続きご利用になる場合は下記までご連絡下さい', '東海顔認証　担当：袈裟丸','y.kesamaru@tokai-kaoninsho.com', '', 'アプリケーションを終了します', title='', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+            sg.popup('サンプルアプリケーションをお使いいただきありがとうございます','使用可能期限を過ぎました', '引き続きご利用になる場合は下記までご連絡下さい', '東海顔認証　担当：袈裟丸','y.kesamaru@tokai-kaoninsho.com', '', 'アプリケーションを終了します', title='', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
             exit()
         elif today < limit_date:
             remaining_days = limit_date - today
             if remaining_days.days < 30:
                 dialog_text = 'お使い頂ける残日数は' + str(remaining_days.days) + '日です'
-                sg.popup( 'サンプルアプリケーションをお使いいただきありがとうございます', dialog_text, title='', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+                sg.popup('サンプルアプリケーションをお使いいただきありがとうございます', dialog_text, title='', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
     limit_date_alart()
+cal_specify_date()
 
 # ホームディレクトリ固定
 def home() -> tuple:
@@ -107,34 +173,42 @@ def home() -> tuple:
     return kaoninshoDir, priset_face_imagesDir
 
 # Initialize variables, load images
-def initialize(SET_WIDTH):
+def initialize(conf_dict):
     kaoninshoDir, priset_face_imagesDir = home()
     os.chdir(kaoninshoDir)
+
+    known_face_encodings, known_face_names = load_priset_image(kaoninshoDir,priset_face_imagesDir)
 
     load_telop_image: bool = False
     load_logo_image: bool = False
     load_unregistered_face_image: bool = False
 
+    rect01_png:cv2.Mat = cv2.imread("images/rect01.png", cv2.IMREAD_UNCHANGED)
+
+    # Get frame info (fps, height etc)
+    vcap = return_vcap(conf_dict["movie"])
+    if not 'height' in locals():
+        SET_WIDTH, fps, height, width, SET_HEIGHT = return_movie_property(conf_dict["SET_WIDTH"], vcap)
+
     # Load Telop image
     telop_image: cv2.Mat
     if not load_telop_image:
-       telop_image = cv2.imread("images/telop.png", cv2.IMREAD_UNCHANGED)
-       load_telop_image = True
+        telop_image = cv2.imread("images/telop.png", cv2.IMREAD_UNCHANGED)
+        load_telop_image = True
+        _, orgWidth = telop_image.shape[:2]
+        ratio: float = SET_WIDTH / orgWidth / 1.5  ## テロップ幅は横幅の半分に設定
+        resized_telop_image = cv2.resize(telop_image, None, fx = ratio, fy = ratio)  # type: ignore
+        cal_resized_telop_nums = cal_resized_telop_image(resized_telop_image)
 
     # Load Logo image
     logo_image: cv2.Mat
     if not load_logo_image:
         logo_image: cv2.Mat = cv2.imread("images/Logo.png", cv2.IMREAD_UNCHANGED)
         load_logo_image = True
-
-    rect01_png:cv2.Mat = cv2.imread("images/rect01.png", cv2.IMREAD_UNCHANGED)
-
-    # Make vcap object
-    vcap = video_capture(kaoninshoDir, movie)
-
-    # Get frame info (fps, height etc)
-    if not 'height' in locals():
-        SET_WIDTH, fps, height, width, SET_HEIGHT = return_movie_property(SET_WIDTH, vcap)
+        _, logoWidth = logo_image.shape[:2]
+        logoRatio = SET_WIDTH / logoWidth / 10
+        resized_logo_image = cv2.resize(logo_image, None, fx = logoRatio, fy = logoRatio)
+        cal_resized_logo_nums = cal_resized_logo_image(resized_logo_image,  SET_HEIGHT,SET_WIDTH)
 
     # Load unregistered_face_image
     unregistered_face_image: cv2.Mat
@@ -146,7 +220,45 @@ def initialize(SET_WIDTH):
     # 日付時刻算出
     date = datetime.datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f") # %f-> マイクロ秒
 
-    return date, rect01_png, telop_image, logo_image, vcap, unregistered_face_image, SET_WIDTH, fps, height, width, SET_HEIGHT, kaoninshoDir, priset_face_imagesDir
+    # 辞書作成
+    init_dict = {
+        'known_face_encodings': known_face_encodings,
+        'known_face_names': known_face_names,
+        'date': date,
+        'rect01_png': rect01_png,
+        'telop_image': telop_image,
+        'resized_telop_image': resized_telop_image,
+        'cal_resized_telop_nums': cal_resized_telop_nums,
+        'logo_image': logo_image,
+        'cal_resized_logo_nums': cal_resized_logo_nums,
+        'unregistered_face_image': unregistered_face_image,
+        'SET_WIDTH': SET_WIDTH,
+        'fps': fps,
+        'height': height,
+        'width': width,
+        'SET_HEIGHT': SET_HEIGHT,
+        'kaoninshoDir': kaoninshoDir,
+        'priset_face_imagesDir': priset_face_imagesDir
+    }
+
+    # 辞書結合
+    args_dict = {**init_dict, **conf_dict}
+
+    return args_dict
+
+def cal_resized_telop_image(resized_telop_image):
+    x1, y1, x2, y2 = 0, 0, resized_telop_image.shape[1], resized_telop_image.shape[0]
+    a = (1 - resized_telop_image[:,:,3:] / 255)
+    b = resized_telop_image[:,:,:3] * (resized_telop_image[:,:,3:] / 255)
+    cal_resized_telop_nums = (x1, y1, x2, y2, a, b)
+    return cal_resized_telop_nums
+
+def cal_resized_logo_image(resized_logo_image,  SET_HEIGHT,SET_WIDTH):
+    x1, y1, x2, y2 = SET_WIDTH - resized_logo_image.shape[1], SET_HEIGHT - resized_logo_image.shape[0], SET_WIDTH, SET_HEIGHT
+    a = (1 - resized_logo_image[:,:,3:] / 255)
+    b = resized_logo_image[:,:,:3] * (resized_logo_image[:,:,3:] / 255)
+    cal_resized_logo_nums = (x1, y1, x2, y2, a, b)
+    return cal_resized_logo_nums
 
 @lru_cache()
 def return_fontpath():
@@ -182,28 +294,43 @@ def resize_frame(SET_WIDTH, SET_HEIGHT, frame):
     small_frame: cv2.Mat = cv2.resize(frame, (SET_WIDTH, SET_HEIGHT))
     return small_frame
 
-def draw_telop(SET_WIDTH: int, telop_image: np.ndarray, small_frame: np.ndarray):
-    x1: int
-    x2: int
-    y1: int
-    y2: int
-    x1, y1, x2, y2 = 0, 0, telop_image.shape[1], telop_image.shape[0]
-    small_frame[y1:y2, x1:x2] = small_frame[y1:y2, x1:x2] * (1 - telop_image[:,:,3:] / 255) + telop_image[:,:,:3] * (telop_image[:,:,3:] / 255)
-    logo_counter = 1
-    return logo_counter, small_frame
-
-def draw_logo(small_frame,logo_image,  SET_HEIGHT,SET_WIDTH):
-    ## ロゴマークを合成　画面右下
-    logoHeight, logoWidth = logo_image.shape[:2]
-    logoRatio = SET_WIDTH / logoWidth / 10
-    logo_image = cv2.resize(logo_image, None, fx = logoRatio, fy = logoRatio)
-    x1, y1, x2, y2 = SET_WIDTH - logo_image.shape[1], SET_HEIGHT - logo_image.shape[0], SET_WIDTH, SET_HEIGHT
+def draw_telop(cal_resized_telop_nums, SET_WIDTH: int, resized_telop_image: np.ndarray, frame: np.ndarray):
+    x1, y1, x2, y2, a, b = cal_resized_telop_nums
     try:
-        small_frame[y1:y2, x1:x2] = small_frame[y1:y2, x1:x2] * (1 - logo_image[:,:,3:] / 255) + logo_image[:,:,:3] * (logo_image[:,:,3:] / 255)
+        frame[y1:y2, x1:x2] = frame[y1:y2, x1:x2] * a + b
     except:
-        pass
-    logo_counter = 1
-    return logo_counter, small_frame
+        """TODO
+        logging warning level"""
+        print("telopが描画できません")
+
+    """DEBUG
+    src1 = frame[y1:y2, x1:x2,]
+    # imshowで可視化実験
+    # cv2.imshow("DEBUG", frame[y1:y2, x1:x2] * (1 - resized_telop_image[:,:,3:] / 255))  # operands could not be broadcast together with shapes (55,433) (55,433,1) 
+    # cv2.imshow("DEBUG", frame[y1:y2, x1:x2] * (1 - resized_telop_image[:,:,3:] / 255))  # operands could not be broadcast together with shapes (55,433) (55,433,1)
+    cv2.imshow("DEBUG", src1)  # 
+    # cv2.imshow("DEBUG", (1 - resized_telop_image[:,:,3:] / 255))  # ネガ化
+    # cv2.imshow("DEBUG", (1 - resized_telop_image[:,:] / 255))  # 色味が変わる
+    # cv2.imshow("DEBUG", resized_telop_image[:,:,:3] * (resized_telop_image[:,:,3:] / 255))  # 普通*ポジ化 -> ほとんど真っ白
+    # cv2.imshow("DEBUG", resized_telop_image[:,:,3:] / 255)  # ポジ化
+    # cv2.imshow("DEBUG", resized_telop_image[:,:,:3])  # 普通
+    # cv2.imshow("DEBUG", resized_telop_image[:,:,3:])  # ポジ化
+    cv2.imshow("DEBUG", frame)
+    cv2.waitKey(3000)
+    cv2.destroyAllWindows()
+    """
+    return  frame
+
+def draw_logo(cal_resized_logo_nums, frame,logo_image,  SET_HEIGHT,SET_WIDTH):
+    ## ロゴマークを合成　画面右下
+    x1, y1, x2, y2, a, b = cal_resized_logo_nums
+    try:
+        frame[y1:y2, x1:x2] = frame[y1:y2, x1:x2] * a + b
+    except:
+        """TODO
+        logging warning level"""
+        print("logoが描画できません")
+    return frame
 
 # python版
 @lru_cache()
@@ -234,7 +361,7 @@ def return_movie_property(SET_WIDTH: int, vcap) -> tuple:
     width = int(width)
     # widthが400pxより小さい場合警告を出す
     if width < 400:
-        sg.popup( '入力指定された映像データ幅が小さすぎます','width: {}px'.format(width), 'このまま処理を続けますが', '性能が発揮できない場合があります','OKを押すと続行します', title='警告', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        sg.popup('入力指定された映像データ幅が小さすぎます','width: {}px'.format(width), 'このまま処理を続けますが', '性能が発揮できない場合があります','OKを押すと続行します', title='警告', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
     # しかしながらパイプ処理の際フレームサイズがわからなくなるので決め打ちする
     SET_HEIGHT: int = int((SET_WIDTH * height) / width)
     return SET_WIDTH,fps,height,width,SET_HEIGHT
@@ -244,7 +371,6 @@ def finalize(vcap):
     vcap.release()
     # ウィンドウの除去
     cv2.destroyAllWindows()
-
 
 def mp_face_detection_func(small_frame, model_selection=0, min_detection_confidence=0.4):
     face = mp.solutions.face_detection.FaceDetection(
@@ -270,10 +396,9 @@ def mp_face_detection_func(small_frame, model_selection=0, min_detection_confide
     """
     return inference
 
-# ---------------------------------------
-# mediapipe face detection
-# ---------------------------------------
 def return_face_coordinates(small_frame, SET_WIDTH, SET_HEIGHT, model_selection, min_detection_confidence) -> Tuple:
+    """TODO
+    計算効率のためのリファクタリング"""
     """
     return:
                 face_location_list
@@ -287,7 +412,7 @@ def return_face_coordinates(small_frame, SET_WIDTH, SET_HEIGHT, model_selection,
     person_frame_list: List = list()
     result = mp_face_detection_func(small_frame, model_selection, min_detection_confidence)
     if not result.detections:
-        return face_location_list, person_frame_list
+        return face_location_list, concatenate_face_location_list,person_frame_list
     else:
         # print('\n------------')
         # print(f'人数: {len(result.detections)}人')
@@ -304,7 +429,12 @@ def return_face_coordinates(small_frame, SET_WIDTH, SET_HEIGHT, model_selection,
             """
             # print(f'信頼度: {round(detection.score[0]*100, 2)}%')
             # print(f'座標: {(xtop,xright,xbottom,xleft)}')
-            face_location_list.append((xtop,xright,xbottom,xleft))  # face_recognition order
+
+            # xleft or xtop がマイナスになる場合があるとバグる
+            if xleft <= 0 or xtop <= 0:
+                continue
+
+            face_location_list.append((xtop,xright,xbottom,xleft))  # faceapi order
             """face_location_listはsmall_frame上の顔座標"""
 
             # person_frame用コード
@@ -340,7 +470,7 @@ def return_face_coordinates(small_frame, SET_WIDTH, SET_HEIGHT, model_selection,
             # fx:float = finally_width_size / width
             person_frame = cv2.resize(person_frame, dsize=(finally_width_size, finally_height_size))
             """DEBUG
-            cv2.imshow("cut off", person_frame)
+            cv2.imshow("DEBUG", person_frame)
             cv2.waitKey(5000)
             cv2.destroyAllWindows()
             """
@@ -358,13 +488,13 @@ def return_face_coordinates(small_frame, SET_WIDTH, SET_HEIGHT, model_selection,
             concatenated_xbottom:int = person_frame_xbottom 
             concatenated_xleft:int = person_frame_xleft + (finally_width_size * detection_counter)
 
-            concatenate_face_location_list.append((concatenated_xtop,concatenated_xright,concatenated_xbottom,concatenated_xleft))  # face_recognition order
+            concatenate_face_location_list.append((concatenated_xtop,concatenated_xright,concatenated_xbottom,concatenated_xleft))  # faceapi order
             detection_counter += 1
             """about coordinate order
             dlib: (Left, Top, Right, Bottom,)
-            face_recognition: (top, right, bottom, left)
+            faceapi: (top, right, bottom, left)
             see bellow
-            https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
+            https://github.com/davisking/dlib/blob/master/python_examples/faceapi.py
             """
         small_frame.flags.writeable = True
         return face_location_list, concatenate_face_location_list,person_frame_list
@@ -377,10 +507,9 @@ def return_face_coordinates(small_frame, SET_WIDTH, SET_HEIGHT, model_selection,
         small_frame[y1:y2, x1:x2] = small_frame[y1:y2, x1:x2]
 """
 
-
 def check_compare_faces(known_face_encodings, face_encoding, tolerance):
     try:
-        matches = face_recognition.compare_faces(known_face_encodings, face_encoding, tolerance)
+        matches = faceapi.compare_faces(known_face_encodings, face_encoding, tolerance)
         return matches
     except:
         print('DEBUG: npKnown.npzが壊れているか予期しないエラーが発生しました。')
@@ -393,15 +522,15 @@ def check_compare_faces(known_face_encodings, face_encoding, tolerance):
         exit()
 
 # Get face_names
-def return_face_names(face_names, known_face_encodings, face_encoding, known_face_names, matches, name):
+def return_face_names(args_dict, face_names, known_face_encodings, face_encoding, known_face_names, matches, name):
     # 各プリセット顔画像のエンコーディングと動画中の顔画像エンコーディングとの各顔距離を要素としたアレイを算出
-    face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)  ## face_distances -> shape:(677,), face_encoding -> shape:(128,)
+    face_distances = faceapi.face_distance(known_face_encodings, face_encoding)  ## face_distances -> shape:(677,), face_encoding -> shape:(128,)
     # プリセット顔画像と動画中顔画像との各顔距離を要素とした配列に含まれる要素のうち、最小の要素のインデックスを求める
     best_match_index: int = np.argmin(face_distances)
     # プリセット顔画像と動画中顔画像との各顔距離を要素とした配列に含まれる要素のうち、最小の要素の値を求める
     min_face_distance: str = str(min(face_distances))  # あとでファイル名として文字列として加工するので予めstr型にしておく
     # アレイ中のインデックスからknown_face_names中の同インデックスの要素を算出
-    face_names = face_names_append(matches, best_match_index, min_face_distance, face_names, name)
+    face_names = face_names_append(args_dict, matches, best_match_index, min_face_distance, face_names, name)
     return face_names
 
 def draw_pink_rectangle(small_frame, top,bottom,left,right):
@@ -435,6 +564,8 @@ def display_percentage(percentage_and_symbol,small_frame, p, left, right, bottom
 
 # デフォルト顔画像の表示面積調整
 def adjust_display_area(default_face_image,top,left,right):
+    """TODO
+    繰り返し計算させないようリファクタリング"""
     _, default_face_image_width = default_face_image.shape[:2]
     default_face_image_ratio = ((right - left) / default_face_image_width / 1.5)
     default_face_small_image = cv2.resize(default_face_image, None, fx = default_face_image_ratio, fy = default_face_image_ratio)  # type: ignore
@@ -443,6 +574,8 @@ def adjust_display_area(default_face_image,top,left,right):
 
 # 顔部分の領域をクロップ画像ファイルとして出力
 def make_crop_face_image(name, date, dis, pil_img_obj_rgb, top, left, right, bottom, number_of_crops, frequency_crop_image):
+    """TODO
+    マルチスレッド化"""
     date = datetime.datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
     imgCroped = pil_img_obj_rgb.crop((left -20,top -20,right +20,bottom +20)).resize((200, 200))
     filename = "output/%s_%s_%s.png" % (name, date, dis)
@@ -454,6 +587,8 @@ def draw_default_face_image(small_frame, default_face_small_image, x1, y1, x2, y
     try:
         small_frame[y1:y2, x1:x2] = small_frame[y1:y2, x1:x2] * (1 - default_face_small_image[:,:,3:] / 255) + default_face_small_image[:,:,:3] * (default_face_small_image[:,:,3:] / 255)
     except:
+        """TODO
+        loggingによる警告レベル"""
         print('デフォルト顔画像の描画が出来ません')
         print('描画面積が足りないか他に問題があります')
     return small_frame
@@ -539,18 +674,18 @@ def draw_text_in_bottom_area(draw, inner_bottom_area_char_left, inner_bottom_are
     draw.text(position, date, fill=(255, 255, 255, 255), font = font)
 
 # pil_imgオブジェクトを生成
-def pil_img_instance(small_frame):
-    pil_img_obj= Image.fromarray(small_frame)
+def pil_img_instance(frame):
+    pil_img_obj= Image.fromarray(frame)
     return pil_img_obj
 
 # pil_img_rgbオブジェクトを生成
-def pil_img_rgb_instance(small_frame):
-    pil_img_obj_rgb = Image.fromarray(cv2.cvtColor(small_frame, cv2.COLOR_BGR2RGBA))
+def pil_img_rgb_instance(frame):
+    pil_img_obj_rgb = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA))
     return  pil_img_obj_rgb
 
 # drawオブジェクトを生成
-def  make_draw_object(small_frame):
-    draw = ImageDraw.Draw(Image.fromarray(small_frame))
+def  make_draw_object(frame):
+    draw = ImageDraw.Draw(Image.fromarray(frame))
     return draw
 
 # draw_rgbオブジェクトを生成
@@ -560,12 +695,15 @@ def  make_draw_rgb_object(pil_img_obj_rgb):
 
 # pil_img_objをnumpy配列に変換
 def convert_pil_img_to_ndarray(pil_img_obj):
-    small_frame = np.array(pil_img_obj)
-    return small_frame
+    frame = np.array(pil_img_obj)
+    return frame
 
-def face_names_append(matches, best_match_index, min_face_distance, face_names, name):
+def face_names_append(args_dict, matches, best_match_index, min_face_distance, face_names, name):
     if matches[best_match_index]:  # tolerance以下の人物しかここは通らない。
-        file_name = known_face_names[best_match_index]
+        """TODO
+        arg: known_face_names
+        """
+        file_name = args_dict["known_face_names"][best_match_index]
         name = file_name + ':' + min_face_distance
     """TODO
     else:
@@ -680,6 +818,8 @@ def draw_target_rectangle(rect01_png,small_frame,target_rectangle,top,bottom,lef
                 small_frame[y1:y2, x1:x2] = small_frame[y1:y2, x1:x2] * (1 - rect01_png[:,:,3:] / 255) + \
                             rect01_png[:,:,:3] * (rect01_png[:,:,3:] / 255)
             except:
+                """TODO
+                logging -> warn level"""
                 pass
             # ---- ---------------------
         else:  ## nameがUnknownだった場合
@@ -721,77 +861,18 @@ def Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR):
 """初期設定"""
 # 使用期限算出
 cal_specify_date()
-# 変数初期化
-date, rect01_png, telop_image, logo_image, vcap, unregistered_face_image, \
-    SET_WIDTH, fps, height, width, SET_HEIGHT, kaoninshoDir, priset_face_imagesDir = \
-        initialize(SET_WIDTH)
+
 # Initialize variables (Outer frame)
 frame_datas: Dict = {}
 default_face_image_dict: Dict = {}
-logo_counter: int = 0  # テロップやロゴを1frameに1回のみ表示させるために必要な変数
 matches: List = [bool]
 
 # 動画の保存 & 画像認識部 ================================================
-def face_attestation(
-    ## オプション変数初期設定 =================
-    # デフォルト値を持たない変数 ------
-    date,
-    rect01_png, 
-    unregistered_face_image,
-    logo_counter,
-    telop_image,
-    logo_image,
-    kaoninshoDir,
-    known_face_encodings: List[np.ndarray],
-    known_face_names: List[int],
-    # デフォルト値を持つ変数 ----------
-    jitters: int =  0,
-    similar_percentage: float = 99.0,
-    mode: str = 'cnn',
-    model: str = 'small',
-    upsampling: int = 0,
-    frame_skip: int = -1,
-    movie: str = 'test.mp4',
-    set_area: str  = 'NONE',
-    # 描画ウィンドウ横幅
-    SET_WIDTH: int = 800,
-    rectangle: bool = False,
-    target_rectangle: bool = True,
-    # opencv-pythonによる描画ウィンドウ表示ON/OFF
-    show_video: bool = False,
-    # 顔領域ファイル保存のON/OFF
-    crop_face_image: bool = True,
-    frequency_crop_image: int = 80,
-    # デフォルト顔画像ファイル読み込みON/OFF
-    default_face_image_draw: bool = True,
-    # output_frame_data: bool = False,
-    # 半透明表示ON/OFF
-    show_overlay: bool = True,
-    # パーセンテージ描画のON/OFF
-    show_percentage: bool = True,
-    # 名前とその四角形描画ON/OFF
-    show_name: bool = True,
-    print_property: bool = False,
-    calculate_time: bool = False,
-    # 複数人チェックのON/OFF
-    should_not_be_multiple_faces: bool = True,
-    # bottom area描画ON/OFF
-    bottom_area: bool = False,
-    draw_telop_and_logo: bool = True,
-    use_mediapipe: bool = True,
-    model_selection:int = 0,
-    min_detection_confidence:float = 0.4,
-     person_frame_face_encoding = False
-    ## ========================================
-    ):
+def main(args_dict):
     
     # 画角値（四隅の座標:Tuple）算出
-    # Python版
-    # if not 'TOP_LEFT' in locals():
-    #     TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER = cal_angle_coordinate(height, width)
-    # cython版
     if not 'TOP_LEFT' in locals():
-        TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER = cal_angle_coordinate(height, width)
+        TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER = cal_angle_coordinate(args_dict["height"], args_dict["width"])
 
     # ###################################################
     # BUG FIX
@@ -808,13 +889,26 @@ def face_attestation(
 
     # toleranceの算出
     if not 'tolerance' in locals():
-        tolerance = to_tolerance(similar_percentage)
+        tolerance = to_tolerance(args_dict["similar_percentage"])
 
     # ⭐️各frameを処理⭐️ -------------------------------------------
+    
+    # while True:
     while True:
+        try:
+            frame = video_capture(args_dict["kaoninshoDir"], args_dict["movie"]).__next__()
+        except:
+            break
         # 処理時間の測定（前半）
-        if calculate_time == True:
+        if args_dict["calculate_time"] == True:
             HANDLING_FRAME_TIME_FRONT = time.perf_counter()
+
+        """DEBUG
+        type(frame)
+        cv2.imshow("DEBUG", frame)
+        cv2.waitKey(5000)
+        cv2.destroyAllWindows()
+        """
 
         """TODO"""
         # frame内変数初期化 ========
@@ -834,10 +928,7 @@ def face_attestation(
         frame_datas_array: List = []
         percentage_and_symbol:str = ''
         # ==========================
-        ret: bool
-        frame: List[np.ndarray]
-        ret, frame = vcap.read()
-
+        """保留
         # 映像データ入力有無確認
         if ret == False:
             if unloaded_frame_count < 1000:
@@ -855,54 +946,44 @@ def face_attestation(
             else:
                 print('入力信号<frame>がないためプログラムを終了します')
                 break
+        """
 
         # frame_skipの数値に満たない場合は処理をスキップ
-        if frame_skip_counter < frame_skip:
+        if frame_skip_counter < args_dict["frame_skip"]:
             frame_skip_counter += 1
             continue
 
         # 画角値をもとに各frameを縮小
         # python版
-        frame = angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)
-        # cython版→1桁遅くなる
-        # frame = return_frame_coordinate(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)
+        frame = angle_of_view_specification(args_dict["set_area"], frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)
         # 各frameリサイズ
-        small_frame = resize_frame(SET_WIDTH, SET_HEIGHT, frame)
+        small_frame = resize_frame(args_dict["SET_WIDTH"], args_dict["SET_HEIGHT"], frame)
 
         # bottom area描画
-        if bottom_area==True:
+        if args_dict["bottom_area"]==True:
             # small_frameの下方向に余白をつける
             small_frame = cv2.copyMakeBorder(small_frame, 0, 180, 0, 0, cv2.BORDER_CONSTANT, value=(255,255,255))
     
         # 半透明処理（前半）
-        if show_overlay==True:
+        if args_dict["show_overlay"]==True:
             overlay: cv2.Mat = small_frame.copy()
 
-        if logo_counter == 0:
-            """
-            テロップとロゴマークの合成
-            貼り付け先座標を左上にセット
-            """
-            if draw_telop_and_logo == True:
-                orgHeight: int
-                orgWidth: int
-                orgHeight, orgWidth = telop_image.shape[:2]
-                ratio: float = SET_WIDTH / orgWidth / 1.5  ## テロップ幅は横幅の半分に設定
-                telop_image = cv2.resize(telop_image, None, fx = ratio, fy = ratio)  # type: ignore
-                # python版
-                logo_counter, small_frame =  draw_telop(SET_WIDTH, telop_image, small_frame)
-                # cython版
-                # small_frame = draw_telop(SET_WIDTH, telop_image, small_frame)
-                logo_counter, small_frame = draw_logo(small_frame,logo_image,  SET_HEIGHT,SET_WIDTH)
-        # End if logo_counter
+        """
+        テロップとロゴマークの合成
+        貼り付け先座標を左上にセット
+        """
+        if args_dict["draw_telop_and_logo"] == True:
+            small_frame =  draw_telop(args_dict["cal_resized_telop_nums"], args_dict["SET_WIDTH"], args_dict["resized_telop_image"], small_frame)
+            small_frame = draw_logo(args_dict["cal_resized_logo_nums"], small_frame, args_dict["logo_image"],  args_dict["SET_HEIGHT"],args_dict["SET_WIDTH"])
+    # End if logo_counter
 
         # 顔認証処理 ここから ====================================================
         # 顔ロケーションを求める
-        if use_mediapipe == True:
+        if args_dict["use_mediapipe"] == True:
             face_location_list, concatenate_face_location_list, person_frame_list = \
-                return_face_coordinates(small_frame, SET_WIDTH, SET_HEIGHT, model_selection, min_detection_confidence)
+                return_face_coordinates(small_frame, args_dict["SET_WIDTH"], args_dict["SET_HEIGHT"], args_dict["model_selection"], args_dict["min_detection_confidence"])
         else:
-            face_location_list = face_recognition.face_locations(small_frame, upsampling, mode)
+            face_location_list = faceapi.face_locations(small_frame, args_dict["upsampling"], args_dict["mode"])
         """face_location_list
         [(144, 197, 242, 99), (97, 489, 215, 371)]
         """
@@ -927,10 +1008,10 @@ def face_attestation(
 
         """TODO 動作チェック"""
         # ボトムエリア内複数人エラーチェック処理 ---------------------
-        if should_not_be_multiple_faces==True:
+        if args_dict["should_not_be_multiple_faces"]==True:
             if len(face_location_list) > 1:
                 small_frame = draw_pink_rectangle(small_frame, top,bottom,left,right)
-                error_messg_rectangle_left, error_messg_rectangle_right, error_messg_rectangle_bottom = draw_error_messg_rectangle(small_frame,SET_HEIGHT, SET_WIDTH)
+                error_messg_rectangle_left, error_messg_rectangle_right, error_messg_rectangle_bottom = draw_error_messg_rectangle(small_frame,SET_HEIGHT, args_dict["SET_WIDTH"])
                 fontpath = return_fontpath()
                 error_messg_rectangle_messg = '複数人が検出されています'
                 error_messg_rectangle_fontsize = 24
@@ -951,8 +1032,8 @@ def face_attestation(
 
         """ ⭐️顔がある場合の処理ここから⭐️ """
         # 顔ロケーションからエンコーディングを求める
-        if use_mediapipe == True and  person_frame_face_encoding == True:
-            """TODO
+        if args_dict["use_mediapipe"] == True and  args_dict["person_frame_face_encoding"] == True:
+            """FIX
             人数分を繰り返し処理しているので時間がかかる。
             dlibは一つの画像に複数の座標を与えて一度に処理をする。
             なので各person_frameをくっつけて一つの画像にすれば処理時間は短くなる。
@@ -972,19 +1053,19 @@ def face_attestation(
             print(f'concatenate_face_location_list: {concatenate_face_location_list}')
             print("---------------------------------")
             """
-            face_encodings = face_recognition.face_encodings( person_frame_face_encoding, concatenate_person_frame, concatenate_face_location_list, jitters, model)
-        elif use_mediapipe == True and  person_frame_face_encoding == False:
-            face_encodings = face_recognition.face_encodings( person_frame_face_encoding, small_frame, face_location_list, jitters, model)
-        elif use_mediapipe == False and  person_frame_face_encoding == True:
+            face_encodings = faceapi.face_encodings(concatenate_person_frame, concatenate_face_location_list, args_dict["jitters"], args_dict["model"])
+        elif args_dict["use_mediapipe"] == True and  args_dict["person_frame_face_encoding"] == False:
+            face_encodings = faceapi.face_encodings(small_frame, face_location_list, args_dict["jitters"], args_dict["model"])
+        elif args_dict["use_mediapipe"] == False and  args_dict["person_frame_face_encoding"] == True:
             print("\n---------------------------------")
             print("config.ini:")
-            print("mediapipe = False  の場合  person_frame_face_encoding = True  には出来ません")
+            print("mediapipe = False  の場合 person_frame_face_encoding = True  には出来ません")
             print("システム管理者へ連絡の後、設定を変更してください")
             print("処理を終了します")
             print("---------------------------------")
             quit()
-        elif use_mediapipe == False and  person_frame_face_encoding == False:
-            face_encodings = face_recognition.face_encodings( person_frame_face_encoding, small_frame, face_location_list, jitters, model)
+        elif args_dict["use_mediapipe"] == False and  args_dict["person_frame_face_encoding"] == False:
+            face_encodings = faceapi.face_encodings(small_frame, face_location_list, args_dict["jitters"], args_dict["model"])
 
 
         """ BUG & TODO frame_skip変数 半自動設定
@@ -1016,9 +1097,9 @@ def face_attestation(
             for face_encoding in face_encodings:
                 # Initialize name, matches (Inner frame)
                 name = "Unknown"
-                matches = check_compare_faces(known_face_encodings, face_encoding, tolerance)
+                matches = check_compare_faces(args_dict["known_face_encodings"], face_encoding, tolerance)
                 # 名前リスト(face_names)生成
-                face_names = return_face_names(face_names, known_face_encodings, face_encoding, known_face_names, matches, name)
+                face_names = return_face_names(args_dict, face_names, args_dict["known_face_encodings"], face_encoding, args_dict["known_face_names"], matches, name)
 
             # face_location_listについて繰り返し処理→frame_datas_array作成
             for (top, right, bottom, left), name in zip(face_location_list, face_names):
@@ -1047,24 +1128,23 @@ def face_attestation(
                         shutil.move(name, './noFace/')
                         continue
 
-                # tolerance未満の場合、変数nameの両端に!をつける
+                # tolerance未満の場合、'顔画像未登録'に。
                 if p > tolerance:
-                    # name = '！'+name+'！'  # （Windowsでファイル名に?は使用不可）
-                    name = '顔画像未登録'  # （Windowsでファイル名に?は使用不可）
+                    name = '顔画像未登録'
                 # デフォルト顔画像の描写
                 if p <= tolerance:  # ディスタンスpがtolerance以下の場合
-                    if default_face_image_draw == True:
+                    if args_dict["default_face_image_draw"] == True:
                         small_frame = draw_default_face(name, top, left, right, small_frame)
 
                 # ピンクまたは白の四角形描画
-                if rectangle == True:
+                if args_dict["rectangle"] == True:
                     if name == 'Unknown':  # プリセット顔画像に対応する顔画像がなかった場合
                         small_frame = draw_pink_rectangle(small_frame, top,bottom,left,right)
                     else:  # プリセット顔画像に対応する顔画像があった場合
-                        small_frame = draw_white_rectangle(rectangle, small_frame, top, left, right, bottom)
+                        small_frame = draw_white_rectangle(args_dict["rectangle"], small_frame, top, left, right, bottom)
                         
                 # パーセンテージ描画
-                if show_percentage==True:
+                if args_dict["show_percentage"]==True:
                     small_frame = display_percentage(percentage_and_symbol,small_frame, p, left, right, bottom, tolerance)
                     # cv2.imshow(small_frame)
 
@@ -1072,29 +1152,29 @@ def face_attestation(
                 """TODO 
                 画像ファイル保存の非同期処理
                 """
-                if crop_face_image==True:
-                    if frequency_crop_image < number_of_crops:
+                if args_dict["crop_face_image"]==True:
+                    if args_dict["frequency_crop_image"] < number_of_crops:
                         pil_img_obj_rgb = pil_img_rgb_instance(small_frame)
                         filename,number_of_crops, frequency_crop_image = \
-                            make_crop_face_image(name, date, dis, pil_img_obj_rgb, top, left, right, bottom, number_of_crops, frequency_crop_image)
+                            make_crop_face_image(name, date, dis, pil_img_obj_rgb, top, left, right, bottom, number_of_crops, args_dict["frequency_crop_image"])
                         number_of_crops = 0
                     else:
                         number_of_crops += 1
 
                 # 名前表示と名前用四角形の描画
-                if show_name==True:
+                if args_dict["show_name"]==True:
                     small_frame = draw_rectangle_for_name(name,small_frame, left, right,bottom)
                     pil_img_obj= Image.fromarray(small_frame)
                     small_frame = draw_text_for_name(left,right,bottom,name, p,tolerance,pil_img_obj)
 
                 # target_rectangleの描画
-                small_frame = draw_target_rectangle(rect01_png, small_frame,target_rectangle,top,bottom,left,right,name)
+                small_frame = draw_target_rectangle(args_dict["rect01_png"], small_frame,args_dict["target_rectangle"],top,bottom,left,right,name)
 
-                if bottom_area == True:
-                    small_frame = draw_bottom_area_rectangle(name,bottom_area, SET_HEIGHT, SET_WIDTH, small_frame)
+                if args_dict["bottom_area"] == True:
+                    small_frame = draw_bottom_area_rectangle(name,args_dict["bottom_area"], SET_HEIGHT, args_dict["SET_WIDTH"], small_frame)
 
                 # bottom_area中の描画
-                if bottom_area==True:
+                if args_dict["bottom_area"]==True:
                     unregistered_face_image, small_frame = draw_bottom_area(name,small_frame)
                     # name等描画
                     inner_bottom_area_char_left = 200
@@ -1103,10 +1183,6 @@ def face_attestation(
                     draw_text_in_bottom_area(draw, inner_bottom_area_char_left, inner_bottom_area_char_top,name,percentage_and_symbol,date)
                     small_frame = convert_pil_img_to_ndarray(pil_img_obj)
 
-                # 半透明処理（後半）_1frameに対して1回のみ
-                if show_overlay==True:
-                    cv2.addWeighted(overlay, alpha, small_frame, 1-alpha, 0, small_frame)
-        
                 # small_frame以外をperson_datasに格納
                 date = datetime.datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
                 person_data = {'name': name, 'pict':filename,  'date':date, 'location':(top,right,bottom,left), 'percentage_and_symbol': percentage_and_symbol}
@@ -1117,6 +1193,10 @@ def face_attestation(
             # 返り値をframe_datas_arrayに追加
             frame_datas_array.append(frame_datas)
             # End for (top, right, bottom, left), name in zip(face_location_list, face_names)
+        
+        # 半透明処理（後半）_1frameに対して1回のみ
+        if args_dict["show_overlay"]==True:
+            cv2.addWeighted(overlay, alpha, small_frame, 1-alpha, 0, small_frame)
         
         yield frame_datas_array
         # End if len(face_encodings) > 0
@@ -1159,84 +1239,23 @@ def face_attestation(
         logo_counter = 0
 
         # 処理時間の測定（後半）
-        if calculate_time == True:
+        if args_dict["calculate_time"] == True:
             HANDLING_FRAME_TIME_REAR = time.perf_counter()
             Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR)
 
     # End of while ---------------------------------------------
 
-    finalize(vcap)
+    finalize(args_dict["vcap"])
+
+"""TODO
+マルチスレッド化"""
+# from concurrent.futures import ThreadPoolExecutor
+# with ThreadPoolExecutor() as th:
+#     th.submit(main())
 
 
 # main =================================================================
 if __name__ == '__main__':
-    # 使用期限設定
-    cal_specify_date()
-    # 変数初期化
-    date, rect01_png, telop_image, logo_image, vcap, unregistered_face_image, \
-        SET_WIDTH, fps, height, width, SET_HEIGHT, kaoninshoDir, priset_face_imagesDir = \
-            initialize(SET_WIDTH)
-
-    """TODO
-    # Confirm system GPU
-    GPUありなしでGRAPHICSかIMAGERかを分ける
-    # from GPUtil import getGPUs
-    # # import GPUtil
-    # for gpu in getGPUs():
-    #     print(gpu.memoryTotal)
-    #     print(gpu.driver)
-    # # print(GPUtil.getGPUs())
-    # print(GPUtil.showUtilization(all = False, attrList = None, useOldCode = False))
-    # exit()
-    """
-
-    known_face_encodings, known_face_names = load_priset_image(
-        kaoninshoDir,
-        priset_face_imagesDir,
-        jitters = priset_face_images_jitters,
-    )
-
-    # Make an object of generator
-    xs = face_attestation(
-        date,
-        rect01_png, 
-        unregistered_face_image,
-        logo_counter,
-        telop_image,
-        logo_image,
-        kaoninshoDir,
-        known_face_encodings,
-        known_face_names,
-        jitters = jitters,
-        similar_percentage = similar_percentage,
-        upsampling = upsampling,
-        mode = mode,
-        model = 'small',
-        frame_skip = frame_skip,
-        movie = movie,
-        set_area = set_area,
-        SET_WIDTH = SET_WIDTH,
-        rectangle = rectangle,
-        target_rectangle = target_rectangle,
-        show_video = show_video,
-        crop_face_image = crop_face_image,
-        frequency_crop_image = frequency_crop_image,
-        default_face_image_draw = default_face_image_draw,
-        show_overlay = show_overlay,
-        show_percentage = show_percentage,
-        show_name = show_name,
-        print_property = print_property,
-        calculate_time = calculate_time,
-        should_not_be_multiple_faces = should_not_be_multiple_faces,
-        bottom_area = bottom_area,
-        draw_telop_and_logo = draw_telop_and_logo,
-        use_mediapipe = use_mediapipe,
-        model_selection = model_selection,
-        min_detection_confidence = min_detection_confidence,
-        person_frame_face_encoding =  person_frame_face_encoding
-    )
-
-
     """ 並行処理用コード_1
     from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
     # pool = ProcessPoolExecutor()
@@ -1371,8 +1390,7 @@ if __name__ == '__main__':
         [sg.Button('終了', key='terminate', pad=(0,10))]
     ]
     window = sg.Window(
-        'CALL_FACE01GRAPHICS', layout, alpha_channel = 1, margins=(0, 0),
-        no_titlebar = True, grab_anywhere = True,
+        'CALL_FACE01GRAPHICS', layout, alpha_channel = 1, margins=(10, 10),
         location=(350,130), modal = True
     )
     
@@ -1383,7 +1401,8 @@ if __name__ == '__main__':
 
     def profile(exec_times):
         HANDLING_FRAME_TIME_FRONT = time.perf_counter()
-        for array_x in xs:
+        for array_x in main(initialize(load_config_ini())):
+        # for array_x in xs:
             if  exec_times >= 0:
                 exec_times = exec_times - 1
                 print(f'exec_times: {exec_times}')
@@ -1419,7 +1438,3 @@ if __name__ == '__main__':
         print(f'profile()関数の処理時間合計: {round(HANDLING_FRAME_TIME , 3)}[秒]')
     pr.run('profile(exec_times)', 'restats')
 # """
-
-"""mediapipe実験用コード
-
-"""
