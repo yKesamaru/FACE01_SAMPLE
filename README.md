@@ -14,7 +14,6 @@
   - config.iniで設定可能にする
 - main関数のさらなる関数細分化
 - Logging
-- 画像ファイル保存の非同期処理
 - frame_skip変数 半自動設定
 - 関数のマルチスレッド化
 - faceapi.compare_facesとreturn_face_namesに冗長がある
@@ -35,6 +34,7 @@
 - config.iniリファクタリング
 - configparser部分を関数化
   - returnは辞書形式で。
+- 画像ファイル保存の非同期処理
 
 
 # 環境構築方法
