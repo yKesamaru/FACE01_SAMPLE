@@ -1,16 +1,15 @@
-import inspect
-from functools import lru_cache
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from typing import Dict, List, Tuple
 
 import dlib
 import numpy as np
 import PIL.Image
-from numba import f8, i8, njit, typeof
-from numba.extending import overload
-from numba.typed import List
 from PIL import ImageFile
 
-NUMBA_CAPTURED_ERRORS="new_style"
+# with ThreadPoolExecutor() as th:
+#     th.submit(main())
+
+
 try:
     import face_recognition_models
 except Exception:
@@ -43,8 +42,6 @@ face_recognition_model = face_recognition_models.face_recognition_model_location
 face_encoder = dlib.face_recognition_model_v1(face_recognition_model)
 
 
-# @lru_cache(maxsize = 128)
-# @njit(cache=True)
 def _rect_to_css(rect: object) ->Tuple[int,int,int,int]:
     """
     Convert a dlib 'rect' object to a plain tuple in (top, right, bottom, left) order
@@ -90,8 +87,6 @@ def load_image_file(file, mode='RGB'):
     return np.array(im)
 
 
-# @njit(cache=True)
-# @lru_cache(maxsize = 128)
 def _raw_face_locations(img: np.ndarray, number_of_times_to_upsample:int =0, model: str="cnn"):
     """
     Returns an array of bounding boxes of human faces in a image
@@ -108,7 +103,6 @@ def _raw_face_locations(img: np.ndarray, number_of_times_to_upsample:int =0, mod
         return face_detector(img, number_of_times_to_upsample)
 
 
-# @njit(cache=True)
 def face_locations(img: np.ndarray, number_of_times_to_upsample: int=0, model: str="hog") -> List[Tuple]:
     """
     Returns an array of bounding boxes of human faces in a image
@@ -125,7 +119,6 @@ def face_locations(img: np.ndarray, number_of_times_to_upsample: int=0, model: s
         return [_trim_css_to_bounds(_rect_to_css(face), img.shape) for face in _raw_face_locations(img, number_of_times_to_upsample, model)]
 
 
-# @njit()
 def _raw_face_landmarks(face_image, face_locations=None, model="small"):
     if face_locations is None:
         face_locations = _raw_face_locations(face_image)
@@ -134,8 +127,6 @@ def _raw_face_landmarks(face_image, face_locations=None, model="small"):
     return [pose_predictor_5_point(face_image, face_location) for face_location in face_locations]
 
 
-# compu_face = face_encoder.compute_face_descriptor()
-# @njit()
 def face_encodings(face_image, known_face_locations=None, num_jitters=0, model="small") ->List[np.ndarray]:
     """
     Given an image, return the 128-dimension face encoding for each face in the image.
@@ -156,10 +147,16 @@ def face_encodings(face_image, known_face_locations=None, num_jitters=0, model="
     """
     raw_landmarks = _raw_face_landmarks(face_image, known_face_locations, model)
     return [np.array(face_encoder.compute_face_descriptor(face_image, raw_landmark_set, num_jitters)) for raw_landmark_set in raw_landmarks]
+    """マルチスレッド化
+    pool = ThreadPoolExecutor()
+    # pool = ProcessPoolExecutor(max_workers=1)  # Error while calling cudaGetDevice(&the_device_id) in file /tmp/pip-install-983gqknr/dlib_66282e4ffadf4aa6965801c6f7ff7671/dlib/cuda/gpu_data.cpp:204. code: 3, reason: initialization error
+    return [pool.submit(multithread, raw_landmark_set, face_image, num_jitters).result() for raw_landmark_set in raw_landmarks]
+    """
+
+def multithread(raw_landmark_set, face_image, num_jitters):
+    return np.array(face_encoder.compute_face_descriptor(face_image, raw_landmark_set, num_jitters))
 
 
-# @njit(cache=False)
-# @njit
 def face_distance(face_encodings, face_to_compare):
     """
     Given a list of face encodings, compare them to a known face encoding and get a euclidean distance
@@ -174,9 +171,6 @@ def face_distance(face_encodings, face_to_compare):
     return np.linalg.norm(x=(face_encodings - face_to_compare), axis=1)
 
 
-# @njit('reflected list(Tuple(float64, bool))<iv=None>')
-# @njit(list(bool)((f8[:,:], f8[:,:], f8)), cache=False)
-# @njit
 def compare_faces(known_face_encodings, face_encoding_to_check, tolerance=0.6):
     """TODO
     compare_facesとreturn_face_namesに冗長がある"""

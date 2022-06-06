@@ -65,8 +65,10 @@ def system_check():
             'NVIDIA GeForce GTX 1660 Ti以上をお使いください',
             '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
         # exit()
+"""TODO"""
 # system_check()
 
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 import configparser
 import datetime
 import os
@@ -1216,7 +1218,7 @@ def main(args_dict):
             frame_datas = {'img':small_frame, 'person_data_list': person_data_list}
             # frame_datas_array.append(frame_datas)
         elif args_dict["headless"] == True:
-            frame_datas = {'img':'', 'person_data_list': person_data_list}
+            frame_datas = {'img':0, 'person_data_list': person_data_list}  # TypeError: list indices must be integers or slices, not str -> img
             # frame_datas_array.append(frame_datas)
         
         if args_dict["headless"] == False:
@@ -1421,7 +1423,7 @@ if __name__ == '__main__':
         location=(350,130), modal = True
     )
     
-    exec_times: int = 50
+    exec_times: int = 500
     profile_HANDLING_FRAME_TIME: float = 0.0
     profile_HANDLING_FRAME_TIME_FRONT: float = 0.0
     profile_HANDLING_FRAME_TIME_REAR: float = 0.0
@@ -1437,7 +1439,10 @@ if __name__ == '__main__':
                 print(f'exec_times: {exec_times}')
                 if headless == False:
                     event, _ = window.read(timeout = 1)
-                img, person_data_list = frame_datas['img'], frame_datas['person_data_list']
+                try:
+                    img, person_data_list = frame_datas['img'], frame_datas['person_data_list']
+                except:
+                    continue
                 for person_data in person_data_list:
                     name, pict, date,  location, percentage_and_symbol = person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
                     if not name == 'Unknown':
