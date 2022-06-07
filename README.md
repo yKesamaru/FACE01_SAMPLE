@@ -1,19 +1,23 @@
 # FACE01について
 
 # TODO
+  - help実装
+    - click, argparseどちらがいいのか調査
 - ヘッドレス機能実装
   - os.popenなどによるパイプ作成
+- Logging
 - video_capture.py
   - RTSPを受け付けるように実装
+  - numbaをもっと調査
   - イテレーターオブジェクトにしてframe送出自体をマルチスレッド化する
 - 何回も再計算している箇所を効率化する
-- ライブラリの内包化
+- 画像ファイル保存の非同期処理
+- ライブラリの内包化(FACE01自身に持つようにする)
   - PySimpleGUI以外
   - インストール負担軽減と使用ライブラリ隠蔽化
 - GPU環境識別
   - config.iniで設定可能にする
 - main関数のさらなる関数細分化
-- Logging
 - frame_skip変数 半自動設定
 - 関数のマルチスレッド化
 - faceapi.compare_facesとreturn_face_namesに冗長がある
@@ -34,7 +38,6 @@
 - config.iniリファクタリング
 - configparser部分を関数化
   - returnは辞書形式で。
-- 画像ファイル保存の非同期処理
 
 
 # 環境構築方法
