@@ -5,6 +5,7 @@ import face01lib.api as faceapi
 import platform
 import psutil
 import sys
+import click
 
 sg.theme('LightGray')
 
@@ -14,37 +15,64 @@ def system_check():
     標準出力にも同様の文を出力すること
     テキストファイルを生成して同じ処理を繰り返させないこと
     """
-    sg.popup(
-        'FACE01の推奨動作環境を満たしているかシステムチェックを実行します', 
-        'Python 3.8以上をお使いください', 
-        '現在のバージョン',
-        sys.version,
-        title='INFORMATION', button_type =sg. POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+    print("FACE01の推奨動作環境を満たしているかシステムチェックを実行します")
+    # Python version
+    print("- Python version check")
+    if (sys.version_info < (3, 8)):
+        print("警告: Python 3.8以降を使用してください")
+        sg.popup(
+            "警告: Python 3.8以降を使用してください",
+            title='INFORMATION', button_type =sg. POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        print(f'現在のPython: {sys.version}')
+        exit()
+    else:
+        print("\t[OK] ", str(sys.version).replace('\n', ''))
     # CPU
+    print("- CPU check")
     if psutil.cpu_freq().max < 3000 or psutil.cpu_count(logical=False) < 4:
         sg.popup(
             'CPU性能が足りません',
             '3GHz以上のCPUが必要です',
             '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
         exit()
+    else:
+        print("\t[OK] ", str(psutil.cpu_freq().max)[0] + '.' +  str(psutil.cpu_freq().max)[1:3],"GHz")
+        print("\t[OK] ", psutil.cpu_count(logical=False), "core")
     # MEMORY
-    if psutil.virtual_memory().total < 8000000000:
+    print("- Memory check")
+    if psutil.virtual_memory().total < 4000000000:
         sg.popup(
         'メモリーが足りません',
-        '少なくとも8GB以上が必要です',
-        '終了します', 
-        title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        '少なくとも4GByte以上が必要です',
+        '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
         exit()
+    else:
+        if psutil.virtual_memory().total < 10000000000:
+            print("\t[OK] ", str(psutil.virtual_memory().total)[0], "GByte"); exit()
+        else:
+            print("\t[OK] ", str(psutil.virtual_memory().total)[0:2], "GByte")
+
     # GPU
+    print("- CUDA devices check")
     if faceapi.dlib.cuda.get_num_devices() == 0:
         sg.popup(
         'CUDAが有効なデバイスが見つかりません',
         '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
         exit()
+    else:
+        print("\t[OK] ", f'cuda devices: {faceapi.dlib.cuda.get_num_devices()}')
+
+    # Dlib build check: CUDA
+    print("- Dlib build check: CUDA")
     if faceapi.dlib.DLIB_USE_CUDA == False:
         sg.popup('dlibビルド時にCUDAが有効化されていません',
         '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
         exit()
+    else:
+        print("\t[OK] ", f'DLIB_USE_CUDA: True')
+
+    # Dlib build check: BLAS
+    print("- Dlib build check: BLAS, LAPACK")
     if faceapi.dlib.DLIB_USE_BLAS == False or faceapi.dlib.DLIB_USE_LAPACK == False:
         sg.popup(
             'BLASまたはLAPACKのいずれか、あるいは両方がインストールされていません',
@@ -54,6 +82,11 @@ def system_check():
             'インストール後にdlibを改めて再インストールしてください',
             '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
         exit()
+    else:
+        print("\t[OK] ", f'DLIB_USE_BLAS, LAPACK: True')
+
+    # VRAM check
+    print("- VRAM check")
     for gpu in getGPUs():
         gpu_memory = gpu.memoryTotal
         gpu_name = gpu.name
@@ -64,9 +97,16 @@ def system_check():
             [gpu_name],
             'NVIDIA GeForce GTX 1660 Ti以上をお使いください',
             '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
-        # exit()
-"""TODO"""
-# system_check()
+        exit()
+    else:
+        if int(gpu_memory) < 9999:
+            print("\t[OK] ", f'VRAM: {str(int(gpu_memory))[0]} GByte')
+        else:
+            print("\t[OK] ", f'VRAM: {str(int(gpu_memory))[0:2]} GByte')
+        print("\t[OK] ", f'GPU device: {gpu_name}')
+
+    print("\n** System check: Done **\n")
+system_check()
 
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 import configparser
@@ -139,6 +179,7 @@ def configure():
             'model_selection' : int(conf.get('DEFAULT','model_selection')),
             'min_detection_confidence' : float(conf.get('DEFAULT','min_detection_confidence')),
             'person_frame_face_encoding' : conf.getboolean('DEFAULT','person_frame_face_encoding'),
+            'cpus' : int(conf.get('DEFAULT','cpus')),
         }
         return conf_dict
     except:
@@ -1412,18 +1453,18 @@ if __name__ == '__main__':
 # """プロファイリング用コード
     import cProfile as pr
     # headless = False
-    headless = True
+    headless = False
     if headless == False:
         layout = [
             [sg.Image(filename='', key='display', pad=(0,0))],
             [sg.Button('終了', key='terminate', pad=(0,10))]
         ]
         window = sg.Window(
-        'CALL_FACE01GRAPHICS', layout, alpha_channel = 1, margins=(10, 10),
+        'FACE01 プロファイリング利用例', layout, alpha_channel = 1, margins=(10, 10),
         location=(350,130), modal = True
     )
     
-    exec_times: int = 500
+    exec_times: int = 50
     profile_HANDLING_FRAME_TIME: float = 0.0
     profile_HANDLING_FRAME_TIME_FRONT: float = 0.0
     profile_HANDLING_FRAME_TIME_REAR: float = 0.0

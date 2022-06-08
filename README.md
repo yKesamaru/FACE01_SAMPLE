@@ -1,6 +1,8 @@
 # FACE01について
 
 # TODO
+- マルチプロセス化
+  - (face_recognition_cli)[https://github.com/ageitgey/face_recognition/blob/87a8449a359fbc0598e95b820e920ce285b8a9d9/face_recognition/face_recognition_cli.py]を参考に
   - help実装
     - click, argparseどちらがいいのか調査
 - ヘッドレス機能実装
@@ -38,6 +40,7 @@
 - config.iniリファクタリング
 - configparser部分を関数化
   - returnは辞書形式で。
+- Pythonバージョン確認コード実装
 
 
 # 環境構築方法
