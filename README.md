@@ -2,7 +2,8 @@
 
 # TODO
 - マルチプロセス化
-  - (face_recognition_cli)[https://github.com/ageitgey/face_recognition/blob/87a8449a359fbc0598e95b820e920ce285b8a9d9/face_recognition/face_recognition_cli.py]を参考に
+  - `frame = video_capture(args_dict["kaoninshoDir"], args_dict["movie"]).__next__()`でフレームを一つ取り出したら、それ以降は一つの関数で良い。そのうえで、その関数をマルチプロセス化する。
+  - 起動時間短縮
   - help実装
     - click, argparseどちらがいいのか調査
 - ヘッドレス機能実装

@@ -146,7 +146,18 @@ def face_encodings(face_image, known_face_locations=None, num_jitters=0, model="
     https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
     """
     raw_landmarks = _raw_face_landmarks(face_image, known_face_locations, model)
-    return [np.array(face_encoder.compute_face_descriptor(face_image, raw_landmark_set, num_jitters)) for raw_landmark_set in raw_landmarks]
+    # face_list = []
+    # for raw_landmark_set in raw_landmarks:
+    #     a = np.array(face_encoder.compute_face_descriptor(face_image, raw_landmark_set, num_jitters, 0.25))
+    #     face_list.append(a)
+    #     return face_list
+    return [np.array(face_encoder.compute_face_descriptor(face_image, raw_landmark_set, num_jitters, 0.25)) for raw_landmark_set in raw_landmarks]
+    # 4th value (0.25) is padding around the face. If padding == 0 then the chip will
+    # be closely cropped around the face. Setting larger padding values will result a looser cropping.
+    # In particular, a padding of 0.5 would double the width of the cropped area, a value of 1.
+    # would triple it, and so forth.
+    # see bellow
+    # http://dlib.net/face_recognition.py.html
     """マルチスレッド化
     pool = ThreadPoolExecutor()
     # pool = ProcessPoolExecutor(max_workers=1)  # Error while calling cudaGetDevice(&the_device_id) in file /tmp/pip-install-983gqknr/dlib_66282e4ffadf4aa6965801c6f7ff7671/dlib/cuda/gpu_data.cpp:204. code: 3, reason: initialization error
