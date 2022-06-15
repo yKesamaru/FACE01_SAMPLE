@@ -1,14 +1,17 @@
 # FACE01について
 
 # TODO
+- Logging
 - マルチプロセス化
   - `frame = video_capture(args_dict["kaoninshoDir"], args_dict["movie"]).__next__()`でフレームを一つ取り出したら、それ以降は一つの関数で良い。そのうえで、その関数をマルチプロセス化する。
+    - face_encodings()はマルチプロセス化できない。dlib仕様。
   - 起動時間短縮
+  - メモリ消費のポイントを探す
+    - 計算式の効率化
   - help実装
     - click, argparseどちらがいいのか調査
 - ヘッドレス機能実装
   - os.popenなどによるパイプ作成
-- Logging
 - video_capture.py
   - RTSPを受け付けるように実装
   - numbaをもっと調査
@@ -24,7 +27,6 @@
 - frame_skip変数 半自動設定
 - 関数のマルチスレッド化
 - faceapi.compare_facesとreturn_face_namesに冗長がある
-- 計算式の効率化
   - 調査
     - mathライブラリ
     - numpy化

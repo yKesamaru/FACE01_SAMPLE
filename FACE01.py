@@ -614,7 +614,7 @@ def adjust_display_area(args_dict, default_face_image):
     """TODO
     繰り返し計算させないようリファクタリング
     左下へ順番に描画するように変更"""
-    face_image_width = int(args_dict["set_width"] / 10)
+    face_image_width = int(args_dict["set_width"] / 15)
     default_face_small_image = cv2.resize(default_face_image, dsize=(face_image_width, face_image_width))  # 幅・高さともに同じとする
     # 高さ = face_image_width
     x1, y1, x2, y2 = 0, args_dict["set_height"] - face_image_width - 10, face_image_width, args_dict["set_height"] - 10
@@ -630,13 +630,6 @@ def adjust_display_area(args_dict, default_face_image):
     # x1, y1, x2, y2 = left+5, top, right+5+default_face_small_image.shape[1], top + default_face_small_image.shape[0]
     """
     return x1, y1, x2, y2, default_face_small_image, face_image_width
-
-# def cal_default_face_small_image(default_face_small_image):
-#     x1, y1, x2, y2 = 0, 0, default_face_small_image.shape[1], default_face_small_image.shape[0]
-#     a = (1 - default_face_small_image[:,:,3:] / 255)
-#     b = default_face_small_image[:,:,:3] * (default_face_small_image[:,:,3:] / 255)
-#     cal_default_face_small_image_nums = (x1, y1, x2, y2, a, b)
-#     return cal_default_face_small_image_nums
 
 # デフォルト顔画像の描画処理
 def draw_default_face_image(resized_frame, default_face_small_image, x1, y1, x2, y2, number_of_people, face_image_width):
@@ -1053,7 +1046,7 @@ def face_encoding_process(args_dict, frame_datas_array):
         resized_frame = frame_data["img"]
         face_location_list = frame_data["face_location_list"]  # [(139, 190, 257, 72)]
         if len(face_location_list) == 0:
-            break
+            return face_encodings, frame_datas_array
         elif len(face_location_list) > 0:
             # 顔ロケーションからエンコーディングを求める
             if args_dict["use_mediapipe"] == True and  args_dict["person_frame_face_encoding"] == True:
@@ -1149,9 +1142,11 @@ def frame_post_processing(args_dict, face_encodings, frame_datas_array):
                     shutil.move(name, './noFace/')
                     return
 
+            """TODO この機能は必要か？
             # tolerance未満の場合、'顔画像未登録'に。
             if p > args_dict["tolerance"]:
                 name = '(不鮮明)' + name
+            """
 
             # クロップ画像保存
             if args_dict["crop_face_image"]==True:
@@ -1289,7 +1284,7 @@ def main_process():
 # main =================================================================
 if __name__ == '__main__':
     import cProfile as pr
-    exec_times: int = 100
+    exec_times: int = 10000
     
     profile_HANDLING_FRAME_TIME: float = 0.0
     profile_HANDLING_FRAME_TIME_FRONT: float = 0.0
