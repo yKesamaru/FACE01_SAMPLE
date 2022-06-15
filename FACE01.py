@@ -454,6 +454,8 @@ def return_face_location_list(resized_frame, set_width, set_height, model_select
             if xleft <= 0 or xtop <= 0:  # xleft or xtop がマイナスになる場合があるとバグる
                 continue
             face_location_list.append((xtop,xright,xbottom,xleft))  # faceapi order
+
+    resized_frame.flags.writeable = True
     return face_location_list
 
 def return_concatenate_location_and_frame(resized_frame, face_location_list):
@@ -568,7 +570,6 @@ def return_face_names(args_dict, face_names, face_encoding, matches, name):
     face_names.append(name)
     return face_names
 
-
 def draw_pink_rectangle(resized_frame, top,bottom,left,right):
     cv2.rectangle(resized_frame, (left, top), (right, bottom), (255, 87, 243), 2) # pink
     return resized_frame
@@ -598,19 +599,6 @@ def display_percentage(percentage_and_symbol,resized_frame, p, left, right, bott
         resized_frame = cv2.putText(resized_frame, percentage_and_symbol, putText_position, font, 1, (255, 87, 243), 1, cv2.LINE_AA)
     return resized_frame
 
-# デフォルト顔画像の表示面積調整
-def adjust_display_area(default_face_image,top,left,right):
-    """TODO
-    繰り返し計算させないようリファクタリング"""
-    _, default_face_image_width = default_face_image.shape[:2]
-    default_face_image_ratio = ((right - left) / default_face_image_width / 1.5)
-    default_face_small_image = cv2.resize(default_face_image, None, fx = default_face_image_ratio, fy = default_face_image_ratio)  # type: ignore
-    # x1, y1, x2, y2 = right+5, top, right+5+default_face_small_image.shape[1], top + default_face_small_image.shape[0]
-    default_face_small_height, default_face_small_width = default_face_small_image.shape[:2]
-    x1, y1, x2, y2 = left + 5, top, default_face_small_width + 5, top + default_face_small_height
-    # x1, y1, x2, y2 = left+5, top, right+5+default_face_small_image.shape[1], top + default_face_small_image.shape[0]
-    return x1, y1, x2, y2, default_face_small_image
-
 # 顔部分の領域をクロップ画像ファイルとして出力
 def make_crop_face_image(name, dis, pil_img_obj_rgb, top, left, right, bottom, number_of_crops, frequency_crop_image):
     """TODO
@@ -621,15 +609,101 @@ def make_crop_face_image(name, dis, pil_img_obj_rgb, top, left, right, bottom, n
     imgCroped.save(filename)
     return filename,number_of_crops, frequency_crop_image
 
+# デフォルト顔画像の表示面積調整
+def adjust_display_area(args_dict, default_face_image):
+    """TODO
+    繰り返し計算させないようリファクタリング
+    左下へ順番に描画するように変更"""
+    face_image_width = int(args_dict["set_width"] / 10)
+    default_face_small_image = cv2.resize(default_face_image, dsize=(face_image_width, face_image_width))  # 幅・高さともに同じとする
+    # 高さ = face_image_width
+    x1, y1, x2, y2 = 0, args_dict["set_height"] - face_image_width - 10, face_image_width, args_dict["set_height"] - 10 # まだ人数を実装していないので複数人重なるはず
+    """
+    # 変更前
+    _, default_face_image_width = default_face_image.shape[:2]
+    default_face_image_ratio = 
+    default_face_image_ratio = ((right - left) / default_face_image_width / 1.5)
+    default_face_small_image = cv2.resize(default_face_image, None, fx = default_face_image_ratio, fy = default_face_image_ratio)  # type: ignore
+    # x1, y1, x2, y2 = right+5, top, right+5+default_face_small_image.shape[1], top + default_face_small_image.shape[0]
+    default_face_small_height, default_face_small_width = default_face_small_image.shape[:2]
+    x1, y1, x2, y2 = left + 5, top, default_face_small_width + 5, top + default_face_small_height
+    # x1, y1, x2, y2 = left+5, top, right+5+default_face_small_image.shape[1], top + default_face_small_image.shape[0]
+    """
+    return x1, y1, x2, y2, default_face_small_image, face_image_width
+
+# def cal_default_face_small_image(default_face_small_image):
+#     x1, y1, x2, y2 = 0, 0, default_face_small_image.shape[1], default_face_small_image.shape[0]
+#     a = (1 - default_face_small_image[:,:,3:] / 255)
+#     b = default_face_small_image[:,:,:3] * (default_face_small_image[:,:,3:] / 255)
+#     cal_default_face_small_image_nums = (x1, y1, x2, y2, a, b)
+#     return cal_default_face_small_image_nums
+
 # デフォルト顔画像の描画処理
-def draw_default_face_image(resized_frame, default_face_small_image, x1, y1, x2, y2):
+def draw_default_face_image(resized_frame, default_face_small_image, x1, y1, x2, y2, number_of_people, face_image_width):
+    """DEBUG"""
+    # frame_imshow_for_debug(resized_frame)  # OK
+    # x1, y1, x2, y2, a, b = cal_resized_logo_nums
+    # x1, y1, x2, y2, a, b = cal_default_face_small_image(default_face_small_image)
+    # try:
+    #     frame[y1:y2, x1:x2] = frame[y1:y2, x1:x2] * a + b
     try:
-        resized_frame[y1:y2, x1:x2] = default_face_small_image[y1:y2, x1:x2] * (1 - default_face_small_image[:,:,3:] / 255) + default_face_small_image[:,:,:3] * (default_face_small_image[:,:,3:] / 255)
+        x1 = x1 + (number_of_people * face_image_width)
+        resized_frame[y1:y2, x1:x2] = resized_frame[y1:y2, x1:x2] * (1 - default_face_small_image[:,:,3:] / 255) + default_face_small_image[:,:,:3] * (default_face_small_image[:,:,3:] / 255)
+        # resized_frame[y1:y2, x1:x2] = resized_frame[y1:y2, x1:x2] * a + b  # ValueError: assignment destination is read-only
+        """DEBUG"""
+        # frame_imshow_for_debug(resized_frame)
     except:
         """TODO
         loggingによる警告レベル"""
         print('デフォルト顔画像の描画が出来ません')
         print('描画面積が足りないか他に問題があります')
+    return resized_frame
+
+def draw_default_face(args_dict, name, resized_frame, number_of_people):
+    default_face_image_dict = args_dict["default_face_image_dict"]
+
+    default_name_png = name + '_default.png'
+    default_face_image_name_png = './priset_face_images/' + default_name_png
+    """TODO デフォルト顔画像ファイル読み込みを選択性にする"""
+    ## for処理毎にディスクからデフォルト顔画像を読み出している点（2021年9月7日）
+    ## {name:default_image_ndarray}という辞書的変数を作りメモリに格納するのはどうか→ver.1.2.9で。
+    if not name in default_face_image_dict:  # default_face_image_dictにnameが存在しなかった場合
+        # 各人物のデフォルト顔画像ファイルの読み込み
+        if os.path.exists(default_face_image_name_png):
+            """TODO"""
+            # WINDOWSのopencv-python4.2.0.32ではcv2.imread()でpng画像を読み込めないバグが
+            # 存在する可能性があると思う。そこでPNG画像の読み込みにはpillowを用いることにする
+            default_face_image = np.array(Image.open(default_face_image_name_png))
+            """DEBUG"""
+            # frame_imshow_for_debug(default_face_image)
+            
+            # BGAをRGBへ変換
+            default_face_image = cv2.cvtColor(default_face_image, cv2.COLOR_BGR2RGBA)
+            """DEBUG"""
+            # frame_imshow_for_debug(default_face_image)
+
+        else:
+            print(f'{name}さんのデフォルト顔画像ファイルがpriset_face_imagesフォルダに存在しません')
+            print(f'{name}さんのデフォルト顔画像ファイルをpriset_face_imagesフォルダに用意してください')
+            print('処理を終了します')
+            exit()
+        # if default_face_image.ndim == 3:  # RGBならアルファチャンネル追加 resized_frameがアルファチャンネルを持っているから。
+        # default_face_imageをメモリに保持
+        default_face_image_dict[name] = default_face_image  # キーnameと値default_face_imageの組み合わせを挿入する
+    else:  # default_face_image_dictにnameが存在した場合
+        default_face_image = default_face_image_dict[name]  # キーnameに対応する値をdefault_face_imageへ格納する
+        """DEBUG"""
+        # frame_imshow_for_debug(default_face_image)  # OK
+        x1, y1, x2, y2 , default_face_small_image, face_image_width = adjust_display_area(args_dict, default_face_image)
+        resized_frame = draw_default_face_image(resized_frame, default_face_small_image, x1, y1, x2, y2, number_of_people, face_image_width)
+    return resized_frame
+
+def draw_rectangle_for_name(name,resized_frame, left, right,bottom):
+    if name == 'Unknown':   # nameがUnknownだった場合
+        resized_frame = cv2.rectangle(resized_frame, (left-25, bottom + 25), (right+25, bottom+50), (255, 87, 243), cv2.FILLED) # pink
+    else:                   # nameが既知だった場合
+        # cv2.rectangle(resized_frame, (left-25, bottom + 25), (right+25, bottom+50), (211, 173, 54), thickness = 1) # 濃い水色の線
+        resized_frame = cv2.rectangle(resized_frame, (left-25, bottom + 25), (right+25, bottom+50), (211, 173, 54), cv2.FILLED) # 濃い水色
     return resized_frame
 
 def calculate_text_position(left,right,name,fontsize,bottom):
@@ -764,49 +838,6 @@ def make_frame_datas_array(overlay, face_location_list, name,filename, top,right
     frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}
     frame_datas_array.append(frame_datas)
     return frame_datas_array
-
-def draw_default_face(name, top, left, right, resized_frame, default_face_image_dict):
-    default_name_png = name + '_default.png'
-    default_face_image_name_png = './priset_face_images/' + default_name_png
-    """TODO デフォルト顔画像ファイル読み込みを選択性にする"""
-    ## for処理毎にディスクからデフォルト顔画像を読み出している点（2021年9月7日）
-    ## {name:default_image_ndarray}という辞書的変数を作りメモリに格納するのはどうか→ver.1.2.9で。
-    if not name in default_face_image_dict:  # default_face_image_dictにnameが存在しなかった場合
-        # 各人物のデフォルト顔画像ファイルの読み込み
-        if os.path.exists(default_face_image_name_png):
-            """TODO"""
-            # WINDOWSのopencv-python4.2.0.32ではcv2.imread()でpng画像を読み込めないバグが
-            # 存在する可能性があると思う。そこでPNG画像の読み込みにはpillowを用いることにする
-            default_face_image = np.array(Image.open(default_face_image_name_png))
-            """DEBUG"""
-            # frame_imshow_for_debug(default_face_image)
-            
-            # BGAをRGBへ変換
-            default_face_image = cv2.cvtColor(default_face_image, cv2.COLOR_BGR2RGBA)
-            """DEBUG"""
-            # frame_imshow_for_debug(default_face_image)
-
-        else:
-            print(f'{name}さんのデフォルト顔画像ファイルがpriset_face_imagesフォルダに存在しません')
-            print(f'{name}さんのデフォルト顔画像ファイルをpriset_face_imagesフォルダに用意してください')
-            print('処理を終了します')
-            exit()
-        # if default_face_image.ndim == 3:  # RGBならアルファチャンネル追加 resized_frameがアルファチャンネルを持っているから。
-        # default_face_imageをメモリに保持
-        default_face_image_dict[name] = default_face_image  # キーnameと値default_face_imageの組み合わせを挿入する
-    else:  # default_face_image_dictにnameが存在した場合
-        default_face_image = default_face_image_dict[name]  # キーnameに対応する値をdefault_face_imageへ格納する
-        x1, y1, x2, y2 , default_face_small_image = adjust_display_area(default_face_image,top,left,right)
-        resized_frame = draw_default_face_image(resized_frame, default_face_small_image, x1, y1, x2, y2)
-    return resized_frame
-
-def draw_rectangle_for_name(name,resized_frame, left, right,bottom):
-    if name == 'Unknown':   # nameがUnknownだった場合
-        resized_frame = cv2.rectangle(resized_frame, (left-25, bottom + 25), (right+25, bottom+50), (255, 87, 243), cv2.FILLED) # pink
-    else:                   # nameが既知だった場合
-        # cv2.rectangle(resized_frame, (left-25, bottom + 25), (right+25, bottom+50), (211, 173, 54), thickness = 1) # 濃い水色の線
-        resized_frame = cv2.rectangle(resized_frame, (left-25, bottom + 25), (right+25, bottom+50), (211, 173, 54), cv2.FILLED) # 濃い水色
-    return resized_frame
 
 def draw_text_for_name(left,right,bottom,name, p,tolerance,pil_img_obj):
     fontpath = return_fontpath()
@@ -1092,6 +1123,7 @@ def frame_post_processing(args_dict, face_encodings, frame_datas_array):
             face_names = return_face_names(args_dict, face_names, face_encoding,  matches, name)
 
         # face_location_listについて繰り返し処理→frame_datas_array作成
+        number_of_people = 0  # 人数。計算上0人から始める。draw_default_face()で使用する
         for (top, right, bottom, left), name in zip(face_location_list, face_names):
             person_data = defaultdict(int)
             if name == 'Unknown':
@@ -1137,7 +1169,8 @@ def frame_post_processing(args_dict, face_encodings, frame_datas_array):
                 # デフォルト顔画像の描画
                 if p <= args_dict["tolerance"]:  # ディスタンスpがtolerance以下の場合
                     if args_dict["default_face_image_draw"] == True:
-                        resized_frame = draw_default_face(name, top, left, right, resized_frame, args_dict["default_face_image_dict"])
+                        resized_frame = draw_default_face(args_dict, name, resized_frame, number_of_people)
+                        number_of_people += 1  # 何人目か
                         """DEBUG"""
                         # frame_imshow_for_debug(resized_frame)
 
