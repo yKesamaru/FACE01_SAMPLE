@@ -617,7 +617,7 @@ def adjust_display_area(args_dict, default_face_image):
     face_image_width = int(args_dict["set_width"] / 10)
     default_face_small_image = cv2.resize(default_face_image, dsize=(face_image_width, face_image_width))  # 幅・高さともに同じとする
     # 高さ = face_image_width
-    x1, y1, x2, y2 = 0, args_dict["set_height"] - face_image_width - 10, face_image_width, args_dict["set_height"] - 10 # まだ人数を実装していないので複数人重なるはず
+    x1, y1, x2, y2 = 0, args_dict["set_height"] - face_image_width - 10, face_image_width, args_dict["set_height"] - 10
     """
     # 変更前
     _, default_face_image_width = default_face_image.shape[:2]
@@ -648,6 +648,7 @@ def draw_default_face_image(resized_frame, default_face_small_image, x1, y1, x2,
     #     frame[y1:y2, x1:x2] = frame[y1:y2, x1:x2] * a + b
     try:
         x1 = x1 + (number_of_people * face_image_width)
+        x2 = x2 + (number_of_people * face_image_width)
         resized_frame[y1:y2, x1:x2] = resized_frame[y1:y2, x1:x2] * (1 - default_face_small_image[:,:,3:] / 255) + default_face_small_image[:,:,:3] * (default_face_small_image[:,:,3:] / 255)
         # resized_frame[y1:y2, x1:x2] = resized_frame[y1:y2, x1:x2] * a + b  # ValueError: assignment destination is read-only
         """DEBUG"""
