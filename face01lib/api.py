@@ -5,16 +5,15 @@ import dlib
 import numpy as np
 import PIL.Image
 from PIL import ImageFile
-
-# with ThreadPoolExecutor() as th:
-#     th.submit(main())
+import logging
+logger = logging.getLogger('face01lib/api')
 
 
 try:
     import face_recognition_models
 except Exception:
-    print("例外エラーが発生しました:<api.py>\n")
-    print("システム管理者にお問い合わせください")
+    logger.warning("例外エラーが発生しました。")
+    logger.warning("システム管理者にお問い合わせください")
     quit()
 """to refer, see bellow
 https://github.com/davisking/dlib

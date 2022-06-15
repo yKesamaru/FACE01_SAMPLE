@@ -4,6 +4,7 @@ import shutil
 
 import face_recognition
 import numpy as np
+logger = logging.getLogger('face01lib/load_priset_image')
 
 # FACE01GRAPHICS127への対応 =========================================
 # priset_face_imagesに新しい顔を登録した時にnpKnown.npzに反映されないバグをフィックス
@@ -33,7 +34,7 @@ def load_priset_image(
         os.chdir(kaoninshoDir)
         cd = True
 
-    logging.info("npKnown.npz を読み込みます")
+    logger.info("npKnown.npz を読み込みます")
 
     ###################### npKnown.npzの有る無しで処理を分岐させる ######################
     # ============= npKnown.npzファイルが存在する場合の処理 ===============
