@@ -1,11 +1,34 @@
 # FACE01について
 
 # TODO
+## 1.3.04で実装予定
 - Logging
+  - [logging --- Python 用ロギング機能](https://docs.python.org/ja/3.8/library/logging.html)
+  - [logging.config --- ロギングの環境設定](https://docs.python.org/ja/3.8/library/logging.config.html)
+
+```python
+# see bellow
+# https://github.com/ageitgey/medium_to_ghost/search?q=logging
+import logging
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+logger = logging.getLogger('medium_to_ghost')
+
+logging.info(f"Downloading {url} to {cache_folder}")
+logging.info(f"{local_destination} already exists. Using cached copy.")
+logging.error(f"Download failed for {local_destination}. Error Message: {e.msg}")
+logging.warning(msg, *args, **kwargs)
+```
+
+## 他
 - マルチプロセス化
   - `frame = video_capture(args_dict["kaoninshoDir"], args_dict["movie"]).__next__()`でフレームを一つ取り出したら、それ以降は一つの関数で良い。そのうえで、その関数をマルチプロセス化する。
-    - face_encodings()はマルチプロセス化できない。dlib仕様。
+    - face_encodings()はマルチプロセス化できない。dlib仕様。←[face_recognition](https://github.com/ageitgey/face_recognition/blob/87a8449a359fbc0598e95b820e920ce285b8a9d9/face_recognition/face_recognition_cli.py#L42) を参考にすると良いかもしれない。
   - 起動時間短縮
+  - ボトムエリア内複数人エラーチェック処理 
+  - mediapipeをより深く調査
+    - GPU使用化
+    - logの吐き方
+  - telopとlogoをもっと小さく。
   - メモリ消費のポイントを探す
     - 計算式の効率化
   - help実装
@@ -40,6 +63,7 @@
 
 ## FIX
 - main関数化
+  - main_process()にした
 - config.iniリファクタリング
 - configparser部分を関数化
   - returnは辞書形式で。
