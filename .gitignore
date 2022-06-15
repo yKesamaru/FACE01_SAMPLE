@@ -8,3 +8,4 @@ output/*
 lib*/*
 build/*
 __pycache__
+mainコード一応保存しとく
