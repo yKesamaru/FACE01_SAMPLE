@@ -1,3 +1,4 @@
+import logging
 import os
 import sys
 import traceback
@@ -5,6 +6,8 @@ from functools import lru_cache
 
 import cv2
 import PySimpleGUI as sg
+
+logger = logging.getLogger('face01lib/video_capture')
 
 """TODO
 RTSPを受け付けるようにする
@@ -151,7 +154,7 @@ def frame_generator(args_dict):
             if ret:
                 live_camera_number = camera_number 
         vcap = cv2.VideoCapture(live_camera_number)
-        print(f'カメラデバイス番号：{camera_number}')
+        logger.info(f'カメラデバイス番号：{camera_number}')
     else:
         vcap = cv2.VideoCapture(movie, cv2.CAP_FFMPEG)
     
@@ -163,10 +166,10 @@ def frame_generator(args_dict):
             ret, frame = vcap.read()
             if ret == False:
                 # sg.popup( '不正な映像データのため終了します', 'システム管理者にお問い合わせください', movie, title='ERROR', button_type=sg.POPUP_BUTTONS_OK, modal=True, keep_on_top=True)
-                print("以下のエラーをシステム管理者へお伝えください")
-                print("---------------------------------------------")
-                print(traceback.format_exc(limit=None, chain=True))
-                print("---------------------------------------------")
+                logger.warning("以下のエラーをシステム管理者へお伝えください")
+                logger.warning("---------------------------------------------")
+                logger.warning(traceback.format_exc(limit=None, chain=True))
+                logger.warning("---------------------------------------------")
                 finalize(args_dict["vcap"])
                 break
             else:

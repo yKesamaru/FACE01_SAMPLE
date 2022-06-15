@@ -1,9 +1,10 @@
 # ===========================================
-# similar_percentageを受取りtorelanceを返す =
+# similar_percentageを受取りtoleranceを返す =
 # ===========================================
 
 import numpy as np
-
+import logging
+logger = logging.getLogger('face01lib/similar_percentage_to_tolerance')
 
 # 変数初期化 ---------
 similar_percentage:float
