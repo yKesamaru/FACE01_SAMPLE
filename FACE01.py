@@ -1247,10 +1247,12 @@ def frame_post_processing(args_dict, face_encodings, frame_datas_array):
     """
 
 
-# vcap, set_area, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER = video_capture.return_vcap_and_values(args_dict)
-# print(type(vcap))
-# resized_frame_obj = video_capture.frame_generator(args_dict)
-
+frame_generator_obj = video_capture.frame_generator(args_dict)
+def main_process():
+    frame_datas_array = frame_pre_processing(args_dict, frame_generator_obj.__next__())
+    face_encodings, frame_datas_array = face_encoding_process(args_dict, frame_datas_array)
+    frame_datas_array = frame_post_processing(args_dict, face_encodings, frame_datas_array)
+    yield frame_datas_array
 
 # main =================================================================
 if __name__ == '__main__':
@@ -1273,17 +1275,13 @@ if __name__ == '__main__':
 
     profile_HANDLING_FRAME_TIME_FRONT = time.perf_counter()
 
-    frame_generator_obj = video_capture.frame_generator(args_dict)
     while True:
-        frame_datas_array = frame_pre_processing(args_dict, frame_generator_obj.__next__())
-        """DEBUG"""
-        # frame_imshow_for_debug(frame_datas_array)
-        face_encodings, frame_datas_array = face_encoding_process(args_dict, frame_datas_array)
-        """DEBUG"""
-        # frame_imshow_for_debug(frame_datas_array)
-        frame_datas_array = frame_post_processing(args_dict, face_encodings, frame_datas_array)
-        """DEBUG"""
-        # frame_imshow_for_debug(frame_datas_array)
+        frame_datas_array = main_process().__next__()
+        if StopIteration == frame_datas_array:
+            break
+        # frame_datas_array = frame_pre_processing(args_dict, frame_generator_obj.__next__())
+        # face_encodings, frame_datas_array = face_encoding_process(args_dict, frame_datas_array)
+        # frame_datas_array = frame_post_processing(args_dict, face_encodings, frame_datas_array)
         exec_times = exec_times - 1
         if  exec_times <= 0:
             break
@@ -1312,8 +1310,8 @@ if __name__ == '__main__':
                     if args_dict["headless"] == False:
                         imgbytes = cv2.imencode(".png", img)[1].tobytes()
                         window["display"].update(data = imgbytes)
-                    del person_data_list
-            del frame_datas_array
+                    # del person_data_list
+            # del frame_datas_array
         if args_dict["headless"] == False:
             if event =='terminate':
                 break
