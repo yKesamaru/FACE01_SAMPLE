@@ -966,8 +966,6 @@ frame_initialize_values = {
 """
 
 
-
-
 # フレーム前処理
 def frame_pre_processing(args_dict, resized_frame):
     person_data_list = []
@@ -1290,6 +1288,7 @@ def main_process():
 
 # main =================================================================
 if __name__ == '__main__':
+    import cProfile as pr
     exec_times: int = 100
     
     profile_HANDLING_FRAME_TIME: float = 0.0
@@ -1309,56 +1308,57 @@ if __name__ == '__main__':
 
     profile_HANDLING_FRAME_TIME_FRONT = time.perf_counter()
 
-    while True:
-        frame_datas_array = main_process().__next__()
-        if StopIteration == frame_datas_array:
-            break
-        # frame_datas_array = frame_pre_processing(args_dict, frame_generator_obj.__next__())
-        # face_encodings, frame_datas_array = face_encoding_process(args_dict, frame_datas_array)
-        # frame_datas_array = frame_post_processing(args_dict, face_encodings, frame_datas_array)
-        exec_times = exec_times - 1
-        if  exec_times <= 0:
-            break
-        else:
-            print(f'exec_times: {exec_times}')
-            if args_dict["headless"] == False:
-                event, _ = window.read(timeout = 1)
-            for frame_datas in frame_datas_array:
-                if "face_location_list" in frame_datas:
-                    img, face_location_list, overlay, person_data_list = \
-                        frame_datas['img'], frame_datas["face_location_list"], frame_datas["overlay"], frame_datas['person_data_list']
-                    for person_data in person_data_list:
-                        name, pict, date,  location, percentage_and_symbol = \
-                            person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
-                        if not name == 'Unknown':
-                            print(
-                                "プロファイリング用コードが動作しています", "\n",
-                                "statsファイルが出力されます", "\n",
-                                name, "\n",
-                                "\t", "類似度\t", percentage_and_symbol, "\n",
-                                "\t", "座標\t", location, "\n",
-                                "\t", "時刻\t", date, "\n",
-                                "\t", "出力\t", pict, "\n",
-                                "-------\n"
-                            )
-                    if args_dict["headless"] == False:
-                        imgbytes = cv2.imencode(".png", img)[1].tobytes()
-                        window["display"].update(data = imgbytes)
-                    # del person_data_list
-            # del frame_datas_array
-        if args_dict["headless"] == False:
-            if event =='terminate':
+    def profile(exec_times):
+        while True:
+            frame_datas_array = main_process().__next__()
+            if StopIteration == frame_datas_array:
+                print("StopIterationです")
                 break
-        # frame_datas_array_copy = frame_datas_array
-        # del frame_datas_array
-        # yield frame_datas_array_copy
-    if args_dict["headless"] == False:
-        window.close()
-    print('終了します')
-    
-    profile_HANDLING_FRAME_TIME_REAR = time.perf_counter()
-    profile_HANDLING_FRAME_TIME = (profile_HANDLING_FRAME_TIME_REAR - profile_HANDLING_FRAME_TIME_FRONT) 
-    print(f'profile()関数の処理時間合計: {round(profile_HANDLING_FRAME_TIME , 3)}[秒]')
+            exec_times = exec_times - 1
+            if  exec_times <= 0:
+                break
+            else:
+                print(f'exec_times: {exec_times}')
+                if args_dict["headless"] == False:
+                    event, _ = window.read(timeout = 1)
+                for frame_datas in frame_datas_array:
+                    if "face_location_list" in frame_datas:
+                        img, face_location_list, overlay, person_data_list = \
+                            frame_datas['img'], frame_datas["face_location_list"], frame_datas["overlay"], frame_datas['person_data_list']
+                        for person_data in person_data_list:
+                            name, pict, date,  location, percentage_and_symbol = \
+                                person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
+                            if not name == 'Unknown':
+                                print(
+                                    "プロファイリング用コードが動作しています", "\n",
+                                    "statsファイルが出力されます", "\n",
+                                    name, "\n",
+                                    "\t", "類似度\t", percentage_and_symbol, "\n",
+                                    "\t", "座標\t", location, "\n",
+                                    "\t", "時刻\t", date, "\n",
+                                    "\t", "出力\t", pict, "\n",
+                                    "-------\n"
+                                )
+                        if args_dict["headless"] == False:
+                            imgbytes = cv2.imencode(".png", img)[1].tobytes()
+                            window["display"].update(data = imgbytes)
+                        # del person_data_list
+                # del frame_datas_array
+            if args_dict["headless"] == False:
+                if event =='terminate':
+                    break
+            # frame_datas_array_copy = frame_datas_array
+            # del frame_datas_array
+            # yield frame_datas_array_copy
+        if args_dict["headless"] == False:
+            window.close()
+        print('プロファイリングを終了します')
+        
+        profile_HANDLING_FRAME_TIME_REAR = time.perf_counter()
+        profile_HANDLING_FRAME_TIME = (profile_HANDLING_FRAME_TIME_REAR - profile_HANDLING_FRAME_TIME_FRONT) 
+        print(f'profile()関数の処理時間合計: {round(profile_HANDLING_FRAME_TIME , 3)}[秒]')
+
+    pr.run('profile(exec_times)', 'restats')
     """# マルチプロセス化で使いやすいように別名をつける
     task = partial(frame_processing, args_dict)
     # with ProcessPoolExecutor() as executor:
