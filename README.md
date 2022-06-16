@@ -1,26 +1,9 @@
 # FACE01について
 
 # TODO
-## 1.3.05で実装予定
-  - 起動時間短縮
-    - ボトルネックになっている箇所を調査
-      - [Pythonのスタートアップ時間を可視化した](https://www.kurusugawa.jp/show-python-import-start-time/)
-```bash
-/home/terms/bin/FACE01/bin/python -X importtime  /home/terms/bin/FACE01/FACE01.py > /dev/null
-```
-```bash
-pip install tuna
-python -X importtime your/script.py 2> a.log 
-tuna a.log
-```
-### 対応方法
-import文をできる限りfrom importへ変更。
-### 対応前
-2.96秒
-![](img/PASTE_IMAGE_2022-06-16-10-57-54.png)
-### 対応後
-1.67秒
-![](img/PASTE_IMAGE_2022-06-16-13-37-49.png)
+## 1.3.06で実装予定
+  - ボトムエリア内複数人エラーチェック処理
+
 
 ## 他
 - face01lib/__init__の編集
@@ -28,7 +11,6 @@ import文をできる限りfrom importへ変更。
   - `frame = video_capture(args_dict["kaoninshoDir"], args_dict["movie"]).__next__()`でフレームを一つ取り出したら、それ以降は一つの関数で良い。そのうえで、その関数をマルチプロセス化する。
     - face_encodings()はマルチプロセス化できない。dlib仕様。←[face_recognition](https://github.com/ageitgey/face_recognition/blob/87a8449a359fbc0598e95b820e920ce285b8a9d9/face_recognition/face_recognition_cli.py#L42) を参考にすると良いかもしれない。
 
-  - ボトムエリア内複数人エラーチェック処理 
   - mediapipeをより深く調査
     - GPU使用化
     - logの吐き方
@@ -90,6 +72,27 @@ import文をできる限りfrom importへ変更。
   shutil.make_archive("medium_export_for_ghost", "zip", "exported_content", logger=logger)
   logger.info(f"Successfully created medium_export_for_ghost.zip. Upload this file to a Ghost 2.0+ instance!")
   ```
+
+## 1.3.05で実装完了
+  - 起動時間短縮
+    - ボトルネックになっている箇所を調査
+      - [Pythonのスタートアップ時間を可視化した](https://www.kurusugawa.jp/show-python-import-start-time/)
+```bash
+/home/terms/bin/FACE01/bin/python -X importtime  /home/terms/bin/FACE01/FACE01.py > /dev/null
+```
+```bash
+pip install tuna
+python -X importtime your/script.py 2> a.log 
+tuna a.log
+```
+### 対応方法
+import文をできる限りfrom importへ変更。
+### 対応前
+2.96秒
+![](img/PASTE_IMAGE_2022-06-16-10-57-54.png)
+### 対応後
+1.67秒
+![](img/PASTE_IMAGE_2022-06-16-13-37-49.png)
 
 
 
