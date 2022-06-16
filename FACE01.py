@@ -189,8 +189,6 @@ def configure():
             'show_percentage' : conf.getboolean('DEFAULT', 'show_percentage'),
             'crop_face_image' : conf.getboolean('DEFAULT', 'crop_face_image'),
             'show_name' : conf.getboolean('DEFAULT', 'show_name'),
-            'should_not_be_multiple_faces' : conf.getboolean('DEFAULT', 'should_not_be_multiple_faces'),
-            'bottom_area' : conf.getboolean('DEFAULT', 'bottom_area'),
             'draw_telop_and_logo' : conf.getboolean('DEFAULT', 'draw_telop_and_logo'),
             'use_mediapipe' : conf.getboolean('DEFAULT','use_mediapipe'),
             'model_selection' : int(conf.get('DEFAULT','model_selection')),
@@ -337,8 +335,6 @@ def initialize(conf_dict):
         args_dict['show_overlay'] = False
         args_dict['show_percentage'] = False
         args_dict['show_name'] = False
-        args_dict['should_not_be_multiple_faces'] = False
-        args_dict['bottom_area'] = False
         args_dict['draw_telop_and_logo'] = False
         args_dict['person_frame_face_encoding'] = False
         args_dict['headless'] = True
@@ -527,7 +523,8 @@ def return_concatenate_location_and_frame(resized_frame, face_location_list):
         print("---------------------------------")
         """
     return concatenate_face_location_list, concatenate_person_frame
-    """
+    
+    """1.3.06でボトムエリア描画は廃止予定
         x1 = inner_bottom_area_left
         y1 = inner_bottom_area_top
         x2 = inner_bottom_area_left + unregistered_face_image.shape[1]
@@ -698,6 +695,7 @@ def draw_error_messg_rectangle(resized_frame, set_height, set_width):
     cv2.rectangle(resized_frame, (error_messg_rectangle_left, error_messg_rectangle_top), (error_messg_rectangle_right, error_messg_rectangle_bottom), (255, 87, 243), cv2.FILLED)  # pink
     return error_messg_rectangle_left, error_messg_rectangle_right, error_messg_rectangle_bottom
 
+"""1.3.06でボトムエリア描画は廃止予定
 # bottom_area_rectangle描画
 def draw_bottom_area_rectangle(name,bottom_area, set_height, set_width, resized_frame):
         bottom_area_rectangle_left: int  = 0
@@ -712,11 +710,13 @@ def draw_bottom_area_rectangle(name,bottom_area, set_height, set_width, resized_
         else:
             resized_frame = cv2.rectangle(resized_frame, (bottom_area_rectangle_left, bottom_area_rectangle_top), (bottom_area_rectangle_right, bottom_area_rectangle_bottom), BLUE, cv2.FILLED)
         return resized_frame
+"""
 
-def draw_bottom_area(name,resized_frame):
+"""1.3.06でボトムエリア描画は廃止予定
+def draw_bottom_area(args_dict, name,resized_frame):
     # default_image描画
     inner_bottom_area_left = 20
-    inner_bottom_area_top = set_height + 20
+    inner_bottom_area_top = args_dict["set_height"] + 20
     unregistered_face_image = np.array(Image.open('images/顔画像未登録.png'))
     h: int
     w: int
@@ -738,11 +738,12 @@ def draw_bottom_area(name,resized_frame):
     except:
         logger_info('下部エリアのデフォルト顔画像が表示できません')
     return unregistered_face_image, resized_frame
+"""
 
+"""1.3.06でボトムエリア描画は廃止予定
 # ボトムエリア内テキスト描画
 def draw_text_in_bottom_area(draw, inner_bottom_area_char_left, inner_bottom_area_char_top,name,percentage_and_symbol,date):
     date = datetime.datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
-    """TODO 動作未確認"""
     fontpath = return_fontpath()
     fontsize = 30
     font = ImageFont.truetype(fontpath, fontsize, encoding = 'utf-8')
@@ -760,6 +761,7 @@ def draw_text_in_bottom_area(draw, inner_bottom_area_char_left, inner_bottom_are
     fontsize = 12
     font = ImageFont.truetype(fontpath, fontsize, encoding = 'utf-8')
     draw.text(position, date, fill=(255, 255, 255, 255), font = font)
+"""
 
 # pil_imgオブジェクトを生成
 def pil_img_instance(frame):
@@ -936,11 +938,13 @@ def frame_pre_processing(args_dict, resized_frame):
 
     # 描画系（bottom area, 半透明, telop, logo）
     if  args_dict["headless"] == False:
+        """1.3.06でボトムエリア描画は廃止予定
         # bottom area描画
         if args_dict["bottom_area"]==True:
             # resized_frameの下方向に余白をつける
             resized_frame = cv2.copyMakeBorder(resized_frame, 0, 180, 0, 0, cv2.BORDER_CONSTANT, value=(255,255,255))
-    
+        """
+
         # 半透明処理（前半）
         if args_dict["show_overlay"]==True:
             overlay: cv2.Mat = resized_frame.copy()
@@ -970,7 +974,7 @@ def frame_pre_processing(args_dict, resized_frame):
         frame_datas_array = make_frame_datas_array(overlay, face_location_list, name,filename, top,right,bottom,left,percentage_and_symbol,person_data_list,frame_datas_array,resized_frame)
         return frame_datas_array
 
-    """TODO 動作チェック"""
+    """1.3.06でボトムエリア描画は廃止予定
     # ボトムエリア内複数人エラーチェック処理 ---------------------
     if args_dict["should_not_be_multiple_faces"]==True:
         if len(face_location_list) > 1:
@@ -990,6 +994,7 @@ def frame_pre_processing(args_dict, resized_frame):
             frame_datas_array = make_frame_datas_array(overlay, face_location_list, name,filename, top,right,bottom,left,percentage_and_symbol,person_data_list,frame_datas_array,resized_frame)
             # frame_datas_array.append(frame_datas)
             return frame_datas_array
+    """
         
     frame_datas_array = make_frame_datas_array(overlay, face_location_list, name,filename, top,right,bottom,left,percentage_and_symbol,person_data_list,frame_datas_array,resized_frame)
     return frame_datas_array
@@ -1151,18 +1156,20 @@ def frame_post_processing(args_dict, face_encodings, frame_datas_array):
                     """DEBUG"""
                     # frame_imshow_for_debug(resized_frame)
 
+                """1.3.06でボトムエリア描画は廃止予定
                 if args_dict["bottom_area"] == True:
                     resized_frame = draw_bottom_area_rectangle(name,args_dict["bottom_area"], args_dict["set_height"], args_dict["set_width"], resized_frame)
 
                 # bottom_area中の描画
                 if args_dict["bottom_area"]==True:
-                    unregistered_face_image, resized_frame = draw_bottom_area(name,resized_frame)
+                    unregistered_face_image, resized_frame = draw_bottom_area(args_dict, name,resized_frame)
                     # name等描画
                     inner_bottom_area_char_left = 200
                     inner_bottom_area_char_top = args_dict["set_height"] + 30
-                    # draw  =  make_draw_object(resized_frame)
+                    draw  =  make_draw_object(resized_frame)
                     draw_text_in_bottom_area(draw, inner_bottom_area_char_left, inner_bottom_area_char_top,name,percentage_and_symbol,date)
                     resized_frame = convert_pil_img_to_ndarray(pil_img_obj)
+                """
 
             person_data = {'name': name, 'pict':filename,  'date':date, 'location':(top,right,bottom,left), 'percentage_and_symbol': percentage_and_symbol}
             person_data_list.append(person_data)
