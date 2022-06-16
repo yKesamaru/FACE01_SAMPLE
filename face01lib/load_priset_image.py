@@ -1,10 +1,11 @@
-import logging
-import os
-import shutil
+from logging import getLogger, info, warning
+from os import chdir, remove, listdir
+from os.path import exists, isdir
+from shutil import move
 
-import face_recognition
-import numpy as np
-logger = logging.getLogger('face01lib/load_priset_image')
+import face01lib.api as faceapi
+from numpy import load, savez
+logger = getLogger('face01lib/load_priset_image')
 
 # FACE01GRAPHICS127への対応 =========================================
 # priset_face_imagesに新しい顔を登録した時にnpKnown.npzに反映されないバグをフィックス
@@ -31,17 +32,17 @@ def load_priset_image(
     cd = False
 
     if cd == False:
-        os.chdir(kaoninshoDir)
+        chdir(kaoninshoDir)
         cd = True
 
     logger.info("npKnown.npz を読み込みます")
 
     ###################### npKnown.npzの有る無しで処理を分岐させる ######################
     # ============= npKnown.npzファイルが存在する場合の処理 ===============
-    if os.path.exists("npKnown.npz"):
+    if exists("npKnown.npz"):
 
         # npKnown.npzの読み込みを行い、今までの全てのデータを格納する
-        npKnown = np.load('npKnown.npz', allow_pickle=True)
+        npKnown = load('npKnown.npz', allow_pickle=True)
         A, B = npKnown.files
         known_face_names_ndarray = npKnown[A]
         known_face_encodings_ndarray = npKnown[B]
@@ -58,9 +59,9 @@ def load_priset_image(
         # #########################################################################
 
         # priset_face_imagesフォルダ内の全てのファイル名を読み込む
-        os.chdir(priset_face_imagesDir)
+        chdir(priset_face_imagesDir)
         # まずpriset_face_imagesDirのファイル名を全て得る
-        for priset_face_image in os.listdir(priset_face_imagesDir):
+        for priset_face_image in listdir(priset_face_imagesDir):
             # <DEBUG>
             # if 'テスト' in priset_face_image:
             #     if not priset_face_image in known_face_names:
@@ -69,7 +70,7 @@ def load_priset_image(
             # 関係ないファイルやフォルダは処理からとばす
             if priset_face_image == 'desktop.ini':
                 continue
-            if os.path.isdir(priset_face_image):
+            if isdir(priset_face_image):
                 continue
             if 'debug' in priset_face_image:
                 continue
@@ -80,40 +81,40 @@ def load_priset_image(
                 # priset_face_imageはknown_face_names配列にないから、new_fileに名前を変える
                 new_file = priset_face_image
 
-                new_file_face_image = face_recognition.load_image_file(
+                new_file_face_image = faceapi.load_image_file(
                     new_file)
-                new_file_face_locations = face_recognition.face_locations(
+                new_file_face_locations = faceapi.face_locations(
                     new_file_face_image, upsampling, mode)
 
                 # 顔検出できなかった場合hogからcnnへチェンジして再度顔検出する
                 if len(new_file_face_locations) == 0:
                     if mode == 'hog':
-                        logging.info('顔が検出できませんでした。一時的にcnnモードへ切り替えます')
-                        new_file_face_locations = face_recognition.face_locations(
+                        info('顔が検出できませんでした。一時的にcnnモードへ切り替えます')
+                        new_file_face_locations = faceapi.face_locations(
                             new_file_face_image, upsampling, 'cnn')
                         # cnnでも顔検出できない場合はnoFaceフォルダへファイルを移動する
-                        logging.info(f"{cnt} 登録顔画像 {new_file} に顔が検出されませんでした(CNNモード)。 noFace フォルダへ移動します")
+                        info(f"{cnt} 登録顔画像 {new_file} に顔が検出されませんでした(CNNモード)。 noFace フォルダへ移動します")
 
                         try:
-                            shutil.move(new_file, '../noFace/')
+                            move(new_file, '../noFace/')
                         except:
-                            os.remove('../noFace/' + new_file)
-                            shutil.move(new_file, '../noFace/')
+                            remove('../noFace/' + new_file)
+                            move(new_file, '../noFace/')
 
                         mode = 'hog'
-                        logging.info('hogモードへ戻しました')
+                        info('hogモードへ戻しました')
 
                 # new_file顔画像のエンコーディング処理：array([encoding 配列])
-                logging.info(f"{cnt} {new_file}をエンコードしています")
-                new_file_face_encodings = face_recognition.face_encodings(
+                info(f"{cnt} {new_file}をエンコードしています")
+                new_file_face_encodings = faceapi.face_encodings(
                     new_file_face_image, new_file_face_locations, jitters, 'small')
 
                 if len(new_file_face_encodings) > 1:  # 複数の顔が検出された時
-                    logging.info(f"{cnt} 登録顔画像 {new_file}に複数の顔が検出されました。 noFace フォルダへ移動します")
-                    shutil.move(new_file, '../noFace/')
+                    info(f"{cnt} 登録顔画像 {new_file}に複数の顔が検出されました。 noFace フォルダへ移動します")
+                    move(new_file, '../noFace/')
                 elif len(new_file_face_encodings) == 0:  # 顔が検出されなかった時
-                    logging.info(f"{cnt} 登録顔画像 {new_files} に顔が検出されませんでした。 noFace フォルダへ移動します")
-                    shutil.move(new_file, '../noFace/' + new_file)
+                    info(f"{cnt} 登録顔画像 {new_files} に顔が検出されませんでした。 noFace フォルダへ移動します")
+                    move(new_file, '../noFace/' + new_file)
 
                 # エンコーディングした顔画像だけ新しい配列に入れる
                 known_face_names_list.append(new_file)
@@ -122,76 +123,76 @@ def load_priset_image(
                 cnt += 1
 
     # ============= npKnown.npzファイルが存在しない場合の処理 =============
-    elif not os.path.exists("npKnown.npz"):
-        os.chdir(priset_face_imagesDir)
+    elif not exists("npKnown.npz"):
+        chdir(priset_face_imagesDir)
         # まずpriset_face_imagesDirのファイル名を全て得る
-        for priset_face_image_filename in os.listdir(priset_face_imagesDir):
+        for priset_face_image_filename in listdir(priset_face_imagesDir):
             # 関係ないファイルやフォルダは処理からとばす
             if priset_face_image_filename == 'desktop.ini':  # desktop.iniは処理をとばす
                 continue
-            if os.path.isdir(priset_face_image_filename):  # フォルダの場合は処理をとばす
+            if isdir(priset_face_image_filename):  # フォルダの場合は処理をとばす
                 continue
             if 'debug' in priset_face_image_filename:  # ファイル名にdebugを含む場合は処理をとばす
                 continue
 
             # それぞれの顔写真について顔認証データを作成する
-            priset_face_img = face_recognition.load_image_file(
+            priset_face_img = faceapi.load_image_file(
                 priset_face_image_filename)
-            priset_face_img_locations = face_recognition.face_locations(
+            priset_face_img_locations = faceapi.face_locations(
                 priset_face_img, upsampling, mode)
 
             # 得られた顔データについて顔写真なのに顔が判別できない場合や複数の顔がある場合はcnnモードで再確認し、それでもな場合はnoFaceフォルダに移動する
             noFace_file = '../noFace/' + priset_face_image_filename
             if len(priset_face_img_locations) == 0 or len(priset_face_img_locations) > 1:
                 if mode == 'hog':
-                    logging.info('顔が検出できない又は複数検出されました。一時的にcnnモードへ切り替えます')
+                    info('顔が検出できない又は複数検出されました。一時的にcnnモードへ切り替えます')
                     # CNNモードにて顔検出を行う
-                    priset_face_img_locations = face_recognition.face_locations(
+                    priset_face_img_locations = faceapi.face_locations(
                         priset_face_img, upsampling, 'cnn')
                     # cnnでも顔検出できない場合はnoFaceフォルダへファイルを移動する
                     if len(priset_face_img_locations) == 0 or len(priset_face_img_locations) > 1:
-                        logging.info(f"{cnt} (CNNモード)登録顔画像 {priset_face_image_filename}にて顔が検出できない又は複数検出されました。 noFace フォルダへ移動します")
-                        if os.path.exists(noFace_file):
-                            os.remove(noFace_file)
-                        shutil.move(priset_face_image_filename, '../noFace/')
+                        info(f"{cnt} (CNNモード)登録顔画像 {priset_face_image_filename}にて顔が検出できない又は複数検出されました。 noFace フォルダへ移動します")
+                        if exists(noFace_file):
+                            remove(noFace_file)
+                        move(priset_face_image_filename, '../noFace/')
                         mode = 'hog'
-                        logging.info('hogモードへ戻しました')
+                        info('hogモードへ戻しました')
 
             # 得られた顔データ（この場合は顔ロケーション）を元にエンコーディングする：array([encoding 配列])
-            logging.info(f"{cnt} {priset_face_image_filename} をエンコードしています")
-            priset_face_image_encodings = face_recognition.face_encodings(
+            info(f"{cnt} {priset_face_image_filename} をエンコードしています")
+            priset_face_image_encodings = faceapi.face_encodings(
                 priset_face_img, priset_face_img_locations, jitters, 'small')
 
             # エンコーディングした顔写真について複数顔や顔がない場合はnoFaceフォルダへ移動する
             if len(priset_face_image_encodings) > 1:  # 複数の顔が検出された時
-                logging.info(f"{cnt} 登録顔画像 {priset_face_image_filename} に複数の顔が検出されました。 noFace フォルダへ移動します")
-                if os.path.exists(noFace_file):
-                    os.remove(noFace_file)
+                info(f"{cnt} 登録顔画像 {priset_face_image_filename} に複数の顔が検出されました。 noFace フォルダへ移動します")
+                if exists(noFace_file):
+                    remove(noFace_file)
                 try:
-                    shutil.move(priset_face_image_filename, '../noFace/')
+                    move(priset_face_image_filename, '../noFace/')
                 except:
                     pass
             elif len(priset_face_image_encodings) == 0:  # 顔が検出されなかった時
-                logging.info(f"{cnt} 登録顔画像 {priset_face_image_filename} に顔が検出されませんでした。 noFace フォルダへ移動します")
-                if os.path.exists(noFace_file):
-                    os.remove(noFace_file)
+                info(f"{cnt} 登録顔画像 {priset_face_image_filename} に顔が検出されませんでした。 noFace フォルダへ移動します")
+                if exists(noFace_file):
+                    remove(noFace_file)
                 try:
-                    shutil.move(priset_face_image_filename, '../noFace/')
+                    move(priset_face_image_filename, '../noFace/')
                 except:
                     """TODO"""
                     pass
 
             # 配列に、名前やエンコーディングデータを要素として追加する
-            # FACE01GRAPHICS本体の方では要素にndarrayを含むListを返り値として期待している(face_recognition APIにそう書いてある)
+            # FACE01GRAPHICS本体の方では要素にndarrayを含むListを返り値として期待している(faceapi APIにそう書いてある)
             known_face_names_list.append(priset_face_image_filename)
             known_face_encodings_list.append(priset_face_image_encodings[0])
 
             cnt += 1
 
-    ###################### np.savezで保存 ######################
-    os.chdir(kaoninshoDir)
+    ###################### savezで保存 ######################
+    chdir(kaoninshoDir)
     # print('debug_npKnown.npzを作成します')
-    np.savez(
+    savez(
         'npKnown',
         # known_face_names_list_127=known_face_names_list,
         known_face_names_list,
@@ -218,12 +219,12 @@ def load_priset_image(
 if __name__ == '__main__':
     import pprint
     import sys
-    pprint(sys.path)
+    # pprint(sys.path)
     exit()
 
     # <DEBUG>
     kaoninshoDir = '/home/terms/ビデオ/one_drive/FACE01GRAPHICS123_UBUNTU_VENV'
-    os.chdir(kaoninshoDir)
+    chdir(kaoninshoDir)
     known_face_encodings, known_face_names = load_priset_image(
         kaoninshoDir,
         priset_face_imagesDir=kaoninshoDir + '/priset_face_images',
