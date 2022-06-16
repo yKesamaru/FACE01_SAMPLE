@@ -4,6 +4,24 @@
 ## 1.3.05で実装予定
   - 起動時間短縮
     - ボトルネックになっている箇所を調査
+      - [Pythonのスタートアップ時間を可視化した](https://www.kurusugawa.jp/show-python-import-start-time/)
+```bash
+/home/terms/bin/FACE01/bin/python -X importtime  /home/terms/bin/FACE01/FACE01.py > /dev/null
+```
+```bash
+pip install tuna
+python -X importtime your/script.py 2> a.log 
+tuna a.log
+```
+### 対応方法
+import文をできる限りfrom importへ変更。
+### 対応前
+2.96秒
+![](img/PASTE_IMAGE_2022-06-16-10-57-54.png)
+### 対応後
+1.67秒
+![](img/PASTE_IMAGE_2022-06-16-13-37-49.png)
+
 ## 他
 - face01lib/__init__の編集
 - マルチプロセス化
@@ -34,6 +52,7 @@
   - config.iniで設定可能にする
 - main関数のさらなる関数細分化
 - frame_skip変数 半自動設定
+- PySimpleGUIをTkinterへ差し替え
 - 関数のマルチスレッド化
 - faceapi.compare_facesとreturn_face_namesに冗長がある
   - 調査

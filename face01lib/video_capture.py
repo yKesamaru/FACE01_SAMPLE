@@ -1,13 +1,12 @@
-import logging
-import os
-import sys
-import traceback
-from functools import lru_cache
+from logging import getLogger
+from os import chdir
+from traceback import format_exc
+# from functools import lru_cache
 
-import cv2
-import PySimpleGUI as sg
+from cv2 import resize, CAP_PROP_FPS, CAP_PROP_FRAME_HEIGHT, CAP_PROP_FRAME_WIDTH, VideoCapture, CAP_FFMPEG, destroyAllWindows, imshow, waitKey, destroyAllWindows
+from PySimpleGUI import popup, POPUP_BUTTONS_OK
 
-logger = logging.getLogger('face01lib/video_capture')
+logger = getLogger('face01lib/video_capture')
 
 """TODO
 RTSPを受け付けるようにする
@@ -47,20 +46,20 @@ if len(face_encodings) > 0:
     """
 
 def resize_frame(set_width, set_height, frame):
-    small_frame: cv2.Mat = cv2.resize(frame, (set_width, set_height))
+    small_frame = resize(frame, (set_width, set_height))
     return small_frame
 
 def return_movie_property(set_width: int, vcap) -> tuple:
     set_width = set_width
-    fps: int    = vcap.get(cv2.CAP_PROP_FPS)
-    height: int = vcap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-    width: int  = vcap.get(cv2.CAP_PROP_FRAME_WIDTH)
+    fps: int    = vcap.get(CAP_PROP_FPS)
+    height: int = vcap.get(CAP_PROP_FRAME_HEIGHT)
+    width: int  = vcap.get(CAP_PROP_FRAME_WIDTH)
     fps = int(fps)
     height= int(height)
     width = int(width)
     # widthが400pxより小さい場合警告を出す
     if width < 400:
-        sg.popup('入力指定された映像データ幅が小さすぎます','width: {}px'.format(width), 'このまま処理を続けますが', '性能が発揮できない場合があります','OKを押すと続行します', title='警告', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        popup('入力指定された映像データ幅が小さすぎます','width: {}px'.format(width), 'このまま処理を続けますが', '性能が発揮できない場合があります','OKを押すと続行します', title='警告', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
     # しかしながらパイプ処理の際フレームサイズがわからなくなるので決め打ちする
     set_height: int = int((set_width * height) / width)
     return set_width,fps,height,width,set_height
@@ -112,21 +111,21 @@ def return_vcap(movie):
     if movie=='usb':   # USB カメラ読み込み時使用
         live_camera_number:int = 0
         for camera_number in range(-5, 5):
-            vcap = cv2.VideoCapture(camera_number)
+            vcap = VideoCapture(camera_number)
             ret, frame = vcap.read()
             if ret:
                 live_camera_number = camera_number 
-        vcap = cv2.VideoCapture(live_camera_number)
+        vcap = VideoCapture(live_camera_number)
         return vcap
     else:
-        vcap = cv2.VideoCapture(movie, cv2.CAP_FFMPEG)
+        vcap = VideoCapture(movie, CAP_FFMPEG)
         return vcap
 
 def finalize(vcap):
     # 入力動画処理ハンドルのリリース
     vcap.release()
     # ウィンドウの除去
-    cv2.destroyAllWindows()
+    destroyAllWindows()
 
 # @lru_cache(maxsize=None)
 def frame_generator(args_dict):
@@ -138,7 +137,7 @@ def frame_generator(args_dict):
     CENTER = 0
 
     kaoninshoDir = args_dict["kaoninshoDir"] 
-    os.chdir(kaoninshoDir)
+    chdir(kaoninshoDir)
     movie = args_dict["movie"] 
     set_area = args_dict["set_area"] 
     # 画角値（四隅の座標:Tuple）算出
@@ -149,14 +148,14 @@ def frame_generator(args_dict):
         camera_number:int = 0
         live_camera_number:int = 0
         for camera_number in range(-5, 5):
-            vcap = cv2.VideoCapture(camera_number)
+            vcap = VideoCapture(camera_number)
             ret, frame = vcap.read()
             if ret:
                 live_camera_number = camera_number 
-        vcap = cv2.VideoCapture(live_camera_number)
+        vcap = VideoCapture(live_camera_number)
         logger.info(f'カメラデバイス番号：{camera_number}')
     else:
-        vcap = cv2.VideoCapture(movie, cv2.CAP_FFMPEG)
+        vcap = VideoCapture(movie, CAP_FFMPEG)
     
         resized_frame_list = []
         frame_skip_counter: int = 0
@@ -165,10 +164,10 @@ def frame_generator(args_dict):
         while vcap.isOpened(): 
             ret, frame = vcap.read()
             if ret == False:
-                # sg.popup( '不正な映像データのため終了します', 'システム管理者にお問い合わせください', movie, title='ERROR', button_type=sg.POPUP_BUTTONS_OK, modal=True, keep_on_top=True)
+                # popup( '不正な映像データのため終了します', 'システム管理者にお問い合わせください', movie, title='ERROR', button_type=sg.POPUP_BUTTONS_OK, modal=True, keep_on_top=True)
                 logger.warning("以下のエラーをシステム管理者へお伝えください")
                 logger.warning("---------------------------------------------")
-                logger.warning(traceback.format_exc(limit=None, chain=True))
+                logger.warning(format_exc(limit=None, chain=True))
                 logger.warning("---------------------------------------------")
                 finalize(args_dict["vcap"])
                 break
@@ -184,9 +183,9 @@ def frame_generator(args_dict):
                 # 各frameリサイズ
                 resized_frame = resize_frame(set_width, set_height, frame)
                 """DEBUG
-                cv2.imshow("video_capture_DEBUG", frame)
-                cv2.waitKey(1000)
-                cv2.destroyAllWindows()
+                imshow("video_capture_DEBUG", frame)
+                waitKey(1000)
+                destroyAllWindows()
                 """
 
                 yield resized_frame

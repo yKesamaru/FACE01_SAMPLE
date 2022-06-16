@@ -1,12 +1,12 @@
-from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
+# from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from typing import Dict, List, Tuple
 
 import dlib
 import numpy as np
-import PIL.Image
+from PIL.Image import open
 from PIL import ImageFile
-import logging
-logger = logging.getLogger('face01lib/api')
+from logging import getLogger
+logger = getLogger('face01lib/api')
 
 
 try:
@@ -80,7 +80,7 @@ def load_image_file(file, mode='RGB'):
     :param mode: format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
     :return: image contents as numpy array
     """
-    im = PIL.Image.open(file)
+    im = open(file)
     if mode:
         im = im.convert(mode)
     return np.array(im)

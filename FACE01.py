@@ -1,17 +1,19 @@
 """CHECK SYSTEM INFORMATION"""
-import logging
-import platform
 import sys
+from logging import INFO, basicConfig, getLogger
+from platform import system
 
-import click
-import psutil
 import PySimpleGUI as sg
 from GPUtil import getGPUs
+# import click
+from psutil import cpu_count, cpu_freq, virtual_memory
 
 import face01lib.api as faceapi
 
-logging.basicConfig(stream=sys.stdout, level=logging.INFO)
-logger = logging.getLogger('FACE01')
+basicConfig(stream=sys.stdout, level=INFO)
+logger = getLogger('FACE01')
+logger_info = logger.info
+logger_warning = logger.warning
 
 sg.theme('LightGray')
 
@@ -20,116 +22,108 @@ def system_check():
     解決できるURLを指定すること
     テキストファイルを生成して同じ処理を繰り返させないこと
     """
-    logger.info("FACE01の推奨動作環境を満たしているかシステムチェックを実行します")
+    logger_info("FACE01の推奨動作環境を満たしているかシステムチェックを実行します")
     # Python version
-    logger.info("- Python version check")
+    logger_info("- Python version check")
     if (sys.version_info < (3, 8)):
-        logger.warning("警告: Python 3.8以降を使用してください")
-        sg.popup(
-            "警告: Python 3.8以降を使用してください",
-            title='INFORMATION', button_type =sg. POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        logger_warning("警告: Python 3.8以降を使用してください")
         exit()
     else:
-        logger.info(f"  [OK] {str(sys.version)}")
-        # logger.info(f"  [OK] {str(sys.version).replace('\n', '')}")
+        logger_info(f"  [OK] {str(sys.version)}")
+        # logger_info(f"  [OK] {str(sys.version).replace('\n', '')}")
     # CPU
-    logger.info("- CPU check")
-    if psutil.cpu_freq().max < 3000 or psutil.cpu_count(logical=False) < 4:
-        sg.popup(
-            'CPU性能が足りません',
-            '3GHz以上のCPUが必要です',
-            '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+    logger_info("- CPU check")
+    if cpu_freq().max < 2500 or cpu_count(logical=False) < 4:
+        logger_warning("CPU性能が足りません")
+        logger_warning("処理速度が実用に達しない恐れがあります")
+        logger_warning("終了します")
         exit()
     else:
-        logger.info(f"  [OK] {str(psutil.cpu_freq().max)[0] + '.' +  str(psutil.cpu_freq().max)[1:3]}GHz")
-        logger.info(f"  [OK] {psutil.cpu_count(logical=False)}core")
+        logger_info(f"  [OK] {str(cpu_freq().max)[0] + '.' +  str(cpu_freq().max)[1:3]}GHz")
+        logger_info(f"  [OK] {cpu_count(logical=False)}core")
     # MEMORY
-    logger.info("- Memory check")
-    if psutil.virtual_memory().total < 4000000000:
-        sg.popup(
-        'メモリーが足りません',
-        '少なくとも4GByte以上が必要です',
-        '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+    logger_info("- Memory check")
+    if virtual_memory().total < 4000000000:
+        logger_warning("メモリーが足りません")
+        logger_warning("少なくとも4GByte以上が必要です")
+        logger_warning("終了します")
         exit()
     else:
-        if psutil.virtual_memory().total < 10000000000:
-            logger.info(f"  [OK] {str(psutil.virtual_memory().total)[0]}GByte"); exit()
+        if virtual_memory().total < 10000000000:
+            logger_info(f"  [OK] {str(virtual_memory().total)[0]}GByte"); exit()
         else:
-            logger.info(f"  [OK] {str(psutil.virtual_memory().total)[0:2]}GByte")
+            logger_info(f"  [OK] {str(virtual_memory().total)[0:2]}GByte")
 
     # GPU
-    logger.info("- CUDA devices check")
+    logger_info("- CUDA devices check")
     if faceapi.dlib.cuda.get_num_devices() == 0:
-        sg.popup(
-        'CUDAが有効なデバイスが見つかりません',
-        '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        logger_warning("CUDAが有効なデバイスが見つかりません")
+        logger_warning("終了します")
         exit()
     else:
-        logger.info(f"  [OK] cuda devices: {faceapi.dlib.cuda.get_num_devices()}")
+        logger_info(f"  [OK] cuda devices: {faceapi.dlib.cuda.get_num_devices()}")
 
     # Dlib build check: CUDA
-    logger.info("- Dlib build check: CUDA")
+    logger_info("- Dlib build check: CUDA")
     if faceapi.dlib.DLIB_USE_CUDA == False:
-        sg.popup('dlibビルド時にCUDAが有効化されていません',
-        '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        logger_warning("dlibビルド時にCUDAが有効化されていません")
+        logger_warning("終了します")
         exit()
     else:
-        logger.info(f"  [OK] DLIB_USE_CUDA: True")
+        logger_info(f"  [OK] DLIB_USE_CUDA: True")
 
     # Dlib build check: BLAS
-    logger.info("- Dlib build check: BLAS, LAPACK")
+    logger_info("- Dlib build check: BLAS, LAPACK")
     if faceapi.dlib.DLIB_USE_BLAS == False or faceapi.dlib.DLIB_USE_LAPACK == False:
-        sg.popup(
-            'BLASまたはLAPACKのいずれか、あるいは両方がインストールされていません',
-            'パッケージマネージャーでインストールしてください',
-            'CUBLAS native runtime libraries(Basic Linear Algebra Subroutines: 基本線形代数サブルーチン)',
-            'LAPACK バージョン 3.X(線形代数演算を行う総合的な FORTRAN ライブラリ)',
-            'インストール後にdlibを改めて再インストールしてください',
-            '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        logger_warning("BLASまたはLAPACKのいずれか、あるいは両方がインストールされていません")
+        logger_warning("パッケージマネージャーでインストールしてください")
+        logger_warning("\tCUBLAS native runtime libraries(Basic Linear Algebra Subroutines: 基本線形代数サブルーチン)")
+        logger_warning("\tLAPACK バージョン 3.X(線形代数演算を行う総合的な FORTRAN ライブラリ)")
+        logger_warning("インストール後にdlibを改めて再インストールしてください")
+        logger_warning("終了します")
         exit()
     else:
-        logger.info("  [OK] DLIB_USE_BLAS, LAPACK: True")
+        logger_info("  [OK] DLIB_USE_BLAS, LAPACK: True")
 
     # VRAM check
-    logger.info("- VRAM check")
+    logger_info("- VRAM check")
     for gpu in getGPUs():
         gpu_memory = gpu.memoryTotal
         gpu_name = gpu.name
     if gpu_memory < 3000:
-        sg.popup(
-            'GPUデバイスの性能が足りません',
-            '現在のGPUデバイス',
-            [gpu_name],
-            'NVIDIA GeForce GTX 1660 Ti以上をお使いください',
-            '終了します', title='INFORMATION', button_type = sg.POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
+        logger_warning("GPUデバイスの性能が足りません")
+        logger_warning(f"現在のGPUデバイス: {gpu_name}")
+        logger_warning("NVIDIA GeForce GTX 1660 Ti以上をお使いください")
+        logger_warning("終了します")
         exit()
     else:
         if int(gpu_memory) < 9999:
-            logger.info(f"  [OK] VRAM: {str(int(gpu_memory))[0]}GByte")
+            logger_info(f"  [OK] VRAM: {str(int(gpu_memory))[0]}GByte")
         else:
-            logger.info(f"  [OK] VRAM: {str(int(gpu_memory))[0:2]}GByte")
-        logger.info(f"  [OK] GPU device: {gpu_name}")
+            logger_info(f"  [OK] VRAM: {str(int(gpu_memory))[0:2]}GByte")
+        logger_info(f"  [OK] GPU device: {gpu_name}")
 
-    logger.info("  ** System check: Done **\n")
+    logger_info("  ** System check: Done **\n")
 system_check()
 
-import configparser
 import datetime
-import os
-import shutil
 import time
-import traceback
 from collections import defaultdict
-from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
-from functools import lru_cache, partial
-from pickle import NONE
-from pickletools import uint8
+from configparser import ConfigParser
+from os import chdir, environ
+from os.path import dirname, exists
+from shutil import move
+from traceback import format_exc
+# from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
+# from functools import lru_cache, partial
+# from pickle import NONE
+# from pickletools import uint8
 from typing import Dict, List, Tuple
 
 import cv2
 import mediapipe as mp
 import numpy as np
-from numba import f8, i8, njit
+# from numba import f8, i8, njit
 from PIL import Image, ImageDraw, ImageFont
 
 import face01lib.video_capture as video_capture
@@ -148,7 +142,7 @@ https://github.com/davisking/dlib/blob/master/python_examples/faceapi.py
 
 
 # opencvの環境変数変更
-os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;udp"
+environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;udp"
 
 global_memory = {
 # 半透明値,
@@ -157,16 +151,16 @@ global_memory = {
 
 # ホームディレクトリ固定
 def home() -> tuple:
-    kaoninshoDir: str = os.path.dirname(__file__)
-    os.chdir(kaoninshoDir)
-    priset_face_imagesDir: str = f'{os.path.dirname(__file__)}/priset_face_images/'
+    kaoninshoDir: str = dirname(__file__)
+    chdir(kaoninshoDir)
+    priset_face_imagesDir: str = f'{dirname(__file__)}/priset_face_images/'
     return kaoninshoDir, priset_face_imagesDir
 
 # configファイル読み込み
 def configure():
     kaoninshoDir, priset_face_imagesDir = home()
     try:
-        conf = configparser.ConfigParser()
+        conf = ConfigParser()
         conf.read('config.ini', 'utf-8')
         # dict作成
         conf_dict = {
@@ -205,11 +199,11 @@ def configure():
         }
         return conf_dict
     except:
-        logger.warning("config.ini 読み込み中にエラーが発生しました")
-        logger.warning("以下のエラーをシステム管理者へお伝えください")
-        logger.warning("---------------------------------------------")
-        logger.warning(traceback.format_exc(limit=None, chain=True))
-        logger.warning("---------------------------------------------")
+        logger_warning("config.ini 読み込み中にエラーが発生しました")
+        logger_warning("以下のエラーをシステム管理者へお伝えください")
+        logger_warning("---------------------------------------------")
+        logger_warning(format_exc(limit=None, chain=True))
+        logger_warning("---------------------------------------------")
         quit()
 
 # configure関数実行
@@ -354,10 +348,9 @@ def initialize(conf_dict):
 # initialize関数実行
 args_dict = initialize(conf_dict)
 
-@lru_cache()
 def return_fontpath():
     # フォントの設定(フォントファイルのパスと文字の大きさ)
-    operating_system: str  = platform.system()
+    operating_system: str  = system()
     fontpath: str = ''
     if (operating_system == 'Linux'):
         fontpath = "/usr/share/fonts/truetype/mplus/mplus-1mn-bold.ttf"
@@ -365,7 +358,7 @@ def return_fontpath():
                     # fontpath = "C:/WINDOWS/FONTS/BIZ-UDGOTHICR.TTC"
         fontpath = "C:/WINDOWS/FONTS/BIZ-UDGOTHICB.TTC"  ## bold体
     else:
-        logger.info('オペレーティングシステムの確認が出来ません。システム管理者にご連絡ください')
+        logger_info('オペレーティングシステムの確認が出来ません。システム管理者にご連絡ください')
     return fontpath
 
 def draw_telop(cal_resized_telop_nums, set_width: int, resized_telop_image: np.ndarray, frame: np.ndarray):
@@ -373,7 +366,7 @@ def draw_telop(cal_resized_telop_nums, set_width: int, resized_telop_image: np.n
     try:
         frame[y1:y2, x1:x2] = frame[y1:y2, x1:x2] * a + b
     except:
-        logger.info("telopが描画できません")
+        logger_info("telopが描画できません")
 
     """DEBUG
     src1 = frame[y1:y2, x1:x2,]
@@ -399,7 +392,7 @@ def draw_logo(cal_resized_logo_nums, frame,logo_image,  set_height,set_width):
     try:
         frame[y1:y2, x1:x2] = frame[y1:y2, x1:x2] * a + b
     except:
-        logger.info("logoが描画できません")
+        logger_info("logoが描画できません")
     return frame
 
 def mp_face_detection_func(resized_frame, model_selection=0, min_detection_confidence=0.4):
@@ -548,13 +541,13 @@ def check_compare_faces(known_face_encodings, face_encoding, tolerance):
         matches = faceapi.compare_faces(known_face_encodings, face_encoding, tolerance)
         return matches
     except:
-        logger.warning("DEBUG: npKnown.npzが壊れているか予期しないエラーが発生しました。")
-        logger.warning("npKnown.npzの自動削除は行われません。原因を特定の上、必要な場合npKnown.npzを削除して下さい。")
-        logger.warning("処理を終了します。FACE01を再起動して下さい。")
-        logger.warning("以下のエラーをシステム管理者へお伝えください")
-        logger.warning("---------------------------------------------")
-        logger.warning(traceback.format_exc(limit=None, chain=True))
-        logger.warning("---------------------------------------------")
+        logger_warning("DEBUG: npKnown.npzが壊れているか予期しないエラーが発生しました。")
+        logger_warning("npKnown.npzの自動削除は行われません。原因を特定の上、必要な場合npKnown.npzを削除して下さい。")
+        logger_warning("処理を終了します。FACE01を再起動して下さい。")
+        logger_warning("以下のエラーをシステム管理者へお伝えください")
+        logger_warning("---------------------------------------------")
+        logger_warning(format_exc(limit=None, chain=True))
+        logger_warning("---------------------------------------------")
         exit()
 
 # Get face_names
@@ -637,8 +630,8 @@ def draw_default_face_image(resized_frame, default_face_small_image, x1, y1, x2,
         """DEBUG"""
         # frame_imshow_for_debug(resized_frame)
     except:
-        logger.info('デフォルト顔画像の描画が出来ません')
-        logger.info('描画面積が足りないか他に問題があります')
+        logger_info('デフォルト顔画像の描画が出来ません')
+        logger_info('描画面積が足りないか他に問題があります')
     return resized_frame
 
 def draw_default_face(args_dict, name, resized_frame, number_of_people):
@@ -651,7 +644,7 @@ def draw_default_face(args_dict, name, resized_frame, number_of_people):
     ## {name:default_image_ndarray}という辞書的変数を作りメモリに格納するのはどうか→ver.1.2.9で。
     if not name in default_face_image_dict:  # default_face_image_dictにnameが存在しなかった場合
         # 各人物のデフォルト顔画像ファイルの読み込み
-        if os.path.exists(default_face_image_name_png):
+        if exists(default_face_image_name_png):
             """TODO"""
             # WINDOWSのopencv-python4.2.0.32ではcv2.imread()でpng画像を読み込めないバグが
             # 存在する可能性があると思う。そこでPNG画像の読み込みにはpillowを用いることにする
@@ -665,9 +658,9 @@ def draw_default_face(args_dict, name, resized_frame, number_of_people):
             # frame_imshow_for_debug(default_face_image)
 
         else:
-            logger.warning(f'{name}さんのデフォルト顔画像ファイルがpriset_face_imagesフォルダに存在しません')
-            logger.warning(f'{name}さんのデフォルト顔画像ファイルをpriset_face_imagesフォルダに用意してください')
-            logger.warning('処理を終了します')
+            logger_warning(f'{name}さんのデフォルト顔画像ファイルがpriset_face_imagesフォルダに存在しません')
+            logger_warning(f'{name}さんのデフォルト顔画像ファイルをpriset_face_imagesフォルダに用意してください')
+            logger_warning('処理を終了します')
             exit()
         # if default_face_image.ndim == 3:  # RGBならアルファチャンネル追加 resized_frameがアルファチャンネルを持っているから。
         # default_face_imageをメモリに保持
@@ -743,7 +736,7 @@ def draw_bottom_area(name,resized_frame):
         resized_frame[y1:y2, x1:x2] = resized_frame[y1:y2, x1:x2] * (1 - unregistered_face_image[:,:,3:] / 255) + \
                     unregistered_face_image[:,:,:3] * (unregistered_face_image[:,:,3:] / 255)
     except:
-        logger.info('下部エリアのデフォルト顔画像が表示できません')
+        logger_info('下部エリアのデフォルト顔画像が表示できません')
     return unregistered_face_image, resized_frame
 
 # ボトムエリア内テキスト描画
@@ -895,7 +888,7 @@ def return_percentage(p):  # python版
 # 処理時間の測定（算出）
 def Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR):
         HANDLING_FRAME_TIME = (HANDLING_FRAME_TIME_REAR - HANDLING_FRAME_TIME_FRONT)  ## 小数点以下がミリ秒
-        logger.info(f'処理時間: {round(HANDLING_FRAME_TIME * 1000, 2)}[ミリ秒]')
+        logger_info(f'処理時間: {round(HANDLING_FRAME_TIME * 1000, 2)}[ミリ秒]')
 
 # 処理時間の測定（前半）
 def Measure_processing_time_forward():
@@ -973,7 +966,7 @@ def frame_pre_processing(args_dict, resized_frame):
 
     # 顔が一定数以上なら以降のエンコード処理を行わない
     if len(face_location_list) >= args_dict["number_of_people"]:
-        logger.info(f'{args_dict["number_of_people"]}人以上を検出しました')
+        logger_info(f'{args_dict["number_of_people"]}人以上を検出しました')
         frame_datas_array = make_frame_datas_array(overlay, face_location_list, name,filename, top,right,bottom,left,percentage_and_symbol,person_data_list,frame_datas_array,resized_frame)
         return frame_datas_array
 
@@ -1032,12 +1025,12 @@ def face_encoding_process(args_dict, frame_datas_array):
             elif args_dict["use_mediapipe"] == True and  args_dict["person_frame_face_encoding"] == False:
                 face_encodings = faceapi.face_encodings(resized_frame, face_location_list, args_dict["jitters"], args_dict["model"])
             elif args_dict["use_mediapipe"] == False and  args_dict["person_frame_face_encoding"] == True:
-                logger.warning("\n---------------------------------")
-                logger.warning("config.ini:")
-                logger.warning("mediapipe = False  の場合 person_frame_face_encoding = True  には出来ません")
-                logger.warning("システム管理者へ連絡の後、設定を変更してください")
-                logger.warning("処理を終了します")
-                logger.warning("---------------------------------")
+                logger_warning("\n---------------------------------")
+                logger_warning("config.ini:")
+                logger_warning("mediapipe = False  の場合 person_frame_face_encoding = True  には出来ません")
+                logger_warning("システム管理者へ連絡の後、設定を変更してください")
+                logger_warning("処理を終了します")
+                logger_warning("---------------------------------")
                 quit()
             elif args_dict["use_mediapipe"] == False and args_dict["person_frame_face_encoding"] == False:
                 face_encodings = faceapi.face_encodings(resized_frame, face_location_list, args_dict["jitters"], args_dict["model"])
@@ -1107,7 +1100,7 @@ def frame_post_processing(args_dict, face_encodings, frame_datas_array):
                     """TODO
                     logger warn level"""
                     sg.popup_error('ファイル名に異常が見つかりました',name,'NAME_default.png あるいはNAME_001.png (001部分は001からはじまる連番)にしてください','noFaceフォルダに移動します')
-                    shutil.move(name, './noFace/')
+                    move(name, './noFace/')
                     return
 
 
@@ -1270,7 +1263,7 @@ if __name__ == '__main__':
         while True:
             frame_datas_array = main_process().__next__()
             if StopIteration == frame_datas_array:
-                logger.info("StopIterationです")
+                logger_info("StopIterationです")
                 break
             exec_times = exec_times - 1
             if  exec_times <= 0:
