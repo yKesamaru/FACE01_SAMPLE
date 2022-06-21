@@ -1,6 +1,7 @@
 """CHECK SYSTEM INFORMATION"""
+from ast import arg
 import sys
-from logging import INFO, basicConfig, getLogger
+import logging
 from platform import system
 
 import PySimpleGUI as sg
@@ -10,10 +11,16 @@ from psutil import cpu_count, cpu_freq, virtual_memory
 
 import face01lib.api as faceapi
 
-basicConfig(stream=sys.stdout, level=INFO)
-logger = getLogger('FACE01')
-logger_info = logger.info
-logger_warning = logger.warning
+logging.basicConfig(
+    level=logging.INFO,
+    filename='face01.log',
+    filemode='w',
+    format='{asctime} {name:<8s} {levelname:<8s} {message}', style='{'
+    )
+console_stdout = logging.StreamHandler()
+console_stdout.setLevel(logging.INFO)
+logging.getLogger('FACE01').addHandler(console_stdout)
+logger_info = logging.getLogger('FACE01')
 
 sg.theme('LightGray')
 
@@ -22,88 +29,88 @@ def system_check():
     解決できるURLを指定すること
     テキストファイルを生成して同じ処理を繰り返させないこと
     """
-    logger_info("FACE01の推奨動作環境を満たしているかシステムチェックを実行します")
+    logger_info.info("FACE01の推奨動作環境を満たしているかシステムチェックを実行します")
     # Python version
-    logger_info("- Python version check")
+    logger_info.info("- Python version check")
     if (sys.version_info < (3, 8)):
-        logger_warning("警告: Python 3.8以降を使用してください")
+        logger_info.warning("警告: Python 3.8以降を使用してください")
         exit()
     else:
-        logger_info(f"  [OK] {str(sys.version)}")
-        # logger_info(f"  [OK] {str(sys.version).replace('\n', '')}")
+        logger_info.info(f"  [OK] {str(sys.version)}")
+        # logger_info.info(f"  [OK] {str(sys.version).replace('\n', '')}")
     # CPU
-    logger_info("- CPU check")
+    logger_info.info("- CPU check")
     if cpu_freq().max < 2500 or cpu_count(logical=False) < 4:
-        logger_warning("CPU性能が足りません")
-        logger_warning("処理速度が実用に達しない恐れがあります")
-        logger_warning("終了します")
+        logger_info.warning("CPU性能が足りません")
+        logger_info.warning("処理速度が実用に達しない恐れがあります")
+        logger_info.warning("終了します")
         exit()
     else:
-        logger_info(f"  [OK] {str(cpu_freq().max)[0] + '.' +  str(cpu_freq().max)[1:3]}GHz")
-        logger_info(f"  [OK] {cpu_count(logical=False)}core")
+        logger_info.info(f"  [OK] {str(cpu_freq().max)[0] + '.' +  str(cpu_freq().max)[1:3]}GHz")
+        logger_info.info(f"  [OK] {cpu_count(logical=False)}core")
     # MEMORY
-    logger_info("- Memory check")
+    logger_info.info("- Memory check")
     if virtual_memory().total < 4000000000:
-        logger_warning("メモリーが足りません")
-        logger_warning("少なくとも4GByte以上が必要です")
-        logger_warning("終了します")
+        logger_info.warning("メモリーが足りません")
+        logger_info.warning("少なくとも4GByte以上が必要です")
+        logger_info.warning("終了します")
         exit()
     else:
         if virtual_memory().total < 10000000000:
-            logger_info(f"  [OK] {str(virtual_memory().total)[0]}GByte"); exit()
+            logger_info.info(f"  [OK] {str(virtual_memory().total)[0]}GByte"); exit()
         else:
-            logger_info(f"  [OK] {str(virtual_memory().total)[0:2]}GByte")
+            logger_info.info(f"  [OK] {str(virtual_memory().total)[0:2]}GByte")
 
     # GPU
-    logger_info("- CUDA devices check")
-    if faceapi.dlib.cuda.get_num_devices() == 0:
-        logger_warning("CUDAが有効なデバイスが見つかりません")
-        logger_warning("終了します")
+    logger_info.info("- CUDA devices check")
+    if faceapi.dlib.cuda.get_num_devices() == 0:  # type: ignore
+        logger_info.warning("CUDAが有効なデバイスが見つかりません")
+        logger_info.warning("終了します")
         exit()
     else:
-        logger_info(f"  [OK] cuda devices: {faceapi.dlib.cuda.get_num_devices()}")
+        logger_info.info(f"  [OK] cuda devices: {faceapi.dlib.cuda.get_num_devices()}")  # type: ignore
 
     # Dlib build check: CUDA
-    logger_info("- Dlib build check: CUDA")
-    if faceapi.dlib.DLIB_USE_CUDA == False:
-        logger_warning("dlibビルド時にCUDAが有効化されていません")
-        logger_warning("終了します")
+    logger_info.info("- Dlib build check: CUDA")
+    if faceapi.dlib.DLIB_USE_CUDA == False:  # type: ignore
+        logger_info.warning("dlibビルド時にCUDAが有効化されていません")
+        logger_info.warning("終了します")
         exit()
     else:
-        logger_info(f"  [OK] DLIB_USE_CUDA: True")
+        logger_info.info(f"  [OK] DLIB_USE_CUDA: True")
 
     # Dlib build check: BLAS
-    logger_info("- Dlib build check: BLAS, LAPACK")
-    if faceapi.dlib.DLIB_USE_BLAS == False or faceapi.dlib.DLIB_USE_LAPACK == False:
-        logger_warning("BLASまたはLAPACKのいずれか、あるいは両方がインストールされていません")
-        logger_warning("パッケージマネージャーでインストールしてください")
-        logger_warning("\tCUBLAS native runtime libraries(Basic Linear Algebra Subroutines: 基本線形代数サブルーチン)")
-        logger_warning("\tLAPACK バージョン 3.X(線形代数演算を行う総合的な FORTRAN ライブラリ)")
-        logger_warning("インストール後にdlibを改めて再インストールしてください")
-        logger_warning("終了します")
+    logger_info.info("- Dlib build check: BLAS, LAPACK")
+    if faceapi.dlib.DLIB_USE_BLAS == False or faceapi.dlib.DLIB_USE_LAPACK == False:  # type: ignore
+        logger_info.warning("BLASまたはLAPACKのいずれか、あるいは両方がインストールされていません")
+        logger_info.warning("パッケージマネージャーでインストールしてください")
+        logger_info.warning("\tCUBLAS native runtime libraries(Basic Linear Algebra Subroutines: 基本線形代数サブルーチン)")
+        logger_info.warning("\tLAPACK バージョン 3.X(線形代数演算を行う総合的な FORTRAN ライブラリ)")
+        logger_info.warning("インストール後にdlibを改めて再インストールしてください")
+        logger_info.warning("終了します")
         exit()
     else:
-        logger_info("  [OK] DLIB_USE_BLAS, LAPACK: True")
+        logger_info.info("  [OK] DLIB_USE_BLAS, LAPACK: True")
 
     # VRAM check
-    logger_info("- VRAM check")
+    logger_info.info("- VRAM check")
     for gpu in getGPUs():
         gpu_memory = gpu.memoryTotal
         gpu_name = gpu.name
     if gpu_memory < 3000:
-        logger_warning("GPUデバイスの性能が足りません")
-        logger_warning(f"現在のGPUデバイス: {gpu_name}")
-        logger_warning("NVIDIA GeForce GTX 1660 Ti以上をお使いください")
-        logger_warning("終了します")
+        logger_info.warning("GPUデバイスの性能が足りません")
+        logger_info.warning(f"現在のGPUデバイス: {gpu_name}")
+        logger_info.warning("NVIDIA GeForce GTX 1660 Ti以上をお使いください")
+        logger_info.warning("終了します")
         exit()
     else:
         if int(gpu_memory) < 9999:
-            logger_info(f"  [OK] VRAM: {str(int(gpu_memory))[0]}GByte")
+            logger_info.info(f"  [OK] VRAM: {str(int(gpu_memory))[0]}GByte")
         else:
-            logger_info(f"  [OK] VRAM: {str(int(gpu_memory))[0:2]}GByte")
-        logger_info(f"  [OK] GPU device: {gpu_name}")
+            logger_info.info(f"  [OK] VRAM: {str(int(gpu_memory))[0:2]}GByte")
+        logger_info.info(f"  [OK] GPU device: {gpu_name}")
 
-    logger_info("  ** System check: Done **\n")
+    logger_info.info("  ** System check: Done **\n")
 system_check()
 
 import datetime
@@ -129,6 +136,8 @@ from PIL import Image, ImageDraw, ImageFont
 import face01lib.video_capture as video_capture
 from face01lib.load_priset_image import load_priset_image
 from face01lib.similar_percentage_to_tolerance import to_tolerance
+
+# from memory_profiler import profile
 
 """mediapipe for python, see bellow
 https://github.com/google/mediapipe/tree/master/mediapipe/python
@@ -197,11 +206,11 @@ def configure():
         }
         return conf_dict
     except:
-        logger_warning("config.ini 読み込み中にエラーが発生しました")
-        logger_warning("以下のエラーをシステム管理者へお伝えください")
-        logger_warning("---------------------------------------------")
-        logger_warning(format_exc(limit=None, chain=True))
-        logger_warning("---------------------------------------------")
+        logger_info.warning("config.ini 読み込み中にエラーが発生しました")
+        logger_info.warning("以下のエラーをシステム管理者へお伝えください")
+        logger_info.warning("---------------------------------------------")
+        logger_info.warning(format_exc(limit=None, chain=True))
+        logger_info.warning("---------------------------------------------")
         quit()
 
 # configure関数実行
@@ -268,7 +277,7 @@ def initialize(conf_dict):
             telop_image = cv2.imread("images/telop.png", cv2.IMREAD_UNCHANGED)
             load_telop_image = True
             _, orgWidth = telop_image.shape[:2]
-            ratio: float = conf_dict["set_width"] / orgWidth / 1.5  ## テロップ幅は横幅の半分に設定
+            ratio: float = conf_dict["set_width"] / orgWidth / 3  ## テロップ幅は横幅の半分に設定
             resized_telop_image = cv2.resize(telop_image, None, fx = ratio, fy = ratio)  # type: ignore
             cal_resized_telop_nums = cal_resized_telop_image(resized_telop_image)
 
@@ -278,7 +287,7 @@ def initialize(conf_dict):
             logo_image: cv2.Mat = cv2.imread("images/Logo.png", cv2.IMREAD_UNCHANGED)
             load_logo_image = True
             _, logoWidth = logo_image.shape[:2]
-            logoRatio = conf_dict["set_width"] / logoWidth / 10
+            logoRatio = conf_dict["set_width"] / logoWidth / 15
             resized_logo_image = cv2.resize(logo_image, None, fx = logoRatio, fy = logoRatio)
             cal_resized_logo_nums = cal_resized_logo_image(resized_logo_image,  set_height,set_width)
 
@@ -354,15 +363,16 @@ def return_fontpath():
                     # fontpath = "C:/WINDOWS/FONTS/BIZ-UDGOTHICR.TTC"
         fontpath = "C:/WINDOWS/FONTS/BIZ-UDGOTHICB.TTC"  ## bold体
     else:
-        logger_info('オペレーティングシステムの確認が出来ません。システム管理者にご連絡ください')
+        logger_info.info('オペレーティングシステムの確認が出来ません。システム管理者にご連絡ください')
     return fontpath
 
 def draw_telop(cal_resized_telop_nums, set_width: int, resized_telop_image: np.ndarray, frame: np.ndarray):
     x1, y1, x2, y2, a, b = cal_resized_telop_nums
     try:
         frame[y1:y2, x1:x2] = frame[y1:y2, x1:x2] * a + b
+        # frame[y1:y2, x1:x2] = resized_telop_image
     except:
-        logger_info("telopが描画できません")
+        logger_info.info("telopが描画できません")
 
     """DEBUG
     src1 = frame[y1:y2, x1:x2,]
@@ -388,11 +398,11 @@ def draw_logo(cal_resized_logo_nums, frame,logo_image,  set_height,set_width):
     try:
         frame[y1:y2, x1:x2] = frame[y1:y2, x1:x2] * a + b
     except:
-        logger_info("logoが描画できません")
+        logger_info.info("logoが描画できません")
     return frame
 
 def mp_face_detection_func(resized_frame, model_selection=0, min_detection_confidence=0.4):
-    face = mp.solutions.face_detection.FaceDetection(
+    face = mp.solutions.face_detection.FaceDetection(  # type: ignore
         model_selection=model_selection,
         min_detection_confidence=min_detection_confidence
     )
@@ -423,6 +433,8 @@ def return_face_location_list(resized_frame, set_width, set_height, model_select
     """
     resized_frame.flags.writeable = False
     face_location_list: List = list()
+    """TODO
+    np.empty((2,0), dtype=np.float64)"""
     person_frame = np.empty([0,0])
     result = mp_face_detection_func(resized_frame, model_selection, min_detection_confidence)
     if not result.detections:
@@ -431,20 +443,36 @@ def return_face_location_list(resized_frame, set_width, set_height, model_select
         # print('\n------------')
         # print(f'人数: {len(result.detections)}人')
         # print(f'exec_times: {exec_times}')
+
+        """計算量削減
+        # 可読性が悪い
+        detection_array = np.array([[
+                [detection.location_data.relative_bounding_box.ymin],
+                [detection.location_data.relative_bounding_box.width],
+                [detection.location_data.relative_bounding_box.height],
+                [detection.location_data.relative_bounding_box.xmin]
+            ] for detection in result.detections], dtype='float64')
+        calc_array = np.array([[
+            [set_height],
+            [set_width + detection.location_data.relative_bounding_box.xmin]
+        ]])
+        """
+        # """ORIGINAL
         for detection in result.detections:
             xleft:int = int(detection.location_data.relative_bounding_box.xmin * set_width)
             xtop :int= int(detection.location_data.relative_bounding_box.ymin * set_height)
             xright:int = int(detection.location_data.relative_bounding_box.width * set_width + xleft)
             xbottom:int = int(detection.location_data.relative_bounding_box.height * set_height + xtop)
-            """see bellow
-            https://stackoverflow.com/questions/71094744/how-to-crop-face-detected-via-mediapipe-in-python
-            """
-            # print(f'信頼度: {round(detection.score[0]*100, 2)}%')
+            # see bellow
+            # https://stackoverflow.com/questions/71094744/how-to-crop-face-detected-via-mediapipe-in-python
+            
+            #  print(f'信頼度: {round(detection.score[0]*100, 2)}%')
             # print(f'座標: {(xtop,xright,xbottom,xleft)}')
 
             if xleft <= 0 or xtop <= 0:  # xleft or xtop がマイナスになる場合があるとバグる
                 continue
             face_location_list.append((xtop,xright,xbottom,xleft))  # faceapi order
+            # """
 
     resized_frame.flags.writeable = True
     return face_location_list
@@ -538,13 +566,13 @@ def check_compare_faces(known_face_encodings, face_encoding, tolerance):
         matches = faceapi.compare_faces(known_face_encodings, face_encoding, tolerance)
         return matches
     except:
-        logger_warning("DEBUG: npKnown.npzが壊れているか予期しないエラーが発生しました。")
-        logger_warning("npKnown.npzの自動削除は行われません。原因を特定の上、必要な場合npKnown.npzを削除して下さい。")
-        logger_warning("処理を終了します。FACE01を再起動して下さい。")
-        logger_warning("以下のエラーをシステム管理者へお伝えください")
-        logger_warning("---------------------------------------------")
-        logger_warning(format_exc(limit=None, chain=True))
-        logger_warning("---------------------------------------------")
+        logger_info.warning("DEBUG: npKnown.npzが壊れているか予期しないエラーが発生しました。")
+        logger_info.warning("npKnown.npzの自動削除は行われません。原因を特定の上、必要な場合npKnown.npzを削除して下さい。")
+        logger_info.warning("処理を終了します。FACE01を再起動して下さい。")
+        logger_info.warning("以下のエラーをシステム管理者へお伝えください")
+        logger_info.warning("---------------------------------------------")
+        logger_info.warning(format_exc(limit=None, chain=True))
+        logger_info.warning("---------------------------------------------")
         exit()
 
 # Get face_names
@@ -627,8 +655,8 @@ def draw_default_face_image(resized_frame, default_face_small_image, x1, y1, x2,
         """DEBUG"""
         # frame_imshow_for_debug(resized_frame)
     except:
-        logger_info('デフォルト顔画像の描画が出来ません')
-        logger_info('描画面積が足りないか他に問題があります')
+        logger_info.info('デフォルト顔画像の描画が出来ません')
+        logger_info.info('描画面積が足りないか他に問題があります')
     return resized_frame
 
 def draw_default_face(args_dict, name, resized_frame, number_of_people):
@@ -655,10 +683,8 @@ def draw_default_face(args_dict, name, resized_frame, number_of_people):
             # frame_imshow_for_debug(default_face_image)
 
         else:
-            logger_warning(f'{name}さんのデフォルト顔画像ファイルがpriset_face_imagesフォルダに存在しません')
-            logger_warning(f'{name}さんのデフォルト顔画像ファイルをpriset_face_imagesフォルダに用意してください')
-            logger_warning('処理を終了します')
-            exit()
+            logger_info.info(f'{name}さんのデフォルト顔画像ファイルがpriset_face_imagesフォルダに存在しません')
+            logger_info.info(f'{name}さんのデフォルト顔画像ファイルをpriset_face_imagesフォルダに用意してください')
         # if default_face_image.ndim == 3:  # RGBならアルファチャンネル追加 resized_frameがアルファチャンネルを持っているから。
         # default_face_imageをメモリに保持
         default_face_image_dict[name] = default_face_image  # キーnameと値default_face_imageの組み合わせを挿入する
@@ -736,7 +762,7 @@ def draw_bottom_area(args_dict, name,resized_frame):
         resized_frame[y1:y2, x1:x2] = resized_frame[y1:y2, x1:x2] * (1 - unregistered_face_image[:,:,3:] / 255) + \
                     unregistered_face_image[:,:,:3] * (unregistered_face_image[:,:,3:] / 255)
     except:
-        logger_info('下部エリアのデフォルト顔画像が表示できません')
+        logger_info.info('下部エリアのデフォルト顔画像が表示できません')
     return unregistered_face_image, resized_frame
 """
 
@@ -803,11 +829,23 @@ def draw_error_messg_rectangle_messg(draw, error_messg_rectangle_position, error
     draw.text(error_messg_rectangle_position, error_messg_rectangle_messg, fill=(255, 255, 255, 255), font = error_messg_rectangle_font)
 
 def make_frame_datas_array(overlay, face_location_list, name,filename, top,right,bottom,left,percentage_and_symbol,person_data_list,frame_datas_array,resized_frame):
-    """_summary_ = 
-    'person_data = {'name': name, 'pict':filename,  'date':date, 'location':(top,right,bottom,left), 'percentage_and_symbol': percentage_and_symbol}
-     person_data_list.append(person_data)
-     frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}
-     frame_datas_array.append(frame_datas)
+    """データ構造(frame_datas_list)を返す
+
+    person_data:
+        {'name': name, 'pict':filename,  'date':date, 'location':(top,right,bottom,left), 'percentage_and_symbol': percentage_and_symbol}
+        
+        person_data内のlocationは個々人の顔座標です。個々人を特定しない場合の顔座標はframe_detas['face_location_list']を使ってください。
+    
+    person_data_list: 
+        person_data_list.append(person_data)
+    
+    frame_datas:
+        {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}
+
+    frame_datas_list: 
+        frame_datas_array.append(frame_datas)
+
+    return: frame_datas_list
     """    
     date = datetime.datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
     person_data = {'name': name, 'pict':filename,  'date':date, 'location':(top,right,bottom,left), 'percentage_and_symbol': percentage_and_symbol}
@@ -860,25 +898,26 @@ def draw_target_rectangle(rect01_png,resized_frame,top,bottom,left,right,name):
         # TODO ---------------------
         try:
             resized_frame[y1:y2, x1:x2] = resized_frame[y1:y2, x1:x2] * (1 - rect01_png[:,:,3:] / 255) + \
-                        rect01_png[:,:,:3] * (rect01_png[:,:,3:] / 255)
+                        rect01_png[:,:,:3] * (rect01_png[:,:,3:] / 255)  # type: ignore
         except:
             """TODO
             logger -> warn level"""
             pass
         # ---- ---------------------
     else:  ## nameがUnknownだった場合
+        fx: float = 0.0
         face_width = right - left
         face_height = bottom - top
         # rect01_NG_png←ピンクのtarget_rectangle
         rect01_NG_png: cv2.Mat = cv2.imread("images/rect01_NG.png", cv2.IMREAD_UNCHANGED)
         orgHeight, orgWidth = rect01_NG_png.shape[:2]
-        width_ratio = 1.0 * (face_width / orgWidth)
+        width_ratio = float(1.0 * (face_width / orgWidth))
         height_ratio = 1.0 * (face_height / orgHeight)
         rect01_NG_png = cv2.resize(rect01_NG_png, None, fx = width_ratio, fy = height_ratio)
         x1, y1, x2, y2 = left, top, left + rect01_NG_png.shape[1], top + rect01_NG_png.shape[0]
         try:
             resized_frame[y1:y2, x1:x2] = resized_frame[y1:y2, x1:x2] * (1 - rect01_NG_png[:,:,3:] / 255) + \
-                        rect01_NG_png[:,:,:3] * (rect01_NG_png[:,:,3:] / 255)
+                        rect01_NG_png[:,:,:3] * (rect01_NG_png[:,:,3:] / int(255))
         except:
             pass
     return resized_frame
@@ -890,7 +929,7 @@ def return_percentage(p):  # python版
 # 処理時間の測定（算出）
 def Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR):
         HANDLING_FRAME_TIME = (HANDLING_FRAME_TIME_REAR - HANDLING_FRAME_TIME_FRONT)  ## 小数点以下がミリ秒
-        logger_info(f'処理時間: {round(HANDLING_FRAME_TIME * 1000, 2)}[ミリ秒]')
+        logger_info.info(f'処理時間: {round(HANDLING_FRAME_TIME * 1000, 2)}[ミリ秒]')
 
 # 処理時間の測定（前半）
 def Measure_processing_time_forward():
@@ -899,7 +938,7 @@ def Measure_processing_time_forward():
         return HANDLING_FRAME_TIME_FRONT
 
 # 処理時間の測定（後半）
-def Mesure_processing_time_backward():
+def Measure_processing_time_backward():
     if args_dict["calculate_time"] == True:
         HANDLING_FRAME_TIME_FRONT = Measure_processing_time_forward()
         HANDLING_FRAME_TIME_REAR = time.perf_counter()
@@ -970,7 +1009,7 @@ def frame_pre_processing(args_dict, resized_frame):
 
     # 顔が一定数以上なら以降のエンコード処理を行わない
     if len(face_location_list) >= args_dict["number_of_people"]:
-        logger_info(f'{args_dict["number_of_people"]}人以上を検出しました')
+        logger_info.info(f'{args_dict["number_of_people"]}人以上を検出しました')
         frame_datas_array = make_frame_datas_array(overlay, face_location_list, name,filename, top,right,bottom,left,percentage_and_symbol,person_data_list,frame_datas_array,resized_frame)
         return frame_datas_array
 
@@ -1000,6 +1039,7 @@ def frame_pre_processing(args_dict, resized_frame):
     return frame_datas_array
 
 # 顔のエンコーディング
+# @profile()
 def face_encoding_process(args_dict, frame_datas_array):
     """frame_datas_arrayの定義
     person_data = {'name': name, 'pict':filename,  'date':date, 'location':(top,right,bottom,left), 'percentage_and_symbol': percentage_and_symbol}
@@ -1030,18 +1070,19 @@ def face_encoding_process(args_dict, frame_datas_array):
             elif args_dict["use_mediapipe"] == True and  args_dict["person_frame_face_encoding"] == False:
                 face_encodings = faceapi.face_encodings(resized_frame, face_location_list, args_dict["jitters"], args_dict["model"])
             elif args_dict["use_mediapipe"] == False and  args_dict["person_frame_face_encoding"] == True:
-                logger_warning("\n---------------------------------")
-                logger_warning("config.ini:")
-                logger_warning("mediapipe = False  の場合 person_frame_face_encoding = True  には出来ません")
-                logger_warning("システム管理者へ連絡の後、設定を変更してください")
-                logger_warning("処理を終了します")
-                logger_warning("---------------------------------")
+                logger_info.warning("\n---------------------------------")
+                logger_info.warning("config.ini:")
+                logger_info.warning("mediapipe = False  の場合 person_frame_face_encoding = True  には出来ません")
+                logger_info.warning("システム管理者へ連絡の後、設定を変更してください")
+                logger_info.warning("処理を終了します")
+                logger_info.warning("---------------------------------")
                 quit()
             elif args_dict["use_mediapipe"] == False and args_dict["person_frame_face_encoding"] == False:
                 face_encodings = faceapi.face_encodings(resized_frame, face_location_list, args_dict["jitters"], args_dict["model"])
         return face_encodings, frame_datas_array
 
 # フレーム後処理
+# @profile()
 def frame_post_processing(args_dict, face_encodings, frame_datas_array):
     """frame_datas_arrayの定義
     person_data = {'name': name, 'pict':filename,  'date':date, 'location':(top,right,bottom,left), 'percentage_and_symbol': percentage_and_symbol}
@@ -1202,6 +1243,8 @@ def frame_post_processing(args_dict, face_encodings, frame_datas_array):
                 # frame_imshow_for_debug(resized_frame)
         
     # return frame_datas
+    """DEBUG"""
+    print(f"modified_frame_list.__sizeof__(): {modified_frame_list.__sizeof__()}MB")
     return modified_frame_list
 
     """機能停止
@@ -1238,6 +1281,7 @@ def frame_post_processing(args_dict, face_encodings, frame_datas_array):
 
 
 frame_generator_obj = video_capture.frame_generator(args_dict)
+# @profile()
 def main_process():
     frame_datas_array = frame_pre_processing(args_dict, frame_generator_obj.__next__())
     face_encodings, frame_datas_array = face_encoding_process(args_dict, frame_datas_array)
@@ -1247,7 +1291,7 @@ def main_process():
 # main =================================================================
 if __name__ == '__main__':
     import cProfile as pr
-    exec_times: int = 10000
+    exec_times: int = 100
     
     profile_HANDLING_FRAME_TIME: float = 0.0
     profile_HANDLING_FRAME_TIME_FRONT: float = 0.0
@@ -1266,11 +1310,13 @@ if __name__ == '__main__':
 
     profile_HANDLING_FRAME_TIME_FRONT = time.perf_counter()
 
+    # from memory_profiler import profile
+    # @profile()
     def profile(exec_times):
         while True:
             frame_datas_array = main_process().__next__()
             if StopIteration == frame_datas_array:
-                logger_info("StopIterationです")
+                logger_info.info("StopIterationです")
                 break
             exec_times = exec_times - 1
             if  exec_times <= 0:
@@ -1287,6 +1333,7 @@ if __name__ == '__main__':
                             name, pict, date,  location, percentage_and_symbol = \
                                 person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
                             if not name == 'Unknown':
+                                # print("メモリプロファイリング中")
                                 print(
                                     "プロファイリング用コードが動作しています", "\n",
                                     "statsファイルが出力されます", "\n",
@@ -1297,6 +1344,8 @@ if __name__ == '__main__':
                                     "\t", "出力\t", pict, "\n",
                                     "-------\n"
                                 )
+                                """DEBUG"""
+                                print(f"args_dict.__sizeof__(): {args_dict.__sizeof__()}MB")
                         if args_dict["headless"] == False:
                             imgbytes = cv2.imencode(".png", img)[1].tobytes()
                             window["display"].update(data = imgbytes)

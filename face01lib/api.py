@@ -5,20 +5,34 @@ import dlib
 import numpy as np
 from PIL.Image import open
 from PIL import ImageFile
-from logging import getLogger
-logger = getLogger('face01lib/api')
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    filename='face01.log',
+    filemode='w',
+    format='{asctime} {name:<8s} {levelname:<8s} {message}', style='{'
+    )
+console_stdout = logging.StreamHandler()
+console_stdout.setLevel(logging.INFO)
+logging.getLogger('face01lib/api').addHandler(console_stdout)
+logger_info = logging.getLogger('face01lib/api')
 
 
 try:
     import face_recognition_models
 except Exception:
-    logger.warning("例外エラーが発生しました。")
-    logger.warning("システム管理者にお問い合わせください")
+    logger_info.warning("例外エラーが発生しました。")
+    logger_info.warning("システム管理者にお問い合わせください")
     quit()
 """to refer, see bellow
 https://github.com/davisking/dlib
 https://github.com/davisking/dlib-models
 https://github.com/ageitgey/face_recognition
+"""
+"""copyright
+This code is based on 'face_recognition' written by Adam Geitgey,
+and modified by Yoshitsugu Kesamaru.
 """
 """about coordinate order
 dlib: (Left, Top, Right, Bottom,)
