@@ -1,20 +1,24 @@
-from logging import getLogger, info, warning
+import logging
 from os import chdir, remove, listdir
 from os.path import exists, isdir
 from shutil import move
 
 import face01lib.api as faceapi
 from numpy import load, savez
-logger = getLogger('face01lib/load_priset_image')
+logger = logging.getLogger('face01lib/load_priset_image')
 
-# FACE01GRAPHICS127への対応 =========================================
-# priset_face_imagesに新しい顔を登録した時にnpKnown.npzに反映されないバグをフィックス
-# ===================================================================
 
-# FACE01GRAPHICS124への対応 =========================================
-# npKnown.txtからnpKnown.npzへの変更
-# hogからcnnへの自動変換
-# ===================================================================
+logging.basicConfig(
+    level=logging.INFO,
+    filename='face01.log',
+    filemode='a',
+    format='{asctime} {name:<8s} {levelname:<8s} {message}', style='{'
+    )
+console_stdout = logging.StreamHandler()
+console_stdout.setLevel(logging.INFO)
+logging.getLogger('face01lib/load_priset_image').addHandler(console_stdout)
+logger_info = logging.getLogger('face01lib/load_priset_image')
+
 
 def load_priset_image(
     kaoninshoDir,
@@ -35,7 +39,7 @@ def load_priset_image(
         chdir(kaoninshoDir)
         cd = True
 
-    logger.info("npKnown.npz を読み込みます")
+    logger_info.info("npKnown.npz を読み込みます")
 
     ###################### npKnown.npzの有る無しで処理を分岐させる ######################
     # ============= npKnown.npzファイルが存在する場合の処理 ===============
@@ -89,11 +93,11 @@ def load_priset_image(
                 # 顔検出できなかった場合hogからcnnへチェンジして再度顔検出する
                 if len(new_file_face_locations) == 0:
                     if mode == 'hog':
-                        info('顔が検出できませんでした。一時的にcnnモードへ切り替えます')
+                        logger_info.info('顔が検出できませんでした。一時的にcnnモードへ切り替えます')
                         new_file_face_locations = faceapi.face_locations(
                             new_file_face_image, upsampling, 'cnn')
                         # cnnでも顔検出できない場合はnoFaceフォルダへファイルを移動する
-                        info(f"{cnt} 登録顔画像 {new_file} に顔が検出されませんでした(CNNモード)。 noFace フォルダへ移動します")
+                        logger_info.info(f"{cnt} 登録顔画像 {new_file} に顔が検出されませんでした(CNNモード)。 noFace フォルダへ移動します")
 
                         try:
                             move(new_file, '../noFace/')
@@ -102,18 +106,18 @@ def load_priset_image(
                             move(new_file, '../noFace/')
 
                         mode = 'hog'
-                        info('hogモードへ戻しました')
+                        logger_info.info('hogモードへ戻しました')
 
                 # new_file顔画像のエンコーディング処理：array([encoding 配列])
-                info(f"{cnt} {new_file}をエンコードしています")
+                logger_info.info(f"{cnt} {new_file}をエンコードしています")
                 new_file_face_encodings = faceapi.face_encodings(
                     new_file_face_image, new_file_face_locations, jitters, 'small')
 
                 if len(new_file_face_encodings) > 1:  # 複数の顔が検出された時
-                    info(f"{cnt} 登録顔画像 {new_file}に複数の顔が検出されました。 noFace フォルダへ移動します")
+                    logger_info.info(f"{cnt} 登録顔画像 {new_file}に複数の顔が検出されました。 noFace フォルダへ移動します")
                     move(new_file, '../noFace/')
                 elif len(new_file_face_encodings) == 0:  # 顔が検出されなかった時
-                    info(f"{cnt} 登録顔画像 {new_files} に顔が検出されませんでした。 noFace フォルダへ移動します")
+                    logger_info.info(f"{cnt} 登録顔画像 {new_files} に顔が検出されませんでした。 noFace フォルダへ移動します")
                     move(new_file, '../noFace/' + new_file)
 
                 # エンコーディングした顔画像だけ新しい配列に入れる
@@ -145,27 +149,27 @@ def load_priset_image(
             noFace_file = '../noFace/' + priset_face_image_filename
             if len(priset_face_img_locations) == 0 or len(priset_face_img_locations) > 1:
                 if mode == 'hog':
-                    info('顔が検出できない又は複数検出されました。一時的にcnnモードへ切り替えます')
+                    logger_info.info('顔が検出できない又は複数検出されました。一時的にcnnモードへ切り替えます')
                     # CNNモードにて顔検出を行う
                     priset_face_img_locations = faceapi.face_locations(
                         priset_face_img, upsampling, 'cnn')
                     # cnnでも顔検出できない場合はnoFaceフォルダへファイルを移動する
                     if len(priset_face_img_locations) == 0 or len(priset_face_img_locations) > 1:
-                        info(f"{cnt} (CNNモード)登録顔画像 {priset_face_image_filename}にて顔が検出できない又は複数検出されました。 noFace フォルダへ移動します")
+                        logger_info.info(f"{cnt} (CNNモード)登録顔画像 {priset_face_image_filename}にて顔が検出できない又は複数検出されました。 noFace フォルダへ移動します")
                         if exists(noFace_file):
                             remove(noFace_file)
                         move(priset_face_image_filename, '../noFace/')
                         mode = 'hog'
-                        info('hogモードへ戻しました')
+                        logger_info.info('hogモードへ戻しました')
 
             # 得られた顔データ（この場合は顔ロケーション）を元にエンコーディングする：array([encoding 配列])
-            info(f"{cnt} {priset_face_image_filename} をエンコードしています")
+            logger_info.info(f"{cnt} {priset_face_image_filename} をエンコードしています")
             priset_face_image_encodings = faceapi.face_encodings(
                 priset_face_img, priset_face_img_locations, jitters, 'small')
 
             # エンコーディングした顔写真について複数顔や顔がない場合はnoFaceフォルダへ移動する
             if len(priset_face_image_encodings) > 1:  # 複数の顔が検出された時
-                info(f"{cnt} 登録顔画像 {priset_face_image_filename} に複数の顔が検出されました。 noFace フォルダへ移動します")
+                logger_info.info(f"{cnt} 登録顔画像 {priset_face_image_filename} に複数の顔が検出されました。 noFace フォルダへ移動します")
                 if exists(noFace_file):
                     remove(noFace_file)
                 try:
@@ -173,7 +177,7 @@ def load_priset_image(
                 except:
                     pass
             elif len(priset_face_image_encodings) == 0:  # 顔が検出されなかった時
-                info(f"{cnt} 登録顔画像 {priset_face_image_filename} に顔が検出されませんでした。 noFace フォルダへ移動します")
+                logger_info.info(f"{cnt} 登録顔画像 {priset_face_image_filename} に顔が検出されませんでした。 noFace フォルダへ移動します")
                 if exists(noFace_file):
                     remove(noFace_file)
                 try:

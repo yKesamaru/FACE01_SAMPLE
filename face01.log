@@ -1,0 +1,21 @@
+2022-06-21 12:36:00,752 FACE01   INFO     FACE01の推奨動作環境を満たしているかシステムチェックを実行します
+2022-06-21 12:36:00,753 FACE01   INFO     - Python version check
+2022-06-21 12:36:00,753 FACE01   INFO       [OK] 3.8.10 (default, Mar 15 2022, 12:22:08) 
+[GCC 9.4.0]
+2022-06-21 12:36:00,753 FACE01   INFO     - CPU check
+2022-06-21 12:36:00,782 FACE01   INFO       [OK] 3.20GHz
+2022-06-21 12:36:00,783 FACE01   INFO       [OK] 4core
+2022-06-21 12:36:00,783 FACE01   INFO     - Memory check
+2022-06-21 12:36:00,784 FACE01   INFO       [OK] 16GByte
+2022-06-21 12:36:00,785 FACE01   INFO     - CUDA devices check
+2022-06-21 12:36:00,785 FACE01   INFO       [OK] cuda devices: 1
+2022-06-21 12:36:00,785 FACE01   INFO     - Dlib build check: CUDA
+2022-06-21 12:36:00,785 FACE01   INFO       [OK] DLIB_USE_CUDA: True
+2022-06-21 12:36:00,786 FACE01   INFO     - Dlib build check: BLAS, LAPACK
+2022-06-21 12:36:00,786 FACE01   INFO       [OK] DLIB_USE_BLAS, LAPACK: True
+2022-06-21 12:36:00,786 FACE01   INFO     - VRAM check
+2022-06-21 12:36:00,821 FACE01   INFO       [OK] VRAM: 6GByte
+2022-06-21 12:36:00,821 FACE01   INFO       [OK] GPU device: NVIDIA GeForce GTX 1660 Ti
+2022-06-21 12:36:00,822 FACE01   INFO       ** System check: Done **
+
+2022-06-21 12:36:02,623 face01lib/load_priset_image INFO     npKnown.npz を読み込みます

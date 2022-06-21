@@ -1,15 +1,14 @@
 # FACE01について
 
 # TODO
-## 1.3.07で実装予定
-  - メモリ消費のポイントを探す
-    - 計算式の効率化
-
+![](img/PASTE_IMAGE_2022-06-18-10-42-46.png)
 ## 他
-- 数値計算をなるべくnumpyに移行する
-  - あまり高速化には寄与しないかもしれないけれど、動的型付けによる計算処理はモヤモヤする。
-  - [NumPyまとめ](https://note.nkmk.me/numpy/)
-  - [数値計算 numpy google検索](https://www.google.com/search?q=%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97%20numpy&ie=utf-8&oe=utf-8&client=firefox-b-m)
+- ctypesでC言語と連携
+- プロセス間通信の調査
+  - FACE01自体の開発より、FACE01がどのようにして他のアプリケーションに情報を伝えるのか考えないといけない。
+- ドキュメントをすこしずつでも書く
+- 使用するフォントをOS標準にする
+  - UbuntuならNotoフォントとか。
 - face01lib/__init__の編集
 - マルチプロセス化
   - `frame = video_capture(args_dict["kaoninshoDir"], args_dict["movie"]).__next__()`でフレームを一つ取り出したら、それ以降は一つの関数で良い。そのうえで、その関数をマルチプロセス化する。
@@ -17,11 +16,8 @@
   - mediapipeをより深く調査
     - GPU使用化
     - logの吐き方
-  - telopとlogoをもっと小さく。
   - help実装
     - click, argparseどちらがいいのか調査
-- ヘッドレス機能実装
-  - os.popenなどによるパイプ作成
 - video_capture.py
   - RTSPを受け付けるように実装
   - numbaをもっと調査
@@ -31,8 +27,9 @@
 - ライブラリの内包化(FACE01自身に持つようにする)
   - PySimpleGUI以外
   - インストール負担軽減と使用ライブラリ隠蔽化
-- GPU環境識別
+- GPU環境識別system_check()
   - config.iniで設定可能にする
+  - 同じマシンで何度も実行しないようにロックファイルを作るようにする
 - main関数のさらなる関数細分化
 - frame_skip変数 半自動設定
 - PySimpleGUIをTkinterへ差し替え
@@ -50,6 +47,9 @@
   - libopencv-calib3d4.2コンピュータビジョンカメラ較正ライブラリ
 - Python3-vlc調査
 - exit()やquit()をどうにかする
+- Python3.8までは、__file__で得られるのはpythonコマンド（環境によってはpython3コマンド）の実行時に指定したパス。相対パスで指定した場合は相対パス、絶対パスで指定した場合は絶対パスが返される。Python3.9以降は、実行時に指定したパスによらず絶対パスが返される。
+  - `python ./FACE01.py`ではエラーになる
+    - `python /home/terms/bin/FACE01/FACE01.py`絶対パスならOKということ
 
 # 実装完了
 - main関数化
@@ -58,11 +58,13 @@
 - configparser部分を関数化
   - returnは辞書形式で。
 - Pythonバージョン確認コード実装
+- telopとlogoをもっと小さく。
 ## 1.3.04で実装
 - Logging
   - [logging --- Python 用ロギング機能](https://docs.python.org/ja/3.8/library/logging.html)
   - [logging.config --- ロギングの環境設定](https://docs.python.org/ja/3.8/library/logging.config.html)
   - ハンドラーなどは1.3.04では実装しない。
+  - stdout, stderrなども考慮されていない
 
   ```python
   # see bellow
@@ -106,6 +108,131 @@ import文をできる限りfrom importへ変更。
     - config.iniの修正：OK
     - FACE01.pyの修正：OK
 
+
+## 1.3.07で実装完了
+- 実装完了というより、以後に課題を残す結果となった。
+### メモリ消費のポイントを探す
+#### 手順
+- ボトルネックを探すモジュール
+  - 標準モジュール
+    - tracemalloc
+      - [標準モジュールでのメモリ追跡の方法](https://tkkm.tokyo/post-329/)
+      - [tracemalloc --- メモリ割り当ての追跡](https://docs.python.org/ja/3.8/library/tracemalloc.html)
+    - guppy
+      - [Pythonのメモリ使用量を減らすポイント](https://qiita.com/yukinoi/items/59d43a3ee207c8aad35b)
+    - memory_profiler
+      - [[python]変数のメモリ消費量確認](https://qiita.com/kpasso1015/items/83062ac14c3c44907e5b#memory_profiler)
+      - [Python: memory_profiler でプログラムのメモリ使用量を調べる](https://blog.amedama.jp/entry/2018/02/04/001950)
+- Pythonのメモリ削減の考え方
+  - [【python】pythonでメモリ不足になったときにすること](https://www.haya-programming.com/entry/2017/02/09/190512)
+  - [Pythonでメモリを食い過ぎた時に見直すポイント](https://nishiohirokazu.hatenadiary.org/entry/20121012/1350045654)
+- 実際の手順
+  - memory_profilerをpipインストール
+  - FACE01の__name__ == __main__以下に@profileを挿入
+    ```python
+    from memory_profiler import profile
+    @profile()
+    def profile(exec_times):
+      以下略
+    ```
+##### 実行結果
+-  @profile()
+   ```bash
+   PYDEV DEBUGGER WARNING:中略
+
+   Line #    Mem usage    Increment  Occurrences   Line Contents
+   =============================================================
+     1034   1906.8 MiB   1563.9 MiB           1                   face_encodings = faceapi.face_encodings(resized_frame, face_location_list, args_dict["jitters"], args_dict["model"])
+     1005   1964.9 MiB   1964.9 MiB           1   @profile()
+     1006                                         def face_encoding_process(args_dict, frame_datas_array):
+   その他略
+   ```
+   ほぼすべての関数に@profile()デコレータをつけた結果が上。
+   face_encodingsに絡んでいるものだけしかメモリ使用量が増加していなかった。
+  変数.__sizeof__()
+   - args_dict.__sizeof__(): 2256
+   -  modified_frame_list: 72
+   -  5500枚の顔写真を登録した状態にしたところメモリは以下のようになり、あまり変化がないことが分かった。これは予想外。
+      - args_dict.__sizeof__(): 2256MB
+      - modified_frame_list.__sizeof__(): 72MB
+- GPU使用率の変化
+   `nvidia-smi -lms 500  # 500msごと`
+   ![](img/PASTE_IMAGE_2022-06-17-08-40-14.png)
+#### 考察
+変数args_dictのメモリ使用量は登録者人数を増やせばもっともっと増えると思ったけど違った。
+メモリ使用量削減するなら、もっと時間をかけた調査が必要。
+- 線形探索[Pythonで実践する線形探索と選択ソート 『Pythonではじめるアルゴリズム入門』より](https://codezine.jp/article/detail/11914)
+> エントリの個数とアクセス頻度によってはO(n)で線形探索したほうがよっぽどよい。
+> [辞書を大量に使ってはいけない](https://nishiohirokazu.hatenadiary.org/entry/20121012/1350045654)
+
+> 私は癖で「配列の形をlistで作ってからnumpy配列に変換する」という処理を良く書くのですが、その度にその配列のメモリ消費が半分近く減少するという経験をしています。
+> これはある意味当たり前のことで、そもそもリスト構造はポインタの塊なので、データの中身を記録するのと同じくらいのメモリ領域をアドレスデータを持つことに費やしています。numpy配列はリストと比べればだいぶ効率的なデータ構造をしているので、これを使ってメモリ消費が小さくなるのは当然です。
+> [リストは積極的にnumpy配列にする](https://www.haya-programming.com/entry/2017/02/09/190512#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AF%E7%A9%8D%E6%A5%B5%E7%9A%84%E3%81%ABnumpy%E9%85%8D%E5%88%97%E3%81%AB%E3%81%99%E3%82%8B)
+
+#### CALL_FACE01.pyを作ってメモリ・処理時間調査
+```bash
+fg.args_dict.__sizeof__(): 1160MB
+(124, 145, 259, 10)
+(295, 246, 426, 115)
+(97, 516, 259, 354)
+Filename: /home/terms/bin/FACE01/CALL_FACE01.py
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    79    300.6 MiB    300.6 MiB           1   @profile()
+    80                                         def extract_face_locations(exec_times):
+    81    780.5 MiB      0.0 MiB         101       for i in range(exec_times):
+    82    776.4 MiB      0.0 MiB         100           i += 1
+    83    776.4 MiB      0.0 MiB         100           if i > exec_times:
+    84                                                     break
+    85    776.4 MiB     49.1 MiB         100           next_frame = next_frame_gen_obj.__next__()
+    86                                                 """DEBUG"""
+    87                                                 # fg.frame_imshow_for_debug(next_frame)
+    88    776.4 MiB      0.0 MiB         100           print(f"fg.args_dict.__sizeof__(): {fg.args_dict.__sizeof__()}MB")
+    89    780.5 MiB    430.9 MiB         100           frame_datas_array = fg.frame_pre_processing(fg.args_dict,next_frame)
+    90    780.5 MiB      0.0 MiB         200           for frame_datas in frame_datas_array:
+    91    780.5 MiB      0.0 MiB         349               for face_location in frame_datas["face_location_list"]:
+    92    780.5 MiB      0.0 MiB         249                   print(face_location)
+```
+![](img/PASTE_IMAGE_2022-06-18-10-38-55.png)
+
+
+### 計算式の効率化
+- 数値計算をなるべくnumpyに移行する
+  - あまり高速化には寄与しないかもしれないけれど、動的型付けによる計算処理はモヤモヤする。
+  - [NumPyまとめ](https://note.nkmk.me/numpy/)
+  - [数値計算 numpy google検索](https://www.google.com/search?q=%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97%20numpy&ie=utf-8&oe=utf-8&client=firefox-b-m)
+- 複数回計算している関数名をピックアップする
+  - return_face_location_list
+  - return_concatenate_location_and_frame
+  - adjust_display_area
+  - draw_default_face_image
+  - calculate_text_position
+  - draw_error_messg_rectangle
+  - decide_text_position
+  - return_percentage
+  - Measure_processing_time
+#### 考察
+- 可読性が悪くなる、返り値がnp.ndarrayになってしまうなど副作用が大きい割には計算コストがあまり変わらないため、numbaなどを使用する以外はやめた方がよい、と感じた。
+- numpy化する時、配列の要素全てに計算を割り当てるから、個別の計算をコードするのはコストが悪い。
+
+### loggingにおけるstdout, stderrを明確にする
+  - [Pythonのlogging入門](https://qiita.com/papi_tokei/items/6051cb55c2843b2c3cdf)
+    > これは、loggingソースコード内のlastResort(日本語で最後の手段という意味)という部分で定義されており、ロガーにハンドラーが一つもない場合、標準出力にWARNING以上のログを出力する、という実装になっているからです。
+    > つまり、ハンドラーを設定しなくてもWARNING以上のログはデフォルトで出力されるが、バグのもとなのでこの実装を当てにしてはいけません。
+  - [便利なハンドラ](https://docs.python.org/ja/3/howto/logging.html#useful-handlers)
+  - [複数の出力先にログを出力する](https://docs.python.org/ja/3/howto/logging-cookbook.html#logging-to-multiple-destinations)
+  ハンドラーについては実装した。
+
+### ヘッドレス機能実装
+- os.popenなどによるパイプ作成調査(fix)
+  - subprocessモジュールが新しい代替
+- imageデータを受け渡しする機能はつけないほうが良い
+  - 元々の動画データをFACE01内で画像データ化しているのに、それをまたバイナリに戻して次のアプリケーションに渡す意味がない。
+  - 顔座標は文字列で受け渡し可能だし、その方が普通のパイプで繋げられるから良い。
+- FACE01のコマンド化
+  - `/home/terms/bin/FACE01/bin/python3 "/home/terms/bin/FACE01/FACE01.py" | cat`でOK
+  - あるいは`/home/terms/bin/FACE01/bin/python3 "/home/terms/bin/FACE01/CALL_FACE01.py" | cat`
 
 
 # 環境構築方法
