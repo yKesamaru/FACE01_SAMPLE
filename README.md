@@ -1,12 +1,6 @@
 # FACE01について
-
+## 1.3.09実装予定
 # TODO
-## 1.3.08実装予定
-- 画像ファイル保存の非同期処理
-- video_capture.py
-  - RTSPを受け付けるように実装
-  - numbaをもっと調査
-  - イテレーターオブジェクトにしてframe送出自体をマルチスレッド化する
 ## 他
 - appendを解決する
   ![](img/PASTE_IMAGE_2022-06-18-10-42-46.png)
@@ -26,6 +20,7 @@
   - help実装
     - click, argparseどちらがいいのか調査
 - 何回も再計算している箇所を効率化する
+  - numbaをもっと調査
 - ライブラリの内包化(FACE01自身に持つようにする)
   - PySimpleGUI以外
   - インストール負担軽減と使用ライブラリ隠蔽化
@@ -236,6 +231,23 @@ Line #    Mem usage    Increment  Occurrences   Line Contents
   - `/home/terms/bin/FACE01/bin/python3 "/home/terms/bin/FACE01/FACE01.py" | cat`でOK
   - あるいは`/home/terms/bin/FACE01/bin/python3 "/home/terms/bin/FACE01/CALL_FACE01.py" | cat`
 
+
+## 1.3.08実装完了: Fix
+- loggingの出力をしっかりと実装する
+  - [Python Tutorial: Logging Advanced - Loggers, Handlers, and Formatters](https://www.youtube.com/watch?app=desktop&v=jxmzY9soFXg)
+  - [inspect --- 活動中のオブジェクトの情報を取得する](https://docs.python.org/ja/3/library/inspect.html)
+- 画像ファイル保存の非同期処理: Fix
+  - [ThreadPoolExecutor の例](https://docs.python.org/ja/3/library/concurrent.futures.html#threadpoolexecutor-example)
+  - 100frame処理した結果ではマルチスレッディングにしたほうが360ms高速だった。マルチスレッディングのコストは高い。
+  - ![マルチスレッディングあり](img/PASTE_IMAGE_2022-06-21-18-11-48.png)
+  - ![マルチスレッディングなし](img/PASTE_IMAGE_2022-06-21-18-13-38.png)
+- video_capture.py
+  - CGIストリームを受け付ける実装: Fix
+    - ![](img/PASTE_IMAGE_2022-06-22-17-00-33.png)
+  - RTSPを受け付けるように実装: Fix
+    - [RTSP Stream for Testing](https://www.wowza.com/developer/rtsp-stream-test)
+    - opencvの環境変数変更 要調査(video_capture.py)←やらない
+  - イテレーターオブジェクトにしてframe送出自体をマルチスレッド化する←やらないことにした。
 
 # 環境構築方法
 ## 開発想定環境

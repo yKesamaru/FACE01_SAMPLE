@@ -6,6 +6,25 @@ import cv2
 import time
 import face01lib.video_capture as vc
 from memory_profiler import profile
+import logging
+
+"""Logging"""
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+formatter = logging.Formatter('[%(asctime)s] [%(name)s] [%(filename)s] [%(levelname)s] %(message)s')
+
+file_handler = logging.FileHandler('face01.log', mode='a')
+file_handler.setLevel(logging.INFO)
+file_handler.setFormatter(formatter)
+
+stream_handler = logging.StreamHandler()
+stream_handler.setLevel(logging.INFO)
+stream_handler.setFormatter(formatter)
+
+logger.addHandler(file_handler)
+logger.addHandler(stream_handler)
+
 
 profile_HANDLING_FRAME_TIME: float = 0.0
 profile_HANDLING_FRAME_TIME_FRONT: float = 0.0
@@ -24,13 +43,14 @@ if fg.args_dict["headless"] == False:
         location=(0,0), modal = True
     )
 
-# @profile(exec_times)
+# @profile()
 def common_main(exec_times):
     while True:
-        frame_datas_array = fg.main_process().__next__()
-        if StopIteration == frame_datas_array:
-            print("StopIterationです")
-            break
+        try:
+            frame_datas_array = fg.main_process().__next__()
+        except Exception as e:
+            logger.warning(e)
+            exit()
         exec_times = exec_times - 1
         if  exec_times <= 0:
             break
@@ -72,11 +92,11 @@ def common_main(exec_times):
     profile_HANDLING_FRAME_TIME_REAR = time.perf_counter()
     profile_HANDLING_FRAME_TIME = (profile_HANDLING_FRAME_TIME_REAR - profile_HANDLING_FRAME_TIME_FRONT) 
     print(f'profile()関数の処理時間合計: {round(profile_HANDLING_FRAME_TIME , 3)}[秒]')
-# pr.run('common_main(exec_times)', 'restats')
+pr.run('common_main(exec_times)', 'restats')
 
 """顔座標のみ抽出したい場合"""
 next_frame_gen_obj = vc.frame_generator(fg.args_dict)
-@profile()
+# @profile()
 def extract_face_locations(exec_times):
     for i in range(exec_times):
         i += 1
@@ -91,4 +111,4 @@ def extract_face_locations(exec_times):
             for face_location in frame_datas["face_location_list"]:
                 print(face_location)
 # extract_face_locations(exec_times)
-pr.run('extract_face_locations(exec_times)', 'restats')
+# pr.run('extract_face_locations(exec_times)', 'restats')
