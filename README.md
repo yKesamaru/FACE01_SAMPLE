@@ -1,9 +1,12 @@
 # FACE01について
 ## 1.3.09実装予定
+- exit()やquit()をどうにかする
+- appendを解決する
+  - [Loops](https://wiki.python.org/moin/PythonSpeed/PerformanceTips#Loops)
+  ![](img/PASTE_IMAGE_2022-06-18-10-42-46.png)
+  []
 # TODO
 ## 他
-- appendを解決する
-  ![](img/PASTE_IMAGE_2022-06-18-10-42-46.png)
 - ctypesでC言語と連携
 - プロセス間通信の調査
   - FACE01自体の開発より、FACE01がどのようにして他のアプリケーションに情報を伝えるのか考えないといけない。
@@ -43,7 +46,6 @@
   - USE GPU
   - libopencv-calib3d4.2コンピュータビジョンカメラ較正ライブラリ
 - Python3-vlc調査
-- exit()やquit()をどうにかする
 - Python3.8までは、__file__で得られるのはpythonコマンド（環境によってはpython3コマンド）の実行時に指定したパス。相対パスで指定した場合は相対パス、絶対パスで指定した場合は絶対パスが返される。Python3.9以降は、実行時に指定したパスによらず絶対パスが返される。
   - `python ./FACE01.py`ではエラーになる
     - `python /home/terms/bin/FACE01/FACE01.py`絶対パスならOKということ
