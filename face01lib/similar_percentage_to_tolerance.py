@@ -5,16 +5,25 @@
 from numpy import sqrt
 import logging
 
-logging.basicConfig(
-    level=logging.INFO,
-    filename='face01.log',
-    filemode='a',
-    format='{asctime} {name:<8s} {levelname:<8s} {message}', style='{'
-    )
-console_stdout = logging.StreamHandler()
-console_stdout.setLevel(logging.INFO)
-logging.getLogger('face01lib/similar_percentage_to_tolerance').addHandler(console_stdout)
-logger_info = logging.getLogger('face01lib/similar_percentage_to_tolerance')
+
+"""Logging"""
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+formatter = logging.Formatter('[%(asctime)s] [%(name)s] [%(filename)s] [%(levelname)s] %(message)s')
+
+file_handler = logging.FileHandler('face01.log', mode='a')
+file_handler.setLevel(logging.INFO)
+file_handler.setFormatter(formatter)
+
+stream_handler = logging.StreamHandler()
+stream_handler.setLevel(logging.INFO)
+stream_handler.setFormatter(formatter)
+
+logger.addHandler(file_handler)
+logger.addHandler(stream_handler)
+
+
 
 # 変数初期化 ---------
 similar_percentage:float = 0.0

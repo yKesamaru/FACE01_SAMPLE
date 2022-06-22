@@ -6,24 +6,36 @@ import numpy as np
 from PIL.Image import open
 from PIL import ImageFile
 import logging
+from traceback import format_exc
 
-logging.basicConfig(
-    level=logging.INFO,
-    filename='face01.log',
-    filemode='w',
-    format='{asctime} {name:<8s} {levelname:<8s} {message}', style='{'
-    )
-console_stdout = logging.StreamHandler()
-console_stdout.setLevel(logging.INFO)
-logging.getLogger('face01lib/api').addHandler(console_stdout)
-logger_info = logging.getLogger('face01lib/api')
+
+"""Logging"""
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+formatter = logging.Formatter('[%(asctime)s] [%(name)s] [%(filename)s] [%(levelname)s] %(message)s')
+
+file_handler = logging.FileHandler('face01.log', mode='a')
+file_handler.setLevel(logging.INFO)
+file_handler.setFormatter(formatter)
+
+stream_handler = logging.StreamHandler()
+stream_handler.setLevel(logging.INFO)
+stream_handler.setFormatter(formatter)
+
+logger.addHandler(file_handler)
+logger.addHandler(stream_handler)
+
 
 
 try:
     import face_recognition_models
 except Exception:
-    logger_info.warning("例外エラーが発生しました。")
-    logger_info.warning("システム管理者にお問い合わせください")
+    logger.warning("例外エラーが発生しました。")
+    logger.warning("システム管理者にお問い合わせください")
+    logger.warning("-" * 20)
+    logger.warning(format_exc(limit=None, chain=True))
+    logger.warning("-" * 20)
     quit()
 """to refer, see bellow
 https://github.com/davisking/dlib
