@@ -1,23 +1,7 @@
 # FACE01について
 # TODO
-## 1.3.09実装予定
-- appendを解決する
-  - [Loops](https://wiki.python.org/moin/PythonSpeed/PerformanceTips#Loops)
-  ![](img/PASTE_IMAGE_2022-06-18-10-42-46.png)
-  - 比較
-    - return_face_location_list
-      - before: 6.57e-05
-      - after: 7.835e-05
-    - return_concatenate_location_and_frame
-      - before: 4.751e-05
-      - after: 4.901e-05
-    - person_frame_list.append(person_frame)をperson_frame_list_appendperson_frame)などとしてもかえって遅くなってしまったのでやめる。
-- exit()やquit()をどうにかする: Fix
-- GPU環境識別system_check()
-  - config.iniで設定可能にする: Fix
-  - 同じマシンで何度も実行しないようにする: Fix
-- PySimpleGUIをTkinterへ差し替え
-  - あんま意味ない。ポップアップとかにしか使っていないので。
+## 1.3.10実装予定
+
 ## 他
 - ctypesでC言語と連携
 - プロセス間通信の調査
@@ -260,6 +244,25 @@ Line #    Mem usage    Increment  Occurrences   Line Contents
     - opencvの環境変数変更 要調査(video_capture.py)←やらない
   - イテレーターオブジェクトにしてframe送出自体をマルチスレッド化する←やらないことにした。
 
+## 1.3.09実装完了
+- appendを解決する
+  - [Loops](https://wiki.python.org/moin/PythonSpeed/PerformanceTips#Loops)
+  ![](img/PASTE_IMAGE_2022-06-18-10-42-46.png)
+  - 比較
+    - return_face_location_list
+      - before: 6.57e-05
+      - after: 7.835e-05
+    - return_concatenate_location_and_frame
+      - before: 4.751e-05
+      - after: 4.901e-05
+    - person_frame_list.append(person_frame)をperson_frame_list_appendperson_frame)などとしてもかえって遅くなってしまったのでやめる。
+- exit()やquit()をどうにかする: Fix
+- GPU環境識別system_check()
+  - config.iniで設定可能にする: Fix
+  - 同じマシンで何度も実行しないようにする: Fix
+- PySimpleGUIをTkinterへ差し替え
+  - あんま意味ない。ポップアップとかにしか使っていないので。
+  - 
 # 環境構築方法
 ## 開発想定環境
 Distributor ID: Ubuntu
