@@ -12,6 +12,7 @@ import io
 from PIL import Image
 import numpy as np
 import cv2
+from sys import exit
 
 
 
@@ -100,7 +101,7 @@ def return_movie_property(set_width: int, vcap) -> tuple:
         logger.warning(format_exc(limit=None, chain=True))
         logger.warning("-" * 20)
         logger.warning("終了します")
-        exit()
+        exit(0)
     # widthが400pxより小さい場合警告を出す
     if width < 400:
         popup('入力指定された映像データ幅が小さすぎます','width: {}px'.format(width), 'このまま処理を続けますが', '性能が発揮できない場合があります','OKを押すと続行します', title='警告', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
@@ -205,7 +206,7 @@ def frame_generator(args_dict):
         logger.info(f'カメラデバイス番号：{camera_number}')
     elif 'http' in movie:
         """DEBUG"""
-        # print(movie); exit()
+        # print(movie); exit(0)
         """see bellow
         [Panasonic製ネットワークカメラの画像を取得して顔検出をしてみる](https://qiita.com/mix_dvd/items/a0bdbe0ba628d5282639)
         [Python, Requestsの使い方](https://note.nkmk.me/python-requests-usage/)
@@ -230,7 +231,7 @@ def frame_generator(args_dict):
                     cv2.moveWindow("video_capture_DEBUG", 0,0)
                     cv2.waitKey(5000)
                     cv2.destroyAllWindows()
-                    exit()
+                    exit(0)
                     """
                     # frame_skipの数値に満たない場合は処理をスキップ
                     if frame_skip_counter < args_dict["frame_skip"]:
@@ -275,7 +276,7 @@ def frame_generator(args_dict):
             logger.exception("httプロトコルに以上が発生しました")
             logger.warning("-" * 20)
             logger.warning("終了します")
-            exit()
+            exit(0)
         
     # elif 'rtsp' in movie:
     #     """RTSPの場合は通常のテスト動画と同じ"""

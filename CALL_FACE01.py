@@ -7,6 +7,7 @@ import time
 import face01lib.video_capture as vc
 from memory_profiler import profile
 import logging
+from sys import exit
 
 """Logging"""
 logger = logging.getLogger(__name__)
@@ -50,7 +51,7 @@ def common_main(exec_times):
             frame_datas_array = fg.main_process().__next__()
         except Exception as e:
             logger.warning(e)
-            exit()
+            exit(0)
         exec_times = exec_times - 1
         if  exec_times <= 0:
             break

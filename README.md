@@ -1,16 +1,29 @@
 # FACE01について
+# TODO
 ## 1.3.09実装予定
-- exit()やquit()をどうにかする
 - appendを解決する
   - [Loops](https://wiki.python.org/moin/PythonSpeed/PerformanceTips#Loops)
   ![](img/PASTE_IMAGE_2022-06-18-10-42-46.png)
-  []
-# TODO
+  - 比較
+    - return_face_location_list
+      - before: 6.57e-05
+      - after: 7.835e-05
+    - return_concatenate_location_and_frame
+      - before: 4.751e-05
+      - after: 4.901e-05
+    - person_frame_list.append(person_frame)をperson_frame_list_appendperson_frame)などとしてもかえって遅くなってしまったのでやめる。
+- exit()やquit()をどうにかする: Fix
+- GPU環境識別system_check()
+  - config.iniで設定可能にする: Fix
+  - 同じマシンで何度も実行しないようにする: Fix
+- PySimpleGUIをTkinterへ差し替え
+  - あんま意味ない。ポップアップとかにしか使っていないので。
 ## 他
 - ctypesでC言語と連携
 - プロセス間通信の調査
   - FACE01自体の開発より、FACE01がどのようにして他のアプリケーションに情報を伝えるのか考えないといけない。
 - ドキュメントをすこしずつでも書く
+  - 解決できるURLを指定する
 - 使用するフォントをOS標準にする
   - UbuntuならNotoフォントとか。
 - face01lib/__init__の編集
@@ -27,12 +40,8 @@
 - ライブラリの内包化(FACE01自身に持つようにする)
   - PySimpleGUI以外
   - インストール負担軽減と使用ライブラリ隠蔽化
-- GPU環境識別system_check()
-  - config.iniで設定可能にする
-  - 同じマシンで何度も実行しないようにロックファイルを作るようにする
 - main関数のさらなる関数細分化
 - frame_skip変数 半自動設定
-- PySimpleGUIをTkinterへ差し替え
 - 関数のマルチスレッド化
 - faceapi.compare_facesとreturn_face_namesに冗長がある
   - 調査

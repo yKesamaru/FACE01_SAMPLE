@@ -7,6 +7,7 @@ from PIL.Image import open
 from PIL import ImageFile
 import logging
 from traceback import format_exc
+from sys import exit
 
 
 """Logging"""
@@ -36,7 +37,7 @@ except Exception:
     logger.warning("-" * 20)
     logger.warning(format_exc(limit=None, chain=True))
     logger.warning("-" * 20)
-    quit()
+    exit(0)
 """to refer, see bellow
 https://github.com/davisking/dlib
 https://github.com/davisking/dlib-models
