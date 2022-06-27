@@ -1,1 +1,0 @@
-[False * len(face_distance_list)]
