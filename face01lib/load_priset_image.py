@@ -6,9 +6,9 @@ from traceback import format_exc
 
 import face01lib.api as faceapi
 from numpy import load, savez
+
+
 logger = logging.getLogger('face01lib/load_priset_image')
-
-
 
 """Logging"""
 logger = logging.getLogger(__name__)

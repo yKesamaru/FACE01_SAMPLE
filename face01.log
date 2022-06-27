@@ -1,1 +1,303 @@
-[2022-06-24 15:53:49,709] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 15:23:58,042] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 15:23:58,106] [face01lib.load_priset_image] [load_priset_image.py] [INFO] 1 池田勇太_4.pngをエンコードしています
+[2022-06-26 15:23:59,778] [face01lib.load_priset_image] [load_priset_image.py] [INFO] 2 池内博之_8.pngをエンコードしています
+[2022-06-26 15:23:59,895] [face01lib.load_priset_image] [load_priset_image.py] [INFO] 3 池内博之_18.pngをエンコードしています
+[2022-06-26 15:24:00,019] [face01lib.load_priset_image] [load_priset_image.py] [INFO] 4 池波志乃_19.pngをエンコードしています
+[2022-06-26 15:24:00,133] [face01lib.load_priset_image] [load_priset_image.py] [INFO] 5 池内博之_13.pngをエンコードしています
+[2022-06-26 15:24:00,237] [face01lib.load_priset_image] [load_priset_image.py] [INFO] 6 池内博之_12.pngをエンコードしています
+[2022-06-26 15:24:00,343] [face01lib.load_priset_image] [load_priset_image.py] [INFO] 7 池内博之_default.pngをエンコードしています
+[2022-06-26 15:24:00,445] [face01lib.load_priset_image] [load_priset_image.py] [INFO] 8 池田勇太_1.pngをエンコードしています
+[2022-06-26 15:24:00,561] [face01lib.load_priset_image] [load_priset_image.py] [INFO] 9 池脇千鶴_20.pngをエンコードしています
+[2022-06-26 15:24:00,674] [face01lib.load_priset_image] [load_priset_image.py] [INFO] 10 池田勇太_10.pngをエンコードしています
+[2022-06-26 15:24:00,779] [face01lib.load_priset_image] [load_priset_image.py] [INFO] 11 池田清彦_26.pngをエンコードしています
+[2022-06-26 15:24:00,888] [face01lib.load_priset_image] [load_priset_image.py] [INFO] 12 池脇千鶴_9.pngをエンコードしています
+[2022-06-26 15:37:30,881] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 15:37:52,190] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 15:37:53,314] [face01lib.video_capture] [video_capture.py] [WARNING] urlが開けませんでした
+[2022-06-26 15:37:53,315] [face01lib.video_capture] [video_capture.py] [WARNING] 以下のエラーをシステム管理者へお伝えください
+[2022-06-26 15:37:53,315] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-06-26 15:37:53,316] [face01lib.video_capture] [video_capture.py] [WARNING] Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 218, in frame_generator
+    response = get(url, auth=HTTPDigestAuth(args_dict["user"], args_dict["passwd"]))
+KeyError: 'user'
+
+[2022-06-26 15:37:53,316] [face01lib.video_capture] [video_capture.py] [ERROR] httプロトコルに以上が発生しました
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 218, in frame_generator
+    response = get(url, auth=HTTPDigestAuth(args_dict["user"], args_dict["passwd"]))
+KeyError: 'user'
+[2022-06-26 15:37:53,317] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-06-26 15:37:53,317] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-06-26 15:40:23,420] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 15:40:24,555] [face01lib.video_capture] [video_capture.py] [WARNING] urlが開けませんでした
+[2022-06-26 15:40:24,555] [face01lib.video_capture] [video_capture.py] [WARNING] 以下のエラーをシステム管理者へお伝えください
+[2022-06-26 15:40:24,555] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-06-26 15:40:24,556] [face01lib.video_capture] [video_capture.py] [WARNING] Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 218, in frame_generator
+    response = requests.get(url, auth=HTTPDigestAuth(args_dict["user"], args_dict["passwd"]))
+KeyError: 'user'
+
+[2022-06-26 15:40:24,557] [face01lib.video_capture] [video_capture.py] [ERROR] httプロトコルに以上が発生しました
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 218, in frame_generator
+    response = requests.get(url, auth=HTTPDigestAuth(args_dict["user"], args_dict["passwd"]))
+KeyError: 'user'
+[2022-06-26 15:40:24,557] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-06-26 15:40:24,558] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-06-26 15:41:01,164] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 15:41:02,285] [face01lib.video_capture] [video_capture.py] [WARNING] urlが開けませんでした
+[2022-06-26 15:41:02,285] [face01lib.video_capture] [video_capture.py] [WARNING] 以下のエラーをシステム管理者へお伝えください
+[2022-06-26 15:41:02,285] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-06-26 15:41:02,286] [face01lib.video_capture] [video_capture.py] [WARNING] Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 218, in frame_generator
+    response = requests.get(url, auth=HTTPDigestAuth(args_dict["user"], args_dict["passwd"]))
+KeyError: 'user'
+
+[2022-06-26 15:41:02,286] [face01lib.video_capture] [video_capture.py] [ERROR] httプロトコルに以上が発生しました
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 218, in frame_generator
+    response = requests.get(url, auth=HTTPDigestAuth(args_dict["user"], args_dict["passwd"]))
+KeyError: 'user'
+[2022-06-26 15:41:02,287] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-06-26 15:41:02,287] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-06-26 15:44:36,241] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 15:44:43,834] [face01lib.video_capture] [video_capture.py] [WARNING] urlが開けませんでした
+[2022-06-26 15:44:43,835] [face01lib.video_capture] [video_capture.py] [WARNING] 以下のエラーをシステム管理者へお伝えください
+[2022-06-26 15:44:43,836] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-06-26 15:44:43,838] [face01lib.video_capture] [video_capture.py] [WARNING] Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 233, in frame_generator
+    exit(0)
+SystemExit: 0
+
+[2022-06-26 15:44:43,839] [face01lib.video_capture] [video_capture.py] [ERROR] httプロトコルに以上が発生しました
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 233, in frame_generator
+    exit(0)
+SystemExit: 0
+[2022-06-26 15:44:43,840] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-06-26 15:44:43,841] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-06-26 15:45:02,658] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 15:45:09,321] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:45:09,322] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:45:10,364] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:45:10,365] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:45:11,416] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:45:11,416] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:45:12,443] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:45:12,444] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:45:15,921] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:45:15,921] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:45:23,574] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:45:23,574] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:45:25,637] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:45:25,638] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:45:26,645] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:45:26,647] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:45:27,656] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:45:27,656] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:45:28,691] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:45:28,691] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:45:29,728] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:45:29,729] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:45:30,781] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:45:30,781] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:46:38,511] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 15:46:44,670] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:46:44,671] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:46:45,635] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:46:45,636] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:46:46,533] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:46:46,534] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:46:47,467] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:46:47,468] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:46:48,437] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:46:48,438] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:46:49,345] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:46:49,345] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:46:50,281] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:46:50,282] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:46:51,219] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:46:51,220] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:46:52,131] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:46:52,131] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:46:53,074] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:46:53,074] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:46:54,033] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:46:54,033] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:46:54,948] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:46:54,948] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:48:00,399] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 15:48:36,244] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:48:36,245] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:48:41,452] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:48:41,452] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:48:43,232] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:48:43,233] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:48:44,968] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:48:44,968] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:48:46,618] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:48:46,618] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:48:48,389] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:48:48,390] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:48:50,238] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:48:50,238] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:48:51,953] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:48:51,954] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:48:55,349] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:48:55,349] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:48:57,035] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:48:57,036] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:48:58,742] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:48:58,742] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:49:00,456] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:49:00,457] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:49:02,160] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:49:02,161] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:49:03,820] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:49:03,821] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:49:05,541] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:49:05,541] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:49:07,275] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:49:07,276] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:49:08,923] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:49:08,924] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:49:10,607] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:49:10,608] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:49:12,342] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:49:12,342] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:49:14,014] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 15:49:14,014] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 15:59:00,722] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 16:00:18,050] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 16:00:21,342] [face01lib.video_capture] [video_capture.py] [WARNING] urlが開けませんでした
+[2022-06-26 16:00:21,343] [face01lib.video_capture] [video_capture.py] [WARNING] 以下のエラーをシステム管理者へお伝えください
+[2022-06-26 16:00:21,343] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-06-26 16:00:21,345] [face01lib.video_capture] [video_capture.py] [WARNING] Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 225, in frame_generator
+    img_bin = io.BytesIO(response.content)
+NameError: name 'io' is not defined
+
+[2022-06-26 16:00:21,345] [face01lib.video_capture] [video_capture.py] [ERROR] httプロトコルに以上が発生しました
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 225, in frame_generator
+    img_bin = io.BytesIO(response.content)
+NameError: name 'io' is not defined
+[2022-06-26 16:00:21,346] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-06-26 16:00:21,346] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-06-26 16:00:39,386] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 16:00:51,025] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 16:00:51,026] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 16:00:52,745] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 16:00:52,745] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 16:00:54,425] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 16:00:54,426] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 16:00:56,176] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 16:00:56,176] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 16:00:57,820] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 16:00:57,820] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 16:00:59,554] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 16:00:59,554] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 16:01:40,150] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 16:01:46,289] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 16:01:46,290] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 16:01:47,323] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 16:01:47,324] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 16:01:51,485] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 16:01:51,486] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 16:01:52,436] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 16:01:52,436] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 16:01:53,337] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 16:01:53,338] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 16:01:55,195] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 16:01:55,195] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 16:01:56,149] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 16:01:56,150] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 16:01:57,112] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 16:01:57,113] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 16:01:58,029] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 16:01:58,029] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 16:01:58,952] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 16:01:58,952] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 16:01:59,904] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 16:01:59,905] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 16:02:01,727] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 16:02:01,728] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 16:02:02,689] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 16:02:02,690] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 16:06:33,168] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 16:33:10,600] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 16:44:10,935] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 16:45:50,959] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 16:46:22,562] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 16:48:06,332] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 16:49:19,864] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 16:53:01,440] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 16:56:28,470] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 16:58:45,160] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 16:59:43,642] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 16:59:47,737] [__main__] [FACE01.py] [INFO] ウィンドウが手動で閉じられました
+[2022-06-26 17:15:31,225] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 17:15:42,690] [__main__] [CALL_FACE01.py] [INFO] ウィンドウが手動で閉じられました
+[2022-06-26 17:16:31,689] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 17:16:38,228] [__main__] [CALL_FACE01.py] [INFO] ウィンドウが手動で閉じられました
+[2022-06-26 17:17:18,044] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 17:17:31,529] [__main__] [CALL_FACE01.py] [INFO] ウィンドウが手動で閉じられました
+[2022-06-26 17:17:56,511] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 17:18:07,629] [__main__] [CALL_FACE01.py] [INFO] ウィンドウが手動で閉じられました
+[2022-06-26 17:19:09,385] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 17:19:25,214] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 17:26:48,267] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 17:26:56,958] [__main__] [CALL_FACE01.py] [INFO] ウィンドウが手動で閉じられました
+[2022-06-26 17:27:06,334] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 17:27:15,564] [__main__] [CALL_FACE01.py] [INFO] ウィンドウが手動で閉じられました
+[2022-06-26 17:29:41,985] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 17:36:22,128] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 17:36:38,043] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 17:38:26,610] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 17:38:56,004] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 17:39:19,631] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 17:39:44,454] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 17:39:51,121] [__main__] [CALL_FACE01.py] [INFO] ウィンドウが手動で閉じられました
+[2022-06-26 17:40:26,008] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 17:45:12,958] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 17:45:44,468] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 18:21:36,862] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 18:25:31,583] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 18:30:36,973] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 18:30:37,234] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-06-26 18:30:37,235] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-06-26 18:30:37,235] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-06-26 18:30:37,235] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-06-26 18:30:37,236] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-06-26 18:32:23,729] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 18:35:40,653] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 18:40:23,741] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 18:41:00,578] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 18:42:11,546] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 18:43:10,709] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 18:44:02,046] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 18:44:29,865] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 18:46:44,059] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 18:49:14,729] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 18:49:38,510] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 18:49:43,088] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 18:49:43,089] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 18:50:01,309] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 18:50:01,309] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-26 18:58:34,578] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-26 18:58:59,890] [FACE01] [FACE01.py] [INFO] telopが描画できません
+[2022-06-26 18:58:59,890] [FACE01] [FACE01.py] [INFO] logoが描画できません
+[2022-06-27 09:34:33,848] [face01lib.api] [api.py] [WARNING] 例外エラーが発生しました。
+[2022-06-27 09:34:33,849] [face01lib.api] [api.py] [WARNING] システム管理者にお問い合わせください
+[2022-06-27 09:34:33,849] [face01lib.api] [api.py] [WARNING] --------------------
+[2022-06-27 09:34:33,851] [face01lib.api] [api.py] [WARNING] Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/api.py", line 32, in <module>
+    import face_recognition_models
+ModuleNotFoundError: No module named 'face_recognition_models'
+
+[2022-06-27 09:34:33,851] [face01lib.api] [api.py] [WARNING] --------------------
+[2022-06-27 10:59:46,862] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-27 11:02:06,777] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-27 11:02:35,456] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-27 11:17:39,947] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます

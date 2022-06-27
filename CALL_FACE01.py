@@ -1,5 +1,4 @@
 import cProfile as pr
-# from FACE01 import main_process, initialize, configure
 import FACE01 as fg
 import PySimpleGUI as sg
 import cv2
@@ -31,17 +30,19 @@ profile_HANDLING_FRAME_TIME: float = 0.0
 profile_HANDLING_FRAME_TIME_FRONT: float = 0.0
 profile_HANDLING_FRAME_TIME_REAR: float = 0.0
 
+"""DEBUG
+再生フレーム数をセット"""
 exec_times: int = 100
 
 # PySimpleGUIレイアウト
 if fg.args_dict["headless"] == False:
     layout = [
         [sg.Image(filename='', key='display', pad=(0,0))],
-        [sg.Button('終了', key='terminate', pad=(0,10))]
+        [sg.Button('終了', key='terminate', pad=(0,10), expand_x=True)]
     ]
     window = sg.Window(
         'FACE01 プロファイリング利用例', layout, alpha_channel = 1, margins=(10, 10),
-        location=(0,0), modal = True
+        location=(0,0), modal = True, titlebar_icon="./images/g1320.png", icon="./images/g1320.png"
     )
 
 # @profile()
@@ -59,6 +60,9 @@ def common_main(exec_times):
             print(f'exec_times: {exec_times}')
             if fg.args_dict["headless"] == False:
                 event, _ = window.read(timeout = 1)
+                if event == sg.WIN_CLOSED:
+                    logger.info("ウィンドウが手動で閉じられました")
+                    break
             for frame_datas in frame_datas_array:
                 if "face_location_list" in frame_datas:
                     img, face_location_list, overlay, person_data_list = \
@@ -94,6 +98,7 @@ def common_main(exec_times):
     profile_HANDLING_FRAME_TIME = (profile_HANDLING_FRAME_TIME_REAR - profile_HANDLING_FRAME_TIME_FRONT) 
     print(f'profile()関数の処理時間合計: {round(profile_HANDLING_FRAME_TIME , 3)}[秒]')
 pr.run('common_main(exec_times)', 'restats')
+
 
 """顔座標のみ抽出したい場合"""
 next_frame_gen_obj = vc.frame_generator(fg.args_dict)

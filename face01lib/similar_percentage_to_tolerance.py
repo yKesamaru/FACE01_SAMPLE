@@ -1,6 +1,4 @@
-# ===========================================
-# similar_percentageを受取りtoleranceを返す =
-# ===========================================
+__doc__ = 'similar_percentageを受取りtoleranceを返す'
 
 from numpy import sqrt
 import logging

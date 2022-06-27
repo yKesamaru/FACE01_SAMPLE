@@ -1,3 +1,7 @@
+__author__ = 'Original code written by Adam Geitgey, modified by YOSHITSUGU KESAMARU'
+__email__ = 'y.kesamaru@tokai-kaoninsho.com'
+__version__ = '1.3.10'
+
 # from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from typing import Dict, List, Tuple
 
@@ -28,11 +32,10 @@ logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 
 
-
 try:
-    import face_recognition_models
+    from face01lib import face_recognition_models
 except Exception:
-    logger.warning("例外エラーが発生しました。")
+    logger.warning("modelのimportに失敗しました")
     logger.warning("システム管理者にお問い合わせください")
     logger.warning("-" * 20)
     logger.warning(format_exc(limit=None, chain=True))

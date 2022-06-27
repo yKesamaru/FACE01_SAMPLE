@@ -1,14 +1,13 @@
 import logging
 from os import chdir, environ
 from traceback import format_exc
-# from functools import lru_cache
 
 from cv2 import resize, CAP_PROP_FPS, CAP_PROP_FRAME_HEIGHT, CAP_PROP_FRAME_WIDTH, VideoCapture, CAP_FFMPEG, destroyAllWindows, imshow, waitKey, destroyAllWindows
 from PySimpleGUI import popup, POPUP_BUTTONS_OK
 import requests
 from requests.auth import HTTPDigestAuth
 
-import io
+from io import BytesIO
 from PIL import Image
 import numpy as np
 import cv2
@@ -40,48 +39,10 @@ logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 
 
-
-"""TODO
-RTSPを受け付けるようにする
-マルチスレッド化
-イテレーターオブジェクトをマルチスレッドでyieldすることにより
-frame送出単位でマルチスレッド化する
-see README.md
-"""
-
 environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;tcp"
 """see bellow
 
 """
-
-""" BUG & TODO frame_skip変数 半自動設定
-if len(face_encodings) > 0:
-    # frame_skip変数 半自動設定 --------------
-    def decide_frame_skip(frame_skip, frame_skip_counter) -> Tuple[int,int]:
-        ## マシンスペックが十分な場合、frame_skip = (顔の数)
-        if frame_skip == -1:
-            # 人数 - 1
-            frame_skip = len(face_encodings)
-            # 人数が1人の時はframe_skip = 1
-            if len(face_encodings)==1:
-                frame_skip = 2
-        else:
-            frame_skip = frame_skip
-        if frame_skip_counter < frame_skip:
-            frame_skip_counter += 1
-        return frame_skip, frame_skip_counter
-
-    frame_skip, frame_skip_counter = decide_frame_skip(frame_skip, frame_skip_counter)
-    if frame_skip_counter < frame_skip:
-        continue
-    # ----------------------------------------
-    # fps_ms = fps
-    # if frame_skip > 0:
-    #     HANDLING_FRAME_TIME / (frame_skip - 1)  < fps_ms
-    # elif frame_skip == 0:
-    #     HANDLING_FRAME_TIME < fps_ms
-    # time.sleep((fps_ms - (HANDLING_FRAME_TIME / (frame_skip - 1))) / 1000)
-    """
 
 def resize_frame(set_width, set_height, frame):
     small_frame = resize(frame, (set_width, set_height))
@@ -181,9 +142,10 @@ def frame_generator(args_dict):
     BOTTOM_RIGHT = 0
     CENTER = 0
     resized_frame_list = []
-    frame_skip_counter: int = 0
+    # frame_skip_counter: int = 0
     set_width = args_dict["set_width"]
     set_height = args_dict["set_height"]
+    movie = args_dict["movie"]
 
     kaoninshoDir = args_dict["kaoninshoDir"] 
     chdir(kaoninshoDir)
@@ -216,13 +178,17 @@ def frame_generator(args_dict):
         try:
             # responseの内容について分岐
             while True:
-                response = requests.get(url, auth=HTTPDigestAuth(args_dict["user"], args_dict["passwd"]))
+                # frame_skipの数値に満たない場合は処理をスキップ
+                for frame_skip_counter in range(1, args_dict["frame_skip"]):
+                    response = requests.get(url, auth=HTTPDigestAuth(args_dict["user"], args_dict["passwd"]))
+                    if frame_skip_counter < args_dict["frame_skip"]:
+                        continue
                 # {'Status': '200', 'Connection': 'Close', 'Set-Cookie': 'Session=0', 'Accept-Ranges': 'bytes',
                 #  'Cache-Control': 'no-cache', 'Content-length': '40140', 'Content-type': 'image/jpeg'}
                 # if response.headers['Status'] == '200' and response.headers['Content-type'] == 'image/jpeg':
                 if response.headers['Content-type'] == 'image/jpeg':
                     # 取得した画像データをOpenCVで扱う形式に変換
-                    img_bin = io.BytesIO(response.content)
+                    img_bin = BytesIO(response.content)
                     img_pil = Image.open(img_bin)
                     img_np  = np.asarray(img_pil)
                     frame  = cv2.cvtColor(img_np, cv2.COLOR_RGBA2BGR)
@@ -233,10 +199,6 @@ def frame_generator(args_dict):
                     cv2.destroyAllWindows()
                     exit(0)
                     """
-                    # frame_skipの数値に満たない場合は処理をスキップ
-                    if frame_skip_counter < args_dict["frame_skip"]:
-                        frame_skip_counter += 1
-                        continue
                     # 画角値をもとに各frameを縮小
                     # python版
                     frame = angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)
@@ -248,8 +210,6 @@ def frame_generator(args_dict):
                     waitKey(500)
                     destroyAllWindows()
                     """
-                    # yield resized_frame
-                    # """DEBUG
                     try:
                         yield resized_frame
                     except TypeError as e:
@@ -258,22 +218,18 @@ def frame_generator(args_dict):
                         logger.warning(e)
                     finally:
                         yield resized_frame
-                    # """
-                # else:
-                #     logger.warning(f"ステータスコード: {response.headers['Status']}")
-                #     logger.warning(f"コンテントタイプ: {response.headers['Content-type']}")
-                #     logger.warning("以下のエラーをシステム管理者へお伝えください")
-                #     logger.warning("-" * 20)
-                #     logger.warning(format_exc(limit=None, chain=True))
-                #     logger.warning("-" * 20)
-                #     logger.warning("終了します")
-                #     break
+                else:
+                    logger.warning("以下のエラーをシステム管理者へお伝えください")
+                    logger.warning(f"ステータスコード: {response.headers['Status']}")
+                    logger.warning(f"コンテントタイプ: {response.headers['Content-type']}")
+                    logger.warning("-" * 20)
+                    logger.warning(format_exc(limit=None, chain=True))
+                    logger.warning("-" * 20)
         except:
-            logger.warning("urlが開けませんでした")
             logger.warning("以下のエラーをシステム管理者へお伝えください")
             logger.warning("-" * 20)
             logger.warning(format_exc(limit=None, chain=True))
-            logger.exception("httプロトコルに以上が発生しました")
+            logger.exception("通信に異常が発生しました")
             logger.warning("-" * 20)
             logger.warning("終了します")
             exit(0)
@@ -283,9 +239,13 @@ def frame_generator(args_dict):
     else:
         vcap = VideoCapture(movie, CAP_FFMPEG)
         while vcap.isOpened(): 
-            ret, frame = vcap.read()
+            # frame_skipの数値に満たない場合は処理をスキップ
+            for frame_skip_counter in range(1, args_dict["frame_skip"]):
+                ret, frame = vcap.read()
+                if frame_skip_counter < args_dict["frame_skip"]:
+                    continue
             if ret == False:
-                # popup( '不正な映像データのため終了します', 'システム管理者にお問い合わせください', movie, title='ERROR', button_type=sg.POPUP_BUTTONS_OK, modal=True, keep_on_top=True)
+                logger.warning("movieが開けません")
                 logger.warning("以下のエラーをシステム管理者へお伝えください")
                 logger.warning("-" * 20)
                 logger.warning(format_exc(limit=None, chain=True))
@@ -293,11 +253,6 @@ def frame_generator(args_dict):
                 finalize(args_dict["vcap"])
                 break
             else:
-                # frame_skipの数値に満たない場合は処理をスキップ
-                if frame_skip_counter < args_dict["frame_skip"]:
-                    frame_skip_counter += 1
-                    continue
-
                 # 画角値をもとに各frameを縮小
                 # python版
                 frame = angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)
