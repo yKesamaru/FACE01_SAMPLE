@@ -1,6 +1,9 @@
 bin/*
 check_images/*
 face01lib/__pycache__/*
+face01lib/build/.cmake
+face01lib/build/CMakeFiles
+face01lib/build/Testing
 priset_face_images/*
 share/*
 noFace/*

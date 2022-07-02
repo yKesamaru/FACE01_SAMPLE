@@ -20,6 +20,56 @@
   - 機能拡張したいところがあればREADME.mdに書いておく
   - 機能拡張は1.5系列で行う
   - マージのコンフリクトを避けるため1.5系列のブランチを禁止する
+- 1.3.10でやる予定だったmarkdownによるドキュメントづくりを忘れていた
+  - 1.4系列でやります
+
+### やったこと
+- `pip install pybind11`
+- VSCode上でC++をデバッグできる環境を作る
+  - [pybind11 : First steps](https://pybind11.readthedocs.io/en/stable/basics.html)
+#### g++ オプション
+- [](https://kaworu.jpn.org/cpp/g++)
+- g++ foo.cpp
+  - コンパイルして実行可能ファイルa.outができる
+- g++ foo.cpp -o foo
+  - 作成する実行ファイル名を指定
+- g++ -g foo.cpp
+  - デバッグ情報を付加してa.outを作る
+- g++ -c foo.cpp
+  - オブジェクトファイルfoo.oを作る
+- g++ -shared -o libfoo.so foo.cpp
+  - シェアードオブジェクトを作成する
+- g++ -I/usr/local/include main.cpp
+  - /usr/local/includeディレクトリをインクルードパスとして追加する
+- g++ -I/usr/local/include -I./include main.cpp
+  - /usr/local/includeとカレントディレクトリの./includeをインクルードパスとして追加する
+- g++ -lm main.cpp
+  - 標準ライブラリをリンクする（/usr/libのライブラリがリンクされる）
+- g++ -L/usr/local/lib -Lfoo main.cpp
+  - /usr/local/libにあるlibfoo.soをリンクする
+- g++ -O0 foo.cpp
+  - 最適化オプション。O0からO3、Osなど
+  - [最適化オプション](https://kaworu.jpn.org/cpp/g%2B%2B_%E6%9C%80%E9%81%A9%E5%8C%96%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3)
+    - g++は-O0を指定されたとき、最適化を行いません。 コンパイル時間を短くします。デバッグプロセスが正しく機能します。 
+    - -O, -O1 は、基本的な最適化を行います。
+    - -O2では、ほとんどの最適化を行います。ループの展開や関数のインライン展開は行いません
+    - -O3では、-O2で指定されたすべての最適化に加えて、以下のオプションを有効にします。
+    - -Osは、サイズの最適化を行います。-Osでは、-O2の最適化で典型的にコードサイズを増加させないオプションをすべて有効にします。コードサイズを小さくするために設計された高速な最適化を実行します。 
+    - -Ofast 厳格な標準準拠を無視します。-Ofastは、-O3のすべての最適化を有効にします。 
+    - -Og デバッキング体験の最適化をします。デバッキングの邪魔にならない最適化を有効にします。
+- g++ -E foo.cpp
+  - プリプロセッサディレクティブを処理して結果を標準出力に出す
+- g++ -S foo.cpp
+  - アセンブルしてアセンブリコードを得る
+- g++ -Wall main.cpp
+  - 警告オプションを有効にする
+- g++ -std=c++11 main.cpp
+  - C++11,C++14(C++xx)などの機能を有効にする
+- -fPIC
+  - [gccのコンパイルオプション-fPICと-fpicの違いは？](https://kaworu.jpn.org/c/gcc%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%AB%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3-fPIC%E3%81%A8-fpic%E3%81%AE%E9%81%95%E3%81%84%E3%81%AF%EF%BC%9F)
+   > -fPIC は、UNIX(Linux)で共有ライブラリ(shared object, シェアードオブジェクト)を作成するときに使われるオプションです。 
+
+
 
 ## 1.3.10実装完了
 ### 方針
@@ -76,6 +126,10 @@
           - types-setuptools
           - typing_extensions
     - mediapipeのアップデートの変更によりprotobuf==3.20.1に固定になった。
+      - see bellow
+        - [ [Python] Release 4.21.0 broke multiple Google Cloud client libraries ("TypeError: Descriptors cannot not be created directly.") #10051 ](https://github.com/protocolbuffers/protobuf/issues/10051#issuecomment-1138392640)
+        > I've set protobuf==3.20.1 and it resolved the issue
+
        terms  terms-Desks  ~/bin/FACE01  pip install -U protobuf==3.20.1
       Collecting protobuf==3.20.1
         Using cached protobuf-3.20.1-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl (1.0 MB)

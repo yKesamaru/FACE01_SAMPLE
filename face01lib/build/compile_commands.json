@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/terms/bin/FACE01/face01lib/build",
+  "command": "/usr/bin/g++  -Dadd_cpp_EXPORTS -I/home/terms/bin/FACE01/include -isystem /home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include -isystem /usr/include/python3.8  -O1 -Wall -O2 -fPIC -fvisibility=hidden   -flto -fno-fat-lto-objects -o CMakeFiles/add_cpp.dir/add_cpp.cpp.o -c /home/terms/bin/FACE01/face01lib/add_cpp.cpp",
+  "file": "/home/terms/bin/FACE01/face01lib/add_cpp.cpp"
+}
+]

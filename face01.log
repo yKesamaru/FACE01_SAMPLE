@@ -301,3 +301,4 @@ ModuleNotFoundError: No module named 'face_recognition_models'
 [2022-06-27 11:02:06,777] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
 [2022-06-27 11:02:35,456] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
 [2022-06-27 11:17:39,947] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-27 13:52:43,401] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます

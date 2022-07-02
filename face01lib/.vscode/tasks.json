@@ -1,0 +1,47 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "tasks_build",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-Dadd_cpp_EXPORTS ",
+				"-I/home/terms/bin/FACE01/include",
+				"-isystem",
+				"/home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include",
+				"-isystem",
+				"/usr/include/python3.8",
+				// "-O1",
+				"-Wall",
+				"-O0",
+				"-g",
+				"-fPIC",
+				"-fvisibility=hidden",
+				// "-c",
+				// "/home/terms/bin/FACE01/face01lib/add_cpp.cpp.o",
+				"-shared",
+				"-o",
+				"/home/terms/bin/FACE01/face01lib/add_cpp.so",
+				"/home/terms/bin/FACE01/face01lib/add_cpp.cpp"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "コンパイラ: /usr/bin/g++"
+		},
+		{
+			"type": "shell",
+			"label": "chmod",
+			"command": "/usr/bin/chmod",
+			"args": [
+				"+x",
+				"/home/terms/bin/FACE01/face01lib/add_cpp.so"
+			]
+		}
+	]
+}

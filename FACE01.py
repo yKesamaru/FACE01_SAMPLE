@@ -60,14 +60,14 @@ global_memory = {
 'number_of_crops' : 0
 }
 
-# ホームディレクトリ固定
+# ホームディレクトリ固定✅
 def home() -> tuple:
     kaoninshoDir: str = dirname(__file__)
     chdir(kaoninshoDir)
     priset_face_imagesDir: str = f'{dirname(__file__)}/priset_face_images/'
     return kaoninshoDir, priset_face_imagesDir
 
-# configファイル読み込み
+# configファイル読み込み✅
 def configure():
     kaoninshoDir, priset_face_imagesDir = home()
     try:
@@ -128,6 +128,7 @@ def configure():
 # configure関数実行
 conf_dict = configure()
 
+# 評価版のみ実行
 def cal_specify_date() -> None:
     """指定日付計算
     """
@@ -145,7 +146,6 @@ def cal_specify_date() -> None:
                 dialog_text = 'お使い頂ける残日数は' + str(remaining_days.days) + '日です'
                 sg.popup('サンプルアプリケーションをお使いいただきありがとうございます', dialog_text, title='', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
     limit_date_alart()
-# 評価版のみ実行
 cal_specify_date()
 
 def cal_resized_telop_image(resized_telop_image):
