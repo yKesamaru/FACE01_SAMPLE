@@ -2,12 +2,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "gdb",
+      "name": "tasks.json_make_so",
       "type": "cppdbg",
       "request": "launch",
       "program": "${fileDirname}/${fileBasenameNoExtension}.so",
       "args": [
-        "2","4"
+        "2000","4000"
       ],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
@@ -32,9 +32,77 @@
               "ignoreFailures": true
           },
         ],
-      "preLaunchTask": "tasks_build",
+      "preLaunchTask": "tasks_build_make_so",
       "miDebuggerPath": "/usr/bin/gdb",
-      "postDebugTask": "chmod"
+    },
+    {
+      "name": "tasks.json_make_exe",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": [
+        "1080",
+        "1920"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "sourceFileMap":{
+        "<source-path>": {
+          "editorPath": ".",
+          "useForBreakpoints": true
+        }
+      },
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+          {
+              "description": "gdb の再フォーマットを有効にする",
+              "text": "-enable-pretty-printing",
+              "ignoreFailures": true
+          },
+          {
+              "description":  "逆アセンブリ フレーバーを Intel に設定",
+              "text": "-gdb-set disassembly-flavor intel",
+              "ignoreFailures": true
+          },
+        ],
+      "preLaunchTask": "tasks_build_make_exe",
+      "miDebuggerPath": "/usr/bin/gdb",
+    },
+    {
+      "name": "CMakeで出来たexeを使う用",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/build/${fileBasenameNoExtension}_exe",
+      "args": [
+        "2","4"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "sourceFileMap":{
+        "<source-path>": {
+          "editorPath": ".",
+          "useForBreakpoints": true
+        }
+      },
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+          {
+              "description": "gdb の再フォーマットを有効にする",
+              "text": "-enable-pretty-printing",
+              "ignoreFailures": true
+          },
+          // {
+          //     "description":  "逆アセンブリ フレーバーを Intel に設定",
+          //     "text": "-gdb-set disassembly-flavor intel",
+          //     "ignoreFailures": true
+          // },
+        ],
+      // "preLaunchTask": "tasks_build",
+      "miDebuggerPath": "/usr/bin/gdb",
     },
     {
       "name": "Python: 現在のファイル",

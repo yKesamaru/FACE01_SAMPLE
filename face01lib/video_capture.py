@@ -12,6 +12,7 @@ from PIL import Image
 import numpy as np
 import cv2
 from sys import exit
+from face01lib import return_tuple
 
 
 
@@ -89,7 +90,7 @@ def cal_angle_coordinate(height:int, width:int) -> tuple:
     return TOP_LEFT,TOP_RIGHT,BOTTOM_LEFT,BOTTOM_RIGHT,CENTER
 
 # frameに対してエリア指定
-def angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER):
+def angle_of_view_specification(set_area: str, frame: np.ndarray, TOP_LEFT, TOP_RIGHT: tuple, BOTTOM_LEFT: tuple, BOTTOM_RIGHT: tuple, CENTER: tuple):
     if set_area=='NONE':
         pass
     elif set_area=='TOP_LEFT':
@@ -153,7 +154,8 @@ def frame_generator(args_dict):
     set_area = args_dict["set_area"] 
     # 画角値（四隅の座標:Tuple）算出
     if  TOP_LEFT == 0:
-        TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER = cal_angle_coordinate(args_dict["height"], args_dict["width"])
+        # TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER = cal_angle_coordinate(args_dict["height"], args_dict["width"])
+        TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER = return_tuple(args_dict["height"], args_dict["width"])
 
     if (movie == 'usb' or movie == 'USB'):   # USB カメラ読み込み時使用
         camera_number:int = 0
@@ -180,7 +182,7 @@ def frame_generator(args_dict):
             while True:
                 # frame_skipの数値に満たない場合は処理をスキップ
                 for frame_skip_counter in range(1, args_dict["frame_skip"]):
-                    response = requests.get(url, auth=HTTPDigestAuth(args_dict["user"], args_dict["passwd"]))
+                    response = requests.get(url, auth = HTTPDigestAuth(args_dict["user"], args_dict["passwd"]))
                     if frame_skip_counter < args_dict["frame_skip"]:
                         continue
                 # {'Status': '200', 'Connection': 'Close', 'Set-Cookie': 'Session=0', 'Accept-Ranges': 'bytes',

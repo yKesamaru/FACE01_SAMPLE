@@ -3,7 +3,7 @@
 	"tasks": [
 		{
 			"type": "shell",
-			"label": "tasks_build",
+			"label": "tasks_build_make_so",
 			"command": "/usr/bin/g++",
 			"args": [
 				"-Dadd_cpp_EXPORTS ",
@@ -12,18 +12,43 @@
 				"/home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include",
 				"-isystem",
 				"/usr/include/python3.8",
-				// "-O1",
 				"-Wall",
 				"-O0",
 				"-g",
 				"-fPIC",
 				"-fvisibility=hidden",
-				// "-c",
-				// "/home/terms/bin/FACE01/face01lib/add_cpp.cpp.o",
 				"-shared",
 				"-o",
-				"/home/terms/bin/FACE01/face01lib/add_cpp.so",
-				"/home/terms/bin/FACE01/face01lib/add_cpp.cpp"
+				"${fileDirname}/${fileBasenameNoExtension}.so",
+				"${file}"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "コンパイラ: /usr/bin/g++"
+		},
+		{
+			"type": "shell",
+			"label": "tasks_build_make_exe",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-I/home/terms/bin/FACE01/include",
+				"-isystem",
+				"/home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include",
+				"-isystem",
+				"/usr/include/python3.8",
+				"-Wall",
+				"-O0",
+				"-g",
+				"-fPIC",
+				"-fvisibility=hidden",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}",
+				"${file}"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
@@ -42,6 +67,26 @@
 				"+x",
 				"/home/terms/bin/FACE01/face01lib/add_cpp.so"
 			]
+		},
+		{
+			"type": "cppbuild",
+			"label": "C/C++: g++ アクティブなファイルのビルド",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "コンパイラ: /usr/bin/g++"
 		}
 	]
 }

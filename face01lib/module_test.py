@@ -1,5 +1,5 @@
-# import add_cpp
-from build import add_cpp
+import cpp_cal_angle_coodinate
+# from build import cpp_cal_angle_coodinate
 
-results = add_cpp.add(4,3)
+results = cpp_cal_angle_coodinate.return_tuple(400,300)
 print(results)

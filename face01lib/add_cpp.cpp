@@ -10,8 +10,14 @@ int add(int i, int j)
     return i + j + result;
 }
 
-PYBIND11_MODULE(add_cpp, m)
-{
-    m.doc() = "pybind11 example plugin"; // optional module docstring
-    m.def("add", &add, "A function that adds two numbers");
+int main(int i, int j){
+    int result = add(i, j);
+    std::cout << result << std::endl;
+    return 0;
 }
+
+// PYBIND11_MODULE(add_cpp, m)
+// {
+//     m.doc() = "pybind11 example plugin"; // optional module docstring
+//     m.def("add", &add, "A function that adds two numbers");
+// }

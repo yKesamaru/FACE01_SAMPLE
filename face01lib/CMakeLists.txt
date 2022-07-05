@@ -43,8 +43,11 @@ include_directories(/home/terms/bin/FACE01/include)
 # -L : ライブラリ探索パス
 link_directories(/home/terms/bin/FACE01/lib/python3.8/site-packages)
 
-# 作成するモジュール名
-pybind11_add_module(add_cpp MODULE  add_cpp.cpp)
+# Pythonモジュールを作成する場合
+pybind11_add_module(cpp_cal_angle_coodinate MODULE  cpp_cal_angle_coodinate.cpp)
+
+# EXEファイルを作ってデバッグしたい場合
+# add_executable(add_cpp_exe add_cpp.cpp)
 
 message("--------------------------")
 # 備考

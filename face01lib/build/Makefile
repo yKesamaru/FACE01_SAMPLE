@@ -248,6 +248,19 @@ ContinuousUpdate/fast:
 .PHONY : ContinuousUpdate/fast
 
 #=============================================================================
+# Target rules for targets named cpp_cal_angle_coodinate
+
+# Build rule for target.
+cpp_cal_angle_coodinate: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cpp_cal_angle_coodinate
+.PHONY : cpp_cal_angle_coodinate
+
+# fast build rule for target.
+cpp_cal_angle_coodinate/fast:
+	$(MAKE) -f CMakeFiles/cpp_cal_angle_coodinate.dir/build.make CMakeFiles/cpp_cal_angle_coodinate.dir/build
+.PHONY : cpp_cal_angle_coodinate/fast
+
+#=============================================================================
 # Target rules for targets named NightlyUpdate
 
 # Build rule for target.
@@ -507,45 +520,32 @@ ContinuousSubmit/fast:
 	$(MAKE) -f CMakeFiles/ContinuousSubmit.dir/build.make CMakeFiles/ContinuousSubmit.dir/build
 .PHONY : ContinuousSubmit/fast
 
-#=============================================================================
-# Target rules for targets named add_cpp
+cpp_cal_angle_coodinate.o: cpp_cal_angle_coodinate.cpp.o
 
-# Build rule for target.
-add_cpp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 add_cpp
-.PHONY : add_cpp
-
-# fast build rule for target.
-add_cpp/fast:
-	$(MAKE) -f CMakeFiles/add_cpp.dir/build.make CMakeFiles/add_cpp.dir/build
-.PHONY : add_cpp/fast
-
-add_cpp.o: add_cpp.cpp.o
-
-.PHONY : add_cpp.o
+.PHONY : cpp_cal_angle_coodinate.o
 
 # target to build an object file
-add_cpp.cpp.o:
-	$(MAKE) -f CMakeFiles/add_cpp.dir/build.make CMakeFiles/add_cpp.dir/add_cpp.cpp.o
-.PHONY : add_cpp.cpp.o
+cpp_cal_angle_coodinate.cpp.o:
+	$(MAKE) -f CMakeFiles/cpp_cal_angle_coodinate.dir/build.make CMakeFiles/cpp_cal_angle_coodinate.dir/cpp_cal_angle_coodinate.cpp.o
+.PHONY : cpp_cal_angle_coodinate.cpp.o
 
-add_cpp.i: add_cpp.cpp.i
+cpp_cal_angle_coodinate.i: cpp_cal_angle_coodinate.cpp.i
 
-.PHONY : add_cpp.i
+.PHONY : cpp_cal_angle_coodinate.i
 
 # target to preprocess a source file
-add_cpp.cpp.i:
-	$(MAKE) -f CMakeFiles/add_cpp.dir/build.make CMakeFiles/add_cpp.dir/add_cpp.cpp.i
-.PHONY : add_cpp.cpp.i
+cpp_cal_angle_coodinate.cpp.i:
+	$(MAKE) -f CMakeFiles/cpp_cal_angle_coodinate.dir/build.make CMakeFiles/cpp_cal_angle_coodinate.dir/cpp_cal_angle_coodinate.cpp.i
+.PHONY : cpp_cal_angle_coodinate.cpp.i
 
-add_cpp.s: add_cpp.cpp.s
+cpp_cal_angle_coodinate.s: cpp_cal_angle_coodinate.cpp.s
 
-.PHONY : add_cpp.s
+.PHONY : cpp_cal_angle_coodinate.s
 
 # target to generate assembly for a file
-add_cpp.cpp.s:
-	$(MAKE) -f CMakeFiles/add_cpp.dir/build.make CMakeFiles/add_cpp.dir/add_cpp.cpp.s
-.PHONY : add_cpp.cpp.s
+cpp_cal_angle_coodinate.cpp.s:
+	$(MAKE) -f CMakeFiles/cpp_cal_angle_coodinate.dir/build.make CMakeFiles/cpp_cal_angle_coodinate.dir/cpp_cal_angle_coodinate.cpp.s
+.PHONY : cpp_cal_angle_coodinate.cpp.s
 
 # Help Target
 help:
@@ -565,6 +565,7 @@ help:
 	@echo "... NightlyMemoryCheck"
 	@echo "... ExperimentalTest"
 	@echo "... ContinuousUpdate"
+	@echo "... cpp_cal_angle_coodinate"
 	@echo "... NightlyUpdate"
 	@echo "... ExperimentalMemCheck"
 	@echo "... ExperimentalSubmit"
@@ -586,10 +587,9 @@ help:
 	@echo "... ContinuousMemCheck"
 	@echo "... ContinuousTest"
 	@echo "... ContinuousSubmit"
-	@echo "... add_cpp"
-	@echo "... add_cpp.o"
-	@echo "... add_cpp.i"
-	@echo "... add_cpp.s"
+	@echo "... cpp_cal_angle_coodinate.o"
+	@echo "... cpp_cal_angle_coodinate.i"
+	@echo "... cpp_cal_angle_coodinate.s"
 .PHONY : help
 
 

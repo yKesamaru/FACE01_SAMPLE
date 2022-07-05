@@ -30,5 +30,16 @@
   ],
   "terminal.integrated.automationProfile.linux": {
       "path": "/usr/bin/bash"
+  },
+  "files.associations": {
+    "*.spec": "python",
+    "*.md": "markdown",
+    "*.in": "shellscript",
+    "*.list": "shellscript",
+    "*.log.*": "log",
+    "*.py": "python",
+    "*.pyx": "cython",
+    "*.cpp": "cpp",
+    "tuple": "cpp"
   }
 }

@@ -3,11 +3,13 @@
         {
             "name": "linux-gcc-x64",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "/usr/include/python3.8",
+                "/home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include"
             ],
             "compilerPath": "/usr/bin/g++",
             "cStandard": "${default}",
-            "cppStandard": "${default}",
+            "cppStandard": "c++17",
             "intelliSenseMode": "linux-gcc-x64",
             "compilerArgs": [],
             "compileCommands": "${workspaceFolder}/build/compile_commands.json"
