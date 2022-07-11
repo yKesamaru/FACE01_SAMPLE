@@ -7,26 +7,46 @@
 			"command": "/usr/bin/g++",
 			"args": [
 				"-Dadd_cpp_EXPORTS ",
+				"-I/usr/include",
+				"-I/usr/include/boost",
+				"-I/usr/include/eigen3",
+				"-I/usr/include/python3.8",
 				"-I/home/terms/bin/FACE01/include",
-				"-isystem",
-				"/home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include",
-				"-isystem",
-				"/usr/include/python3.8",
 				"-Wall",
 				"-O0",
 				"-g",
 				"-fPIC",
 				"-fvisibility=hidden",
 				"-shared",
+				"-Xlinker",
+				"-rpath",
+				"-Xlinker",
+				"/usr/lib/x86_64-linux-gnu",
 				"-o",
 				"${fileDirname}/${fileBasenameNoExtension}.so",
-				"${file}"
+				"${file}",
+				"-lboost_python38",
+				"-lboost_numpy38",
 			],
 			"options": {
 				"cwd": "${fileDirname}"
 			},
 			"problemMatcher": [
-				"$gcc"
+				{
+					"owner": "cpp",
+					"fileLocation": [
+						"relative",
+						"${workspaceRoot}"
+					],
+					"pattern": {
+						"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+						"file": 1,
+						"line": 2,
+						"column": 3,
+						"severity": 4,
+						"message": 5
+					}
+				}
 			],
 			"group": "build",
 			"detail": "コンパイラ: /usr/bin/g++"
@@ -36,25 +56,35 @@
 			"label": "tasks_build_make_exe",
 			"command": "/usr/bin/g++",
 			"args": [
-				"-I/home/terms/bin/FACE01/include",
 				"-isystem",
 				"/home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include",
-				"-isystem",
-				"/usr/include/python3.8",
+				"-Dadd_cpp_EXPORTS ",
+				"-I/usr/include",
+				"-I/usr/include/boost",
+				"-I/usr/include/eigen3",
+				"-I/usr/include/python3.8",
+				"-I/home/terms/bin/FACE01/include",
 				"-Wall",
 				"-O0",
 				"-g",
 				"-fPIC",
 				"-fvisibility=hidden",
+				// "-shared",
+				"-Xlinker",
+				"-rpath",
+				"-Xlinker",
+				"/usr/lib/x86_64-linux-gnu",
 				"-o",
 				"${fileDirname}/${fileBasenameNoExtension}",
-				"${file}"
+				"${file}",
+				"-lboost_python38",
+				"-lboost_numpy38",
 			],
 			"options": {
 				"cwd": "${fileDirname}"
 			},
 			"problemMatcher": [
-				"$gcc"
+				"$g++"
 			],
 			"group": "build",
 			"detail": "コンパイラ: /usr/bin/g++"
@@ -83,7 +113,7 @@
 				"cwd": "${fileDirname}"
 			},
 			"problemMatcher": [
-				"$gcc"
+				"$g++"
 			],
 			"group": "build",
 			"detail": "コンパイラ: /usr/bin/g++"

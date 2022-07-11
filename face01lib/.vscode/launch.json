@@ -1,6 +1,7 @@
 {
   "version": "0.2.0",
   "configurations": [
+
     {
       "name": "tasks.json_make_so",
       "type": "cppdbg",
@@ -111,6 +112,16 @@
       "program": "${file}",
       "console": "integratedTerminal",
       "justMyCode": true
+    },
+    {
+      "name": "CALL_FACE01.py",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01",
+      "program": "/home/terms/bin/FACE01/CALL_FACE01.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python",
+      // "justMyCode": false
     },
     {
       "name": "C/C++ Runner: Debug Session",

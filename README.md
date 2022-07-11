@@ -22,11 +22,56 @@
   - マージのコンフリクトを避けるため1.5系列のブランチを禁止する
 - 1.3.10でやる予定だったmarkdownによるドキュメントづくりを忘れていた
   - 1.4系列でやります
+  - rtspコードの改善
+    > rtsp://user:password@ip:port/ipcam_h264.sdp
+    > [](https://qiita.com/haseshin/items/59aed8bae8a1fa88fa21) 
 
 ### やったこと
 - `pip install pybind11`
 - VSCode上でC++をデバッグできる環境を作る
   - [pybind11 : First steps](https://pybind11.readthedocs.io/en/stable/basics.html)
+- -fvisibility
+  - > GCC付属のドキュメント（gcc.info）によると，-fvisibilityは，このVisibility属性のデフォルト値を指定するためのオプションで，-fvisibility=hiddenと指定すると，外部に公開することをソースコード中で明示したシンボル以外は外部から見えなくなるように各シンボルのVisibility属性が設定されます。 [第34回　C++とGCCの-fvisibilityオプション](https://gihyo.jp/lifestyle/serial/01/ganshiki-soushi/0034?page=2)
+- [ライブラリとは何なのか？](https://qiita.com/false-git@github/items/4b531467788b446a18d2)
+- [boost::python::numpyを使う、VSCodeでデバッグする](https://qiita.com/SolKul/items/600d6cd306509240a37a)
+  - pybind11は構文がよく理解できなかった。boost::pythonの構文を見てみると意外ととっつきやすかったので、pybind11を使わずboost::pythonを使用しようと思う。
+      - `sudo apt install libboost-all-dev`
+- [既存プログラムの関数を書き換える、強力で危険なLinux環境変数LD_PRELOAD](https://qiita.com/developer-kikikaikai/items/f6f87b2d1d7c3e14fb52)
+  - > rpathの指定には癖があり、Xlinkerでくくらないと効果が出ないようです。
+  `-Xlinker -rpath -Xlinker $(libdir)`
+- -Dadd_cpp_EXPORTS
+  - 調べても記事が見つからなかったのでコメントアウトした(task.json)
+- "-l"オプションの意味
+  - > 具体的には、"-l"オプションはリンクのときに使われるオプションで、"-l"の後に続く文字列に"lib"、後方に".a"をつけたライブラリを検索します。[小粋空間](https://www.koikikukan.com/archives/2018/03/06-000300.php)
+- 参照とポインタの違い
+  - [ポインタはポイント先を変更できますが、参照は参照先を変更できません。そもそも参照先を変更するための書き方が存在しません。](https://theolizer.com/cpp-school1/cpp-school1-16/#:~:text=%E3%83%9D%E3%82%A4%E3%83%B3%E3%82%BF%E3%81%AF%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E5%85%88%E3%82%92,%E6%9B%B8%E3%81%8D%E6%96%B9%E3%81%8C%E5%AD%98%E5%9C%A8%E3%81%97%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82&text=%E3%83%9D%E3%82%A4%E3%83%B3%E3%82%BF%E3%81%AF%E3%83%9D%E3%82%A4%E3%83%B3%E3%82%BF%E5%A4%89%E6%95%B0%E3%81%AB,%E6%9B%B8%E3%81%8D%E6%96%B9%E3%81%8C%E5%AD%98%E5%9C%A8%E3%81%97%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82)
+  - > ポインタはポイント先を変更できますが、参照は参照先を変更できません。 そもそも参照先を変更するための書き方が存在しません。 ポインタはポインタ変数に割り当てられているメモリ・アドレスを獲得できますが、参照は参照先アドレスが記録されているメモリ・アドレスを獲得できません。 そもそもそのための書き方が存在しません。
+  - 参照は型名の後ろに&をつける
+    - int&とかdouble&とか。
+- [imreadで返される配列について](https://qiita.com/Castiel/items/53ecbee3c06b9d92759e)
+  - > cv2.imreadで読み込んだframe変数について。
+    > 3次元配列が出力されていることがわかる．この配列をA×B×3次元配列とする．
+    > Aは画素の行数であり，Bは画素の列数である
+    > (読み込む画像のサイズによって，行列のサイズは変わるため変数A，Bとした)．3は，RGBの輝度である．
+    > 上の画像において，輝度が縦に大量に並んでいるが，これは
+    > [[[0行0列目の輝度]~[0行B列目の輝度]]~[[A行0列目の輝度]~[A行B列目の輝度]]]の順に並んでいる．
+    > (画像において0行0列目は，左上)
+    > よって，imreadで返される配列とは，画素の輝度を行列の順に格納したものである
+
+    > imreadで返された配列の顔画像の部分(顔画像の左上の行列から，右下の行列までの**区分行列**（ブロック行列）の輝度)
+    > だけを取り出すことで，切り取ることができた．
+- [NumPyの軸(axis)と次元数(ndim)とは何を意味するのか](https://deepage.net/features/numpy-axis.html)
+  - ![](img/PASTE_IMAGE_2022-07-10-09-17-39.png)
+- [numpy:shapeとstrides](https://xuzijian629.hatenablog.com/entry/2019/10/15/182746)
+  - > 多くのプログラミング言語で配列のデータは連続領域に確保されます。すなわち、a[k]とa[k+1]は隣り合ったメモリ領域に確保されます。しかし、NumPyの配列は必ずしも個々のデータを連続領域にもちません。NumPyの配列は、data, shape, stridesという3要素によって管理されます。
+    - data
+      - 先頭アドレス
+    - shape
+      - データの多次元サイズ情報
+    - strides
+      - データアクセスのindexが1増えるとメモリ領域が何byteずれるかを表します。
+- 
+
 #### g++ オプション
 - [](https://kaworu.jpn.org/cpp/g++)
 - g++ foo.cpp

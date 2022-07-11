@@ -1,7 +1,7 @@
 [
 {
   "directory": "/home/terms/bin/FACE01/face01lib/build",
-  "command": "/usr/bin/g++  -Dcpp_cal_angle_coodinate_EXPORTS -I/home/terms/bin/FACE01/include -isystem /home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include -isystem /usr/include/python3.8  -O1 -Wall -O0 -g -fPIC -fvisibility=hidden   -o CMakeFiles/cpp_cal_angle_coodinate.dir/cpp_cal_angle_coodinate.cpp.o -c /home/terms/bin/FACE01/face01lib/cpp_cal_angle_coodinate.cpp",
-  "file": "/home/terms/bin/FACE01/face01lib/cpp_cal_angle_coodinate.cpp"
+  "command": "/usr/bin/g++  -Dcpp_angle_of_view_specification_EXPORTS -I/usr/include/eigen3 -I/home/terms/bin/FACE01/include -isystem /home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include -isystem /usr/include/python3.8  -O1 -Wall -O0 -g -fPIC -fvisibility=hidden   -o CMakeFiles/cpp_angle_of_view_specification.dir/cpp_angle_of_view_specification.cpp.o -c /home/terms/bin/FACE01/face01lib/cpp_angle_of_view_specification.cpp",
+  "file": "/home/terms/bin/FACE01/face01lib/cpp_angle_of_view_specification.cpp"
 }
 ]

@@ -36,15 +36,16 @@ message("今動いているPythonは？: " ${Python_EXECUTABLE})
 
 # -I : インクルードパス
 include_directories(/usr/include)
+include_directories(/usr/include/eigen3)
 include_directories(/home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include)
 include_directories(/home/terms/bin/FACE01/include)
-# include_directories(/usr/include/python3.8)
+include_directories(/usr/include/python3.8)
 
 # -L : ライブラリ探索パス
 link_directories(/home/terms/bin/FACE01/lib/python3.8/site-packages)
 
 # Pythonモジュールを作成する場合
-pybind11_add_module(cpp_cal_angle_coodinate MODULE  cpp_cal_angle_coodinate.cpp)
+pybind11_add_module(cpp_angle_of_view_specification MODULE  cpp_angle_of_view_specification.cpp)
 
 # EXEファイルを作ってデバッグしたい場合
 # add_executable(add_cpp_exe add_cpp.cpp)

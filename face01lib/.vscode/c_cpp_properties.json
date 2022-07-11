@@ -5,9 +5,10 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/usr/include/python3.8",
+                "/usr/include/eigen3",
                 "/home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include"
             ],
-            "compilerPath": "/usr/bin/g++",
+            "compilerPath": "/usr/bin/gcc",
             "cStandard": "${default}",
             "cppStandard": "c++17",
             "intelliSenseMode": "linux-gcc-x64",
