@@ -542,7 +542,7 @@ $ sudo apt install -y \
         libx11-dev \
         python3-dev \
         python3-tk \
-        python3-venv 
+        python3-venv
 ```
 ### pip install
 ```python

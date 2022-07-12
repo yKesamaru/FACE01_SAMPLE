@@ -801,3 +801,6 @@ did not match C++ signature:
 [2022-07-11 09:23:50,190] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
 [2022-07-11 09:26:30,529] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
 [2022-07-11 09:31:12,795] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-12 08:49:53,362] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-12 08:52:08,998] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-12 12:50:51,792] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
