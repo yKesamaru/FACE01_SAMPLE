@@ -301,3 +301,506 @@ ModuleNotFoundError: No module named 'face_recognition_models'
 [2022-06-27 11:02:06,777] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
 [2022-06-27 11:02:35,456] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
 [2022-06-27 11:17:39,947] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-06-27 13:52:43,401] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-03 19:45:58,811] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-04 11:50:24,647] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-04 12:01:06,037] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-04 12:01:21,287] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-04 12:04:56,416] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-04 13:31:13,659] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-05 11:17:06,243] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-05 12:34:07,575] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-05 12:35:22,456] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-05 13:07:16,942] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-05 13:08:36,670] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-06 08:39:25,443] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-06 08:40:29,914] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-06 08:41:30,207] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-06 08:41:57,865] [__main__] [CALL_FACE01.py] [WARNING] modify_frame(): incompatible function arguments. The following argument types are supported:
+    1. (arg0: str, arg1: numpy.ndarray[numpy.float64[m, n], flags.writeable], arg2: Tuple[int, int, int, int], arg3: Tuple[int, int, int, int], arg4: Tuple[int, int, int, int], arg5: Tuple[int, int, int, int], arg6: Tuple[int, int, int, int]) -> int
+
+Invoked with: 'TOP_LEFT', array([[[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       ...,
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [170, 184, 232],
+        [165, 181, 229],
+        [153, 169, 217]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [168, 182, 230],
+        [164, 180, 228],
+        [153, 169, 217]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [168, 182, 230],
+        [164, 180, 228],
+        [153, 169, 217]]], dtype=uint8)
+[2022-07-06 08:45:23,494] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-06 08:45:34,286] [__main__] [CALL_FACE01.py] [WARNING] modify_frame(): incompatible function arguments. The following argument types are supported:
+    1. (arg0: str, arg1: numpy.ndarray[numpy.float64[m, n], flags.writeable], arg2: Tuple[int, int, int, int], arg3: Tuple[int, int, int, int], arg4: Tuple[int, int, int, int], arg5: Tuple[int, int, int, int], arg6: Tuple[int, int, int, int]) -> int
+
+Invoked with: 'TOP_LEFT', array([[[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       ...,
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [170, 184, 232],
+        [165, 181, 229],
+        [153, 169, 217]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [168, 182, 230],
+        [164, 180, 228],
+        [153, 169, 217]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [168, 182, 230],
+        [164, 180, 228],
+        [153, 169, 217]]], dtype=uint8)
+[2022-07-06 08:46:31,725] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-06 08:46:38,160] [__main__] [CALL_FACE01.py] [WARNING] modify_frame(): incompatible function arguments. The following argument types are supported:
+    1. (arg0: str, arg1: numpy.ndarray[numpy.float64[m, n], flags.writeable], arg2: Tuple[int, int, int, int], arg3: Tuple[int, int, int, int], arg4: Tuple[int, int, int, int], arg5: Tuple[int, int, int, int], arg6: Tuple[int, int, int, int]) -> int
+
+Invoked with: 'TOP_LEFT', array([[[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       ...,
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [170, 184, 232],
+        [165, 181, 229],
+        [153, 169, 217]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [168, 182, 230],
+        [164, 180, 228],
+        [153, 169, 217]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [168, 182, 230],
+        [164, 180, 228],
+        [153, 169, 217]]], dtype=uint8), (0, 540, 0, 960), (0, 540, 960, 1920), (540, 1080, 0, 960), (540, 1080, 960, 1920), (270, 810, 480, 1440)
+[2022-07-06 08:54:45,281] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-06 08:54:55,396] [__main__] [CALL_FACE01.py] [WARNING] modify_frame(): incompatible function arguments. The following argument types are supported:
+    1. (arg0: numpy.ndarray[numpy.float64[m, n], flags.writeable], arg1: Tuple[int, int, int, int], arg2: Tuple[int, int, int, int], arg3: Tuple[int, int, int, int], arg4: Tuple[int, int, int, int], arg5: Tuple[int, int, int, int]) -> int
+
+Invoked with: array([[[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       ...,
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [170, 184, 232],
+        [165, 181, 229],
+        [153, 169, 217]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [168, 182, 230],
+        [164, 180, 228],
+        [153, 169, 217]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [168, 182, 230],
+        [164, 180, 228],
+        [153, 169, 217]]], dtype=uint8), (0, 540, 0, 960), (0, 540, 960, 1920), (540, 1080, 0, 960), (540, 1080, 960, 1920), (270, 810, 480, 1440)
+[2022-07-06 08:56:19,572] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-06 08:56:53,830] [__main__] [CALL_FACE01.py] [WARNING] modify_frame(): incompatible function arguments. The following argument types are supported:
+    1. (arg0: numpy.ndarray[numpy.float64[m, n], flags.writeable], arg1: Tuple[int, int, int, int], arg2: Tuple[int, int, int, int], arg3: Tuple[int, int, int, int], arg4: Tuple[int, int, int, int], arg5: Tuple[int, int, int, int]) -> int
+
+Invoked with: array([[[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       ...,
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [170, 184, 232],
+        [165, 181, 229],
+        [153, 169, 217]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [168, 182, 230],
+        [164, 180, 228],
+        [153, 169, 217]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [168, 182, 230],
+        [164, 180, 228],
+        [153, 169, 217]]], dtype=uint8), (0, 540, 0, 960), (0, 540, 960, 1920), (540, 1080, 0, 960), (540, 1080, 960, 1920), (270, 810, 480, 1440)
+[2022-07-06 08:59:37,521] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-06 08:59:40,164] [__main__] [CALL_FACE01.py] [WARNING] modify_frame(): incompatible function arguments. The following argument types are supported:
+    1. (arg0: numpy.ndarray[numpy.float64[m, n], flags.writeable], arg1: Tuple[int, int, int, int], arg2: Tuple[int, int, int, int], arg3: Tuple[int, int, int, int], arg4: Tuple[int, int, int, int], arg5: Tuple[int, int, int, int]) -> int
+
+Invoked with: array([[[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       ...,
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [170, 184, 232],
+        [165, 181, 229],
+        [153, 169, 217]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [168, 182, 230],
+        [164, 180, 228],
+        [153, 169, 217]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [168, 182, 230],
+        [164, 180, 228],
+        [153, 169, 217]]], dtype=uint8), (0, 540, 0, 960), (0, 540, 960, 1920), (540, 1080, 0, 960), (540, 1080, 960, 1920), (270, 810, 480, 1440)
+[2022-07-06 12:03:10,441] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-06 12:03:17,055] [__main__] [CALL_FACE01.py] [WARNING] modify_frame(): incompatible function arguments. The following argument types are supported:
+    1. (arg0: numpy.ndarray[numpy.uint8[m, n], flags.writeable, flags.c_contiguous], arg1: Tuple[int, int, int, int], arg2: Tuple[int, int, int, int], arg3: Tuple[int, int, int, int], arg4: Tuple[int, int, int, int], arg5: Tuple[int, int, int, int]) -> None
+
+Invoked with: array([[[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       ...,
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [170, 184, 232],
+        [165, 181, 229],
+        [153, 169, 217]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [168, 182, 230],
+        [164, 180, 228],
+        [153, 169, 217]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [168, 182, 230],
+        [164, 180, 228],
+        [153, 169, 217]]], dtype=uint8), (0, 540, 0, 960), (0, 540, 960, 1920), (540, 1080, 0, 960), (540, 1080, 960, 1920), (270, 810, 480, 1440)
+[2022-07-06 12:04:02,160] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-06 14:03:38,962] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-06 14:04:00,513] [__main__] [CALL_FACE01.py] [WARNING] modify_frame(): incompatible function arguments. The following argument types are supported:
+    1. (arg0: numpy.ndarray[numpy.uint8[m, n], flags.writeable, flags.c_contiguous], arg1: Tuple[int, int, int, int], arg2: Tuple[int, int, int, int], arg3: Tuple[int, int, int, int], arg4: Tuple[int, int, int, int], arg5: Tuple[int, int, int, int]) -> None
+
+Invoked with: array([[[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0]],
+
+       ...,
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [170, 184, 232],
+        [165, 181, 229],
+        [153, 169, 217]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [168, 182, 230],
+        [164, 180, 228],
+        [153, 169, 217]],
+
+       [[  0,   0,   0],
+        [  0,   0,   0],
+        [  0,   0,   0],
+        ...,
+        [168, 182, 230],
+        [164, 180, 228],
+        [153, 169, 217]]], dtype=uint8), (0, 540, 0, 960), (0, 540, 960, 1920), (540, 1080, 0, 960), (540, 1080, 960, 1920), (270, 810, 480, 1440)
+[2022-07-08 20:36:21,592] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-09 10:55:19,262] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-09 10:56:38,564] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-09 11:00:38,971] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-09 17:39:35,000] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-09 17:39:48,731] [__main__] [CALL_FACE01.py] [WARNING] Python argument types in
+    face01lib.sample.size(str, numpy.ndarray, tuple)
+did not match C++ signature:
+    size(char const*, boost::python::numpy::ndarray {lvalue}, std::tuple<int, int, int, int>)
+[2022-07-09 17:56:25,933] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-09 17:56:31,992] [__main__] [CALL_FACE01.py] [WARNING] No registered converter was able to produce a C++ rvalue of type std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > from this Python object of type int
+[2022-07-09 18:27:38,409] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-09 18:27:43,472] [__main__] [CALL_FACE01.py] [WARNING] No registered converter was able to produce a C++ rvalue of type std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > from this Python object of type int
+[2022-07-09 18:28:14,096] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-09 18:30:18,934] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-09 18:31:43,545] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-09 18:32:46,134] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-10 08:12:34,298] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-10 12:51:09,557] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-10 12:51:09,934] [__main__] [CALL_FACE01.py] [WARNING] Python argument types in
+    face01lib.sample.size(str, numpy.ndarray, tuple)
+did not match C++ signature:
+    size(char const*, Eigen::Matrix<double, 3, 3, 1, 3, 3> {lvalue}, boost::python::tuple {lvalue})
+[2022-07-10 12:53:27,020] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-10 12:53:27,391] [__main__] [CALL_FACE01.py] [WARNING] Python argument types in
+    face01lib.sample.size(str, numpy.ndarray, tuple)
+did not match C++ signature:
+    size(char const*, Eigen::Matrix<double, -1, -1, 1, -1, -1> {lvalue}, boost::python::tuple {lvalue})
+[2022-07-10 15:18:20,579] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-10 15:18:20,948] [__main__] [CALL_FACE01.py] [WARNING] Python argument types in
+    face01lib.sample.size(str, numpy.ndarray, tuple)
+did not match C++ signature:
+    size(char const*, Eigen::Matrix<double, -1, -1, 1, -1, -1> {lvalue}, boost::python::tuple {lvalue})
+[2022-07-10 15:18:37,618] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-10 15:58:57,655] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-10 16:33:00,376] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-10 21:34:09,399] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-10 21:34:14,617] [__main__] [CALL_FACE01.py] [WARNING] name 'float64' is not defined
+[2022-07-11 05:14:58,397] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 05:15:06,172] [__main__] [CALL_FACE01.py] [WARNING] name 'dowble' is not defined
+[2022-07-11 05:16:45,297] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 05:16:52,307] [__main__] [CALL_FACE01.py] [WARNING] name 'double' is not defined
+[2022-07-11 05:19:00,549] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 05:22:04,507] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 05:23:17,307] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 05:24:04,875] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 05:24:42,368] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 07:48:54,947] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 07:51:20,798] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 07:55:43,706] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 08:06:58,923] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 08:12:32,736] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 08:13:36,478] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 08:22:13,359] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 08:29:55,330] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 08:42:55,260] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 08:58:26,643] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 09:16:17,858] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 09:23:50,190] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 09:26:30,529] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-11 09:31:12,795] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-12 08:49:53,362] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-12 08:52:08,998] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-12 12:50:51,792] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます

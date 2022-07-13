@@ -2,13 +2,54 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "FACE01_2022年5月20日",
+      "name": "(gdb) 起動",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": ["1080", "1920"],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+          {
+              "description": "gdb の再フォーマットを有効にする",
+              "text": "-enable-pretty-printing",
+              "ignoreFailures": true
+          },
+          {
+              "description":  "逆アセンブリ フレーバーを Intel に設定",
+              "text": "-gdb-set disassembly-flavor intel",
+              "ignoreFailures": true
+          }
+      ]
+    },
+
+    {
+      "name": "WAKANA",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "CALL_FACE01.py",
       "type": "python",
       "request": "launch",
       "cwd": "/home/terms/bin/FACE01",
-      // "program": "${file}",
-      // "program": "/home/terms/bin/FACE01/FACE01.py",
       "program": "/home/terms/bin/FACE01/CALL_FACE01.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python",
+      // "justMyCode": false
+    },
+    {
+      "name": "Module_test",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01/face01lib",
+      "program": "module_test.py",
       "console": "integratedTerminal",
       "python": "/home/terms/bin/FACE01/bin/python",
       // "justMyCode": false
@@ -22,26 +63,5 @@
       "console": "integratedTerminal",
       "python": "/home/terms/bin/FACE01GRAPHICS_129/bin/python"
     },
-    {
-      "name": "C/C++ Runner: Debug Session",
-      "type": "cppdbg",
-      "request": "launch",
-      "args": [],
-      "stopAtEntry": false,
-      "cwd": "/home/terms/bin/FACE01GRAPHICS_129",
-      "environment": [],
-      "program": "/home/terms/bin/FACE01GRAPHICS_129/build/Debug/outDebug",
-      "internalConsoleOptions": "openOnSessionStart",
-      "MIMode": "gdb",
-      "miDebuggerPath": "/usr/bin/gdb",
-      "console": "integratedTerminal",
-      "setupCommands": [
-        {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
-        }
-      ]
-    }
   ]
 }

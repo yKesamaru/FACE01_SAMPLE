@@ -1,0 +1,14 @@
+{
+    "version": "0.2",
+    "ignorePaths": [],
+    "dictionaryDefinitions": [
+        {
+            "name": "custom-dictionary-user",
+            "path": "~/.cspell/custom-dictionary-user.txt"
+        }
+    ],
+    "dictionaries": [],
+    "words": [],
+    "ignoreWords": [],
+    "import": []
+}

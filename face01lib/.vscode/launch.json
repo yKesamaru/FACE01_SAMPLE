@@ -1,17 +1,146 @@
 {
-    // IntelliSense を使用して利用可能な属性を学べます。
-    // 既存の属性の説明をホバーして表示します。
-    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Python: Current File",
-            "type": "python",
-            "request": "launch",
-            "python": "/usr/bin/python3",
-            "program": "${file}",
-            "cwd": "/home/terms/ビデオ/one_drive/FACE01GRAPHICS123_UBUNTU_VENV/face01lib",
-            "console": "integratedTerminal"
+  "version": "0.2.0",
+  "configurations": [
+
+    {
+      "name": "tasks.json_make_so",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}.so",
+      "args": [
+        "2000","4000"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "sourceFileMap":{
+        "<source-path>": {
+          "editorPath": ".",
+          "useForBreakpoints": true
         }
-    ]
+      },
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+          {
+              "description": "gdb の再フォーマットを有効にする",
+              "text": "-enable-pretty-printing",
+              "ignoreFailures": true
+          },
+          {
+              "description":  "逆アセンブリ フレーバーを Intel に設定",
+              "text": "-gdb-set disassembly-flavor intel",
+              "ignoreFailures": true
+          },
+        ],
+      "preLaunchTask": "tasks_build_make_so",
+      "miDebuggerPath": "/usr/bin/gdb",
+    },
+    {
+      "name": "tasks.json_make_exe",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": [
+        "1080",
+        "1920"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "sourceFileMap":{
+        "<source-path>": {
+          "editorPath": ".",
+          "useForBreakpoints": true
+        }
+      },
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+          {
+              "description": "gdb の再フォーマットを有効にする",
+              "text": "-enable-pretty-printing",
+              "ignoreFailures": true
+          },
+          {
+              "description":  "逆アセンブリ フレーバーを Intel に設定",
+              "text": "-gdb-set disassembly-flavor intel",
+              "ignoreFailures": true
+          },
+        ],
+      "preLaunchTask": "tasks_build_make_exe",
+      "miDebuggerPath": "/usr/bin/gdb",
+    },
+    {
+      "name": "CMakeで出来たexeを使う用",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/build/${fileBasenameNoExtension}_exe",
+      "args": [
+        "2","4"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "sourceFileMap":{
+        "<source-path>": {
+          "editorPath": ".",
+          "useForBreakpoints": true
+        }
+      },
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+          {
+              "description": "gdb の再フォーマットを有効にする",
+              "text": "-enable-pretty-printing",
+              "ignoreFailures": true
+          },
+          // {
+          //     "description":  "逆アセンブリ フレーバーを Intel に設定",
+          //     "text": "-gdb-set disassembly-flavor intel",
+          //     "ignoreFailures": true
+          // },
+        ],
+      // "preLaunchTask": "tasks_build",
+      "miDebuggerPath": "/usr/bin/gdb",
+    },
+    {
+      "name": "Python: 現在のファイル",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "CALL_FACE01.py",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01",
+      "program": "/home/terms/bin/FACE01/CALL_FACE01.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python",
+      // "justMyCode": false
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "cwd": "/home/terms/bin/FACE01/face01lib",
+      "program": "/home/terms/bin/FACE01/face01lib/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
 }

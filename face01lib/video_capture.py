@@ -1,5 +1,7 @@
+from ast import Return
 import logging
 from os import chdir, environ
+from pickletools import float8
 from traceback import format_exc
 
 from cv2 import resize, CAP_PROP_FPS, CAP_PROP_FRAME_HEIGHT, CAP_PROP_FRAME_WIDTH, VideoCapture, CAP_FFMPEG, destroyAllWindows, imshow, waitKey, destroyAllWindows
@@ -12,14 +14,37 @@ from PIL import Image
 import numpy as np
 import cv2
 from sys import exit
+from face01lib import return_tuple
+from face01lib.sample import size
 
 
 
 """TODO opencvの環境変数変更 要調査"""
 # environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;udp"
 environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;tcp"
+"""see bellow
 
+"""
 
+"""
+cv2.imreadで読み込んだframe変数について。
+> 3次元配列が出力されていることがわかる．この配列をA×B×3次元配列とする．
+> Aは画素の行数であり，Bは画素の列数である
+> (読み込む画像のサイズによって，行列のサイズは変わるため変数A，Bとした)．3は，RGBの輝度である．
+> 上の画像において，輝度が縦に大量に並んでいるが，これは
+> [[[0行0列目の輝度]~[0行B列目の輝度]]~[[A行0列目の輝度]~[A行B列目の輝度]]]の順に並んでいる．
+> (画像において0行0列目は，左上)
+> よって，imreadで返される配列とは，画素の輝度を行列の順に格納したものである
+
+> imreadで返された配列の顔画像の部分(顔画像の左上の行列から，右下の行列までの**区分行列**（ブロック行列）の輝度)
+> だけを取り出すことで，切り取ることができた．
+
+[imreadで返される配列について](https://qiita.com/Castiel/items/53ecbee3c06b9d92759e)
+"""
+
+"""
+[NumPyの軸(axis)と次元数(ndim)とは何を意味するのか](https://deepage.net/features/numpy-axis.html)
+"""
 
 """Logging"""
 logger = logging.getLogger(__name__)
@@ -39,10 +64,6 @@ logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 
 
-environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;tcp"
-"""see bellow
-
-"""
 
 def resize_frame(set_width, set_height, frame):
     small_frame = resize(frame, (set_width, set_height))
@@ -89,7 +110,7 @@ def cal_angle_coordinate(height:int, width:int) -> tuple:
     return TOP_LEFT,TOP_RIGHT,BOTTOM_LEFT,BOTTOM_RIGHT,CENTER
 
 # frameに対してエリア指定
-def angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER):
+def angle_of_view_specification(set_area: str, frame: np.ndarray, TOP_LEFT, TOP_RIGHT: tuple, BOTTOM_LEFT: tuple, BOTTOM_RIGHT: tuple, CENTER: tuple):
     if set_area=='NONE':
         pass
     elif set_area=='TOP_LEFT':
@@ -153,7 +174,8 @@ def frame_generator(args_dict):
     set_area = args_dict["set_area"] 
     # 画角値（四隅の座標:Tuple）算出
     if  TOP_LEFT == 0:
-        TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER = cal_angle_coordinate(args_dict["height"], args_dict["width"])
+        # TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER = cal_angle_coordinate(args_dict["height"], args_dict["width"])
+        TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER = return_tuple(args_dict["height"], args_dict["width"])
 
     if (movie == 'usb' or movie == 'USB'):   # USB カメラ読み込み時使用
         camera_number:int = 0
@@ -180,7 +202,7 @@ def frame_generator(args_dict):
             while True:
                 # frame_skipの数値に満たない場合は処理をスキップ
                 for frame_skip_counter in range(1, args_dict["frame_skip"]):
-                    response = requests.get(url, auth=HTTPDigestAuth(args_dict["user"], args_dict["passwd"]))
+                    response = requests.get(url, auth = HTTPDigestAuth(args_dict["user"], args_dict["passwd"]))
                     if frame_skip_counter < args_dict["frame_skip"]:
                         continue
                 # {'Status': '200', 'Connection': 'Close', 'Set-Cookie': 'Session=0', 'Accept-Ranges': 'bytes',
@@ -201,7 +223,7 @@ def frame_generator(args_dict):
                     """
                     # 画角値をもとに各frameを縮小
                     # python版
-                    frame = angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)
+                    frame = angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)  # type: ignore
                     # 各frameリサイズ
                     resized_frame = resize_frame(set_width, set_height, frame)
                     """DEBUG
@@ -244,7 +266,7 @@ def frame_generator(args_dict):
                 ret, frame = vcap.read()
                 if frame_skip_counter < args_dict["frame_skip"]:
                     continue
-            if ret == False:
+            if Return == False:
                 logger.warning("movieが開けません")
                 logger.warning("以下のエラーをシステム管理者へお伝えください")
                 logger.warning("-" * 20)
@@ -253,9 +275,11 @@ def frame_generator(args_dict):
                 finalize(args_dict["vcap"])
                 break
             else:
+                # frame = frame.astype(dtype='float64')
+                size(frame.shape, frame.strides, set_area, frame, TOP_LEFT)
                 # 画角値をもとに各frameを縮小
                 # python版
-                frame = angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)
+                frame = angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)  # type: ignore
                 # 各frameリサイズ
                 resized_frame = resize_frame(set_width, set_height, frame)
                 """DEBUG
