@@ -1,15 +1,15 @@
 import cv2
 import mediapipe as mp
-import numpy as np
 from typing import List, Tuple
 import datetime
 from PIL import Image
 from time import perf_counter
+import logging
 
-# セットアップ
-# INPUT = "test.mp4"
+# 仮
+INPUT = "test.mp4"
 INPUT = "some_people.mp4"
-# INPUT = "顔無し区間を含んだテスト動画.mp4"
+INPUT = "顔無し区間を含んだテスト動画.mp4"
 SET_WIDTH = 750
 
 def mp_face_detection_func(frame, model_selection=0, min_detection_confidence=0.4):
@@ -63,23 +63,42 @@ def Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR):
     HANDLING_FRAME_TIME = (HANDLING_FRAME_TIME_REAR - HANDLING_FRAME_TIME_FRONT)  ## 小数点以下がミリ秒
     return HANDLING_FRAME_TIME
 
-vcap = cv2.VideoCapture(INPUT)
-while True:
-    ret, frame = vcap.read()
-    frame, set_width, set_height = resize_frame(frame, SET_WIDTH)
-    # """DEBUG
-    cv2.imshow("DEBUG", frame)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        cv2.destroyAllWindows()
-        break
-    # """
-    if ret:
-        face_location_list = return_face_location_list(frame, set_width, set_height, model_selection=0, min_detection_confidence=0.4)
-        pil_img_obj_rgb = pil_img_rgb_instance(frame)
-        for location in face_location_list:
-            HANDLING_FRAME_TIME_FRONT = perf_counter()
-            filename = make_crop_face_image(pil_img_obj_rgb, location[0], location[3], location[1], location[2])
-            HANDLING_FRAME_TIME_REAR = perf_counter()
-            HANDLING_FRAME_TIME = Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR)
+def example(LEVEL, INPUT, SET_WIDTH):
+    """Logging"""
+    logger = logging.getLogger(__name__)
+    if LEVEL == "DEBUG":
+        logger.setLevel(logging.DEBUG)
+    else:
+        logger.setLevel(logging.INFO)
 
-            print(face_location_list, filename, HANDLING_FRAME_TIME)
+    formatter = logging.Formatter('[%(asctime)s] [%(name)s] [%(filename)s] [%(levelname)s] %(message)s')
+    file_handler = logging.FileHandler('example.log', mode='a')
+    file_handler.setLevel(logging.DEBUG)
+    file_handler.setFormatter(formatter)
+    stream_handler = logging.StreamHandler()
+    stream_handler.setLevel(logging.DEBUG)
+    stream_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+    logger.addHandler(stream_handler)
+
+    vcap = cv2.VideoCapture(INPUT)
+    while True:
+        ret, frame = vcap.read()
+        frame, set_width, set_height = resize_frame(frame, SET_WIDTH)
+        if LEVEL == "DEBUG":
+            cv2.imshow("DEBUG", frame)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                cv2.destroyAllWindows()
+                break
+        if ret:
+            face_location_list = return_face_location_list(frame, set_width, set_height, model_selection=0, min_detection_confidence=0.4)
+            pil_img_obj_rgb = pil_img_rgb_instance(frame)
+            for location in face_location_list:
+                HANDLING_FRAME_TIME_FRONT = perf_counter()
+                filename = make_crop_face_image(pil_img_obj_rgb, location[0], location[3], location[1], location[2])
+                HANDLING_FRAME_TIME_REAR = perf_counter()
+                HANDLING_FRAME_TIME = Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR)
+
+                logger.debug((face_location_list, filename, HANDLING_FRAME_TIME))
+
+example("DEBUG", INPUT, SET_WIDTH)
