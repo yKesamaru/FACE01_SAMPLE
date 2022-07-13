@@ -1,10 +1,16 @@
+import logging
+from datetime import datetime
+from io import BytesIO
+from time import perf_counter
+from typing import List, Tuple
+
 import cv2
 import mediapipe as mp
-from typing import List, Tuple
-from datetime import datetime
+import requests
 from PIL import Image
-from time import perf_counter
-import logging
+from requests.auth import HTTPDigestAuth
+import numpy as np
+from traceback import format_exc
 
 
 def mp_face_detection_func(frame, model_selection=0, min_detection_confidence=0.4):
@@ -66,6 +72,39 @@ def cal_specify_date() -> None:
         print('指定日付を過ぎました')
         exit(0)
 
+def finalize(vcap):
+    vcap.release()
+    cv2.destroyAllWindows()
+
+def frame_generator(INPUT, vcap, logger):
+    """INPUT source"""
+    if 'http' in INPUT:
+        while True:
+            response = requests.get(INPUT, auth = HTTPDigestAuth("", ""))  # user, passwd
+            if response.headers['Content-type'] == 'image/jpeg':
+                img_bin = BytesIO(response.content)
+                img_pil = Image.open(img_bin)
+                img_np  = np.asarray(img_pil)
+                frame  = cv2.cvtColor(img_np, cv2.COLOR_RGBA2BGR)
+                ret = True
+                yield frame
+            else:
+                logger.warning("INPUTが開けません")
+                logger.warning(format_exc(limit=None, chain=True))
+    else:
+        while vcap.isOpened(): 
+            ret, frame = vcap.read()
+            if not ret:
+                logger.warning("INPUTが開けません")
+                logger.warning("以下のエラーをシステム管理者へお伝えください")
+                logger.warning("-" * 20)
+                logger.warning(format_exc(limit=None, chain=True))
+                logger.warning("-" * 20)
+                finalize(vcap)
+                break
+            yield frame
+
+
 def example(LEVEL, INPUT, SET_WIDTH):
     """Logging"""
     logger = logging.getLogger(__name__)
@@ -87,31 +126,32 @@ def example(LEVEL, INPUT, SET_WIDTH):
     """Limit"""
     cal_specify_date()
 
-    vcap = cv2.VideoCapture(INPUT)
+    vcap = cv2.VideoCapture(INPUT, cv2.CAP_FFMPEG)
     while True:
-        ret, frame = vcap.read()
+        frame_generator_obj = frame_generator(INPUT, vcap, logger)
+        frame = frame_generator_obj.__next__()
         frame, set_width, set_height = resize_frame(frame, SET_WIDTH)
         if LEVEL == "DEBUG":
             cv2.imshow("DEBUG", frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 cv2.destroyAllWindows()
                 break
-        if ret:
-            face_location_list = return_face_location_list(frame, set_width, set_height, model_selection=0, min_detection_confidence=0.4)
-            pil_img_obj_rgb = pil_img_rgb_instance(frame)
-            for location in face_location_list:
-                HANDLING_FRAME_TIME_FRONT = perf_counter()
-                filename = make_crop_face_image(pil_img_obj_rgb, location[0], location[3], location[1], location[2])
-                HANDLING_FRAME_TIME_REAR = perf_counter()
-                HANDLING_FRAME_TIME = Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR)
+        face_location_list = return_face_location_list(frame, set_width, set_height, model_selection=0, min_detection_confidence=0.4)
+        pil_img_obj_rgb = pil_img_rgb_instance(frame)
+        for location in face_location_list:
+            HANDLING_FRAME_TIME_FRONT = perf_counter()
+            filename = make_crop_face_image(pil_img_obj_rgb, location[0], location[3], location[1], location[2])
+            HANDLING_FRAME_TIME_REAR = perf_counter()
+            HANDLING_FRAME_TIME = Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR)
 
-                logger.debug((face_location_list, filename, HANDLING_FRAME_TIME))
+            logger.debug((face_location_list, filename, HANDLING_FRAME_TIME))
 
 if __name__ == '__main__':
     # 仮
     INPUT = "test.mp4"
     INPUT = "some_people.mp4"
     INPUT = "顔無し区間を含んだテスト動画.mp4"
+    INPUT = "http://175.210.52.167:84/SnapshotJPEG?Resolution=640x480"
     SET_WIDTH = 750
 
     example("DEBUG", INPUT, SET_WIDTH)
