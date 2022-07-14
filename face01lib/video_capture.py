@@ -284,8 +284,10 @@ def frame_generator(args_dict):
                 finalize(args_dict["vcap"])
                 break
             else:
+                """C++実装試験
                 # frame = frame.astype(dtype='float64')
                 size(frame.shape, frame.strides, set_area, frame, TOP_LEFT)
+                """
                 # 画角値をもとに各frameを縮小
                 # python版
                 frame = angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)  # type: ignore

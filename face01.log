@@ -847,3 +847,8 @@ did not match C++ signature:
 NoneType: None
 [2022-07-14 08:58:23,668] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
 [2022-07-14 08:58:27,136] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-07-14 10:22:39,397] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 10:24:45,241] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 10:28:21,346] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 11:05:42,757] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 06:25:15,145] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます

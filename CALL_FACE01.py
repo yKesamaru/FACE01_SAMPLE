@@ -82,8 +82,9 @@ def common_main(exec_times):
                                 "\t", "出力\t", pict, "\n",
                                 "-------\n"
                             )
-                            """DEBUG"""
+                            """DEBUG
                             print(f"fg.args_dict.__sizeof__(): {fg.args_dict.__sizeof__()}MB")
+                            """
                     if fg.args_dict["headless"] == False:
                         imgbytes = cv2.imencode(".png", img)[1].tobytes()
                         window["display"].update(data = imgbytes)
@@ -109,9 +110,10 @@ def extract_face_locations(exec_times):
         if i > exec_times:
             break
         next_frame = next_frame_gen_obj.__next__()
-        """DEBUG"""
+        """DEBUG
         # fg.frame_imshow_for_debug(next_frame)
         print(f"fg.args_dict.__sizeof__(): {fg.args_dict.__sizeof__()}MB")
+        """
         frame_datas_array = fg.frame_pre_processing(fg.args_dict,next_frame)
         for frame_datas in frame_datas_array:
             for face_location in frame_datas["face_location_list"]:
