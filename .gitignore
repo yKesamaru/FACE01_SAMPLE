@@ -7,7 +7,7 @@ face01lib/build/Testing
 priset_face_images/*
 share/*
 noFace/*
-output/*
+output/*.png
 lib*/*
 build/*
 __pycache__

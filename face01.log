@@ -804,3 +804,46 @@ did not match C++ signature:
 [2022-07-12 08:49:53,362] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
 [2022-07-12 08:52:08,998] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
 [2022-07-12 12:50:51,792] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:44:24,291] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:44:27,896] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：-5
+[2022-07-14 08:46:09,973] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:48:05,919] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:48:44,515] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-07-14 08:48:44,516] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:48:44,518] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-07-14 08:48:44,519] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:48:44,519] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-07-14 08:52:58,823] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:53:08,495] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-07-14 08:53:08,496] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:53:08,497] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-07-14 08:53:08,497] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:53:08,498] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-07-14 08:53:52,788] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:54:29,283] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:54:29,569] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-07-14 08:54:29,569] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:54:29,569] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-07-14 08:54:29,570] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:54:29,570] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-07-14 08:55:28,270] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:55:28,539] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-07-14 08:55:28,539] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:55:28,539] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-07-14 08:55:28,540] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:55:28,540] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-07-14 08:55:57,467] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:57:52,773] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:58:08,860] [face01lib.video_capture] [video_capture.py] [WARNING] USBカメラの受信が出来ません
+[2022-07-14 08:58:10,811] [face01lib.video_capture] [video_capture.py] [WARNING] 以下のエラーをシステム管理者へお伝えください
+[2022-07-14 08:58:12,463] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:58:14,166] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-07-14 08:58:18,978] [face01lib.video_capture] [video_capture.py] [ERROR] 通信に異常が発生しました
+NoneType: None
+[2022-07-14 08:58:23,668] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:58:27,136] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します

@@ -138,11 +138,20 @@ def return_vcap(movie):
     if movie=='usb' or movie == 'USB':   # USB カメラ読み込み時使用
         live_camera_number:int = 0
         for camera_number in range(-5, 5):
-            vcap = VideoCapture(camera_number)
+            vcap = VideoCapture(camera_number, CAP_FFMPEG)
             ret, frame = vcap.read()
             if ret:
-                live_camera_number = camera_number 
-        vcap = VideoCapture(live_camera_number)
+                live_camera_number = camera_number
+            if camera_number == 4 and ret is False:
+                logger.warning("USBカメラの受信が出来ません")
+                logger.warning("以下のエラーをシステム管理者へお伝えください")
+                logger.warning("-" * 20)
+                logger.warning(format_exc(limit=None, chain=True))
+                logger.exception("USBカメラとの通信に異常が発生しました")
+                logger.warning("-" * 20)
+                logger.warning("終了します")
+                exit(0)
+        vcap = VideoCapture(live_camera_number, CAP_FFMPEG)
         return vcap
     else:
         vcap = VideoCapture(movie, CAP_FFMPEG)
