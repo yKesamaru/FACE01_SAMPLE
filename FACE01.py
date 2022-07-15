@@ -1,29 +1,31 @@
-from datetime import datetime
 import logging
-from sys import version_info, version, exit
-from time import perf_counter
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from configparser import ConfigParser
+from datetime import datetime
 from os import chdir, environ
 from os.path import dirname, exists
 from platform import system
 from shutil import move
+from sys import exit, version, version_info
+from time import perf_counter
 from traceback import format_exc
 from typing import Dict, List, Tuple
 
 import cv2
 import mediapipe as mp
 import numpy as np
-import PySimpleGUI as sg
 from GPUtil import getGPUs
 from PIL import Image, ImageDraw, ImageFont
 from psutil import cpu_count, cpu_freq, virtual_memory
 
 import face01lib.api as faceapi
-import face01lib.video_capture as video_capture
+import face01lib.LoadImage
+# import face01lib.video_capture as video_capture  # py
+import face01lib.vidCap as video_capture  # so
+from face01lib.Calc import Cal
 from face01lib.load_priset_image import load_priset_image
-from face01lib.similar_percentage_to_tolerance import to_tolerance
+from face01lib.LoadImage import LoadImage
 
 """Logging"""
 logger = logging.getLogger(__name__)
@@ -42,7 +44,6 @@ stream_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 
-sg.theme('LightGray')
 
 """mediapipe for python, see bellow
 https://github.com/google/mediapipe/tree/master/mediapipe/python
@@ -118,7 +119,7 @@ def configure():
     except:
         logger.warning("config.ini 読み込み中にエラーが発生しました")
         logger.exception("conf_dictが正常に作成できませんでした")
-        logger.warning("以下のエラーをシステム管理者へお伝えください")
+        logger.warning("以下のエラーをシステム管理者様へお伝えください")
         logger.warning("-" * 20)
         logger.warning(format_exc(limit=None, chain=True))
         logger.warning("-" * 20)
@@ -128,39 +129,7 @@ def configure():
 # configure関数実行
 conf_dict = configure()
 
-# 評価版のみ実行
-def cal_specify_date() -> None:
-    """指定日付計算
-    """
-    limit_date = datetime(2022, 12, 1, 0, 0, 0)   # 指定日付
-    today = datetime.now()
-
-    def limit_date_alart() -> None:
-        if today >= limit_date:
-            print('指定日付を過ぎました')
-            sg.popup('サンプルアプリケーションをお使いいただきありがとうございます','使用可能期限を過ぎました', '引き続きご利用になる場合は下記までご連絡下さい', '東海顔認証　担当：袈裟丸','y.kesamaru@tokai-kaoninsho.com', '', 'アプリケーションを終了します', title='', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
-            exit(0)
-        elif today < limit_date:
-            remaining_days = limit_date - today
-            if remaining_days.days < 30:
-                dialog_text = 'お使い頂ける残日数は' + str(remaining_days.days) + '日です'
-                sg.popup('サンプルアプリケーションをお使いいただきありがとうございます', dialog_text, title='', button_type = POPUP_BUTTONS_OK, modal = True, keep_on_top = True)
-    limit_date_alart()
-cal_specify_date()
-
-def cal_resized_telop_image(resized_telop_image):
-    x1, y1, x2, y2 = 0, 0, resized_telop_image.shape[1], resized_telop_image.shape[0]
-    a = (1 - resized_telop_image[:,:,3:] / 255)
-    b = resized_telop_image[:,:,:3] * (resized_telop_image[:,:,3:] / 255)
-    cal_resized_telop_nums = (x1, y1, x2, y2, a, b)
-    return cal_resized_telop_nums
-
-def cal_resized_logo_image(resized_logo_image,  set_height,set_width):
-    x1, y1, x2, y2 = set_width - resized_logo_image.shape[1], set_height - resized_logo_image.shape[0], set_width, set_height
-    a = (1 - resized_logo_image[:,:,3:] / 255)
-    b = resized_logo_image[:,:,:3] * (resized_logo_image[:,:,3:] / 255)
-    cal_resized_logo_nums = (x1, y1, x2, y2, a, b)
-    return cal_resized_logo_nums
+Cal().cal_specify_date
 
 """CHECK SYSTEM INFORMATION"""
 # Initialize variables, load images
@@ -173,43 +142,12 @@ def initialize(conf_dict):
         video_capture.return_movie_property(conf_dict["set_width"], video_capture.return_vcap(conf_dict["movie"]))
     
     # toleranceの算出
-    tolerance = to_tolerance(conf_dict["similar_percentage"])
+    tolerance = Cal().to_tolerance(conf_dict["similar_percentage"])
 
-    # 画像読み込み系
-    if headless == False:
-        # それぞれの画像が1度だけしか読み込まれない仕組み
-        load_telop_image: bool = False
-        load_logo_image: bool = False
-        load_unregistered_face_image: bool = False
-
-        rect01_png:cv2.Mat = cv2.imread("images/rect01.png", cv2.IMREAD_UNCHANGED)
-
-        # Load Telop image
-        telop_image: cv2.Mat
-        if not load_telop_image:
-            telop_image = cv2.imread("images/telop.png", cv2.IMREAD_UNCHANGED)
-            load_telop_image = True
-            _, orgWidth = telop_image.shape[:2]
-            ratio: float = conf_dict["set_width"] / orgWidth / 3  ## テロップ幅は横幅を分母として設定
-            resized_telop_image = cv2.resize(telop_image, None, fx = ratio, fy = ratio)
-            cal_resized_telop_nums = cal_resized_telop_image(resized_telop_image)
-
-        # Load Logo image
-        logo_image: cv2.Mat
-        if not load_logo_image:
-            logo_image: cv2.Mat = cv2.imread("images/Logo.png", cv2.IMREAD_UNCHANGED)
-            load_logo_image = True
-            _, logoWidth = logo_image.shape[:2]
-            logoRatio = conf_dict["set_width"] / logoWidth / 15
-            resized_logo_image = cv2.resize(logo_image, None, fx = logoRatio, fy = logoRatio)
-            cal_resized_logo_nums = cal_resized_logo_image(resized_logo_image,  set_height,set_width)
-
-        # Load unregistered_face_image
-        unregistered_face_image: cv2.Mat
-        if not load_unregistered_face_image:
-            unregistered_face_image = np.array(Image.open('./images/顔画像未登録.png'))
-            unregistered_face_image = cv2.cvtColor(unregistered_face_image, cv2.COLOR_BGR2RGBA)
-            load_unregistered_face_image = True
+    LoadImage_obj = LoadImage(headless, conf_dict)
+    rect01_png, resized_telop_image, cal_resized_telop_nums, resized_logo_image, \
+        cal_resized_logo_nums, load_unregistered_face_image, telop_image, logo_image, unregistered_face_image = \
+        LoadImage_obj.LI(set_height, set_width)
 
     # 日付時刻算出
     date = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f") # %f-> マイクロ秒
@@ -498,7 +436,7 @@ def check_compare_faces(known_face_encodings, face_encoding, tolerance):
         logger.warning("DEBUG: npKnown.npzが壊れているか予期しないエラーが発生しました。")
         logger.warning("npKnown.npzの自動削除は行われません。原因を特定の上、必要な場合npKnown.npzを削除して下さい。")
         logger.warning("処理を終了します。FACE01を再起動して下さい。")
-        logger.warning("以下のエラーをシステム管理者へお伝えください")
+        logger.warning("以下のエラーをシステム管理者様へお伝えください")
         logger.warning("-" * 20)
         logger.warning(format_exc(limit=None, chain=True))
         logger.warning("-" * 20)
@@ -897,7 +835,7 @@ def face_encoding_process(args_dict, frame_datas_array):
             elif args_dict["use_mediapipe"] == False and  args_dict["person_frame_face_encoding"] == True:
                 logger.warning("config.ini:")
                 logger.warning("mediapipe = False  の場合 person_frame_face_encoding = True  には出来ません")
-                logger.warning("システム管理者へ連絡の後、設定を変更してください")
+                logger.warning("システム管理者様へ連絡の後、設定を変更してください")
                 logger.warning("-" * 20)
                 logger.warning(format_exc(limit=None, chain=True))
                 logger.warning("-" * 20)
@@ -966,9 +904,7 @@ def frame_post_processing(args_dict, face_encodings, frame_datas_array, global_m
                 try:
                     name, _ = name.split('_', maxsplit = 1)
                 except:
-                    """TODO
-                    logger warn level"""
-                    sg.popup_error('ファイル名に異常が見つかりました',name,'NAME_default.png あるいはNAME_001.png (001部分は001からはじまる連番)にしてください','noFaceフォルダに移動します')
+                    logger.warning('ファイル名に異常が見つかりました',name,'NAME_default.png あるいはNAME_001.png (001部分は001からはじまる連番)にしてください','noFaceフォルダに移動します')
                     move(name, './noFace/')
                     return
 
@@ -1078,12 +1014,15 @@ def main_process():
 if __name__ == '__main__':
     import cProfile as pr
 
+    import PySimpleGUI as sg
+
     exec_times: int = 100
     
     profile_HANDLING_FRAME_TIME: float = 0.0
     profile_HANDLING_FRAME_TIME_FRONT: float = 0.0
     profile_HANDLING_FRAME_TIME_REAR: float = 0.0
 
+    sg.theme('LightGray')
     # PySimpleGUIレイアウト
     if args_dict["headless"] == False:
         layout = [

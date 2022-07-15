@@ -1,3 +1,6 @@
+"""Calc.pyを作成したためこのファイルは廃止予定"""
+
+
 __doc__ = 'similar_percentageを受取りtoleranceを返す'
 
 from numpy import sqrt

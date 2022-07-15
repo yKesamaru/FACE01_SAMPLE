@@ -1,6 +1,6 @@
 # FACE01について
 # TODO
-## 1.4.01実装予定
+## 1.4.02実装予定
 ### 方針
 > 1.3.10を1.3系列の最終安定版とする
 >>> 機能拡張する場合、1.3.10.01とし、別ブランチとする
@@ -13,9 +13,10 @@
 > 1.3.10 README.mdより引用
 
 ### 予定
+- 出来る関数から***Cython***を用いてc++へ書き換える
+  - `$ python compile.py build_ext --inplace`
 - FACE01.py内部のdef関数をface01lib/ディレクトリ以下に移動する
   - 基本的には1ファイル1関数にしようと思う
-- 出来る関数からpybind11を用いてc++へ書き換える
 - 細かなバグフィックスは行うが、機能拡張はしない
   - 機能拡張したいところがあればREADME.mdに書いておく
   - 機能拡張は1.5系列で行う
@@ -27,99 +28,6 @@
     > [](https://qiita.com/haseshin/items/59aed8bae8a1fa88fa21) 
 
 ### やったこと
-- `pip install pybind11`
-- VSCode上でC++をデバッグできる環境を作る
-  - [pybind11 : First steps](https://pybind11.readthedocs.io/en/stable/basics.html)
-- -fvisibility
-  - > GCC付属のドキュメント（gcc.info）によると，-fvisibilityは，このVisibility属性のデフォルト値を指定するためのオプションで，-fvisibility=hiddenと指定すると，外部に公開することをソースコード中で明示したシンボル以外は外部から見えなくなるように各シンボルのVisibility属性が設定されます。 [第34回　C++とGCCの-fvisibilityオプション](https://gihyo.jp/lifestyle/serial/01/ganshiki-soushi/0034?page=2)
-- [ライブラリとは何なのか？](https://qiita.com/false-git@github/items/4b531467788b446a18d2)
-- [boost::python::numpyを使う、VSCodeでデバッグする](https://qiita.com/SolKul/items/600d6cd306509240a37a)
-  - pybind11は構文がよく理解できなかった。boost::pythonの構文を見てみると意外ととっつきやすかったので、pybind11を使わずboost::pythonを使用しようと思う。
-      - `sudo apt install libboost-all-dev`
-- [既存プログラムの関数を書き換える、強力で危険なLinux環境変数LD_PRELOAD](https://qiita.com/developer-kikikaikai/items/f6f87b2d1d7c3e14fb52)
-  - > rpathの指定には癖があり、Xlinkerでくくらないと効果が出ないようです。
-  `-Xlinker -rpath -Xlinker $(libdir)`
-- -Dadd_cpp_EXPORTS
-  - 調べても記事が見つからなかったのでコメントアウトした(task.json)
-- "-l"オプションの意味
-  - > 具体的には、"-l"オプションはリンクのときに使われるオプションで、"-l"の後に続く文字列に"lib"、後方に".a"をつけたライブラリを検索します。[小粋空間](https://www.koikikukan.com/archives/2018/03/06-000300.php)
-- 参照とポインタの違い
-  - [ポインタはポイント先を変更できますが、参照は参照先を変更できません。そもそも参照先を変更するための書き方が存在しません。](https://theolizer.com/cpp-school1/cpp-school1-16/#:~:text=%E3%83%9D%E3%82%A4%E3%83%B3%E3%82%BF%E3%81%AF%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E5%85%88%E3%82%92,%E6%9B%B8%E3%81%8D%E6%96%B9%E3%81%8C%E5%AD%98%E5%9C%A8%E3%81%97%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82&text=%E3%83%9D%E3%82%A4%E3%83%B3%E3%82%BF%E3%81%AF%E3%83%9D%E3%82%A4%E3%83%B3%E3%82%BF%E5%A4%89%E6%95%B0%E3%81%AB,%E6%9B%B8%E3%81%8D%E6%96%B9%E3%81%8C%E5%AD%98%E5%9C%A8%E3%81%97%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82)
-  - > ポインタはポイント先を変更できますが、参照は参照先を変更できません。 そもそも参照先を変更するための書き方が存在しません。 ポインタはポインタ変数に割り当てられているメモリ・アドレスを獲得できますが、参照は参照先アドレスが記録されているメモリ・アドレスを獲得できません。 そもそもそのための書き方が存在しません。
-  - 参照は型名の後ろに&をつける
-    - int&とかdouble&とか。
-- [imreadで返される配列について](https://qiita.com/Castiel/items/53ecbee3c06b9d92759e)
-  - > cv2.imreadで読み込んだframe変数について。
-    > 3次元配列が出力されていることがわかる．この配列をA×B×3次元配列とする．
-    > Aは画素の行数であり，Bは画素の列数である
-    > (読み込む画像のサイズによって，行列のサイズは変わるため変数A，Bとした)．3は，RGBの輝度である．
-    > 上の画像において，輝度が縦に大量に並んでいるが，これは
-    > [[[0行0列目の輝度]~[0行B列目の輝度]]~[[A行0列目の輝度]~[A行B列目の輝度]]]の順に並んでいる．
-    > (画像において0行0列目は，左上)
-    > よって，imreadで返される配列とは，画素の輝度を行列の順に格納したものである
-
-    > imreadで返された配列の顔画像の部分(顔画像の左上の行列から，右下の行列までの**区分行列**（ブロック行列）の輝度)
-    > だけを取り出すことで，切り取ることができた．
-- [NumPyの軸(axis)と次元数(ndim)とは何を意味するのか](https://deepage.net/features/numpy-axis.html)
-  - ![](img/PASTE_IMAGE_2022-07-10-09-17-39.png)
-- [numpy:shapeとstrides](https://xuzijian629.hatenablog.com/entry/2019/10/15/182746)
-  - > 多くのプログラミング言語で配列のデータは連続領域に確保されます。すなわち、a[k]とa[k+1]は隣り合ったメモリ領域に確保されます。しかし、NumPyの配列は必ずしも個々のデータを連続領域にもちません。NumPyの配列は、data, shape, stridesという3要素によって管理されます。
-    - data
-      - 先頭アドレス
-    - shape
-      - データの多次元サイズ情報
-    - strides
-      - データアクセスのindexが1増えるとメモリ領域が何byteずれるかを表します。
-- 
-
-#### g++ オプション
-- [](https://kaworu.jpn.org/cpp/g++)
-- g++ foo.cpp
-  - コンパイルして実行可能ファイルa.outができる
-- g++ foo.cpp -o foo
-  - 作成する実行ファイル名を指定
-- g++ -g foo.cpp
-  - デバッグ情報を付加してa.outを作る
-- g++ -c foo.cpp
-  - オブジェクトファイルfoo.oを作る
-- g++ -shared -o libfoo.so foo.cpp
-  - シェアードオブジェクトを作成する
-- g++ -I/usr/local/include main.cpp
-  - /usr/local/includeディレクトリをインクルードパスとして追加する
-- g++ -I/usr/local/include -I./include main.cpp
-  - /usr/local/includeとカレントディレクトリの./includeをインクルードパスとして追加する
-- g++ -lm main.cpp
-  - 標準ライブラリをリンクする（/usr/libのライブラリがリンクされる）
-- g++ -L/usr/local/lib -Lfoo main.cpp
-  - /usr/local/libにあるlibfoo.soをリンクする
-- g++ -O0 foo.cpp
-  - 最適化オプション。O0からO3、Osなど
-  - [最適化オプション](https://kaworu.jpn.org/cpp/g%2B%2B_%E6%9C%80%E9%81%A9%E5%8C%96%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3)
-  - [GCCコマンド・オプション](https://www.asahi-net.or.jp/~wg5k-ickw/html/online/gcc-2.95.2/gcc_2.html#SEC11)
-    - g++は-O0を指定されたとき、最適化を行いません。 コンパイル時間を短くします。デバッグプロセスが正しく機能します。 
-    - -O, -O1 は、基本的な最適化を行います。
-    - -O2では、ほとんどの最適化を行います。ループの展開や関数のインライン展開は行いません
-    - -O3では、-O2で指定されたすべての最適化に加えて、以下のオプションを有効にします。
-    - -Osは、サイズの最適化を行います。-Osでは、-O2の最適化で典型的にコードサイズを増加させないオプションをすべて有効にします。コードサイズを小さくするために設計された高速な最適化を実行します。 
-    - -Ofast 厳格な標準準拠を無視します。-Ofastは、-O3のすべての最適化を有効にします。 
-    - -Og デバッキング体験の最適化をします。デバッキングの邪魔にならない最適化を有効にします。
-- g++ -E foo.cpp
-  - プリプロセッサディレクティブを処理して結果を標準出力に出す
-- g++ -S foo.cpp
-  - アセンブルしてアセンブリコードを得る
-- g++ -Wall main.cpp
-  - 警告オプションを有効にする
-- g++ -std=c++11 main.cpp
-  - C++11,C++14(C++xx)などの機能を有効にする
-- -fPIC
-  - [gccのコンパイルオプション-fPICと-fpicの違いは？](https://kaworu.jpn.org/c/gcc%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%AB%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3-fPIC%E3%81%A8-fpic%E3%81%AE%E9%81%95%E3%81%84%E3%81%AF%EF%BC%9F)
-   > -fPIC は、UNIX(Linux)で共有ライブラリ(shared object, シェアードオブジェクト)を作成するときに使われるオプションです。 
-- 1.4.01でコミットした
-  - soファイルをビルドする時はVSCodeのステータスバーからCMakeを使ってビルドすると、リリース版を作ることが出来る。
-  - soファイルは作れるようになったけれど、ブレイクポイントを指定してデバッグが出来ない。
-- tasks.jsonなど設定ファイルのハードコーティングしている部分を直す
-- 
-
 
 ## 1.3.10実装完了
 ### 方針
@@ -621,3 +529,122 @@ True
 ## 標準出力を日本語に。(python3系の場合）
 - 標準出力のバッファリングをオフに
 - sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', buffering=1)
+
+## 1.4.01実装予定
+### 方針
+> 1.3.10を1.3系列の最終安定版とする
+>>> 機能拡張する場合、1.3.10.01とし、別ブランチとする
+>>> 1.3.10では機能拡張のヒントとなるコメント行やコメントアウトされたコードは削除されるので、そういったものは1.3.09を参照すること
+> 1.4系列ではFACE01.py内のdef関数をface01libディレクトリに移し、適宜c++コードに置き換えていく予定
+>>> ブランチの作成元は1.3.10とする
+>>> 1.3.10の機能拡張版(1.3.10.01など)はバックポートしない
+>>>> gitのコンフリクトを避けるため、機能拡張版は1.5系列で行う
+
+> 1.3.10 README.mdより引用
+
+### 予定
+- FACE01.py内部のdef関数をface01lib/ディレクトリ以下に移動する
+  - 基本的には1ファイル1関数にしようと思う
+- 出来る関数からpybind11を用いてc++へ書き換える
+- 細かなバグフィックスは行うが、機能拡張はしない
+  - 機能拡張したいところがあればREADME.mdに書いておく
+  - 機能拡張は1.5系列で行う
+  - マージのコンフリクトを避けるため1.5系列のブランチを禁止する
+- 1.3.10でやる予定だったmarkdownによるドキュメントづくりを忘れていた
+  - 1.4系列でやります
+  - rtspコードの改善
+    > rtsp://user:password@ip:port/ipcam_h264.sdp
+    > [](https://qiita.com/haseshin/items/59aed8bae8a1fa88fa21) 
+
+### やったこと
+- `pip install pybind11`
+- VSCode上でC++をデバッグできる環境を作る
+  - [pybind11 : First steps](https://pybind11.readthedocs.io/en/stable/basics.html)
+- -fvisibility
+  - > GCC付属のドキュメント（gcc.info）によると，-fvisibilityは，このVisibility属性のデフォルト値を指定するためのオプションで，-fvisibility=hiddenと指定すると，外部に公開することをソースコード中で明示したシンボル以外は外部から見えなくなるように各シンボルのVisibility属性が設定されます。 [第34回　C++とGCCの-fvisibilityオプション](https://gihyo.jp/lifestyle/serial/01/ganshiki-soushi/0034?page=2)
+- [ライブラリとは何なのか？](https://qiita.com/false-git@github/items/4b531467788b446a18d2)
+- [boost::python::numpyを使う、VSCodeでデバッグする](https://qiita.com/SolKul/items/600d6cd306509240a37a)
+  - pybind11は構文がよく理解できなかった。boost::pythonの構文を見てみると意外ととっつきやすかったので、pybind11を使わずboost::pythonを使用しようと思う。
+      - `sudo apt install libboost-all-dev`
+- [既存プログラムの関数を書き換える、強力で危険なLinux環境変数LD_PRELOAD](https://qiita.com/developer-kikikaikai/items/f6f87b2d1d7c3e14fb52)
+  - > rpathの指定には癖があり、Xlinkerでくくらないと効果が出ないようです。
+  `-Xlinker -rpath -Xlinker $(libdir)`
+- -Dadd_cpp_EXPORTS
+  - 調べても記事が見つからなかったのでコメントアウトした(task.json)
+- "-l"オプションの意味
+  - > 具体的には、"-l"オプションはリンクのときに使われるオプションで、"-l"の後に続く文字列に"lib"、後方に".a"をつけたライブラリを検索します。[小粋空間](https://www.koikikukan.com/archives/2018/03/06-000300.php)
+- 参照とポインタの違い
+  - [ポインタはポイント先を変更できますが、参照は参照先を変更できません。そもそも参照先を変更するための書き方が存在しません。](https://theolizer.com/cpp-school1/cpp-school1-16/#:~:text=%E3%83%9D%E3%82%A4%E3%83%B3%E3%82%BF%E3%81%AF%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E5%85%88%E3%82%92,%E6%9B%B8%E3%81%8D%E6%96%B9%E3%81%8C%E5%AD%98%E5%9C%A8%E3%81%97%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82&text=%E3%83%9D%E3%82%A4%E3%83%B3%E3%82%BF%E3%81%AF%E3%83%9D%E3%82%A4%E3%83%B3%E3%82%BF%E5%A4%89%E6%95%B0%E3%81%AB,%E6%9B%B8%E3%81%8D%E6%96%B9%E3%81%8C%E5%AD%98%E5%9C%A8%E3%81%97%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82)
+  - > ポインタはポイント先を変更できますが、参照は参照先を変更できません。 そもそも参照先を変更するための書き方が存在しません。 ポインタはポインタ変数に割り当てられているメモリ・アドレスを獲得できますが、参照は参照先アドレスが記録されているメモリ・アドレスを獲得できません。 そもそもそのための書き方が存在しません。
+  - 参照は型名の後ろに&をつける
+    - int&とかdouble&とか。
+- [imreadで返される配列について](https://qiita.com/Castiel/items/53ecbee3c06b9d92759e)
+  - > cv2.imreadで読み込んだframe変数について。
+    > 3次元配列が出力されていることがわかる．この配列をA×B×3次元配列とする．
+    > Aは画素の行数であり，Bは画素の列数である
+    > (読み込む画像のサイズによって，行列のサイズは変わるため変数A，Bとした)．3は，RGBの輝度である．
+    > 上の画像において，輝度が縦に大量に並んでいるが，これは
+    > [[[0行0列目の輝度]~[0行B列目の輝度]]~[[A行0列目の輝度]~[A行B列目の輝度]]]の順に並んでいる．
+    > (画像において0行0列目は，左上)
+    > よって，imreadで返される配列とは，画素の輝度を行列の順に格納したものである
+
+    > imreadで返された配列の顔画像の部分(顔画像の左上の行列から，右下の行列までの**区分行列**（ブロック行列）の輝度)
+    > だけを取り出すことで，切り取ることができた．
+- [NumPyの軸(axis)と次元数(ndim)とは何を意味するのか](https://deepage.net/features/numpy-axis.html)
+  - ![](img/PASTE_IMAGE_2022-07-10-09-17-39.png)
+- [numpy:shapeとstrides](https://xuzijian629.hatenablog.com/entry/2019/10/15/182746)
+  - > 多くのプログラミング言語で配列のデータは連続領域に確保されます。すなわち、a[k]とa[k+1]は隣り合ったメモリ領域に確保されます。しかし、NumPyの配列は必ずしも個々のデータを連続領域にもちません。NumPyの配列は、data, shape, stridesという3要素によって管理されます。
+    - data
+      - 先頭アドレス
+    - shape
+      - データの多次元サイズ情報
+    - strides
+      - データアクセスのindexが1増えるとメモリ領域が何byteずれるかを表します。
+- 
+
+#### g++ オプション
+- [](https://kaworu.jpn.org/cpp/g++)
+- g++ foo.cpp
+  - コンパイルして実行可能ファイルa.outができる
+- g++ foo.cpp -o foo
+  - 作成する実行ファイル名を指定
+- g++ -g foo.cpp
+  - デバッグ情報を付加してa.outを作る
+- g++ -c foo.cpp
+  - オブジェクトファイルfoo.oを作る
+- g++ -shared -o libfoo.so foo.cpp
+  - シェアードオブジェクトを作成する
+- g++ -I/usr/local/include main.cpp
+  - /usr/local/includeディレクトリをインクルードパスとして追加する
+- g++ -I/usr/local/include -I./include main.cpp
+  - /usr/local/includeとカレントディレクトリの./includeをインクルードパスとして追加する
+- g++ -lm main.cpp
+  - 標準ライブラリをリンクする（/usr/libのライブラリがリンクされる）
+- g++ -L/usr/local/lib -Lfoo main.cpp
+  - /usr/local/libにあるlibfoo.soをリンクする
+- g++ -O0 foo.cpp
+  - 最適化オプション。O0からO3、Osなど
+  - [最適化オプション](https://kaworu.jpn.org/cpp/g%2B%2B_%E6%9C%80%E9%81%A9%E5%8C%96%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3)
+  - [GCCコマンド・オプション](https://www.asahi-net.or.jp/~wg5k-ickw/html/online/gcc-2.95.2/gcc_2.html#SEC11)
+    - g++は-O0を指定されたとき、最適化を行いません。 コンパイル時間を短くします。デバッグプロセスが正しく機能します。 
+    - -O, -O1 は、基本的な最適化を行います。
+    - -O2では、ほとんどの最適化を行います。ループの展開や関数のインライン展開は行いません
+    - -O3では、-O2で指定されたすべての最適化に加えて、以下のオプションを有効にします。
+    - -Osは、サイズの最適化を行います。-Osでは、-O2の最適化で典型的にコードサイズを増加させないオプションをすべて有効にします。コードサイズを小さくするために設計された高速な最適化を実行します。 
+    - -Ofast 厳格な標準準拠を無視します。-Ofastは、-O3のすべての最適化を有効にします。 
+    - -Og デバッキング体験の最適化をします。デバッキングの邪魔にならない最適化を有効にします。
+- g++ -E foo.cpp
+  - プリプロセッサディレクティブを処理して結果を標準出力に出す
+- g++ -S foo.cpp
+  - アセンブルしてアセンブリコードを得る
+- g++ -Wall main.cpp
+  - 警告オプションを有効にする
+- g++ -std=c++11 main.cpp
+  - C++11,C++14(C++xx)などの機能を有効にする
+- -fPIC
+  - [gccのコンパイルオプション-fPICと-fpicの違いは？](https://kaworu.jpn.org/c/gcc%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%AB%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3-fPIC%E3%81%A8-fpic%E3%81%AE%E9%81%95%E3%81%84%E3%81%AF%EF%BC%9F)
+   > -fPIC は、UNIX(Linux)で共有ライブラリ(shared object, シェアードオブジェクト)を作成するときに使われるオプションです。 
+- 1.4.01でコミットした
+  - soファイルをビルドする時はVSCodeのステータスバーからCMakeを使ってビルドすると、リリース版を作ることが出来る。
+  - soファイルは作れるようになったけれど、ブレイクポイントを指定してデバッグが出来ない。
+- tasks.jsonなど設定ファイルのハードコーティングしている部分を直す

@@ -852,3 +852,62 @@ NoneType: None
 [2022-07-14 10:28:21,346] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
 [2022-07-14 11:05:42,757] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
 [2022-07-15 06:25:15,145] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 06:45:34,589] [FACE01] [FACE01.py] [WARNING] config.ini 読み込み中にエラーが発生しました
+[2022-07-15 06:45:34,590] [FACE01] [FACE01.py] [ERROR] conf_dictが正常に作成できませんでした
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/configparser.py", line 789, in get
+    value = d[option]
+  File "/usr/lib/python3.8/collections/__init__.py", line 898, in __getitem__
+    return self.__missing__(key)            # support subclasses that define __missing__
+  File "/usr/lib/python3.8/collections/__init__.py", line 890, in __missing__
+    raise KeyError(key)
+KeyError: 'movie'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/FACE01.py", line 90, in configure
+    'movie' : conf.get('DEFAULT','movie'),
+  File "/usr/lib/python3.8/configparser.py", line 792, in get
+    raise NoOptionError(option, section)
+configparser.NoOptionError: No option 'movie' in section: 'DEFAULT'
+[2022-07-15 06:45:34,592] [FACE01] [FACE01.py] [WARNING] 以下のエラーをシステム管理者へお伝えください
+[2022-07-15 06:45:34,593] [FACE01] [FACE01.py] [WARNING] --------------------
+[2022-07-15 06:45:34,593] [FACE01] [FACE01.py] [WARNING] Traceback (most recent call last):
+  File "/usr/lib/python3.8/configparser.py", line 789, in get
+    value = d[option]
+  File "/usr/lib/python3.8/collections/__init__.py", line 898, in __getitem__
+    return self.__missing__(key)            # support subclasses that define __missing__
+  File "/usr/lib/python3.8/collections/__init__.py", line 890, in __missing__
+    raise KeyError(key)
+KeyError: 'movie'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/FACE01.py", line 90, in configure
+    'movie' : conf.get('DEFAULT','movie'),
+  File "/usr/lib/python3.8/configparser.py", line 792, in get
+    raise NoOptionError(option, section)
+configparser.NoOptionError: No option 'movie' in section: 'DEFAULT'
+
+[2022-07-15 06:45:34,594] [FACE01] [FACE01.py] [WARNING] --------------------
+[2022-07-15 06:45:34,594] [FACE01] [FACE01.py] [WARNING] 終了します
+[2022-07-15 06:47:23,992] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 07:01:08,963] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 07:32:34,665] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 07:33:27,626] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 07:33:43,803] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 08:06:18,243] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 10:40:16,696] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:17:00,996] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:17:38,993] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:18:45,161] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:20:16,733] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:20:17,093] [__main__] [CALL_FACE01.py] [WARNING] not enough values to unpack (expected 6, got 0)
+[2022-07-15 11:22:01,661] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:23:43,766] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:27:09,641] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:27:41,351] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:28:22,137] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:34:16,210] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます

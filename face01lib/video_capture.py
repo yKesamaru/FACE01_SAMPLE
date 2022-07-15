@@ -15,7 +15,7 @@ import numpy as np
 import cv2
 from sys import exit
 from face01lib import return_tuple
-from face01lib.sample import size
+# from face01lib.sample import size
 
 
 
