@@ -1,35 +1,28 @@
 import logging
-from os import chdir, remove, listdir
+from os import chdir, listdir, remove
 from os.path import exists, isdir
 from shutil import move
-from traceback import format_exc
 
-import face01lib.api as faceapi
 from numpy import load, savez
 
-
-logger = logging.getLogger('face01lib/load_priset_image')
+import face01lib.api as faceapi
 
 """Logging"""
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('face01lib/load_priset_image')
+# logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-
 formatter = logging.Formatter('[%(asctime)s] [%(name)s] [%(filename)s] [%(levelname)s] %(message)s')
-
 file_handler = logging.FileHandler('face01.log', mode='a')
 file_handler.setLevel(logging.INFO)
 file_handler.setFormatter(formatter)
-
 stream_handler = logging.StreamHandler()
 stream_handler.setLevel(logging.INFO)
 stream_handler.setFormatter(formatter)
-
 logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 
-
-
 def load_priset_image(
+    self,
     kaoninshoDir,
     priset_face_imagesDir,
     upsampling=0,
@@ -227,24 +220,3 @@ def load_priset_image(
     # 返り値のknown_face_encodingsと、npKnown.npzから読み込んだknown_face_encodingsとでは
     # もしかしたらデータ型とか？なにかが異なっているのかもしれない。
 
-
-# 検証用
-if __name__ == '__main__':
-    import pprint
-    import sys
-    # pprint(sys.path)
-    exit()
-
-    # <DEBUG>
-    kaoninshoDir = '/home/terms/ビデオ/one_drive/FACE01GRAPHICS123_UBUNTU_VENV'
-    chdir(kaoninshoDir)
-    known_face_encodings, known_face_names = load_priset_image(
-        kaoninshoDir,
-        priset_face_imagesDir=kaoninshoDir + '/priset_face_images',
-        upsampling=0,
-        jitters=4,
-        mode='cnn',
-        model='small'
-    )
-    print('known_face_encodings: ', known_face_encodings)
-    print('known_face_names: ', known_face_names)

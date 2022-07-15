@@ -13,7 +13,6 @@ from traceback import format_exc
 from typing import Dict, List, Tuple
 
 import cv2
-import mediapipe as mp
 import numpy as np
 from GPUtil import getGPUs
 from PIL import Image, ImageDraw, ImageFont
@@ -24,8 +23,10 @@ import face01lib.LoadImage
 # import face01lib.video_capture as video_capture  # py
 import face01lib.vidCap as video_capture  # so
 from face01lib.Calc import Cal
-from face01lib.load_priset_image import load_priset_image
+# from face01lib.load_priset_image import load_priset_image
 from face01lib.LoadImage import LoadImage
+from face01lib.Core import Core
+from face01lib.Initialize import Initialize
 
 """Logging"""
 logger = logging.getLogger(__name__)
@@ -125,86 +126,16 @@ def configure():
         logger.warning("-" * 20)
         logger.warning("終了します")
         exit(0)
-
-# configure関数実行
 conf_dict = configure()
 
-Cal().cal_specify_date
+# initialize
+args_dict = Initialize().initialize(conf_dict)
 
 """CHECK SYSTEM INFORMATION"""
-# Initialize variables, load images
-def initialize(conf_dict):
-    headless = conf_dict["headless"]
-    known_face_encodings, known_face_names = load_priset_image(conf_dict["kaoninshoDir"],conf_dict["priset_face_imagesDir"])
-
-    # set_width,fps,height,width,set_height
-    set_width,fps,height,width,set_height = \
-        video_capture.return_movie_property(conf_dict["set_width"], video_capture.return_vcap(conf_dict["movie"]))
-    
-    # toleranceの算出
-    tolerance = Cal().to_tolerance(conf_dict["similar_percentage"])
-
-    LoadImage_obj = LoadImage(headless, conf_dict)
-    rect01_png, resized_telop_image, cal_resized_telop_nums, resized_logo_image, \
-        cal_resized_logo_nums, load_unregistered_face_image, telop_image, logo_image, unregistered_face_image = \
-        LoadImage_obj.LI(set_height, set_width)
-
-    # 日付時刻算出
-    date = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f") # %f-> マイクロ秒
-
-    # 辞書作成
-    if headless == False:
-        init_dict = {
-            'known_face_encodings': known_face_encodings,
-            'known_face_names': known_face_names,
-            'date': date,
-            'rect01_png': rect01_png,
-            'telop_image': telop_image,
-            'resized_telop_image': resized_telop_image,
-            'cal_resized_telop_nums': cal_resized_telop_nums,
-            'logo_image': logo_image,
-            'cal_resized_logo_nums': cal_resized_logo_nums,
-            'unregistered_face_image': unregistered_face_image,
-            'height': height,
-            'width': width,
-            'set_height': set_height,
-            'tolerance': tolerance,
-            'default_face_image_dict': {}
-        }
-    elif headless == True:
-        init_dict = {
-            'known_face_encodings': known_face_encodings,
-            'known_face_names': known_face_names,
-            'date': date,
-            'height': height,
-            'width': width,
-            'set_height': set_height,
-            'tolerance': tolerance,
-            'default_face_image_dict': {}
-        }
-
-    # 辞書結合
-    args_dict = {**init_dict, **conf_dict}
-
-    # ヘッドレス実装
-    if headless == True:
-        args_dict['rectangle'] = False
-        args_dict['target_rectangle'] = False
-        args_dict['show_video'] = False
-        args_dict['default_face_image_draw'] = False
-        args_dict['show_overlay'] = False
-        args_dict['show_percentage'] = False
-        args_dict['show_name'] = False
-        args_dict['draw_telop_and_logo'] = False
-        args_dict['person_frame_face_encoding'] = False
-        args_dict['headless'] = True
-
-    return args_dict
-
-# initialize関数実行
-args_dict = initialize(conf_dict)
-
 def system_check(args_dict):
+    # lock
+    with open("SystemCheckLock", "w") as f:
+        f.write('')
     logger.info("FACE01の推奨動作環境を満たしているかシステムチェックを実行します")
     logger.info("- Python version check")
     major_ver, minor_ver_1, minor_ver_2 = args_dict["Python_version"].split('.', maxsplit = 3)
@@ -288,7 +219,7 @@ def system_check(args_dict):
     logger.info("  ** System check: Done **\n")
 
 # system_check関数実行
-if not exists("face01.log"):
+if not exists("SystemCheckLock"):
     system_check(args_dict)
 
 def return_fontpath():
@@ -309,7 +240,7 @@ def draw_telop(cal_resized_telop_nums, set_width: int, resized_telop_image: np.n
     try:
         frame[y1:y2, x1:x2] = frame[y1:y2, x1:x2] * a + b
     except:
-        logger.info("telopが描画できません")
+        logger.debug("telopが描画できません")
     return  frame
 
 def draw_logo(cal_resized_logo_nums, frame,logo_image,  set_height,set_width):
@@ -318,58 +249,10 @@ def draw_logo(cal_resized_logo_nums, frame,logo_image,  set_height,set_width):
     try:
         frame[y1:y2, x1:x2] = frame[y1:y2, x1:x2] * a + b
     except:
-        logger.info("logoが描画できません")
+        logger.debug("logoが描画できません")
     return frame
 
-def mp_face_detection_func(resized_frame, model_selection=0, min_detection_confidence=0.4):
-    face = mp.solutions.face_detection.FaceDetection(
-        model_selection=model_selection,
-        min_detection_confidence=min_detection_confidence
-    )
-    """refer to
-    https://solutions.mediapipe.dev/face_detection#python-solution-api
-    """    
-    # 推論処理
-    inference = face.process(resized_frame)
-    """
-    Processes an RGB image and returns a list of the detected face location data.
-    Args:
-          image: An RGB image represented as a numpy ndarray.
-    Raises:
-          RuntimeError: If the underlying graph throws any error.
-    ValueError: 
-          If the input image is not three channel RGB.
-     Returns:
-           A NamedTuple object with a "detections" field that contains a list of the
-           detected face location data.'
-    """
-    return inference
 
-def return_face_location_list(resized_frame, set_width, set_height, model_selection, min_detection_confidence) -> Tuple:
-    """
-    return: face_location_list
-    """
-    resized_frame.flags.writeable = False
-    face_location_list: List = []
-    person_frame = np.empty((2,0), dtype=np.float64)
-    result = mp_face_detection_func(resized_frame, model_selection, min_detection_confidence)
-    if not result.detections:
-        return face_location_list
-    else:
-        for detection in result.detections:
-            xleft:int = int(detection.location_data.relative_bounding_box.xmin * set_width)
-            xtop :int= int(detection.location_data.relative_bounding_box.ymin * set_height)
-            xright:int = int(detection.location_data.relative_bounding_box.width * set_width + xleft)
-            xbottom:int = int(detection.location_data.relative_bounding_box.height * set_height + xtop)
-            # see bellow
-            # https://stackoverflow.com/questions/71094744/how-to-crop-face-detected-via-mediapipe-in-python
-            
-            if xleft <= 0 or xtop <= 0:  # xleft or xtop がマイナスになる場合があるとバグる
-                continue
-            face_location_list.append((xtop,xright,xbottom,xleft))  # faceapi order
-
-    resized_frame.flags.writeable = True
-    return face_location_list
 
 def return_concatenate_location_and_frame(resized_frame, face_location_list):
     """face_location_listはresized_frame上の顔座標"""
@@ -780,7 +663,7 @@ def frame_pre_processing(args_dict, resized_frame):
 
     # 顔座標算出
     if args_dict["use_mediapipe"] == True:
-        face_location_list = return_face_location_list(resized_frame, args_dict["set_width"], args_dict["set_height"], args_dict["model_selection"], args_dict["min_detection_confidence"])
+        face_location_list = Core().return_face_location_list(resized_frame, args_dict["set_width"], args_dict["set_height"], args_dict["model_selection"], args_dict["min_detection_confidence"])
     else:
         face_location_list = faceapi.face_locations(resized_frame, args_dict["upsampling"], args_dict["mode"])
     """face_location_list

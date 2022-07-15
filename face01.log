@@ -911,3 +911,58 @@ configparser.NoOptionError: No option 'movie' in section: 'DEFAULT'
 [2022-07-15 11:27:41,351] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
 [2022-07-15 11:28:22,137] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
 [2022-07-15 11:34:16,210] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:50:03,542] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:52:13,414] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:54:29,905] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:54:57,696] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:55:18,672] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 12:11:55,739] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 12:16:10,382] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 12:19:37,798] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:27:51,756] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:31:09,310] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:32:17,223] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:34:34,965] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:36:33,187] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:44:22,550] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:46:02,073] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:51:48,983] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:54:15,445] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:59:12,761] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 14:54:18,146] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 14:54:51,812] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 14:55:41,702] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 14:59:05,167] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 15:01:44,420] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 15:15:06,970] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 15:15:07,274] [FACE01] [FACE01.py] [INFO] FACE01の推奨動作環境を満たしているかシステムチェックを実行します
+[2022-07-15 15:15:07,274] [FACE01] [FACE01.py] [INFO] - Python version check
+[2022-07-15 15:15:07,275] [FACE01] [FACE01.py] [INFO]   [OK] 3.8.10 (default, Jun 22 2022, 20:18:18) 
+[GCC 9.4.0]
+[2022-07-15 15:15:07,276] [FACE01] [FACE01.py] [INFO] - CPU check
+[2022-07-15 15:15:07,326] [FACE01] [FACE01.py] [INFO]   [OK] 3.20GHz
+[2022-07-15 15:15:07,328] [FACE01] [FACE01.py] [INFO]   [OK] 4core
+[2022-07-15 15:15:07,333] [FACE01] [FACE01.py] [INFO] - Memory check
+[2022-07-15 15:15:07,334] [FACE01] [FACE01.py] [INFO]   [OK] 16GByte
+[2022-07-15 15:15:07,334] [FACE01] [FACE01.py] [INFO] - CUDA devices check
+[2022-07-15 15:15:07,334] [FACE01] [FACE01.py] [INFO]   [OK] cuda devices: 1
+[2022-07-15 15:15:07,334] [FACE01] [FACE01.py] [INFO] - Dlib build check: CUDA
+[2022-07-15 15:15:07,335] [FACE01] [FACE01.py] [WARNING] dlibビルド時にCUDAが有効化されていません
+[2022-07-15 15:15:07,335] [FACE01] [FACE01.py] [WARNING] 終了します
+[2022-07-15 15:16:18,714] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 15:16:19,001] [FACE01] [FACE01.py] [INFO] FACE01の推奨動作環境を満たしているかシステムチェックを実行します
+[2022-07-15 15:16:19,001] [FACE01] [FACE01.py] [INFO] - Python version check
+[2022-07-15 15:16:19,001] [FACE01] [FACE01.py] [INFO]   [OK] 3.8.10 (default, Jun 22 2022, 20:18:18) 
+[GCC 9.4.0]
+[2022-07-15 15:16:19,001] [FACE01] [FACE01.py] [INFO] - CPU check
+[2022-07-15 15:16:19,037] [FACE01] [FACE01.py] [INFO]   [OK] 3.20GHz
+[2022-07-15 15:16:19,038] [FACE01] [FACE01.py] [INFO]   [OK] 4core
+[2022-07-15 15:16:19,038] [FACE01] [FACE01.py] [INFO] - Memory check
+[2022-07-15 15:16:19,039] [FACE01] [FACE01.py] [INFO]   [OK] 16GByte
+[2022-07-15 15:16:19,040] [FACE01] [FACE01.py] [INFO] - CUDA devices check
+[2022-07-15 15:16:19,040] [FACE01] [FACE01.py] [INFO]   [OK] cuda devices: 1
+[2022-07-15 15:16:19,040] [FACE01] [FACE01.py] [INFO] - Dlib build check: CUDA
+[2022-07-15 15:16:19,040] [FACE01] [FACE01.py] [WARNING] dlibビルド時にCUDAが有効化されていません
+[2022-07-15 15:16:19,041] [FACE01] [FACE01.py] [WARNING] 終了します
+[2022-07-15 15:16:55,941] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 15:17:37,864] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
