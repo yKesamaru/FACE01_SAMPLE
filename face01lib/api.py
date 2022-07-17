@@ -9,6 +9,7 @@ import dlib
 import numpy as np
 from PIL.Image import open
 from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 import logging
 from traceback import format_exc
 from sys import exit
@@ -41,6 +42,10 @@ except Exception:
     logger.warning(format_exc(limit=None, chain=True))
     logger.warning("-" * 20)
     exit(0)
+
+
+
+    
 """to refer, see bellow
 https://github.com/davisking/dlib
 https://github.com/davisking/dlib-models
@@ -57,7 +62,6 @@ see bellow
 https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
 """
 
-ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 face_detector = dlib.get_frontal_face_detector()
 

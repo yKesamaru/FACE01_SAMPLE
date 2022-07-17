@@ -4,6 +4,7 @@ __version__ = '1.3.10'
 
 from pkg_resources import resource_filename
 
+# DATA_PATH = pkg_resources.resource_filename('<package name>', 'data/')
 def pose_predictor_five_point_model_location():
     return resource_filename(__name__, "models/shape_predictor_5_face_landmarks.dat")
 

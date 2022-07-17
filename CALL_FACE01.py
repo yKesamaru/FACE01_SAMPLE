@@ -1,15 +1,16 @@
 import cProfile as pr
-import FACE01 as fg
 import PySimpleGUI as sg
 import cv2
 import time
-import face01lib.video_capture as vc
+from face01lib.video_capture import VidCap 
 from memory_profiler import profile  # @profile()
 from sys import exit
 
+import FACE01 as fg
+
 """DEBUG
 再生フレーム数をセット"""
-exec_times: int = 50
+exec_times: int = 10
 ALL_FRAME = exec_times
 
 # PySimpleGUIレイアウト
@@ -27,6 +28,7 @@ if fg.args_dict["headless"] == False:
 # @profile()
 def common_main(exec_times):
     profile_HANDLING_FRAME_TIME_FRONT = time.perf_counter()
+    event = ''
     while True:
         try:
             frame_datas_array = fg.main_process().__next__()
@@ -81,14 +83,15 @@ def common_main(exec_times):
     print(f'処理フレーム数: {ALL_FRAME - exec_times}')
     print(f'profile()関数の処理時間合計: {round(profile_HANDLING_FRAME_TIME , 3)}[秒]')
     print(f'1フレーム: {round(profile_HANDLING_FRAME_TIME / (ALL_FRAME - exec_times), 3)}[秒]')
-# pr.run('common_main(exec_times)', 'restats')
+pr.run('common_main(exec_times)', 'restats')
 
 
 """顔座標のみ抽出したい場合"""
-next_frame_gen_obj = vc.frame_generator(fg.args_dict)
+next_frame_gen_obj = VidCap().frame_generator(fg.args_dict)
 # @profile()
 def extract_face_locations(exec_times):
     profile_HANDLING_FRAME_TIME_FRONT = time.perf_counter()
+    i: int = 0
     for i in range(exec_times):
         i += 1
         if i >= exec_times:
@@ -98,7 +101,7 @@ def extract_face_locations(exec_times):
         # fg.frame_imshow_for_debug(next_frame)
         print(f"fg.args_dict.__sizeof__(): {fg.args_dict.__sizeof__()}MB")
         """
-        frame_datas_array = fg.frame_pre_processing(fg.args_dict,next_frame)
+        frame_datas_array = fg.Core().frame_pre_processing(fg.logger, fg.args_dict,next_frame)
         for frame_datas in frame_datas_array:
             for face_location in frame_datas["face_location_list"]:
                 print(face_location)
@@ -110,5 +113,4 @@ def extract_face_locations(exec_times):
     print(f'処理フレーム数: {i}')
     print(f'profile()関数の処理時間合計: {round(profile_HANDLING_FRAME_TIME , 3)}[秒]')
     print(f'1フレーム: {round(profile_HANDLING_FRAME_TIME / i, 3)}[秒]')
-# extract_face_locations(exec_times)
-pr.run('extract_face_locations(exec_times)', 'restats')
+# pr.run('extract_face_locations(exec_times)', 'restats')
