@@ -3,14 +3,14 @@ https://github.com/google/mediapipe/tree/master/mediapipe/python
 """
 """about coordinate order
 dlib: (Left, Top, Right, Bottom,)
-faceapi: (top, right, bottom, left)
+Dlib_api(): (top, right, bottom, left)
 see bellow
 https://github.com/davisking/dlib/blob/master/python_examples/faceapi.py
 """
 # from asyncio.log import logger
 import mediapipe as mp
 import numpy as np
-import face01lib.api as faceapi
+from face01lib.api import Dlib_api
 from traceback import format_exc
 from datetime import datetime
 from PIL import Image, ImageFile
@@ -84,7 +84,7 @@ class Core:
                 
                 if xleft <= 0 or xtop <= 0:  # xleft or xtop がマイナスになる場合があるとバグる
                     continue
-                face_location_list.append((xtop,xright,xbottom,xleft))  # faceapi order
+                face_location_list.append((xtop,xright,xbottom,xleft))  # Dlib_api() order
 
         self.resized_frame.flags.writeable = True
         return face_location_list
@@ -117,7 +117,7 @@ class Core:
         self.face_encoding = face_encoding
         self.tolerance = tolerance
         try:
-            matches = faceapi.compare_faces(self.known_face_encodings, self.face_encoding, self.tolerance)
+            matches = Dlib_api().compare_faces(self.known_face_encodings, self.face_encoding, self.tolerance)
             return matches
         except:
             self.logger.warning("DEBUG: npKnown.npzが壊れているか予期しないエラーが発生しました。")
@@ -198,7 +198,7 @@ class Core:
         self.matches = matches
         self.name = name
         # 各プリセット顔画像のエンコーディングと動画中の顔画像エンコーディングとの各顔距離を要素としたアレイを算出
-        face_distances = faceapi.face_distance(self.args_dict["known_face_encodings"], self.face_encoding)  ## face_distances -> shape:(677,), face_encoding -> shape:(128,)
+        face_distances = Dlib_api().face_distance(self.args_dict["known_face_encodings"], self.face_encoding)  ## face_distances -> shape:(677,), face_encoding -> shape:(128,)
         # プリセット顔画像と動画中顔画像との各顔距離を要素とした配列に含まれる要素のうち、最小の要素のインデックスを求める
         best_match_index = np.argmin(face_distances)
         # プリセット顔画像と動画中顔画像との各顔距離を要素とした配列に含まれる要素のうち、最小の要素の値を求める
@@ -247,11 +247,11 @@ class Core:
             concatenated_xbottom:int = person_frame_xbottom 
             concatenated_xleft:int = person_frame_xleft + (finally_width_size * detection_counter)
 
-            concatenate_face_location_list.append((concatenated_xtop,concatenated_xright,concatenated_xbottom,concatenated_xleft))  # faceapi order
+            concatenate_face_location_list.append((concatenated_xtop,concatenated_xright,concatenated_xbottom,concatenated_xleft))  # Dlib_api() order
             detection_counter += 1
             """about coordinate order
             dlib: (Left, Top, Right, Bottom,)
-            faceapi: (top, right, bottom, left)
+            Dlib_api(): (top, right, bottom, left)
             see bellow
             https://github.com/davisking/dlib/blob/master/python_examples/faceapi.py
             """
@@ -308,7 +308,7 @@ class Core:
         if self.args_dict["use_pipe"] == True:
             face_location_list = Core().return_face_location_list(self.resized_frame, self.args_dict["set_width"], self.args_dict["set_height"], self.args_dict["model_selection"], self.args_dict["min_detection_confidence"])
         else:
-            face_location_list = faceapi.face_locations(self.resized_frame, self.args_dict["upsampling"], self.args_dict["mode"])
+            face_location_list = Dlib_api().face_locations(self.resized_frame, self.args_dict["upsampling"], self.args_dict["mode"])
         """face_location_list
         [(144, 197, 242, 99), (97, 489, 215, 371)]
         """
@@ -358,9 +358,9 @@ class Core:
                     """
                     concatenate_face_location_list, concatenate_person_frame = \
                         Core().return_concatenate_location_and_frame(resized_frame, face_location_list)
-                    face_encodings = faceapi.face_encodings(concatenate_person_frame, concatenate_face_location_list, self.args_dict["jitters"], self.args_dict["model"])
+                    face_encodings = Dlib_api().face_encodings(concatenate_person_frame, concatenate_face_location_list, self.args_dict["jitters"], self.args_dict["model"])
                 elif self.args_dict["use_pipe"] == True and  self.args_dict["person_frame_face_encoding"] == False:
-                    face_encodings = faceapi.face_encodings(resized_frame, face_location_list, self.args_dict["jitters"], self.args_dict["model"])
+                    face_encodings = Dlib_api().face_encodings(resized_frame, face_location_list, self.args_dict["jitters"], self.args_dict["model"])
                 elif self.args_dict["use_pipe"] == False and  self.args_dict["person_frame_face_encoding"] == True:
                     self.logger.warning("config.ini:")
                     self.logger.warning("mediapipe = False  の場合 person_frame_face_encoding = True  には出来ません")
@@ -371,7 +371,7 @@ class Core:
                     self.logger.warning("処理を終了します")
                     exit(0)
                 elif self.args_dict["use_pipe"] == False and self.args_dict["person_frame_face_encoding"] == False:
-                    face_encodings = faceapi.face_encodings(resized_frame, face_location_list, self.args_dict["jitters"], self.args_dict["model"])
+                    face_encodings = Dlib_api().face_encodings(resized_frame, face_location_list, self.args_dict["jitters"], self.args_dict["model"])
             return face_encodings, self.frame_datas_array
 
     # フレーム後処理

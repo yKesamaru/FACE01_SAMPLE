@@ -5,7 +5,7 @@ from shutil import move
 
 from numpy import load, savez
 
-import face01lib.api as faceapi
+from face01lib.api import Dlib_api
 
 """Logging"""
 logger = logging.getLogger('face01lib/load_priset_image')
@@ -87,16 +87,16 @@ def load_priset_image(
                 # priset_face_imageはknown_face_names配列にないから、new_fileに名前を変える
                 new_file = priset_face_image
 
-                new_file_face_image = faceapi.load_image_file(
+                new_file_face_image = Dlib_api().load_image_file(
                     new_file)
-                new_file_face_locations = faceapi.face_locations(
+                new_file_face_locations = Dlib_api().face_locations(
                     new_file_face_image, upsampling, mode)
 
                 # 顔検出できなかった場合hogからcnnへチェンジして再度顔検出する
                 if len(new_file_face_locations) == 0:
                     if mode == 'hog':
                         logger.info('顔が検出できませんでした。一時的にcnnモードへ切り替えます')
-                        new_file_face_locations = faceapi.face_locations(
+                        new_file_face_locations = Dlib_api().face_locations(
                             new_file_face_image, upsampling, 'cnn')
                         # cnnでも顔検出できない場合はnoFaceフォルダへファイルを移動する
                         logger.info(f"{cnt} 登録顔画像 {new_file} に顔が検出されませんでした(CNNモード)。 noFace フォルダへ移動します")
@@ -112,7 +112,7 @@ def load_priset_image(
 
                 # new_file顔画像のエンコーディング処理：array([encoding 配列])
                 logger.info(f"{cnt} {new_file}をエンコードしています")
-                new_file_face_encodings = faceapi.face_encodings(
+                new_file_face_encodings = Dlib_api().face_encodings(
                     new_file_face_image, new_file_face_locations, jitters, 'small')
 
                 if len(new_file_face_encodings) > 1:  # 複数の顔が検出された時
@@ -142,9 +142,9 @@ def load_priset_image(
                 continue
 
             # それぞれの顔写真について顔認証データを作成する
-            priset_face_img = faceapi.load_image_file(
+            priset_face_img = Dlib_api().load_image_file(
                 priset_face_image_filename)
-            priset_face_img_locations = faceapi.face_locations(
+            priset_face_img_locations = Dlib_api().face_locations(
                 priset_face_img, upsampling, mode)
 
             # 得られた顔データについて顔写真なのに顔が判別できない場合や複数の顔がある場合はcnnモードで再確認し、それでもな場合はnoFaceフォルダに移動する
@@ -153,7 +153,7 @@ def load_priset_image(
                 if mode == 'hog':
                     logger.info('顔が検出できない又は複数検出されました。一時的にcnnモードへ切り替えます')
                     # CNNモードにて顔検出を行う
-                    priset_face_img_locations = faceapi.face_locations(
+                    priset_face_img_locations = Dlib_api().face_locations(
                         priset_face_img, upsampling, 'cnn')
                     # cnnでも顔検出できない場合はnoFaceフォルダへファイルを移動する
                     if len(priset_face_img_locations) == 0 or len(priset_face_img_locations) > 1:
@@ -166,7 +166,7 @@ def load_priset_image(
 
             # 得られた顔データ（この場合は顔ロケーション）を元にエンコーディングする：array([encoding 配列])
             logger.info(f"{cnt} {priset_face_image_filename} をエンコードしています")
-            priset_face_image_encodings = faceapi.face_encodings(
+            priset_face_image_encodings = Dlib_api().face_encodings(
                 priset_face_img, priset_face_img_locations, jitters, 'small')
 
             # エンコーディングした顔写真について複数顔や顔がない場合はnoFaceフォルダへ移動する
@@ -189,7 +189,7 @@ def load_priset_image(
                     pass
 
             # 配列に、名前やエンコーディングデータを要素として追加する
-            # FACE01GRAPHICS本体の方では要素にndarrayを含むListを返り値として期待している(faceapi APIにそう書いてある)
+            # FACE01GRAPHICS本体の方では要素にndarrayを含むListを返り値として期待している(Dlib_api() APIにそう書いてある)
             known_face_names_list.append(priset_face_image_filename)
             known_face_encodings_list.append(priset_face_image_encodings[0])
 
