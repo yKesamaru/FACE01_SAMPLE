@@ -199,22 +199,6 @@ def Measure_processing_time_backward():
         HANDLING_FRAME_TIME_REAR = perf_counter()
         Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR)
 
-# デバッグ用imshow()
-def frame_imshow_for_debug(frame):
-    # print(type(frame))
-    if isinstance(frame, np.ndarray):
-        cv2.imshow("DEBUG", frame)
-        cv2.moveWindow('window DEBUG', 0, 0)
-        cv2.waitKey(3000)
-        cv2.destroyAllWindows()
-    else:
-        for fra in frame:
-            fr = fra["img"]
-            cv2.imshow("DEBUG", fr)
-            cv2.moveWindow('window DEBUG', 0, 0)
-            cv2.waitKey(3000)
-            cv2.destroyAllWindows()
-
 frame_generator_obj = VidCap().frame_generator(args_dict)
 # @profile()
 def main_process():

@@ -10,7 +10,7 @@ import FACE01 as fg
 
 """DEBUG
 再生フレーム数をセット"""
-exec_times: int = 10
+exec_times: int = 100
 ALL_FRAME = exec_times
 
 # PySimpleGUIレイアウト

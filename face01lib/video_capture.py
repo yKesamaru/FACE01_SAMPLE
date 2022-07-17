@@ -18,12 +18,11 @@ cv2.imreadで読み込んだframe変数について。
 [NumPyの軸(axis)と次元数(ndim)とは何を意味するのか](https://deepage.net/features/numpy-axis.html)
 """
 
-from ast import Return
 from os import chdir, environ
 from os.path import dirname
 from traceback import format_exc
 
-from cv2 import resize, CAP_PROP_FPS, CAP_PROP_FRAME_HEIGHT, CAP_PROP_FRAME_WIDTH, VideoCapture, CAP_FFMPEG, destroyAllWindows, imshow, waitKey, destroyAllWindows
+import cv2
 import requests
 from requests.auth import HTTPDigestAuth
 
@@ -49,20 +48,36 @@ class VidCap:
     def __init__(self) -> None:
         pass
 
+    # デバッグ用imshow()
+    def frame_imshow_for_debug(self, frame):
+        self.frame = frame
+        if isinstance(self.frame, np.ndarray):
+            cv2.imshow("DEBUG", self.frame)
+            cv2.moveWindow('window DEBUG', 0, 0)
+            cv2.waitKey(3000)
+            cv2.destroyAllWindows()
+        else:
+            for fra in self.frame:
+                fr = fra["img"]
+                cv2.imshow("DEBUG", fr)
+                cv2.moveWindow('window DEBUG', 0, 0)
+                cv2.waitKey(3000)
+                cv2.destroyAllWindows()
+                
     def resize_frame(self, set_width, set_height, frame):
         self.set_width = set_width
         self.set_height = set_height
         self.frame = frame
-        small_frame = resize(self.frame, (self.set_width, self.set_height))
+        small_frame = cv2.resize(self.frame, (self.set_width, self.set_height))
         return small_frame
 
     def return_movie_property(self, set_width: int, vcap) -> tuple:
         self.set_width = set_width
         self.vcap = vcap
         
-        fps: int    = self.vcap.get(CAP_PROP_FPS)
-        height: int = self.vcap.get(CAP_PROP_FRAME_HEIGHT)
-        width: int  = self.vcap.get(CAP_PROP_FRAME_WIDTH)
+        fps: int    = self.vcap.get(cv2.CAP_PROP_FPS)
+        height: int = self.vcap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+        width: int  = self.vcap.get(cv2.CAP_PROP_FRAME_WIDTH)
         fps = int(fps)
         height= int(height)
         width = int(width)
@@ -105,18 +120,20 @@ class VidCap:
         self.BOTTOM_LEFT = BOTTOM_LEFT
         self.BOTTOM_RIGHT = BOTTOM_RIGHT
         self.CENTER = CENTER
+        # VidCap().frame_imshow_for_debug(self.frame)
         if self.set_area=='NONE':
             pass
-        elif self.set_area=='self.TOP_LEFT':
+        elif self.set_area=='TOP_LEFT':
             self.frame = self.frame[self.TOP_LEFT[0]:self.TOP_LEFT[1],self.TOP_LEFT[2]:self.TOP_LEFT[3]]
-        elif self.set_area=='self.TOP_RIGHT':
+        elif self.set_area=='TOP_RIGHT':
             self.frame = self.frame[self.TOP_RIGHT[0]:self.TOP_RIGHT[1],self.TOP_RIGHT[2]:self.TOP_RIGHT[3]]
-        elif self.set_area=='self.BOTTOM_LEFT':
+        elif self.set_area=='BOTTOM_LEFT':
             self.frame = self.frame[self.BOTTOM_LEFT[0]:self.BOTTOM_LEFT[1],self.BOTTOM_LEFT[2]:self.BOTTOM_LEFT[3]]
-        elif self.set_area=='self.BOTTOM_RIGHT':
+        elif self.set_area=='BOTTOM_RIGHT':
             self.frame = self.frame[self.BOTTOM_RIGHT[0]:self.BOTTOM_RIGHT[1],self.BOTTOM_RIGHT[2]:self.BOTTOM_RIGHT[3]]
-        elif self.set_area=='self.CENTER':
+        elif self.set_area=='CENTER':
             self.frame = self.frame[self.CENTER[0]:self.CENTER[1],self.CENTER[2]:self.CENTER[3]]
+        # VidCap().frame_imshow_for_debug(self.frame)
         return self.frame
 
     def return_vcap(self, movie):
@@ -133,7 +150,7 @@ class VidCap:
         if self.movie=='usb' or self.movie == 'USB':   # USB カメラ読み込み時使用
             live_camera_number:int = 0
             for camera_number in range(-5, 5):
-                vcap = VideoCapture(camera_number, CAP_FFMPEG)
+                vcap = cv2.VideoCapture(camera_number, cv2.CAP_FFMPEG)
                 ret, frame = vcap.read()
                 if ret:
                     live_camera_number = camera_number
@@ -145,11 +162,12 @@ class VidCap:
                     logger.exception("USBカメラとの通信に異常が発生しました")
                     logger.warning("-" * 20)
                     logger.warning("終了します")
+                    VidCap().finalize(vcap)
                     exit(0)
-            vcap = VideoCapture(live_camera_number, CAP_FFMPEG)
+            vcap = cv2.VideoCapture(live_camera_number, cv2.CAP_FFMPEG)
             return vcap
         else:
-            vcap = VideoCapture(self.movie, CAP_FFMPEG)
+            vcap = cv2.VideoCapture(self.movie, cv2.CAP_FFMPEG)
             return vcap
 
     def finalize(self, vcap):
@@ -157,7 +175,7 @@ class VidCap:
         # 入力動画処理ハンドルのリリース
         self.vcap.release()
         # ウィンドウの除去
-        destroyAllWindows()
+        cv2.destroyAllWindows()
 
     # @lru_cache(maxsize=None)
     def frame_generator(self, args_dict):
@@ -187,12 +205,12 @@ class VidCap:
             camera_number:int = 0
             live_camera_number:int = 0
             for camera_number in range(-5, 5):
-                vcap = VideoCapture(camera_number)
+                vcap = cv2.VideoCapture(camera_number)
                 ret, frame = vcap.read()
                 if ret:
                     live_camera_number = camera_number 
                     break
-            vcap = VideoCapture(live_camera_number)
+            vcap = cv2.VideoCapture(live_camera_number)
             logger.info(f'カメラデバイス番号：{camera_number}')
         elif 'http' in movie:
             """DEBUG"""
@@ -209,6 +227,7 @@ class VidCap:
                     # frame_skipの数値に満たない場合は処理をスキップ
                     for frame_skip_counter in range(1, self.args_dict["frame_skip"]):
                         response = requests.get(url, auth = HTTPDigestAuth(self.args_dict["user"], self.args_dict["passwd"]))
+                        # print(f'response: {response}')
                         if frame_skip_counter < self.args_dict["frame_skip"]:
                             continue
                     # {'Status': '200', 'Connection': 'Close', 'Set-Cookie': 'Session=0', 'Accept-Ranges': 'bytes',
@@ -221,7 +240,7 @@ class VidCap:
                         img_np  = np.asarray(img_pil)
                         frame  = cv2.cvtColor(img_np, cv2.COLOR_RGBA2BGR)
                         """DEBUG
-                        imshow("video_capture_DEBUG", frame)
+                        cv2.imshow("video_capture_DEBUG", frame)
                         cv2.moveWindow("video_capture_DEBUG", 0,0)
                         cv2.waitKey(5000)
                         cv2.destroyAllWindows()
@@ -233,10 +252,10 @@ class VidCap:
                         # 各frameリサイズ
                         resized_frame = VidCap().resize_frame(set_width, set_height, frame)
                         """DEBUG
-                        imshow("video_capture_DEBUG", frame)
+                        cv2.imshow("video_capture_DEBUG", frame)
                         cv2.moveWindow("video_capture_DEBUG", 0,0)
-                        waitKey(500)
-                        destroyAllWindows()
+                        cv2.waitKey(500)
+                        cv2.destroyAllWindows()
                         """
                         try:
                             yield resized_frame
@@ -253,6 +272,7 @@ class VidCap:
                         logger.warning("-" * 20)
                         logger.warning(format_exc(limit=None, chain=True))
                         logger.warning("-" * 20)
+                        exit(0)
             except:
                 logger.warning("以下のエラーをシステム管理者へお伝えください")
                 logger.warning("-" * 20)
@@ -265,20 +285,20 @@ class VidCap:
         # elif 'rtsp' in movie:
         #     """RTSPの場合は通常のテスト動画と同じ"""
         else:
-            vcap = VideoCapture(movie, CAP_FFMPEG)
+            vcap = cv2.VideoCapture(movie, cv2.CAP_FFMPEG)
             while vcap.isOpened(): 
                 # frame_skipの数値に満たない場合は処理をスキップ
                 for frame_skip_counter in range(1, self.args_dict["frame_skip"]):
                     ret, frame = vcap.read()
                     if frame_skip_counter < self.args_dict["frame_skip"]:
                         continue
-                if Return == False:
-                    logger.warning("movieが開けません")
-                    logger.warning("以下のエラーをシステム管理者へお伝えください")
-                    logger.warning("-" * 20)
-                    logger.warning(format_exc(limit=None, chain=True))
-                    logger.warning("-" * 20)
-                    finalize(self.args_dict["vcap"])
+                    if ret == False:
+                        logger.warning("movieが開けません")
+                        logger.warning("以下のエラーをシステム管理者へお伝えください")
+                        logger.warning("-" * 20)
+                        logger.warning(format_exc(limit=None, chain=True))
+                        logger.warning("-" * 20)
+                        VidCap().finalize(vcap)
                     break
                 else:
                     """C++実装試験
@@ -291,10 +311,10 @@ class VidCap:
                     # 各frameリサイズ
                     resized_frame = VidCap().resize_frame(set_width, set_height, frame)
                     """DEBUG
-                    imshow("video_capture_DEBUG", frame)
+                    cv2.imshow("video_capture_DEBUG", frame)
                     cv2.moveWindow("video_capture_DEBUG", 0,0)
-                    waitKey(3000)
-                    destroyAllWindows()
+                    cv2.waitKey(3000)
+                    cv2.destroyAllWindows()
                     """
                     yield resized_frame
 
