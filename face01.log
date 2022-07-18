@@ -804,3 +804,668 @@ did not match C++ signature:
 [2022-07-12 08:49:53,362] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
 [2022-07-12 08:52:08,998] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
 [2022-07-12 12:50:51,792] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:44:24,291] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:44:27,896] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：-5
+[2022-07-14 08:46:09,973] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:48:05,919] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:48:44,515] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-07-14 08:48:44,516] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:48:44,518] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-07-14 08:48:44,519] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:48:44,519] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-07-14 08:52:58,823] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:53:08,495] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-07-14 08:53:08,496] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:53:08,497] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-07-14 08:53:08,497] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:53:08,498] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-07-14 08:53:52,788] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:54:29,283] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:54:29,569] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-07-14 08:54:29,569] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:54:29,569] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-07-14 08:54:29,570] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:54:29,570] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-07-14 08:55:28,270] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:55:28,539] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-07-14 08:55:28,539] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:55:28,539] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-07-14 08:55:28,540] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:55:28,540] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-07-14 08:55:57,467] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:57:52,773] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 08:58:08,860] [face01lib.video_capture] [video_capture.py] [WARNING] USBカメラの受信が出来ません
+[2022-07-14 08:58:10,811] [face01lib.video_capture] [video_capture.py] [WARNING] 以下のエラーをシステム管理者へお伝えください
+[2022-07-14 08:58:12,463] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:58:14,166] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-07-14 08:58:18,978] [face01lib.video_capture] [video_capture.py] [ERROR] 通信に異常が発生しました
+NoneType: None
+[2022-07-14 08:58:23,668] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-14 08:58:27,136] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-07-14 10:22:39,397] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 10:24:45,241] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 10:28:21,346] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-14 11:05:42,757] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 06:25:15,145] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 06:45:34,589] [FACE01] [FACE01.py] [WARNING] config.ini 読み込み中にエラーが発生しました
+[2022-07-15 06:45:34,590] [FACE01] [FACE01.py] [ERROR] conf_dictが正常に作成できませんでした
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/configparser.py", line 789, in get
+    value = d[option]
+  File "/usr/lib/python3.8/collections/__init__.py", line 898, in __getitem__
+    return self.__missing__(key)            # support subclasses that define __missing__
+  File "/usr/lib/python3.8/collections/__init__.py", line 890, in __missing__
+    raise KeyError(key)
+KeyError: 'movie'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/FACE01.py", line 90, in configure
+    'movie' : conf.get('DEFAULT','movie'),
+  File "/usr/lib/python3.8/configparser.py", line 792, in get
+    raise NoOptionError(option, section)
+configparser.NoOptionError: No option 'movie' in section: 'DEFAULT'
+[2022-07-15 06:45:34,592] [FACE01] [FACE01.py] [WARNING] 以下のエラーをシステム管理者へお伝えください
+[2022-07-15 06:45:34,593] [FACE01] [FACE01.py] [WARNING] --------------------
+[2022-07-15 06:45:34,593] [FACE01] [FACE01.py] [WARNING] Traceback (most recent call last):
+  File "/usr/lib/python3.8/configparser.py", line 789, in get
+    value = d[option]
+  File "/usr/lib/python3.8/collections/__init__.py", line 898, in __getitem__
+    return self.__missing__(key)            # support subclasses that define __missing__
+  File "/usr/lib/python3.8/collections/__init__.py", line 890, in __missing__
+    raise KeyError(key)
+KeyError: 'movie'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/FACE01.py", line 90, in configure
+    'movie' : conf.get('DEFAULT','movie'),
+  File "/usr/lib/python3.8/configparser.py", line 792, in get
+    raise NoOptionError(option, section)
+configparser.NoOptionError: No option 'movie' in section: 'DEFAULT'
+
+[2022-07-15 06:45:34,594] [FACE01] [FACE01.py] [WARNING] --------------------
+[2022-07-15 06:45:34,594] [FACE01] [FACE01.py] [WARNING] 終了します
+[2022-07-15 06:47:23,992] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 07:01:08,963] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 07:32:34,665] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 07:33:27,626] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 07:33:43,803] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 08:06:18,243] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 10:40:16,696] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:17:00,996] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:17:38,993] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:18:45,161] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:20:16,733] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:20:17,093] [__main__] [CALL_FACE01.py] [WARNING] not enough values to unpack (expected 6, got 0)
+[2022-07-15 11:22:01,661] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:23:43,766] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:27:09,641] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:27:41,351] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:28:22,137] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:34:16,210] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:50:03,542] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:52:13,414] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:54:29,905] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:54:57,696] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 11:55:18,672] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 12:11:55,739] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 12:16:10,382] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 12:19:37,798] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:27:51,756] [face01lib.load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:31:09,310] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:32:17,223] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:34:34,965] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:36:33,187] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:44:22,550] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:46:02,073] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:51:48,983] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:54:15,445] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 13:59:12,761] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 14:54:18,146] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 14:54:51,812] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 14:55:41,702] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 14:59:05,167] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 15:01:44,420] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 15:15:06,970] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 15:15:07,274] [FACE01] [FACE01.py] [INFO] FACE01の推奨動作環境を満たしているかシステムチェックを実行します
+[2022-07-15 15:15:07,274] [FACE01] [FACE01.py] [INFO] - Python version check
+[2022-07-15 15:15:07,275] [FACE01] [FACE01.py] [INFO]   [OK] 3.8.10 (default, Jun 22 2022, 20:18:18) 
+[GCC 9.4.0]
+[2022-07-15 15:15:07,276] [FACE01] [FACE01.py] [INFO] - CPU check
+[2022-07-15 15:15:07,326] [FACE01] [FACE01.py] [INFO]   [OK] 3.20GHz
+[2022-07-15 15:15:07,328] [FACE01] [FACE01.py] [INFO]   [OK] 4core
+[2022-07-15 15:15:07,333] [FACE01] [FACE01.py] [INFO] - Memory check
+[2022-07-15 15:15:07,334] [FACE01] [FACE01.py] [INFO]   [OK] 16GByte
+[2022-07-15 15:15:07,334] [FACE01] [FACE01.py] [INFO] - CUDA devices check
+[2022-07-15 15:15:07,334] [FACE01] [FACE01.py] [INFO]   [OK] cuda devices: 1
+[2022-07-15 15:15:07,334] [FACE01] [FACE01.py] [INFO] - Dlib build check: CUDA
+[2022-07-15 15:15:07,335] [FACE01] [FACE01.py] [WARNING] dlibビルド時にCUDAが有効化されていません
+[2022-07-15 15:15:07,335] [FACE01] [FACE01.py] [WARNING] 終了します
+[2022-07-15 15:16:18,714] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 15:16:19,001] [FACE01] [FACE01.py] [INFO] FACE01の推奨動作環境を満たしているかシステムチェックを実行します
+[2022-07-15 15:16:19,001] [FACE01] [FACE01.py] [INFO] - Python version check
+[2022-07-15 15:16:19,001] [FACE01] [FACE01.py] [INFO]   [OK] 3.8.10 (default, Jun 22 2022, 20:18:18) 
+[GCC 9.4.0]
+[2022-07-15 15:16:19,001] [FACE01] [FACE01.py] [INFO] - CPU check
+[2022-07-15 15:16:19,037] [FACE01] [FACE01.py] [INFO]   [OK] 3.20GHz
+[2022-07-15 15:16:19,038] [FACE01] [FACE01.py] [INFO]   [OK] 4core
+[2022-07-15 15:16:19,038] [FACE01] [FACE01.py] [INFO] - Memory check
+[2022-07-15 15:16:19,039] [FACE01] [FACE01.py] [INFO]   [OK] 16GByte
+[2022-07-15 15:16:19,040] [FACE01] [FACE01.py] [INFO] - CUDA devices check
+[2022-07-15 15:16:19,040] [FACE01] [FACE01.py] [INFO]   [OK] cuda devices: 1
+[2022-07-15 15:16:19,040] [FACE01] [FACE01.py] [INFO] - Dlib build check: CUDA
+[2022-07-15 15:16:19,040] [FACE01] [FACE01.py] [WARNING] dlibビルド時にCUDAが有効化されていません
+[2022-07-15 15:16:19,041] [FACE01] [FACE01.py] [WARNING] 終了します
+[2022-07-15 15:16:55,941] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 15:17:37,864] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 15:22:39,173] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 15:23:29,535] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 15:26:18,002] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 15:33:08,182] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 15:33:58,781] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 15:42:08,076] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 15:45:48,154] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 15:49:18,649] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 15:58:16,867] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 16:03:43,370] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 16:04:02,906] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 22:15:17,402] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 22:15:18,040] [FACE01] [Core.py] [WARNING] DEBUG: npKnown.npzが壊れているか予期しないエラーが発生しました。
+[2022-07-15 22:15:18,041] [FACE01] [Core.py] [WARNING] npKnown.npzの自動削除は行われません。原因を特定の上、必要な場合npKnown.npzを削除して下さい。
+[2022-07-15 22:15:18,042] [FACE01] [Core.py] [WARNING] 処理を終了します。FACE01を再起動して下さい。
+[2022-07-15 22:15:18,044] [FACE01] [Core.py] [WARNING] 以下のエラーをシステム管理者様へお伝えください
+[2022-07-15 22:15:18,045] [FACE01] [Core.py] [WARNING] --------------------
+[2022-07-15 22:24:50,567] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 22:31:27,598] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 22:36:25,661] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 22:37:05,061] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-15 22:37:19,432] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 09:27:15,151] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 09:28:08,774] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 14:03:14,919] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 14:03:58,731] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 14:04:51,068] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 14:05:14,149] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 14:43:05,029] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 14:47:30,450] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 14:47:31,842] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:47:31,850] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:47:32,122] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:47:32,131] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:47:32,410] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:47:32,412] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:47:32,679] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:47:32,680] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:47:32,943] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:47:32,944] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:47:33,226] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:47:33,234] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:47:33,469] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:47:33,470] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:47:33,725] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:47:33,727] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:47:33,982] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:47:33,982] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:47:34,559] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:47:34,560] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:47:34,853] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:47:34,854] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:47:35,167] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:47:35,169] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:47:35,461] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:47:35,461] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:47:35,792] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:47:35,792] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:47:36,075] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:47:36,076] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:47:36,394] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:47:36,395] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:19,778] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 14:48:21,159] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:21,160] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:21,434] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:21,434] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:21,717] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:21,717] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:21,943] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:21,950] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:22,181] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:22,182] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:22,452] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:22,455] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:22,758] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:22,759] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:23,005] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:23,005] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:23,251] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:23,251] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:23,797] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:23,798] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:24,074] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:24,075] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:24,368] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:24,369] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:24,658] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:24,665] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:25,000] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:25,001] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:25,272] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:25,279] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:25,589] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:25,589] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:28,265] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:28,269] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:28,552] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:28,559] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:28,843] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:28,843] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:29,151] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:29,158] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:29,436] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:29,438] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:29,766] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:29,766] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:30,035] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:30,041] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:30,348] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:30,351] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:30,652] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:30,652] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:30,875] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:30,876] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:31,194] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:31,195] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:31,479] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:31,487] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:31,739] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:31,741] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:31,974] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:31,975] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:32,221] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:32,222] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:32,458] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:32,459] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:32,730] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:32,731] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:32,958] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:32,959] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:51,930] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 14:48:53,266] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:53,268] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:53,514] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:53,515] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:53,769] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:53,770] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:54,010] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:54,011] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:54,248] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:54,249] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:54,562] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:54,563] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:54,794] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:54,796] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:55,037] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:55,039] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:55,281] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:55,283] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:55,837] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:55,839] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:56,135] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:56,142] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:56,452] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:56,453] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:56,764] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:56,765] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:57,080] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:57,081] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:57,360] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:57,360] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:48:57,682] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:48:57,682] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:52:37,102] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 14:52:38,493] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:52:38,498] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:52:38,740] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:52:38,741] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:52:39,021] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:52:39,022] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:52:39,262] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:52:39,263] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:52:39,498] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:52:39,501] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:52:39,770] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:52:39,772] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:52:40,045] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:52:40,045] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:52:40,285] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:52:40,286] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:52:40,529] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:52:40,537] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:52:41,073] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:52:41,075] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:52:41,356] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:52:41,357] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:52:41,662] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:52:41,663] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:52:42,008] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:52:42,009] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:52:42,335] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:52:42,337] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:52:42,617] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:52:42,618] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:52:42,949] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:52:42,950] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:55:34,839] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 14:55:36,236] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:55:36,237] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:55:36,519] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:55:36,520] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:55:36,794] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:55:36,805] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:55:37,039] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:55:37,039] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:55:37,292] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:55:37,293] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:55:37,586] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:55:37,593] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:55:37,819] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:55:37,819] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 14:55:38,066] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 14:55:38,066] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:08:47,423] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 15:08:48,779] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:08:48,780] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:08:49,019] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:08:49,020] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:08:49,295] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:08:49,295] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:08:49,535] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:08:49,536] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:08:49,804] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:08:49,804] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:08:50,121] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:08:50,122] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:08:50,388] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:08:50,390] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:08:50,686] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:08:50,696] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:08:50,923] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:08:50,923] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:21,282] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 15:28:22,670] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:22,671] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:22,909] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:22,910] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:23,174] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:23,174] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:23,405] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:23,406] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:23,680] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:23,681] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:23,982] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:23,983] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:24,232] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:24,233] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:24,490] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:24,491] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:24,745] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:24,751] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:25,347] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:25,348] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:25,654] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:25,655] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:25,982] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:25,984] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:26,287] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:26,288] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:26,617] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:26,618] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:26,908] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:26,915] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:27,238] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:27,241] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:30,010] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:30,013] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:30,292] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:30,295] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:30,592] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:30,600] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:30,924] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:30,925] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:31,204] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:31,205] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:31,530] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:31,530] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:31,811] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:31,812] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:32,121] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:32,123] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:32,409] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:32,410] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:32,659] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:32,665] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:32,990] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:32,990] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:33,268] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:33,269] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:33,556] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:33,568] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:33,793] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:33,794] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:34,030] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:34,032] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:34,262] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:34,263] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:34,535] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:34,542] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:34,774] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:34,775] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:35,010] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:35,011] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:35,277] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:35,278] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:35,511] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:35,511] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:42,433] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 15:28:43,752] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:43,754] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:44,010] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:44,015] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:44,280] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:44,281] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:44,502] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:44,504] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:44,751] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:44,751] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:45,003] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:45,003] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:45,228] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:45,230] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:45,480] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:45,482] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:45,735] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:45,736] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:46,277] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:46,278] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:46,574] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:46,576] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:46,876] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:46,877] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:47,169] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:47,172] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:47,481] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:47,481] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:47,749] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:47,750] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:48,062] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:48,065] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:50,785] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:50,786] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:51,066] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:51,073] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:51,363] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:51,370] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:51,677] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:51,678] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:52,001] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:52,008] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:52,328] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:52,329] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:52,617] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:52,618] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:52,930] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:52,937] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:53,217] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:53,218] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:53,448] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:53,449] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:53,792] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:53,794] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:54,071] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:54,072] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:54,353] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:54,354] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:54,590] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:54,591] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:54,831] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:54,832] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:55,090] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:55,091] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:55,339] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:55,341] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:28:55,559] [FACE01] [libdraw.py] [INFO] デフォルト顔画像の描画が出来ません
+[2022-07-16 15:28:55,566] [FACE01] [libdraw.py] [INFO] 描画面積が足りないか他に問題があります
+[2022-07-16 15:41:49,557] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 15:46:05,493] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 15:47:21,008] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 15:55:50,667] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 15:57:12,839] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 17:35:44,962] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 17:40:59,604] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 17:42:22,881] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 17:43:05,432] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 17:45:47,796] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 17:54:42,204] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 18:45:48,226] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 18:54:24,407] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 19:04:33,057] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 19:11:07,931] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 19:12:33,541] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 19:12:58,091] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 19:26:37,760] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 19:31:20,783] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 19:54:58,836] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 19:55:57,418] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 19:57:00,724] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 19:57:27,322] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 19:58:41,118] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 19:59:52,764] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 20:00:04,173] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 20:04:39,122] [face01lib.Calc] [Calc.py] [WARNING] 試用期限を過ぎました
+[2022-07-16 20:04:43,031] [face01lib.Calc] [Calc.py] [WARNING] 引き続きご利用になる場合は下記までご連絡下さい
+[2022-07-16 20:05:43,326] [face01lib.Calc] [Calc.py] [WARNING] 試用期限を過ぎました
+[2022-07-16 20:05:43,326] [face01lib.Calc] [Calc.py] [WARNING] 引き続きご利用になる場合は下記までご連絡下さい
+[2022-07-16 20:06:48,109] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 20:06:48,493] [face01lib.Calc] [Calc.py] [WARNING] 試用期限を過ぎました
+[2022-07-16 20:06:48,493] [face01lib.Calc] [Calc.py] [WARNING] 試用期限を過ぎました
+[2022-07-16 20:06:48,493] [face01lib.Calc] [Calc.py] [WARNING] 試用期限を過ぎました
+[2022-07-16 20:06:48,493] [face01lib.Calc] [Calc.py] [WARNING] 試用期限を過ぎました
+[2022-07-16 20:06:48,494] [face01lib.Calc] [Calc.py] [WARNING] 引き続きご利用になる場合は下記までご連絡下さい
+[2022-07-16 20:06:48,494] [face01lib.Calc] [Calc.py] [WARNING] 引き続きご利用になる場合は下記までご連絡下さい
+[2022-07-16 20:06:48,494] [face01lib.Calc] [Calc.py] [WARNING] 引き続きご利用になる場合は下記までご連絡下さい
+[2022-07-16 20:06:48,494] [face01lib.Calc] [Calc.py] [WARNING] 引き続きご利用になる場合は下記までご連絡下さい
+[2022-07-16 20:14:02,488] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-16 21:48:51,668] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 08:23:54,242] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 08:32:20,323] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 08:35:21,714] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 08:36:57,675] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 08:40:23,414] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 08:40:56,340] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 08:41:56,174] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 08:42:09,603] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 08:42:22,117] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 08:42:32,897] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 09:35:37,396] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 11:07:28,720] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 11:08:33,655] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 11:09:46,060] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 11:10:48,601] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 11:13:41,992] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 11:17:18,485] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 11:22:02,689] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 11:23:02,647] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 11:24:20,929] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 11:26:15,531] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 11:27:53,062] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 15:27:34,908] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 15:39:08,153] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 15:45:03,371] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 15:57:42,292] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 15:58:17,425] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:02:08,795] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:03:35,746] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:15:58,400] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:16:41,957] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:17:52,949] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:18:22,541] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:18:47,947] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:19:01,530] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:19:57,111] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:20:39,649] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:21:18,831] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:23:51,822] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:27:53,791] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:30:27,991] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:31:05,461] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:31:46,402] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:33:49,099] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:34:21,268] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:41:48,984] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:43:12,894] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:43:55,577] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:44:16,092] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:44:37,614] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:45:00,510] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:45:22,815] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:45:45,058] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:47:47,474] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 16:52:14,839] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-17 17:01:41,821] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-18 08:25:41,652] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-18 11:05:52,998] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-18 11:07:16,486] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-18 11:07:43,817] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-18 11:09:24,789] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-18 11:10:47,323] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-07-18 11:13:44,722] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-07-18 11:13:44,793] [face01lib/load_priset_image] [FACE01.py] [INFO] 1 池脇千鶴_31.pngをエンコードしています
+[2022-07-18 11:13:51,873] [face01lib/load_priset_image] [FACE01.py] [INFO] 2 池脇千鶴_45.pngをエンコードしています
+[2022-07-18 11:13:59,470] [face01lib/load_priset_image] [FACE01.py] [INFO] 3 池脇千鶴_34.pngをエンコードしています
+[2022-07-18 11:14:06,321] [face01lib/load_priset_image] [FACE01.py] [INFO] 4 池脇千鶴_36.pngをエンコードしています
+[2022-07-18 11:14:13,705] [face01lib/load_priset_image] [FACE01.py] [INFO] 5 池脇千鶴_42.pngをエンコードしています
+[2022-07-18 11:14:21,785] [face01lib/load_priset_image] [FACE01.py] [INFO] 6 池脇千鶴_38.pngをエンコードしています
+[2022-07-18 11:14:28,365] [face01lib/load_priset_image] [FACE01.py] [INFO] 7 池脇千鶴_46.pngをエンコードしています
+[2022-07-18 11:14:35,056] [face01lib/load_priset_image] [FACE01.py] [INFO] 8 池脇千鶴_33.pngをエンコードしています
+[2022-07-18 11:14:44,123] [face01lib/load_priset_image] [FACE01.py] [INFO] 9 池脇千鶴_24.pngをエンコードしています
+[2022-07-18 11:14:52,127] [face01lib/load_priset_image] [FACE01.py] [INFO] 10 池脇千鶴_29.pngをエンコードしています
+[2022-07-18 11:15:02,008] [face01lib/load_priset_image] [FACE01.py] [INFO] 11 池脇千鶴_49.pngをエンコードしています
+[2022-07-18 11:15:10,262] [face01lib/load_priset_image] [FACE01.py] [INFO] 12 池脇千鶴_25.pngをエンコードしています
+[2022-07-18 11:15:17,796] [face01lib/load_priset_image] [FACE01.py] [INFO] 13 池脇千鶴_39.pngをエンコードしています
+[2022-07-18 11:15:26,107] [face01lib/load_priset_image] [FACE01.py] [INFO] 14 池脇千鶴_26.pngをエンコードしています
+[2022-07-18 11:15:34,597] [face01lib/load_priset_image] [FACE01.py] [INFO] 15 池脇千鶴_47.pngをエンコードしています
+[2022-07-18 11:15:43,339] [face01lib/load_priset_image] [FACE01.py] [INFO] 16 池脇千鶴_48.pngをエンコードしています
+[2022-07-18 11:15:50,997] [face01lib/load_priset_image] [FACE01.py] [INFO] 17 池脇千鶴_35.pngをエンコードしています
+[2022-07-18 11:15:57,411] [face01lib/load_priset_image] [FACE01.py] [INFO] 18 池脇千鶴_30.pngをエンコードしています
+[2022-07-18 11:16:03,950] [face01lib/load_priset_image] [FACE01.py] [INFO] 19 池脇千鶴_44.pngをエンコードしています
+[2022-07-18 11:16:10,508] [face01lib/load_priset_image] [FACE01.py] [INFO] 20 池脇千鶴_28.pngをエンコードしています
+[2022-07-18 11:21:22,683] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-07-18 11:22:56,963] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます

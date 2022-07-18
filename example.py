@@ -152,7 +152,7 @@ if __name__ == '__main__':
     INPUT = "test.mp4"
     INPUT = "some_people.mp4"
     INPUT = "顔無し区間を含んだテスト動画.mp4"
-    INPUT = "http://175.210.52.167:84/SnapshotJPEG?Resolution=640x480"
+    INPUT = "http://219.102.239.58:80/cgi-bin/camera?resolution=1280"
     SET_WIDTH = 750
 
     example("DEBUG", INPUT, SET_WIDTH)

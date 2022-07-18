@@ -1,0 +1,91 @@
+[2022-07-17 08:32:20,629] [face01lib.Core] [Calc.py] [WARNING] 試用期限を過ぎました
+[2022-07-17 08:32:20,630] [face01lib.Core] [Calc.py] [WARNING] 引き続きご利用になる場合は下記までご連絡下さい
+[2022-07-17 08:35:22,000] [face01lib.Core] [Calc.py] [WARNING] 試用期限を過ぎました
+[2022-07-17 08:35:22,000] [face01lib.Core] [Calc.py] [WARNING] 引き続きご利用になる場合は下記までご連絡下さい
+[2022-07-17 08:36:57,986] [face01lib.Core] [Calc.py] [WARNING] 試用期限を過ぎました
+[2022-07-17 08:36:57,986] [face01lib.Core] [Calc.py] [WARNING] 引き続きご利用になる場合は下記までご連絡下さい
+[2022-07-17 08:40:23,734] [face01lib.Core] [Calc.py] [WARNING] 試用期限を過ぎました
+[2022-07-17 08:40:23,734] [face01lib.Core] [Calc.py] [WARNING] 引き続きご利用になる場合は下記までご連絡下さい
+[2022-07-17 08:40:23,735] [face01lib.Core] [Calc.py] [WARNING] 東海顔認証　担当：袈裟丸 y.kesamaru@tokai-kaoninsho.com
+[2022-07-17 08:40:56,632] [face01lib.Core] [Calc.py] [WARNING] 試用期限を過ぎました
+[2022-07-17 08:40:56,632] [face01lib.Core] [Calc.py] [WARNING] 引き続きご利用になる場合は下記までご連絡下さい
+[2022-07-17 08:40:56,633] [face01lib.Core] [Calc.py] [WARNING] 東海顔認証　担当：袈裟丸 y.kesamaru@tokai-kaoninsho.com
+[2022-07-17 08:41:56,474] [face01lib.Core] [Calc.py] [WARNING] 試用期限を過ぎました
+[2022-07-17 08:41:56,474] [face01lib.Core] [Calc.py] [WARNING] 引き続きご利用になる場合は下記までご連絡下さい
+[2022-07-17 08:41:56,474] [face01lib.Core] [Calc.py] [WARNING] 東海顔認証 担当: 袈裟丸 y.kesamaru@tokai-kaoninsho.com
+[2022-07-17 08:42:09,904] [face01lib.Core] [Calc.py] [WARNING] 試用期限を過ぎました
+[2022-07-17 08:42:09,904] [face01lib.Core] [Calc.py] [WARNING] 引き続きご利用になる場合は下記までご連絡下さい
+[2022-07-17 08:42:09,905] [face01lib.Core] [Calc.py] [WARNING] 東海顔認証 担当: 袈裟丸 y.kesamaru@tokai-kaoninsho.com
+[2022-07-17 08:42:22,403] [face01lib.Core] [Calc.py] [WARNING] 試用期限を過ぎました
+[2022-07-17 08:42:22,404] [face01lib.Core] [Calc.py] [WARNING] 引き続きご利用になる場合は下記までご連絡下さい
+[2022-07-17 08:42:22,404] [face01lib.Core] [Calc.py] [WARNING] 東海顔認証 担当: 袈裟丸 y.kesamaru@tokai-kaoninsho.com
+[2022-07-17 15:45:06,967] [face01lib.video_capture] [video_capture.py] [WARNING] 以下のエラーをシステム管理者へお伝えください
+[2022-07-17 15:45:06,968] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-17 15:45:06,969] [face01lib.video_capture] [video_capture.py] [WARNING] Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 222, in frame_generator
+    frame  = cv2.cvtColor(img_np, cv2.COLOR_RGBA2BGR)
+NameError: name 'cv2' is not defined
+
+[2022-07-17 15:45:06,970] [face01lib.video_capture] [video_capture.py] [ERROR] 通信に異常が発生しました
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 222, in frame_generator
+    frame  = cv2.cvtColor(img_np, cv2.COLOR_RGBA2BGR)
+NameError: name 'cv2' is not defined
+[2022-07-17 15:45:06,971] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-17 15:45:06,971] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-07-17 16:15:59,597] [face01lib.video_capture] [video_capture.py] [WARNING] 以下のエラーをシステム管理者へお伝えください
+[2022-07-17 16:15:59,597] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-17 16:15:59,598] [face01lib.video_capture] [video_capture.py] [WARNING] Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 219, in frame_generator
+    if response.headers['Content-type'] == 'image/jpeg':
+UnboundLocalError: local variable 'response' referenced before assignment
+
+[2022-07-17 16:15:59,598] [face01lib.video_capture] [video_capture.py] [ERROR] 通信に異常が発生しました
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 219, in frame_generator
+    if response.headers['Content-type'] == 'image/jpeg':
+UnboundLocalError: local variable 'response' referenced before assignment
+[2022-07-17 16:15:59,599] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-17 16:15:59,599] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-07-17 16:16:43,156] [face01lib.video_capture] [video_capture.py] [WARNING] 以下のエラーをシステム管理者へお伝えください
+[2022-07-17 16:16:43,157] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-17 16:16:43,157] [face01lib.video_capture] [video_capture.py] [WARNING] Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 219, in frame_generator
+    if response.headers['Content-type'] == 'image/jpeg':
+UnboundLocalError: local variable 'response' referenced before assignment
+
+[2022-07-17 16:16:43,158] [face01lib.video_capture] [video_capture.py] [ERROR] 通信に異常が発生しました
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 219, in frame_generator
+    if response.headers['Content-type'] == 'image/jpeg':
+UnboundLocalError: local variable 'response' referenced before assignment
+[2022-07-17 16:16:43,158] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-17 16:16:43,158] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-07-17 16:17:54,223] [face01lib.video_capture] [video_capture.py] [WARNING] 以下のエラーをシステム管理者へお伝えください
+[2022-07-17 16:17:54,223] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-17 16:17:54,225] [face01lib.video_capture] [video_capture.py] [WARNING] Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 219, in frame_generator
+    if response.headers['Content-type'] == 'image/jpeg':
+UnboundLocalError: local variable 'response' referenced before assignment
+
+[2022-07-17 16:17:54,225] [face01lib.video_capture] [video_capture.py] [ERROR] 通信に異常が発生しました
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 219, in frame_generator
+    if response.headers['Content-type'] == 'image/jpeg':
+UnboundLocalError: local variable 'response' referenced before assignment
+[2022-07-17 16:17:54,226] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-17 16:17:54,226] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-07-17 16:19:02,765] [face01lib.video_capture] [video_capture.py] [WARNING] 以下のエラーをシステム管理者へお伝えください
+[2022-07-17 16:19:02,766] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-17 16:19:02,767] [face01lib.video_capture] [video_capture.py] [WARNING] Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 219, in frame_generator
+    if response.headers['Content-type'] == 'image/jpeg':
+UnboundLocalError: local variable 'response' referenced before assignment
+
+[2022-07-17 16:19:02,767] [face01lib.video_capture] [video_capture.py] [ERROR] 通信に異常が発生しました
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 219, in frame_generator
+    if response.headers['Content-type'] == 'image/jpeg':
+UnboundLocalError: local variable 'response' referenced before assignment
+[2022-07-17 16:19:02,768] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-17 16:19:02,768] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
