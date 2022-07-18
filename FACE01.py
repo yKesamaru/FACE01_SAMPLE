@@ -52,7 +52,6 @@ def configure():
             'show_video' : conf.getboolean('DEFAULT','show_video'),
             'frequency_crop_image' : int(conf.get('DEFAULT','frequency_crop_image')),
             'set_area' : conf.get('DEFAULT','set_area'),
-            'print_property' : conf.getboolean('DEFAULT','print_property'),
             'calculate_time' : conf.getboolean('DEFAULT','calculate_time'),
             'set_width' : int(conf.get('DEFAULT','set_width')),
             'default_face_image_draw' : conf.getboolean('DEFAULT', 'default_face_image_draw'),
