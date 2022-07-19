@@ -70,7 +70,7 @@ python3 setup.py install --clean
 
 cd ../
 
-git clone 
+git clone https://github.com/yKesamaru/FACE01_SAMPLE.git .
 
 python CALL_FACE01.py
 

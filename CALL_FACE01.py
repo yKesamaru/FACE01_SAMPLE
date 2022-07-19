@@ -9,16 +9,16 @@ from sys import exit
 import FACE01 as fg
 
 """DEBUG
-再生フレーム数をセット"""
+Set the number of playback frames"""
 exec_times: int = 50
 ALL_FRAME = exec_times
 
-# PySimpleGUIレイアウト
+# PySimpleGUI layout
 sg.theme('LightGray')
 if fg.args_dict["headless"] == False:
     layout = [
         [sg.Image(filename='', key='display', pad=(0,0))],
-        [sg.Button('終了', key='terminate', pad=(0,10), expand_x=True)]
+        [sg.Button('terminate', key='terminate', pad=(0,10), expand_x=True)]
     ]
     window = sg.Window(
         'FACE01 EXAMPLE', layout, alpha_channel = 1, margins=(10, 10),
@@ -43,7 +43,7 @@ def common_main(exec_times):
             if fg.args_dict["headless"] == False:
                 event, _ = window.read(timeout = 1)
                 if event == sg.WIN_CLOSED:
-                    print("ウィンドウが手動で閉じられました")
+                    print("The window was closed manually")
                     break
             for frame_datas in frame_datas_array:
                 if "face_location_list" in frame_datas:
@@ -53,20 +53,14 @@ def common_main(exec_times):
                         name, pict, date,  location, percentage_and_symbol = \
                             person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
                         if not name == 'Unknown':
-                            # print("メモリプロファイリング中")
                             print(
-                                "プロファイリング用コードが動作しています", "\n",
-                                "statsファイルが出力されます", "\n",
                                 name, "\n",
-                                "\t", "類似度\t", percentage_and_symbol, "\n",
-                                "\t", "座標\t", location, "\n",
-                                "\t", "時刻\t", date, "\n",
-                                "\t", "出力\t", pict, "\n",
+                                "\t", "similarity\t", percentage_and_symbol, "\n",
+                                "\t", "coordinate\t", location, "\n",
+                                "\t", "time\t", date, "\n",
+                                "\t", "output\t", pict, "\n",
                                 "-------\n"
                             )
-                            """DEBUG
-                            print(f"fg.args_dict.__sizeof__(): {fg.args_dict.__sizeof__()}MB")
-                            """
                     if fg.args_dict["headless"] == False:
                         imgbytes = cv2.imencode(".png", img)[1].tobytes()
                         window["display"].update(data = imgbytes)
@@ -75,18 +69,17 @@ def common_main(exec_times):
                 break
     if fg.args_dict["headless"] == False:
         window.close()
-    print('プロファイリングを終了します')
     
     profile_HANDLING_FRAME_TIME_REAR = time.perf_counter()
     profile_HANDLING_FRAME_TIME = (profile_HANDLING_FRAME_TIME_REAR - profile_HANDLING_FRAME_TIME_FRONT) 
-    print(f'予定フレーム数: {ALL_FRAME}')
-    print(f'処理フレーム数: {ALL_FRAME - exec_times}')
-    print(f'profile()関数の処理時間合計: {round(profile_HANDLING_FRAME_TIME , 3)}[秒]')
-    print(f'1フレーム: {round(profile_HANDLING_FRAME_TIME / (ALL_FRAME - exec_times), 3)}[秒]')
+    print(f'Predetermined number of frames: {ALL_FRAME}')
+    print(f'Number of frames processed: {ALL_FRAME - exec_times}')
+    print(f'Total processing time: {round(profile_HANDLING_FRAME_TIME , 3)}[seconds]')
+    print(f'Per frame: {round(profile_HANDLING_FRAME_TIME / (ALL_FRAME - exec_times), 3)}[seconds]')
 pr.run('common_main(exec_times)', 'restats')
 
 
-"""顔座標のみ抽出したい場合"""
+"""If you want to extract only face coordinates"""
 next_frame_gen_obj = VidCap().frame_generator(fg.args_dict)
 # @profile()
 def extract_face_locations(exec_times):
@@ -106,11 +99,11 @@ def extract_face_locations(exec_times):
             for face_location in frame_datas["face_location_list"]:
                 print(face_location)
     
-    print('プロファイリングを終了します')
+    print('Finish profiling')
     profile_HANDLING_FRAME_TIME_REAR = time.perf_counter()
     profile_HANDLING_FRAME_TIME = (profile_HANDLING_FRAME_TIME_REAR - profile_HANDLING_FRAME_TIME_FRONT) 
-    print(f'予定フレーム数: {ALL_FRAME}')
-    print(f'処理フレーム数: {i}')
-    print(f'profile()関数の処理時間合計: {round(profile_HANDLING_FRAME_TIME , 3)}[秒]')
-    print(f'1フレーム: {round(profile_HANDLING_FRAME_TIME / i, 3)}[秒]')
+    print(f'Predetermined number of frames: {ALL_FRAME}')
+    print(f'Number of frames processed: {i}')
+    print(f'Total processing time: {round(profile_HANDLING_FRAME_TIME , 3)}[seconds]')
+    print(f'Per frame: {round(profile_HANDLING_FRAME_TIME / i, 3)}[seconds]')
 # pr.run('extract_face_locations(exec_times)', 'restats')
