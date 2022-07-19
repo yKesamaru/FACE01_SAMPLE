@@ -3,14 +3,21 @@
 This repository contains FACE01 SAMPLE for UBUNTU 20.04.
 This sample can be used until December 2022.
 
+# About FACE01
+FACE01 is a face recognition library that integrates various functions and can be called from Python.
+You can call individual methods or call a set of functions.
+
 # Installation
 `sudo bash -c 'INSTALL_FACE01.sh'`
 NOTE: THIS IS *ONLY* USE FOR UBUNTU *20.04*
+
 Alternatively, refer to INSTALL_FACE01.sh and install manually.
 This installer creates Python virtual environment.
 
 # Configuration
 Edit `config.ini` file to configure FACE01.
+If you want to use the http protocol as the input source, replace the `movie =` part of the `config.ini` file with` movie = http: // <IP> / cgi-bin / <parameter> `. If you want to store the authentication information, enter `user =" ", passwd =" "` in the `config.ini` file as above.
+See `config.ini` for details.
 
 # Example
 `python CALL_FACE01.py`
