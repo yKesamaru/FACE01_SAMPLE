@@ -1,0 +1,12 @@
+share/*
+lib64/*
+__pycache__/*
+bin/*
+dlib-19.24/*
+lib/*
+include/*
+restats
+SystemCheckLock
+pyvenv.cfg
+DST.code-workspace
+output/*

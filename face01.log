@@ -1,0 +1,41 @@
+[2022-07-19 10:31:14,948] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-07-19 10:31:15,030] [face01lib/load_priset_image] [FACE01.py] [INFO] 顔が検出できませんでした。一時的にcnnモードへ切り替えます
+[2022-07-19 10:31:16,514] [face01lib/load_priset_image] [FACE01.py] [INFO] 1 登録顔画像 赤星憲広_22.png に顔が検出されませんでした(CNNモード)。 noFace フォルダへ移動します
+[2022-07-19 10:31:16,514] [face01lib/load_priset_image] [FACE01.py] [INFO] hogモードへ戻しました
+[2022-07-19 10:31:16,515] [face01lib/load_priset_image] [FACE01.py] [INFO] 1 赤星憲広_22.pngをエンコードしています
+[2022-07-19 10:31:16,719] [face01lib/load_priset_image] [FACE01.py] [INFO] 顔が検出できませんでした。一時的にcnnモードへ切り替えます
+[2022-07-19 10:31:16,727] [face01lib/load_priset_image] [FACE01.py] [INFO] 2 登録顔画像 畑岡奈紗_3.png に顔が検出されませんでした(CNNモード)。 noFace フォルダへ移動します
+[2022-07-19 10:31:16,728] [face01lib/load_priset_image] [FACE01.py] [INFO] hogモードへ戻しました
+[2022-07-19 10:31:16,728] [face01lib/load_priset_image] [FACE01.py] [INFO] 2 畑岡奈紗_3.pngをエンコードしています
+[2022-07-19 10:31:16,850] [face01lib/load_priset_image] [FACE01.py] [INFO] 顔が検出できませんでした。一時的にcnnモードへ切り替えます
+[2022-07-19 10:31:16,853] [face01lib/load_priset_image] [FACE01.py] [INFO] 3 登録顔画像 畑岡奈紗_36.png に顔が検出されませんでした(CNNモード)。 noFace フォルダへ移動します
+[2022-07-19 10:31:16,853] [face01lib/load_priset_image] [FACE01.py] [INFO] hogモードへ戻しました
+[2022-07-19 10:31:16,854] [face01lib/load_priset_image] [FACE01.py] [INFO] 3 畑岡奈紗_36.pngをエンコードしています
+[2022-07-19 10:31:16,967] [face01lib/load_priset_image] [FACE01.py] [INFO] 顔が検出できませんでした。一時的にcnnモードへ切り替えます
+[2022-07-19 10:31:16,970] [face01lib/load_priset_image] [FACE01.py] [INFO] 4 登録顔画像 菅井きん_2.png に顔が検出されませんでした(CNNモード)。 noFace フォルダへ移動します
+[2022-07-19 10:31:16,970] [face01lib/load_priset_image] [FACE01.py] [INFO] hogモードへ戻しました
+[2022-07-19 10:31:16,970] [face01lib/load_priset_image] [FACE01.py] [INFO] 4 菅井きん_2.pngをエンコードしています
+[2022-07-19 10:31:17,078] [face01lib/load_priset_image] [FACE01.py] [INFO] 顔が検出できませんでした。一時的にcnnモードへ切り替えます
+[2022-07-19 10:31:17,081] [face01lib/load_priset_image] [FACE01.py] [INFO] 5 登録顔画像 澤部佑_27.png に顔が検出されませんでした(CNNモード)。 noFace フォルダへ移動します
+[2022-07-19 10:31:17,081] [face01lib/load_priset_image] [FACE01.py] [INFO] hogモードへ戻しました
+[2022-07-19 10:31:17,081] [face01lib/load_priset_image] [FACE01.py] [INFO] 5 澤部佑_27.pngをエンコードしています
+[2022-07-19 10:31:17,188] [face01lib/load_priset_image] [FACE01.py] [INFO] 顔が検出できませんでした。一時的にcnnモードへ切り替えます
+[2022-07-19 10:31:17,190] [face01lib/load_priset_image] [FACE01.py] [INFO] 6 登録顔画像 板垣瑞生_5.png に顔が検出されませんでした(CNNモード)。 noFace フォルダへ移動します
+[2022-07-19 10:31:17,190] [face01lib/load_priset_image] [FACE01.py] [INFO] hogモードへ戻しました
+[2022-07-19 10:31:17,191] [face01lib/load_priset_image] [FACE01.py] [INFO] 6 板垣瑞生_5.pngをエンコードしています
+[2022-07-19 10:31:17,298] [face01lib/load_priset_image] [FACE01.py] [INFO] 顔が検出できませんでした。一時的にcnnモードへ切り替えます
+[2022-07-19 10:31:17,301] [face01lib/load_priset_image] [FACE01.py] [INFO] 7 登録顔画像 渡部建_5.png に顔が検出されませんでした(CNNモード)。 noFace フォルダへ移動します
+[2022-07-19 10:31:17,301] [face01lib/load_priset_image] [FACE01.py] [INFO] hogモードへ戻しました
+[2022-07-19 10:31:17,301] [face01lib/load_priset_image] [FACE01.py] [INFO] 7 渡部建_5.pngをエンコードしています
+[2022-07-19 10:31:17,406] [face01lib/load_priset_image] [FACE01.py] [INFO] 顔が検出できませんでした。一時的にcnnモードへ切り替えます
+[2022-07-19 10:31:17,409] [face01lib/load_priset_image] [FACE01.py] [INFO] 8 登録顔画像 木村美穂_18.png に顔が検出されませんでした(CNNモード)。 noFace フォルダへ移動します
+[2022-07-19 10:31:17,409] [face01lib/load_priset_image] [FACE01.py] [INFO] hogモードへ戻しました
+[2022-07-19 10:31:17,409] [face01lib/load_priset_image] [FACE01.py] [INFO] 8 木村美穂_18.pngをエンコードしています
+[2022-07-19 11:27:15,091] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-07-19 11:29:34,119] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-07-19 11:30:12,772] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-07-19 11:30:41,758] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-07-19 11:31:43,640] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-07-19 11:32:11,136] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-07-19 17:27:10,561] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-07-19 17:29:15,659] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます

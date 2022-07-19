@@ -1,0 +1,8 @@
+[2022-07-19 06:59:50,604] [face01lib.api] [<frozen importlib._bootstrap>] [WARNING] modelのimportに失敗しました
+[2022-07-19 06:59:50,607] [face01lib.api] [<frozen importlib._bootstrap>] [WARNING] システム管理者にお問い合わせください
+[2022-07-19 06:59:50,609] [face01lib.api] [<frozen importlib._bootstrap>] [WARNING] --------------------
+[2022-07-19 06:59:50,610] [face01lib.api] [<frozen importlib._bootstrap>] [WARNING] Traceback (most recent call last):
+  File "api.pyx", line 32, in api
+ImportError: cannot import name face_recognition_models
+
+[2022-07-19 06:59:50,610] [face01lib.api] [<frozen importlib._bootstrap>] [WARNING] --------------------
