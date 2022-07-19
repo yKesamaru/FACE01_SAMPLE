@@ -6,6 +6,7 @@ This sample can be used until December 2022.
 # About FACE01
 FACE01 is a face recognition library that integrates various functions and can be called from Python.
 You can call individual methods or call a set of functions.
+See [docs/functions](docs/functions.md).
 
 # Installation
 `sudo bash -c 'INSTALL_FACE01.sh'`
