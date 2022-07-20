@@ -6,7 +6,6 @@ dlib-19.24/*
 lib/*
 include/*
 restats
-SystemCheckLock
 pyvenv.cfg
 DST.code-workspace
-output/*
+output/*.png

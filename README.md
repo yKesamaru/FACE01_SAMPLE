@@ -12,7 +12,7 @@ See [docs/functions](docs/functions.md).
 ```bash
 wget https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/INSTALL_FACE01.sh
 chmod +x INSTALL_FACE01.sh
-sudo bash -c INSTALL_FACE01.sh
+bash -c ./INSTALL_FACE01.sh
 ```
 
 NOTE: THIS IS *ONLY* USE FOR UBUNTU *20.04*
@@ -23,7 +23,7 @@ This installer creates Python virtual environment.
 # Configuration
 Edit `config.ini` file to configure FACE01.
 If you want to use the http protocol as the input source, replace the `movie =` part of the `config.ini` file with` movie = http: // <IP> / cgi-bin / <parameter> `. If you want to store the authentication information, enter `user =" ", passwd =" "` in the `config.ini` file as above.
-See `config.ini` for details.
+See [config.ini](docs/config_ini.md) for details.
 
 # Example
 `python CALL_FACE01.py`
