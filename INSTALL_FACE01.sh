@@ -6,7 +6,7 @@ set -x
 # THIS IS *ONLY* USE FOR UBUNTU *20.04*
 # -----------------------------------------------------------------
 
-sudo su &&
+
 apt update && sudo apt upgrade -y
 apt install -y build-essential
 apt install -y cmake
