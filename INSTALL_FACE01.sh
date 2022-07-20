@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-set -Ceux -o pipefail
+set -x
 
 # -----------------------------------------------------------------
 # FACE01 SETUP INSTALLER
 # THIS IS *ONLY* USE FOR UBUNTU *20.04*
 # -----------------------------------------------------------------
 
-sudo su
+sudo su &&
 apt update && sudo apt upgrade -y
 apt install -y build-essential
 apt install -y cmake

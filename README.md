@@ -9,7 +9,12 @@ You can call individual methods or call a set of functions.
 See [docs/functions](docs/functions.md).
 
 # Installation
-`sudo bash -c 'INSTALL_FACE01.sh'`
+```bash
+wget https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/INSTALL_FACE01.sh
+chmod +x INSTALL_FACE01.sh
+sudo bash -c INSTALL_FACE01.sh
+```
+
 NOTE: THIS IS *ONLY* USE FOR UBUNTU *20.04*
 
 Alternatively, refer to INSTALL_FACE01.sh and install manually.
