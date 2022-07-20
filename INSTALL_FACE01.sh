@@ -40,11 +40,6 @@ sudo apt install -y nvidia-cuda-toolkit
 
 sudo apt autoremove -y
 
-# DEBUG ----
-# echo "$USERNAME"
-# exit
-#  ---------
-
 cat << EOS >> ~/.bashrc
 export PATH="/usr/local/cuda/bin/:$PATH"
 export LD_LIBRARY_PATH="/usr/local/cuda/lib64/:$LD_LIBRARY_PATH"
