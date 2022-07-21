@@ -1,4 +1,6 @@
 # Functions
+This section talk about `main_process` function.
+More information is here.
 ```python
 import FACE01 as fg
 ```
@@ -24,5 +26,22 @@ will return `Dict` contains variables `img`, `face_location_list`, `overlay`,`pe
   - `numpy.ndarray`
 - `person_data_list`
   - `List[Dict{name:'', pict: '', date: '', location: tuple, percentage_and_symbol: ''}]`
+
+
 ### `face_encoding_process`
+```python
+fg.Core().face_encoding_process(fg.logger, fg.args_dict, fg.frame_datas_array)
+```
+will return `face_encodings`, `frame_datas_array`.
+- `face_encodings`
+  - numpy.ndarray[list, ...]
+  - 
+- `frame_datas_array`
+  - [{'img': 'no-data_img', 'face_location_list': [...], 'overlay': array([], dtype=float64), 'person_data_list': [...]}]
+
 ### `frame_post_processing`
+```python
+ fg.Core().frame_post_processing(fg.logger,fg.args_dict, face_encodings, frame_datas_array, fg.GLOBAL_MEMORY)
+ ```
+will return `frame_datas_array`.
+- [{'img': 'no-data_img', 'face_location_list': [...], 'overlay': array([], dtype=float64), 'person_data_list': [...]}]
