@@ -19,7 +19,7 @@ jobs:
   Install FACE01_SAMPLE:
     runs-on: ubuntu-20.04
     steps:
-      - uses: yKesamaru/FACE01_SAMPLE
+      # - uses: yKesamaru/FACE01_SAMPLE
       - shell: bash
       - name: Install libraries
         run: |
