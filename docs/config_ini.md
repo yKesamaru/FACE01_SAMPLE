@@ -12,13 +12,13 @@ NOTE: Do not edit.
 - headless
   - bool
   - Default: True
-    - If `True`, display GUI window.
+  - If `True`, display GUI window.
 
 ## [SPEED OR PRECISE]
 - set_width
   - int
   - Default: 750
-    - Width of GUI window.
+  - Width of GUI window.
 - similar_percentage
   - float
   - Default: 99.1
