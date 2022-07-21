@@ -39,7 +39,7 @@ jobs:
 
       - name: cuda-toolkit
         uses: Jimver/cuda-toolkit@v0.2.8
-        run: echo "Cuda install location: ${{steps.cuda-toolkit.outputs.CUDA_PATH}}"
+      - run: echo "Cuda install location: ${{steps.cuda-toolkit.outputs.CUDA_PATH}}"
 
       # - name: Get cuda apt-key
       #   run: |
