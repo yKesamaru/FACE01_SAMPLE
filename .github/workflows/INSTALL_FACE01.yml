@@ -52,7 +52,7 @@ jobs:
       - name: Install cuda libraries
         run: |
           sudo apt update && sudo apt upgrade -y
-          sudo ubuntu-drivers autoinstall
+          # sudo ubuntu-drivers autoinstall  # cannot use github actions
           sudo apt install -y cuda
           sudo apt install -y libcublas
           sudo apt install -y libcudnn8
