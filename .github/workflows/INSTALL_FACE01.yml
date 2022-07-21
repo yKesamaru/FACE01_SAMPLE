@@ -2,7 +2,7 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
 # See below for how to write the format.
-# [最低限の定義はこんな感じ。何の意味もないやつ。](https://tech.guitarrapc.com/entry/2020/01/06/071911#YAML%E3%82%B7%E3%83%B3%E3%82%BF%E3%83%83%E3%82%AF%E3%82%B9)
+# [ワークフローの例](https://docs.github.com/ja/actions/examples/using-scripts-to-test-your-code-on-a-runner#example-workflow)
 name: INSTALL_FACE01
 
 on:
@@ -19,31 +19,35 @@ jobs:
   Install-FACE01_SAMPLE:
     runs-on: ubuntu-20.04
     steps:
-      - name: Install libraries
-        run: |
-          sudo apt update && sudo apt upgrade -y
-          sudo apt install -y build-essential
-          sudo apt install -y cmake
-          sudo apt install -y ffmpeg
-          sudo apt install -y fonts-mplus
-          sudo apt install -y git
-          sudo apt install -y libavcodec-dev
-          sudo apt install -y libavformat-dev
-          sudo apt install -y libswscale-dev
-          sudo apt install -y libx11-dev
-          sudo apt install -y python3-dev
-          sudo apt install -y python3-tk
-          sudo apt install -y python3-venv
-          sudo apt install -y wget
-        shell: bash
+      # - name: Install libraries
+      #   run: |
+      #     sudo apt update && sudo apt upgrade -y
+      #     sudo apt install -y build-essential
+      #     sudo apt install -y cmake
+      #     sudo apt install -y ffmpeg
+      #     sudo apt install -y fonts-mplus
+      #     sudo apt install -y git
+      #     sudo apt install -y libavcodec-dev
+      #     sudo apt install -y libavformat-dev
+      #     sudo apt install -y libswscale-dev
+      #     sudo apt install -y libx11-dev
+      #     sudo apt install -y python3-dev
+      #     sudo apt install -y python3-tk
+      #     sudo apt install -y python3-venv
+      #     sudo apt install -y wget
+      #   shell: bash
 
-      - name: Get cuda apt-key
-        run: |
-          wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
-          sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
-          sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub
-          sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/ /"
-        shell: bash
+      - name: cuda-toolkit
+        uses: Jimver/cuda-toolkit@v0.2.8
+        run: echo "Cuda install location: ${{steps.cuda-toolkit.outputs.CUDA_PATH}}"
+
+      # - name: Get cuda apt-key
+      #   run: |
+      #     wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
+      #     sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
+      #     sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub
+      #     sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/ /"
+      #   shell: bash
 
       - name: Install cuda libraries
         run: |
