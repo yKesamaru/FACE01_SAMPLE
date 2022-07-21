@@ -19,9 +19,9 @@ jobs:
   Install FACE01_SAMPLE:
     runs-on: ubuntu-20.04
     steps:
-      - uses: yKesamaru/FACE01_SAMPLE@v3
       - shell: bash
       - name: Install libraries
+        uses: yKesamaru/FACE01_SAMPLE@v3
         run: |
           sudo apt update && sudo apt upgrade -y
           sudo apt install -y build-essential
@@ -39,6 +39,7 @@ jobs:
           sudo apt install -y wget
 
       - name: Get cuda apt-key
+        uses: yKesamaru/FACE01_SAMPLE@v3
         run: |
           wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
           sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
@@ -46,6 +47,7 @@ jobs:
           sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/ /"
 
       - name: Install cuda libraries
+        uses: yKesamaru/FACE01_SAMPLE@v3
         run: |
           sudo apt update && sudo apt upgrade -y
           sudo ubuntu-drivers autoinstall
@@ -59,6 +61,7 @@ jobs:
           sudo apt autoremove -y
 
       - name: Append lines to .bashrc
+        uses: yKesamaru/FACE01_SAMPLE@v3
         run: |
           cat << EOS >> ~/.bashrc
           export PATH="/usr/local/cuda/bin/:$PATH"
@@ -69,10 +72,12 @@ jobs:
           source ~/.bashrc
 
       - name: Git clone
+        uses: yKesamaru/FACE01_SAMPLE@v3
         run: |
           git clone https://github.com/yKesamaru/FACE01_SAMPLE.git
 
       - name: Make Python virtual environment
+        uses: yKesamaru/FACE01_SAMPLE@v3
         run: |
           cd ./FACE01_SAMPLE
           python3 -m venv ./
@@ -88,5 +93,6 @@ jobs:
           cd ../
 
       - name: Start CALL_FACE01.py
+        uses: yKesamaru/FACE01_SAMPLE@v3
         run: python CALL_FACE01.py
 
