@@ -16,7 +16,7 @@ on:
 #   contents: read
 
 jobs:
-  Install FACE01_SAMPLE:
+  Install-FACE01_SAMPLE:
     runs-on: ubuntu-20.04
     steps:
       - name: Install libraries
