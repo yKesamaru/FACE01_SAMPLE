@@ -6,11 +6,10 @@ from time import perf_counter
 from traceback import format_exc
 
 import cv2
-import numpy as np
 from GPUtil import getGPUs
 from psutil import cpu_count, cpu_freq, virtual_memory
 
-import face01lib.api as faceapi
+from face01lib.api import Dlib_api
 # import face01lib.vidCap as video_capture  # so
 from face01lib.video_capture import VidCap  # py
 from face01lib.Core import Core
@@ -127,16 +126,16 @@ def system_check(args_dict):
     # GPU
     logger.info("- CUDA devices check")
     if args_dict["gpu_check"] == True:
-        if faceapi.dlib.cuda.get_num_devices() == 0:
+        if Dlib_api().dlib.cuda.get_num_devices() == 0:
             logger.warning("CUDAが有効なデバイスが見つかりません")
             logger.warning("終了します")
             exit(0)
         else:
-            logger.info(f"  [OK] cuda devices: {faceapi.dlib.cuda.get_num_devices()}")
+            logger.info(f"  [OK] cuda devices: {Dlib_api().dlib.cuda.get_num_devices()}")
 
         # Dlib build check: CUDA
         logger.info("- Dlib build check: CUDA")
-        if faceapi.dlib.DLIB_USE_CUDA == False:
+        if Dlib_api().dlib.DLIB_USE_CUDA == False:
             logger.warning("dlibビルド時にCUDAが有効化されていません")
             logger.warning("終了します")
             exit(0)
@@ -145,7 +144,7 @@ def system_check(args_dict):
 
         # Dlib build check: BLAS
         logger.info("- Dlib build check: BLAS, LAPACK")
-        if faceapi.dlib.DLIB_USE_BLAS == False or faceapi.dlib.DLIB_USE_LAPACK == False:
+        if Dlib_api().dlib.DLIB_USE_BLAS == False or Dlib_api().dlib.DLIB_USE_LAPACK == False:
             logger.warning("BLASまたはLAPACKのいずれか、あるいは両方がインストールされていません")
             logger.warning("パッケージマネージャーでインストールしてください")
             logger.warning("\tCUBLAS native runtime libraries(Basic Linear Algebra Subroutines: 基本線形代数サブルーチン)")

@@ -8,8 +8,8 @@ ext_modules = [
     # see bellow
     # [C コンパイラのオプションの設定](https://blog.ymyzk.com/2014/11/setuptools-cython/)
     Extension(
-        "similar_percentage_to_tolerance",  
-        sources=["similar_percentage_to_tolerance.pyx"],
+        "api",  
+        sources=["api.pyx"],
         # extra_compile_args=['--option-a', '-O3'],
         include_dirs=[numpy.get_include()]
     ),

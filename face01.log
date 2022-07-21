@@ -1469,3 +1469,5 @@ configparser.NoOptionError: No option 'movie' in section: 'DEFAULT'
 [2022-07-18 11:16:10,508] [face01lib/load_priset_image] [FACE01.py] [INFO] 20 池脇千鶴_28.pngをエンコードしています
 [2022-07-18 11:21:22,683] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
 [2022-07-18 11:22:56,963] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-07-19 07:21:27,258] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-07-19 09:53:43,678] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
