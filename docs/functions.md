@@ -1,6 +1,6 @@
 # Functions
 This section talk about `main_process` function.
-More information is here.
+More information is [here](doc/../more_functions.md).
 ```python
 import FACE01 as fg
 ```

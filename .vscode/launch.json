@@ -24,5 +24,15 @@
         "python": "/home/terms/bin/DIST/bin/python3",
         // "justMyCode": false
     },
+    {
+        "name": "Python",
+        "type": "python",
+        "request": "launch",
+        "cwd": "/home/terms/bin/DIST/example",
+        "program": "${file}",
+        "console": "integratedTerminal",
+        "python": "/home/terms/bin/DIST/bin/python3",
+        // "justMyCode": false
+    },
     ]
 }
