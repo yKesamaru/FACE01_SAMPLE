@@ -14,15 +14,29 @@ Format is `key = value`.
   - Default: 99.1
 similar_percentage = 99.1
 - jitters
-jitters = 0
-priset_face_images_jitters = 100
-- Specifying the detected face area. 0: 80x80px, 1: 40x40px
-upsampling = 0
-mode = cnn
-- Specify the number to drop frame. Do not make it less than 2 if use http protocol.
-frame_skip = 5
-- Do not analyze more than the specified number of people.
-number_of_people = 10
+  - int
+  - Default: 0
+  - Calculate jitters for running FACE01.
+- priset_face_images_jitters
+  - int
+  - Default: 100
+  - Calculate jitters for priset_face_images.
+- upsampling
+  - int
+  - Default: 0
+  - Specifying the detected face area. 0: 80x80px, 1: 40x40px
+- mode
+  - str
+  - Default: cnn
+  - If you don't use cuda, set 'hog'.
+- frame_skip
+  - int
+  - Default: 5
+  - Specify the number to drop frame. Do not make it less than 2 if use http protocol.
+- number_of_people
+  - int
+  - Default: 10
+  - Do not analyze more than the specified number of people.
 -
 - [dlib]
 - Whether to use dlib for face coordinate calculation.

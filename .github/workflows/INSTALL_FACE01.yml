@@ -19,6 +19,9 @@ jobs:
   Install-FACE01_SAMPLE:
     runs-on: ubuntu-20.04
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
       # - name: Install libraries
       #   run: |
       #     sudo apt update && sudo apt upgrade -y
@@ -52,7 +55,7 @@ jobs:
       - name: Install cuda libraries
         run: |
           sudo apt update && sudo apt upgrade -y
-          # sudo ubuntu-drivers autoinstall  # cannot use github actions
+          sudo ubuntu-drivers autoinstall  # cannot use github actions
           sudo apt install -y cuda
           sudo apt install -y libcublas
           sudo apt install -y libcudnn8

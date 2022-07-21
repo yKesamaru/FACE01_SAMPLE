@@ -23,7 +23,7 @@ This installer creates Python virtual environment.
 # Configuration
 Edit `config.ini` file to configure FACE01.
 If you want to use the http protocol as the input source, replace the `movie =` part of the `config.ini` file with` movie = http: // <IP> / cgi-bin / <parameter> `. If you want to store the authentication information, enter `user =" ", passwd =" "` in the `config.ini` file as above.
-See [config.ini](docs/config_ini.md) for details.
+See [docs/config.ini](docs/config_ini.md) for details.
 
 # Example
 `python CALL_FACE01.py`
