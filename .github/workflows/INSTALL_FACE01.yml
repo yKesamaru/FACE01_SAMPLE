@@ -37,9 +37,9 @@ jobs:
       #     sudo apt install -y wget
       #   shell: bash
 
+      # [cuda-toolkit](https://github.com/marketplace/actions/cuda-toolkit)
       - name: cuda-toolkit
         uses: Jimver/cuda-toolkit@v0.2.8
-        run: echo "Cuda install location: ${{CUDA_PATH}}"
 
       # - name: Get cuda apt-key
       #   run: |
