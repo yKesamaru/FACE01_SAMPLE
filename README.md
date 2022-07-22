@@ -241,7 +241,7 @@ Total processing time: 9.186[seconds]
 Per frame: 0.184[seconds]
 ```
 ![](img/PASTE_IMAGE_2022-07-20-07-00-03.png)
-[![](doc/FACE01_GUI.mp4)](https://user-images.githubusercontent.com/93259837/180320724-ef741fc2-c18a-417d-ba89-9769b2fc0593.mp4)
+https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/docs/FACE01_GUI.mp4
 ![](img/PASTE_IMAGE_2022-07-20-07-32-12.png)
 
 # References
