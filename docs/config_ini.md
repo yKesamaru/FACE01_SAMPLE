@@ -12,7 +12,7 @@ NOTE: Do not edit.
 - headless
   - bool
   - Default: True
-  - If `True`, display GUI window.
+  - If set `False`, display GUI window, and process speed get slowly.
 
 ## [SPEED OR PRECISE]
 - set_width

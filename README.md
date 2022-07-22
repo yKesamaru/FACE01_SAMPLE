@@ -27,7 +27,7 @@ See [docs/config.ini](docs/config_ini.md) for details.
 
 # Example
 `python CALL_FACE01.py`
-See `CALL_FACE01.py` to refer the entire code.
+See [CALL_FACE01.py](CALL_FACE01.py) to refer the entire code.
 ## If you want to extract only face coordinates
 Set `headless = True` on `config.ini`.
 
