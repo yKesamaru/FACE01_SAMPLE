@@ -22,7 +22,23 @@ There are 3 part of functions.
 3.  Core().frame_post_processing(logger, args_dict, face_encodings, frame_datas_array, GLOBAL_MEMORY)
 
 `Core` is the class declared in `face01lib.Core`.
-To import `Core` class, see bellow.
+To import `Core` class, see `frame_pre_processing` section.
+
+`main_process` method is the generator, return generator object.
+```python
+while True:
+  frame_datas_array = fg.main_process().__next__()
+  for frame_datas in frame_datas_array:
+    if "face_location_list" in frame_datas:
+        img, face_location_list, overlay, person_data_list = \
+            frame_datas['img'], frame_datas["face_location_list"], frame_datas["overlay"], frame_datas['person_data_list']
+        for person_data in person_data_list:
+            name, pict, date,  location, percentage_and_symbol = \
+                person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
+```
+Whole code is [CALL_FACE01.py](../CALL_FACE01.py).
+
+
 ### `frame_pre_processing`
 ```python
 fg.Core().frame_pre_processing(fg.logger, fg.args_dict,next_frame)
