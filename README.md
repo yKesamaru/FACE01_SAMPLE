@@ -240,7 +240,6 @@ Number of frames processed: 50
 Total processing time: 9.186[seconds]
 Per frame: 0.184[seconds]
 ```
-![](img/PASTE_IMAGE_2022-07-20-07-00-03.png)
 ![FACE01_GUI](https://user-images.githubusercontent.com/93259837/180339656-7ef7baea-480f-4d78-b29b-e8e12bc85189.gif)
 ![](img/PASTE_IMAGE_2022-07-20-07-32-12.png)
 

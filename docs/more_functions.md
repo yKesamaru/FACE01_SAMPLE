@@ -19,7 +19,7 @@ while True:
     next_frame = next_frame_gen_obj.__next__()
 ```
 
-# api
+# `Dlib_api` class
 This class is modified from [face_recognition](https://github.com/ageitgey/face_recognition) by ageitgey. And model data from [dlib](https://github.com/davisking/dlib) by davisking. We will not to use 68 face model but also 5 face model. In FACE01 repository, not exist 68 face model and using it's code.
 See to refer `Core.return_face_location_list` example.
 ```python
@@ -29,7 +29,7 @@ Dlib_api_obj = Dlib_api()
 ## face_locations
 Returns an array of bounding boxes of faces in a frame.
 ```python
-face_list = Dlib_api().face_locations(img, number_of_times_to_upsample, model, )
+face_list = Dlib_api().face_locations(img, number_of_times_to_upsample, model)
 ``` 
 ### example
 ```python
@@ -50,9 +50,9 @@ for i in range(exec_times):
 [(125, 199, 261, 62), (92, 521, 256, 357)]
 [(138, 185, 275, 49), (92, 521, 256, 357)]
 ```
-Whole example code is [here](example/../../example/api_face_locations.py)
+Whole example code is [here](example/../../example/api_face_locations.py).
 
-# Core
+# `Core` class
 Import Core class.
 ```python
 from face01lib.Core import Core
@@ -81,3 +81,37 @@ for i in range(exec_times):
 [(134, 197, 273, 58), (103, 529, 263, 369)]
 ```
 Whole example code is [here](../example/Core_return_face_location_list.py).
+
+# `load_priset_image`
+This function loads face images in `priset_face_images` folder, and make npKnown.npz file.
+## example
+```python
+```
+
+# `VidCap` class
+This class is included in `video_capture`.
+To import, see bellow.
+```python
+from face01lib.video_capture import VidCap
+```
+
+## `resize_frame`
+Return numpy array of resized image.
+```python
+resized_frame = VidCap().resize_frame(set_width, set_height, original_frame)
+```
+Whole code is [here](../example/resize_frame.py).
+
+## `return_movie_property`
+Return property fps, height and width of input movie data.
+```python
+set_width,fps,height,width,set_height = VidCap().return_movie_property(set_width, vcap)
+```
+result
+```bash
+...
+set_width:  750 
+ set_height: 421 
+ fps:  30 
+```
+Whole code is [here](../example/return_movie_property.py).
