@@ -88,6 +88,11 @@ This function loads face images in `priset_face_images` folder, and make npKnown
 ```python
 ```
 
+# return_anti_spoof
+This method returns valuable `spoof_or_not`, `score` and `ELE`.
+
+In general, the results inferred from the trained model are not clearly divided into 1 and 0. For this reason, FACE01 incorporates the concept of `ELE: Equally Likely Events`. `score` originally presents two numbers between 0 ~ 1. At this time, the difference between the two numbers is set to 0.3, and the combination of numbers with a difference of 0.3 or less is considered to be "similarly certain"(=Equally Likely Events). FACE01 expresses this as ELE. That is, if the difference between the two numbers is LESS 0.3, it is not possible to determine whether it is `spoof` or` not spoof`.
+
 # `VidCap` class
 This class is included in `video_capture`.
 To import, see bellow.

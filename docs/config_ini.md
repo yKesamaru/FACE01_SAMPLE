@@ -13,6 +13,9 @@ NOTE: Do not edit.
   - bool
   - Default: True
   - If set `False`, display GUI window, and process speed get slowly.
+- anti_spoof
+  - bool
+  - Default: True
 
 ## [SPEED OR PRECISE]
 - set_width

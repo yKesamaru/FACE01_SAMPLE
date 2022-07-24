@@ -3,6 +3,9 @@
 This repository contains FACE01 SAMPLE for UBUNTU 20.04.
 This sample can be used until December 2022.
 
+# New function!
+***Anti spoof*** function was added to FACE01 in v1.4.03.
+
 # About FACE01
 FACE01 is a face recognition library that integrates various functions and can be called from Python.
 You can call individual methods or call a set of functions.
@@ -214,37 +217,100 @@ if fg.args_dict["headless"] == False:
         'FACE01 EXAMPLE', layout, alpha_channel = 1, margins=(10, 10),
         location=(0,0), modal = True, titlebar_icon="./images/g1320.png", icon="./images/g1320.png"
     )
+
+# @profile()
+def common_main(exec_times):
+    profile_HANDLING_FRAME_TIME_FRONT = time.perf_counter()
+    event = ''
+    while True:
+        try:
+            frame_datas_array = fg.main_process().__next__()
+        except Exception as e:
+            print(e)
+            exit(0)
+        exec_times = exec_times - 1
+        if  exec_times <= 0:
+            break
+        else:
+            print(f'exec_times: {exec_times}')
+            if fg.args_dict["headless"] == False:
+                event, _ = window.read(timeout = 1)
+                if event == sg.WIN_CLOSED:
+                    print("The window was closed manually")
+                    break
+            for frame_datas in frame_datas_array:
+                if "face_location_list" in frame_datas:
+                    img, face_location_list, overlay, person_data_list = \
+                        frame_datas['img'], frame_datas["face_location_list"], frame_datas["overlay"], frame_datas['person_data_list']
+                    for person_data in person_data_list:
+                        if len(person_data) == 0:
+                            continue
+                        name, pict, date,  location, percentage_and_symbol = \
+                            person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
+                        # ELE: Equally Likely Events
+                        if not name == 'Unknown':
+                            result, score, ELE = Core_obj.return_anti_spoof(frame_datas['img'], person_data["location"])
+                            if ELE is False:
+                                print(
+                                    name, "\n",
+                                    "\t", "Anti spoof\t\t", result, "\n",
+                                    "\t", "Anti spoof score\t", round(score * 100, 2), "%\n",
+                                    "\t", "similarity\t\t", percentage_and_symbol, "\n",
+                                    "\t", "coordinate\t\t", location, "\n",
+                                    "\t", "time\t\t\t", date, "\n",
+                                    "\t", "output\t\t\t", pict, "\n",
+                                    "-------\n"
+                                )
+                    if fg.args_dict["headless"] == False:
+                        imgbytes = cv2.imencode(".png", img)[1].tobytes()
+                        window["display"].update(data = imgbytes)
+        if fg.args_dict["headless"] == False:
+            if event =='terminate':
+                break
+    if fg.args_dict["headless"] == False:
+        window.close()
+    
+    profile_HANDLING_FRAME_TIME_REAR = time.perf_counter()
+    profile_HANDLING_FRAME_TIME = (profile_HANDLING_FRAME_TIME_REAR - profile_HANDLING_FRAME_TIME_FRONT) 
+    print(f'Predetermined number of frames: {ALL_FRAME}')
+    print(f'Number of frames processed: {ALL_FRAME - exec_times}')
+    print(f'Total processing time: {round(profile_HANDLING_FRAME_TIME , 3)}[seconds]')
+    print(f'Per frame: {round(profile_HANDLING_FRAME_TIME / (ALL_FRAME - exec_times), 3)}[seconds]')
+pr.run('common_main(exec_times)', 'restats')
 ```
 ## Result
 ```bash
 ...
- -------
-
 exec_times: 1
 麻生太郎 
-         similarity      99.2% 
-         coordinate      (113, 529, 277, 365) 
-         time    2022,07,20,07,30,01,276896 
-         output   
+         Anti spoof              not_spoof 
+         Anti spoof score        89.0 %
+         similarity              99.2% 
+         coordinate              (113, 529, 277, 365) 
+         time                    2022,07,24,19,42,02,574734 
+         output                   
  -------
 
 菅義偉 
-         similarity      99.3% 
-         coordinate      (122, 200, 283, 39) 
-         time    2022,07,20,07,30,01,276896 
-         output  output/菅義偉_2022,07,20,07,30,01,305439_0.34.png 
+         Anti spoof              spoof 
+         Anti spoof score        89.0 %
+         similarity              99.3% 
+         coordinate              (122, 200, 283, 39) 
+         time                    2022,07,24,19,42,02,574734 
+         output                  output/菅義偉_2022,07,24,19,42,02,610419_0.34.png 
  -------
 
 Predetermined number of frames: 50
 Number of frames processed: 50
-Total processing time: 9.186[seconds]
-Per frame: 0.184[seconds]
+Total processing time: 10.654[seconds]
+Per frame: 0.213[seconds]
 ```
 ![FACE01_GUI](https://user-images.githubusercontent.com/93259837/180339656-7ef7baea-480f-4d78-b29b-e8e12bc85189.gif)
-![](img/PASTE_IMAGE_2022-07-20-07-32-12.png)
+![](img/PASTE_IMAGE_2022-07-24-19-43-44.png)
 
 # References
 1. [dlib](https://github.com/davisking/dlib)
 2. [face_recognition](https://github.com/ageitgey/face_recognition)
 3. [mediapipe](https://github.com/google/mediapipe)
+4. [PINTO_model_zoo](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3)
 
