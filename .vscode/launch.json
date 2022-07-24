@@ -45,6 +45,16 @@
       // "justMyCode": false
     },
     {
+      "name": "FACE01.py",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01",
+      "program": "/home/terms/bin/FACE01/FACE01.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python",
+      // "justMyCode": false
+    },
+    {
       "name": "Module_test",
       "type": "python",
       "request": "launch",

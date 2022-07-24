@@ -14,3 +14,6 @@ def face_recognition_model_location():
 def cnn_face_detector_model_location():
     return resource_filename(__name__, "models/mmod_human_face_detector.dat")
 
+def anti_spoof_model_location():
+    return resource_filename(__name__, "models/model_float32.onnx")
+

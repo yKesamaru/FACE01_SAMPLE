@@ -1,5 +1,10 @@
 # FACE01について
 # TODO
+## 1.4.03実装予定
+- anti spoof
+x1 = np.clip(x1, 0, image_width)
+NumPy配列ndarrayを任意の最小値・最大値に収めるclip
+
 ## 1.4.02実装予定
 ### 方針
 > 1.3.10を1.3系列の最終安定版とする
