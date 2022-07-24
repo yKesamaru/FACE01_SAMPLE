@@ -23,6 +23,7 @@ class LoadImage:
 
     def LI(self, set_height, set_width):
         rect01_png: cv2.Mat = cv2.imread("images/rect01.png", cv2.IMREAD_UNCHANGED)
+        rect01_NG_png: cv2.Mat = cv2.imread("images/rect01_NG.png", cv2.IMREAD_UNCHANGED)
 
         # Load Telop image
         telop_image: cv2.Mat
@@ -62,5 +63,5 @@ class LoadImage:
             load_unregistered_face_image = False
             unregistered_face_image = ''
 
-        return rect01_png, resized_telop_image, cal_resized_telop_nums, resized_logo_image, \
+        return rect01_png, rect01_NG_png, resized_telop_image, cal_resized_telop_nums, resized_logo_image, \
             cal_resized_logo_nums, load_unregistered_face_image, telop_image, logo_image, unregistered_face_image
