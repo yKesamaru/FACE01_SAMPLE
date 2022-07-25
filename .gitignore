@@ -10,3 +10,4 @@ DST.code-workspace
 output/*.png
 dlib-19.24
 face01lib/CMakeLists.txt
+example

@@ -31,7 +31,6 @@ packaging==21.3
 pbr==5.9.0
 pep8==1.7.1
 Pillow==9.1.1
-pkg_resources
 protobuf==3.20.1
 psutil==5.9.1
 pybind11==2.9.2
