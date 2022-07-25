@@ -23,6 +23,25 @@ NOTE: THIS IS *ONLY* USE FOR UBUNTU *20.04*
 Alternatively, refer to INSTALL_FACE01.sh and install manually.
 This installer creates Python virtual environment.
 
+# If you want using Docker.
+## To install Docker
+See [here](docs/install_docker.md).
+
+## To build FACE01 docker nvidia-docker2 package.
+```bash
+docker build -t face01:1.4.03 .
+```
+## Check the completed image.
+```bash
+docker images
+```
+## Start FACE01 example
+```bash
+xhost +local:
+docker run --gpus all --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: FACE01:1.4.03
+```
+**NOTE**: Don't forget `xhost -local:` after using example.
+
 # Configuration
 Edit `config.ini` file to configure FACE01.
 If you want to use the http protocol as the input source, replace the `movie =` part of the `config.ini` file with` movie = http: // <IP> / cgi-bin / <parameter> `. If you want to store the authentication information, enter `user =" ", passwd =" "` in the `config.ini` file as above.

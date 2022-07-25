@@ -18,6 +18,7 @@ sudo apt install -y libswscale-dev
 sudo apt install -y libx11-dev
 sudo apt install -y python3-dev
 sudo apt install -y python3-tk
+sudo apt install -y python3-pkg-resources
 sudo apt install -y python3-venv
 sudo apt install -y wget
 
