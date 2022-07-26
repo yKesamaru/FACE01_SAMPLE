@@ -30,6 +30,8 @@ See [here](docs/install_docker.md).
 
 ### To build FACE01 docker nvidia-docker2 package.
 ```bash
+git clone https://github.com/yKesamaru/FACE01_SAMPLE.git
+cd FACE01_SAMPLE
 docker build -t face01:1.4.03 .
 ```
 ### Check the completed image.

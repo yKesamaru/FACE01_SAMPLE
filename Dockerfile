@@ -1,17 +1,18 @@
 FROM nvidia/cuda:11.0.3-base-ubuntu20.04
+
 ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES utility,compute
 
 # FROM ubuntu:20.04
-LABEL maintainer="yKesamaru <y.kesamaru@tokai-kaoninsho.com>"
+LABEL maintainer="yKesamkaoninsho.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ADD sources.list /etc/apt/
-# RUN sed -i "s/# deb-src/deb-src/g" /etc/apt/sources.list
+COPY sources.list /etc/apt/
+RUN sed -i "s/# deb-src/deb-src/g" /etc/apt/sources.list
 RUN apt-get update && apt-get install -y \
 	software-properties-common \
-  apt-utils \
+	apt-utils \
 	sudo \
 	supervisor \
 	autoconf \
@@ -91,23 +92,17 @@ RUN apt-get update && apt-get install -y \
 	liblapack-dev \
 	libopenblas-dev \
 	nvidia-cuda-toolkit \
-  && rm -rf /var/lib/apt/lists/*
+	&& rm -rf /var/lib/apt/lists/*
 
-# 日本語
+# configure
 RUN locale-gen ja_JP.UTF-8
 ENV LANG=ja_JP.UTF-8
-
-# タイムゾーン
 ENV TZ=Asia/Tokyo
-
-# 日本語入力
 ENV GTK_IM_MODULE=fcitx \
     QT_IM_MODULE=fcitx \
     XMODIFIERS=@im=fcitx \
     DefaultIMModule=fcitx
-
-# docker内で使うユーザを作成する。
-# ホストと同じUIDにする。
+# add user
 ARG DOCKER_UID=1000
 ARG DOCKER_USER=docker
 ARG DOCKER_PASSWORD=docker
@@ -130,22 +125,35 @@ USER ${DOCKER_USER}
 # RUN source .bashrc
 
 RUN mkdir /home/${DOCKER_USER}/FACE01_SAMPLE
-WORKDIR /home/${DOCKER_USER}/FACE01_SAMPLE
-ADD ./* ./
+WORKDIR /home/${DOCKER_USER}/FACE01_SAMPLE/
+COPY ./face01lib /home/${DOCKER_USER}/FACE01_SAMPLE/
+COPY ./output /home/${DOCKER_USER}/FACE01_SAMPLE/output
+COPY ./noFace /home/${DOCKER_USER}/FACE01_SAMPLE/noFace
+COPY ./images /home/${DOCKER_USER}/FACE01_SAMPLE/images
+COPY ./requirements.txt /home/${DOCKER_USER}/FACE01_SAMPLE/
+COPY ./config.ini /home/${DOCKER_USER}/FACE01_SAMPLE/
+COPY ./FACE01.py /home/${DOCKER_USER}/FACE01_SAMPLE/
+COPY ./CALL_FACE01.py /home/${DOCKER_USER}/FACE01_SAMPLE/
+COPY ./npKnown.npz /home/${DOCKER_USER}/FACE01_SAMPLE/
+COPY ./dlib-19.24.tar.bz2 /home/${DOCKER_USER}/FACE01_SAMPLE/
+COPY ./SystemCheckLock /home/${DOCKER_USER}/FACE01_SAMPLE/
+COPY ./*.mp4 /home/${DOCKER_USER}/FACE01_SAMPLE/
+RUN echo ${DOCKER_PASSWORD} | sudo -S chown -R ${DOCKER_USER} /home/${DOCKER_USER}/FACE01_SAMPLE
+COPY ./priset_face_images /home/${DOCKER_USER}/FACE01_SAMPLE/
 
-RUN python3 -m venv .
-RUN source bin/activate
+RUN python3 -m venv /home/${DOCKER_USER}/FACE01_SAMPLE/
+RUN . /home/${DOCKER_USER}/FACE01_SAMPLE/bin/activate
 
-RUN python3 -m pip cache remove dlib
+# RUN python3 -m pip cache remove dlib
 RUN python3 -m pip install -U pip
 RUN python3 -m pip install -U setuptools
 RUN python3 -m pip install -U wheel
 RUN python3 -m pip install -r requirements.txt
 
-RUN tar -jxvf dlib-19.24.tar.bz2
+RUN tar -jxvf /home/${DOCKER_USER}/FACE01_SAMPLE/dlib-19.24.tar.bz2
 # `--clean` see bellow
 # [Have you done sudo python3 setup.py install --clean yet?](https://github.com/davisking/dlib/issues/1686#issuecomment-471509357)
-WORKDIR dlib-19.24
+WORKDIR /home/${DOCKER_USER}/FACE01_SAMPLE/dlib-19.24
 RUN python3 setup.py install --clean
 WORKDIR /home/${DOCKER_USER}/FACE01_SAMPLE
 
