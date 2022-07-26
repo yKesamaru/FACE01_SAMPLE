@@ -31,8 +31,8 @@ sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/
 sudo apt update && sudo apt upgrade -y
 sudo ubuntu-drivers autoinstall
 sudo apt install -y cuda
-sudo apt install -y libcublas
-# E: パッケージ libcublas が見つかりません
+sudo apt install -y libcublas-11-7
+sudo apt install -y libcublas-dev-11-7
 sudo apt install -y libcudnn8
 sudo apt install -y libcudnn8-dev
 sudo apt install -y liblapack-dev
@@ -69,5 +69,5 @@ cd dlib-19.24
 python3 setup.py install --clean
 cd ../
 
-python CALL_FACE01.py
+# python CALL_FACE01.py
 

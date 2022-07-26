@@ -1,6 +1,7 @@
 ![Logo](images/g1320.png)
 # FACE01 SAMPLE
 This repository contains FACE01 SAMPLE for UBUNTU 20.04.
+If you are a Windows user, please use on WSL2.
 This sample can be used until December 2022.
 
 # New function!
@@ -18,27 +19,27 @@ chmod +x INSTALL_FACE01.sh
 bash -c ./INSTALL_FACE01.sh
 ```
 
-NOTE: THIS IS *ONLY* USE FOR UBUNTU *20.04*
+NOTE: THIS IS *ONLY* USE FOR UBUNTU *20.04*. If you are a Windows user, please use on `WSL2`. If you are using another Linux distribution, use `Docker`, `Boxes`, or `lxd`.
 
 Alternatively, refer to INSTALL_FACE01.sh and install manually.
 This installer creates Python virtual environment.
 
-# If you want using Docker.
-## To install Docker
+## If you want using Docker.
+### To install Docker
 See [here](docs/install_docker.md).
 
-## To build FACE01 docker nvidia-docker2 package.
+### To build FACE01 docker nvidia-docker2 package.
 ```bash
 docker build -t face01:1.4.03 .
 ```
-## Check the completed image.
+### Check the completed image.
 ```bash
 docker images
 ```
-## Start FACE01 example
+### Start FACE01 example
 ```bash
 xhost +local:
-docker run --gpus all --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: FACE01:1.4.03
+docker run --gpus all --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face01:1.4.03
 ```
 **NOTE**: Don't forget `xhost -local:` after using example.
 

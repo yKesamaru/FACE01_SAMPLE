@@ -1,0 +1,14 @@
+docs
+img
+# output
+# *.mp4
+__pycache__
+# example
+# include
+priset_face_images
+# bin
+# lib
+face01lib
+# lib64
+noFace
+# share
