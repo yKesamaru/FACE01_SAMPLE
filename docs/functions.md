@@ -24,7 +24,10 @@ There are 3 part of functions.
 `Core` is the class declared in `face01lib.Core`.
 To import `Core` class, see `frame_pre_processing` section.
 
-`main_process` method is the generator, return generator object.
+`main_process` method is the generator, return array.
+```python
+frame_datas_array = fg.main_process().__next__()
+```
 ```python
 while True:
   frame_datas_array = fg.main_process().__next__()

@@ -3,13 +3,13 @@ FROM nvidia/cuda:11.0.3-base-ubuntu20.04
 ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES utility,compute
 
-# FROM ubuntu:20.04
 LABEL maintainer="yKesamkaoninsho.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-COPY sources.list /etc/apt/
-RUN sed -i "s/# deb-src/deb-src/g" /etc/apt/sources.list
+RUN sed -i "s/# deb-src/deb-src/g" /etc/apt/sources.list \
+	&& cat sources.list >> /etc/apt/sources.list
+
 RUN apt-get update && apt-get install -y \
 	software-properties-common \
 	apt-utils \
@@ -68,8 +68,6 @@ RUN apt-get update && apt-get install -y \
 	python3-venv \
 	tzdata \
 	uuid-runtime \
-	vim \
-	vlc \
 	wget \
 	x11-xserver-utils \
 	xauth \
@@ -114,19 +112,12 @@ WORKDIR /home/${DOCKER_USER}
 RUN chown -R ${DOCKER_USER} ./
 USER ${DOCKER_USER}
 
-# Install FACE01
-# RUN { \
-#   cat << EOS >> .bashrc \
-#   export PATH="/usr/local/cuda/bin/:$PATH" \
-#   export LD_LIBRARY_PATH="/usr/local/cuda/lib64/:$LD_LIBRARY_PATH" \
-#   export PATH=/usr/local/cuda/bin${PATH:+:${PATH}} \
-#   export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}} \
-# EOS}
-# RUN source .bashrc
+RUN cat bashrc >> /home/${DOCKER_USER}/.bashrc \
+	&& . /home/${DOCKER_USER}/.bashrc \
+	&& mkdir /home/${DOCKER_USER}/FACE01_SAMPLE
 
-RUN mkdir /home/${DOCKER_USER}/FACE01_SAMPLE
 WORKDIR /home/${DOCKER_USER}/FACE01_SAMPLE/
-COPY ./face01lib /home/${DOCKER_USER}/FACE01_SAMPLE/
+COPY ./face01lib /home/${DOCKER_USER}/FACE01_SAMPLE/face01lib
 COPY ./output /home/${DOCKER_USER}/FACE01_SAMPLE/output
 COPY ./noFace /home/${DOCKER_USER}/FACE01_SAMPLE/noFace
 COPY ./images /home/${DOCKER_USER}/FACE01_SAMPLE/images
@@ -139,23 +130,21 @@ COPY ./dlib-19.24.tar.bz2 /home/${DOCKER_USER}/FACE01_SAMPLE/
 COPY ./SystemCheckLock /home/${DOCKER_USER}/FACE01_SAMPLE/
 COPY ./*.mp4 /home/${DOCKER_USER}/FACE01_SAMPLE/
 RUN echo ${DOCKER_PASSWORD} | sudo -S chown -R ${DOCKER_USER} /home/${DOCKER_USER}/FACE01_SAMPLE
-COPY ./priset_face_images /home/${DOCKER_USER}/FACE01_SAMPLE/
+COPY ./priset_face_images /home/${DOCKER_USER}/FACE01_SAMPLE/priset_face_images
 
-RUN python3 -m venv /home/${DOCKER_USER}/FACE01_SAMPLE/
-RUN . /home/${DOCKER_USER}/FACE01_SAMPLE/bin/activate
-
-# RUN python3 -m pip cache remove dlib
-RUN python3 -m pip install -U pip
-RUN python3 -m pip install -U setuptools
-RUN python3 -m pip install -U wheel
-RUN python3 -m pip install -r requirements.txt
-
-RUN tar -jxvf /home/${DOCKER_USER}/FACE01_SAMPLE/dlib-19.24.tar.bz2
-# `--clean` see bellow
-# [Have you done sudo python3 setup.py install --clean yet?](https://github.com/davisking/dlib/issues/1686#issuecomment-471509357)
-WORKDIR /home/${DOCKER_USER}/FACE01_SAMPLE/dlib-19.24
-RUN python3 setup.py install --clean
-WORKDIR /home/${DOCKER_USER}/FACE01_SAMPLE
+RUN python3 -m venv /home/${DOCKER_USER}/FACE01_SAMPLE/ \
+	&& . /home/${DOCKER_USER}/FACE01_SAMPLE/bin/activate \
+	&& python3 -m pip install -U pip \
+	&& python3 -m pip install -U setuptools \
+	&& python3 -m pip install -U wheel \
+	&& python3 -m pip install -r requirements.txt \
+	&& tar -jxvf /home/${DOCKER_USER}/FACE01_SAMPLE/dlib-19.24.tar.bz2 \
+	&& cd dlib-19.24 \
+	&& python3 setup.py install --clean \
+	&& cd ../
 
 CMD startxfce4
 # RUN python3 ./CALL_FACE01.py
+
+# `--clean` see bellow
+# [Have you done sudo python3 setup.py install --clean yet?](https://github.com/davisking/dlib/issues/1686#issuecomment-471509357)

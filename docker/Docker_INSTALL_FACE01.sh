@@ -48,7 +48,7 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PAT
 EOS
 source ~/.bashrc
 
-git clone https://github.com/yKesamaru/FACE01_SAMPLE.git
+# git clone https://github.com/yKesamaru/FACE01_SAMPLE.git
 
 cd ./FACE01_SAMPLE
 

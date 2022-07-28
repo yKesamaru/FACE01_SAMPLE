@@ -19,30 +19,26 @@ chmod +x INSTALL_FACE01.sh
 bash -c ./INSTALL_FACE01.sh
 ```
 
-NOTE: THIS IS *ONLY* USE FOR UBUNTU *20.04*. If you are a Windows user, please use on `WSL2`. If you are using another Linux distribution, use `Docker`, `Boxes`, or `lxd`.
+NOTE: THIS IS *ONLY* USE FOR UBUNTU *20.04*.
+If you are a Windows user, please use on `WSL2`.
+If you are using another Linux distribution, use `Docker`, `Boxes`, or `lxd`.
 
-Alternatively, refer to INSTALL_FACE01.sh and install manually.
-This installer creates Python virtual environment.
+Alternatively, refer to INSTALL_FACE01.sh and install manually, or use docker.
 
-## If you want using Docker.
+## If you want using Docker
 ### To install Docker
 See [here](docs/install_docker.md).
 
-### To build FACE01 docker nvidia-docker2 package.
-```bash
-git clone https://github.com/yKesamaru/FACE01_SAMPLE.git
-cd FACE01_SAMPLE
-docker build -t face01:1.4.03 .
-```
-### Check the completed image.
-```bash
-docker images
-```
+### To build Docker
+See [here](docs/to_build_docker_image.md)
+
 ### Start FACE01 example
+This docker image is build with Dockerfile_xfce4 dockerfile.
 ```bash
 xhost +local:
 docker run --gpus all --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face01:1.4.03
 ```
+![](img/PASTE_IMAGE_2022-07-27-08-57-12.png)
 **NOTE**: Don't forget `xhost -local:` after using example.
 
 # Configuration
