@@ -29,6 +29,3 @@ cd dlib-19.24
 # [Have you done sudo python3 setup.py install --clean yet?](https://github.com/davisking/dlib/issues/1686#issuecomment-471509357)
 python3 setup.py install --clean
 cd ../
-
-# python CALL_FACE01.py
-

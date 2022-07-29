@@ -58,7 +58,7 @@ def common_main(exec_times):
                         name, pict, date,  location, percentage_and_symbol = \
                             person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
                         # ELE: Equally Likely Events
-                        if not name == 'Unknown':
+                        if name != 'Unknown':
                             result, score, ELE = Core_obj.return_anti_spoof(frame_datas['img'], person_data["location"])
                             if ELE is False:
                                 print(

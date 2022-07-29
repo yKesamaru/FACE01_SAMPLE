@@ -28,41 +28,40 @@ Alternatively, refer to INSTALL_FACE01.sh and install manually, or use docker.
 ## If you want using Docker
 ### To install Docker
 See [here](docs/install_docker.md).
-
-### To build Docker
+You can choose from `To build Docker` or `Pull Docker image`.
+#### To build Docker
 See [here](docs/to_build_docker_image.md)
 
-### Start FACE01 example
-#### Dockerfile_console
-This docker image is build with Dockerfile_console dockerfile.
+#### Pull Docker image
 ```bash
-docker run --rm -it <IMAGE ID>
-docker run --rm -it 038e151625f1
+docker pull tokaikaoninsho/face01_gpu:1.4.03
+```
+
+- Digest
+    - sha256:01c94cc3b60bab1846b4fcfb44f1fefa7afcfeac809109b0ec30a2ad867f0475
+- OS/ARCH
+  - linux/amd64
+- Compressed Size
+  - 8.85 GB
+
+### Start FACE01 example
+#### Dockerfile_gpu
+This docker image is build with dockerfile named 'Dockerfile_gpu'.
+```bash
+# Launch Docker image
+docker run --rm -it --gpus all -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.03
 # Enter the Python virtual environment
 docker@e85311b5908e:~/FACE01_SAMPLE$ . bin/activate
 (FACE01_SAMPLE) docker@e85311b5908e:~/FACE01_SAMPLE$ 
-# Check Python version
-(FACE01_SAMPLE) docker@e85311b5908e:~/FACE01_SAMPLE$ python -V
-Python 3.8.10
-# Check GPU and Tkinter
-(FACE01_SAMPLE) docker@e85311b5908e:~/FACE01_SAMPLE$ python
-Python 3.8.10 (default, Jun 22 2022, 20:18:18) 
-[GCC 9.4.0] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> import dlib
->>> dlib.DLIB_USE_CUDA
-True
->>> import tk
->>> 
+# Launch FACE01_SAMPLE
+(FACE01_SAMPLE) docker@e85311b5908e:~/FACE01_SAMPLE$ python CALL_FACE01.py
 ```
-#### Dockerfile_xfce4
-This docker image is build with Dockerfile_xfce4 dockerfile.
+
+![](img/PASTE_IMAGE_2022-07-20-07-00-03.png)
+#### Dockerfile_no_gpu
+
 ```bash
-xhost +local:
-docker run --gpus all --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face01:1.4.03
-```
-![](img/PASTE_IMAGE_2022-07-27-08-57-12.png)
-**NOTE**: Don't forget `xhost -local:` after using example.
+docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:1.4.03
 
 # Configuration
 Edit `config.ini` file to configure FACE01.

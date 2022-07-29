@@ -45,7 +45,7 @@ docker@6ee18359bde8:~/FACE01_SAMPLE$  ls
 CALL_FACE01.py            SystemCheckLock  dlib-19.24          images   lib64        output              requirements.txt  test.mp4
 Docker_INSTALL_FACE01.sh  bin              dlib-19.24.tar.bz2  include  noFace       priset_face_images  share             顔無し区間を含んだテスト動画.mp4
 FACE01.py                 config.ini       face01lib           lib      npKnown.npz  pyvenv.cfg          some_people.mp4
-# Launch Python virtual environment
+# Launch Python virtual environment (Important!)
 docker@ee44d08e933f:~/FACE01_SAMPLE$ . bin/activate
 # Launch FACE01
 (FACE01_SAMPLE) docker@ee44d08e933f:~/FACE01_SAMPLE$ python CALL_FACE01.py 
