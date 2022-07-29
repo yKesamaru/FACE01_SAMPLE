@@ -80,7 +80,6 @@ WORKDIR /home/${DOCKER_USER}/FACE01_SAMPLE
 RUN echo ${DOCKER_PASSWORD} | sudo -S chown ${DOCKER_USER} /home/${DOCKER_USER}/FACE01_SAMPLE/Docker_INSTALL_FACE01.sh \
     && chmod +x /home/${DOCKER_USER}/FACE01_SAMPLE/Docker_INSTALL_FACE01.sh \
     && /bin/bash -c /home/${DOCKER_USER}/FACE01_SAMPLE/Docker_INSTALL_FACE01.sh
-RUN echo ${DOCKER_PASSWORD} | sudo -S apt-get update && sudo apt-get install vim -y
 
 # `--clean` see bellow
 # [Have you done sudo python3 setup.py install --clean yet?](https://github.com/davisking/dlib/issues/1686#issuecomment-471509357)
