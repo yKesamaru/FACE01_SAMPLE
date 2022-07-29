@@ -1,4 +1,4 @@
-![Logo](images/g1320.png)
+![Logo](https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/g1320.png)
 # FACE01 SAMPLE
 This repository contains FACE01 SAMPLE for UBUNTU 20.04.
 If you are a Windows user, please use this on WSLg.
@@ -19,7 +19,7 @@ You can call individual methods or call a set of functions.
 - ...and many others!
 
 
-See [docs/functions](docs/functions.md).
+See [docs/functions](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/functions.md).
 
 # Installation
 ```bash
@@ -36,10 +36,10 @@ Alternatively, refer to INSTALL_FACE01.sh and install manually, or use docker.
 
 ## If you want using Docker
 ### To install Docker
-See [here](docs/install_docker.md).
+See [here](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/install_docker.md).
 You can choose from `To build Docker` or `Pull Docker image`.
 #### To build Docker
-See [here](docs/to_build_docker_image.md)
+See [here](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/to_build_docker_image.md)
 
 #### Pull Docker image
 ##### Use Nvidia GPU
@@ -85,7 +85,7 @@ docker@e85311b5908e:~/FACE01_SAMPLE$ . bin/activate
 (FACE01_SAMPLE) docker@e85311b5908e:~/FACE01_SAMPLE$ python CALL_FACE01.py
 ```
 
-![](img/PASTE_IMAGE_2022-07-20-07-00-03.png)
+![](https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/img/PASTE_IMAGE_2022-07-20-07-00-03.png)
 #### Dockerfile_no_gpu
 
 ```bash
@@ -94,7 +94,7 @@ docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face0
 # Configuration
 Edit `config.ini` file to configure FACE01.
 If you want to use the http protocol as the input source, replace the `movie =` part of the `config.ini` file with` movie = http: // <IP> / cgi-bin / <parameter> `. If you want to store the authentication information, enter `user =" ", passwd =" "` in the `config.ini` file as above.
-See [docs/config.ini](docs/config_ini.md) for details.
+See [docs/config.ini](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/config_ini.md) for details.
 
 # Example
 `python CALL_FACE01.py`
@@ -161,13 +161,13 @@ Total processing time: 2.353[second]
 Per frame: 0.047[second]
 ```
 The face images are output to the `/output/` folder.
-![](img/PASTE_IMAGE_2022-07-20-07-36-26.png)
+![](https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/img/PASTE_IMAGE_2022-07-20-07-36-26.png)
 You can see the profile result.
 `snakeviz restats`
 ```bash
 snakeviz restats
 ```
-![](img/PASTE_IMAGE_2022-07-20-07-23-21.png)
+![](https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/img/PASTE_IMAGE_2022-07-20-07-23-21.png)
 
 ## If you want to face recognition
 Set `headless = True` on `config.ini`.
@@ -268,7 +268,7 @@ You can see the profile result.
 ```bash
 snakeviz restats
 ```
-![](img/PASTE_IMAGE_2022-07-20-07-20-01.png)
+![](https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/img/PASTE_IMAGE_2022-07-20-07-20-01.png)
 
 ## If you want to display GUI window.
 The processing speed will be slower, but you can use the GUI to display the window.
@@ -374,7 +374,7 @@ Total processing time: 10.654[seconds]
 Per frame: 0.213[seconds]
 ```
 ![FACE01_GUI](https://user-images.githubusercontent.com/93259837/180339656-7ef7baea-480f-4d78-b29b-e8e12bc85189.gif)
-![](img/PASTE_IMAGE_2022-07-24-19-43-44.png)
+![](https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/img/PASTE_IMAGE_2022-07-24-19-43-44.png)
 
 # References
 1. [dlib](https://github.com/davisking/dlib)
