@@ -1741,7 +1741,6 @@ static const char __pyx_k_defaultdict[] = "defaultdict";
 static const char __pyx_k_face_height[] = "face_height";
 static const char __pyx_k_frame_datas[] = "frame_datas";
 static const char __pyx_k_input_image[] = "input_image";
-static const char __pyx_k_no_data_img[] = "no-data_img";
 static const char __pyx_k_onnxruntime[] = "onnxruntime";
 static const char __pyx_k_person_data[] = "person_data";
 static const char __pyx_k_pil_img_obj[] = "pil_img_obj";
@@ -2182,7 +2181,6 @@ static PyObject *__pyx_n_s_name_2;
 static PyObject *__pyx_n_s_ndarray;
 static PyObject *__pyx_kp_s_noFace;
 static PyObject *__pyx_kp_s_noFace_2;
-static PyObject *__pyx_kp_s_no_data_img;
 static PyObject *__pyx_kp_s_no_data_person_data_list;
 static PyObject *__pyx_n_s_not_spoof;
 static PyObject *__pyx_n_s_now;
@@ -12990,7 +12988,7 @@ static PyObject *__pyx_pf_4Core_4Core_28frame_post_processing(CYTHON_UNUSED PyOb
  *                 modified_frame_list.append(frame_datas)
  * 
  *             elif self.args_dict["headless"] == True:             # <<<<<<<<<<<<<<
- *                 frame_datas = {'img':'no-data_img', 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}  # TypeError: list indices must be integers or slices, not str -> img
+ *                 frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}  # TypeError: list indices must be integers or slices, not str -> img
  *                 # self.frame_datas_array.append(frame_datas)
  */
     __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_args_dict); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 544, __pyx_L1_error)
@@ -13007,13 +13005,13 @@ static PyObject *__pyx_pf_4Core_4Core_28frame_post_processing(CYTHON_UNUSED PyOb
       /* "Core.pyx":545
  * 
  *             elif self.args_dict["headless"] == True:
- *                 frame_datas = {'img':'no-data_img', 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}  # TypeError: list indices must be integers or slices, not str -> img             # <<<<<<<<<<<<<<
+ *                 frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}  # TypeError: list indices must be integers or slices, not str -> img             # <<<<<<<<<<<<<<
  *                 # self.frame_datas_array.append(frame_datas)
  *                 modified_frame_list.append(frame_datas)
  */
       __pyx_t_12 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 545, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_img, __pyx_kp_s_no_data_img) < 0) __PYX_ERR(0, 545, __pyx_L1_error)
+      if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_img, __pyx_v_resized_frame) < 0) __PYX_ERR(0, 545, __pyx_L1_error)
       if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_face_location_list, __pyx_v_face_location_list) < 0) __PYX_ERR(0, 545, __pyx_L1_error)
       if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_overlay, __pyx_v_overlay) < 0) __PYX_ERR(0, 545, __pyx_L1_error)
       if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_person_data_list, __pyx_v_person_data_list) < 0) __PYX_ERR(0, 545, __pyx_L1_error)
@@ -13021,11 +13019,11 @@ static PyObject *__pyx_pf_4Core_4Core_28frame_post_processing(CYTHON_UNUSED PyOb
       __pyx_t_12 = 0;
 
       /* "Core.pyx":547
- *                 frame_datas = {'img':'no-data_img', 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}  # TypeError: list indices must be integers or slices, not str -> img
+ *                 frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}  # TypeError: list indices must be integers or slices, not str -> img
  *                 # self.frame_datas_array.append(frame_datas)
  *                 modified_frame_list.append(frame_datas)             # <<<<<<<<<<<<<<
  *             else:
- *                 frame_datas = {'img':'no-data_img', 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': 'no-data_person_data_list'}
+ *                 frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': 'no-data_person_data_list'}
  */
       __pyx_t_26 = __Pyx_PyList_Append(__pyx_v_modified_frame_list, __pyx_v_frame_datas); if (unlikely(__pyx_t_26 == ((int)-1))) __PYX_ERR(0, 547, __pyx_L1_error)
 
@@ -13033,7 +13031,7 @@ static PyObject *__pyx_pf_4Core_4Core_28frame_post_processing(CYTHON_UNUSED PyOb
  *                 modified_frame_list.append(frame_datas)
  * 
  *             elif self.args_dict["headless"] == True:             # <<<<<<<<<<<<<<
- *                 frame_datas = {'img':'no-data_img', 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}  # TypeError: list indices must be integers or slices, not str -> img
+ *                 frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}  # TypeError: list indices must be integers or slices, not str -> img
  *                 # self.frame_datas_array.append(frame_datas)
  */
       goto __pyx_L64;
@@ -13042,14 +13040,14 @@ static PyObject *__pyx_pf_4Core_4Core_28frame_post_processing(CYTHON_UNUSED PyOb
     /* "Core.pyx":549
  *                 modified_frame_list.append(frame_datas)
  *             else:
- *                 frame_datas = {'img':'no-data_img', 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': 'no-data_person_data_list'}             # <<<<<<<<<<<<<<
+ *                 frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': 'no-data_person_data_list'}             # <<<<<<<<<<<<<<
  *                 # self.frame_datas_array.append(frame_datas)
  *                 modified_frame_list.append(frame_datas)
  */
     /*else*/ {
       __pyx_t_12 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 549, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_img, __pyx_kp_s_no_data_img) < 0) __PYX_ERR(0, 549, __pyx_L1_error)
+      if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_img, __pyx_v_resized_frame) < 0) __PYX_ERR(0, 549, __pyx_L1_error)
       if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_face_location_list, __pyx_v_face_location_list) < 0) __PYX_ERR(0, 549, __pyx_L1_error)
       if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_overlay, __pyx_v_overlay) < 0) __PYX_ERR(0, 549, __pyx_L1_error)
       if (PyDict_SetItem(__pyx_t_12, __pyx_n_s_person_data_list, __pyx_kp_s_no_data_person_data_list) < 0) __PYX_ERR(0, 549, __pyx_L1_error)
@@ -13057,7 +13055,7 @@ static PyObject *__pyx_pf_4Core_4Core_28frame_post_processing(CYTHON_UNUSED PyOb
       __pyx_t_12 = 0;
 
       /* "Core.pyx":551
- *                 frame_datas = {'img':'no-data_img', 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': 'no-data_person_data_list'}
+ *                 frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': 'no-data_person_data_list'}
  *                 # self.frame_datas_array.append(frame_datas)
  *                 modified_frame_list.append(frame_datas)             # <<<<<<<<<<<<<<
  * 
@@ -21943,7 +21941,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_ndarray, __pyx_k_ndarray, sizeof(__pyx_k_ndarray), 0, 0, 1, 1},
   {&__pyx_kp_s_noFace, __pyx_k_noFace, sizeof(__pyx_k_noFace), 0, 0, 1, 0},
   {&__pyx_kp_s_noFace_2, __pyx_k_noFace_2, sizeof(__pyx_k_noFace_2), 0, 0, 1, 0},
-  {&__pyx_kp_s_no_data_img, __pyx_k_no_data_img, sizeof(__pyx_k_no_data_img), 0, 0, 1, 0},
   {&__pyx_kp_s_no_data_person_data_list, __pyx_k_no_data_person_data_list, sizeof(__pyx_k_no_data_person_data_list), 0, 0, 1, 0},
   {&__pyx_n_s_not_spoof, __pyx_k_not_spoof, sizeof(__pyx_k_not_spoof), 0, 0, 1, 1},
   {&__pyx_n_s_now, __pyx_k_now, sizeof(__pyx_k_now), 0, 0, 1, 1},

@@ -542,11 +542,11 @@ class Core:
                 modified_frame_list.append(frame_datas)
 
             elif self.args_dict["headless"] == True:
-                frame_datas = {'img':'no-data_img', 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}  # TypeError: list indices must be integers or slices, not str -> img
+                frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}  # TypeError: list indices must be integers or slices, not str -> img
                 # self.frame_datas_array.append(frame_datas)
                 modified_frame_list.append(frame_datas)
             else:
-                frame_datas = {'img':'no-data_img', 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': 'no-data_person_data_list'} 
+                frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': 'no-data_person_data_list'} 
                 # self.frame_datas_array.append(frame_datas)
                 modified_frame_list.append(frame_datas)
 

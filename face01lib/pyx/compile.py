@@ -8,8 +8,8 @@ ext_modules = [
     # see bellow
     # [C コンパイラのオプションの設定](https://blog.ymyzk.com/2014/11/setuptools-cython/)
     Extension(
-        "load_priset_image",  
-        sources=["load_priset_image.pyx"],
+        "Core",  
+        sources=["Core.pyx"],
         # extra_compile_args=['--option-a', '-O3'],
         include_dirs=[numpy.get_include()]
     ),
