@@ -1,7 +1,7 @@
 ![Logo](images/g1320.png)
 # FACE01 SAMPLE
 This repository contains FACE01 SAMPLE for UBUNTU 20.04.
-If you are a Windows user, please use on WSL2.
+If you are a Windows user, please use this on WSLg.
 This sample can be used until December 2022.
 
 # New function!
@@ -10,6 +10,15 @@ This sample can be used until December 2022.
 # About FACE01
 FACE01 is a face recognition library that integrates various functions and can be called from Python.
 You can call individual methods or call a set of functions.
+- High-speed face coordinate output function
+- Face image saving function with date and time information
+- Output modified image
+- Anti spoofing
+- High-speed face recognition is possible from face data of more than 10,000 people
+- Centralized management of functions by configuration file
+- ...and many others!
+
+
 See [docs/functions](docs/functions.md).
 
 # Installation
@@ -33,8 +42,12 @@ You can choose from `To build Docker` or `Pull Docker image`.
 See [here](docs/to_build_docker_image.md)
 
 #### Pull Docker image
+##### Use Nvidia GPU
 ```bash
 docker pull tokaikaoninsho/face01_gpu:1.4.03
+docker run --rm -it --gpus all -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.03
+. bin/activate
+python CALL_FACE01.py
 ```
 
 - Digest
@@ -43,6 +56,21 @@ docker pull tokaikaoninsho/face01_gpu:1.4.03
   - linux/amd64
 - Compressed Size
   - 8.85 GB
+
+##### Only use CPU
+```bash
+docker pull tokaikaoninsho/face01_no_gpu
+docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:1.4.03
+. bin/activate
+python CALL_FACE01.py
+```
+
+- Digest
+    - sha256:08a694fecff1a0f3358ac7c6046109304416f4f484f00b037a477b42717e2221
+- OS/ARCH
+  - linux/amd64
+- Compressed Size
+  - 2.08 GB
 
 ### Start FACE01 example
 #### Dockerfile_gpu
