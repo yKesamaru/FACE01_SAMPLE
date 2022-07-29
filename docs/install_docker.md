@@ -1,7 +1,7 @@
 For Ubuntu, you can choose some method to install Docker, and before to install, should choice `Docker Desktop` or `Docker Engine`. Official tutorial is [here](https://docs.docker.com/engine/install/ubuntu/).
 This section, we talk about install `Docker Engine` and `Docker ce`.
 
-*If you're PC is not installed Nvidia GPU card, read [this section]().*
+*If you're PC is not installed Nvidia GPU card, refer [section](docs/to_build_docker_image.md) 'To build FACE01 docker image without nvidia-docker2 package'.*
 
 # NOTE
 You must meet the conditions listed below. See [official site](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#platform-requirements).

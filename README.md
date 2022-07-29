@@ -33,6 +33,29 @@ See [here](docs/install_docker.md).
 See [here](docs/to_build_docker_image.md)
 
 ### Start FACE01 example
+#### Dockerfile_console
+This docker image is build with Dockerfile_console dockerfile.
+```bash
+docker run --rm -it <IMAGE ID>
+docker run --rm -it 038e151625f1
+# Enter the Python virtual environment
+docker@e85311b5908e:~/FACE01_SAMPLE$ . bin/activate
+(FACE01_SAMPLE) docker@e85311b5908e:~/FACE01_SAMPLE$ 
+# Check Python version
+(FACE01_SAMPLE) docker@e85311b5908e:~/FACE01_SAMPLE$ python -V
+Python 3.8.10
+# Check GPU and Tkinter
+(FACE01_SAMPLE) docker@e85311b5908e:~/FACE01_SAMPLE$ python
+Python 3.8.10 (default, Jun 22 2022, 20:18:18) 
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import dlib
+>>> dlib.DLIB_USE_CUDA
+True
+>>> import tk
+>>> 
+```
+#### Dockerfile_xfce4
 This docker image is build with Dockerfile_xfce4 dockerfile.
 ```bash
 xhost +local:
