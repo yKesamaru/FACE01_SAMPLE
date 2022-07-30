@@ -7,35 +7,47 @@ Dlib_api(): (top, right, bottom, left)
 see bellow
 https://github.com/davisking/dlib/blob/master/python_examples/faceapi.py
 """
+__model__ = 'Original model create by Prokofev Kirill, modified by PINT'
+__URL__ = 'https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3'
+
+from datetime import datetime
+from platform import system
+from traceback import format_exc
+
+import cv2
 # from asyncio.log import logger
 import mediapipe as mp
 import numpy as np
-from face01lib.api import Dlib_api
-from traceback import format_exc
-from datetime import datetime
-from PIL import Image, ImageFile
+from PIL import Image, ImageDraw, ImageFile, ImageFont
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-import cv2
-from collections import defaultdict
+from face01lib.api import Dlib_api
 from face01lib.Calc import Cal
-from face01lib.libdraw import LibDraw
-from shutil import move
+
+from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
-from os.path import dirname
+from os.path import dirname, exists
+from shutil import move
+
+import onnxruntime
+
+from face01lib.models import Dlib_models
 from face01lib.logger import Logger
+
+anti_spoof_model = Dlib_models().anti_spoof_model_location()
+onnx_session = onnxruntime.InferenceSession(anti_spoof_model)
 
 name = __name__
 dir = dirname(__file__)
 logger = Logger().logger(name, dir)
 Cal().cal_specify_date(logger)
-ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 class Core:
     def __init__(self) -> None:
         pass
 
     def mp_face_detection_func(self, resized_frame, model_selection=0, min_detection_confidence=0.4):
-        face = mp.solutions.face_detection.FaceDetection(
+        face = mp.solutions.face_detection.FaceDetection(  # type: ignore
             model_selection=model_selection,
             min_detection_confidence=min_detection_confidence
         )
@@ -98,6 +110,7 @@ class Core:
             frame[y1:y2, x1:x2] = self.frame[y1:y2, x1:x2] * a + b
         except:
             self.logger.debug("telopが描画できません")
+            # TODO np.clip
         return  frame
 
     def draw_logo(self, logger, cal_resized_logo_nums, frame) -> np.ndarray:
@@ -109,6 +122,7 @@ class Core:
             frame[y1:y2, x1:x2] = self.frame[y1:y2, x1:x2] * a + b
         except:
             self.logger.debug("logoが描画できません")
+            # TODO np.clip
         return frame
 
     def check_compare_faces(self, logger, known_face_encodings, face_encoding, tolerance) -> list:
@@ -274,7 +288,7 @@ class Core:
         self.logger = logger
         self.args_dict = args_dict
         self.resized_frame = resized_frame
-        person_data_list = []
+        person_data_list = [{}]
         name = 'Unknown'
         filename = ''
         top = ()
@@ -288,25 +302,18 @@ class Core:
 
         # 描画系（bottom area, 半透明, telop, logo）
         if  self.args_dict["headless"] == False:
-            """1.3.06でボトムエリア描画は廃止予定
-            # bottom area描画
-            if self.args_dict["bottom_area"]==True:
-                # resized_frameの下方向に余白をつける
-                self.resized_frame = cv2.copyMakeBorder(self.resized_frame, 0, 180, 0, 0, cv2.BORDER_CONSTANT, value=(255,255,255))
-            """
-
             # 半透明処理（前半）
             if self.args_dict["show_overlay"]==True:
                 overlay: cv2.Mat = self.resized_frame.copy()
 
             # テロップとロゴマークの合成
             if self.args_dict["draw_telop_and_logo"] == True:
-                self.resized_frame =  Core().draw_telop(self.logger, self.args_dict["cal_resized_telop_nums"], self.resized_frame)
-                self.resized_frame = Core().draw_logo(self.logger, self.args_dict["cal_resized_logo_nums"], self.resized_frame)
+                self.resized_frame =  self.draw_telop(self.logger, self.args_dict["cal_resized_telop_nums"], self.resized_frame)
+                self.resized_frame = self.draw_logo(self.logger, self.args_dict["cal_resized_logo_nums"], self.resized_frame)
 
         # 顔座標算出
         if self.args_dict["use_pipe"] == True:
-            face_location_list = Core().return_face_location_list(self.resized_frame, self.args_dict["set_width"], self.args_dict["set_height"], self.args_dict["model_selection"], self.args_dict["min_detection_confidence"])
+            face_location_list = self.return_face_location_list(self.resized_frame, self.args_dict["set_width"], self.args_dict["set_height"], self.args_dict["model_selection"], self.args_dict["min_detection_confidence"])
         else:
             face_location_list = Dlib_api().face_locations(self.resized_frame, self.args_dict["upsampling"], self.args_dict["mode"])
         """face_location_list
@@ -315,16 +322,16 @@ class Core:
 
         # 顔がなかったら以降のエンコード処理を行わない
         if len(face_location_list) == 0:
-            frame_datas_array = Core().make_frame_datas_array(overlay, face_location_list, name,filename, top,right,bottom,left,percentage_and_symbol,person_data_list,frame_datas_array,self.resized_frame)
+            frame_datas_array = self.make_frame_datas_array(overlay, face_location_list, name,filename, top,right,bottom,left,percentage_and_symbol,person_data_list,frame_datas_array,self.resized_frame)
             return frame_datas_array
 
         # 顔が一定数以上なら以降のエンコード処理を行わない
         if len(face_location_list) >= self.args_dict["number_of_people"]:
             self.logger.info(f'{self.args_dict["number_of_people"]}人以上を検出しました')
-            frame_datas_array = Core().make_frame_datas_array(overlay, face_location_list, name,filename, top,right,bottom,left,percentage_and_symbol,person_data_list,frame_datas_array,self.resized_frame)
+            frame_datas_array = self.make_frame_datas_array(overlay, face_location_list, name,filename, top,right,bottom,left,percentage_and_symbol,person_data_list,frame_datas_array,self.resized_frame)
             return frame_datas_array
 
-        frame_datas_array = Core().make_frame_datas_array(overlay, face_location_list, name,filename, top,right,bottom,left,percentage_and_symbol,person_data_list,frame_datas_array,self.resized_frame)
+        frame_datas_array = self.make_frame_datas_array(overlay, face_location_list, name,filename, top,right,bottom,left,percentage_and_symbol,person_data_list,frame_datas_array,self.resized_frame)
         return frame_datas_array
 
     # 顔のエンコーディング
@@ -357,7 +364,7 @@ class Core:
                         https://numpy.org/doc/stable/reference/generated/numpy.hstack.html
                     """
                     concatenate_face_location_list, concatenate_person_frame = \
-                        Core().return_concatenate_location_and_frame(resized_frame, face_location_list)
+                        self.return_concatenate_location_and_frame(resized_frame, face_location_list)
                     face_encodings = Dlib_api().face_encodings(concatenate_person_frame, concatenate_face_location_list, self.args_dict["jitters"], self.args_dict["model"])
                 elif self.args_dict["use_pipe"] == True and  self.args_dict["person_frame_face_encoding"] == False:
                     face_encodings = Dlib_api().face_encodings(resized_frame, face_location_list, self.args_dict["jitters"], self.args_dict["model"])
@@ -373,6 +380,28 @@ class Core:
                 elif self.args_dict["use_pipe"] == False and self.args_dict["person_frame_face_encoding"] == False:
                     face_encodings = Dlib_api().face_encodings(resized_frame, face_location_list, self.args_dict["jitters"], self.args_dict["model"])
             return face_encodings, self.frame_datas_array
+
+    # 顔の生データ(np.ndarray)を返す
+    def return_face_image(self, resized_frame, face_location):
+        self.resized_frame = resized_frame
+        if len(self.face_location) > 0:
+            top = face_location[0]
+            right = face_location[1]
+            bottom = face_location[2]
+            left = face_location[3]
+            face_image = self.resized_frame[top:bottom, left:right]
+            """How to slice
+            face_location order: top, right, bottom, left
+            how to slice: img[top:bottom, left:right]
+            """
+            """DEBUG
+            from face01lib.video_capture import VidCap
+            VidCap().frame_imshow_for_debug(face_image)
+            VidCap().frame_imshow_for_debug(self.resized_frame)
+            """
+            return face_image
+        else:
+            return []
 
     # フレーム後処理
     # @profile()
@@ -412,9 +441,9 @@ class Core:
             for face_encoding in self.face_encodings:
                 # Initialize name, matches (Inner frame)
                 name = "Unknown"
-                matches = Core().check_compare_faces(self.logger, self.args_dict["known_face_encodings"], face_encoding, self.args_dict["tolerance"])
+                matches = self.check_compare_faces(self.logger, self.args_dict["known_face_encodings"], face_encoding, self.args_dict["tolerance"])
                 # 名前リスト(face_names)生成
-                face_names = Core().return_face_names(self.args_dict, face_names, face_encoding,  matches, name)
+                face_names = self.return_face_names(self.args_dict, face_names, face_encoding,  matches, name)
 
             # face_location_listについて繰り返し処理→frame_datas_array作成
             number_of_people = 0  # 人数。計算上0人から始める。draw_default_face()で使用する
@@ -445,17 +474,17 @@ class Core:
                 # クロップ画像保存
                 if self.args_dict["crop_face_image"]==True:
                     if self.args_dict["frequency_crop_image"] < self.GLOBAL_MEMORY['number_of_crops']:
-                        pil_img_obj_rgb = Core().pil_img_rgb_instance(resized_frame)
+                        pil_img_obj_rgb = self.pil_img_rgb_instance(resized_frame)
                         if self.args_dict["crop_with_multithreading"] == True:
                             # """1.3.08 multithreading 9.05s
                             with ThreadPoolExecutor() as executor:
-                                future = executor.submit(Core().make_crop_face_image, name, dis, pil_img_obj_rgb, top, left, right, bottom, self.GLOBAL_MEMORY['number_of_crops'], self.args_dict["frequency_crop_image"])
+                                future = executor.submit(self.make_crop_face_image, name, dis, pil_img_obj_rgb, top, left, right, bottom, self.GLOBAL_MEMORY['number_of_crops'], self.args_dict["frequency_crop_image"])
                                 filename,number_of_crops, frequency_crop_image = future.result()
                             # """
                         else:
                             # """ORIGINAL: 1.3.08で変更 8.69s
                             filename,number_of_crops, frequency_crop_image = \
-                                Core().make_crop_face_image(name, dis, pil_img_obj_rgb, top, left, right, bottom, self.GLOBAL_MEMORY['number_of_crops'], self.args_dict["frequency_crop_image"])
+                                self.make_crop_face_image(name, dis, pil_img_obj_rgb, top, left, right, bottom, self.GLOBAL_MEMORY['number_of_crops'], self.args_dict["frequency_crop_image"])
                             # """
                         self.GLOBAL_MEMORY['number_of_crops'] = 0
                     else:
@@ -466,7 +495,7 @@ class Core:
                     # デフォルト顔画像の描画
                     if p <= self.args_dict["tolerance"]:  # ディスタンスpがtolerance以下の場合
                         if self.args_dict["default_face_image_draw"] == True:
-                            resized_frame = LibDraw().draw_default_face(self.logger, self.args_dict, name, resized_frame, number_of_people)
+                            resized_frame = self.draw_default_face(self.logger, self.args_dict, name, resized_frame, number_of_people)
                             number_of_people += 1  # 何人目か
                             """DEBUG"""
                             # frame_imshow_for_debug(resized_frame)
@@ -474,27 +503,27 @@ class Core:
                     # ピンクまたは白の四角形描画
                     if self.args_dict["rectangle"] == True:
                         if name == 'Unknown':  # プリセット顔画像に対応する顔画像がなかった場合
-                            resized_frame = LibDraw().draw_pink_rectangle(resized_frame, top,bottom,left,right)
+                            resized_frame = self.draw_pink_rectangle(resized_frame, top,bottom,left,right)
                         else:  # プリセット顔画像に対応する顔画像があった場合
-                            resized_frame = LibDraw().draw_white_rectangle(self.args_dict["rectangle"], resized_frame, top, left, right, bottom)
+                            resized_frame = self.draw_white_rectangle(self.args_dict["rectangle"], resized_frame, top, left, right, bottom)
                         
                     # パーセンテージ描画
                     if self.args_dict["show_percentage"]==True:
-                        resized_frame = LibDraw().display_percentage(percentage_and_symbol,resized_frame, p, left, right, bottom, self.args_dict["tolerance"])
+                        resized_frame = self.display_percentage(percentage_and_symbol,resized_frame, p, left, right, bottom, self.args_dict["tolerance"])
                         """DEBUG"""
                         # frame_imshow_for_debug(resized_frame)
 
                     # 名前表示と名前用四角形の描画
                     if self.args_dict["show_name"]==True:
-                        resized_frame = LibDraw().draw_rectangle_for_name(name,resized_frame, left, right,bottom)
+                        resized_frame = self.draw_rectangle_for_name(name,resized_frame, left, right,bottom)
                         pil_img_obj= Image.fromarray(resized_frame)
-                        resized_frame = LibDraw().draw_text_for_name(self.logger, left,right,bottom,name, p,self.args_dict["tolerance"],pil_img_obj)
+                        resized_frame = self.draw_text_for_name(self.logger, left,right,bottom,name, p,self.args_dict["tolerance"],pil_img_obj)
                         """DEBUG"""
                         # frame_imshow_for_debug(resized_frame)
 
                     # target_rectangleの描画
                     if self.args_dict["target_rectangle"] == True:
-                        resized_frame = LibDraw().draw_target_rectangle(self.args_dict["rect01_png"], resized_frame,top,bottom,left,right,name)
+                        resized_frame = self.draw_target_rectangle(self.args_dict["anti_spoof"], self.args_dict["rect01_png"], self.args_dict["rect01_NG_png"], resized_frame,top,bottom,left,right,name)
                         """DEBUG
                         frame_imshow_for_debug(resized_frame)
                         """
@@ -513,11 +542,11 @@ class Core:
                 modified_frame_list.append(frame_datas)
 
             elif self.args_dict["headless"] == True:
-                frame_datas = {'img':'no-data_img', 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}  # TypeError: list indices must be integers or slices, not str -> img
+                frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}  # TypeError: list indices must be integers or slices, not str -> img
                 # self.frame_datas_array.append(frame_datas)
                 modified_frame_list.append(frame_datas)
             else:
-                frame_datas = {'img':'no-data_img', 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': 'no-data_person_data_list'} 
+                frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': 'no-data_person_data_list'} 
                 # self.frame_datas_array.append(frame_datas)
                 modified_frame_list.append(frame_datas)
 
@@ -535,3 +564,335 @@ class Core:
         print(f"modified_frame_list.__sizeof__(): {modified_frame_list.__sizeof__()}MB")
         """
         return modified_frame_list
+
+    def return_anti_spoof(self, frame, face_location):
+        self.frame = frame
+        self.face_location = face_location
+        face_image = self.return_face_image(self.frame, self.face_location)
+        # VidCap_obj.frame_imshow_for_debug(face_image)  # DEBUG
+
+        # 定形処理:リサイズ, 標準化, 成形, float32キャスト, 推論, 後処理
+        input_image = cv2.resize(face_image, dsize=(128, 128))
+        """DEBUG"""
+        # VidCap_obj.frame_imshow_for_debug(input_image)
+
+        input_image = input_image.transpose(2, 0, 1).astype('float32')
+        input_image = input_image.reshape(-1, 3, 128, 128)
+
+        # 推論
+        input_name = onnx_session.get_inputs()[0].name
+        result = onnx_session.run(None, {input_name: input_image})
+
+        # 後処理
+        result = np.array(result)
+        result = np.squeeze(result)
+
+        as_index = np.argmax(result)
+
+        score: float = 0.0
+        if result[0] > result[1]:
+            score = result[0] - result[1]
+        else:
+            score = result[1] - result[0]
+        score = round(score, 2)
+        # ELE: Equally Likely Events
+        ELE: bool = False
+        if score < 0.3:
+            ELE = True
+
+        spoof_or_not: str = ''
+        if as_index == 0:  # (255, 0, 0)
+            spoof_or_not = 'spoof'
+            return spoof_or_not, score, ELE
+        if as_index == 1:
+            spoof_or_not = 'not_spoof'
+            return spoof_or_not, score, ELE
+
+# 以下、元libdraw.LibDraw
+    def draw_pink_rectangle(self, resized_frame, top,bottom,left,right) -> np.ndarray:
+        self.resized_frame = resized_frame
+        self.top = top
+        self.bottom = bottom
+        self.left = left
+        self.right = right
+        cv2.rectangle(self.resized_frame, (self.left, self.top), (self.right, self.bottom), (255, 87, 243), 2) # pink
+        return self.resized_frame
+        
+    def draw_white_rectangle(self, rectangle, resized_frame, top, left, right, bottom) -> np.ndarray:
+        self.rectangle = rectangle
+        self.resized_frame = resized_frame
+        self.top = top
+        self.left = left
+        self.right = right
+        self.bottom = bottom
+        cv2.rectangle(self.resized_frame, (self.left-18, self.top-18), (self.right+18, self.bottom+18), (175, 175, 175), 2) # 灰色内枠
+        cv2.rectangle(self.resized_frame, (self.left-20, self.top-20), (self.right+20, self.bottom+20), (255,255,255), 2) # 白色外枠
+        return self.resized_frame
+
+    # パーセンテージ表示
+    def display_percentage(self, percentage_and_symbol,resized_frame, p, left, right, bottom, tolerance) -> np.ndarray:
+        self.percentage_and_symbol = percentage_and_symbol
+        self.resized_frame = resized_frame
+        self.p = p
+        self.left = left
+        self.right = right
+        self.bottom = bottom
+        self.tolerance = tolerance
+        font = cv2.FONT_HERSHEY_COMPLEX_SMALL
+        # パーセンテージ表示用の灰色に塗りつぶされた四角形の描画
+        cv2.rectangle(self.resized_frame, (self.left-25, self.bottom + 75), (self.right+25, self.bottom+50), (30,30,30), cv2.FILLED) # 灰色
+        # テキスト表示位置
+        fontsize = 14
+        putText_center = int((self.left-25 + self.right+25)/2)
+        putText_chaCenter = int(5/2)
+        putText_pos = putText_center - (putText_chaCenter*fontsize) - int(fontsize/2)
+        putText_position = (putText_pos, self.bottom + 75 - int(fontsize / 2))
+        # toleranceの値によってフォント色を変える
+        if self.p < self.tolerance:
+            # パーセンテージを白文字表示
+            self.resized_frame = cv2.putText(self.resized_frame, self.percentage_and_symbol, putText_position, font, 1, (255,255,255), 1, cv2.LINE_AA)
+        else:
+            # パーセンテージをピンク表示
+            self.resized_frame = cv2.putText(self.resized_frame, self.percentage_and_symbol, putText_position, font, 1, (255, 87, 243), 1, cv2.LINE_AA)
+        return self.resized_frame
+
+    # デフォルト顔画像の描画処理
+    def draw_default_face_image(self, logger, resized_frame, default_face_small_image, x1, y1, x2, y2, number_of_people, face_image_width):
+        self.resized_frame = resized_frame
+        self.default_face_small_image = default_face_small_image
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+        self.number_of_people = number_of_people
+        self.face_image_width = face_image_width
+        try:
+            self.x1 = self.x1 + (self.number_of_people * self.face_image_width)
+            self.x2 = self.x2 + (self.number_of_people * self.face_image_width)
+            self.resized_frame[self.y1:self.y2, self.x1:self.x2] = self.resized_frame[self.y1:self.y2, self.x1:self.x2] * (1 - self.default_face_small_image[:,:,3:] / 255) + self.default_face_small_image[:,:,:3] * (default_face_small_image[:,:,3:] / 255)
+            # resized_frame[y1:y2, x1:x2] = resized_frame[y1:y2, x1:x2] * a + b  # ValueError: assignment destination is read-only
+            """DEBUG"""
+            # frame_imshow_for_debug(resized_frame)
+        except:
+            logger.info('デフォルト顔画像の描画が出来ません')
+            logger.info('描画面積が足りないか他に問題があります')
+        return self.resized_frame
+
+    # デフォルト顔画像の表示面積調整
+    def adjust_display_area(self, args_dict, default_face_image) -> tuple:
+        self.args_dict = args_dict
+        self.default_face_image = default_face_image
+        """TODO
+        繰り返し計算させないようリファクタリング"""
+        face_image_width = int(self.args_dict["set_width"] / 15)
+        default_face_small_image = cv2.resize(self.default_face_image, dsize=(face_image_width, face_image_width))  # 幅・高さともに同じとする
+        # 高さ = face_image_width
+        x1, y1, x2, y2 = 0, self.args_dict["set_height"] - face_image_width - 10, face_image_width, self.args_dict["set_height"] - 10
+        return x1, y1, x2, y2, default_face_small_image, face_image_width
+
+    def draw_default_face(self, logger, args_dict, name, resized_frame, number_of_people):
+        self.logger = logger
+        self.args_dict = args_dict
+        self.name = name
+        self.resized_frame = resized_frame
+        self.number_of_people = number_of_people
+        default_face_image_dict = self.args_dict["default_face_image_dict"]
+
+        default_name_png = self.name + '_default.png'
+        default_face_image_name_png = './priset_face_images/' + default_name_png
+        if not self.name in default_face_image_dict:  # default_face_image_dictにnameが存在しなかった場合
+            # 各人物のデフォルト顔画像ファイルの読み込み
+            if exists(default_face_image_name_png):
+                # WINDOWSのopencv-python4.2.0.32ではcv2.imread()でpng画像を読み込めないバグが
+                # 存在する可能性があると思う。そこでPNG画像の読み込みにはpillowを用いることにする
+                default_face_image = np.array(Image.open(default_face_image_name_png))
+                """DEBUG
+                frame_imshow_for_debug(default_face_image)
+                """
+                # BGAをRGBへ変換
+                default_face_image = cv2.cvtColor(default_face_image, cv2.COLOR_BGR2RGBA)
+                """DEBUG
+                frame_imshow_for_debug(default_face_image)
+                """
+                # if default_face_image.ndim == 3:  # RGBならアルファチャンネル追加 resized_frameがアルファチャンネルを持っているから。
+                # default_face_imageをメモリに保持
+                default_face_image_dict[self.name] = default_face_image  # キーnameと値default_face_imageの組み合わせを挿入する
+            else:
+                self.logger.info(f'{self.name}さんのデフォルト顔画像ファイルがpriset_face_imagesフォルダに存在しません')
+                self.logger.info(f'{self.name}さんのデフォルト顔画像ファイルをpriset_face_imagesフォルダに用意してください')
+        else:  # default_face_image_dictにnameが存在した場合
+            default_face_image = default_face_image_dict[self.name]  # キーnameに対応する値をdefault_face_imageへ格納する
+            """DEBUG
+            frame_imshow_for_debug(default_face_image)  # OK
+            """
+            x1, y1, x2, y2 , default_face_small_image, face_image_width = self.adjust_display_area(args_dict, default_face_image)
+            resized_frame = self.draw_default_face_image(logger, resized_frame, default_face_small_image, x1, y1, x2, y2, number_of_people, face_image_width)
+        return resized_frame
+
+    def draw_rectangle_for_name(self, name,resized_frame, left, right,bottom):
+        self.name = name
+        self.resized_frame = resized_frame
+        self.left = left
+        self.right = right
+        self.bottom = bottom
+        if self.name == 'Unknown':   # nameがUnknownだった場合
+            self.resized_frame = cv2.rectangle(self.resized_frame, (self.left-25, self.bottom + 25), (self.right+25, self.bottom+50), (255, 87, 243), cv2.FILLED) # pink
+        else:                   # nameが既知だった場合
+            # cv2.rectangle(resized_frame, (left-25, bottom + 25), (right+25, bottom+50), (211, 173, 54), thickness = 1) # 濃い水色の線
+            self.resized_frame = cv2.rectangle(self.resized_frame, (self.left-25, self.bottom + 25), (self.right+25, self.bottom+50), (211, 173, 54), cv2.FILLED) # 濃い水色
+        return self.resized_frame
+
+    # 帯状四角形（ピンク）の描画
+    def draw_error_messg_rectangle(self, resized_frame, set_height, set_width):
+        """廃止予定
+        """        
+        self.resized_frame = resized_frame
+        self.set_height = set_height
+        self.set_width = set_width
+        error_messg_rectangle_top: int  = int((self.set_height + 20) / 2)
+        error_messg_rectangle_bottom : int = int((self.set_height + 120) / 2)
+        error_messg_rectangle_left: int  = 0
+        error_messg_rectangle_right : int = self.set_width
+        cv2.rectangle(self.resized_frame, (error_messg_rectangle_left, error_messg_rectangle_top), (error_messg_rectangle_right, error_messg_rectangle_bottom), (255, 87, 243), cv2.FILLED)  # pink
+        return error_messg_rectangle_left, error_messg_rectangle_right, error_messg_rectangle_bottom
+
+    # drawオブジェクトを生成
+    def  make_draw_object(self, frame):
+        self.frame = frame
+        draw = ImageDraw.Draw(Image.fromarray(self.frame))
+        return draw
+
+    def draw_error_messg_rectangle_messg(self, draw, error_messg_rectangle_position, error_messg_rectangle_messg, error_messg_rectangle_font):
+        """廃止予定
+        """
+        self.draw = draw
+        self.error_messg_rectangle_position = error_messg_rectangle_position
+        self.error_messg_rectangle_messg = error_messg_rectangle_messg
+        self.error_messg_rectangle_font = error_messg_rectangle_font
+        draw.text(self.error_messg_rectangle_position, self.error_messg_rectangle_messg, fill=(255, 255, 255, 255), font = self.error_messg_rectangle_font)
+
+    def return_fontpath(self, logger):
+        # フォントの設定(フォントファイルのパスと文字の大きさ)
+        operating_system: str  = system()
+        fontpath: str = ''
+        if (operating_system == 'Linux'):
+            fontpath = "/usr/share/fonts/truetype/mplus/mplus-1mn-bold.ttf"
+        elif (operating_system == 'Windows'):
+                        # fontpath = "C:/WINDOWS/FONTS/BIZ-UDGOTHICR.TTC"
+            fontpath = "C:/WINDOWS/FONTS/BIZ-UDGOTHICB.TTC"  ## bold体
+        else:
+            logger.info('オペレーティングシステムの確認が出来ません。システム管理者にご連絡ください')
+        return fontpath
+
+    def calculate_text_position(self, left,right,name,fontsize,bottom):
+        self.left = left
+        self.right = right
+        self.name = name
+        self.fontsize = fontsize
+        self.bottom = bottom
+        center = int((self.left + self.right)/2)
+        chaCenter = int(len(self.name)/2)
+        pos = center - (chaCenter* self.fontsize) - int(self.fontsize/2)
+        position = (pos, self.bottom + (self.fontsize * 2))
+        Unknown_position = (pos + self.fontsize, self.bottom + (self.fontsize * 2))
+        return position, Unknown_position
+
+    def draw_name(self, name,pil_img_obj, Unknown_position, font, p, tolerance, position):
+        self.name = name
+        self.pil_img_obj = pil_img_obj
+        self.Unknown_position = Unknown_position
+        self.font = font
+        self.p = p
+        self.tolerance = tolerance
+        self.position = position
+        local_draw_obj = ImageDraw.Draw(self.pil_img_obj)
+        if self.name == 'Unknown':  ## nameがUnknownだった場合
+            # draw.text(Unknown_position, '照合不一致', fill=(255, 255, 255, 255), font = font)
+            local_draw_obj.text(self.Unknown_position, '　未登録', fill=(255, 255, 255, 255), font = self.font)
+        else:  ## nameが既知の場合
+            # if percentage > 99.0:
+            if self.p < self.tolerance:
+                # nameの描画
+                local_draw_obj.text(self.position, self.name, fill=(255, 255, 255, 255), font = self.font)
+            else:
+                local_draw_obj.text(self.position, self.name, fill=(255, 87, 243, 255), font = self.font)
+        return self.pil_img_obj
+
+    # pil_img_objをnumpy配列に変換
+    def convert_pil_img_to_ndarray(self, pil_img_obj):
+        self.pil_img_obj = pil_img_obj
+        frame = np.array(pil_img_obj)
+        return frame
+
+    def draw_text_for_name(self, logger, left,right,bottom,name, p,tolerance,pil_img_obj):
+        self.logger = logger
+        self.left = left
+        self.right = right
+        self.bottom = bottom
+        self.name = name
+        self.p = p
+        self.tolerance = tolerance
+        self.pil_img_obj = pil_img_obj
+        fontpath = self.return_fontpath(logger)
+        """TODO FONTSIZEハードコーティング訂正"""
+        fontsize = 14
+        font = ImageFont.truetype(fontpath, fontsize, encoding = 'utf-8')
+        # テキスト表示位置決定
+        position, Unknown_position = self.calculate_text_position(self.left,self.right,self.name,fontsize,self.bottom)
+        # nameの描画
+        self.pil_img_obj = self.draw_name(self.name,self.pil_img_obj, Unknown_position, font, self.p, self.tolerance, position)
+        # pil_img_objをnumpy配列に変換
+        resized_frame = self.convert_pil_img_to_ndarray(self.pil_img_obj)
+        return resized_frame
+
+    # target_rectangleの描画
+    def draw_target_rectangle(self, anti_spoof, rect01_png, rect01_NG_png, resized_frame,top,bottom,left,right,name):
+        self.anti_spoof = anti_spoof,
+        self.rect01_png = rect01_png
+        self.rect01_NG_png = rect01_NG_png
+        self.resized_frame = resized_frame
+        self.top = top
+        self.bottom = bottom
+        self.left = left
+        self.right = right
+        self.name = name
+        face_location = [self.top, self.right, self.bottom, self.left]
+        width_ratio: float
+        height_ratio: float
+        face_width: int
+        face_height: int
+        result = 'not_spoof'
+        if self.anti_spoof[0] == True:
+            # ELE: Equally Likely Events
+            result, score, ELE = self.return_anti_spoof(self.resized_frame, face_location)
+        if not self.name == 'Unknown' and result == 'not_spoof' and ELE is False:  ## self.nameが既知の場合
+            face_width: int = self.right - self.left
+            face_height: int = self.bottom - self.top
+            orgHeight, orgWidth = self.rect01_png.shape[:2]
+            width_ratio = 1.0 * (face_width / orgWidth)
+            height_ratio = 1.0 * (face_height / orgHeight)
+            self.rect01_png = cv2.resize(self.rect01_png, None, fx = width_ratio, fy = height_ratio)
+            x1, y1, x2, y2 = self.left, self.top, self.left + self.rect01_png.shape[1], self.top + self.rect01_png.shape[0]
+            try:
+                self.resized_frame[y1:y2, x1:x2] = self.resized_frame[y1:y2, x1:x2] * (1 - self.rect01_png[:,:,3:] / 255) + \
+                            self.rect01_png[:,:,:3] * (self.rect01_png[:,:,3:] / 255)
+            except:
+                # TODO: np.clip
+                pass
+        else:  ## self.nameがUnknownだった場合
+            fx: float = 0.0
+            face_width = self.right - self.left
+            face_height = self.bottom - self.top
+            # rect01_NG_png←ピンクのtarget_rectangle
+            # rect01_NG_png: cv2.Mat = cv2.imread("images/rect01_NG.png", cv2.IMREAD_UNCHANGED)
+            orgHeight, orgWidth = self.rect01_NG_png.shape[:2]
+            width_ratio = float(1.0 * (face_width / orgWidth))
+            height_ratio = 1.0 * (face_height / orgHeight)
+            self.rect01_NG_png = cv2.resize(self.rect01_NG_png, None, fx = width_ratio, fy = height_ratio)
+            x1, y1, x2, y2 = self.left, self.top, self.left + self.rect01_NG_png.shape[1], self.top + self.rect01_NG_png.shape[0]
+            try:
+                self.resized_frame[y1:y2, x1:x2] = self.resized_frame[y1:y2, x1:x2] * (1 - self.rect01_NG_png[:,:,3:] / 255) + \
+                            self.rect01_NG_png[:,:,:3] * (self.rect01_NG_png[:,:,3:] / int(255))
+            except:
+                pass
+        return self.resized_frame

@@ -10,11 +10,10 @@ from GPUtil import getGPUs
 from psutil import cpu_count, cpu_freq, virtual_memory
 
 from face01lib.api import Dlib_api
-# import face01lib.vidCap as video_capture  # so
-from face01lib.video_capture import VidCap  # py
 from face01lib.Core import Core
 from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
+from face01lib.video_capture import VidCap
 
 GLOBAL_MEMORY = {
 # 半透明値,
@@ -34,6 +33,7 @@ def configure():
         conf.read('config.ini', 'utf-8')
         # dict作成
         conf_dict = {
+            'anti_spoof' : conf.getboolean('DEFAULT','anti_spoof'),
             'kaoninshoDir' :kaoninshoDir,
             'priset_face_imagesDir' :priset_face_imagesDir,
             'headless' : conf.getboolean('DEFAULT','headless'),
@@ -208,38 +208,43 @@ def main_process():
 # main =================================================================
 if __name__ == '__main__':
     import cProfile as pr
+    import time
 
     import PySimpleGUI as sg
-
-    exec_times: int = 100
+    from face01lib.Core import Core
+    Core_obj = Core()
     
     profile_HANDLING_FRAME_TIME: float = 0.0
     profile_HANDLING_FRAME_TIME_FRONT: float = 0.0
     profile_HANDLING_FRAME_TIME_REAR: float = 0.0
 
+    """DEBUG
+    Set the number of playback frames"""
+    exec_times: int = 50
+    ALL_FRAME = exec_times
+
+    # PySimpleGUI layout
     sg.theme('LightGray')
-    # PySimpleGUIレイアウト
     if args_dict["headless"] == False:
         layout = [
             [sg.Image(filename='', key='display', pad=(0,0))],
-            [sg.Button('終了', key='terminate', pad=(0,10), expand_x=True)]
+            [sg.Button('terminate', key='terminate', pad=(0,10), expand_x=True)]
         ]
         window = sg.Window(
-            'FACE01 プロファイリング利用例', layout, alpha_channel = 1, margins=(10, 10),
-            location=(150,130), modal = True, titlebar_icon="./images/g1320.png", icon="./images/g1320.png"
+            'FACE01 EXAMPLE', layout, alpha_channel = 1, margins=(10, 10),
+            location=(0,0), modal = True, titlebar_icon="./images/g1320.png", icon="./images/g1320.png"
         )
 
-    profile_HANDLING_FRAME_TIME_FRONT = perf_counter()
-
-    # from memory_profiler import profile
     # @profile()
-    def profile(exec_times):
+    def common_main(exec_times):
+        profile_HANDLING_FRAME_TIME_FRONT = time.perf_counter()
         event = ''
         while True:
-            frame_datas_array = main_process().__next__()
-            if StopIteration == frame_datas_array:
-                logger.info("StopIterationです")
-                break
+            try:
+                frame_datas_array = main_process().__next__()
+            except Exception as e:
+                print(e)
+                exit(0)
             exec_times = exec_times - 1
             if  exec_times <= 0:
                 break
@@ -248,28 +253,31 @@ if __name__ == '__main__':
                 if args_dict["headless"] == False:
                     event, _ = window.read(timeout = 1)
                     if event == sg.WIN_CLOSED:
-                        logger.info("ウィンドウが手動で閉じられました")
+                        print("The window was closed manually")
                         break
                 for frame_datas in frame_datas_array:
                     if "face_location_list" in frame_datas:
                         img, face_location_list, overlay, person_data_list = \
                             frame_datas['img'], frame_datas["face_location_list"], frame_datas["overlay"], frame_datas['person_data_list']
                         for person_data in person_data_list:
+                            if len(person_data) == 0:
+                                continue
                             name, pict, date,  location, percentage_and_symbol = \
                                 person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
+                            # ELE: Equally Likely Events
                             if not name == 'Unknown':
-                                print(
-                                    "プロファイリング用コードが動作しています", "\n",
-                                    "statsファイルが出力されます", "\n",
-                                    name, "\n",
-                                    "\t", "類似度\t", percentage_and_symbol, "\n",
-                                    "\t", "座標\t", location, "\n",
-                                    "\t", "時刻\t", date, "\n",
-                                    "\t", "出力\t", pict, "\n",
-                                    "-------\n"
-                                )
-                                """DEBUG"""
-                                print(f"args_dict.__sizeof__(): {args_dict.__sizeof__()}MB")
+                                result, score, ELE = Core_obj.return_anti_spoof(frame_datas['img'], person_data["location"])
+                                if ELE is False:
+                                    print(
+                                        name, "\n",
+                                        "\t", "Anti spoof\t\t", result, "\n",
+                                        "\t", "Anti spoof score\t", round(score * 100, 2), "%\n",
+                                        "\t", "similarity\t\t", percentage_and_symbol, "\n",
+                                        "\t", "coordinate\t\t", location, "\n",
+                                        "\t", "time\t\t\t", date, "\n",
+                                        "\t", "output\t\t\t", pict, "\n",
+                                        "-------\n"
+                                    )
                         if args_dict["headless"] == False:
                             imgbytes = cv2.imencode(".png", img)[1].tobytes()
                             window["display"].update(data = imgbytes)
@@ -278,10 +286,11 @@ if __name__ == '__main__':
                     break
         if args_dict["headless"] == False:
             window.close()
-        print('プロファイリングを終了します')
         
-        profile_HANDLING_FRAME_TIME_REAR = perf_counter()
+        profile_HANDLING_FRAME_TIME_REAR = time.perf_counter()
         profile_HANDLING_FRAME_TIME = (profile_HANDLING_FRAME_TIME_REAR - profile_HANDLING_FRAME_TIME_FRONT) 
-        print(f'profile()関数の処理時間合計: {round(profile_HANDLING_FRAME_TIME , 3)}[秒]')
-
-    pr.run('profile(exec_times)', 'restats')
+        print(f'Predetermined number of frames: {ALL_FRAME}')
+        print(f'Number of frames processed: {ALL_FRAME - exec_times}')
+        print(f'Total processing time: {round(profile_HANDLING_FRAME_TIME , 3)}[seconds]')
+        print(f'Per frame: {round(profile_HANDLING_FRAME_TIME / (ALL_FRAME - exec_times), 3)}[seconds]')
+    pr.run('common_main(exec_times)', 'restats')
