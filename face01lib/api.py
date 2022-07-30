@@ -29,7 +29,7 @@ name = __name__
 dir = dirname(__file__)
 logger = Logger().logger(name, dir)
 try:
-    from face01lib import face_recognition_models
+    from face01lib.models import Dlib_models
 except Exception:
     logger.warning("modelのimportに失敗しました")
     logger.warning("システム管理者にお問い合わせください")
@@ -41,13 +41,13 @@ except Exception:
 
 face_detector = dlib.get_frontal_face_detector()
 
-predictor_5_point_model = face_recognition_models.pose_predictor_five_point_model_location()
+predictor_5_point_model = Dlib_models().pose_predictor_five_point_model_location()
 pose_predictor_5_point = dlib.shape_predictor(predictor_5_point_model)
 
-cnn_face_detection_model = face_recognition_models.cnn_face_detector_model_location()
+cnn_face_detection_model = Dlib_models().cnn_face_detector_model_location()
 cnn_face_detector = dlib.cnn_face_detection_model_v1(cnn_face_detection_model)
 
-face_recognition_model = face_recognition_models.face_recognition_model_location()
+face_recognition_model = Dlib_models().face_recognition_model_location()
 face_encoder = dlib.face_recognition_model_v1(face_recognition_model)
 
 class Dlib_api:
@@ -140,9 +140,9 @@ class Dlib_api:
         :return: A list of tuples of found face locations in css (top, right, bottom, left) order
         """
         if self.model == "cnn":
-            return [Dlib_api()._trim_css_to_bounds(Dlib_api()._rect_to_css(face.rect), self.img.shape) for face in Dlib_api()._raw_face_locations(self.img, self.number_of_times_to_upsample, "cnn")]
+            return [self._trim_css_to_bounds(self._rect_to_css(face.rect), self.img.shape) for face in self._raw_face_locations(self.img, self.number_of_times_to_upsample, "cnn")]
         else:
-            return [Dlib_api()._trim_css_to_bounds(Dlib_api()._rect_to_css(face), self.img.shape) for face in Dlib_api()._raw_face_locations(self.img, self.number_of_times_to_upsample, self.model)]
+            return [self._trim_css_to_bounds(self._rect_to_css(face), self.img.shape) for face in self._raw_face_locations(self.img, self.number_of_times_to_upsample, self.model)]
 
 
     def _raw_face_landmarks(self, face_image, face_locations=None, model="small"):
@@ -150,9 +150,9 @@ class Dlib_api:
         self.face_locations = face_locations
         self. model = model
         if self.face_locations is None:
-            self.face_locations = Dlib_api()._raw_face_locations(self.face_image)
+            self.face_locations = self._raw_face_locations(self.face_image)
         else:
-            self.face_locations = [Dlib_api()._css_to_rect(face_location) for face_location in self.face_locations]
+            self.face_locations = [self._css_to_rect(face_location) for face_location in self.face_locations]
         return [pose_predictor_5_point(self.face_image, face_location) for face_location in self.face_locations]
 
 
@@ -178,7 +178,7 @@ class Dlib_api:
         see bellow
         https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
         """
-        raw_landmarks = Dlib_api()._raw_face_landmarks(self.face_image, self.known_face_locations, self.model)
+        raw_landmarks = self._raw_face_landmarks(self.face_image, self.known_face_locations, self.model)
         # face_list = []
         # for raw_landmark_set in raw_landmarks:
         #     a = np.array(face_encoder.compute_face_descriptor(self.face_image, raw_landmark_set, self.num_jitters, 0.25))
@@ -234,7 +234,7 @@ class Dlib_api:
         :param tolerance: How much distance between faces to consider it a match. Lower is more strict. 0.6 is typical best performance.
         :return: A list of True/False values indicating which known_face_encodings match the face encoding to check
         """
-        face_distance_list = list(Dlib_api().face_distance(self.known_face_encodings, self.face_encoding_to_check))
+        face_distance_list = list(self.face_distance(self.known_face_encodings, self.face_encoding_to_check))
         _min = min(face_distance_list)
         if _min <= self.tolerance:
             return [True if i == _min else False for i in face_distance_list]

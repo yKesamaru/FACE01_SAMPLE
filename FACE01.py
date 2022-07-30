@@ -10,11 +10,11 @@ from GPUtil import getGPUs
 from psutil import cpu_count, cpu_freq, virtual_memory
 
 from face01lib.api import Dlib_api
-# import face01lib.vidCap as video_capture  # so
-from face01lib.video_capture import VidCap  # py
+Dlib_api_obj = Dlib_api()
 from face01lib.Core import Core
 from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
+from face01lib.video_capture import VidCap
 
 GLOBAL_MEMORY = {
 # 半透明値,
@@ -34,43 +34,44 @@ def configure():
         conf.read('config.ini', 'utf-8')
         # dict作成
         conf_dict = {
-            'kaoninshoDir' :kaoninshoDir,
-            'priset_face_imagesDir' :priset_face_imagesDir,
-            'headless' : conf.getboolean('DEFAULT','headless'),
             'model' : conf.get('DEFAULT','model'),
-            'similar_percentage' : float(conf.get('DEFAULT','similar_percentage')),
-            'jitters' : int(conf.get('DEFAULT','jitters')),
-            'number_of_people' : int(conf.get('DEFAULT','number_of_people')),
-            'priset_face_images_jitters' : int(conf.get('DEFAULT','priset_face_images_jitters')),
-            'upsampling' : int(conf.get('DEFAULT','upsampling')),
-            'mode' : conf.get('DEFAULT','mode'),
-            'frame_skip' : int(conf.get('DEFAULT','frame_skip')),
-            'movie' : conf.get('DEFAULT','movie'),
-            'rectangle' : conf.getboolean('DEFAULT','rectangle'),
-            'target_rectangle' : conf.getboolean('DEFAULT','target_rectangle'),
-            'show_video' : conf.getboolean('DEFAULT','show_video'),
-            'frequency_crop_image' : int(conf.get('DEFAULT','frequency_crop_image')),
-            'set_area' : conf.get('DEFAULT','set_area'),
-            'calculate_time' : conf.getboolean('DEFAULT','calculate_time'),
-            'set_width' : int(conf.get('DEFAULT','set_width')),
-            'default_face_image_draw' : conf.getboolean('DEFAULT', 'default_face_image_draw'),
-            'show_overlay' : conf.getboolean('DEFAULT', 'show_overlay'),
-            'show_percentage' : conf.getboolean('DEFAULT', 'show_percentage'),
-            'crop_face_image' : conf.getboolean('DEFAULT', 'crop_face_image'),
-            'show_name' : conf.getboolean('DEFAULT', 'show_name'),
-            'draw_telop_and_logo' : conf.getboolean('DEFAULT', 'draw_telop_and_logo'),
-            'use_pipe' : conf.getboolean('DEFAULT','use_pipe'),
-            'model_selection' : int(conf.get('DEFAULT','model_selection')),
-            'min_detection_confidence' : float(conf.get('DEFAULT','min_detection_confidence')),
-            'person_frame_face_encoding' : conf.getboolean('DEFAULT','person_frame_face_encoding'),
-            'crop_with_multithreading' : conf.getboolean('DEFAULT','crop_with_multithreading'),
-            'Python_version': conf.get('DEFAULT','Python_version'),
-            'cpu_freq': conf.get('DEFAULT','cpu_freq'),
-            'cpu_count': conf.get('DEFAULT','cpu_count'),
-            'memory': conf.get('DEFAULT','memory'),
-            'gpu_check' : conf.getboolean('DEFAULT','gpu_check'),
-            'user': conf.get('DEFAULT','user'),
-            'passwd': conf.get('DEFAULT','passwd'),
+            'headless' : conf.getboolean('MAIN','headless'),
+            'anti_spoof' : conf.getboolean('MAIN','anti_spoof'),
+            'set_width' : int(conf.get('SPEED_OR_PRECISE','set_width')),
+            'similar_percentage' : float(conf.get('SPEED_OR_PRECISE','similar_percentage')),
+            'jitters' : int(conf.get('SPEED_OR_PRECISE','jitters')),
+            'priset_face_images_jitters' : int(conf.get('SPEED_OR_PRECISE','priset_face_images_jitters')),
+            'priset_face_imagesDir' :priset_face_imagesDir,
+            'upsampling' : int(conf.get('SPEED_OR_PRECISE','upsampling')),
+            'mode' : conf.get('SPEED_OR_PRECISE','mode'),
+            'frame_skip' : int(conf.get('SPEED_OR_PRECISE','frame_skip')),
+            'number_of_people' : int(conf.get('SPEED_OR_PRECISE','number_of_people')),
+            'use_pipe' : conf.getboolean('dlib','use_pipe'),
+            'model_selection' : int(conf.get('dlib','model_selection')),
+            'min_detection_confidence' : float(conf.get('dlib','min_detection_confidence')),
+            'person_frame_face_encoding' : conf.getboolean('dlib','person_frame_face_encoding'),
+            'set_area' : conf.get('INPUT','set_area'),
+            'movie' : conf.get('INPUT','movie'),
+            'user': conf.get('Authentication','user'),
+            'passwd': conf.get('Authentication','passwd'),
+            'rectangle' : conf.getboolean('DRAW_INFOMATION','rectangle'),
+            'target_rectangle' : conf.getboolean('DRAW_INFOMATION','target_rectangle'),
+            'draw_telop_and_logo' : conf.getboolean('DRAW_INFOMATION', 'draw_telop_and_logo'),
+            'default_face_image_draw' : conf.getboolean('DRAW_INFOMATION', 'default_face_image_draw'),
+            'show_overlay' : conf.getboolean('DRAW_INFOMATION', 'show_overlay'),
+            'show_percentage' : conf.getboolean('DRAW_INFOMATION', 'show_percentage'),
+            'show_name' : conf.getboolean('DRAW_INFOMATION', 'show_name'),
+            'crop_face_image' : conf.getboolean('SAVE_FACE_IMAGE', 'crop_face_image'),
+            'frequency_crop_image' : int(conf.get('SAVE_FACE_IMAGE','frequency_crop_image')),
+            'crop_with_multithreading' : conf.getboolean('SAVE_FACE_IMAGE','crop_with_multithreading'),
+            'Python_version': conf.get('system_check','Python_version'),
+            'cpu_freq': conf.get('system_check','cpu_freq'),
+            'cpu_count': conf.get('system_check','cpu_count'),
+            'memory': conf.get('system_check','memory'),
+            'gpu_check' : conf.getboolean('system_check','gpu_check'),
+            'calculate_time' : conf.getboolean('DEBUG','calculate_time'),
+            'show_video' : conf.getboolean('Scheduled_to_be_abolished','show_video'),
+            'kaoninshoDir' :kaoninshoDir,
         }
         return conf_dict
     except:
@@ -126,16 +127,16 @@ def system_check(args_dict):
     # GPU
     logger.info("- CUDA devices check")
     if args_dict["gpu_check"] == True:
-        if Dlib_api().dlib.cuda.get_num_devices() == 0:
+        if Dlib_api_obj.dlib.cuda.get_num_devices() == 0:
             logger.warning("CUDAが有効なデバイスが見つかりません")
             logger.warning("終了します")
             exit(0)
         else:
-            logger.info(f"  [OK] cuda devices: {Dlib_api().dlib.cuda.get_num_devices()}")
+            logger.info(f"  [OK] cuda devices: {Dlib_api_obj.dlib.cuda.get_num_devices()}")
 
         # Dlib build check: CUDA
         logger.info("- Dlib build check: CUDA")
-        if Dlib_api().dlib.DLIB_USE_CUDA == False:
+        if Dlib_api_obj.dlib.DLIB_USE_CUDA == False:
             logger.warning("dlibビルド時にCUDAが有効化されていません")
             logger.warning("終了します")
             exit(0)
@@ -144,7 +145,7 @@ def system_check(args_dict):
 
         # Dlib build check: BLAS
         logger.info("- Dlib build check: BLAS, LAPACK")
-        if Dlib_api().dlib.DLIB_USE_BLAS == False or Dlib_api().dlib.DLIB_USE_LAPACK == False:
+        if Dlib_api_obj.dlib.DLIB_USE_BLAS == False or Dlib_api_obj.dlib.DLIB_USE_LAPACK == False:
             logger.warning("BLASまたはLAPACKのいずれか、あるいは両方がインストールされていません")
             logger.warning("パッケージマネージャーでインストールしてください")
             logger.warning("\tCUBLAS native runtime libraries(Basic Linear Algebra Subroutines: 基本線形代数サブルーチン)")
@@ -208,38 +209,43 @@ def main_process():
 # main =================================================================
 if __name__ == '__main__':
     import cProfile as pr
+    import time
 
     import PySimpleGUI as sg
-
-    exec_times: int = 100
+    from face01lib.Core import Core
+    Core_obj = Core()
     
     profile_HANDLING_FRAME_TIME: float = 0.0
     profile_HANDLING_FRAME_TIME_FRONT: float = 0.0
     profile_HANDLING_FRAME_TIME_REAR: float = 0.0
 
+    """DEBUG
+    Set the number of playback frames"""
+    exec_times: int = 50
+    ALL_FRAME = exec_times
+
+    # PySimpleGUI layout
     sg.theme('LightGray')
-    # PySimpleGUIレイアウト
     if args_dict["headless"] == False:
         layout = [
             [sg.Image(filename='', key='display', pad=(0,0))],
-            [sg.Button('終了', key='terminate', pad=(0,10), expand_x=True)]
+            [sg.Button('terminate', key='terminate', pad=(0,10), expand_x=True)]
         ]
         window = sg.Window(
-            'FACE01 プロファイリング利用例', layout, alpha_channel = 1, margins=(10, 10),
-            location=(150,130), modal = True, titlebar_icon="./images/g1320.png", icon="./images/g1320.png"
+            'FACE01 EXAMPLE', layout, alpha_channel = 1, margins=(10, 10),
+            location=(0,0), modal = True, titlebar_icon="./images/g1320.png", icon="./images/g1320.png"
         )
 
-    profile_HANDLING_FRAME_TIME_FRONT = perf_counter()
-
-    # from memory_profiler import profile
     # @profile()
-    def profile(exec_times):
+    def common_main(exec_times):
+        profile_HANDLING_FRAME_TIME_FRONT = time.perf_counter()
         event = ''
         while True:
-            frame_datas_array = main_process().__next__()
-            if StopIteration == frame_datas_array:
-                logger.info("StopIterationです")
-                break
+            try:
+                frame_datas_array = main_process().__next__()
+            except Exception as e:
+                print(e)
+                exit(0)
             exec_times = exec_times - 1
             if  exec_times <= 0:
                 break
@@ -248,28 +254,43 @@ if __name__ == '__main__':
                 if args_dict["headless"] == False:
                     event, _ = window.read(timeout = 1)
                     if event == sg.WIN_CLOSED:
-                        logger.info("ウィンドウが手動で閉じられました")
+                        print("The window was closed manually")
                         break
                 for frame_datas in frame_datas_array:
                     if "face_location_list" in frame_datas:
                         img, face_location_list, overlay, person_data_list = \
                             frame_datas['img'], frame_datas["face_location_list"], frame_datas["overlay"], frame_datas['person_data_list']
                         for person_data in person_data_list:
+                            if len(person_data) == 0:
+                                continue
                             name, pict, date,  location, percentage_and_symbol = \
                                 person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
+                            # ELE: Equally Likely Events
                             if not name == 'Unknown':
-                                print(
-                                    "プロファイリング用コードが動作しています", "\n",
-                                    "statsファイルが出力されます", "\n",
-                                    name, "\n",
-                                    "\t", "類似度\t", percentage_and_symbol, "\n",
-                                    "\t", "座標\t", location, "\n",
-                                    "\t", "時刻\t", date, "\n",
-                                    "\t", "出力\t", pict, "\n",
-                                    "-------\n"
-                                )
-                                """DEBUG"""
-                                print(f"args_dict.__sizeof__(): {args_dict.__sizeof__()}MB")
+                                result, score, ELE = Core_obj.return_anti_spoof(frame_datas['img'], person_data["location"])
+                                # Bug fix
+                                if args_dict["anti_spoof"] is True:
+                                    if ELE is False:
+                                        print(
+                                            name, "\n",
+                                            "\t", "Anti spoof\t\t", result, "\n",
+                                            "\t", "Anti spoof score\t", round(score * 100, 2), "%\n",
+                                            "\t", "similarity\t\t", percentage_and_symbol, "\n",
+                                            "\t", "coordinate\t\t", location, "\n",
+                                            "\t", "time\t\t\t", date, "\n",
+                                            "\t", "output\t\t\t", pict, "\n",
+                                            "-------\n"
+                                        )
+                                else:
+                                    if ELE is False:
+                                        print(
+                                            name, "\n",
+                                            "\t", "similarity\t\t", percentage_and_symbol, "\n",
+                                            "\t", "coordinate\t\t", location, "\n",
+                                            "\t", "time\t\t\t", date, "\n",
+                                            "\t", "output\t\t\t", pict, "\n",
+                                            "-------\n"
+                                        )
                         if args_dict["headless"] == False:
                             imgbytes = cv2.imencode(".png", img)[1].tobytes()
                             window["display"].update(data = imgbytes)
@@ -278,10 +299,11 @@ if __name__ == '__main__':
                     break
         if args_dict["headless"] == False:
             window.close()
-        print('プロファイリングを終了します')
         
-        profile_HANDLING_FRAME_TIME_REAR = perf_counter()
+        profile_HANDLING_FRAME_TIME_REAR = time.perf_counter()
         profile_HANDLING_FRAME_TIME = (profile_HANDLING_FRAME_TIME_REAR - profile_HANDLING_FRAME_TIME_FRONT) 
-        print(f'profile()関数の処理時間合計: {round(profile_HANDLING_FRAME_TIME , 3)}[秒]')
-
-    pr.run('profile(exec_times)', 'restats')
+        print(f'Predetermined number of frames: {ALL_FRAME}')
+        print(f'Number of frames processed: {ALL_FRAME - exec_times}')
+        print(f'Total processing time: {round(profile_HANDLING_FRAME_TIME , 3)}[seconds]')
+        print(f'Per frame: {round(profile_HANDLING_FRAME_TIME / (ALL_FRAME - exec_times), 3)}[seconds]')
+    pr.run('common_main(exec_times)', 'restats')
