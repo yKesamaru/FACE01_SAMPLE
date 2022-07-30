@@ -10,6 +10,7 @@ from GPUtil import getGPUs
 from psutil import cpu_count, cpu_freq, virtual_memory
 
 from face01lib.api import Dlib_api
+Dlib_api_obj = Dlib_api()
 from face01lib.Core import Core
 from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
@@ -33,44 +34,44 @@ def configure():
         conf.read('config.ini', 'utf-8')
         # dict作成
         conf_dict = {
-            'anti_spoof' : conf.getboolean('DEFAULT','anti_spoof'),
-            'kaoninshoDir' :kaoninshoDir,
-            'priset_face_imagesDir' :priset_face_imagesDir,
-            'headless' : conf.getboolean('DEFAULT','headless'),
             'model' : conf.get('DEFAULT','model'),
-            'similar_percentage' : float(conf.get('DEFAULT','similar_percentage')),
-            'jitters' : int(conf.get('DEFAULT','jitters')),
-            'number_of_people' : int(conf.get('DEFAULT','number_of_people')),
-            'priset_face_images_jitters' : int(conf.get('DEFAULT','priset_face_images_jitters')),
-            'upsampling' : int(conf.get('DEFAULT','upsampling')),
-            'mode' : conf.get('DEFAULT','mode'),
-            'frame_skip' : int(conf.get('DEFAULT','frame_skip')),
-            'movie' : conf.get('DEFAULT','movie'),
-            'rectangle' : conf.getboolean('DEFAULT','rectangle'),
-            'target_rectangle' : conf.getboolean('DEFAULT','target_rectangle'),
-            'show_video' : conf.getboolean('DEFAULT','show_video'),
-            'frequency_crop_image' : int(conf.get('DEFAULT','frequency_crop_image')),
-            'set_area' : conf.get('DEFAULT','set_area'),
-            'calculate_time' : conf.getboolean('DEFAULT','calculate_time'),
-            'set_width' : int(conf.get('DEFAULT','set_width')),
-            'default_face_image_draw' : conf.getboolean('DEFAULT', 'default_face_image_draw'),
-            'show_overlay' : conf.getboolean('DEFAULT', 'show_overlay'),
-            'show_percentage' : conf.getboolean('DEFAULT', 'show_percentage'),
-            'crop_face_image' : conf.getboolean('DEFAULT', 'crop_face_image'),
-            'show_name' : conf.getboolean('DEFAULT', 'show_name'),
-            'draw_telop_and_logo' : conf.getboolean('DEFAULT', 'draw_telop_and_logo'),
-            'use_pipe' : conf.getboolean('DEFAULT','use_pipe'),
-            'model_selection' : int(conf.get('DEFAULT','model_selection')),
-            'min_detection_confidence' : float(conf.get('DEFAULT','min_detection_confidence')),
-            'person_frame_face_encoding' : conf.getboolean('DEFAULT','person_frame_face_encoding'),
-            'crop_with_multithreading' : conf.getboolean('DEFAULT','crop_with_multithreading'),
-            'Python_version': conf.get('DEFAULT','Python_version'),
-            'cpu_freq': conf.get('DEFAULT','cpu_freq'),
-            'cpu_count': conf.get('DEFAULT','cpu_count'),
-            'memory': conf.get('DEFAULT','memory'),
-            'gpu_check' : conf.getboolean('DEFAULT','gpu_check'),
-            'user': conf.get('DEFAULT','user'),
-            'passwd': conf.get('DEFAULT','passwd'),
+            'headless' : conf.getboolean('MAIN','headless'),
+            'anti_spoof' : conf.getboolean('MAIN','anti_spoof'),
+            'set_width' : int(conf.get('SPEED_OR_PRECISE','set_width')),
+            'similar_percentage' : float(conf.get('SPEED_OR_PRECISE','similar_percentage')),
+            'jitters' : int(conf.get('SPEED_OR_PRECISE','jitters')),
+            'priset_face_images_jitters' : int(conf.get('SPEED_OR_PRECISE','priset_face_images_jitters')),
+            'priset_face_imagesDir' :priset_face_imagesDir,
+            'upsampling' : int(conf.get('SPEED_OR_PRECISE','upsampling')),
+            'mode' : conf.get('SPEED_OR_PRECISE','mode'),
+            'frame_skip' : int(conf.get('SPEED_OR_PRECISE','frame_skip')),
+            'number_of_people' : int(conf.get('SPEED_OR_PRECISE','number_of_people')),
+            'use_pipe' : conf.getboolean('dlib','use_pipe'),
+            'model_selection' : int(conf.get('dlib','model_selection')),
+            'min_detection_confidence' : float(conf.get('dlib','min_detection_confidence')),
+            'person_frame_face_encoding' : conf.getboolean('dlib','person_frame_face_encoding'),
+            'set_area' : conf.get('INPUT','set_area'),
+            'movie' : conf.get('INPUT','movie'),
+            'user': conf.get('Authentication','user'),
+            'passwd': conf.get('Authentication','passwd'),
+            'rectangle' : conf.getboolean('DRAW_INFOMATION','rectangle'),
+            'target_rectangle' : conf.getboolean('DRAW_INFOMATION','target_rectangle'),
+            'draw_telop_and_logo' : conf.getboolean('DRAW_INFOMATION', 'draw_telop_and_logo'),
+            'default_face_image_draw' : conf.getboolean('DRAW_INFOMATION', 'default_face_image_draw'),
+            'show_overlay' : conf.getboolean('DRAW_INFOMATION', 'show_overlay'),
+            'show_percentage' : conf.getboolean('DRAW_INFOMATION', 'show_percentage'),
+            'show_name' : conf.getboolean('DRAW_INFOMATION', 'show_name'),
+            'crop_face_image' : conf.getboolean('SAVE_FACE_IMAGE', 'crop_face_image'),
+            'frequency_crop_image' : int(conf.get('SAVE_FACE_IMAGE','frequency_crop_image')),
+            'crop_with_multithreading' : conf.getboolean('SAVE_FACE_IMAGE','crop_with_multithreading'),
+            'Python_version': conf.get('system_check','Python_version'),
+            'cpu_freq': conf.get('system_check','cpu_freq'),
+            'cpu_count': conf.get('system_check','cpu_count'),
+            'memory': conf.get('system_check','memory'),
+            'gpu_check' : conf.getboolean('system_check','gpu_check'),
+            'calculate_time' : conf.getboolean('DEBUG','calculate_time'),
+            'show_video' : conf.getboolean('Scheduled_to_be_abolished','show_video'),
+            'kaoninshoDir' :kaoninshoDir,
         }
         return conf_dict
     except:
@@ -126,16 +127,16 @@ def system_check(args_dict):
     # GPU
     logger.info("- CUDA devices check")
     if args_dict["gpu_check"] == True:
-        if Dlib_api().dlib.cuda.get_num_devices() == 0:
+        if Dlib_api_obj.dlib.cuda.get_num_devices() == 0:
             logger.warning("CUDAが有効なデバイスが見つかりません")
             logger.warning("終了します")
             exit(0)
         else:
-            logger.info(f"  [OK] cuda devices: {Dlib_api().dlib.cuda.get_num_devices()}")
+            logger.info(f"  [OK] cuda devices: {Dlib_api_obj.dlib.cuda.get_num_devices()}")
 
         # Dlib build check: CUDA
         logger.info("- Dlib build check: CUDA")
-        if Dlib_api().dlib.DLIB_USE_CUDA == False:
+        if Dlib_api_obj.dlib.DLIB_USE_CUDA == False:
             logger.warning("dlibビルド時にCUDAが有効化されていません")
             logger.warning("終了します")
             exit(0)
@@ -144,7 +145,7 @@ def system_check(args_dict):
 
         # Dlib build check: BLAS
         logger.info("- Dlib build check: BLAS, LAPACK")
-        if Dlib_api().dlib.DLIB_USE_BLAS == False or Dlib_api().dlib.DLIB_USE_LAPACK == False:
+        if Dlib_api_obj.dlib.DLIB_USE_BLAS == False or Dlib_api_obj.dlib.DLIB_USE_LAPACK == False:
             logger.warning("BLASまたはLAPACKのいずれか、あるいは両方がインストールされていません")
             logger.warning("パッケージマネージャーでインストールしてください")
             logger.warning("\tCUBLAS native runtime libraries(Basic Linear Algebra Subroutines: 基本線形代数サブルーチン)")
@@ -267,17 +268,29 @@ if __name__ == '__main__':
                             # ELE: Equally Likely Events
                             if not name == 'Unknown':
                                 result, score, ELE = Core_obj.return_anti_spoof(frame_datas['img'], person_data["location"])
-                                if ELE is False:
-                                    print(
-                                        name, "\n",
-                                        "\t", "Anti spoof\t\t", result, "\n",
-                                        "\t", "Anti spoof score\t", round(score * 100, 2), "%\n",
-                                        "\t", "similarity\t\t", percentage_and_symbol, "\n",
-                                        "\t", "coordinate\t\t", location, "\n",
-                                        "\t", "time\t\t\t", date, "\n",
-                                        "\t", "output\t\t\t", pict, "\n",
-                                        "-------\n"
-                                    )
+                                # Bug fix
+                                if args_dict["anti_spoof"] is True:
+                                    if ELE is False:
+                                        print(
+                                            name, "\n",
+                                            "\t", "Anti spoof\t\t", result, "\n",
+                                            "\t", "Anti spoof score\t", round(score * 100, 2), "%\n",
+                                            "\t", "similarity\t\t", percentage_and_symbol, "\n",
+                                            "\t", "coordinate\t\t", location, "\n",
+                                            "\t", "time\t\t\t", date, "\n",
+                                            "\t", "output\t\t\t", pict, "\n",
+                                            "-------\n"
+                                        )
+                                else:
+                                    if ELE is False:
+                                        print(
+                                            name, "\n",
+                                            "\t", "similarity\t\t", percentage_and_symbol, "\n",
+                                            "\t", "coordinate\t\t", location, "\n",
+                                            "\t", "time\t\t\t", date, "\n",
+                                            "\t", "output\t\t\t", pict, "\n",
+                                            "-------\n"
+                                        )
                         if args_dict["headless"] == False:
                             imgbytes = cv2.imencode(".png", img)[1].tobytes()
                             window["display"].update(data = imgbytes)

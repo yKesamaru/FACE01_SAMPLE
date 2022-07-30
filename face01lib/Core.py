@@ -865,6 +865,9 @@ class Core:
         if self.anti_spoof[0] == True:
             # ELE: Equally Likely Events
             result, score, ELE = self.return_anti_spoof(self.resized_frame, face_location)
+        else:
+            # BUG FIX: v1.4.04
+            ELE = False
         if not self.name == 'Unknown' and result == 'not_spoof' and ELE is False:  ## self.nameが既知の場合
             face_width: int = self.right - self.left
             face_height: int = self.bottom - self.top
