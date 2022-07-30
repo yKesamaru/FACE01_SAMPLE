@@ -13,3 +13,4 @@ build/*
 __pycache__
 mainコード一応保存しとく
 dlib-19.24
+restats

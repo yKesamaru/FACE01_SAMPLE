@@ -29,7 +29,7 @@ name = __name__
 dir = dirname(__file__)
 logger = Logger().logger(name, dir)
 try:
-    from face01lib import face_recognition_models
+    from face01lib.models import Dlib_models
 except Exception:
     logger.warning("modelのimportに失敗しました")
     logger.warning("システム管理者にお問い合わせください")
@@ -41,13 +41,13 @@ except Exception:
 
 face_detector = dlib.get_frontal_face_detector()
 
-predictor_5_point_model = face_recognition_models.pose_predictor_five_point_model_location()
+predictor_5_point_model = Dlib_models().pose_predictor_five_point_model_location()
 pose_predictor_5_point = dlib.shape_predictor(predictor_5_point_model)
 
-cnn_face_detection_model = face_recognition_models.cnn_face_detector_model_location()
+cnn_face_detection_model = Dlib_models().cnn_face_detector_model_location()
 cnn_face_detector = dlib.cnn_face_detection_model_v1(cnn_face_detection_model)
 
-face_recognition_model = face_recognition_models.face_recognition_model_location()
+face_recognition_model = Dlib_models().face_recognition_model_location()
 face_encoder = dlib.face_recognition_model_v1(face_recognition_model)
 
 class Dlib_api:
