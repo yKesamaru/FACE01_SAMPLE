@@ -6,26 +6,28 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${fileDirname}/${fileBasenameNoExtension}",
-      "args": ["1080", "1920"],
+      "args": [
+        "1080",
+        "1920"
+      ],
       "stopAtEntry": false,
       "cwd": "${fileDirname}",
       "environment": [],
       "externalConsole": false,
       "MIMode": "gdb",
       "setupCommands": [
-          {
-              "description": "gdb の再フォーマットを有効にする",
-              "text": "-enable-pretty-printing",
-              "ignoreFailures": true
-          },
-          {
-              "description":  "逆アセンブリ フレーバーを Intel に設定",
-              "text": "-gdb-set disassembly-flavor intel",
-              "ignoreFailures": true
-          }
+        {
+          "description": "gdb の再フォーマットを有効にする",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "逆アセンブリ フレーバーを Intel に設定",
+          "text": "-gdb-set disassembly-flavor intel",
+          "ignoreFailures": true
+        }
       ]
     },
-
     {
       "name": "WAKANA",
       "type": "python",
@@ -41,8 +43,7 @@
       "cwd": "/home/terms/bin/FACE01",
       "program": "/home/terms/bin/FACE01/CALL_FACE01.py",
       "console": "integratedTerminal",
-      "python": "/home/terms/bin/FACE01/bin/python",
-      // "justMyCode": false
+      "python": "/home/terms/bin/FACE01/bin/python"
     },
     {
       "name": "FACE01.py",
@@ -51,8 +52,7 @@
       "cwd": "/home/terms/bin/FACE01",
       "program": "/home/terms/bin/FACE01/FACE01.py",
       "console": "integratedTerminal",
-      "python": "/home/terms/bin/FACE01/bin/python",
-      // "justMyCode": false
+      "python": "/home/terms/bin/FACE01/bin/python"
     },
     {
       "name": "Module_test",
@@ -61,8 +61,7 @@
       "cwd": "/home/terms/bin/FACE01/face01lib",
       "program": "module_test.py",
       "console": "integratedTerminal",
-      "python": "/home/terms/bin/FACE01/bin/python",
-      // "justMyCode": false
+      "python": "/home/terms/bin/FACE01/bin/python"
     },
     {
       "name": "2022年4月16日",
@@ -73,5 +72,24 @@
       "console": "integratedTerminal",
       "python": "/home/terms/bin/FACE01GRAPHICS_129/bin/python"
     },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "cwd": "/home/terms/bin/FACE01",
+      "program": "/home/terms/bin/FACE01/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
   ]
 }
