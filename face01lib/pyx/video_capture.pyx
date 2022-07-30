@@ -104,6 +104,7 @@ class VidCap:
         Returns:
             tuple: TOP_LEFT,TOP_RIGHT,BOTTOM_LEFT,BOTTOM_RIGHT,CENTER
         """
+        # order: (top, bottom, left, right)
         TOP_LEFT: tuple =(0,int(self.height/2),0,int(self.width/2))
         TOP_RIGHT: tuple =(0,int( self.height/2),int(self.width/2),self.width)
         BOTTOM_LEFT: tuple =(int(self.height/2),self.height,0,int(self.width/2))
@@ -121,6 +122,9 @@ class VidCap:
         self.BOTTOM_RIGHT = BOTTOM_RIGHT
         self.CENTER = CENTER
         # VidCap().frame_imshow_for_debug(self.frame)
+        # face_location order: top, right, bottom, left
+        # TOP_LEFT order: (top, bottom, left, right)
+        # how to slice: img[top:bottom, left:right]
         if self.set_area=='NONE':
             pass
         elif self.set_area=='TOP_LEFT':

@@ -1,0 +1,1 @@
+/home/terms/bin/DIST/INSTALL_FACE01.sh

@@ -8,8 +8,8 @@ ext_modules = [
     # see bellow
     # [C コンパイラのオプションの設定](https://blog.ymyzk.com/2014/11/setuptools-cython/)
     Extension(
-        "api",  
-        sources=["api.pyx"],
+        "Core",  
+        sources=["Core.pyx"],
         # extra_compile_args=['--option-a', '-O3'],
         include_dirs=[numpy.get_include()]
     ),

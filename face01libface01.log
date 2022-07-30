@@ -89,19 +89,12 @@ Traceback (most recent call last):
 UnboundLocalError: local variable 'response' referenced before assignment
 [2022-07-17 16:19:02,768] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
 [2022-07-17 16:19:02,768] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
-[2022-07-19 07:04:42,838] [face01lib.api] [<frozen importlib._bootstrap>] [WARNING] modelのimportに失敗しました
-[2022-07-19 07:04:42,855] [face01lib.api] [<frozen importlib._bootstrap>] [WARNING] システム管理者にお問い合わせください
-[2022-07-19 07:04:42,855] [face01lib.api] [<frozen importlib._bootstrap>] [WARNING] --------------------
-[2022-07-19 07:04:42,856] [face01lib.api] [<frozen importlib._bootstrap>] [WARNING] Traceback (most recent call last):
-  File "api.pyx", line 32, in api
-ImportError: cannot import name face_recognition_models
+[2022-07-24 18:47:25,949] [face01lib.video_capture] [video_capture.py] [WARNING] USBカメラの受信が出来ません
+[2022-07-24 18:47:25,963] [face01lib.video_capture] [video_capture.py] [WARNING] 以下のエラーをシステム管理者へお伝えください
+[2022-07-24 18:47:25,963] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-24 18:47:25,964] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
 
-[2022-07-19 07:04:42,860] [face01lib.api] [<frozen importlib._bootstrap>] [WARNING] --------------------
-[2022-07-19 07:05:35,704] [face01lib.api] [<frozen importlib._bootstrap>] [WARNING] modelのimportに失敗しました
-[2022-07-19 07:05:35,705] [face01lib.api] [<frozen importlib._bootstrap>] [WARNING] システム管理者にお問い合わせください
-[2022-07-19 07:05:35,705] [face01lib.api] [<frozen importlib._bootstrap>] [WARNING] --------------------
-[2022-07-19 07:05:35,706] [face01lib.api] [<frozen importlib._bootstrap>] [WARNING] Traceback (most recent call last):
-  File "api.pyx", line 32, in api
-ImportError: cannot import name face_recognition_models
-
-[2022-07-19 07:05:35,709] [face01lib.api] [<frozen importlib._bootstrap>] [WARNING] --------------------
+[2022-07-24 18:47:25,964] [face01lib.video_capture] [video_capture.py] [ERROR] USBカメラとの通信に異常が発生しました
+NoneType: None
+[2022-07-24 18:47:25,965] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-24 18:47:25,965] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
