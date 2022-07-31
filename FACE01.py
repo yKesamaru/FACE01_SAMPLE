@@ -270,7 +270,7 @@ if __name__ == '__main__':
                                 result, score, ELE = Core_obj.return_anti_spoof(frame_datas['img'], person_data["location"])
                                 # Bug fix
                                 if args_dict["anti_spoof"] is True:
-                                    if ELE is False:
+                                    if ELE is False and score > 0.8 and result == 'not_spoof':
                                         print(
                                             name, "\n",
                                             "\t", "Anti spoof\t\t", result, "\n",

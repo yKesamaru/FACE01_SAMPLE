@@ -98,3 +98,12 @@ UnboundLocalError: local variable 'response' referenced before assignment
 NoneType: None
 [2022-07-24 18:47:25,965] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
 [2022-07-24 18:47:25,965] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-07-31 07:29:55,148] [face01lib.video_capture] [video_capture.py] [WARNING] USBカメラの受信が出来ません
+[2022-07-31 07:29:55,148] [face01lib.video_capture] [video_capture.py] [WARNING] 以下のエラーをシステム管理者へお伝えください
+[2022-07-31 07:29:55,149] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-31 07:29:55,150] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-07-31 07:29:55,151] [face01lib.video_capture] [video_capture.py] [ERROR] USBカメラとの通信に異常が発生しました
+NoneType: None
+[2022-07-31 07:29:55,152] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-07-31 07:29:55,153] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
