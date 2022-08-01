@@ -80,6 +80,9 @@ class VidCap:
         fps: int    = self.vcap.get(cv2.CAP_PROP_FPS)
         height: int = self.vcap.get(cv2.CAP_PROP_FRAME_HEIGHT)
         width: int  = self.vcap.get(cv2.CAP_PROP_FRAME_WIDTH)
+        # BUGFIX: vcapを閉じておく
+        self.finalize(self.vcap)
+
         fps = int(fps)
         height= int(height)
         width = int(width)
@@ -156,14 +159,22 @@ class VidCap:
         # movie=movie
         if self.movie=='usb' or self.movie == 'USB':   # USB カメラ読み込み時使用
             live_camera_number:int = 0
-            for camera_number in range(-5, 5):
-                vcap = cv2.VideoCapture(camera_number, cv2.CAP_FFMPEG)
-                print(type(vcap))
+            for camera_number in range(0, 5):
+                vcap = cv2.VideoCapture(camera_number)
+                # BUG: cv2.CAP_FFMPEG
+                # vcap = cv2.VideoCapture(camera_number, cv2.CAP_FFMPEG)
+                # vcap = cv2.VideoCapture(camera_number, cv2.CAP_DSHOW)
                 ret:bool
                 frame:np.ndarray
                 ret, frame = vcap.read()
                 if ret:
+                    """DEBUG
+                    self.frame_imshow_for_debug(frame)
+                    """
+                if ret:
                     live_camera_number = camera_number
+                    self.finalize(vcap)
+                    break
                 if camera_number == 4 and ret is False:
                     logger.warning("USBカメラの受信が出来ません")
                     logger.warning("以下のエラーをシステム管理者へお伝えください")
@@ -174,10 +185,11 @@ class VidCap:
                     logger.warning("終了します")
                     self.finalize(vcap)
                     exit(0)
-            vcap = cv2.VideoCapture(live_camera_number, cv2.CAP_FFMPEG)
+            print(f'live_camera_number: {live_camera_number}')
+            vcap = cv2.VideoCapture(live_camera_number)
             return vcap
         else:
-            vcap = cv2.VideoCapture(self.movie, cv2.CAP_FFMPEG)
+            vcap = cv2.VideoCapture(self.movie)
             return vcap
 
     def finalize(self, vcap):
@@ -214,14 +226,39 @@ class VidCap:
         if (movie == 'usb' or movie == 'USB'):   # USB カメラ読み込み時使用
             camera_number:int = 0
             live_camera_number:int = 0
-            for camera_number in range(-5, 5):
+            for camera_number in range(0, 5):
                 vcap = cv2.VideoCapture(camera_number)
                 ret, frame = vcap.read()
                 if ret:
                     live_camera_number = camera_number 
                     break
-            vcap = cv2.VideoCapture(live_camera_number)
             logger.info(f'カメラデバイス番号：{camera_number}')
+            while vcap.isOpened(): 
+                # frame_skipの数値に満たない場合は処理をスキップ
+                for frame_skip_counter in range(1, self.args_dict["frame_skip"]):
+                    ret, frame = vcap.read()
+                    if frame_skip_counter < self.args_dict["frame_skip"]:
+                        continue
+                    if ret == False:
+                        logger.warning("movieが開けません")
+                        logger.warning("以下のエラーをシステム管理者へお伝えください")
+                        logger.warning("-" * 20)
+                        logger.warning(format_exc(limit=None, chain=True))
+                        logger.warning("-" * 20)
+                        self.finalize(vcap)
+                    break
+                else:
+                    # 画角値をもとに各frameを縮小
+                    # python版
+                    frame = self.angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)  # type: ignore
+                    # 各frameリサイズ
+                    resized_frame = self.resize_frame(set_width, set_height, frame)
+                    """DEBUG
+                    self.frame_imshow_for_debug(resized_frame)
+                    """
+                    yield resized_frame
+
+
         elif 'http' in movie:
             """DEBUG"""
             # print(movie); exit(0)

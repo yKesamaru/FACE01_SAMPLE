@@ -107,3 +107,49 @@ NoneType: None
 NoneType: None
 [2022-07-31 07:29:55,152] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
 [2022-07-31 07:29:55,153] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-08-01 09:23:09,963] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-08-01 09:23:09,964] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-01 09:23:09,965] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-08-01 09:23:09,966] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-01 09:23:09,966] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-08-01 09:24:07,149] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-08-01 09:24:07,150] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-01 09:24:07,151] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-08-01 09:24:07,152] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-01 09:24:07,153] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-08-01 09:25:01,320] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-08-01 09:25:02,255] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-01 09:25:03,111] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-08-01 09:25:04,984] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-01 09:25:05,599] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-08-01 09:31:43,676] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：-5
+[2022-08-01 09:34:19,515] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：-5
+[2022-08-01 17:27:53,915] [face01lib.video_capture] [video_capture.py] [WARNING] USBカメラの受信が出来ません
+[2022-08-01 17:27:53,915] [face01lib.video_capture] [video_capture.py] [WARNING] 以下のエラーをシステム管理者へお伝えください
+[2022-08-01 17:27:53,916] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-01 17:27:53,916] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-08-01 17:27:53,917] [face01lib.video_capture] [video_capture.py] [ERROR] USBカメラとの通信に異常が発生しました
+NoneType: None
+[2022-08-01 17:27:53,917] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-01 17:27:53,918] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-08-01 17:28:16,881] [face01lib.video_capture] [video_capture.py] [WARNING] USBカメラの受信が出来ません
+[2022-08-01 17:28:16,882] [face01lib.video_capture] [video_capture.py] [WARNING] 以下のエラーをシステム管理者へお伝えください
+[2022-08-01 17:28:16,882] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-01 17:28:16,882] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-08-01 17:28:16,883] [face01lib.video_capture] [video_capture.py] [ERROR] USBカメラとの通信に異常が発生しました
+NoneType: None
+[2022-08-01 17:28:16,884] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-01 17:28:16,884] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-08-01 17:29:50,928] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：-5
+[2022-08-01 17:34:01,928] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：-5
+[2022-08-01 17:48:47,624] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：0
+[2022-08-01 17:52:16,619] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：0
+[2022-08-01 17:52:37,579] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：0
+[2022-08-01 17:54:54,528] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：0
+[2022-08-01 17:55:48,114] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：0
+[2022-08-01 17:56:16,516] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：0
