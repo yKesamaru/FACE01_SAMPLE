@@ -23,6 +23,9 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 from face01lib.api import Dlib_api
 from face01lib.Calc import Cal
+Cal_obj = Cal()
+# from face01lib.video_capture import VidCap
+# VidCap_obj = VidCap()
 
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
@@ -40,11 +43,11 @@ onnx_session = onnxruntime.InferenceSession(anti_spoof_model)
 name = __name__
 dir = dirname(__file__)
 logger = Logger().logger(name, dir)
-Cal().cal_specify_date(logger)
+Cal_obj.cal_specify_date(logger)
 
 class Core:
-    def __init__(self) -> None:
-        pass
+    # def __init__(self) -> None:
+    #     pass
 
     def mp_face_detection_func(self, resized_frame, model_selection=0, min_detection_confidence=0.4):
         face = mp.solutions.face_detection.FaceDetection(  # type: ignore
@@ -188,7 +191,8 @@ class Core:
         return  pil_img_obj_rgb
 
     # 顔部分の領域をクロップ画像ファイルとして出力
-    def make_crop_face_image(self, name, dis, pil_img_obj_rgb, top, left, right, bottom, number_of_crops, frequency_crop_image):
+    def make_crop_face_image(self, anti_spoof, name, dis, pil_img_obj_rgb, top, left, right, bottom, number_of_crops, frequency_crop_image):
+        self.anti_spoof = anti_spoof
         self.name = name
         self.dis = dis
         self.pil_img_obj_rgb = pil_img_obj_rgb
@@ -200,7 +204,11 @@ class Core:
         self.frequency_crop_image = frequency_crop_image
         date = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
         imgCroped = self.pil_img_obj_rgb.crop((self.left -20,self.top -20,self.right +20,self.bottom +20)).resize((200, 200))
-        filename = "output/%s_%s_%s.png" % (self.name, date, self.dis)
+        # TODO: outputのファイル名にanti_spoof結果を入れる
+        if self.anti_spoof == True:
+            filename = "output/%s_%s_%s.png" % (self.name, date, self.dis)
+        else:
+            filename = "output/%s_%s_%s.png" % (self.name, date, self.dis)
         imgCroped.save(filename)
         return filename,self.number_of_crops, self.frequency_crop_image
 
@@ -460,7 +468,7 @@ class Core:
                     dis = str(round(float(distance), 2))
                     p = float(distance)
                     # return_percentage(p)
-                    percentage = Cal().return_percentage(p)
+                    percentage = Cal_obj.return_percentage(p)
                     percentage = round(percentage, 1)
                     percentage_and_symbol = str(percentage) + '%'
                     # ファイル名を最初のアンダーバーで区切る（アンダーバーは複数なのでmaxsplit = 1）
@@ -478,13 +486,13 @@ class Core:
                         if self.args_dict["crop_with_multithreading"] == True:
                             # """1.3.08 multithreading 9.05s
                             with ThreadPoolExecutor() as executor:
-                                future = executor.submit(self.make_crop_face_image, name, dis, pil_img_obj_rgb, top, left, right, bottom, self.GLOBAL_MEMORY['number_of_crops'], self.args_dict["frequency_crop_image"])
+                                future = executor.submit(self.make_crop_face_image, args_dict["anti_spoof"], name, dis, pil_img_obj_rgb, top, left, right, bottom, self.GLOBAL_MEMORY['number_of_crops'], self.args_dict["frequency_crop_image"])
                                 filename,number_of_crops, frequency_crop_image = future.result()
                             # """
                         else:
                             # """ORIGINAL: 1.3.08で変更 8.69s
                             filename,number_of_crops, frequency_crop_image = \
-                                self.make_crop_face_image(name, dis, pil_img_obj_rgb, top, left, right, bottom, self.GLOBAL_MEMORY['number_of_crops'], self.args_dict["frequency_crop_image"])
+                                self.make_crop_face_image(args_dict["anti_spoof"], name, dis, pil_img_obj_rgb, top, left, right, bottom, self.GLOBAL_MEMORY['number_of_crops'], self.args_dict["frequency_crop_image"])
                             # """
                         self.GLOBAL_MEMORY['number_of_crops'] = 0
                     else:
@@ -523,7 +531,7 @@ class Core:
 
                     # target_rectangleの描画
                     if self.args_dict["target_rectangle"] == True:
-                        resized_frame = self.draw_target_rectangle(self.args_dict["anti_spoof"], self.args_dict["rect01_png"], self.args_dict["rect01_NG_png"], resized_frame,top,bottom,left,right,name)
+                        resized_frame = self.draw_target_rectangle(self.args_dict["anti_spoof"], self.args_dict["rect01_png"], self.args_dict["rect01_NG_png"], self.args_dict["rect01_SPOOF_png"], self.args_dict["rect01_CANNOT_DISTINCTION_png"], resized_frame,top,bottom,left,right,name)
                         """DEBUG
                         frame_imshow_for_debug(resized_frame)
                         """
@@ -571,6 +579,13 @@ class Core:
         face_image = self.return_face_image(self.frame, self.face_location)
         # VidCap_obj.frame_imshow_for_debug(face_image)  # DEBUG
 
+        """ DEBUG: face_image確認 -> 正方形であることを確認した
+        print(self.face_location)
+        cv2.imshow('', face_image)
+        cv2.waitKey(3000)
+        cv2.destroyAllWindows()
+        """
+
         # 定形処理:リサイズ, 標準化, 成形, float32キャスト, 推論, 後処理
         input_image = cv2.resize(face_image, dsize=(128, 128))
         """DEBUG"""
@@ -600,13 +615,19 @@ class Core:
         if score < 0.3:
             ELE = True
 
-        spoof_or_not: str = ''
-        if as_index == 0:  # (255, 0, 0)
-            spoof_or_not = 'spoof'
-            return spoof_or_not, score, ELE
-        if as_index == 1:
-            spoof_or_not = 'not_spoof'
-            return spoof_or_not, score, ELE
+        spoof_or_real: str = ''
+        if as_index == 0 and score >= 0.8:  # (255, 0, 0)
+            spoof_or_real = 'real'
+            # spoof_or_real = 'spoof'
+            return spoof_or_real, score, ELE
+        if as_index == 1 and score >= 0.8:
+        # else:
+            spoof_or_real = 'spoof'
+            # spoof_or_real = 'real'
+            return spoof_or_real, score, ELE
+        else:
+            spoof_or_real = 'cannot_distinction'
+            return spoof_or_real, score, ELE
 
 # 以下、元libdraw.LibDraw
     def draw_pink_rectangle(self, resized_frame, top,bottom,left,right) -> np.ndarray:
@@ -846,10 +867,12 @@ class Core:
         return resized_frame
 
     # target_rectangleの描画
-    def draw_target_rectangle(self, anti_spoof, rect01_png, rect01_NG_png, resized_frame,top,bottom,left,right,name):
+    def draw_target_rectangle(self, anti_spoof, rect01_png, rect01_NG_png, rect01_SPOOF_png, rect01_CANNOT_DISTINCTION,resized_frame,top,bottom,left,right,name):
         self.anti_spoof = anti_spoof,
         self.rect01_png = rect01_png
         self.rect01_NG_png = rect01_NG_png
+        self.rect01_SPOOF_png = rect01_SPOOF_png
+        self.rect01_CANNOT_DISTINCTION_png = rect01_CANNOT_DISTINCTION
         self.resized_frame = resized_frame
         self.top = top
         self.bottom = bottom
@@ -861,41 +884,72 @@ class Core:
         height_ratio: float
         face_width: int
         face_height: int
-        result = 'not_spoof'
+        result = 'real'
         if self.anti_spoof[0] == True:
+            # TODO: この箇所でreturn_anti_spoof()を呼び出すのは重複になる
             # ELE: Equally Likely Events
             result, score, ELE = self.return_anti_spoof(self.resized_frame, face_location)
+
+            if result == 'spoof' and ELE is False:
+                face_width: int = self.right - self.left
+                face_height: int = self.bottom - self.top
+                orgHeight, orgWidth = self.rect01_SPOOF_png.shape[:2]
+                width_ratio = 1.0 * (face_width / orgWidth)
+                height_ratio = 1.0 * (face_height / orgHeight)
+                self.rect01_SPOOF_png = cv2.resize(self.rect01_SPOOF_png, None, fx = width_ratio, fy = height_ratio)
+                x1, y1, x2, y2 = self.left, self.top, self.left + self.rect01_SPOOF_png.shape[1], self.top + self.rect01_SPOOF_png.shape[0]
+                try:
+                    self.resized_frame[y1:y2, x1:x2] = self.resized_frame[y1:y2, x1:x2] * (1 - self.rect01_SPOOF_png[:,:,3:] / 255) + \
+                                self.rect01_SPOOF_png[:,:,:3] * (self.rect01_SPOOF_png[:,:,3:] / 255)
+                except:
+                    # TODO: np.clip
+                    pass
+            elif result == 'cannot_distinction' and ELE is False:
+                face_width: int = self.right - self.left
+                face_height: int = self.bottom - self.top
+                orgHeight, orgWidth = self.rect01_CANNOT_DISTINCTION_png.shape[:2]
+                width_ratio = 1.0 * (face_width / orgWidth)
+                height_ratio = 1.0 * (face_height / orgHeight)
+                self.rect01_CANNOT_DISTINCTION_png = cv2.resize(self.rect01_CANNOT_DISTINCTION_png, None, fx = width_ratio, fy = height_ratio)
+                x1, y1, x2, y2 = self.left, self.top, self.left + self.rect01_CANNOT_DISTINCTION_png.shape[1], self.top + self.rect01_CANNOT_DISTINCTION_png.shape[0]
+                try:
+                    self.resized_frame[y1:y2, x1:x2] = self.resized_frame[y1:y2, x1:x2] * (1 - self.rect01_CANNOT_DISTINCTION_png[:,:,3:] / 255) + \
+                                self.rect01_CANNOT_DISTINCTION_png[:,:,:3] * (self.rect01_CANNOT_DISTINCTION_png[:,:,3:] / 255)
+                except:
+                    # TODO: np.clip
+                    pass
+            elif self.name != 'Unknown' and result == 'real' and ELE is False:  ## self.nameが既知の場合
+                face_width: int = self.right - self.left
+                face_height: int = self.bottom - self.top
+                orgHeight, orgWidth = self.rect01_png.shape[:2]
+                width_ratio = 1.0 * (face_width / orgWidth)
+                height_ratio = 1.0 * (face_height / orgHeight)
+                self.rect01_png = cv2.resize(self.rect01_png, None, fx = width_ratio, fy = height_ratio)
+                x1, y1, x2, y2 = self.left, self.top, self.left + self.rect01_png.shape[1], self.top + self.rect01_png.shape[0]
+                try:
+                    self.resized_frame[y1:y2, x1:x2] = self.resized_frame[y1:y2, x1:x2] * (1 - self.rect01_png[:,:,3:] / 255) + \
+                                self.rect01_png[:,:,:3] * (self.rect01_png[:,:,3:] / 255)
+                except:
+                    # TODO: np.clip
+                    pass
+            elif self.name == 'Unknown' and result == 'real' and ELE is False:  ## self.nameがUnknownだった場合
+                fx: float = 0.0
+                face_width = self.right - self.left
+                face_height = self.bottom - self.top
+                # rect01_NG_png←ピンクのtarget_rectangle
+                # rect01_NG_png: cv2.Mat = cv2.imread("images/rect01_NG.png", cv2.IMREAD_UNCHANGED)
+                orgHeight, orgWidth = self.rect01_NG_png.shape[:2]
+                width_ratio = float(1.0 * (face_width / orgWidth))
+                height_ratio = 1.0 * (face_height / orgHeight)
+                self.rect01_NG_png = cv2.resize(self.rect01_NG_png, None, fx = width_ratio, fy = height_ratio)
+                x1, y1, x2, y2 = self.left, self.top, self.left + self.rect01_NG_png.shape[1], self.top + self.rect01_NG_png.shape[0]
+                try:
+                    self.resized_frame[y1:y2, x1:x2] = self.resized_frame[y1:y2, x1:x2] * (1 - self.rect01_NG_png[:,:,3:] / 255) + \
+                                self.rect01_NG_png[:,:,:3] * (self.rect01_NG_png[:,:,3:] / int(255))
+                except:
+                    # TODO: np.clip
+                    pass
         else:
             # BUG FIX: v1.4.04
             ELE = False
-        if not self.name == 'Unknown' and result == 'not_spoof' and ELE is False:  ## self.nameが既知の場合
-            face_width: int = self.right - self.left
-            face_height: int = self.bottom - self.top
-            orgHeight, orgWidth = self.rect01_png.shape[:2]
-            width_ratio = 1.0 * (face_width / orgWidth)
-            height_ratio = 1.0 * (face_height / orgHeight)
-            self.rect01_png = cv2.resize(self.rect01_png, None, fx = width_ratio, fy = height_ratio)
-            x1, y1, x2, y2 = self.left, self.top, self.left + self.rect01_png.shape[1], self.top + self.rect01_png.shape[0]
-            try:
-                self.resized_frame[y1:y2, x1:x2] = self.resized_frame[y1:y2, x1:x2] * (1 - self.rect01_png[:,:,3:] / 255) + \
-                            self.rect01_png[:,:,:3] * (self.rect01_png[:,:,3:] / 255)
-            except:
-                # TODO: np.clip
-                pass
-        else:  ## self.nameがUnknownだった場合
-            fx: float = 0.0
-            face_width = self.right - self.left
-            face_height = self.bottom - self.top
-            # rect01_NG_png←ピンクのtarget_rectangle
-            # rect01_NG_png: cv2.Mat = cv2.imread("images/rect01_NG.png", cv2.IMREAD_UNCHANGED)
-            orgHeight, orgWidth = self.rect01_NG_png.shape[:2]
-            width_ratio = float(1.0 * (face_width / orgWidth))
-            height_ratio = 1.0 * (face_height / orgHeight)
-            self.rect01_NG_png = cv2.resize(self.rect01_NG_png, None, fx = width_ratio, fy = height_ratio)
-            x1, y1, x2, y2 = self.left, self.top, self.left + self.rect01_NG_png.shape[1], self.top + self.rect01_NG_png.shape[0]
-            try:
-                self.resized_frame[y1:y2, x1:x2] = self.resized_frame[y1:y2, x1:x2] * (1 - self.rect01_NG_png[:,:,3:] / 255) + \
-                            self.rect01_NG_png[:,:,:3] * (self.rect01_NG_png[:,:,3:] / int(255))
-            except:
-                pass
         return self.resized_frame

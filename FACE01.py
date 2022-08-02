@@ -221,7 +221,7 @@ if __name__ == '__main__':
 
     """DEBUG
     Set the number of playback frames"""
-    exec_times: int = 50
+    exec_times: int = 250
     ALL_FRAME = exec_times
 
     # PySimpleGUI layout
