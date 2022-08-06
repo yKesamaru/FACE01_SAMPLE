@@ -1,5 +1,13 @@
 # FACE01について
 # TODO
+## 1.4.05
+[CelebA-Spoofデータセット](https://github.com/ZhangYuanhan-AI/CelebA-Spoof)が商用利用不可だったので、アンチスプーフ機能を外す。
+以下のREADME.mdを除去。
+4. [PINTO_model_zoo](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3)
+5. [open_model_zoo/anti-spoof-mn3](https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/public/anti-spoof-mn3)
+6. [CelebA-Spoof](https://github.com/ZhangYuanhan-AI/CelebA-Spoof)
+
+
 ## 1.4.03実装予定
 - anti spoof
 x1 = np.clip(x1, 0, image_width)

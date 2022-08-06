@@ -200,3 +200,5 @@ NoneType: None
 [2022-08-02 12:06:53,426] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：0
 [2022-08-02 12:10:15,336] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：0
 [2022-08-02 12:12:29,343] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：0
+[2022-08-06 16:52:58,301] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：0
+[2022-08-06 16:55:05,753] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：0

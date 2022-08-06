@@ -24,6 +24,7 @@ from face01lib.logger import Logger
 from traceback import format_exc
 from sys import exit
 from os.path import dirname
+import traceback
 
 name = __name__
 dir = dirname(__file__)
@@ -51,10 +52,10 @@ face_recognition_model = Dlib_models().face_recognition_model_location()
 face_encoder = dlib.face_recognition_model_v1(face_recognition_model)
 
 class Dlib_api:
-    def __init__(self) -> None:
-        __author__ = 'Original code written by Adam Geitgey, modified by YOSHITSUGU KESAMARU'
-        __email__ = 'y.kesamaru@tokai-kaoninsho.com'
-        __version__ = '1.4.02'
+    # def __init__(self) -> None:
+    #     __author__ = 'Original code written by Adam Geitgey, modified by YOSHITSUGU KESAMARU'
+    #     __email__ = 'y.kesamaru@tokai-kaoninsho.com'
+    #     __version__ = '1.4.02'
 
     def _rect_to_css(self, rect: object) -> tuple:
         self.rect = rect
@@ -126,7 +127,13 @@ class Dlib_api:
             return face_detector(self.img, self.number_of_times_to_upsample)
 
 
-    def face_locations(self, img: np.ndarray, number_of_times_to_upsample: int=0, model: str="hog") -> list:
+    def face_locations(
+        self,
+        img: np.ndarray,
+        number_of_times_to_upsample: int=0,
+        model: str="hog"
+        ) -> list:
+        
         self.img = img
         self.number_of_times_to_upsample = number_of_times_to_upsample
         self.model = model
@@ -145,27 +152,39 @@ class Dlib_api:
             return [self._trim_css_to_bounds(self._rect_to_css(face), self.img.shape) for face in self._raw_face_locations(self.img, self.number_of_times_to_upsample, self.model)]
 
 
-    def _raw_face_landmarks(self, face_image, face_locations=None, model="small"):
-        self.face_image = face_image
+    def _raw_face_landmarks(
+        self,
+        resized_frame,
+        face_locations = None,
+        model="small"
+    ):
+        self.resized_frame = resized_frame
         self.face_locations = face_locations
         self. model = model
-        if self.face_locations is None:
-            self.face_locations = self._raw_face_locations(self.face_image)
+
+        if self.face_locations == None:
+            self.face_locations = self._raw_face_locations(self.resized_frame)
         else:
             self.face_locations = [self._css_to_rect(face_location) for face_location in self.face_locations]
-        return [pose_predictor_5_point(self.face_image, face_location) for face_location in self.face_locations]
+        return [pose_predictor_5_point(self.resized_frame, face_location) for face_location in self.face_locations]
 
 
-    def face_encodings(self, face_image, known_face_locations=None, num_jitters=0, model="small") ->list:
-        self.face_image = face_image
-        self.known_face_locations = known_face_locations
+    def face_encodings(
+        self,
+        resized_frame,
+        face_location_list=None,
+        num_jitters=0,
+        model="small"
+    ):
+        self.resized_frame = resized_frame
+        self.face_location_list = face_location_list
         self.num_jitters = num_jitters
         self.model = model
         """
         Given an image, return the 128-dimension face encoding for each face in the image.
 
-        :param face_image: The image that contains one or more faces (=small_frame)
-        :param known_face_locations: Optional - the bounding boxes of each face if you already know them. (=face_location_list)
+        :param resized_frame: The image that contains one or more faces (=small_frame)
+        :param face_location_list: Optional - the bounding boxes of each face if you already know them. (=face_location_list)
         :param num_jitters: How many times to re-sample the face when calculating encoding. Higher is more accurate, but slower (i.e. 100 is 100x slower)
         :param model: Optional - which model to use. "large" (default) or "small" which only returns 5 points but is faster.
         :return: A list of 128-dimensional face encodings (one for each face in the image)
@@ -178,13 +197,45 @@ class Dlib_api:
         see bellow
         https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
         """
-        raw_landmarks = self._raw_face_landmarks(self.face_image, self.known_face_locations, self.model)
-        # face_list = []
-        # for raw_landmark_set in raw_landmarks:
-        #     a = np.array(face_encoder.compute_face_descriptor(self.face_image, raw_landmark_set, self.num_jitters, 0.25))
-        #     face_list.append(a)
-        #     return face_list
-        return [np.array(face_encoder.compute_face_descriptor(self.face_image, raw_landmark_set, self.num_jitters, 0.25)) for raw_landmark_set in raw_landmarks]
+        try:
+            raw_landmarks = self._raw_face_landmarks(
+                self.resized_frame,
+                self.face_location_list,
+                self.model
+            )
+        except Exception as e:
+            print(f'resized_frame: {self.resized_frame}\nface_location_list:  {self.face_location_list}')
+            print(f'ERROR: {e}')
+            print(traceback.format_exc())
+            exit(0)
+
+        # TEST FOR DEBUG
+        face_encodings = []
+        for raw_landmark_set in raw_landmarks:
+            try:
+                a = np.array(
+                    face_encoder.compute_face_descriptor(
+                        self.resized_frame,
+                        raw_landmark_set,
+                        self.num_jitters,
+                        0.25
+                    )
+                )
+                face_encodings.append(a)
+            except Exception as e:
+                print(f'resized_frame: {self.resized_frame}\nface_location_list:  {self.raw_landmark_set}')
+                print(f'ERROR: {e}')
+                print(traceback.format_exc())
+                exit(0)
+        # print(face_encodings)
+        return face_encodings
+        """
+        [compute_face_descriptor](https://blog.dlib.net/2017/02/high-quality-face-recognition-with-deep.html?m=0&commentPage=2)
+        Davis King said...The landmarks are only used to align the face before the DNN extracts the face descriptor. How many landmarks you use doesn't really matter.
+        """
+
+        # TODO: 余白の0.25 (padding)
+        # return [np.array(face_encoder.compute_face_descriptor(self.resized_frame, raw_landmark_set, self.num_jitters, 0.25)) for raw_landmark_set in raw_landmarks]
         # 4th value (0.25) is padding around the face. If padding == 0 then the chip will
         # be closely cropped around the face. Setting larger padding values will result a looser cropping.
         # In particular, a padding of 0.5 would double the width of the cropped area, a value of 1.
@@ -194,14 +245,14 @@ class Dlib_api:
         """マルチスレッド化
         pool = ThreadPoolExecutor()
         # pool = ProcessPoolExecutor(max_workers=1)  # Error while calling cudaGetDevice(&the_device_id) in file /tmp/pip-install-983gqknr/dlib_66282e4ffadf4aa6965801c6f7ff7671/dlib/cuda/gpu_data.cpp:204. code: 3, reason: initialization error
-        return [pool.submit(multithread, raw_landmark_set, self.face_image, self.num_jitters).result() for raw_landmark_set in raw_landmarks]
+        return [pool.submit(multithread, raw_landmark_set, self.resized_frame, self.num_jitters).result() for raw_landmark_set in raw_landmarks]
         """
 
-    def multithread(self, raw_landmark_set, face_image, num_jitters):
+    def multithread(self, raw_landmark_set, resized_frame, num_jitters):
         self.raw_landmark_set = raw_landmark_set
-        self.face_image = face_image
+        self.resized_frame = resized_frame
         self.num_jitters = num_jitters
-        return np.array(face_encoder.compute_face_descriptor(self.face_image, self.raw_landmark_set, self.num_jitters))
+        return np.array(face_encoder.compute_face_descriptor(self.resized_frame, self.raw_landmark_set, self.num_jitters))
 
 
     def face_distance(self, face_encodings, face_to_compare):

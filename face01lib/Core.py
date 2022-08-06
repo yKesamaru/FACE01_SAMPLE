@@ -13,6 +13,7 @@ __URL__ = 'https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof
 from datetime import datetime
 from platform import system
 from traceback import format_exc
+import traceback
 
 import cv2
 # from asyncio.log import logger
@@ -22,12 +23,13 @@ from PIL import Image, ImageDraw, ImageFile, ImageFont
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 from face01lib.api import Dlib_api
+Dlib_api_obj = Dlib_api()
 from face01lib.Calc import Cal
 Cal_obj = Cal()
 # from face01lib.video_capture import VidCap
 # VidCap_obj = VidCap()
 
-from collections import defaultdict
+# from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from os.path import dirname, exists
 from shutil import move
@@ -73,7 +75,14 @@ class Core:
         """
         return inference
 
-    def return_face_location_list(self, resized_frame, set_width, set_height, model_selection, min_detection_confidence) -> list:
+    def return_face_location_list(
+        self,
+        resized_frame,
+        set_width,
+        set_height,
+        model_selection,
+        min_detection_confidence
+    ) -> list:
         """
         return: face_location_list
         """
@@ -85,9 +94,15 @@ class Core:
         self.resized_frame.flags.writeable = False
         face_location_list: list = []
         person_frame = np.empty((2,0), dtype = np.float64)
-        result = self.mp_face_detection_func(self.resized_frame, self.model_selection, self.min_detection_confidence)
+        date = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
+
+        result = self.mp_face_detection_func(
+            self.resized_frame,
+            self.model_selection,
+            self.min_detection_confidence
+        )
         if not result.detections:
-            return face_location_list
+            return face_location_list, date
         else:
             for detection in result.detections:
                 xleft:int = int(detection.location_data.relative_bounding_box.xmin * self.set_width)
@@ -102,7 +117,7 @@ class Core:
                 face_location_list.append((xtop,xright,xbottom,xleft))  # Dlib_api() order
 
         self.resized_frame.flags.writeable = True
-        return face_location_list
+        return face_location_list, date
 
     def draw_telop(self, logger, cal_resized_telop_nums, frame: np.ndarray) -> np.ndarray:
         self.logger = logger
@@ -134,7 +149,7 @@ class Core:
         self.face_encoding = face_encoding
         self.tolerance = tolerance
         try:
-            matches = Dlib_api().compare_faces(self.known_face_encodings, self.face_encoding, self.tolerance)
+            matches = Dlib_api_obj.compare_faces(self.known_face_encodings, self.face_encoding, self.tolerance)
             return matches
         except:
             self.logger.warning("DEBUG: npKnown.npzが壊れているか予期しないエラーが発生しました。")
@@ -146,7 +161,17 @@ class Core:
             self.logger.warning("-" * 20)
             exit(0)
 
-    def make_frame_datas_array(self, overlay, face_location_list, name,filename, top,right,bottom,left,percentage_and_symbol,person_data_list,frame_datas_array,resized_frame):
+    def make_frame_datas_array(
+        self,
+        overlay,
+        face_location_list,
+        name,
+        filename,
+        percentage_and_symbol,
+        person_data_list,
+        frame_datas_array,
+        resized_frame
+        ):
         """データ構造(frame_datas_list)を返す
 
         person_data:
@@ -169,19 +194,52 @@ class Core:
         self.face_location_list = face_location_list
         self.name = name
         self.filename = filename
-        self.top = top
-        self.right = right
-        self.bottom = bottom
-        self.left = left
         self.percentage_and_symbol = percentage_and_symbol
         self.person_data_list = person_data_list
         self.frame_datas_array = frame_datas_array
         self.resized_frame = resized_frame
-        date = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
-        person_data = {'name': self.name, 'pict':self.filename,  'date':date, 'location':(self.top,self.right,self.bottom,self.left), 'percentage_and_symbol': self.percentage_and_symbol}
-        self.person_data_list.append(person_data)
-        frame_datas = {'img':self.resized_frame, 'face_location_list':self.face_location_list, 'overlay': self.overlay, 'person_data_list': self.person_data_list}
-        self.frame_datas_array.append(frame_datas)
+        # date = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
+        # spoof_or_real = None
+        # score = 0.0
+        # ELE = True
+        # spoof_dict = {}
+        # # BUG: anti_spoofを個々に挿入する(1.4.05)
+        # if self.anti_spoof == True:
+        #     for face_location in face_location_list:
+        #         spoof_or_real, score, ELE = self.return_anti_spoof(self.resized_frame, face_location)
+        #         spoof_dict["spoof_or_real"] = spoof_or_real
+        #         spoof_dict["score"] = score
+        #         spoof_dict["ELE"] = ELE
+        #         person_data = {'spoof_dict': spoof_dict, 'name': self.name, 'pict':self.filename,  'date':date, 'location':face_location, 'percentage_and_symbol': self.percentage_and_symbol}
+        #         self.person_data_list.append(person_data)
+        #         frame_datas = {'img':self.resized_frame, 'face_location_list':self.face_location_list, 'overlay': self.overlay, 'person_data_list': self.person_data_list}
+        #         self.frame_datas_array.append(frame_datas)
+        # else:
+        #     for face_location in face_location_list:
+        #         person_data = {'spoof_dict':spoof_dict, 'name': self.name, 'pict':self.filename,  'date':date, 'location':face_location, 'percentage_and_symbol': self.percentage_and_symbol}
+        #         self.person_data_list.append(person_data)
+        #         frame_datas = {'img':self.resized_frame, 'face_location_list':self.face_location_list, 'overlay': self.overlay, 'person_data_list': self.person_data_list}
+        #         self.frame_datas_array.append(frame_datas)
+        if len(face_location_list) > 0:
+            for face_location in face_location_list:
+                # person_data = {'spoof_dict':{}, 'name': self.name, 'pict':self.filename,  'date':date, 'location':face_location, 'percentage_and_symbol': self.percentage_and_symbol}
+                # self.person_data_list.append(person_data)
+                frame_datas = {
+                    'img':self.resized_frame ,
+                    'face_location_list':self.face_location_list ,
+                    'overlay': self.overlay ,
+                    'person_data_list': self.person_data_list
+                }
+                self.frame_datas_array.append(frame_datas)
+        else:
+            frame_datas = {
+                'img':self.resized_frame ,
+                'face_location_list':self.face_location_list ,
+                'overlay': self.overlay ,
+                'person_data_list': self.person_data_list
+            }
+            self.frame_datas_array.append(frame_datas)
+
         return self.frame_datas_array
 
     # pil_img_rgbオブジェクトを生成
@@ -191,7 +249,19 @@ class Core:
         return  pil_img_obj_rgb
 
     # 顔部分の領域をクロップ画像ファイルとして出力
-    def make_crop_face_image(self, anti_spoof, name, dis, pil_img_obj_rgb, top, left, right, bottom, number_of_crops, frequency_crop_image):
+    def make_crop_face_image(
+        self,
+        anti_spoof,
+        name,
+        dis,
+        pil_img_obj_rgb,
+        top,
+        left,
+        right,
+        bottom,
+        number_of_crops,
+        frequency_crop_image
+    ):
         self.anti_spoof = anti_spoof
         self.name = name
         self.dis = dis
@@ -203,7 +273,12 @@ class Core:
         self.number_of_crops = number_of_crops
         self.frequency_crop_image = frequency_crop_image
         date = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
-        imgCroped = self.pil_img_obj_rgb.crop((self.left -20,self.top -20,self.right +20,self.bottom +20)).resize((200, 200))
+        # TODO: CROPする時の余白を設定可能にする
+        margin = 20
+        imgCroped = \
+            self.pil_img_obj_rgb.crop(
+                (self.left - margin,self.top - margin,self.right + margin,self.bottom + margin)).resize((200, 200)
+            )
         # TODO: outputのファイル名にanti_spoof結果を入れる
         if self.anti_spoof == True:
             filename = "output/%s_%s_%s.png" % (self.name, date, self.dis)
@@ -220,7 +295,7 @@ class Core:
         self.matches = matches
         self.name = name
         # 各プリセット顔画像のエンコーディングと動画中の顔画像エンコーディングとの各顔距離を要素としたアレイを算出
-        face_distances = Dlib_api().face_distance(self.args_dict["known_face_encodings"], self.face_encoding)  ## face_distances -> shape:(677,), face_encoding -> shape:(128,)
+        face_distances = Dlib_api_obj.face_distance(self.args_dict["known_face_encodings"], self.face_encoding)  ## face_distances -> shape:(677,), face_encoding -> shape:(128,)
         # プリセット顔画像と動画中顔画像との各顔距離を要素とした配列に含まれる要素のうち、最小の要素のインデックスを求める
         best_match_index = np.argmin(face_distances)
         # プリセット顔画像と動画中顔画像との各顔距離を要素とした配列に含まれる要素のうち、最小の要素の値を求める
@@ -296,17 +371,18 @@ class Core:
         self.logger = logger
         self.args_dict = args_dict
         self.resized_frame = resized_frame
-        person_data_list = [{}]
+
+        person_data_list = []
         name = 'Unknown'
         filename = ''
-        top = ()
-        bottom = ()
-        left = ()
-        right = ()
         frame_datas_array = []
         face_location_list = []
         percentage_and_symbol = ''
-        overlay = np.empty(0)
+        overlay = np.empty((0,0), dtype=float)
+        # spoof_or_real = None
+        # score = 0.0
+        # ELE = True
+        # spoof_dict = {}
 
         # 描画系（bottom area, 半透明, telop, logo）
         if  self.args_dict["headless"] == False:
@@ -321,25 +397,126 @@ class Core:
 
         # 顔座標算出
         if self.args_dict["use_pipe"] == True:
-            face_location_list = self.return_face_location_list(self.resized_frame, self.args_dict["set_width"], self.args_dict["set_height"], self.args_dict["model_selection"], self.args_dict["min_detection_confidence"])
+            face_location_list, date = \
+                self.return_face_location_list(
+                    self.resized_frame,
+                    self.args_dict["set_width"],
+                    self.args_dict["set_height"],
+                    self.args_dict["model_selection"],
+                    self.args_dict["min_detection_confidence"]
+                )
         else:
-            face_location_list = Dlib_api().face_locations(self.resized_frame, self.args_dict["upsampling"], self.args_dict["mode"])
+            date = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
+            face_location_list = \
+                Dlib_api_obj.face_locations(
+                    self.resized_frame,
+                    self.args_dict["upsampling"],
+                    self.args_dict["mode"]
+                )
         """face_location_list
         [(144, 197, 242, 99), (97, 489, 215, 371)]
         """
 
+        """いらないのでは？"""
         # 顔がなかったら以降のエンコード処理を行わない
         if len(face_location_list) == 0:
-            frame_datas_array = self.make_frame_datas_array(overlay, face_location_list, name,filename, top,right,bottom,left,percentage_and_symbol,person_data_list,frame_datas_array,self.resized_frame)
+            frame_datas_array = \
+                self.make_frame_datas_array( 
+                    overlay,
+                    face_location_list,
+                    name,
+                    filename,
+                    percentage_and_symbol,
+                    person_data_list,
+                    frame_datas_array,
+                    self.resized_frame
+                )
             return frame_datas_array
 
         # 顔が一定数以上なら以降のエンコード処理を行わない
         if len(face_location_list) >= self.args_dict["number_of_people"]:
             self.logger.info(f'{self.args_dict["number_of_people"]}人以上を検出しました')
-            frame_datas_array = self.make_frame_datas_array(overlay, face_location_list, name,filename, top,right,bottom,left,percentage_and_symbol,person_data_list,frame_datas_array,self.resized_frame)
+            frame_datas_array = \
+                self.make_frame_datas_array(
+                    overlay,
+                    face_location_list,
+                    name,
+                    filename,
+                    percentage_and_symbol,
+                    person_data_list,
+                    frame_datas_array,
+                    self.resized_frame
+                )
             return frame_datas_array
 
-        frame_datas_array = self.make_frame_datas_array(overlay, face_location_list, name,filename, top,right,bottom,left,percentage_and_symbol,person_data_list,frame_datas_array,self.resized_frame)
+        # BUG: anti_spoofを個々に挿入する(1.4.05) ->  frame_pre_processingではanti_spoofを行わないことにする。
+        ## anti_spoof機能は独立させて存在させることにする。-> frame_post_processingにも搭載しない。
+        # if self.args_dict["anti_spoof"] == True:
+        #     for face_location in face_location_list:
+        #         spoof_or_real, score, ELE = \
+        #             self.return_anti_spoof(self.resized_frame, face_location)
+                
+        #         spoof_dict["spoof_or_real"] = spoof_or_real
+        #         spoof_dict["score"] = score
+        #         spoof_dict["ELE"] = ELE
+
+        #         person_data = {
+        #             'spoof_dict': spoof_dict,
+        #             'name': name,
+        #             'pict':filename,
+        #             'date':date,
+        #             'location':face_location,
+        #             'percentage_and_symbol': percentage_and_symbol
+        #         }
+        #         person_data_list.append(person_data)
+
+        #         frame_datas = {
+        #             'img':self.resized_frame,
+        #             'face_location_list':face_location_list,
+        #             'overlay': overlay,
+        #             'person_data_list': person_data_list
+        #         }
+        #         frame_datas_array.append(frame_datas)
+
+        # elif self.args_dict["anti_spoof"] == False:
+        #     for face_location in face_location_list:
+        #         person_data = {
+        #             'spoof_dict':spoof_dict,  # {}、つまりカラ。
+        #             'name': name,
+        #             'pict':filename,
+        #             'date':date,
+        #             'location':face_location,
+        #             'percentage_and_symbol': percentage_and_symbol
+        #             }
+        #         person_data_list.append(person_data)
+
+        #         frame_datas = {
+        #             'img':self.resized_frame,
+        #             'face_location_list':face_location_list,
+        #             'overlay': overlay,
+        #             'person_data_list': person_data_list
+        #         }
+        #         frame_datas_array.append(frame_datas)
+                
+        frame_datas = {
+            'img':self.resized_frame,
+            'face_location_list':face_location_list,
+            'overlay': overlay,
+            'person_data_list': person_data_list
+        }
+        frame_datas_array.append(frame_datas)
+        
+        frame_datas_array = \
+            self.make_frame_datas_array(
+                overlay,
+                face_location_list,
+                name,
+                filename,
+                percentage_and_symbol,
+                person_data_list,
+                frame_datas_array,
+                self.resized_frame
+            )
         return frame_datas_array
 
     # 顔のエンコーディング
@@ -354,13 +531,18 @@ class Core:
         self.logger = logger
         self.args_dict = args_dict
         self.frame_datas_array = frame_datas_array
+
         face_encodings = []
+        face_encodings_list = []
+
         for frame_data in self.frame_datas_array:
             resized_frame = frame_data["img"]
             face_location_list = frame_data["face_location_list"]  # [(139, 190, 257, 72)]
-            if len(face_location_list) == 0:
+
+            if len(face_location_list) == 0:  # 顔がない場合
                 return face_encodings, self.frame_datas_array
-            elif len(face_location_list) > 0:
+            elif len(face_location_list) > 0:  # 顔がある場合
+
                 # 顔ロケーションからエンコーディングを求める
                 if self.args_dict["use_pipe"] == True and  self.args_dict["person_frame_face_encoding"] == True:
                     """FIX
@@ -373,9 +555,30 @@ class Core:
                     """
                     concatenate_face_location_list, concatenate_person_frame = \
                         self.return_concatenate_location_and_frame(resized_frame, face_location_list)
-                    face_encodings = Dlib_api().face_encodings(concatenate_person_frame, concatenate_face_location_list, self.args_dict["jitters"], self.args_dict["model"])
+                    face_encodings = \
+                        Dlib_api_obj.face_encodings(
+                            concatenate_person_frame,
+                            concatenate_face_location_list,
+                            self.args_dict["jitters"],
+                            self.args_dict["model"]
+                        )
                 elif self.args_dict["use_pipe"] == True and  self.args_dict["person_frame_face_encoding"] == False:
-                    face_encodings = Dlib_api().face_encodings(resized_frame, face_location_list, self.args_dict["jitters"], self.args_dict["model"])
+                    try:
+                        face_encodings = \
+                            Dlib_api().face_encodings(  # Dlib_api_obj.face_encodingsだとエラーが発生する。
+                            # Dlib_api_obj.face_encodings(
+                                resized_frame,
+                                face_location_list,
+                                self.args_dict["jitters"],
+                                self.args_dict["model"]
+                            )
+                        if face_encodings == []:
+                            return face_encodings, self.frame_datas_array
+                    except Exception as e:
+                        print(f'resized_frame: {resized_frame}\nface_location_list:  {face_location_list}')
+                        print(f'ERROR: {e}')
+                        print(traceback.format_exc())
+                        exit(0)
                 elif self.args_dict["use_pipe"] == False and  self.args_dict["person_frame_face_encoding"] == True:
                     self.logger.warning("config.ini:")
                     self.logger.warning("mediapipe = False  の場合 person_frame_face_encoding = True  には出来ません")
@@ -386,8 +589,17 @@ class Core:
                     self.logger.warning("処理を終了します")
                     exit(0)
                 elif self.args_dict["use_pipe"] == False and self.args_dict["person_frame_face_encoding"] == False:
-                    face_encodings = Dlib_api().face_encodings(resized_frame, face_location_list, self.args_dict["jitters"], self.args_dict["model"])
-            return face_encodings, self.frame_datas_array
+                    face_encodings = \
+                        Dlib_api_obj.face_encodings(
+                            resized_frame,
+                            face_location_list,
+                            self.args_dict["jitters"],
+                            self.args_dict["model"]
+                        )
+                
+                # face_encodings_list = face_encodings_list.append(face_encodings)
+        # yield face_encodings, self.frame_datas_array
+        return face_encodings, self.frame_datas_array
 
     # 顔の生データ(np.ndarray)を返す
     def return_face_image(self, resized_frame, face_location):
@@ -415,7 +627,7 @@ class Core:
     # @profile()
     def frame_post_processing(self, logger, args_dict, face_encodings, frame_datas_array, GLOBAL_MEMORY):
         """frame_datas_arrayの定義
-        person_data = {'name': name, 'pict':filename,  'date':date, 'location':(top,right,bottom,left), 'percentage_and_symbol': percentage_and_symbol}
+        person_data = {'spoof_dict:spoof_dict, 'name': name, 'pict':filename,  'date':date, 'location':(top,right,bottom,left), 'percentage_and_symbol': percentage_and_symbol}
         person_data_list.append(person_data)
         frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}
         frame_datas_array.append(frame_datas)
@@ -431,7 +643,10 @@ class Core:
         debug_frame_turn_count = 0
         modified_frame_list = []
 
+        # frame_datas_arrayについて一度づつ回す
         for frame_data in self.frame_datas_array:
+
+            # frame_dataにface_location_listがなければ処理をとばす
             if "face_location_list" not in frame_data:
                 if self.args_dict["headless"] == False:
                     # 半透明処理（後半）_1frameに対して1回
@@ -442,7 +657,7 @@ class Core:
             resized_frame = frame_data["img"]
             face_location_list = frame_data["face_location_list"]
             overlay = frame_data["overlay"]
-            person_data_list = frame_data["person_data_list"]
+            person_data_list = frame_data["person_data_list"]  # person_data_listが変数に格納される
             date = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
 
             # 名前リスト作成
@@ -453,15 +668,18 @@ class Core:
                 # 名前リスト(face_names)生成
                 face_names = self.return_face_names(self.args_dict, face_names, face_encoding,  matches, name)
 
-            # face_location_listについて繰り返し処理→frame_datas_array作成
+            # face_location_listについて繰り返し処理 → **frame_datas_array**作成
+            ## つまり人が写っているframeだけに対して以降の処理を行う、ということ。
             number_of_people = 0  # 人数。計算上0人から始める。draw_default_face()で使用する
             for (top, right, bottom, left), name in zip(face_location_list, face_names):
-                person_data = defaultdict(int)
+                # person_data = defaultdict(int)  # defaultdict(): k(eyの存在チェックが不要)[https://qiita.com/xza/items/72a1b07fcf64d1f4bdb7]
+                # person_data = {}
                 if name == 'Unknown':
                     percentage_and_symbol: str = ''
                     dis: str = ''
                     p: float = 1.0
-                else:  # nameが誰かの名前の場合
+                # nameが誰かの名前の場合、以下の処理を行う。
+                else:  
                     distance: str
                     name, distance = name.split(':')
                     # パーセンテージの算出
@@ -479,6 +697,7 @@ class Core:
                         move(name, './noFace/')
                         return
 
+                # nameがUnknownであってもなくても以降の処理を行う。
                 # クロップ画像保存
                 if self.args_dict["crop_face_image"]==True:
                     if self.args_dict["frequency_crop_image"] < self.GLOBAL_MEMORY['number_of_crops']:
@@ -486,13 +705,35 @@ class Core:
                         if self.args_dict["crop_with_multithreading"] == True:
                             # """1.3.08 multithreading 9.05s
                             with ThreadPoolExecutor() as executor:
-                                future = executor.submit(self.make_crop_face_image, args_dict["anti_spoof"], name, dis, pil_img_obj_rgb, top, left, right, bottom, self.GLOBAL_MEMORY['number_of_crops'], self.args_dict["frequency_crop_image"])
+                                future = executor.submit(self.make_crop_face_image, 
+                                    args_dict["anti_spoof"],
+                                    name,
+                                    dis,
+                                    pil_img_obj_rgb,
+                                    top,
+                                    left,
+                                    right,
+                                    bottom,
+                                    self.GLOBAL_MEMORY['number_of_crops'],
+                                    self.args_dict["frequency_crop_image"]
+                                )
                                 filename,number_of_crops, frequency_crop_image = future.result()
                             # """
                         else:
                             # """ORIGINAL: 1.3.08で変更 8.69s
                             filename,number_of_crops, frequency_crop_image = \
-                                self.make_crop_face_image(args_dict["anti_spoof"], name, dis, pil_img_obj_rgb, top, left, right, bottom, self.GLOBAL_MEMORY['number_of_crops'], self.args_dict["frequency_crop_image"])
+                                self.make_crop_face_image(
+                                    args_dict["anti_spoof"],
+                                    name,
+                                    dis,
+                                    pil_img_obj_rgb,
+                                    top,
+                                    left,
+                                    right,
+                                    bottom,
+                                    self.GLOBAL_MEMORY['number_of_crops'],
+                                    self.args_dict["frequency_crop_image"]
+                                )
                             # """
                         self.GLOBAL_MEMORY['number_of_crops'] = 0
                     else:
@@ -500,6 +741,7 @@ class Core:
 
                 # 描画系
                 if self.args_dict["headless"] == False:
+
                     # デフォルト顔画像の描画
                     if p <= self.args_dict["tolerance"]:  # ディスタンスpがtolerance以下の場合
                         if self.args_dict["default_face_image_draw"] == True:
@@ -531,18 +773,42 @@ class Core:
 
                     # target_rectangleの描画
                     if self.args_dict["target_rectangle"] == True:
-                        resized_frame = self.draw_target_rectangle(self.args_dict["anti_spoof"], self.args_dict["rect01_png"], self.args_dict["rect01_NG_png"], self.args_dict["rect01_SPOOF_png"], self.args_dict["rect01_CANNOT_DISTINCTION_png"], resized_frame,top,bottom,left,right,name)
+                        resized_frame = self.draw_target_rectangle(person_data_list, self.args_dict, resized_frame,top,bottom,left,right,name)
                         """DEBUG
                         frame_imshow_for_debug(resized_frame)
                         """
 
-                person_data = {'name': name, 'pict':filename,  'date':date, 'location':(top,right,bottom,left), 'percentage_and_symbol': percentage_and_symbol}
+                person_data = {
+                    'name': name,
+                    'pict':filename,
+                    'date':date,
+                    'location':(top, right, bottom, left),
+                    'percentage_and_symbol': percentage_and_symbol
+                }
                 person_data_list.append(person_data)
+
+                # self.frame_datas_array = \
+                #     self.make_frame_datas_array(
+                #         overlay,
+                #         face_location_list,
+                #         name,
+                #         filename,
+                #         percentage_and_symbol,
+                #         person_data_list,
+                #         frame_datas_array,
+                #         resized_frame 
+                #     )
             # End for (top, right, bottom, left), name in zip(face_location_list, face_names)
 
-            # _1frameに対して1回
+            # _1frameに対して1回 <- ?
+            ## 人が写っているframeをforで回している途中です。
             if self.args_dict["headless"] == False:
-                frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}
+                frame_datas = {
+                    'img':resized_frame,
+                    'face_location_list':face_location_list,
+                    'overlay': overlay,
+                    'person_data_list': person_data_list
+                }
                 """DEBUG
                 frame_imshow_for_debug(resized_frame)
                 self.frame_datas_array.append(frame_datas)
@@ -550,13 +816,18 @@ class Core:
                 modified_frame_list.append(frame_datas)
 
             elif self.args_dict["headless"] == True:
-                frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}  # TypeError: list indices must be integers or slices, not str -> img
+                frame_datas = {
+                    'img':resized_frame,
+                    'face_location_list':face_location_list,
+                    'overlay': overlay,
+                    'person_data_list': person_data_list
+                }
                 # self.frame_datas_array.append(frame_datas)
                 modified_frame_list.append(frame_datas)
-            else:
-                frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': 'no-data_person_data_list'} 
-                # self.frame_datas_array.append(frame_datas)
-                modified_frame_list.append(frame_datas)
+            # else:  # この処理はどうして書いたのか？不明。
+            #     frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': 'no-data_person_data_list'} 
+            #     # self.frame_datas_array.append(frame_datas)
+            #     modified_frame_list.append(frame_datas)
 
             if self.args_dict["headless"] == False:
                 # 半透明処理（後半）_1frameに対して1回
@@ -596,11 +867,11 @@ class Core:
 
         # 推論
         input_name = onnx_session.get_inputs()[0].name
-        result = onnx_session.run(None, {input_name: input_image})
+        result = onnx_session.run(None, {input_name: input_image})  # [array([[0.08206003, 0.91793996]], dtype=float32)]
 
         # 後処理
-        result = np.array(result)
-        result = np.squeeze(result)
+        result = np.array(result)  # array([[[0.08206003, 0.91793996]]], dtype=float32)
+        result = np.squeeze(result)  # array([0.08206003, 0.91793996], dtype=float32)
 
         as_index = np.argmax(result)
 
@@ -612,18 +883,18 @@ class Core:
         score = round(score, 2)
         # ELE: Equally Likely Events
         ELE: bool = False
-        if score < 0.3:
+        if score < 0.4:
             ELE = True
 
         spoof_or_real: str = ''
         if as_index == 0 and score >= 0.8:  # (255, 0, 0)
-            spoof_or_real = 'real'
-            # spoof_or_real = 'spoof'
+            # spoof_or_real = 'real'
+            spoof_or_real = 'spoof'
             return spoof_or_real, score, ELE
         if as_index == 1 and score >= 0.8:
         # else:
-            spoof_or_real = 'spoof'
-            # spoof_or_real = 'real'
+            # spoof_or_real = 'spoof'
+            spoof_or_real = 'real'
             return spoof_or_real, score, ELE
         else:
             spoof_or_real = 'cannot_distinction'
@@ -867,30 +1138,54 @@ class Core:
         return resized_frame
 
     # target_rectangleの描画
-    def draw_target_rectangle(self, anti_spoof, rect01_png, rect01_NG_png, rect01_SPOOF_png, rect01_CANNOT_DISTINCTION,resized_frame,top,bottom,left,right,name):
-        self.anti_spoof = anti_spoof,
-        self.rect01_png = rect01_png
-        self.rect01_NG_png = rect01_NG_png
-        self.rect01_SPOOF_png = rect01_SPOOF_png
-        self.rect01_CANNOT_DISTINCTION_png = rect01_CANNOT_DISTINCTION
+    def draw_target_rectangle(
+        self,
+        person_data_list,
+        args_dict,
+        resized_frame,
+        top,
+        bottom,
+        left,
+        right,
+        name
+    ):
+        self.person_data_list = person_data_list,
+        self.anti_spoof = args_dict["anti_spoof"],
+        self.rect01_png = args_dict["rect01_png"]
+        self.rect01_NG_png = args_dict["rect01_NG_png"]
+        self.rect01_SPOOF_png = args_dict["rect01_SPOOF_png"]
+        self.rect01_CANNOT_DISTINCTION_png = args_dict["rect01_CANNOT_DISTINCTION_png"]
         self.resized_frame = resized_frame
         self.top = top
         self.bottom = bottom
         self.left = left
         self.right = right
         self.name = name
-        face_location = [self.top, self.right, self.bottom, self.left]
+        face_location = (self.top, self.right, self.bottom, self.left)
+
         width_ratio: float
         height_ratio: float
         face_width: int
         face_height: int
-        result = 'real'
-        if self.anti_spoof[0] == True:
-            # TODO: この箇所でreturn_anti_spoof()を呼び出すのは重複になる
-            # ELE: Equally Likely Events
-            result, score, ELE = self.return_anti_spoof(self.resized_frame, face_location)
+        result = None
 
-            if result == 'spoof' and ELE is False:
+        spoof_or_real = None
+        score = 0.0
+        ELE = True
+
+        if self.anti_spoof[0] == True:
+            # Fix: TODO: この箇所でreturn_anti_spoof()を呼び出すのは重複になる
+            # for person_data in self.person_data_list:
+            #     for person_data_element in person_data:
+            #         if person_data_element == {}:
+            #             continue
+            #         spoof_or_real = person_data_element["spoof_dict"]["spoof_or_real"]
+            #         score = person_data_element["spoof_dict"]["score"]
+            #         ELE = person_data_element["spoof_dict"]["ELE"]
+            # ELE: Equally Likely Events
+            spoof_or_real, score, ELE = self.return_anti_spoof(self.resized_frame, face_location)
+
+            if spoof_or_real == 'spoof' and ELE is False:
                 face_width: int = self.right - self.left
                 face_height: int = self.bottom - self.top
                 orgHeight, orgWidth = self.rect01_SPOOF_png.shape[:2]
@@ -904,7 +1199,7 @@ class Core:
                 except:
                     # TODO: np.clip
                     pass
-            elif result == 'cannot_distinction' and ELE is False:
+            elif spoof_or_real == 'cannot_distinction' and ELE is False:
                 face_width: int = self.right - self.left
                 face_height: int = self.bottom - self.top
                 orgHeight, orgWidth = self.rect01_CANNOT_DISTINCTION_png.shape[:2]
@@ -918,7 +1213,7 @@ class Core:
                 except:
                     # TODO: np.clip
                     pass
-            elif self.name != 'Unknown' and result == 'real' and ELE is False:  ## self.nameが既知の場合
+            elif self.name != 'Unknown' and spoof_or_real == 'real' and ELE is False:  ## self.nameが既知の場合
                 face_width: int = self.right - self.left
                 face_height: int = self.bottom - self.top
                 orgHeight, orgWidth = self.rect01_png.shape[:2]
@@ -932,7 +1227,7 @@ class Core:
                 except:
                     # TODO: np.clip
                     pass
-            elif self.name == 'Unknown' and result == 'real' and ELE is False:  ## self.nameがUnknownだった場合
+            elif self.name == 'Unknown' and spoof_or_real == 'real' and ELE is False:  ## self.nameがUnknownだった場合
                 fx: float = 0.0
                 face_width = self.right - self.left
                 face_height = self.bottom - self.top
@@ -949,7 +1244,39 @@ class Core:
                 except:
                     # TODO: np.clip
                     pass
-        else:
+        elif self.anti_spoof[0] == False:
             # BUG FIX: v1.4.04
             ELE = False
+            if self.name != 'Unknown':  ## self.nameが既知の場合
+                face_width: int = self.right - self.left
+                face_height: int = self.bottom - self.top
+                orgHeight, orgWidth = self.rect01_png.shape[:2]
+                width_ratio = 1.0 * (face_width / orgWidth)
+                height_ratio = 1.0 * (face_height / orgHeight)
+                self.rect01_png = cv2.resize(self.rect01_png, None, fx = width_ratio, fy = height_ratio)
+                x1, y1, x2, y2 = self.left, self.top, self.left + self.rect01_png.shape[1], self.top + self.rect01_png.shape[0]
+                try:
+                    self.resized_frame[y1:y2, x1:x2] = self.resized_frame[y1:y2, x1:x2] * (1 - self.rect01_png[:,:,3:] / 255) + \
+                                self.rect01_png[:,:,:3] * (self.rect01_png[:,:,3:] / 255)
+                except:
+                    # TODO: np.clip
+                    pass
+            elif self.name == 'Unknown':  ## self.nameがUnknownだった場合
+                fx: float = 0.0
+                face_width = self.right - self.left
+                face_height = self.bottom - self.top
+                # rect01_NG_png←ピンクのtarget_rectangle
+                # rect01_NG_png: cv2.Mat = cv2.imread("images/rect01_NG.png", cv2.IMREAD_UNCHANGED)
+                orgHeight, orgWidth = self.rect01_NG_png.shape[:2]
+                width_ratio = float(1.0 * (face_width / orgWidth))
+                height_ratio = 1.0 * (face_height / orgHeight)
+                self.rect01_NG_png = cv2.resize(self.rect01_NG_png, None, fx = width_ratio, fy = height_ratio)
+                x1, y1, x2, y2 = self.left, self.top, self.left + self.rect01_NG_png.shape[1], self.top + self.rect01_NG_png.shape[0]
+                try:
+                    self.resized_frame[y1:y2, x1:x2] = self.resized_frame[y1:y2, x1:x2] * (1 - self.rect01_NG_png[:,:,3:] / 255) + \
+                                self.rect01_NG_png[:,:,:3] * (self.rect01_NG_png[:,:,3:] / int(255))
+                except:
+                    # TODO: np.clip
+                    pass
+
         return self.resized_frame
