@@ -1,11 +1,10 @@
 ![Logo](https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/g1320.png)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/yKesamaru/FACE01_SAMPLE)
+
 # FACE01 SAMPLE
 This repository contains FACE01 SAMPLE for UBUNTU 20.04.
 If you are a Windows user, please use this on WSLg.
 This sample can be used until December 2022.
-
-# New function!
-***Anti spoof*** function was added to FACE01 in v1.4.03.
 
 # About FACE01
 FACE01 is a face recognition library that integrates various functions and can be called from Python.
@@ -13,7 +12,6 @@ You can call individual methods or call a set of functions.
 - High-speed face coordinate output function
 - Face image saving function with date and time information
 - Output modified image
-- Anti spoofing
 - High-speed face recognition is possible from face data of more than 10,000 people
 - Centralized management of functions by configuration file
 - ...and many others!
@@ -29,10 +27,10 @@ bash -c ./INSTALL_FACE01.sh
 ```
 
 NOTE: THIS IS *ONLY* USE FOR UBUNTU *20.04*.
-If you are a Windows user, please use on `WSL2`.
+If you are a Windows user, please use on `WSLg` or `Docker`.
 If you are using another Linux distribution, use `Docker`, `Boxes`, or `lxd`.
 
-Alternatively, refer to INSTALL_FACE01.sh and install manually, or use docker.
+Alternatively, refer to INSTALL_FACE01.sh and install manually.
 
 ## If you want using Docker
 ### To install Docker
@@ -380,5 +378,4 @@ Per frame: 0.213[seconds]
 1. [dlib](https://github.com/davisking/dlib)
 2. [face_recognition](https://github.com/ageitgey/face_recognition)
 3. [mediapipe](https://github.com/google/mediapipe)
-4. [PINTO_model_zoo](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3)
 

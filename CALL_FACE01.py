@@ -13,7 +13,7 @@ import FACE01 as fg
 
 """DEBUG
 Set the number of playback frames"""
-exec_times: int = 50
+exec_times: int = 550
 ALL_FRAME = exec_times
 
 # PySimpleGUI layout
@@ -60,17 +60,29 @@ def common_main(exec_times):
                         # ELE: Equally Likely Events
                         if name != 'Unknown':
                             result, score, ELE = Core_obj.return_anti_spoof(frame_datas['img'], person_data["location"])
-                            if ELE is False:
-                                print(
-                                    name, "\n",
-                                    "\t", "Anti spoof\t\t", result, "\n",
-                                    "\t", "Anti spoof score\t", round(score * 100, 2), "%\n",
-                                    "\t", "similarity\t\t", percentage_and_symbol, "\n",
-                                    "\t", "coordinate\t\t", location, "\n",
-                                    "\t", "time\t\t\t", date, "\n",
-                                    "\t", "output\t\t\t", pict, "\n",
-                                    "-------\n"
-                                )
+                            # Bug fix
+                            if fg.args_dict["anti_spoof"] is True:
+                                if ELE is False:
+                                    print(
+                                        name, "\n",
+                                        "\t", "Anti spoof\t\t", result, "\n",
+                                        "\t", "Anti spoof score\t", round(score * 100, 2), "%\n",
+                                        "\t", "similarity\t\t", percentage_and_symbol, "\n",
+                                        "\t", "coordinate\t\t", location, "\n",
+                                        "\t", "time\t\t\t", date, "\n",
+                                        "\t", "output\t\t\t", pict, "\n",
+                                        "-------\n"
+                                    )
+                            else:
+                                if ELE is False:
+                                    print(
+                                        name, "\n",
+                                        "\t", "similarity\t\t", percentage_and_symbol, "\n",
+                                        "\t", "coordinate\t\t", location, "\n",
+                                        "\t", "time\t\t\t", date, "\n",
+                                        "\t", "output\t\t\t", pict, "\n",
+                                        "-------\n"
+                                    )
                     if fg.args_dict["headless"] == False:
                         imgbytes = cv2.imencode(".png", img)[1].tobytes()
                         window["display"].update(data = imgbytes)
