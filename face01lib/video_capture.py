@@ -45,32 +45,34 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;tcp"
 
 class VidCap:
-    def __init__(self) -> None:
-        pass
+    # def __init__(self) -> None:
+    #     pass
 
     # デバッグ用imshow()
     def frame_imshow_for_debug(self, frame):
-        self.frame = frame
-        if isinstance(self.frame, np.ndarray):
-            cv2.imshow("DEBUG", self.frame)
+        self.frame_maybe = frame
+        if isinstance(self.frame_maybe, np.ndarray):
+            cv2.imshow("DEBUG", self.frame_maybe)
             cv2.moveWindow('window DEBUG', 0, 0)
             cv2.waitKey(3000)
             cv2.destroyAllWindows()
         else:
-            for fra in self.frame:
+            for fra in self.frame_maybe:
                 fr = fra["img"]
                 cv2.imshow("DEBUG", fr)
                 cv2.moveWindow('window DEBUG', 0, 0)
                 cv2.waitKey(3000)
                 cv2.destroyAllWindows()
-                
-    def resize_frame(self, set_width, set_height, frame):
-        self.set_width = set_width
-        self.set_height = set_height
-        self.frame = frame
-        small_frame = cv2.resize(self.frame, (self.set_width, self.set_height))
+
+    # cpdef
+    def resize_frame(self, set_width:int, set_height:int, frame:np.ndarray) -> np.ndarray:
+        self.set_width:int = set_width
+        self.set_height:int = set_height
+        self.frame:np.ndarray = frame
+        small_frame:np.ndarray = cv2.resize(self.frame, (self.set_width, self.set_height))
         return small_frame
 
+    # not cdef
     def return_movie_property(self, set_width: int, vcap) -> tuple:
         self.set_width = set_width
         self.vcap = vcap
@@ -78,6 +80,9 @@ class VidCap:
         fps: int    = self.vcap.get(cv2.CAP_PROP_FPS)
         height: int = self.vcap.get(cv2.CAP_PROP_FRAME_HEIGHT)
         width: int  = self.vcap.get(cv2.CAP_PROP_FRAME_WIDTH)
+        # BUGFIX: vcapを閉じておく
+        self.finalize(self.vcap)
+
         fps = int(fps)
         height= int(height)
         width = int(width)
@@ -91,10 +96,10 @@ class VidCap:
         set_height: int = int((self.set_width * height) / width)
         return self.set_width,fps,height,width,set_height
 
-    # python版
+    # cdef, python版
     def cal_angle_coordinate(self, height:int, width:int) -> tuple:
-        self.height = height
-        self.width = width
+        self.height:int = height
+        self.width:int = width
         """画角(TOP_LEFT,TOP_RIGHT)予めを算出
 
         Args:
@@ -112,15 +117,15 @@ class VidCap:
         CENTER: tuple =(int(self.height/4),int(self.height/4)*3,int(self.width/4),int(self.width/4)*3)
         return TOP_LEFT,TOP_RIGHT,BOTTOM_LEFT,BOTTOM_RIGHT,CENTER
 
-    # frameに対してエリア指定
-    def angle_of_view_specification(self, set_area: str, frame: np.ndarray, TOP_LEFT, TOP_RIGHT: tuple, BOTTOM_LEFT: tuple, BOTTOM_RIGHT: tuple, CENTER: tuple):
-        self.set_area = set_area
-        self.frame = frame
-        self.TOP_LEFT = TOP_LEFT
-        self.TOP_RIGHT = TOP_RIGHT
-        self.BOTTOM_LEFT = BOTTOM_LEFT
-        self.BOTTOM_RIGHT = BOTTOM_RIGHT
-        self.CENTER = CENTER
+    # cdef, frameに対してエリア指定
+    def angle_of_view_specification(self, set_area: str, frame: np.ndarray, TOP_LEFT, TOP_RIGHT: tuple, BOTTOM_LEFT: tuple, BOTTOM_RIGHT: tuple, CENTER: tuple) ->np.ndarray:
+        self.set_area: str = set_area
+        self.frame:np.ndarray = frame
+        self.TOP_LEFT:tuple = TOP_LEFT
+        self.TOP_RIGHT:tuple = TOP_RIGHT
+        self.BOTTOM_LEFT:tuple = BOTTOM_LEFT
+        self.BOTTOM_RIGHT:tuple = BOTTOM_RIGHT
+        self.CENTER:tuple = CENTER
         # VidCap().frame_imshow_for_debug(self.frame)
         # face_location order: top, right, bottom, left
         # TOP_LEFT order: (top, bottom, left, right)
@@ -140,8 +145,9 @@ class VidCap:
         # VidCap().frame_imshow_for_debug(self.frame)
         return self.frame
 
-    def return_vcap(self, movie):
-        self.movie = movie
+    # not cdef
+    def return_vcap(self, movie:str):
+        self.movie:str = movie
         """vcapをreturnする
 
         Args:
@@ -153,11 +159,22 @@ class VidCap:
         # movie=movie
         if self.movie=='usb' or self.movie == 'USB':   # USB カメラ読み込み時使用
             live_camera_number:int = 0
-            for camera_number in range(-5, 5):
-                vcap = cv2.VideoCapture(camera_number, cv2.CAP_FFMPEG)
+            for camera_number in range(0, 5):
+                vcap = cv2.VideoCapture(camera_number)
+                # BUG: cv2.CAP_FFMPEG
+                # vcap = cv2.VideoCapture(camera_number, cv2.CAP_FFMPEG)
+                # vcap = cv2.VideoCapture(camera_number, cv2.CAP_DSHOW)
+                ret:bool
+                frame:np.ndarray
                 ret, frame = vcap.read()
                 if ret:
+                    """DEBUG
+                    self.frame_imshow_for_debug(frame)
+                    """
+                if ret:
                     live_camera_number = camera_number
+                    self.finalize(vcap)
+                    break
                 if camera_number == 4 and ret is False:
                     logger.warning("USBカメラの受信が出来ません")
                     logger.warning("以下のエラーをシステム管理者へお伝えください")
@@ -166,12 +183,13 @@ class VidCap:
                     logger.exception("USBカメラとの通信に異常が発生しました")
                     logger.warning("-" * 20)
                     logger.warning("終了します")
-                    VidCap().finalize(vcap)
+                    self.finalize(vcap)
                     exit(0)
-            vcap = cv2.VideoCapture(live_camera_number, cv2.CAP_FFMPEG)
+            print(f'live_camera_number: {live_camera_number}')
+            vcap = cv2.VideoCapture(live_camera_number)
             return vcap
         else:
-            vcap = cv2.VideoCapture(self.movie, cv2.CAP_FFMPEG)
+            vcap = cv2.VideoCapture(self.movie)
             return vcap
 
     def finalize(self, vcap):
@@ -202,20 +220,45 @@ class VidCap:
         set_area = self.args_dict["set_area"] 
         # 画角値（四隅の座標:Tuple）算出
         if  TOP_LEFT == 0:
-            TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER = VidCap().cal_angle_coordinate(self.args_dict["height"], self.args_dict["width"])
+            TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER = self.cal_angle_coordinate(self.args_dict["height"], self.args_dict["width"])
             # TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER = return_tuple(self.args_dict["height"], self.args_dict["width"])
 
         if (movie == 'usb' or movie == 'USB'):   # USB カメラ読み込み時使用
             camera_number:int = 0
             live_camera_number:int = 0
-            for camera_number in range(-5, 5):
+            for camera_number in range(0, 5):
                 vcap = cv2.VideoCapture(camera_number)
                 ret, frame = vcap.read()
                 if ret:
                     live_camera_number = camera_number 
                     break
-            vcap = cv2.VideoCapture(live_camera_number)
             logger.info(f'カメラデバイス番号：{camera_number}')
+            while vcap.isOpened(): 
+                # frame_skipの数値に満たない場合は処理をスキップ
+                for frame_skip_counter in range(1, self.args_dict["frame_skip"]):
+                    ret, frame = vcap.read()
+                    if frame_skip_counter < self.args_dict["frame_skip"]:
+                        continue
+                    if ret == False:
+                        logger.warning("movieが開けません")
+                        logger.warning("以下のエラーをシステム管理者へお伝えください")
+                        logger.warning("-" * 20)
+                        logger.warning(format_exc(limit=None, chain=True))
+                        logger.warning("-" * 20)
+                        self.finalize(vcap)
+                    break
+                else:
+                    # 画角値をもとに各frameを縮小
+                    # python版
+                    frame = self.angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)  # type: ignore
+                    # 各frameリサイズ
+                    resized_frame = self.resize_frame(set_width, set_height, frame)
+                    """DEBUG
+                    self.frame_imshow_for_debug(resized_frame)
+                    """
+                    yield resized_frame
+
+
         elif 'http' in movie:
             """DEBUG"""
             # print(movie); exit(0)
@@ -252,9 +295,9 @@ class VidCap:
                         """
                         # 画角値をもとに各frameを縮小
                         # python版
-                        frame = VidCap().angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)
+                        frame = self.angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)
                         # 各frameリサイズ
-                        resized_frame = VidCap().resize_frame(set_width, set_height, frame)
+                        resized_frame = self.resize_frame(set_width, set_height, frame)
                         """DEBUG
                         cv2.imshow("video_capture_DEBUG", frame)
                         cv2.moveWindow("video_capture_DEBUG", 0,0)
@@ -302,7 +345,7 @@ class VidCap:
                         logger.warning("-" * 20)
                         logger.warning(format_exc(limit=None, chain=True))
                         logger.warning("-" * 20)
-                        VidCap().finalize(vcap)
+                        self.finalize(vcap)
                     break
                 else:
                     """C++実装試験
@@ -311,9 +354,9 @@ class VidCap:
                     """
                     # 画角値をもとに各frameを縮小
                     # python版
-                    frame = VidCap().angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)  # type: ignore
+                    frame = self.angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)  # type: ignore
                     # 各frameリサイズ
-                    resized_frame = VidCap().resize_frame(set_width, set_height, frame)
+                    resized_frame = self.resize_frame(set_width, set_height, frame)
                     """DEBUG
                     cv2.imshow("video_capture_DEBUG", frame)
                     cv2.moveWindow("video_capture_DEBUG", 0,0)

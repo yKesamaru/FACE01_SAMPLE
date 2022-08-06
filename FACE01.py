@@ -12,6 +12,7 @@ from psutil import cpu_count, cpu_freq, virtual_memory
 from face01lib.api import Dlib_api
 Dlib_api_obj = Dlib_api()
 from face01lib.Core import Core
+Core_obj = Core()
 from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
 from face01lib.video_capture import VidCap
@@ -201,9 +202,9 @@ def Measure_processing_time_backward():
 frame_generator_obj = VidCap().frame_generator(args_dict)
 # @profile()
 def main_process():
-    frame_datas_array = Core().frame_pre_processing(logger, args_dict, frame_generator_obj.__next__())
-    face_encodings, frame_datas_array = Core().face_encoding_process(logger, args_dict, frame_datas_array)
-    frame_datas_array = Core().frame_post_processing(logger, args_dict, face_encodings, frame_datas_array, GLOBAL_MEMORY)
+    frame_datas_array = Core_obj.frame_pre_processing(logger, args_dict, frame_generator_obj.__next__())
+    face_encodings, frame_datas_array = Core_obj.face_encoding_process(logger, args_dict, frame_datas_array)
+    frame_datas_array = Core_obj.frame_post_processing(logger, args_dict, face_encodings, frame_datas_array, GLOBAL_MEMORY)
     yield frame_datas_array
 
 # main =================================================================
@@ -212,8 +213,9 @@ if __name__ == '__main__':
     import time
 
     import PySimpleGUI as sg
-    from face01lib.Core import Core
-    Core_obj = Core()
+    import traceback
+    # from face01lib.Core import Core
+    # Core_obj = Core()
     
     profile_HANDLING_FRAME_TIME: float = 0.0
     profile_HANDLING_FRAME_TIME_FRONT: float = 0.0
@@ -221,7 +223,7 @@ if __name__ == '__main__':
 
     """DEBUG
     Set the number of playback frames"""
-    exec_times: int = 50
+    exec_times: int = 250
     ALL_FRAME = exec_times
 
     # PySimpleGUI layout
@@ -245,6 +247,7 @@ if __name__ == '__main__':
                 frame_datas_array = main_process().__next__()
             except Exception as e:
                 print(e)
+                print(traceback.format_exc())
                 exit(0)
             exec_times = exec_times - 1
             if  exec_times <= 0:
@@ -258,22 +261,31 @@ if __name__ == '__main__':
                         break
                 for frame_datas in frame_datas_array:
                     if "face_location_list" in frame_datas:
-                        img, face_location_list, overlay, person_data_list = \
-                            frame_datas['img'], frame_datas["face_location_list"], frame_datas["overlay"], frame_datas['person_data_list']
+                        img = frame_datas['img']
+                        face_location_list = frame_datas["face_location_list"]
+                        overlay = frame_datas["overlay"]
+                        person_data_list = frame_datas['person_data_list']
+                        
                         for person_data in person_data_list:
-                            if len(person_data) == 0:
+                            if person_data == {}:
                                 continue
-                            name, pict, date,  location, percentage_and_symbol = \
-                                person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
+
+                            name = person_data['name']
+                            pict = person_data['pict']
+                            date = person_data['date']
+                            location = person_data['location']
+                            percentage_and_symbol = person_data['percentage_and_symbol']
+
+                            spoof_or_real, score, ELE = \
+                                Core_obj.return_anti_spoof(img, location)
                             # ELE: Equally Likely Events
                             if not name == 'Unknown':
-                                result, score, ELE = Core_obj.return_anti_spoof(frame_datas['img'], person_data["location"])
                                 # Bug fix
-                                if args_dict["anti_spoof"] is True:
-                                    if ELE is False:
+                                if args_dict["anti_spoof"] == True:
+                                    if ELE == False and spoof_or_real == 'real':
                                         print(
                                             name, "\n",
-                                            "\t", "Anti spoof\t\t", result, "\n",
+                                            "\t", "Anti spoof\t\t", spoof_or_real, "\n",
                                             "\t", "Anti spoof score\t", round(score * 100, 2), "%\n",
                                             "\t", "similarity\t\t", percentage_and_symbol, "\n",
                                             "\t", "coordinate\t\t", location, "\n",
@@ -282,7 +294,7 @@ if __name__ == '__main__':
                                             "-------\n"
                                         )
                                 else:
-                                    if ELE is False:
+                                    if ELE == False:
                                         print(
                                             name, "\n",
                                             "\t", "similarity\t\t", percentage_and_symbol, "\n",

@@ -24,7 +24,7 @@ class Initialize:
         tolerance = Cal().to_tolerance(self.conf_dict["similar_percentage"])
 
         LoadImage_obj = LoadImage(headless, self.conf_dict)
-        rect01_png, rect01_NG_png, resized_telop_image, cal_resized_telop_nums, resized_logo_image, \
+        rect01_png, rect01_NG_png, rect01_SPOOF_png, rect01_CANNOT_DISTINCTION_png, resized_telop_image, cal_resized_telop_nums, resized_logo_image, \
             cal_resized_logo_nums, load_unregistered_face_image, telop_image, logo_image, unregistered_face_image = \
             LoadImage_obj.LI(set_height, set_width)
 
@@ -39,6 +39,8 @@ class Initialize:
                 'date': date,
                 'rect01_png': rect01_png,
                 'rect01_NG_png': rect01_NG_png,
+                'rect01_SPOOF_png': rect01_SPOOF_png,
+                'rect01_CANNOT_DISTINCTION_png': rect01_CANNOT_DISTINCTION_png,
                 'telop_image': telop_image,
                 'resized_telop_image': resized_telop_image,
                 'cal_resized_telop_nums': cal_resized_telop_nums,
