@@ -262,8 +262,6 @@ if __name__ == '__main__':
                 for frame_datas in frame_datas_array:
                     if "face_location_list" in frame_datas:
                         img = frame_datas['img']
-                        face_location_list = frame_datas["face_location_list"]
-                        overlay = frame_datas["overlay"]
                         person_data_list = frame_datas['person_data_list']
                         
                         for person_data in person_data_list:

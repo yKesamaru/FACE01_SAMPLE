@@ -12,6 +12,7 @@ export LD_LIBRARY_PATH="/usr/local/cuda/lib64/:$LD_LIBRARY_PATH"
 export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 EOS
+'export QT_X11_NO_MITSHM=1' >> ~/.bashrc && \
 source ~/.bashrc
 
 python3 -m venv ./

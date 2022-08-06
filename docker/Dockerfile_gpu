@@ -38,6 +38,9 @@ RUN apt-get update \
     language-pack-ja \
     fonts-noto-cjk \
     vim \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
 	&& rm -rf /var/lib/apt/lists/*
 
 # configure
@@ -49,7 +52,7 @@ ARG DOCKER_UID=1000
 ARG DOCKER_USER=docker
 ARG DOCKER_PASSWORD=docker
 RUN useradd -m \
-  --uid ${DOCKER_UID} --groups sudo --shell /bin/bash ${DOCKER_USER} \
+  --uid ${DOCKER_UID} --groups sudo,video --shell /bin/bash ${DOCKER_USER} \
   && echo ${DOCKER_USER}:${DOCKER_PASSWORD} | chpasswd
 
 WORKDIR /home/${DOCKER_USER}
@@ -79,7 +82,7 @@ COPY docker/Docker_INSTALL_FACE01.sh /home/${DOCKER_USER}/FACE01_SAMPLE/
 WORKDIR /home/${DOCKER_USER}/FACE01_SAMPLE
 RUN echo ${DOCKER_PASSWORD} | sudo -S chown ${DOCKER_USER} /home/${DOCKER_USER}/FACE01_SAMPLE/Docker_INSTALL_FACE01.sh \
     && chmod +x /home/${DOCKER_USER}/FACE01_SAMPLE/Docker_INSTALL_FACE01.sh \
-    && /bin/bash -c /home/${DOCKER_USER}/FACE01_SAMPLE/Docker_INSTALL_FACE01.sh
+    && /bin/bash -c /home/${DOCKER_USER}/FACE01_SAMPLE/Docker_INSTALL_FACE01.sh \
 
 # `--clean` see bellow
 # [Have you done sudo python3 setup.py install --clean yet?](https://github.com/davisking/dlib/issues/1686#issuecomment-471509357)

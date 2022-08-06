@@ -10,3 +10,6 @@ NoneType: None
 [2022-08-06 20:15:03,630] [face01lib.video_capture] [FACE01.py] [INFO] カメラデバイス番号：0
 [2022-08-06 21:34:17,837] [face01lib.video_capture] [FACE01.py] [INFO] カメラデバイス番号：0
 [2022-08-06 21:38:17,676] [face01lib.video_capture] [FACE01.py] [INFO] カメラデバイス番号：0
+[2022-08-06 21:40:22,937] [face01lib.video_capture] [FACE01.py] [INFO] カメラデバイス番号：0
+[2022-08-06 21:41:22,137] [face01lib.video_capture] [CALL_FACE01.py] [INFO] カメラデバイス番号：0
+[2022-08-07 07:38:32,406] [face01lib.video_capture] [FACE01.py] [INFO] カメラデバイス番号：0

@@ -42,14 +42,16 @@ See [here](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/to_build_
 #### Pull Docker image
 ##### Use Nvidia GPU
 ```bash
-docker pull tokaikaoninsho/face01_gpu
-docker run --rm -it --gpus all -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.03
+docker run --rm -it \
+        --gpus all -e DISPLAY=$DISPLAY \
+        --device /dev/video0:/dev/video0:mwr \
+        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.05 
 . bin/activate
 python CALL_FACE01.py
 ```
 
 - Digest
-    - sha256:01c94cc3b60bab1846b4fcfb44f1fefa7afcfeac809109b0ec30a2ad867f0475
+    - sha256:
 - OS/ARCH
   - linux/amd64
 - Compressed Size
@@ -58,13 +60,13 @@ python CALL_FACE01.py
 ##### Only use CPU
 ```bash
 docker pull tokaikaoninsho/face01_no_gpu
-docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:1.4.03
+docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:1.4.05
 . bin/activate
 python CALL_FACE01.py
 ```
 
 - Digest
-    - sha256:08a694fecff1a0f3358ac7c6046109304416f4f484f00b037a477b42717e2221
+    - sha256:
 - OS/ARCH
   - linux/amd64
 - Compressed Size

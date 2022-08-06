@@ -10,16 +10,17 @@ import FACE01 as fg
 ## `main_process`
 It is defined as follows in the `FACE01.py` file.
 ```python
+Core_obj= Core()
 def main_process():
-    frame_datas_array = Core().frame_pre_processing(logger, args_dict, frame_generator_obj.__next__())
-    face_encodings, frame_datas_array = Core().face_encoding_process(logger, args_dict, frame_datas_array)
-    frame_datas_array = Core().frame_post_processing(logger, args_dict, face_encodings, frame_datas_array, GLOBAL_MEMORY)
+    frame_datas_array = Core_obj.frame_pre_processing(logger, args_dict, frame_generator_obj.__next__())
+    face_encodings, frame_datas_array = Core_obj.face_encoding_process(logger, args_dict, frame_datas_array)
+    frame_datas_array = Core_obj.frame_post_processing(logger, args_dict, face_encodings, frame_datas_array, GLOBAL_MEMORY)
     yield frame_datas_array
 ```
 There are 3 part of functions.
-1.  Core().frame_pre_processing(logger, args_dict, frame_generator_obj.__next__())
-2.  Core().face_encoding_process(logger, args_dict, frame_datas_array)
-3.  Core().frame_post_processing(logger, args_dict, face_encodings, frame_datas_array, GLOBAL_MEMORY)
+1.  Core_obj.frame_pre_processing(logger, args_dict, frame_generator_obj.__next__())
+2.  Core_obj.face_encoding_process(logger, args_dict, frame_datas_array)
+3.  Core_obj.frame_post_processing(logger, args_dict, face_encodings, frame_datas_array, GLOBAL_MEMORY)
 
 `Core` is the class declared in `face01lib.Core`.
 To import `Core` class, see `frame_pre_processing` section.
@@ -30,14 +31,36 @@ frame_datas_array = fg.main_process().__next__()
 ```
 ```python
 while True:
-  frame_datas_array = fg.main_process().__next__()
-  for frame_datas in frame_datas_array:
-    if "face_location_list" in frame_datas:
-        img, face_location_list, overlay, person_data_list = \
-            frame_datas['img'], frame_datas["face_location_list"], frame_datas["overlay"], frame_datas['person_data_list']
-        for person_data in person_data_list:
-            name, pict, date,  location, percentage_and_symbol = \
-                person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
+    try:
+        frame_datas_array = main_process().__next__()
+    except Exception as e:
+        print(e)
+        print(traceback.format_exc())
+        exit(0)
+    exec_times = exec_times - 1
+    if  exec_times <= 0:
+        break
+    else:
+        print(f'exec_times: {exec_times}')
+        if args_dict["headless"] == False:
+            event, _ = window.read(timeout = 1)
+            if event == sg.WIN_CLOSED:
+                print("The window was closed manually")
+                break
+        for frame_datas in frame_datas_array:
+            if "face_location_list" in frame_datas:
+                img = frame_datas['img']
+                person_data_list = frame_datas['person_data_list']
+                
+                for person_data in person_data_list:
+                    if person_data == {}:
+                        continue
+
+                    name = person_data['name']
+                    pict = person_data['pict']
+                    date = person_data['date']
+                    location = person_data['location']
+                    percentage_and_symbol = person_data['percentage_and_symbol']
 ```
 Whole code is [CALL_FACE01.py](../CALL_FACE01.py).
 
@@ -56,7 +79,7 @@ will return `Dict` contains variables `img`, `face_location_list`, `overlay`,`pe
 - `person_data_list`
   - `List[Dict{name:'', pict: '', date: '', location: tuple, percentage_and_symbol: ''}]`
 
-In `face_location_list` or `person_data_list.location` contains coordinates of faces. If you want only coordinates of faces, this function is useful.
+In `face_location_list` contains coordinates of faces. If you want only coordinates of faces, this function is useful.
 
 ### `face_encoding_process`
 If you want to get names who are in movie frames, you need call methods `frame_pre_processing`, `face_encoding_process`, and `face_encoding_process`.
@@ -86,7 +109,8 @@ Person_data_list contains some values as bellow.
   - Saved faces image file path.
 - date
 - location
-  - Coordinate of a face in a frame.
+  - Tuple: Coordinate of a face in a frame.
+  - (top, right, bottom, left)
 - percentage_and_symbol
   - Similarity of face in a frame represented by '%'.
 
