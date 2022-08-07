@@ -337,3 +337,4 @@ Per frame: 0.213[seconds]
 5. [light-weight-face-anti-spoofing](https://github.com/kprokofi/light-weight-face-anti-spoofing)
 6. [openvino2tensorflow](https://github.com/PINTO0309/openvino2tensorflow)
 7. [PINTO_model_zoo](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3)
+8. [FaceDetection-Anti-Spoof-Demo](https://github.com/Kazuhito00/FaceDetection-Anti-Spoof-Demo)
