@@ -1,9 +1,13 @@
+.vscode
 DST.code-workspace
 __pycache__
 bin
 dlib-19.24
 example
 face01lib/CMakeLists.txt
+face01lib/.vscode
+face01lib/cspell.json
+face01lib/face01lib.code-workspace
 images/描画.svg
 include
 lib
