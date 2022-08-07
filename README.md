@@ -1,5 +1,6 @@
 ![Logo](https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/g1320.png)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/yKesamaru/FACE01_SAMPLE)
+
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE)
 
 # FACE01 SAMPLE
 This repository contains FACE01 SAMPLE for UBUNTU 20.04.
