@@ -84,21 +84,20 @@ Whole example code is [here](../example/Core_return_face_location_list.py).
 
 # `load_priset_image`
 This function loads face images in `priset_face_images` folder, and make npKnown.npz file.
+
+
+# `return_anti_spoof`
+This method returns valuable `spoof_or_real`, `score` and `ELE`.
+
+In general, the results inferred from the trained model are not clearly divided into 1 and 0. For this reason, FACE01 incorporates the concept of `ELE: Equally Likely Events`. `score` originally presents two numbers between 0 ~ 1. At this time, the difference between the two numbers is set to 0.4, and the combination of numbers with a difference of 0.4 or less is considered to be "similarly certain"(=Equally Likely Events). FACE01 expresses this as ELE. That is, if the difference between the two numbers is LESS 0.4, it is not possible to determine whether it is `spoof` or` not spoof`.
 ## example
 ```python
-```
-
-# return_anti_spoof
-This method returns valuable `spoof_or_not`, `score` and `ELE`.
-
-In general, the results inferred from the trained model are not clearly divided into 1 and 0. For this reason, FACE01 incorporates the concept of `ELE: Equally Likely Events`. `score` originally presents two numbers between 0 ~ 1. At this time, the difference between the two numbers is set to 0.3, and the combination of numbers with a difference of 0.3 or less is considered to be "similarly certain"(=Equally Likely Events). FACE01 expresses this as ELE. That is, if the difference between the two numbers is LESS 0.3, it is not possible to determine whether it is `spoof` or` not spoof`.
-## example
-```python
-result, score, ELE = Core_obj.return_anti_spoof(frame_datas['img'], person_data["location"])
+from face01lib.Core import Core
+spoof_or_real, score, ELE = Core().return_anti_spoof(frame_datas['img'], person_data["location"])
 if ELE is False:
     print(
         name, "\n",
-        "\t", "Anti spoof\t\t", result, "\n",
+        "\t", "Anti spoof\t\t", spoof_or_real, "\n",
         "\t", "Anti spoof score\t", round(score * 100, 2), "%\n",
         "\t", "similarity\t\t", percentage_and_symbol, "\n",
         "\t", "coordinate\t\t", location, "\n",

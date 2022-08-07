@@ -59,13 +59,13 @@ def common_main(exec_times):
                             person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
                         # ELE: Equally Likely Events
                         if name != 'Unknown':
-                            result, score, ELE = Core_obj.return_anti_spoof(frame_datas['img'], person_data["location"])
+                            spoof_or_real, score, ELE = Core_obj.return_anti_spoof(frame_datas['img'], person_data["location"])
                             # Bug fix
                             if fg.args_dict["anti_spoof"] is True:
                                 if ELE is False:
                                     print(
                                         name, "\n",
-                                        "\t", "Anti spoof\t\t", result, "\n",
+                                        "\t", "Anti spoof\t\t", spoof_or_real, "\n",
                                         "\t", "Anti spoof score\t", round(score * 100, 2), "%\n",
                                         "\t", "similarity\t\t", percentage_and_symbol, "\n",
                                         "\t", "coordinate\t\t", location, "\n",
