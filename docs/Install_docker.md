@@ -1,7 +1,7 @@
 For Ubuntu, you can choose some method to install Docker, and before to install, should choice `Docker Desktop` or `Docker Engine`. Official tutorial is [here](https://docs.docker.com/engine/install/ubuntu/).
 This section, we talk about install `Docker Engine` and `Docker ce`.
 
-*If you're PC is not installed Nvidia GPU card, refer [section](docs/to_build_docker_image.md) 'To build FACE01 docker image without nvidia-docker2 package'.*
+*If you're PC is not installed NVIDIA GPU card, refer [section]([docs/to_build_docker_image.md](Install_docker.md#if-youre-pc-is-not-installed-nvidia-gpu-card)) 'To build FACE01 docker image without nvidia-docker2 package'.*
 
 ## NOTE
 You must meet the conditions listed below. See [official site](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#platform-requirements).
@@ -23,7 +23,7 @@ docker --version
 lspci | grep -ie nvidia
 ## List of architecture is [here](https://en.wikipedia.org/wiki/Category:Nvidia_microarchitectures) and [here](https://en.wikipedia.org/wiki/List_of_Nvidia_graphics_processing_units) and [here](https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/).
 
-# Your Nvidia linux driver version.
+# Your NVIDIA linux driver version.
 nvidia-smi
 ```
 
@@ -68,7 +68,7 @@ If you want to confirm installed Docker, try the following command.
 `sudo docker run hello-world`
 
 ## Install nvidia-docker2
-To install `nvidia-docker2`, refer to [Nvidia official tutorial](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#setting-up-nvidia-container-toolkit).
+To install `nvidia-docker2`, refer to [NVIDIA official tutorial](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#setting-up-nvidia-container-toolkit).
 ```bash
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
       && curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
@@ -107,10 +107,10 @@ Also, you chose some manner as bellow.
 ### Delete all except specific images
 `docker images -aq | grep -v 98c2341c70ce | xargs docker rmi`
 
-## If you're PC is not installed Nvidia GPU card
+## If you're PC is not installed NVIDIA GPU card
 The Dockerfile you build must be `Dockerfile_no_gpu`.
 The settings in config.ini are limited to bellow.
 - `headless = True`
 - `use_pipe = True`
 
-See 'To build FACE01 docker image without nvidia-docker2 package' section described [here](./to_build_docker_image.md/).
+See 'To build FACE01 docker image without nvidia-docker2 package' section described [here](./docker.md)

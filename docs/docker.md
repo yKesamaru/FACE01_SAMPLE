@@ -9,7 +9,7 @@ docker pull tokaikaoninsho/face01_gpu:1.4.05
 # OR USE ONLY CPU
 docker pull tokaikaoninsho/face01_no_gpu
 ```
-## Use Nvidia GPU
+## Use NVIDIA GPU
 ```bash
 docker run --rm -it \
         --gpus all -e DISPLAY=$DISPLAY \
