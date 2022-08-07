@@ -3,7 +3,7 @@ This section, we talk about install `Docker Engine` and `Docker ce`.
 
 *If you're PC is not installed Nvidia GPU card, refer [section](docs/to_build_docker_image.md) 'To build FACE01 docker image without nvidia-docker2 package'.*
 
-# NOTE
+## NOTE
 You must meet the conditions listed below. See [official site](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#platform-requirements).
 
 1. GNU/Linux x86_64 with kernel version > 3.10
@@ -27,7 +27,7 @@ lspci | grep -ie nvidia
 nvidia-smi
 ```
 
-# Use convenient script
+## Use convenient script
 You can install docker using convenient script.
 ```bash
 sudo apt update && sudo apt upgrade -y \
@@ -35,7 +35,7 @@ sudo apt update && sudo apt upgrade -y \
   && sudo systemctl --now enable docker
 ```
 
-# Manually install
+## Manually install
 Also, you can install docker manually.
 ```bash
 # Uninstall old versions
@@ -67,7 +67,7 @@ sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 If you want to confirm installed Docker, try the following command.
 `sudo docker run hello-world`
 
-# Install nvidia-docker2
+## Install nvidia-docker2
 To install `nvidia-docker2`, refer to [Nvidia official tutorial](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#setting-up-nvidia-container-toolkit).
 ```bash
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
@@ -86,7 +86,7 @@ sudo docker run --rm --gpus all nvidia/cuda:11.0.3-base-ubuntu20.04 nvidia-smi
 ```
 ![](img/PASTE_IMAGE_2022-07-25-10-24-45.png)
 
-# Post installation
+## Post installation
 If you don’t want to preface the docker command with sudo, create a Unix group called docker and add users to it.
 ```bash
 sudo groupadd docker
@@ -94,20 +94,20 @@ sudo usermod -aG docker $USER
 ```
 See [here](https://docs.docker.com/engine/install/linux-postinstall/)
 
-# When you want to delete all at once
+## When you want to delete all at once
 See [`docker prune`](https://docs.docker.com/config/pruning/).
 Japanese is [here](https://docs.docker.jp/config/pruning.html).
 Also, you chose some manner as bellow.
-## Stop all containers
+### Stop all containers
 `docker stop $(docker ps -q)`
-## Delete all containers
+### Delete all containers
 `docker rm $(docker ps -q -a)`
-## Delete all images
+### Delete all images
 `docker rmi $(docker images -q)`
-## Delete all except specific images
+### Delete all except specific images
 `docker images -aq | grep -v 98c2341c70ce | xargs docker rmi`
 
-# If you're PC is not installed Nvidia GPU card
+## If you're PC is not installed Nvidia GPU card
 The Dockerfile you build must be `Dockerfile_no_gpu`.
 The settings in config.ini are limited to bellow.
 - `headless = True`

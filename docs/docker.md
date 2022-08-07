@@ -1,22 +1,66 @@
+# To install Docker
+See [here](Install_docker.md).
+
+# Pull Docker image
+The easiest way to use Docker is to pull the image.
+```bash
+# USE NVIDIA GPU
+docker pull tokaikaoninsho/face01_gpu:1.4.05
+# OR USE ONLY CPU
+docker pull tokaikaoninsho/face01_no_gpu
+```
+## Use Nvidia GPU
+```bash
+docker run --rm -it \
+        --gpus all -e DISPLAY=$DISPLAY \
+        --device /dev/video0:/dev/video0:mwr \
+        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.05 
+```
+```bash
+. bin/activate
+python CALL_FACE01.py
+```
+
+## Only use CPU
+```bash
+docker run --rm -it \
+        -e DISPLAY=$DISPLAY \
+        --device /dev/video0:/dev/video0:mwr \
+        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:1.4.05 
+```
+```bash
+. bin/activate
+python CALL_FACE01.py
+```
+
+# Build Docker image
+If you want to build the Docker Image yourself,
+See bellow.
 
 First, you have to clone FACE01_SAMPLE repository.
 ```bash
 git clone https://github.com/yKesamaru/FACE01_SAMPLE.git
 ```
-# To build FACE01 docker image with nvidia-docker2 package
-## To make image
+## Build FACE01 docker image with nvidia-docker2 package
+To make image
 ```bash
 cd FACE01_SAMPLE
 docker build -t face01_gpu:1.4.05 -f docker/Dockerfile_gpu . --network host
 ```
 
-# Check the completed image.
+## Build FACE01 docker image without nvidia-docker2 package
+```bash
+cd FACE01_SAMPLE
+docker build -t face01_no_gpu:1.4.05 -f docker/Dockerfile_no_gpu . --network host
+```
+
+## Check the completed image.
 ```bash
 docker images
 REPOSITORY    TAG                       IMAGE ID       CREATED         SIZE
 face01_gpu    1.4.05                    41b1d82ee908   7 seconds ago   17.5GB
 ```
-# Launch FACE01_SAMPLE
+## Launch FACE01_SAMPLE
 ```bash
 docker run --rm -it \
         --gpus all -e DISPLAY=$DISPLAY \
@@ -50,6 +94,25 @@ Docker_INSTALL_FACE01.sh  bin              dlib-19.24.tar.bz2  include  noFace  
 FACE01.py                 config.ini       face01lib           lib      npKnown.npz  pyvenv.cfg          some_people.mp4
 # Launch Python virtual environment (Important!)
 docker@ee44d08e933f:~/FACE01_SAMPLE$ . bin/activate
+
+```
+
+# Start FACE01 example
+## Dockerfile_gpu
+This docker image is build with dockerfile named 'Dockerfile_gpu'.
+```bash
+# Launch Docker image
+docker run --rm -it \
+        --gpus all -e DISPLAY=$DISPLAY \
+        --device /dev/video0:/dev/video0:mwr \
+        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.05 
+# Enter the Python virtual environment (IMPORTANT!)
+docker@e85311b5908e:~/FACE01_SAMPLE$ . bin/activate
+(FACE01_SAMPLE) docker@e85311b5908e:~/FACE01_SAMPLE$ 
+# Launch FACE01_SAMPLE
+(FACE01_SAMPLE) docker@e85311b5908e:~/FACE01_SAMPLE$ python CALL_FACE01.py
+```
+```bash
 # Launch FACE01
 (FACE01_SAMPLE) docker@ee44d08e933f:~/FACE01_SAMPLE$ python CALL_FACE01.py 
 [2022-07-29 09:14:27,219] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
@@ -90,11 +153,20 @@ Number of frames processed: 50
 Total processing time: 9.75[seconds]
 Per frame: 0.195[seconds]
 ```
-![](img/PASTE_IMAGE_2022-07-29-09-15-30.png)
 
+![](https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/img/PASTE_IMAGE_2022-07-20-07-00-03.png)
 
-# To build FACE01 docker image without nvidia-docker2 package
+## Dockerfile_no_gpu
 ```bash
-cd FACE01_SAMPLE
-docker build -t face01_no_gpu:1.4.05 -f docker/Dockerfile_no_gpu . --network host
+# Launch Docker image
+docker run --rm -it \
+        -e DISPLAY=$DISPLAY \
+        --device /dev/video0:/dev/video0:mwr \
+        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:1.4.05 
+# Enter the Python virtual environment (IMPORTANT!)
+docker@e85311b5908e:~/FACE01_SAMPLE$ . bin/activate
+(FACE01_SAMPLE) docker@e85311b5908e:~/FACE01_SAMPLE$ 
+# Launch FACE01_SAMPLE
+(FACE01_SAMPLE) docker@e85311b5908e:~/FACE01_SAMPLE$ python CALL_FACE01.py
 ```
+![USB CAM](https://user-images.githubusercontent.com/93259837/183275274-99f9d575-3c76-44a4-9da3-d14c8faf0370.mp4)
