@@ -42,6 +42,7 @@ See [here](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/to_build_
 #### Pull Docker image
 ##### Use Nvidia GPU
 ```bash
+docker pull tokaikaoninsho/face01_gpu:1.4.05
 docker run --rm -it \
         --gpus all -e DISPLAY=$DISPLAY \
         --device /dev/video0:/dev/video0:mwr \
@@ -50,34 +51,26 @@ docker run --rm -it \
 python CALL_FACE01.py
 ```
 
-- Digest
-    - sha256:
-- OS/ARCH
-  - linux/amd64
-- Compressed Size
-  - 8.85 GB
-
 ##### Only use CPU
 ```bash
 docker pull tokaikaoninsho/face01_no_gpu
-docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:1.4.05
+docker run --rm -it \
+        -e DISPLAY=$DISPLAY \
+        --device /dev/video0:/dev/video0:mwr \
+        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:1.4.05 
 . bin/activate
 python CALL_FACE01.py
 ```
-
-- Digest
-    - sha256:
-- OS/ARCH
-  - linux/amd64
-- Compressed Size
-  - 2.08 GB
 
 ### Start FACE01 example
 #### Dockerfile_gpu
 This docker image is build with dockerfile named 'Dockerfile_gpu'.
 ```bash
 # Launch Docker image
-docker run --rm -it --gpus all -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.03
+docker run --rm -it \
+        --gpus all -e DISPLAY=$DISPLAY \
+        --device /dev/video0:/dev/video0:mwr \
+        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.05 
 # Enter the Python virtual environment
 docker@e85311b5908e:~/FACE01_SAMPLE$ . bin/activate
 (FACE01_SAMPLE) docker@e85311b5908e:~/FACE01_SAMPLE$ 
@@ -89,10 +82,12 @@ docker@e85311b5908e:~/FACE01_SAMPLE$ . bin/activate
 #### Dockerfile_no_gpu
 
 ```bash
-docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:1.4.03
+docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:1.4.05
+```
 
 # Configuration
 Edit `config.ini` file to configure FACE01.
+If you use docker face01_gpu, you can modify the config.ini with `vim`.
 If you want to use the http protocol as the input source, replace the `movie =` part of the `config.ini` file with` movie = http: // <IP> / cgi-bin / <parameter> `. If you want to store the authentication information, enter `user =" ", passwd =" "` in the `config.ini` file as above.
 See [docs/config.ini](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/config_ini.md) for details.
 
