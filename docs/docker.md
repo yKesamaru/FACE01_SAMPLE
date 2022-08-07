@@ -169,4 +169,5 @@ docker@e85311b5908e:~/FACE01_SAMPLE$ . bin/activate
 # Launch FACE01_SAMPLE
 (FACE01_SAMPLE) docker@e85311b5908e:~/FACE01_SAMPLE$ python CALL_FACE01.py
 ```
-![USB CAM](https://user-images.githubusercontent.com/93259837/183275274-99f9d575-3c76-44a4-9da3-d14c8faf0370.mp4)
+![](img/USB_CAM.gif)
+[mp4 is here](https://user-images.githubusercontent.com/93259837/183275274-99f9d575-3c76-44a4-9da3-d14c8faf0370.mp4)
