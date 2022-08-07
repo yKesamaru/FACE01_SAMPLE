@@ -14,6 +14,7 @@ NOTE: Do not edit.
   - Default: True
   - If set `False`, display GUI window, and process speed get slowly.
 - anti_spoof
+  - NOTE: Anti-spoof model is included with this sample, but please do ***not*** use this model as is for commercial use. Please contact tokai-kaoninsho for details.
   - bool
   - Default: False
 

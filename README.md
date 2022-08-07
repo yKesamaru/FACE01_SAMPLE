@@ -37,27 +37,37 @@ Alternatively, refer to INSTALL_FACE01.sh and install manually.
 See [here](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/install_docker.md).
 You can choose from `To build Docker` or `Pull Docker image`.
 #### To build Docker
+If you want to build the Docker Image yourself,
 See [here](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/to_build_docker_image.md)
 
 #### Pull Docker image
+The easiest way to use Docker is to pull the image.
+```bash
+# USE NVIDIA GPU
+docker pull tokaikaoninsho/face01_gpu:1.4.05
+# OR USE ONLY CPU
+docker pull tokaikaoninsho/face01_no_gpu
+```
 ##### Use Nvidia GPU
 ```bash
-docker pull tokaikaoninsho/face01_gpu:1.4.05
 docker run --rm -it \
         --gpus all -e DISPLAY=$DISPLAY \
         --device /dev/video0:/dev/video0:mwr \
         -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.05 
+```
+```bash
 . bin/activate
 python CALL_FACE01.py
 ```
 
 ##### Only use CPU
 ```bash
-docker pull tokaikaoninsho/face01_no_gpu
 docker run --rm -it \
         -e DISPLAY=$DISPLAY \
         --device /dev/video0:/dev/video0:mwr \
         -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:1.4.05 
+```
+```bash
 . bin/activate
 python CALL_FACE01.py
 ```
@@ -82,7 +92,10 @@ docker@e85311b5908e:~/FACE01_SAMPLE$ . bin/activate
 #### Dockerfile_no_gpu
 
 ```bash
-docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:1.4.05
+docker run --rm -it \
+        -e DISPLAY=$DISPLAY \
+        --device /dev/video0:/dev/video0:mwr \
+        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:1.4.05 
 ```
 
 # Configuration
