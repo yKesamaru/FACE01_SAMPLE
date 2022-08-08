@@ -15,7 +15,7 @@ __URL__ = 'https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof
 from datetime import datetime
 from platform import system
 from traceback import format_exc
-import traceback
+import mojimoji
 
 import cv2
 # from asyncio.log import logger
@@ -1070,6 +1070,8 @@ class Core:
         operating_system: str  = system()
         fontpath: str = ''
         if (operating_system == 'Linux'):
+            # fontpath = "/home/terms/.local/share/fonts/HackGenNerd_v2.5.3/HackGenNerdConsole-Regular.ttf"
+            # fontpath = "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"
             fontpath = "/usr/share/fonts/truetype/mplus/mplus-1mn-bold.ttf"
         elif (operating_system == 'Windows'):
                         # fontpath = "C:/WINDOWS/FONTS/BIZ-UDGOTHICR.TTC"
@@ -1085,6 +1087,7 @@ class Core:
         self.name = name
         self.fontsize = fontsize
         self.bottom = bottom
+
         center = int((self.left + self.right)/2)
         chaCenter = int(len(self.name)/2)
         pos = center - (chaCenter* self.fontsize) - int(self.fontsize/2)
@@ -1100,10 +1103,11 @@ class Core:
         self.p = p
         self.tolerance = tolerance
         self.position = position
+
         local_draw_obj = ImageDraw.Draw(self.pil_img_obj)
         if self.name == 'Unknown':  ## nameがUnknownだった場合
             # draw.text(Unknown_position, '照合不一致', fill=(255, 255, 255, 255), font = font)
-            local_draw_obj.text(self.Unknown_position, 'UNREGISTERED', fill=(255, 255, 255, 255), font = self.font)
+            local_draw_obj.text(self.Unknown_position, mojimoji.han_to_zen('UNREGISTERED'), fill=(255, 255, 255, 255), font = self.font)
             # local_draw_obj.text(self.Unknown_position, '　未登録', fill=(255, 255, 255, 255), font = self.font)
         else:  ## nameが既知の場合
             # if percentage > 99.0:
@@ -1139,6 +1143,10 @@ class Core:
         self.p = p
         self.tolerance = tolerance
         self.pil_img_obj = pil_img_obj
+
+        # すべての文字を全角変換する
+        self.name = mojimoji.han_to_zen(self.name, ascii=True, kana=True, digit=True)
+
         fontpath = self.return_fontpath(logger)
         """TODO #16 FONTSIZEハードコーティング訂正"""
         fontsize = 14
