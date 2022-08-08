@@ -53,3 +53,4 @@ types-setuptools==57.4.18
 types-urllib3==1.26.16
 typing_extensions==4.2.0
 urllib3==1.26.9
+mojimoji==0.0.12
