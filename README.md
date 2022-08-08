@@ -3,6 +3,7 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE)
 ![](https://img.shields.io/badge/Release-v1.4.05-blue)
 
+![](./docs/img/ROMAN_HOLIDAY.GIF)
 # FACE01 SAMPLE
 This repository contains FACE01 SAMPLE for UBUNTU 20.04.
 If you are a Windows user, please use this on WSLg.

@@ -8,6 +8,7 @@ from face01lib.Core import Core
 Core_obj = Core()
 from memory_profiler import profile  # @profile()
 from sys import exit
+from traceback import format_exc
 
 import FACE01 as fg
 
@@ -36,6 +37,7 @@ def common_main(exec_times):
         try:
             frame_datas_array = fg.main_process().__next__()
         except Exception as e:
+            print(format_exc(limit=None, chain=True))
             print(e)
             exit(0)
         exec_times = exec_times - 1
