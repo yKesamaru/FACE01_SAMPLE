@@ -4,6 +4,18 @@
 ![](https://img.shields.io/badge/Release-v1.4.05-blue)
 
 ![](./docs/img/ROMAN_HOLIDAY.GIF)
+```bash
+# result
+Audrey Hepburn 
+         Anti spoof              real 
+         Anti spoof score        100.0 %
+         similarity              99.1% 
+         coordinate              (123, 390, 334, 179) 
+         time                    2022,08,09,04,19,35,552949 
+         output                  output/Audrey Hepburn_2022,08,09,04,19,35,556237_0.39.png 
+ -------
+ ```
+ 
 # FACE01 SAMPLE
 This repository contains FACE01 SAMPLE for UBUNTU 20.04.
 If you are a Windows user, please use this on WSLg.
