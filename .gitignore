@@ -18,3 +18,4 @@ priset_face_images/debug/*.png
 pyvenv.cfg
 restats
 share
+SETTING_MANAGER.py
