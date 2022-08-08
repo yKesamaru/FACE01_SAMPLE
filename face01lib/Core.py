@@ -1079,6 +1079,7 @@ class Core:
         return fontpath
 
     def calculate_text_position(self, left,right,name,fontsize,bottom):
+        # TODO: #17 英数字のみの場合の位置決定バグ
         self.left = left
         self.right = right
         self.name = name
@@ -1102,7 +1103,8 @@ class Core:
         local_draw_obj = ImageDraw.Draw(self.pil_img_obj)
         if self.name == 'Unknown':  ## nameがUnknownだった場合
             # draw.text(Unknown_position, '照合不一致', fill=(255, 255, 255, 255), font = font)
-            local_draw_obj.text(self.Unknown_position, '　未登録', fill=(255, 255, 255, 255), font = self.font)
+            local_draw_obj.text(self.Unknown_position, 'UNREGISTERED', fill=(255, 255, 255, 255), font = self.font)
+            # local_draw_obj.text(self.Unknown_position, '　未登録', fill=(255, 255, 255, 255), font = self.font)
         else:  ## nameが既知の場合
             # if percentage > 99.0:
             if self.p < self.tolerance:
@@ -1118,7 +1120,17 @@ class Core:
         frame = np.array(pil_img_obj)
         return frame
 
-    def draw_text_for_name(self, logger, left,right,bottom,name, p,tolerance,pil_img_obj):
+    def draw_text_for_name(
+            self,
+            logger,
+            left,
+            right,
+            bottom,
+            name,
+            p,
+            tolerance,
+            pil_img_obj
+        ):
         self.logger = logger
         self.left = left
         self.right = right
@@ -1128,13 +1140,29 @@ class Core:
         self.tolerance = tolerance
         self.pil_img_obj = pil_img_obj
         fontpath = self.return_fontpath(logger)
-        """TODO FONTSIZEハードコーティング訂正"""
+        """TODO #16 FONTSIZEハードコーティング訂正"""
         fontsize = 14
         font = ImageFont.truetype(fontpath, fontsize, encoding = 'utf-8')
         # テキスト表示位置決定
-        position, Unknown_position = self.calculate_text_position(self.left,self.right,self.name,fontsize,self.bottom)
+        position, Unknown_position = \
+            self.calculate_text_position(
+                self.left,
+                self.right,
+                self.name,
+                fontsize,
+                self.bottom
+            )
         # nameの描画
-        self.pil_img_obj = self.draw_name(self.name,self.pil_img_obj, Unknown_position, font, self.p, self.tolerance, position)
+        self.pil_img_obj = \
+            self.draw_name(
+                self.name,
+                self.pil_img_obj,
+                Unknown_position,
+                font,
+                self.p,
+                self.tolerance,
+                position
+            )
         # pil_img_objをnumpy配列に変換
         resized_frame = self.convert_pil_img_to_ndarray(self.pil_img_obj)
         return resized_frame

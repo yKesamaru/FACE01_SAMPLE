@@ -42,7 +42,7 @@ dir = dirname(__file__)
 logger = Logger().logger(name, dir)
 Cal().cal_specify_date(logger)
 ImageFile.LOAD_TRUNCATED_IMAGES = True
-"""TODO opencvの環境変数変更 要調査"""
+"""TODO #18 opencvの環境変数変更 要調査"""
 # environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;udp"
 environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;tcp"
 
@@ -234,7 +234,7 @@ class VidCap:
                 if ret:
                     live_camera_number = camera_number 
                     break
-            logger.info(f'カメラデバイス番号：{camera_number}')
+            logger.info(f'CAMERA DEVICE NUMBER: {camera_number}')
             while vcap.isOpened(): 
                 # frame_skipの数値に満たない場合は処理をスキップ
                 for frame_skip_counter in range(1, self.args_dict["frame_skip"]):
@@ -242,8 +242,7 @@ class VidCap:
                     if frame_skip_counter < self.args_dict["frame_skip"]:
                         continue
                     if ret == False:
-                        logger.warning("movieが開けません")
-                        logger.warning("以下のエラーをシステム管理者へお伝えください")
+                        logger.warning("ERROR OCURRED\nREPORTED BY FACE01")
                         logger.warning("-" * 20)
                         logger.warning(format_exc(limit=None, chain=True))
                         logger.warning("-" * 20)
@@ -337,39 +336,42 @@ class VidCap:
             vcap = cv2.VideoCapture(movie, cv2.CAP_FFMPEG)
             while vcap.isOpened(): 
                 # frame_skipの数値に満たない場合は処理をスキップ
-                for frame_skip_counter in range(1, self.args_dict["frame_skip"]):
+                for frame_skip_counter in range(1, self.args_dict["frame_skip"]+1):
                     ret, frame = vcap.read()
                     if frame_skip_counter < self.args_dict["frame_skip"]:
                         continue
                     if ret == False:
-                        logger.warning("movieが開けません")
-                        logger.warning("以下のエラーをシステム管理者へお伝えください")
+                        logger.warning("ERROR OCURRED")
+                        logger.warning("DATA RECEPTION HAS ENDED")
                         logger.warning("-" * 20)
                         logger.warning(format_exc(limit=None, chain=True))
                         logger.warning("-" * 20)
                         self.finalize(vcap)
-                    break
-                else:
-                    """C++実装試験
-                    # frame = frame.astype(dtype='float64')
-                    size(frame.shape, frame.strides, set_area, frame, TOP_LEFT)
-                    """
-                    # 画角値をもとに各frameを縮小
-                    # python版
-                    frame = self.angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)  # type: ignore
-                    # 各frameリサイズ
-                    resized_frame = self.resize_frame(set_width, set_height, frame)
-                    """DEBUG
-                    cv2.imshow("video_capture_DEBUG", frame)
-                    cv2.moveWindow("video_capture_DEBUG", 0,0)
-                    cv2.waitKey(3000)
-                    cv2.destroyAllWindows()
-                    """
-                    yield resized_frame
+                        break
+                # else:
+                    if ret == True:
+                        """C++実装試験
+                        # frame = frame.astype(dtype='float64')
+                        size(frame.shape, frame.strides, set_area, frame, TOP_LEFT)
+                        """
+                        # 画角値をもとに各frameを縮小
+                        # python版
+                        frame = self.angle_of_view_specification(set_area, frame, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER)  # type: ignore
+                        # 各frameリサイズ
+                        resized_frame = self.resize_frame(set_width, set_height, frame)
+                        """DEBUG
+                        cv2.imshow("video_capture_DEBUG", frame)
+                        cv2.moveWindow("video_capture_DEBUG", 0,0)
+                        cv2.waitKey(3000)
+                        cv2.destroyAllWindows()
+                        """
+                        yield resized_frame
+                    elif ret == False:
+                        self.finalize(vcap)
 
-                    # resized_frame_list.append(resized_frame)
-                    # if len(resized_frame_list) == 5:
-                    #     resized_frame_list_copy = resized_frame_list
-                    #     resized_frame_list = []
-                    #     yield resized_frame_list_copy
+                        # resized_frame_list.append(resized_frame)
+                        # if len(resized_frame_list) == 5:
+                        #     resized_frame_list_copy = resized_frame_list
+                        #     resized_frame_list = []
+                        #     yield resized_frame_list_copy
 

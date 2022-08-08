@@ -202,3 +202,90 @@ NoneType: None
 [2022-08-02 12:12:29,343] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：0
 [2022-08-06 16:52:58,301] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：0
 [2022-08-06 16:55:05,753] [face01lib.video_capture] [video_capture.py] [INFO] カメラデバイス番号：0
+[2022-08-07 09:42:29,913] [face01lib.video_capture] [FACE01.py] [INFO] カメラデバイス番号：0
+[2022-08-07 09:42:51,682] [face01lib.video_capture] [FACE01.py] [INFO] カメラデバイス番号：0
+[2022-08-07 09:44:33,285] [face01lib.video_capture] [FACE01.py] [INFO] カメラデバイス番号：0
+[2022-08-07 16:38:43,660] [face01lib.video_capture] [FACE01.py] [INFO] カメラデバイス番号：0
+[2022-08-07 16:39:19,720] [face01lib.video_capture] [FACE01.py] [INFO] カメラデバイス番号：0
+[2022-08-07 16:39:51,502] [face01lib.video_capture] [FACE01.py] [INFO] カメラデバイス番号：0
+[2022-08-07 16:40:48,188] [face01lib.video_capture] [FACE01.py] [INFO] カメラデバイス番号：0
+[2022-08-07 16:41:25,559] [face01lib.video_capture] [FACE01.py] [INFO] カメラデバイス番号：0
+[2022-08-07 17:00:33,806] [face01lib.video_capture] [FACE01.py] [INFO] カメラデバイス番号：0
+[2022-08-08 10:59:49,281] [face01lib.video_capture] [FACE01.py] [WARNING] 受信できません
+[2022-08-08 10:59:49,282] [face01lib.video_capture] [FACE01.py] [WARNING] --------------------
+[2022-08-08 10:59:49,283] [face01lib.video_capture] [FACE01.py] [WARNING] NoneType: None
+
+[2022-08-08 10:59:49,284] [face01lib.video_capture] [FACE01.py] [WARNING] --------------------
+[2022-08-08 10:59:49,285] [face01lib.video_capture] [FACE01.py] [WARNING] 終了します
+[2022-08-08 11:01:14,861] [face01lib.video_capture] [FACE01.py] [WARNING] 受信できません
+[2022-08-08 11:01:14,862] [face01lib.video_capture] [FACE01.py] [WARNING] --------------------
+[2022-08-08 11:01:14,862] [face01lib.video_capture] [FACE01.py] [WARNING] NoneType: None
+
+[2022-08-08 11:01:14,862] [face01lib.video_capture] [FACE01.py] [WARNING] --------------------
+[2022-08-08 11:01:14,862] [face01lib.video_capture] [FACE01.py] [WARNING] 終了します
+[2022-08-08 11:02:14,645] [face01lib.video_capture] [FACE01.py] [WARNING] 受信できません
+[2022-08-08 11:02:14,645] [face01lib.video_capture] [FACE01.py] [WARNING] --------------------
+[2022-08-08 11:02:14,646] [face01lib.video_capture] [FACE01.py] [WARNING] NoneType: None
+
+[2022-08-08 11:02:14,646] [face01lib.video_capture] [FACE01.py] [WARNING] --------------------
+[2022-08-08 11:02:14,646] [face01lib.video_capture] [FACE01.py] [WARNING] 終了します
+[2022-08-08 11:06:18,415] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-08-08 11:06:18,416] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-08 11:06:18,417] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-08-08 11:06:18,417] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-08 11:06:18,418] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-08-08 11:37:04,184] [face01lib.video_capture] [video_capture.py] [WARNING] ERROR OCURRED
+[2022-08-08 11:37:04,185] [face01lib.video_capture] [video_capture.py] [WARNING] REPORTED BY FACE01
+[2022-08-08 11:37:04,185] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-08 11:37:04,186] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-08-08 11:37:04,186] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-08 11:41:44,074] [face01lib.video_capture] [video_capture.py] [WARNING] ERROR OCURRED
+[2022-08-08 11:41:44,075] [face01lib.video_capture] [video_capture.py] [WARNING] REPORTED BY FACE01
+[2022-08-08 11:41:44,075] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-08 11:41:44,076] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-08-08 11:41:44,076] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-08 11:44:24,227] [face01lib.video_capture] [video_capture.py] [WARNING] ERROR OCURRED
+[2022-08-08 11:44:24,227] [face01lib.video_capture] [video_capture.py] [WARNING] REPORTED BY FACE01
+[2022-08-08 11:44:24,228] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-08 11:44:24,228] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-08-08 11:44:24,228] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-08 11:51:22,770] [face01lib.video_capture] [video_capture.py] [WARNING] ERROR OCURRED
+[2022-08-08 11:51:22,770] [face01lib.video_capture] [video_capture.py] [WARNING] REPORTED BY FACE01
+[2022-08-08 11:51:22,771] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-08 11:51:22,772] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-08-08 11:51:22,772] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-08 11:57:21,127] [face01lib.video_capture] [video_capture.py] [WARNING] ERROR OCURRED
+[2022-08-08 11:57:21,128] [face01lib.video_capture] [video_capture.py] [WARNING] DATA RECEPTION HAS ENDED
+[2022-08-08 11:57:21,128] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-08 11:57:21,129] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-08-08 11:57:21,129] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-08 12:01:49,447] [face01lib.video_capture] [video_capture.py] [WARNING] ERROR OCURRED
+[2022-08-08 12:01:49,448] [face01lib.video_capture] [video_capture.py] [WARNING] DATA RECEPTION HAS ENDED
+[2022-08-08 12:01:49,448] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-08 12:01:49,449] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-08-08 12:01:49,450] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-08 12:05:38,464] [face01lib.video_capture] [video_capture.py] [WARNING] ERROR OCURRED
+[2022-08-08 12:05:38,464] [face01lib.video_capture] [video_capture.py] [WARNING] DATA RECEPTION HAS ENDED
+[2022-08-08 12:05:38,465] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-08 12:05:38,465] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-08-08 12:05:38,466] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-08 12:08:41,706] [face01lib.video_capture] [video_capture.py] [WARNING] ERROR OCURRED
+[2022-08-08 12:08:41,707] [face01lib.video_capture] [video_capture.py] [WARNING] DATA RECEPTION HAS ENDED
+[2022-08-08 12:08:41,707] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-08 12:08:41,708] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-08-08 12:08:41,709] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-08 13:11:47,017] [face01lib.video_capture] [video_capture.py] [WARNING] ERROR OCURRED
+[2022-08-08 13:11:47,018] [face01lib.video_capture] [video_capture.py] [WARNING] DATA RECEPTION HAS ENDED
+[2022-08-08 13:11:47,018] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-08 13:11:47,019] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-08-08 13:11:47,019] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------

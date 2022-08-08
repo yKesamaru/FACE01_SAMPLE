@@ -202,10 +202,21 @@ def Measure_processing_time_backward():
 frame_generator_obj = VidCap().frame_generator(args_dict)
 # @profile()
 def main_process():
-    frame_datas_array = Core_obj.frame_pre_processing(logger, args_dict, frame_generator_obj.__next__())
-    face_encodings, frame_datas_array = Core_obj.face_encoding_process(logger, args_dict, frame_datas_array)
-    frame_datas_array = Core_obj.frame_post_processing(logger, args_dict, face_encodings, frame_datas_array, GLOBAL_MEMORY)
-    yield frame_datas_array
+    try:
+        frame_datas_array = Core_obj.frame_pre_processing(logger, args_dict, frame_generator_obj.__next__())
+        face_encodings, frame_datas_array = Core_obj.face_encoding_process(logger, args_dict, frame_datas_array)
+        frame_datas_array = Core_obj.frame_post_processing(logger, args_dict, face_encodings, frame_datas_array, GLOBAL_MEMORY)
+        yield frame_datas_array
+    except StopIteration:
+        logger.warning("DATA RECEPTION HAS ENDED")
+        exit(0)
+    except Exception as e:
+        logger.warning("ERROR OCURRED")
+        logger.warning("-" * 20)
+        logger.warning(f"ERROR TYPE: {e}")
+        logger.warning(format_exc(limit=None, chain=True))
+        logger.warning("-" * 20)
+        exit(0)
 
 # main =================================================================
 if __name__ == '__main__':
@@ -262,8 +273,6 @@ if __name__ == '__main__':
                 for frame_datas in frame_datas_array:
                     if "face_location_list" in frame_datas:
                         img = frame_datas['img']
-                        face_location_list = frame_datas["face_location_list"]
-                        overlay = frame_datas["overlay"]
                         person_data_list = frame_datas['person_data_list']
                         
                         for person_data in person_data_list:
