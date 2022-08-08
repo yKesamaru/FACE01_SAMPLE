@@ -1,6 +1,5 @@
 #!python
 #cython: language_level=3
-
 """mediapipe for python, see bellow
 https://github.com/google/mediapipe/tree/master/mediapipe/python
 """
@@ -16,7 +15,7 @@ __URL__ = 'https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof
 from datetime import datetime
 from platform import system
 from traceback import format_exc
-import traceback
+import mojimoji
 
 import cv2
 # from asyncio.log import logger
@@ -580,7 +579,7 @@ class Core:
                     except Exception as e:
                         print(f'resized_frame: {resized_frame}\nface_location_list:  {face_location_list}')
                         print(f'ERROR: {e}')
-                        print(traceback.format_exc())
+                        print(format_exc())
                         exit(0)
                 elif self.args_dict["use_pipe"] == False and  self.args_dict["person_frame_face_encoding"] == True:
                     self.logger.warning("config.ini:")
@@ -1071,6 +1070,8 @@ class Core:
         operating_system: str  = system()
         fontpath: str = ''
         if (operating_system == 'Linux'):
+            # fontpath = "/home/terms/.local/share/fonts/HackGenNerd_v2.5.3/HackGenNerdConsole-Regular.ttf"
+            # fontpath = "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"
             fontpath = "/usr/share/fonts/truetype/mplus/mplus-1mn-bold.ttf"
         elif (operating_system == 'Windows'):
                         # fontpath = "C:/WINDOWS/FONTS/BIZ-UDGOTHICR.TTC"
@@ -1080,11 +1081,13 @@ class Core:
         return fontpath
 
     def calculate_text_position(self, left,right,name,fontsize,bottom):
+        # TODO: #17 英数字のみの場合の位置決定バグ
         self.left = left
         self.right = right
         self.name = name
         self.fontsize = fontsize
         self.bottom = bottom
+
         center = int((self.left + self.right)/2)
         chaCenter = int(len(self.name)/2)
         pos = center - (chaCenter* self.fontsize) - int(self.fontsize/2)
@@ -1100,10 +1103,14 @@ class Core:
         self.p = p
         self.tolerance = tolerance
         self.position = position
+
         local_draw_obj = ImageDraw.Draw(self.pil_img_obj)
         if self.name == 'Unknown':  ## nameがUnknownだった場合
             # draw.text(Unknown_position, '照合不一致', fill=(255, 255, 255, 255), font = font)
-            local_draw_obj.text(self.Unknown_position, '　未登録', fill=(255, 255, 255, 255), font = self.font)
+            # unregistered = mojimoji.han_to_zen('UNREGISTERED')
+            # local_draw_obj.text(self.Unknown_position, unregistered, fill=(255, 255, 255, 255), font = self.font)
+            local_draw_obj.text(self.Unknown_position, 'UNREGISTERED', fill=(255, 255, 255, 255), font = self.font)
+            # local_draw_obj.text(self.Unknown_position, '　未登録', fill=(255, 255, 255, 255), font = self.font)
         else:  ## nameが既知の場合
             # if percentage > 99.0:
             if self.p < self.tolerance:
@@ -1119,7 +1126,17 @@ class Core:
         frame = np.array(pil_img_obj)
         return frame
 
-    def draw_text_for_name(self, logger, left,right,bottom,name, p,tolerance,pil_img_obj):
+    def draw_text_for_name(
+            self,
+            logger,
+            left,
+            right,
+            bottom,
+            name,
+            p,
+            tolerance,
+            pil_img_obj
+        ):
         self.logger = logger
         self.left = left
         self.right = right
@@ -1128,14 +1145,34 @@ class Core:
         self.p = p
         self.tolerance = tolerance
         self.pil_img_obj = pil_img_obj
+
+        # すべての文字を全角変換する
+        self.name = mojimoji.han_to_zen(self.name, ascii=True, kana=True, digit=True)
+
         fontpath = self.return_fontpath(logger)
-        """TODO FONTSIZEハードコーティング訂正"""
+        """TODO #16 FONTSIZEハードコーティング訂正"""
         fontsize = 14
         font = ImageFont.truetype(fontpath, fontsize, encoding = 'utf-8')
         # テキスト表示位置決定
-        position, Unknown_position = self.calculate_text_position(self.left,self.right,self.name,fontsize,self.bottom)
+        position, Unknown_position = \
+            self.calculate_text_position(
+                self.left,
+                self.right,
+                self.name,
+                fontsize,
+                self.bottom
+            )
         # nameの描画
-        self.pil_img_obj = self.draw_name(self.name,self.pil_img_obj, Unknown_position, font, self.p, self.tolerance, position)
+        self.pil_img_obj = \
+            self.draw_name(
+                self.name,
+                self.pil_img_obj,
+                Unknown_position,
+                font,
+                self.p,
+                self.tolerance,
+                position
+            )
         # pil_img_objをnumpy配列に変換
         resized_frame = self.convert_pil_img_to_ndarray(self.pil_img_obj)
         return resized_frame
