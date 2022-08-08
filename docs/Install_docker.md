@@ -95,7 +95,7 @@ sudo usermod -aG docker $USER
 See [here](https://docs.docker.com/engine/install/linux-postinstall/)
 
 ## When you want to delete all at once
-See [`docker prune`](https://docs.docker.com/config/pruning/).
+See [`docker image prune`](https://docs.docker.com/config/pruning/).
 Japanese is [here](https://docs.docker.jp/config/pruning.html).
 Also, you chose some manner as bellow.
 ### Stop all containers

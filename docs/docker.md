@@ -14,7 +14,8 @@ docker pull tokaikaoninsho/face01_no_gpu
 docker run --rm -it \
         --gpus all -e DISPLAY=$DISPLAY \
         --device /dev/video0:/dev/video0:mwr \
-        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.05 
+        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.06 
+
 ```
 ```bash
 . bin/activate
@@ -26,7 +27,8 @@ python CALL_FACE01.py
 docker run --rm -it \
         -e DISPLAY=$DISPLAY \
         --device /dev/video0:/dev/video0:mwr \
-        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:1.4.05 
+        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:1.4.06 
+
 ```
 ```bash
 . bin/activate
@@ -45,27 +47,49 @@ git clone https://github.com/yKesamaru/FACE01_SAMPLE.git
 To make image
 ```bash
 cd FACE01_SAMPLE
-docker build -t face01_gpu:1.4.05 -f docker/Dockerfile_gpu . --network host
+docker build -t face01_gpu:1.4.06 -f docker/Dockerfile_gpu . --network host
+
 ```
 
-## Build FACE01 docker image without nvidia-docker2 package
+## Build FACE01 docker image * ***without*** * nvidia-docker2 package
 ```bash
 cd FACE01_SAMPLE
-docker build -t face01_no_gpu:1.4.05 -f docker/Dockerfile_no_gpu . --network host
-```
+docker build -t face01_no_gpu:1.4.06 -f docker/Dockerfile_no_gpu . --network host
 
+```
+## If you want to upload to you're own DockerHub
+Reference is [here](https://docs.docker.com/docker-hub/repos/#pushing-a-docker-container-image-to-docker-hub).
+Japanese is [here](https://zenn.dev/katan/articles/1d5ff92fd809e7).
+```bash
+# Built Docker Image
+docker built ...
+# Run Docker Image
+docker run ...
+# Confirm CONTAINER-ID
+docker ps
+# Confirm IMAGE-ID
+docker images
+# Commit container
+docker container commit <container-id> <hub-user>/<repo-name>[:<tag>]
+# Tag the Image with the repository name
+docker tag <image-id> <repo-name>
+# Docker loginr
+docker login
+# Docker push
+docker push <hub-user>/<repo-name>[:<tag>]
+```
 ## Check the completed image.
 ```bash
 docker images
 REPOSITORY    TAG                       IMAGE ID       CREATED         SIZE
-face01_gpu    1.4.05                    41b1d82ee908   7 seconds ago   17.5GB
+face01_gpu    1.4.06                    41b1d82ee908   7 seconds ago   17.5GB
 ```
 ## Launch FACE01_SAMPLE
 ```bash
 docker run --rm -it \
         --gpus all -e DISPLAY=$DISPLAY \
         --device /dev/video0:/dev/video0:mwr \
-        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.05 
+        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.06 
 # Check nvidia-smi
 docker@ee44d08e933f:~/FACE01_SAMPLE$ nvidia-smi
 Fri Jul 29 09:06:03 2022       
@@ -105,7 +129,7 @@ This docker image is build with dockerfile named 'Dockerfile_gpu'.
 docker run --rm -it \
         --gpus all -e DISPLAY=$DISPLAY \
         --device /dev/video0:/dev/video0:mwr \
-        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.05 
+        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.06 
 # Enter the Python virtual environment (IMPORTANT!)
 docker@e85311b5908e:~/FACE01_SAMPLE$ . bin/activate
 (FACE01_SAMPLE) docker@e85311b5908e:~/FACE01_SAMPLE$ 
@@ -162,7 +186,7 @@ Per frame: 0.195[seconds]
 docker run --rm -it \
         -e DISPLAY=$DISPLAY \
         --device /dev/video0:/dev/video0:mwr \
-        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:1.4.05 
+        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:1.4.06 
 # Enter the Python virtual environment (IMPORTANT!)
 docker@e85311b5908e:~/FACE01_SAMPLE$ . bin/activate
 (FACE01_SAMPLE) docker@e85311b5908e:~/FACE01_SAMPLE$ 

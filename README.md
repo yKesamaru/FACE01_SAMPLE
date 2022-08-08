@@ -1,7 +1,7 @@
 ![Logo](https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/g1320.png)
 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE)
-![](https://img.shields.io/badge/Release-v1.4.05-blue)
+![](https://img.shields.io/badge/Release-v1.4.06-blue)
 
 ![](./docs/img/ROMAN_HOLIDAY.GIF)
 ```bash
