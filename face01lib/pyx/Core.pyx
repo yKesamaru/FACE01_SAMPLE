@@ -1,5 +1,6 @@
 # cython: language_level=3
 # cython: profile = True
+"""
 # cython: boundscheck = False
 # cython: wraparound = False
 # cython: initializedcheck = False
@@ -7,6 +8,8 @@
 # cython: always_allow_keywords = False
 # cython: unraisable_tracebacks = False
 # cython: binding = False
+"""
+
 """see bellow
 https://www.youtube.com/watch?app=desktop&v=sGggkVaRMzY
 """
@@ -45,6 +48,7 @@ from face01lib.api import Dlib_api
 Dlib_api_obj = Dlib_api()
 from face01lib.Calc import Cal
 Cal_obj = Cal()
+from face01lib.return_face_image import Return_face_image
 # from face01lib.video_capture import VidCap
 # VidCap_obj = VidCap()
 
@@ -647,38 +651,6 @@ class Core:
     #     else:
     #         return empty_ndarray
     
-    @cython.returns(nptyping.NDArray)
-    def return_face_image(
-        self,
-        resized_frame:nptyping.NDArray,
-        face_location: tuple
-    ):
-        """Return face image array which contain ndarray
-
-        Args:
-            resized_frame (numpy.ndarray): frame data
-            face_location (tuple): face location which ordered top, right, bottom, left
-
-        Returns:
-            list: face image of ndarray or empty array
-        """        
-        self.resized_frame = resized_frame
-        empty_ndarray: nptyping.NDArray = np.empty(shape=(0,0,0), dtype=np.uint8)
-
-        if len(self.face_location) > 0:
-            top: cython.int = face_location[0]
-            right: cython.int = face_location[1]
-            bottom: cython.int = face_location[2]
-            left: cython.int = face_location[3]
-            face_image: nptyping.NDArray = self.resized_frame[top:bottom, left:right]
-            """DEBUG
-            from face01lib.video_capture import VidCap
-            VidCap().frame_imshow_for_debug(face_image)
-            VidCap().frame_imshow_for_debug(self.resized_frame)
-            """
-            return face_image
-        else:
-            return empty_ndarray
 
     # フレーム後処理
     # @profile()
@@ -903,8 +875,9 @@ class Core:
 
     def return_anti_spoof(self, frame, face_location):
         self.frame = frame
-        self.face_location = face_location
-        face_image = self.return_face_image(self.frame, self.face_location)
+        self.face_location: tuple = face_location
+        face_image = Return_face_image().return_face_image(self.frame, self.face_location)
+        # face_image = self.return_face_image(self.frame, self.face_location)
         # VidCap_obj.frame_imshow_for_debug(face_image)  # DEBUG
 
         """ DEBUG: face_image確認 -> 正方形であることを確認した

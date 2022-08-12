@@ -3,6 +3,7 @@ from Cython.Build import cythonize
 
 setup(
     ext_modules = cythonize(
+        "Core.pyx",
         "return_face_image.pyx",
         annotate=True  # htmlファイルを出力
     )
