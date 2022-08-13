@@ -36,7 +36,6 @@ try:
     from face01lib.models import Dlib_models
 except Exception:
     logger.warning("modelのimportに失敗しました")
-    logger.warning("システム管理者にお問い合わせください")
     logger.warning("-" * 20)
     logger.warning(format_exc(limit=None, chain=True))
     logger.warning("-" * 20)
@@ -270,7 +269,7 @@ class Dlib_api:
         :return: A numpy ndarray with the distance for each face in the same order as the 'faces' array
         """
         if len(self.face_encodings) == 0:
-            return np.empty((2,0), dtype=np.float64)
+            return np.empty((2,2,3), dtype=np.uint8)
         return np.linalg.norm(x=(self.face_encodings - self.face_to_compare), axis=1)
 
 
