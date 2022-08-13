@@ -14,7 +14,7 @@ import FACE01 as fg
 
 """DEBUG
 Set the number of playback frames"""
-exec_times: int = 50
+exec_times: int = 20
 ALL_FRAME = exec_times
 
 # PySimpleGUI layout
