@@ -1,12 +1,15 @@
 {
     "configurations": [
         {
+            // To reference, See bellow.
+            // https: //code.visualstudio.com/docs/cpp/c-cpp-properties-schema-reference
             "name": "linux-gcc-x64",
             "includePath": [
-                "${workspaceFolder}/**",
                 "/usr/include/python3.8",
                 "/usr/include/eigen3",
-                "/home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include"
+                "/home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include",
+                "${workspaceFolder}/**",
+                "/usr/include/**"
             ],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "${default}",

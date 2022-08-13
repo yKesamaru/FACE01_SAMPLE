@@ -1,5 +1,6 @@
 # cython: language_level=3
 # cython: profile = True
+"""
 # cython: boundscheck = False
 # cython: wraparound = False
 # cython: initializedcheck = False
@@ -7,7 +8,7 @@
 # cython: always_allow_keywords = False
 # cython: unraisable_tracebacks = False
 # cython: binding = False
-
+"""
 
 """cythonでは使用不可
 from __future__ import annotations

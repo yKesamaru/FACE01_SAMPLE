@@ -9,7 +9,21 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-I",
+                "/home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include",
+                "-I",
+                "/home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include/pybind11/",
+                "-I",
+                "/home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include/pybind11/detail",
+                "-I",
+                "/home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include/pybind11/stl",
+                "-I",
+                "/usr/include/python3.8",
+                "-I",
+                "/usr/include/eigen3",
+                "-I",
+                "/usr/include/fmt"
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -17,7 +31,10 @@
             "problemMatcher": [
                 "$gcc"
             ],
-            "group": "build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
             "detail": "コンパイラ: /usr/bin/g++"
         }
     ]

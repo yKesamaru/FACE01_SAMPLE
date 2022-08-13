@@ -15,18 +15,18 @@
   "C_Cpp_Runner.warningsAsError": false,
   "C_Cpp_Runner.compilerArgs": [],
   "C_Cpp_Runner.linkerArgs": [],
-  "C_Cpp_Runner.includePaths": [],
+  "C_Cpp_Runner.includePaths": ["/home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include/**"],
   "C_Cpp_Runner.includeSearch": [
     "*",
     "**/*"
   ],
   "C_Cpp_Runner.excludeSearch": [
-    "**/build",
-    "**/build/**",
-    "**/.*",
-    "**/.*/**",
-    "**/.vscode",
-    "**/.vscode/**"
+    // "**/build",
+    // "**/build/**",
+    // "**/.*",
+    // "**/.*/**",
+    // "**/.vscode",
+    // "**/.vscode/**"
   ],
   "terminal.integrated.automationProfile.linux": {
       "path": "/usr/bin/bash"
