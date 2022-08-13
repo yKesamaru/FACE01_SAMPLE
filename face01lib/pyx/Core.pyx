@@ -1,5 +1,20 @@
-#!python
-#cython: language_level=3
+# cython: language_level=3
+# cython: profile = True
+"""
+# cython: boundscheck = False
+# cython: wraparound = False
+# cython: initializedcheck = False
+# cython: cdivision = True
+# cython: always_allow_keywords = False
+# cython: unraisable_tracebacks = False
+# cython: binding = False
+"""
+
+"""see bellow
+https://www.youtube.com/watch?app=desktop&v=sGggkVaRMzY
+"""
+# from __future__ import annotations
+
 """mediapipe for python, see bellow
 https://github.com/google/mediapipe/tree/master/mediapipe/python
 """
@@ -12,6 +27,9 @@ https://github.com/davisking/dlib/blob/master/python_examples/faceapi.py
 __model__ = 'Original model create by Prokofev Kirill, modified by PINT'
 __URL__ = 'https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3'
 
+
+from nptyping import NDArray
+import nptyping
 from datetime import datetime
 from platform import system
 from traceback import format_exc
@@ -28,6 +46,7 @@ from face01lib.api import Dlib_api
 Dlib_api_obj = Dlib_api()
 from face01lib.Calc import Cal
 Cal_obj = Cal()
+from face01lib.return_face_image import Return_face_image
 # from face01lib.video_capture import VidCap
 # VidCap_obj = VidCap()
 
@@ -44,14 +63,14 @@ from face01lib.logger import Logger
 anti_spoof_model = Dlib_models().anti_spoof_model_location()
 onnx_session = onnxruntime.InferenceSession(anti_spoof_model)
 
-name = __name__
-dir = dirname(__file__)
+name: str = __name__
+dir: str = dirname(__file__)
 logger = Logger().logger(name, dir)
 Cal_obj.cal_specify_date(logger)
 
 class Core:
-    # def __init__(self) -> None:
-    #     pass
+    def __init__(self) -> None:
+        Cal().cal_specify_date(logger)
 
     def mp_face_detection_func(self, resized_frame, model_selection=0, min_detection_confidence=0.4):
         face = mp.solutions.face_detection.FaceDetection(  # type: ignore
@@ -88,9 +107,9 @@ class Core:
         """
         return: face_location_list
         """
-        self.resized_frame = resized_frame
-        self.set_width = set_width
-        self.set_height = set_height
+        self.resized_frame: np.ndarray = resized_frame
+        self.set_width: int = set_width
+        self.set_height: int = set_height
         self.model_selection = model_selection
         self.min_detection_confidence = min_detection_confidence
         self.resized_frame.flags.writeable = False
@@ -577,18 +596,17 @@ class Core:
                         if face_encodings == []:
                             return face_encodings, self.frame_datas_array
                     except Exception as e:
-                        print(f'resized_frame: {resized_frame}\nface_location_list:  {face_location_list}')
-                        print(f'ERROR: {e}')
-                        print(format_exc())
+                        self.logger.warning(f'resized_frame: {resized_frame}\nface_location_list:  {face_location_list}')
+                        self.logger.warning(f'ERROR: {e}')
+                        self.logger.warning(format_exc())
                         exit(0)
                 elif self.args_dict["use_pipe"] == False and  self.args_dict["person_frame_face_encoding"] == True:
                     self.logger.warning("config.ini:")
-                    self.logger.warning("mediapipe = False  の場合 person_frame_face_encoding = True  には出来ません")
-                    self.logger.warning("システム管理者様へ連絡の後、設定を変更してください")
+                    self.logger.warning("You cannot set person_frame_face_encoding = True if use_pipe = False")
+                    self.logger.warning("Change the settings appropriately")
                     self.logger.warning("-" * 20)
                     self.logger.warning(format_exc(limit=None, chain=True))
                     self.logger.warning("-" * 20)
-                    self.logger.warning("処理を終了します")
                     exit(0)
                 elif self.args_dict["use_pipe"] == False and self.args_dict["person_frame_face_encoding"] == False:
                     face_encodings = \
@@ -604,26 +622,33 @@ class Core:
         return face_encodings, self.frame_datas_array
 
     # 顔の生データ(np.ndarray)を返す
-    def return_face_image(self, resized_frame, face_location):
-        self.resized_frame = resized_frame
-        if len(self.face_location) > 0:
-            top = face_location[0]
-            right = face_location[1]
-            bottom = face_location[2]
-            left = face_location[3]
-            face_image = self.resized_frame[top:bottom, left:right]
-            """How to slice
-            face_location order: top, right, bottom, left
-            how to slice: img[top:bottom, left:right]
-            """
-            """DEBUG
-            from face01lib.video_capture import VidCap
-            VidCap().frame_imshow_for_debug(face_image)
-            VidCap().frame_imshow_for_debug(self.resized_frame)
-            """
-            return face_image
-        else:
-            return []
+    """How to slice
+    face_location order: top, right, bottom, left
+    how to slice: img[top:bottom, left:right]
+    """
+    # def return_face_image(
+    #     self,
+    #     resized_frame,
+    #     face_location
+    # ):
+    #     self.resized_frame = resized_frame
+    #     empty_ndarray = np.empty(shape=(0,0,0), dtype=np.uint8)
+
+    #     if len(self.face_location) > 0:
+    #         top = face_location[0]
+    #         right = face_location[1]
+    #         bottom = face_location[2]
+    #         left = face_location[3]
+    #         face_image = self.resized_frame[top:bottom, left:right]
+    #         """DEBUG
+    #         from face01lib.video_capture import VidCap
+    #         VidCap().frame_imshow_for_debug(face_image)
+    #         VidCap().frame_imshow_for_debug(self.resized_frame)
+    #         """
+    #         return face_image
+    #     else:
+    #         return empty_ndarray
+    
 
     # フレーム後処理
     # @profile()
@@ -848,8 +873,9 @@ class Core:
 
     def return_anti_spoof(self, frame, face_location):
         self.frame = frame
-        self.face_location = face_location
-        face_image = self.return_face_image(self.frame, self.face_location)
+        self.face_location: tuple = face_location
+        face_image = Return_face_image().return_face_image(self.frame, self.face_location)
+        # face_image = self.return_face_image(self.frame, self.face_location)
         # VidCap_obj.frame_imshow_for_debug(face_image)  # DEBUG
 
         """ DEBUG: face_image確認 -> 正方形であることを確認した

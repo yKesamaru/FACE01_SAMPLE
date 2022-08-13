@@ -29,6 +29,7 @@ class Cal:
                 self.logger.info("お使いいただける残日数は",  str(remaining_days.days) + "日です")
                 self.logger.info("引き続きご利用になる場合は下記までご連絡下さい")
                 self.logger.info("東海顔認証 担当: 袈裟丸 y.kesamaru@tokai-kaoninsho.com")
+                
 
     def cal_resized_telop_image(self, resized_telop_image):
         self.resized_telop_image = resized_telop_image
