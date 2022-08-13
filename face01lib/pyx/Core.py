@@ -28,7 +28,6 @@ __model__ = 'Original model create by Prokofev Kirill, modified by PINT'
 __URL__ = 'https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3'
 
 
-from pickletools import uint8
 from nptyping import NDArray
 import nptyping
 from datetime import datetime
@@ -36,7 +35,6 @@ from platform import system
 from traceback import format_exc
 import mojimoji
 
-import cython
 import cv2
 # from asyncio.log import logger
 import mediapipe as mp
@@ -71,8 +69,8 @@ logger = Logger().logger(name, dir)
 Cal_obj.cal_specify_date(logger)
 
 class Core:
-    # def __init__(self) -> None:
-    #     pass
+    def __init__(self) -> None:
+        Cal().cal_specify_date(logger)
 
     def mp_face_detection_func(self, resized_frame, model_selection=0, min_detection_confidence=0.4):
         face = mp.solutions.face_detection.FaceDetection(  # type: ignore
