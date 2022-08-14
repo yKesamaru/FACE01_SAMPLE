@@ -2,11 +2,11 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: g++ アクティブなファイルのビルド",
+            "label": "ビルドいたします",
             "command": "/usr/bin/g++",
             "args": [
                 "-fdiagnostics-color=always",
-                "-g",
+                // "-g",
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
@@ -22,8 +22,8 @@
                 "/usr/include/python3.8",
                 "-I",
                 "/usr/include/eigen3",
-                "-I",
-                "/usr/include/fmt"
+                // "-I",
+                // "/usr/include/fmt"
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -36,6 +36,20 @@
                 "isDefault": true
             },
             "detail": "コンパイラ: /usr/bin/g++"
+        },
+        {
+            "type": "cmake",
+            "label": "CMake: build",
+            "command": "build",
+            "targets": [
+                "all"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "detail": "CMake template build task"
         }
     ]
 }

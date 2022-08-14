@@ -325,3 +325,9 @@ NoneType: None
 [2022-08-09 03:41:00,996] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
 
 [2022-08-09 03:41:00,996] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-14 17:29:50,744] [face01lib.video_capture] [FACE01.py] [WARNING] ERROR OCURRED
+[2022-08-14 17:29:50,748] [face01lib.video_capture] [FACE01.py] [WARNING] DATA RECEPTION HAS ENDED
+[2022-08-14 17:29:50,748] [face01lib.video_capture] [FACE01.py] [WARNING] --------------------
+[2022-08-14 17:29:50,748] [face01lib.video_capture] [FACE01.py] [WARNING] NoneType: None
+
+[2022-08-14 17:29:50,749] [face01lib.video_capture] [FACE01.py] [WARNING] --------------------

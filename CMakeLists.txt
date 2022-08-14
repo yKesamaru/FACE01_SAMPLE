@@ -45,7 +45,7 @@ include_directories(/usr/include/python3.8)
 link_directories(/home/terms/bin/FACE01/lib/python3.8/site-packages)
 
 # Pythonモジュールを作成する場合
-pybind11_add_module(cpp_angle_of_view_specification MODULE  cpp_angle_of_view_specification.cpp)
+pybind11_add_module(return_face_image MODULE  return_face_image.cpp)
 
 # EXEファイルを作ってデバッグしたい場合
 # add_executable(add_cpp_exe add_cpp.cpp)

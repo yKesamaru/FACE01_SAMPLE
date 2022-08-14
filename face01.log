@@ -5466,3 +5466,14 @@ configparser.NoOptionError: No option 'movie' in section: 'DEFAULT'
 [2022-08-13 13:30:17,674] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
 [2022-08-13 13:32:21,575] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
 [2022-08-13 13:38:33,928] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-08-14 15:21:58,779] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-08-14 16:07:55,225] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-08-14 16:55:42,572] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-08-14 16:56:35,513] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-08-14 16:59:35,732] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-08-14 17:02:39,187] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-08-14 17:02:50,570] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-08-14 17:28:15,417] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-08-14 17:29:23,372] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-08-14 17:31:35,970] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます
+[2022-08-14 17:38:12,095] [face01lib/load_priset_image] [FACE01.py] [INFO] npKnown.npz を読み込みます

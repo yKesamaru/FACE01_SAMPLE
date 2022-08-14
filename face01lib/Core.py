@@ -879,12 +879,12 @@ class Core:
         # face_image = self.return_face_image(self.frame, self.face_location)
         # VidCap_obj.frame_imshow_for_debug(face_image)  # DEBUG
 
-        """ DEBUG: face_image確認 -> 正方形であることを確認した
+        """ DEBUG: face_image確認 -> 正方形であることを確認した"""
         print(self.face_location)
         cv2.imshow('', face_image)
         cv2.waitKey(3000)
         cv2.destroyAllWindows()
-        """
+        
 
         # 定形処理:リサイズ, 標準化, 成形, float32キャスト, 推論, 後処理
         input_image = cv2.resize(face_image, dsize=(128, 128))
