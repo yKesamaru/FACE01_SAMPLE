@@ -1,12 +1,13 @@
 #include <iostream>
 #include <pybind11/pybind11.h>
 #include <pybind11/numpy.h>
+// # include <string.h>
 // # include <tuple>
 // # include <Eigen/Core>
 // # include <pybind11/stl_bind.h>
 
 namespace py = pybind11;
-
+    
 class Return_face_image
 {
 public:
@@ -17,30 +18,41 @@ public:
         const py::array_t<uint8_t> &resized_frame,
         const std::tuple<int, int, int, int> &face_location)
     {
-        const auto &buff_info = resized_frame.request();
-        const auto &shape = buff_info.shape;
-        py::array_t<uint8_t> face_image{shape};
+        // const auto &buff_info = resized_frame.request();
+        // const auto &shape = buff_info.shape;
 
         int top = std::get<0>(face_location);
         int right = std::get<1>(face_location);
         int bottom = std::get<2>(face_location);
         int left = std::get<3>(face_location);
 
-        if (right == 0){
+        // py::array_t<uint8_t> face_image{shape};  // 縮小せねば。
+        int height = bottom - top;
+        int width = right - left;
+        py::array_t<uint8_t> face_image;
+        face_image.resize({height, width, 3});
+
+        // std::cout << *shape << std::endl;
+
+        // py::print("shape = ", to_string(&shape, resized_frame.ndim()));
+
+        if (right == 0)
+        {
             std::cout << "ERROR OCURRED!" << std::endl;  //DEBUG
             return face_image;
         }
-        for (auto i = 0; i < shape[0]; i++)
-        {
-            if (i < top){continue;}
-            if (i > bottom){continue;}
-            for (auto j = 0; j < shape[1]; j++)
-            {
-                if (j < left){continue;}
-                if (j > right){continue;}
-                *face_image.mutable_data(i, j) = *resized_frame.data(i, j);
-            }
-        }
+
+        std::cout << "top: " << top << std::endl;
+        std::cout << "right: " << right << std::endl;
+        std::cout << "bottom: " << bottom << std::endl;
+        std::cout << "left: " << left << std::endl;
+
+        // *face_image = *resized_frame[py::slice(top,bottom, 1), py::slice(left, right, 1), py::slice(0,3,1)];
+        // *face_image = *resized_frame[py::make_tuple(py::slice(bottom, top, 1), py::slice(right, left, 1), py::slice(0,3,1))];
+        // *face_image = *resized_frame[py::make_tuple(py::slice(top, bottom, 1), py::slice(left, right, 1), py::slice(0,255,1))];
+        *face_image = 
+        *resized_frame[py::make_tuple( py::slice(top,bottom, 1), py::slice(left,right,1),py::slice(0,3, 1))];
+
         return face_image;
     }
 };

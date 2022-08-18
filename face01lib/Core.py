@@ -145,6 +145,8 @@ class Core:
         x1, y1, x2, y2, a, b = self.cal_resized_telop_nums
         frame_view = self.frame.view(dtype=np.uint8, type=np.ndarray)
         try:
+            # TODO: #21 numpyのfunctionを探す
+            # https://numpy.org/devdocs/reference/arrays.indexing.html
             # frame[y1:y2, x1:x2] = self.frame[y1:y2, x1:x2] * a + b
             frame[y1:y2, x1:x2] = frame_view[y1:y2, x1:x2] * a + b
 
