@@ -369,3 +369,5 @@ cpp
 ![](img/PASTE_IMAGE_2022-08-20-15-33-50.png)
 python
 ![](img/PASTE_IMAGE_2022-08-20-15-35-47.png)
+cython
+![](img/PASTE_IMAGE_2022-08-20-17-41-53.png)
