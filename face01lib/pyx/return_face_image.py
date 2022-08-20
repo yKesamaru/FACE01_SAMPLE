@@ -1,6 +1,6 @@
 # cython: language_level=3
-"""
 # cython: profile = True
+"""
 # cython: boundscheck = False
 # cython: wraparound = False
 # cython: initializedcheck = False
@@ -41,13 +41,10 @@ class Return_face_image():
             bottom: int = face_location[2]
             left: int = face_location[3]
             face_image = self.resized_frame[top:bottom, left:right]
-            # face_image = self.resized_frame[:,top:bottom, left:right]
             """DEBUG
             from face01lib.video_capture import VidCap
             VidCap().frame_imshow_for_debug(face_image)
-            # print(face_image)
             VidCap().frame_imshow_for_debug(self.resized_frame)
-            # print(self.resized_frame)
             """
             return face_image
         else:
