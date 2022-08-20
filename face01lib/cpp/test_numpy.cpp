@@ -1,31 +1,22 @@
-# include <pybind11/pybind11.h>
+#include <iostream>
 #include <pybind11/eigen.h>
-#include <pybind11/numpy.h>
-namespace py = pybind11;
+#include <Eigen/Dense>
 
-class Matrix
+// template <typename T>
+// using RMatrix = Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic,Eigen::RowMajor>;
+// using RMatrix = Eigen::Matrix<T, -1, -1, Eigen::RowMajor>;
+
+Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::Dynamic> m;
+// template <typename T>
+// RMatrix<T> test_numpy(RMatrix<T> m, const std::tuple<int, int, int, int> &start_stop)
+Eigen::Matrix<double> test_numpy(Eigen::Matrix<double> m, const std::tuple<int, int, int, int> &start_stop)
 {
-public:
-    Matrix(size_t rows, size_t cols) : m_rows(rows), m_cols(cols)
-    {
-        m_data = new float[rows * cols];
-    }
-    float *data() { return m_data; }
-    size_t rows() const { return m_rows; }
-    size_t cols() const { return m_cols; }
+    std::cout << m << std::endl;
+    return m ;
+}
 
-private:
-    size_t m_rows, m_cols;
-    float *m_data;
-};
-
-py::class_<Matrix>(m, "Matrix", py::buffer_protocol())
-    .def_buffer([](Matrix &m) -> py::buffer_info
-                { return py::buffer_info(
-                      m.data(),                               /* Pointer to buffer */
-                      sizeof(float),                          /* Size of one scalar */
-                      py::format_descriptor<float>::format(), /* Python struct-style format descriptor */
-                      2,                                      /* Number of dimensions */
-                      {m.rows(), m.cols()},                   /* Buffer dimensions */
-                      {sizeof(float) * m.cols(),              /* Strides (in bytes) for each index */
-                       sizeof(float)}); });
+PYBIND11_MODULE(test_numpy, m)
+{
+    m.doc() = "my test module";
+    m.def("test_numpy", &test_numpy<double>, "");
+}

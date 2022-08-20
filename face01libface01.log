@@ -331,3 +331,23 @@ NoneType: None
 [2022-08-14 17:29:50,748] [face01lib.video_capture] [FACE01.py] [WARNING] NoneType: None
 
 [2022-08-14 17:29:50,749] [face01lib.video_capture] [FACE01.py] [WARNING] --------------------
+[2022-08-19 07:51:07,235] [face01lib.video_capture] [video_capture.py] [WARNING] /home/terms/bin/FACE01/face01lib/return_face_image.py
+[2022-08-19 07:51:07,239] [face01lib.video_capture] [video_capture.py] [WARNING] 47
+[2022-08-19 07:51:10,357] [face01lib.video_capture] [video_capture.py] [WARNING] /home/terms/bin/FACE01/face01lib/return_face_image.py
+[2022-08-19 07:51:10,358] [face01lib.video_capture] [video_capture.py] [WARNING] 48
+[2022-08-19 07:51:16,374] [face01lib.video_capture] [video_capture.py] [WARNING] /home/terms/bin/FACE01/face01lib/return_face_image.py
+[2022-08-19 07:51:16,374] [face01lib.video_capture] [video_capture.py] [WARNING] 47
+[2022-08-19 07:51:19,355] [face01lib.video_capture] [video_capture.py] [WARNING] /home/terms/bin/FACE01/face01lib/return_face_image.py
+[2022-08-19 07:51:19,356] [face01lib.video_capture] [video_capture.py] [WARNING] 48
+[2022-08-19 07:54:46,339] [face01lib.video_capture] [video_capture.py] [WARNING] /home/terms/bin/FACE01/face01lib/return_face_image.py
+[2022-08-19 07:54:46,340] [face01lib.video_capture] [video_capture.py] [WARNING] 47
+[2022-08-19 07:55:08,388] [face01lib.video_capture] [video_capture.py] [WARNING] /home/terms/bin/FACE01/face01lib/return_face_image.py
+[2022-08-19 07:55:08,389] [face01lib.video_capture] [video_capture.py] [WARNING] 49
+[2022-08-19 07:55:39,421] [face01lib.video_capture] [video_capture.py] [WARNING] /home/terms/bin/FACE01/face01lib/return_face_image.py
+[2022-08-19 07:55:39,423] [face01lib.video_capture] [video_capture.py] [WARNING] 47
+[2022-08-19 07:55:52,776] [face01lib.video_capture] [video_capture.py] [WARNING] /home/terms/bin/FACE01/face01lib/return_face_image.py
+[2022-08-19 07:55:52,776] [face01lib.video_capture] [video_capture.py] [WARNING] 49
+[2022-08-20 15:34:32,677] [face01lib.video_capture] [video_capture.py] [WARNING] /home/terms/bin/FACE01/face01lib/return_face_image.py
+[2022-08-20 15:34:32,681] [face01lib.video_capture] [video_capture.py] [WARNING] 47
+[2022-08-20 15:34:35,739] [face01lib.video_capture] [video_capture.py] [WARNING] /home/terms/bin/FACE01/face01lib/return_face_image.py
+[2022-08-20 15:34:35,740] [face01lib.video_capture] [video_capture.py] [WARNING] 49

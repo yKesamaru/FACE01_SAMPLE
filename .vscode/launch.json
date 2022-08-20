@@ -34,6 +34,15 @@
       "justMyCode": true
     },
     {
+      "name": "test_numpy_main.py",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01",
+      "program": "/home/terms/bin/FACE01/test_numpy_main.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python"
+    },
+    {
       "name": "CALL_FACE01.py",
       "type": "python",
       "request": "launch",

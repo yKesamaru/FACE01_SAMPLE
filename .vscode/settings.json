@@ -195,7 +195,11 @@
     "typeinfo": "cpp",
     "utility": "cpp",
     "valarray": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "cstdarg": "cpp",
+    "cstdlib": "cpp",
+    "ctime": "cpp"
   },
-  "C_Cpp.errorSquiggles": "Enabled"
+  "C_Cpp.errorSquiggles": "Enabled",
+  "cmake.sourceDirectory": "${workspaceFolder}/face01lib/cpp"
 }
