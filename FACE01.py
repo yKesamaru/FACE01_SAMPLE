@@ -1,3 +1,4 @@
+import inspect
 from configparser import ConfigParser
 from os import chdir
 from os.path import dirname, exists
@@ -10,8 +11,10 @@ from GPUtil import getGPUs
 from psutil import cpu_count, cpu_freq, virtual_memory
 
 from face01lib.api import Dlib_api
+
 Dlib_api_obj = Dlib_api()
 from face01lib.Core import Core
+
 Core_obj = Core()
 from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
@@ -203,7 +206,15 @@ frame_generator_obj = VidCap().frame_generator(args_dict)
 # @profile()
 def main_process():
     try:
+
         frame_datas_array = Core_obj.frame_pre_processing(logger, args_dict, frame_generator_obj.__next__())
+        
+        """DEBUG
+        logger.warning(f'frame_datas_array size: {len(frame_datas_array)}')
+        logger.warning(inspect.currentframe().f_back.f_code.co_filename)
+        logger.warning(inspect.currentframe().f_back.f_lineno)
+        """
+
         face_encodings, frame_datas_array = Core_obj.face_encoding_process(logger, args_dict, frame_datas_array)
         frame_datas_array = Core_obj.frame_post_processing(logger, args_dict, face_encodings, frame_datas_array, GLOBAL_MEMORY)
         yield frame_datas_array
@@ -222,9 +233,10 @@ def main_process():
 if __name__ == '__main__':
     import cProfile as pr
     import time
+    import traceback
 
     import PySimpleGUI as sg
-    import traceback
+
     # from face01lib.Core import Core
     # Core_obj = Core()
     

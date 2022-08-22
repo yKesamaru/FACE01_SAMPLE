@@ -28,26 +28,26 @@ __model__ = 'Original model create by Prokofev Kirill, modified by PINT'
 __URL__ = 'https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3'
 
 
+import inspect
 from datetime import datetime
 from platform import system
 from traceback import format_exc
-import mojimoji
 
 import cv2
 # from asyncio.log import logger
 import mediapipe as mp
+import mojimoji
 import numpy as np
 from PIL import Image, ImageDraw, ImageFile, ImageFont
+
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 from face01lib.api import Dlib_api
+
 Dlib_api_obj = Dlib_api()
 from face01lib.Calc import Cal
-Cal_obj = Cal()
-from face01lib.return_face_image import Return_face_image
-# from face01lib.video_capture import VidCap
-# VidCap_obj = VidCap()
 
+Cal_obj = Cal()
 # from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from os.path import dirname, exists
@@ -55,8 +55,15 @@ from shutil import move
 
 import onnxruntime
 
-from face01lib.models import Dlib_models
 from face01lib.logger import Logger
+from face01lib.models import Dlib_models
+from face01lib.return_face_image import Return_face_image
+
+# from face01lib.video_capture import VidCap
+# VidCap_obj = VidCap()
+
+
+
 
 anti_spoof_model = Dlib_models().anti_spoof_model_location()
 onnx_session = onnxruntime.InferenceSession(anti_spoof_model)
@@ -264,6 +271,12 @@ class Core:
             }
             self.frame_datas_array.append(frame_datas)
 
+        """DEBUG
+        logger.warning(f'frame_datas_array size: {len(self.frame_datas_array)}')
+        logger.warning(inspect.currentframe().f_back.f_code.co_filename)
+        logger.warning(inspect.currentframe().f_back.f_lineno)
+        """
+        
         return self.frame_datas_array
 
     # pil_img_rgbオブジェクトを生成

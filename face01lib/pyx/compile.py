@@ -13,9 +13,15 @@ import glob
 
 setup(
     ext_modules = cythonize(
-        "return_face_image.pyx",
+        "Core.pyx",
     )
 )
+
+# setup(
+#     ext_modules = cythonize(
+#         "return_face_image.pyx",
+#     )
+# )
 
 """compile
 cd ~/bin/FACE01/face01lib/pyx
