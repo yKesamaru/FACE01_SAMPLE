@@ -1,0 +1,359 @@
+1
+stat: /usr/lib/python3.8/runpy.py:194: size=4627 KiB (+4627 KiB), count=12 (+12), average=386 KiB
+line:   File "/usr/lib/python3.8/runpy.py", line 194
+line:     return _run_code(code, main_globals, None,
+line:   File "/usr/lib/python3.8/runpy.py", line 87
+line:     exec(code, run_globals)
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/__main__.py", line 39
+line:     cli.main()
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 430
+line:     run()
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 284
+line:     runpy.run_path(target, run_name="__main__")
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 321
+line:     return _run_module_code(code, init_globals, run_name,
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 135
+line:     _run_code(code, mod_globals, init_globals,
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 124
+line:     exec(code, run_globals)
+line:   File "/home/terms/bin/FACE01/CALL_FACE01.py", line 130
+line:     pr.run('common_main(exec_times)', 'restats')
+line:   File "/usr/lib/python3.8/cProfile.py", line 16
+line:     return _pyprofile._Utils(Profile).run(statement, filename, sort)
+line:   File "/usr/lib/python3.8/profile.py", line 53
+line:     prof.run(statement)
+line:   File "/usr/lib/python3.8/cProfile.py", line 95
+line:     return self.runctx(cmd, dict, dict)
+line:   File "/usr/lib/python3.8/cProfile.py", line 100
+line:     exec(cmd, globals, locals)
+line:   File "<string>", line 1
+line:   File "/home/terms/bin/FACE01/CALL_FACE01.py", line 58
+line:     frame_datas_array = fg.main_process().__next__()
+line:   File "/home/terms/bin/FACE01/FACE01.py", line 219
+line:     frame_datas_array = Core_obj.frame_post_processing(logger, args_dict, face_encodings, frame_datas_array, GLOBAL_MEMORY)
+line:   File "/home/terms/bin/FACE01/face01lib/Core.py", line 813
+line:     resized_frame = self.draw_text_for_name(self.logger, left,right,bottom,name, p,self.args_dict["tolerance"],pil_img_obj)
+line:   File "/home/terms/bin/FACE01/face01lib/Core.py", line 1226
+line:     resized_frame = self.convert_pil_img_to_ndarray(self.pil_img_obj)
+line:   File "/home/terms/bin/FACE01/face01lib/Core.py", line 1175
+line:     frame = np.array(pil_img_obj)
+==================== 
+
+2
+stat: /home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py:430: size=3136 KiB (+3136 KiB), count=23569 (+23569), average=136 B
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 430
+line:     run()
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 284
+line:     runpy.run_path(target, run_name="__main__")
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 321
+line:     return _run_module_code(code, init_globals, run_name,
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 135
+line:     _run_code(code, mod_globals, init_globals,
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 124
+line:     exec(code, run_globals)
+line:   File "/home/terms/bin/FACE01/CALL_FACE01.py", line 130
+line:     pr.run('common_main(exec_times)', 'restats')
+line:   File "/usr/lib/python3.8/cProfile.py", line 16
+line:     return _pyprofile._Utils(Profile).run(statement, filename, sort)
+line:   File "/usr/lib/python3.8/profile.py", line 53
+line:     prof.run(statement)
+line:   File "/usr/lib/python3.8/cProfile.py", line 95
+line:     return self.runctx(cmd, dict, dict)
+line:   File "/usr/lib/python3.8/cProfile.py", line 100
+line:     exec(cmd, globals, locals)
+line:   File "<string>", line 1
+line:   File "/home/terms/bin/FACE01/CALL_FACE01.py", line 69
+line:     event, _ = window.read(timeout = 1)
+line:   File "/home/terms/bin/FACE01/lib/python3.8/site-packages/PySimpleGUI/PySimpleGUI.py", line 10057
+line:     _refresh_debugger()
+line:   File "/home/terms/bin/FACE01/lib/python3.8/site-packages/PySimpleGUI/PySimpleGUI.py", line 22930
+line:     frame, *others = inspect.stack()[1]
+line:   File "/usr/lib/python3.8/inspect.py", line 1526
+line:     return getouterframes(sys._getframe(1), context)
+line:   File "/usr/lib/python3.8/inspect.py", line 1503
+line:     frameinfo = (frame,) + getframeinfo(frame, context)
+line:   File "/usr/lib/python3.8/inspect.py", line 1477
+line:     lines, lnum = findsource(frame)
+line:   File "/usr/lib/python3.8/inspect.py", line 794
+line:     lines = linecache.getlines(file, module.__dict__)
+line:   File "/usr/lib/python3.8/linecache.py", line 47
+line:     return updatecache(filename, module_globals)
+line:   File "/usr/lib/python3.8/linecache.py", line 137
+line:     lines = fp.readlines()
+==================== 
+
+3
+stat: /usr/lib/python3.8/runpy.py:194: size=2775 KiB (+2775 KiB), count=6 (+6), average=463 KiB
+line:   File "/usr/lib/python3.8/runpy.py", line 194
+line:     return _run_code(code, main_globals, None,
+line:   File "/usr/lib/python3.8/runpy.py", line 87
+line:     exec(code, run_globals)
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/__main__.py", line 39
+line:     cli.main()
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 430
+line:     run()
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 284
+line:     runpy.run_path(target, run_name="__main__")
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 321
+line:     return _run_module_code(code, init_globals, run_name,
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 135
+line:     _run_code(code, mod_globals, init_globals,
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 124
+line:     exec(code, run_globals)
+line:   File "/home/terms/bin/FACE01/CALL_FACE01.py", line 130
+line:     pr.run('common_main(exec_times)', 'restats')
+line:   File "/usr/lib/python3.8/cProfile.py", line 16
+line:     return _pyprofile._Utils(Profile).run(statement, filename, sort)
+line:   File "/usr/lib/python3.8/profile.py", line 53
+line:     prof.run(statement)
+line:   File "/usr/lib/python3.8/cProfile.py", line 95
+line:     return self.runctx(cmd, dict, dict)
+line:   File "/usr/lib/python3.8/cProfile.py", line 100
+line:     exec(cmd, globals, locals)
+line:   File "<string>", line 1
+line:   File "/home/terms/bin/FACE01/CALL_FACE01.py", line 58
+line:     frame_datas_array = fg.main_process().__next__()
+line:   File "/home/terms/bin/FACE01/FACE01.py", line 210
+line:     frame_datas_array = Core_obj.frame_pre_processing(logger, args_dict, frame_generator_obj.__next__())
+line:   File "/home/terms/bin/FACE01/face01lib/Core.py", line 428
+line:     overlay: cv2.Mat = self.resized_frame.copy()
+==================== 
+
+4
+stat: /usr/lib/python3.8/runpy.py:194: size=2700 KiB (+2700 KiB), count=2 (+2), average=1350 KiB
+line:   File "/usr/lib/python3.8/runpy.py", line 194
+line:     return _run_code(code, main_globals, None,
+line:   File "/usr/lib/python3.8/runpy.py", line 87
+line:     exec(code, run_globals)
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/__main__.py", line 39
+line:     cli.main()
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 430
+line:     run()
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 284
+line:     runpy.run_path(target, run_name="__main__")
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 321
+line:     return _run_module_code(code, init_globals, run_name,
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 135
+line:     _run_code(code, mod_globals, init_globals,
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 124
+line:     exec(code, run_globals)
+line:   File "/home/terms/bin/FACE01/CALL_FACE01.py", line 130
+line:     pr.run('common_main(exec_times)', 'restats')
+line:   File "/usr/lib/python3.8/cProfile.py", line 16
+line:     return _pyprofile._Utils(Profile).run(statement, filename, sort)
+line:   File "/usr/lib/python3.8/profile.py", line 53
+line:     prof.run(statement)
+line:   File "/usr/lib/python3.8/cProfile.py", line 95
+line:     return self.runctx(cmd, dict, dict)
+line:   File "/usr/lib/python3.8/cProfile.py", line 100
+line:     exec(cmd, globals, locals)
+line:   File "<string>", line 1
+line:   File "/home/terms/bin/FACE01/CALL_FACE01.py", line 58
+line:     frame_datas_array = fg.main_process().__next__()
+line:   File "/home/terms/bin/FACE01/FACE01.py", line 210
+line:     frame_datas_array = Core_obj.frame_pre_processing(logger, args_dict, frame_generator_obj.__next__())
+line:   File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 346
+line:     ret, frame = vcap.read()
+==================== 
+
+5
+stat: <frozen importlib._bootstrap>:991: size=2668 KiB (+2668 KiB), count=1752 (+1752), average=1560 B
+line:   File "<frozen importlib._bootstrap>", line 991
+line:   File "<frozen importlib._bootstrap>", line 975
+line:   File "<frozen importlib._bootstrap>", line 671
+line:   File "<frozen importlib._bootstrap_external>", line 848
+line:   File "<frozen importlib._bootstrap>", line 219
+line:   File "/home/terms/bin/FACE01/lib/python3.8/site-packages/matplotlib/font_manager.py", line 44
+line:     from matplotlib import _api, afm, cbook, ft2font, rcParams
+line:   File "<frozen importlib._bootstrap>", line 1042
+line:   File "<frozen importlib._bootstrap>", line 219
+line:   File "<frozen importlib._bootstrap>", line 991
+line:   File "<frozen importlib._bootstrap>", line 975
+line:   File "<frozen importlib._bootstrap>", line 671
+line:   File "<frozen importlib._bootstrap_external>", line 848
+line:   File "<frozen importlib._bootstrap>", line 219
+line:   File "/home/terms/bin/FACE01/lib/python3.8/site-packages/matplotlib/afm.py", line 42
+line:     from ._mathtext_data import uni2type1
+line:   File "<frozen importlib._bootstrap>", line 991
+line:   File "<frozen importlib._bootstrap>", line 975
+line:   File "<frozen importlib._bootstrap>", line 671
+line:   File "<frozen importlib._bootstrap_external>", line 844
+line:   File "<frozen importlib._bootstrap_external>", line 976
+line:   File "<frozen importlib._bootstrap_external>", line 640
+==================== 
+
+6
+stat: /usr/lib/python3.8/runpy.py:87: size=1844 KiB (+1844 KiB), count=10879 (+10879), average=174 B
+line:   File "/usr/lib/python3.8/runpy.py", line 87
+line:     exec(code, run_globals)
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/__main__.py", line 39
+line:     cli.main()
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 430
+line:     run()
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 284
+line:     runpy.run_path(target, run_name="__main__")
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 321
+line:     return _run_module_code(code, init_globals, run_name,
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 135
+line:     _run_code(code, mod_globals, init_globals,
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 124
+line:     exec(code, run_globals)
+line:   File "/home/terms/bin/FACE01/CALL_FACE01.py", line 9
+line:     import PySimpleGUI as sg
+line:   File "<frozen importlib._bootstrap>", line 991
+line:   File "<frozen importlib._bootstrap>", line 975
+line:   File "<frozen importlib._bootstrap>", line 671
+line:   File "<frozen importlib._bootstrap_external>", line 848
+line:   File "<frozen importlib._bootstrap>", line 219
+line:   File "/home/terms/bin/FACE01/lib/python3.8/site-packages/PySimpleGUI/__init__.py", line 2
+line:     from .PySimpleGUI import *
+line:   File "<frozen importlib._bootstrap>", line 991
+line:   File "<frozen importlib._bootstrap>", line 975
+line:   File "<frozen importlib._bootstrap>", line 671
+line:   File "<frozen importlib._bootstrap_external>", line 844
+line:   File "<frozen importlib._bootstrap_external>", line 976
+line:   File "<frozen importlib._bootstrap_external>", line 640
+==================== 
+
+7
+stat: /home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py:284: size=1732 KiB (+1732 KiB), count=15480 (+15480), average=115 B
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 284
+line:     runpy.run_path(target, run_name="__main__")
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 321
+line:     return _run_module_code(code, init_globals, run_name,
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 135
+line:     _run_code(code, mod_globals, init_globals,
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 124
+line:     exec(code, run_globals)
+line:   File "/home/terms/bin/FACE01/CALL_FACE01.py", line 8
+line:     import cv2
+line:   File "<frozen importlib._bootstrap>", line 991
+line:   File "<frozen importlib._bootstrap>", line 975
+line:   File "<frozen importlib._bootstrap>", line 671
+line:   File "<frozen importlib._bootstrap_external>", line 848
+line:   File "<frozen importlib._bootstrap>", line 219
+line:   File "/home/terms/bin/FACE01/lib/python3.8/site-packages/cv2/__init__.py", line 181
+line:     bootstrap()
+line:   File "/home/terms/bin/FACE01/lib/python3.8/site-packages/cv2/__init__.py", line 153
+line:     native_module = importlib.import_module("cv2")
+line:   File "/usr/lib/python3.8/importlib/__init__.py", line 127
+line:     return _bootstrap._gcd_import(name[level:], package, level)
+line:   File "<frozen importlib._bootstrap>", line 1014
+line:   File "<frozen importlib._bootstrap>", line 991
+line:   File "<frozen importlib._bootstrap>", line 975
+line:   File "<frozen importlib._bootstrap>", line 657
+line:   File "<frozen importlib._bootstrap>", line 556
+line:   File "<frozen importlib._bootstrap_external>", line 1166
+line:   File "<frozen importlib._bootstrap>", line 219
+==================== 
+
+8
+stat: /usr/lib/python3.8/runpy.py:194: size=1614 KiB (+1614 KiB), count=3 (+3), average=538 KiB
+line:   File "/usr/lib/python3.8/runpy.py", line 194
+line:     return _run_code(code, main_globals, None,
+line:   File "/usr/lib/python3.8/runpy.py", line 87
+line:     exec(code, run_globals)
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/__main__.py", line 39
+line:     cli.main()
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 430
+line:     run()
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 284
+line:     runpy.run_path(target, run_name="__main__")
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 321
+line:     return _run_module_code(code, init_globals, run_name,
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 135
+line:     _run_code(code, mod_globals, init_globals,
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 124
+line:     exec(code, run_globals)
+line:   File "/home/terms/bin/FACE01/CALL_FACE01.py", line 24
+line:     import FACE01 as fg
+line:   File "<frozen importlib._bootstrap>", line 991
+line:   File "<frozen importlib._bootstrap>", line 975
+line:   File "<frozen importlib._bootstrap>", line 671
+line:   File "<frozen importlib._bootstrap_external>", line 848
+line:   File "<frozen importlib._bootstrap>", line 219
+line:   File "/home/terms/bin/FACE01/FACE01.py", line 94
+line:     args_dict =  Initialize().initialize(conf_dict)
+line:   File "/home/terms/bin/FACE01/face01lib/Initialize.py", line 32
+line:     LoadImage_obj.LI(set_height, set_width)
+line:   File "/home/terms/bin/FACE01/face01lib/LoadImage.py", line 35
+line:     telop_image = cv2.imread("images/telop.png", cv2.IMREAD_UNCHANGED)
+==================== 
+
+9
+stat: /usr/lib/python3.8/runpy.py:194: size=1233 KiB (+1233 KiB), count=2 (+2), average=617 KiB
+line:   File "/usr/lib/python3.8/runpy.py", line 194
+line:     return _run_code(code, main_globals, None,
+line:   File "/usr/lib/python3.8/runpy.py", line 87
+line:     exec(code, run_globals)
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/__main__.py", line 39
+line:     cli.main()
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 430
+line:     run()
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 284
+line:     runpy.run_path(target, run_name="__main__")
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 321
+line:     return _run_module_code(code, init_globals, run_name,
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 135
+line:     _run_code(code, mod_globals, init_globals,
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 124
+line:     exec(code, run_globals)
+line:   File "/home/terms/bin/FACE01/CALL_FACE01.py", line 130
+line:     pr.run('common_main(exec_times)', 'restats')
+line:   File "/usr/lib/python3.8/cProfile.py", line 16
+line:     return _pyprofile._Utils(Profile).run(statement, filename, sort)
+line:   File "/usr/lib/python3.8/profile.py", line 53
+line:     prof.run(statement)
+line:   File "/usr/lib/python3.8/cProfile.py", line 95
+line:     return self.runctx(cmd, dict, dict)
+line:   File "/usr/lib/python3.8/cProfile.py", line 100
+line:     exec(cmd, globals, locals)
+line:   File "<string>", line 1
+line:   File "/home/terms/bin/FACE01/CALL_FACE01.py", line 58
+line:     frame_datas_array = fg.main_process().__next__()
+line:   File "/home/terms/bin/FACE01/FACE01.py", line 219
+line:     frame_datas_array = Core_obj.frame_post_processing(logger, args_dict, face_encodings, frame_datas_array, GLOBAL_MEMORY)
+line:   File "/home/terms/bin/FACE01/face01lib/Core.py", line 747
+line:     pil_img_obj_rgb = self.pil_img_rgb_instance(resized_frame)
+line:   File "/home/terms/bin/FACE01/face01lib/Core.py", line 285
+line:     pil_img_obj_rgb = Image.fromarray(cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGBA))
+==================== 
+
+10
+stat: /usr/lib/python3.8/runpy.py:194: size=925 KiB (+925 KiB), count=2 (+2), average=463 KiB
+line:   File "/usr/lib/python3.8/runpy.py", line 194
+line:     return _run_code(code, main_globals, None,
+line:   File "/usr/lib/python3.8/runpy.py", line 87
+line:     exec(code, run_globals)
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/__main__.py", line 39
+line:     cli.main()
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 430
+line:     run()
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher/../../debugpy/../debugpy/server/cli.py", line 284
+line:     runpy.run_path(target, run_name="__main__")
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 321
+line:     return _run_module_code(code, init_globals, run_name,
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 135
+line:     _run_code(code, mod_globals, init_globals,
+line:   File "/home/terms/.vscode/extensions/ms-python.python-2022.12.1/pythonFiles/lib/python/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 124
+line:     exec(code, run_globals)
+line:   File "/home/terms/bin/FACE01/CALL_FACE01.py", line 130
+line:     pr.run('common_main(exec_times)', 'restats')
+line:   File "/usr/lib/python3.8/cProfile.py", line 16
+line:     return _pyprofile._Utils(Profile).run(statement, filename, sort)
+line:   File "/usr/lib/python3.8/profile.py", line 53
+line:     prof.run(statement)
+line:   File "/usr/lib/python3.8/cProfile.py", line 95
+line:     return self.runctx(cmd, dict, dict)
+line:   File "/usr/lib/python3.8/cProfile.py", line 100
+line:     exec(cmd, globals, locals)
+line:   File "<string>", line 1
+line:   File "/home/terms/bin/FACE01/CALL_FACE01.py", line 58
+line:     frame_datas_array = fg.main_process().__next__()
+line:   File "/home/terms/bin/FACE01/FACE01.py", line 210
+line:     frame_datas_array = Core_obj.frame_pre_processing(logger, args_dict, frame_generator_obj.__next__())
+line:   File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 367
+line:     resized_frame = self.resize_frame(set_width, set_height, frame)
+line:   File "/home/terms/bin/FACE01/face01lib/video_capture.py", line 80
+line:     small_frame:np.ndarray = cv2.resize(self.frame, (self.set_width, self.set_height))
+==================== 
