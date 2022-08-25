@@ -660,3 +660,42 @@ NoneType: None
 [2022-08-22 17:23:01,380] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 3
 [2022-08-22 17:23:01,381] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/face01lib/Core.py
 [2022-08-22 17:23:01,382] [face01lib.Core] [Core.py] [WARNING] 546
+[2022-08-25 20:35:02,030] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 2
+[2022-08-25 20:35:02,032] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/lib/python3.8/site-packages/memory_profiler.py
+[2022-08-25 20:35:02,034] [face01lib.Core] [Core.py] [WARNING] 759
+[2022-08-25 20:35:04,376] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 3
+[2022-08-25 20:35:04,378] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/lib/python3.8/site-packages/memory_profiler.py
+[2022-08-25 20:35:04,380] [face01lib.Core] [Core.py] [WARNING] 759
+[2022-08-25 20:35:05,210] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 2
+[2022-08-25 20:35:05,212] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/lib/python3.8/site-packages/memory_profiler.py
+[2022-08-25 20:35:05,214] [face01lib.Core] [Core.py] [WARNING] 759
+[2022-08-25 20:35:05,601] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 3
+[2022-08-25 20:35:05,602] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/lib/python3.8/site-packages/memory_profiler.py
+[2022-08-25 20:35:05,604] [face01lib.Core] [Core.py] [WARNING] 759
+[2022-08-25 20:35:06,298] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 3
+[2022-08-25 20:35:06,300] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/lib/python3.8/site-packages/memory_profiler.py
+[2022-08-25 20:35:06,302] [face01lib.Core] [Core.py] [WARNING] 759
+[2022-08-25 20:35:07,028] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 3
+[2022-08-25 20:35:07,031] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/lib/python3.8/site-packages/memory_profiler.py
+[2022-08-25 20:35:07,033] [face01lib.Core] [Core.py] [WARNING] 759
+[2022-08-25 20:35:07,775] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 3
+[2022-08-25 20:35:07,776] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/lib/python3.8/site-packages/memory_profiler.py
+[2022-08-25 20:35:07,778] [face01lib.Core] [Core.py] [WARNING] 759
+[2022-08-25 20:35:08,464] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 3
+[2022-08-25 20:35:08,466] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/lib/python3.8/site-packages/memory_profiler.py
+[2022-08-25 20:35:08,468] [face01lib.Core] [Core.py] [WARNING] 759
+[2022-08-25 20:35:09,122] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 3
+[2022-08-25 20:35:09,124] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/lib/python3.8/site-packages/memory_profiler.py
+[2022-08-25 20:35:09,125] [face01lib.Core] [Core.py] [WARNING] 759
+[2022-08-25 20:35:09,830] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 3
+[2022-08-25 20:35:09,833] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/lib/python3.8/site-packages/memory_profiler.py
+[2022-08-25 20:35:09,835] [face01lib.Core] [Core.py] [WARNING] 759
+[2022-08-25 20:35:10,588] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 3
+[2022-08-25 20:35:10,589] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/lib/python3.8/site-packages/memory_profiler.py
+[2022-08-25 20:35:10,592] [face01lib.Core] [Core.py] [WARNING] 759
+[2022-08-25 20:35:11,383] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 4
+[2022-08-25 20:35:11,386] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/lib/python3.8/site-packages/memory_profiler.py
+[2022-08-25 20:35:11,388] [face01lib.Core] [Core.py] [WARNING] 759
+[2022-08-25 20:35:12,459] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 3
+[2022-08-25 20:35:12,460] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/lib/python3.8/site-packages/memory_profiler.py
+[2022-08-25 20:35:12,463] [face01lib.Core] [Core.py] [WARNING] 759

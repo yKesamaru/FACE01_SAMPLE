@@ -31,7 +31,7 @@ import traceback
 
 name = __name__
 dir = dirname(__file__)
-logger = Logger().logger(name, dir)
+logger = Logger().logger(name, dir, None)
 try:
     from face01lib.models import Dlib_models
 except Exception:

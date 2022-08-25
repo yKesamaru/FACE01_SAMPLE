@@ -1,10 +1,10 @@
 
-"""DEBUG: MEMORY LEAK"""
+"""DEBUG: MEMORY LEAK
 from face01lib.memory_leak import Memory_leak
 Memory_leak_obj = Memory_leak()
-line_or_traceback = 'traceback'  # 'line' or 'traceback'
+line_or_traceback = 'line'  # 'line' or 'traceback'
 Memory_leak_obj.memory_leak_analyze_start(line_or_traceback)
-
+"""
 import gc
 import cProfile as pr
 import time
@@ -22,7 +22,7 @@ import inspect
 from os.path import dirname
 from sys import exit
 from traceback import format_exc
-
+import sys
 from memory_profiler import profile  # @profile()
 
 import FACE01 as fg
@@ -33,18 +33,20 @@ from face01lib.logger import Logger
 
 name = __name__
 dir = dirname(__file__)
-logger = Logger().logger(name, dir)
+if fg.args_dict[output_debug_log] == True:
+    logger = Logger().logger(name, dir, 'debug')
+else:
+    logger = Logger().logger(name, dir, None)
+
+
 Cal().cal_specify_date(logger)
-
-
 
 """DEBUG
 Set the number of playback frames"""
-exec_times: int = 300
+exec_times: int = 30
 ALL_FRAME = exec_times
 
 # PySimpleGUI layout
-# @profile()
 sg.theme('LightGray')
 if fg.args_dict["headless"] == False:
     layout = [
@@ -64,6 +66,11 @@ def common_main(exec_times):
         try:
             # frame_datas_array = fg_main_process_obj.__next__()
             frame_datas_array = fg.main_process().__next__()
+            """DEBUG"""
+            logger.debug(f"frame_datas_array: {sys.getsizeof(frame_datas_array) / 1024 / 1048}MiB")
+            logger.debug(inspect.currentframe().f_back.f_code.co_filename)
+            logger.debug(inspect.currentframe().f_back.f_lineno)
+
         except Exception as e:
             print(format_exc(limit=None, chain=True))
             print(e)
@@ -73,6 +80,12 @@ def common_main(exec_times):
             break
         else:
             print(f'exec_times: {exec_times}')
+
+            """DEBUG"""
+            logger.debug(f"args_dict: {sys.getsizeof(fg.args_dict) / 1024 / 1048}MiB")
+            logger.debug(inspect.currentframe().f_back.f_code.co_filename)
+            logger.debug(inspect.currentframe().f_back.f_lineno)
+
             if fg.args_dict["headless"] == False:
                 event, _ = window.read(timeout = 1)
                 if event == sg.WIN_CLOSED:
@@ -123,7 +136,6 @@ def common_main(exec_times):
                     if fg.args_dict["headless"] == False:
                         imgbytes = cv2.imencode(".png", img)[1].tobytes()
                         window["display"].update(data = imgbytes)
-        
             # メモリ解放
             del frame_datas_array
             gc.collect()
@@ -145,7 +157,7 @@ pr.run('common_main(exec_times)', 'restats')
 
 """If you want to extract only face coordinates"""
 next_frame_gen_obj = VidCap_obj.frame_generator(fg.args_dict)
-@profile()
+# @profile()
 def extract_face_locations(exec_times):
     profile_HANDLING_FRAME_TIME_FRONT = time.perf_counter()
     i: int = 0
@@ -172,9 +184,9 @@ def extract_face_locations(exec_times):
     print(f'Per frame: {round(profile_HANDLING_FRAME_TIME / i, 3)}[seconds]')
 # pr.run('extract_face_locations(exec_times)', 'restats')
 
-"""DEBUG: MEMORY LEAK"""
+"""DEBUG: MEMORY LEAK
 Memory_leak_obj.memory_leak_analyze_stop(line_or_traceback)
-
+"""
 # from pympler import summary, muppy
 # all_objects = muppy.get_objects()
 # sum1 = summary.summarize(all_objects)

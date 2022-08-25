@@ -27,13 +27,12 @@ https://github.com/davisking/dlib/blob/master/python_examples/faceapi.py
 __model__ = 'Original model create by Prokofev Kirill, modified by PINT'
 __URL__ = 'https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3'
 
-"""DEBUG: MEMORY LEAK"""
+"""DEBUG: MEMORY LEAK
 from face01lib.memory_leak import Memory_leak
 Memory_leak_obj = Memory_leak()
-line_or_traceback = 'line'
-# line_or_traceback = 'traceback'
+line_or_traceback = 'line'  # 'line' or 'traceback'
 Memory_leak_obj.memory_leak_analyze_start(line_or_traceback)
-
+"""
 import inspect
 from datetime import datetime
 from platform import system
@@ -77,7 +76,7 @@ onnx_session = onnxruntime.InferenceSession(anti_spoof_model)
 
 name: str = __name__
 dir: str = dirname(__file__)
-logger = Logger().logger(name, dir)
+logger = Logger().logger(name, dir, None)
 # Cal_obj.cal_specify_date(logger)
 
 class Core:
@@ -284,11 +283,11 @@ class Core:
             }
             self.frame_datas_array.append(frame_datas)
 
-        """DEBUG
+        """DEBUG"""
         logger.warning(f'frame_datas_array size: {len(self.frame_datas_array)}')
         logger.warning(inspect.currentframe().f_back.f_code.co_filename)
         logger.warning(inspect.currentframe().f_back.f_lineno)
-        """
+        
         
         return self.frame_datas_array
 
@@ -360,7 +359,7 @@ class Core:
         self.face_names.append(self.name)
         return self.face_names
 
-    @profile()
+    # @profile()
     def return_concatenate_location_and_frame(self, resized_frame, face_location_list):
         self.resized_frame = resized_frame
         self.face_location_list = face_location_list
@@ -972,7 +971,7 @@ class Core:
             return spoof_or_real, score, ELE
 
 # 以下、元libdraw.LibDraw
-    @profile()
+    # @profile()
     def draw_pink_rectangle(self, resized_frame, top,bottom,left,right) -> np.ndarray:
         self.resized_frame = resized_frame
         self.top = top
@@ -982,7 +981,7 @@ class Core:
         cv2.rectangle(self.resized_frame, (self.left, self.top), (self.right, self.bottom), (255, 87, 243), 2) # pink
         return self.resized_frame
     
-    @profile()
+    # @profile()
     def draw_white_rectangle(self, rectangle, resized_frame, top, left, right, bottom) -> np.ndarray:
         self.rectangle = rectangle
         self.resized_frame = resized_frame
@@ -1113,7 +1112,7 @@ class Core:
         return self.resized_frame
 
     # 帯状四角形（ピンク）の描画
-    @profile()
+    # @profile()
     def draw_error_messg_rectangle(self, resized_frame, set_height, set_width):
         """廃止予定
         """        
@@ -1128,13 +1127,13 @@ class Core:
         return error_messg_rectangle_left, error_messg_rectangle_right, error_messg_rectangle_bottom
 
     # drawオブジェクトを生成
-    @profile()
+    # @profile()
     def  make_draw_object(self, frame):
         self.frame = frame
         draw = ImageDraw.Draw(Image.fromarray(self.frame))
         return draw
 
-    @profile()
+    # @profile()
     def draw_error_messg_rectangle_messg(self, draw, error_messg_rectangle_position, error_messg_rectangle_messg, error_messg_rectangle_font):
         """廃止予定
         """
@@ -1406,9 +1405,9 @@ class Core:
 
         return self.resized_frame
 
-"""DEBUG: MEMORY LEAK"""
+"""DEBUG: MEMORY LEAK
 Memory_leak_obj.memory_leak_analyze_stop(line_or_traceback)
-
+"""
 # from pympler import summary, muppy
 # all_objects = muppy.get_objects()
 # sum1 = summary.summarize(all_objects)

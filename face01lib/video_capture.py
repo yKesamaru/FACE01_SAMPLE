@@ -40,7 +40,7 @@ from face01lib.Calc import Cal
 
 name = __name__
 dir = dirname(__file__)
-logger = Logger().logger(name, dir)
+logger = Logger().logger(name, dir, None)
 Cal().cal_specify_date(logger)
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 """TODO #18 opencvの環境変数変更 要調査"""
