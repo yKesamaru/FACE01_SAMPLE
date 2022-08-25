@@ -2,14 +2,22 @@ import inspect
 from configparser import ConfigParser
 from os import chdir
 from os.path import dirname, exists
-from sys import exit, version, version_info
+from sys import exit, version, version_info, getsizeof
 from time import perf_counter
 from traceback import format_exc
 
+"""DEBUG: MEMORY LEAK"""
+from face01lib.memory_leak import Memory_leak
+Memory_leak_obj = Memory_leak()
+line_or_traceback = 'line'  # or 'traceback'
+Memory_leak_obj.memory_leak_analyze_start(line_or_traceback)
+
+import gc
 import cv2
 from GPUtil import getGPUs
 from psutil import cpu_count, cpu_freq, virtual_memory
 
+from memory_profiler import profile  # @profile()
 from face01lib.api import Dlib_api
 
 Dlib_api_obj = Dlib_api()
@@ -25,9 +33,12 @@ GLOBAL_MEMORY = {
 'alpha' : 0.3,
 'number_of_crops' : 0
 }
+
 name = __name__
 dir = dirname(__file__)
 logger = Logger().logger(name, dir)
+
+# @profile()
 def configure():
     kaoninshoDir: str = dir
     chdir(kaoninshoDir)
@@ -94,6 +105,7 @@ conf_dict = configure()
 args_dict =  Initialize().initialize(conf_dict)
 
 """CHECK SYSTEM INFORMATION"""
+@profile()
 def system_check(args_dict):
     # lock
     with open("SystemCheckLock", "w") as f:
@@ -203,17 +215,20 @@ def Measure_processing_time_backward():
         Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR)
 
 frame_generator_obj = VidCap().frame_generator(args_dict)
-# @profile()
+@profile()
 def main_process():
     try:
 
         frame_datas_array = Core_obj.frame_pre_processing(logger, args_dict, frame_generator_obj.__next__())
         
-        """DEBUG
-        logger.warning(f'frame_datas_array size: {len(frame_datas_array)}')
+        """DEBUG"""
+        logger.warning(f'frame_datas_array size: {len(frame_datas_array), getsizeof(frame_datas_array)}')
         logger.warning(inspect.currentframe().f_back.f_code.co_filename)
         logger.warning(inspect.currentframe().f_back.f_lineno)
-        """
+        logger.warning(f'args_dict size: {len(args_dict), getsizeof(args_dict)}')
+        logger.warning(inspect.currentframe().f_back.f_code.co_filename)
+        logger.warning(inspect.currentframe().f_back.f_lineno)
+        
 
         face_encodings, frame_datas_array = Core_obj.face_encoding_process(logger, args_dict, frame_datas_array)
         frame_datas_array = Core_obj.frame_post_processing(logger, args_dict, face_encodings, frame_datas_array, GLOBAL_MEMORY)
@@ -246,7 +261,7 @@ if __name__ == '__main__':
 
     """DEBUG
     Set the number of playback frames"""
-    exec_times: int = 250
+    exec_times: int = 50
     ALL_FRAME = exec_times
 
     # PySimpleGUI layout
@@ -261,7 +276,7 @@ if __name__ == '__main__':
             location=(0,0), modal = True, titlebar_icon="./images/g1320.png", icon="./images/g1320.png"
         )
 
-    # @profile()
+    @profile()
     def common_main(exec_times):
         profile_HANDLING_FRAME_TIME_FRONT = time.perf_counter()
         event = ''
@@ -330,6 +345,11 @@ if __name__ == '__main__':
             if args_dict["headless"] == False:
                 if event =='terminate':
                     break
+        
+        # メモリ解放
+        del frame_datas_array
+        gc.collect()
+        
         if args_dict["headless"] == False:
             window.close()
         
@@ -340,3 +360,11 @@ if __name__ == '__main__':
         print(f'Total processing time: {round(profile_HANDLING_FRAME_TIME , 3)}[seconds]')
         print(f'Per frame: {round(profile_HANDLING_FRAME_TIME / (ALL_FRAME - exec_times), 3)}[seconds]')
     pr.run('common_main(exec_times)', 'restats')
+
+"""DEBUG: MEMORY LEAK"""
+Memory_leak_obj.memory_leak_analyze_stop(line_or_traceback)
+
+# from pympler import summary, muppy
+# all_objects = muppy.get_objects()
+# sum1 = summary.summarize(all_objects)
+# summary.print_(sum1)

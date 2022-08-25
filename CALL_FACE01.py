@@ -1,8 +1,11 @@
+
+"""DEBUG: MEMORY LEAK"""
 from face01lib.memory_leak import Memory_leak
 Memory_leak_obj = Memory_leak()
-line_or_traceback = 'traceback'
+line_or_traceback = 'traceback'  # 'line' or 'traceback'
 Memory_leak_obj.memory_leak_analyze_start(line_or_traceback)
 
+import gc
 import cProfile as pr
 import time
 
@@ -23,6 +26,8 @@ from traceback import format_exc
 from memory_profiler import profile  # @profile()
 
 import FACE01 as fg
+fg_main_process_obj = fg.main_process()
+
 from face01lib.Calc import Cal
 from face01lib.logger import Logger
 
@@ -35,7 +40,7 @@ Cal().cal_specify_date(logger)
 
 """DEBUG
 Set the number of playback frames"""
-exec_times: int = 3
+exec_times: int = 300
 ALL_FRAME = exec_times
 
 # PySimpleGUI layout
@@ -57,6 +62,7 @@ def common_main(exec_times):
     event = ''
     while True:
         try:
+            # frame_datas_array = fg_main_process_obj.__next__()
             frame_datas_array = fg.main_process().__next__()
         except Exception as e:
             print(format_exc(limit=None, chain=True))
@@ -117,6 +123,11 @@ def common_main(exec_times):
                     if fg.args_dict["headless"] == False:
                         imgbytes = cv2.imencode(".png", img)[1].tobytes()
                         window["display"].update(data = imgbytes)
+        
+            # メモリ解放
+            del frame_datas_array
+            gc.collect()
+
         if fg.args_dict["headless"] == False:
             if event =='terminate':
                 break
@@ -161,4 +172,10 @@ def extract_face_locations(exec_times):
     print(f'Per frame: {round(profile_HANDLING_FRAME_TIME / i, 3)}[seconds]')
 # pr.run('extract_face_locations(exec_times)', 'restats')
 
+"""DEBUG: MEMORY LEAK"""
 Memory_leak_obj.memory_leak_analyze_stop(line_or_traceback)
+
+# from pympler import summary, muppy
+# all_objects = muppy.get_objects()
+# sum1 = summary.summarize(all_objects)
+# summary.print_(sum1)

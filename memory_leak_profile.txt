@@ -1,0 +1,246 @@
+====================
+⭐️⭐️⭐️ Memory usage before start: 5.2 GiB
+====================
+⭐️⭐️⭐️ Memory usage before start: 5.4 GiB
+Top 5 lines
+#1: File:<frozen importlib._bootstrap_external>
+    Line: 640
+    Size: 20.5 MiB
+-----
+#2: File:/usr/lib/python3.8/linecache.py
+    Line: 137
+    Size: 1.0 MiB
+    lines = fp.readlines()
+-----
+#3: File:/usr/lib/python3.8/abc.py
+    Line: 102
+    Size: 0.6 MiB
+    return _abc_subclasscheck(cls, subclass)
+-----
+#4: File:/usr/lib/python3.8/abc.py
+    Line: 85
+    Size: 0.4 MiB
+    cls = super().__new__(mcls, name, bases, namespace, **kwargs)
+-----
+#5: File:/usr/lib/python3.8/inspect.py
+    Line: 2819
+    Size: 0.3 MiB
+    params[name] = param
+-----
+25748箇所, その他: 17.4 MiB
+Total allocated size: 40.1 MiB
+====================
+
+
+⭐️⭐️⭐️ Used Memory: -0.3 GiB
+====================
+⭐️⭐️⭐️ Memory usage before start: 5.1 GiB
+Top 5 lines
+#1: File:<frozen importlib._bootstrap_external>
+    Line: 640
+    Size: 22.2 MiB
+-----
+#2: File:/home/terms/bin/FACE01/face01lib/LoadImage.py
+    Line: 35
+    Size: 1.5 MiB
+    telop_image = cv2.imread("images/telop.png", cv2.IMREAD_UNCHANGED)
+-----
+#3: File:/usr/lib/python3.8/linecache.py
+    Line: 137
+    Size: 1.2 MiB
+    lines = fp.readlines()
+-----
+#4: File:/home/terms/bin/FACE01/lib/python3.8/site-packages/numpy/lib/format.py
+    Line: 769
+    Size: 0.8 MiB
+    array = numpy.ndarray(count, dtype=dtype)
+-----
+#5: File:/usr/lib/python3.8/abc.py
+    Line: 102
+    Size: 0.6 MiB
+    return _abc_subclasscheck(cls, subclass)
+-----
+28660箇所, その他: 22.7 MiB
+Total allocated size: 49.1 MiB
+====================
+
+
+⭐️⭐️⭐️ Used Memory: 0.4 GiB
+exec_times: 99
+exec_times: 98
+exec_times: 97
+exec_times: 96
+exec_times: 95
+exec_times: 94
+exec_times: 93
+exec_times: 92
+exec_times: 91
+exec_times: 90
+exec_times: 89
+exec_times: 88
+exec_times: 87
+exec_times: 86
+exec_times: 85
+exec_times: 84
+exec_times: 83
+exec_times: 82
+exec_times: 81
+exec_times: 80
+exec_times: 79
+exec_times: 78
+exec_times: 77
+exec_times: 76
+exec_times: 75
+exec_times: 74
+exec_times: 73
+exec_times: 72
+exec_times: 71
+exec_times: 70
+exec_times: 69
+exec_times: 68
+exec_times: 67
+exec_times: 66
+exec_times: 65
+exec_times: 64
+exec_times: 63
+exec_times: 62
+exec_times: 61
+exec_times: 60
+exec_times: 59
+exec_times: 58
+exec_times: 57
+exec_times: 56
+exec_times: 55
+exec_times: 54
+exec_times: 53
+exec_times: 52
+exec_times: 51
+exec_times: 50
+exec_times: 49
+exec_times: 48
+exec_times: 47
+Predetermined number of frames: 100
+Number of frames processed: 53
+Total processing time: 29.662[seconds]
+Per frame: 0.56[seconds]
+Filename: CALL_FACE01.py
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    59    477.0 MiB    477.0 MiB           1   @profile()
+    60                                         def common_main(exec_times):
+    61    477.0 MiB      0.0 MiB           1       profile_HANDLING_FRAME_TIME_FRONT = time.perf_counter()
+    62    477.0 MiB      0.0 MiB           1       event = ''
+    63                                             while True:
+    64   2785.4 MiB      0.0 MiB          53           try:
+    65                                                     # frame_datas_array = fg_main_process_obj.__next__()
+    66   2801.1 MiB   2305.9 MiB          53               frame_datas_array = fg.main_process().__next__()
+    67                                                 except Exception as e:
+    68                                                     print(format_exc(limit=None, chain=True))
+    69                                                     print(e)
+    70                                                     exit(0)
+    71   2801.1 MiB      0.0 MiB          53           exec_times = exec_times - 1
+    72   2801.1 MiB      0.0 MiB          53           if  exec_times <= 0:
+    73                                                     break
+    74                                                 else:
+    75   2801.1 MiB      0.0 MiB          53               print(f'exec_times: {exec_times}')
+    76   2801.1 MiB      0.0 MiB          53               if fg.args_dict["headless"] == False:
+    77   2801.1 MiB     10.3 MiB          53                   event, _ = window.read(timeout = 1)
+    78   2801.1 MiB      0.0 MiB          53                   if event == sg.WIN_CLOSED:
+    79                                                             print("The window was closed manually")
+    80                                                             break
+    81   2801.1 MiB      0.0 MiB         202               for frame_datas in frame_datas_array:
+    82                                                         """DEBUG
+    83                                                         logger.warning(f'frame_datas_array size: {len(frame_datas_array)}')
+    84                                                         logger.warning(inspect.currentframe().f_back.f_code.co_filename)
+    85                                                         logger.warning(inspect.currentframe().f_back.f_lineno)
+    86                                                         """
+    87                                         
+    88   2801.1 MiB      0.0 MiB         149                   if "face_location_list" in frame_datas:
+    89   2801.1 MiB      0.0 MiB         149                       img, face_location_list, overlay, person_data_list = \
+    90   2801.1 MiB      0.0 MiB         149                           frame_datas['img'], frame_datas["face_location_list"], frame_datas["overlay"], frame_datas['person_data_list']
+    91   2801.1 MiB      0.0 MiB         979                       for person_data in person_data_list:
+    92   2801.1 MiB      0.0 MiB         830                           if len(person_data) == 0:
+    93                                                                     continue
+    94   2801.1 MiB      0.0 MiB         830                           name, pict, date,  location, percentage_and_symbol = \
+    95   2801.1 MiB      0.0 MiB         830                               person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
+    96                                                                 # ELE: Equally Likely Events
+    97   2801.1 MiB      0.0 MiB         830                           if name != 'Unknown':
+    98   2801.1 MiB      0.5 MiB         778                               spoof_or_real, score, ELE = Core_obj.return_anti_spoof(frame_datas['img'], person_data["location"])
+    99                                                                     
+   100   2801.1 MiB      0.0 MiB         778                               if fg.args_dict["anti_spoof"] is True:
+   101   2801.1 MiB      0.0 MiB         778                                   if ELE is False:
+   102   2801.1 MiB      0.0 MiB         491                                       pass
+   103                                                                             # print(
+   104                                                                             #     name, "\n",
+   105                                                                             #     "\t", "Anti spoof\t\t", spoof_or_real, "\n",
+   106                                                                             #     "\t", "Anti spoof score\t", round(score * 100, 2), "%\n",
+   107                                                                             #     "\t", "similarity\t\t", percentage_and_symbol, "\n",
+   108                                                                             #     "\t", "coordinate\t\t", location, "\n",
+   109                                                                             #     "\t", "time\t\t\t", date, "\n",
+   110                                                                             #     "\t", "output\t\t\t", pict, "\n",
+   111                                                                             #     "-------\n"
+   112                                                                             # )
+   113                                                                     # else:
+   114                                                                     #     if ELE is False:
+   115                                                                     #         print(
+   116                                                                     #             name, "\n",
+   117                                                                     #             "\t", "similarity\t\t", percentage_and_symbol, "\n",
+   118                                                                     #             "\t", "coordinate\t\t", location, "\n",
+   119                                                                     #             "\t", "time\t\t\t", date, "\n",
+   120                                                                     #             "\t", "output\t\t\t", pict, "\n",
+   121                                                                     #             "-------\n"
+   122                                                                     #         )
+   123   2801.1 MiB      0.0 MiB         149                       if fg.args_dict["headless"] == False:
+   124   2801.1 MiB      1.2 MiB         149                           imgbytes = cv2.imencode(".png", img)[1].tobytes()
+   125   2801.1 MiB      6.9 MiB         149                           window["display"].update(data = imgbytes)
+   126                                                 
+   127                                                     # メモリ解放
+   128   2801.1 MiB      0.0 MiB          53               del frame_datas_array
+   129   2801.1 MiB     -0.7 MiB          53               gc.collect()
+   130                                         
+   131   2801.1 MiB      0.0 MiB          53           if fg.args_dict["headless"] == False:
+   132   2801.1 MiB      0.0 MiB          53               if event =='terminate':
+   133   2801.1 MiB      0.0 MiB           1                   break
+   134   2801.1 MiB      0.0 MiB           1       if fg.args_dict["headless"] == False:
+   135   2801.1 MiB      0.0 MiB           1           window.close()
+   136                                             
+   137   2801.1 MiB      0.0 MiB           1       profile_HANDLING_FRAME_TIME_REAR = time.perf_counter()
+   138   2801.1 MiB      0.0 MiB           1       profile_HANDLING_FRAME_TIME = (profile_HANDLING_FRAME_TIME_REAR - profile_HANDLING_FRAME_TIME_FRONT) 
+   139   2801.1 MiB      0.0 MiB           1       print(f'Predetermined number of frames: {ALL_FRAME}')
+   140   2801.1 MiB      0.0 MiB           1       print(f'Number of frames processed: {ALL_FRAME - exec_times}')
+   141   2801.1 MiB      0.0 MiB           1       print(f'Total processing time: {round(profile_HANDLING_FRAME_TIME , 3)}[seconds]')
+   142   2801.1 MiB      0.0 MiB           1       print(f'Per frame: {round(profile_HANDLING_FRAME_TIME / (ALL_FRAME - exec_times), 3)}[seconds]')
+
+
+Top 5 lines
+#1: File:<frozen importlib._bootstrap_external>
+    Line: 640
+    Size: 22.2 MiB
+-----
+#2: File:/usr/lib/python3.8/linecache.py
+    Line: 137
+    Size: 4.4 MiB
+    lines = fp.readlines()
+-----
+#3: File:/home/terms/bin/FACE01/face01lib/video_capture.py
+    Line: 346
+    Size: 2.6 MiB
+    ret, frame = vcap.read()
+-----
+#4: File:/home/terms/bin/FACE01/face01lib/LoadImage.py
+    Line: 35
+    Size: 1.5 MiB
+    telop_image = cv2.imread("images/telop.png", cv2.IMREAD_UNCHANGED)
+-----
+#5: File:/home/terms/bin/FACE01/face01lib/Core.py
+    Line: 299
+    Size: 1.2 MiB
+    pil_img_obj_rgb = Image.fromarray(cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGBA))
+-----
+29150箇所, その他: 28.0 MiB
+Total allocated size: 59.9 MiB
+====================
+
+
+⭐️⭐️⭐️ Used Memory: 3.0 GiB

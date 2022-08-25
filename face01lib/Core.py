@@ -27,12 +27,19 @@ https://github.com/davisking/dlib/blob/master/python_examples/faceapi.py
 __model__ = 'Original model create by Prokofev Kirill, modified by PINT'
 __URL__ = 'https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3'
 
+"""DEBUG: MEMORY LEAK"""
+from face01lib.memory_leak import Memory_leak
+Memory_leak_obj = Memory_leak()
+line_or_traceback = 'line'
+# line_or_traceback = 'traceback'
+Memory_leak_obj.memory_leak_analyze_start(line_or_traceback)
 
 import inspect
 from datetime import datetime
 from platform import system
 from traceback import format_exc
 
+from memory_profiler import profile  # @profile()
 import cv2
 # from asyncio.log import logger
 import mediapipe as mp
@@ -77,6 +84,7 @@ class Core:
     def __init__(self) -> None:
         Cal_obj.cal_specify_date(logger)
 
+    # @profile()
     def mp_face_detection_func(self, resized_frame, model_selection=0, min_detection_confidence=0.4):
         face = mp.solutions.face_detection.FaceDetection(  # type: ignore
             model_selection=model_selection,
@@ -101,6 +109,7 @@ class Core:
         """
         return inference
 
+    # @profile()
     def return_face_location_list(
         self,
         resized_frame,
@@ -145,6 +154,7 @@ class Core:
         self.resized_frame.flags.writeable = True
         return face_location_list
 
+    # @profile()
     def draw_telop(self, logger, cal_resized_telop_nums, frame: np.ndarray) -> np.ndarray:
         self.logger = logger
         self.cal_resized_telop_nums = cal_resized_telop_nums
@@ -162,6 +172,7 @@ class Core:
             # TODO np.clip
         return  frame
 
+    # @profile()
     def draw_logo(self, logger, cal_resized_logo_nums, frame) -> np.ndarray:
         self.logger = logger
         self.cal_resized_logo_nums = cal_resized_logo_nums
@@ -174,6 +185,7 @@ class Core:
             # TODO np.clip
         return frame
 
+    # @profile()
     def check_compare_faces(self, logger, known_face_encodings, face_encoding, tolerance) -> list:
         self.logger = logger
         self.known_face_encodings = known_face_encodings
@@ -192,6 +204,7 @@ class Core:
             self.logger.warning("-" * 20)
             exit(0)
 
+    # @profile()
     def make_frame_datas_array(
         self,
         overlay,
@@ -280,12 +293,14 @@ class Core:
         return self.frame_datas_array
 
     # pil_img_rgbオブジェクトを生成
+    # @profile()
     def pil_img_rgb_instance(self, frame):
         self.frame = frame
         pil_img_obj_rgb = Image.fromarray(cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGBA))
         return  pil_img_obj_rgb
 
     # 顔部分の領域をクロップ画像ファイルとして出力
+    # @profile()
     def make_crop_face_image(
         self,
         anti_spoof,
@@ -325,6 +340,7 @@ class Core:
         return filename,self.number_of_crops, self.frequency_crop_image
 
     # Get face_names
+    # @profile()
     def return_face_names(self, args_dict, face_names, face_encoding, matches, name):
         self.args_dict = args_dict
         self.face_names = face_names
@@ -344,6 +360,7 @@ class Core:
         self.face_names.append(self.name)
         return self.face_names
 
+    @profile()
     def return_concatenate_location_and_frame(self, resized_frame, face_location_list):
         self.resized_frame = resized_frame
         self.face_location_list = face_location_list
@@ -404,6 +421,7 @@ class Core:
         return concatenate_face_location_list, concatenate_person_frame
 
     # フレーム前処理
+    # @profile()
     def frame_pre_processing(self, logger, args_dict, resized_frame):
         self.logger = logger
         self.args_dict = args_dict
@@ -887,12 +905,14 @@ class Core:
         """
         return modified_frame_list
 
+    # @profile()
     def r_face_image(self, frame, face_location):
         self.frame = frame
         self.face_location = face_location
         face_image = Return_face_image().return_face_image(self.frame, self.face_location)
         return face_image
 
+    # @profile()
     def return_anti_spoof(self, frame, face_location):
         self.frame = frame
         self.face_location: tuple = face_location
@@ -952,6 +972,7 @@ class Core:
             return spoof_or_real, score, ELE
 
 # 以下、元libdraw.LibDraw
+    @profile()
     def draw_pink_rectangle(self, resized_frame, top,bottom,left,right) -> np.ndarray:
         self.resized_frame = resized_frame
         self.top = top
@@ -960,7 +981,8 @@ class Core:
         self.right = right
         cv2.rectangle(self.resized_frame, (self.left, self.top), (self.right, self.bottom), (255, 87, 243), 2) # pink
         return self.resized_frame
-        
+    
+    @profile()
     def draw_white_rectangle(self, rectangle, resized_frame, top, left, right, bottom) -> np.ndarray:
         self.rectangle = rectangle
         self.resized_frame = resized_frame
@@ -973,6 +995,7 @@ class Core:
         return self.resized_frame
 
     # パーセンテージ表示
+    # @profile()
     def display_percentage(self, percentage_and_symbol,resized_frame, p, left, right, bottom, tolerance) -> np.ndarray:
         self.percentage_and_symbol = percentage_and_symbol
         self.resized_frame = resized_frame
@@ -1000,6 +1023,7 @@ class Core:
         return self.resized_frame
 
     # デフォルト顔画像の描画処理
+    # @profile()
     def draw_default_face_image(self, logger, resized_frame, default_face_small_image, x1, y1, x2, y2, number_of_people, face_image_width):
         self.resized_frame = resized_frame
         self.default_face_small_image = default_face_small_image
@@ -1022,6 +1046,7 @@ class Core:
         return self.resized_frame
 
     # デフォルト顔画像の表示面積調整
+    # @profile()
     def adjust_display_area(self, args_dict, default_face_image) -> tuple:
         self.args_dict = args_dict
         self.default_face_image = default_face_image
@@ -1033,6 +1058,7 @@ class Core:
         x1, y1, x2, y2 = 0, self.args_dict["set_height"] - face_image_width - 10, face_image_width, self.args_dict["set_height"] - 10
         return x1, y1, x2, y2, default_face_small_image, face_image_width
 
+    # @profile()
     def draw_default_face(self, logger, args_dict, name, resized_frame, number_of_people):
         self.logger = logger
         self.args_dict = args_dict
@@ -1072,6 +1098,7 @@ class Core:
             resized_frame = self.draw_default_face_image(logger, resized_frame, default_face_small_image, x1, y1, x2, y2, number_of_people, face_image_width)
         return resized_frame
 
+    # @profile()
     def draw_rectangle_for_name(self, name,resized_frame, left, right,bottom):
         self.name = name
         self.resized_frame = resized_frame
@@ -1086,6 +1113,7 @@ class Core:
         return self.resized_frame
 
     # 帯状四角形（ピンク）の描画
+    @profile()
     def draw_error_messg_rectangle(self, resized_frame, set_height, set_width):
         """廃止予定
         """        
@@ -1100,11 +1128,13 @@ class Core:
         return error_messg_rectangle_left, error_messg_rectangle_right, error_messg_rectangle_bottom
 
     # drawオブジェクトを生成
+    @profile()
     def  make_draw_object(self, frame):
         self.frame = frame
         draw = ImageDraw.Draw(Image.fromarray(self.frame))
         return draw
 
+    @profile()
     def draw_error_messg_rectangle_messg(self, draw, error_messg_rectangle_position, error_messg_rectangle_messg, error_messg_rectangle_font):
         """廃止予定
         """
@@ -1114,6 +1144,7 @@ class Core:
         self.error_messg_rectangle_font = error_messg_rectangle_font
         draw.text(self.error_messg_rectangle_position, self.error_messg_rectangle_messg, fill=(255, 255, 255, 255), font = self.error_messg_rectangle_font)
 
+    # @profile()
     def return_fontpath(self, logger):
         # フォントの設定(フォントファイルのパスと文字の大きさ)
         operating_system: str  = system()
@@ -1129,6 +1160,7 @@ class Core:
             logger.info('オペレーティングシステムの確認が出来ません。システム管理者にご連絡ください')
         return fontpath
 
+    # @profile()
     def calculate_text_position(self, left,right,name,fontsize,bottom):
         # TODO: #17 英数字のみの場合の位置決定バグ
         self.left = left
@@ -1144,6 +1176,7 @@ class Core:
         Unknown_position = (pos + self.fontsize, self.bottom + (self.fontsize * 2))
         return position, Unknown_position
 
+    # @profile()
     def draw_name(self, name,pil_img_obj, Unknown_position, font, p, tolerance, position):
         self.name = name
         self.pil_img_obj = pil_img_obj
@@ -1170,11 +1203,13 @@ class Core:
         return self.pil_img_obj
 
     # pil_img_objをnumpy配列に変換
+    # @profile()
     def convert_pil_img_to_ndarray(self, pil_img_obj):
         self.pil_img_obj = pil_img_obj
         frame = np.array(pil_img_obj)
         return frame
 
+    # @profile()
     def draw_text_for_name(
             self,
             logger,
@@ -1227,6 +1262,7 @@ class Core:
         return resized_frame
 
     # target_rectangleの描画
+    # @profile()
     def draw_target_rectangle(
         self,
         person_data_list,
@@ -1369,3 +1405,11 @@ class Core:
                     pass
 
         return self.resized_frame
+
+"""DEBUG: MEMORY LEAK"""
+Memory_leak_obj.memory_leak_analyze_stop(line_or_traceback)
+
+# from pympler import summary, muppy
+# all_objects = muppy.get_objects()
+# sum1 = summary.summarize(all_objects)
+# summary.print_(sum1)
