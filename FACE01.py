@@ -6,12 +6,13 @@ from sys import exit, version, version_info, getsizeof
 from time import perf_counter
 from traceback import format_exc
 
-"""DEBUG: MEMORY LEAK
+"""DEBUG: MEMORY LEAK"""
 from face01lib.memory_leak import Memory_leak
-Memory_leak_obj = Memory_leak()
-line_or_traceback = 'line'  # or 'traceback'
+Memory_leak_obj = Memory_leak(50)  # Set 'nframe'
+line_or_traceback = 'traceback'
 Memory_leak_obj.memory_leak_analyze_start(line_or_traceback)
-"""
+
+
 import gc
 import cv2
 from GPUtil import getGPUs
@@ -216,6 +217,7 @@ def Measure_processing_time_backward():
         Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR)
 
 frame_generator_obj = VidCap().frame_generator(args_dict)
+
 # @profile()
 def main_process():
     try:
@@ -252,7 +254,7 @@ def main_process():
 
 # main =================================================================
 if __name__ == '__main__':
-    import cProfile as pr
+    # import cProfile as pr
     import time
     import traceback
 
@@ -267,7 +269,7 @@ if __name__ == '__main__':
 
     """DEBUG
     Set the number of playback frames"""
-    exec_times: int = 50
+    exec_times: int = 500
     ALL_FRAME = exec_times
 
     # PySimpleGUI layout
@@ -365,12 +367,16 @@ if __name__ == '__main__':
         print(f'Number of frames processed: {ALL_FRAME - exec_times}')
         print(f'Total processing time: {round(profile_HANDLING_FRAME_TIME , 3)}[seconds]')
         print(f'Per frame: {round(profile_HANDLING_FRAME_TIME / (ALL_FRAME - exec_times), 3)}[seconds]')
-    pr.run('common_main(exec_times)', 'restats')
+    # pr.run('common_main(exec_times)', 'restats')
 
-"""DEBUG: MEMORY LEAK
+
+    common_main(exec_times)
+
+"""DEBUG: MEMORY LEAK"""
 Memory_leak_obj.memory_leak_analyze_stop(line_or_traceback)
-"""
-# from pympler import summary, muppy
-# all_objects = muppy.get_objects()
-# sum1 = summary.summarize(all_objects)
-# summary.print_(sum1)
+
+
+from pympler import summary, muppy
+all_objects = muppy.get_objects()
+sum1 = summary.summarize(all_objects)
+summary.print_(sum1)

@@ -13,13 +13,14 @@ import psutil
 
 
 class Memory_leak:
-    def __init__(self) -> None:
-        global used_memory1
-        used_memory1 = psutil.virtual_memory().used
+    def __init__(self, nframe: int) -> None:
+        self.nframe = nframe
+        self.used_memory1 = psutil.virtual_memory().used
         print("=" * 20)
-        print("⭐️" * 3, "Memory usage before start: %.1f GiB" % (used_memory1 / 1024 /1048 / 1074))
+        print("memory_leak.pyが呼び出されました")
+        print("=" * 20)
 
-    def display_line(self, snapshot, key_type='lineno', limit=5):
+    def display_line(self, snapshot, key_type='lineno', limit=10):
         self.snapshot = snapshot
         self.key_type = key_type
         self.limit = limit
@@ -27,7 +28,7 @@ class Memory_leak:
         snapshot = self.snapshot.filter_traces(
             (
                 tracemalloc.Filter(False, "<frozen importlib._bootstrap>"),
-                tracemalloc.Filter(False, "<unknown>"),
+                tracemalloc.Filter(False, "<frozen importlib._bootstrap_external>"),
             )
         )
         top_stats = snapshot.statistics(self.key_type)
@@ -67,24 +68,34 @@ class Memory_leak:
     def memory_leak_analyze_start(self, line_or_traceback: str = 'line'):
         self.line_or_traceback = line_or_traceback
         if self.line_or_traceback == 'traceback':
-            tracemalloc.start(20)
-            self.snapshot1 = tracemalloc.take_snapshot()
-            pass
+            tracemalloc.start(self.nframe)
+            self.snapshot1 = tracemalloc.take_snapshot().filter_traces(
+                (
+                    tracemalloc.Filter(False, "<frozen importlib._bootstrap>"),
+                    tracemalloc.Filter(False, "<frozen importlib._bootstrap_external>"),
+                )
+            )
         elif self.line_or_traceback == 'line':
-            tracemalloc.start()
+            tracemalloc.start(self.nframe)
         else:
             print("The argument 'line_or_traceback' must specify either 'line' or 'traceback'."); exit()
 
     def memory_leak_analyze_stop(self, line_or_traceback: str = 'line'):
         self.line_or_traceback = line_or_traceback
         if self.line_or_traceback == 'traceback':
-            snapshot2 = tracemalloc.take_snapshot()
+            snapshot2 = tracemalloc.take_snapshot().filter_traces(
+                (
+                    tracemalloc.Filter(False, "<frozen importlib._bootstrap>"),
+                    tracemalloc.Filter(False, "<frozen importlib._bootstrap_external>"),
+                )
+            )
             stats = snapshot2.compare_to(self.snapshot1, 'traceback')
             self.display_traceback(stats)
         elif self.line_or_traceback == 'line':
             snapshot = tracemalloc.take_snapshot()
             self.display_line(snapshot)
 
+        tracemalloc_memory = tracemalloc.get_tracemalloc_memory()
         used_memory2 = psutil.virtual_memory().used
-        used_memory = used_memory2 - used_memory1
+        used_memory = used_memory2 - self.used_memory1 - tracemalloc_memory
         print("⭐️" * 3, "Used Memory: %.1f GiB" % (used_memory / 1024 /1048 / 1074))

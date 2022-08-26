@@ -699,3 +699,21 @@ NoneType: None
 [2022-08-25 20:35:12,459] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 3
 [2022-08-25 20:35:12,460] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/lib/python3.8/site-packages/memory_profiler.py
 [2022-08-25 20:35:12,463] [face01lib.Core] [Core.py] [WARNING] 759
+[2022-08-25 20:42:48,859] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 2
+[2022-08-25 20:42:48,860] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-25 20:42:48,862] [face01lib.Core] [Core.py] [WARNING] 564
+[2022-08-25 20:42:51,056] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 3
+[2022-08-25 20:42:51,059] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-25 20:42:51,061] [face01lib.Core] [Core.py] [WARNING] 564
+[2022-08-25 20:42:51,701] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 2
+[2022-08-25 20:42:51,704] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-25 20:42:51,707] [face01lib.Core] [Core.py] [WARNING] 564
+[2022-08-25 20:42:52,074] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 3
+[2022-08-25 20:42:52,075] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-25 20:42:52,076] [face01lib.Core] [Core.py] [WARNING] 564
+[2022-08-25 20:42:52,704] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 3
+[2022-08-25 20:42:52,706] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-25 20:42:52,710] [face01lib.Core] [Core.py] [WARNING] 564
+[2022-08-25 20:42:53,287] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 3
+[2022-08-25 20:42:53,288] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-25 20:42:53,289] [face01lib.Core] [Core.py] [WARNING] 564

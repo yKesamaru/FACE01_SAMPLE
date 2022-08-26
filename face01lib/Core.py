@@ -33,6 +33,8 @@ Memory_leak_obj = Memory_leak()
 line_or_traceback = 'line'  # 'line' or 'traceback'
 Memory_leak_obj.memory_leak_analyze_start(line_or_traceback)
 """
+
+import gc
 import inspect
 from datetime import datetime
 from platform import system
@@ -76,7 +78,7 @@ onnx_session = onnxruntime.InferenceSession(anti_spoof_model)
 
 name: str = __name__
 dir: str = dirname(__file__)
-logger = Logger().logger(name, dir, None)
+logger = Logger().logger(name, dir, 'debug')
 # Cal_obj.cal_specify_date(logger)
 
 class Core:
@@ -284,9 +286,9 @@ class Core:
             self.frame_datas_array.append(frame_datas)
 
         """DEBUG"""
-        logger.warning(f'frame_datas_array size: {len(self.frame_datas_array)}')
-        logger.warning(inspect.currentframe().f_back.f_code.co_filename)
-        logger.warning(inspect.currentframe().f_back.f_lineno)
+        logger.debug(f'frame_datas_array size: {len(self.frame_datas_array)}')
+        logger.debug(inspect.currentframe().f_back.f_code.co_filename)
+        logger.debug(inspect.currentframe().f_back.f_lineno)
         
         
         return self.frame_datas_array
@@ -443,6 +445,8 @@ class Core:
             # 半透明処理（前半）
             if self.args_dict["show_overlay"]==True:
                 overlay: cv2.Mat = self.resized_frame.copy()
+                """DEBUG: Memory leak"""
+                
 
             # テロップとロゴマークの合成
             if self.args_dict["draw_telop_and_logo"] == True:
@@ -462,7 +466,8 @@ class Core:
         else:
             date = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
             face_location_list = \
-                Dlib_api_obj.face_locations(
+                Dlib_api().face_locations(
+                # Dlib_api_obj.face_locations(
                     self.resized_frame,
                     self.args_dict["upsampling"],
                     self.args_dict["mode"]
@@ -643,7 +648,8 @@ class Core:
                     exit(0)
                 elif self.args_dict["use_pipe"] == False and self.args_dict["person_frame_face_encoding"] == False:
                     face_encodings = \
-                        Dlib_api_obj.face_encodings(
+                        Dlib_api().face_encodings(
+                        # Dlib_api_obj.face_encodings(
                             resized_frame,
                             face_location_list,
                             self.args_dict["jitters"],
@@ -1205,7 +1211,11 @@ class Core:
     # @profile()
     def convert_pil_img_to_ndarray(self, pil_img_obj):
         self.pil_img_obj = pil_img_obj
-        frame = np.array(pil_img_obj)
+        frame = np.array(self.pil_img_obj)
+        """DEBUG: Memory leak
+        del pil_img_obj
+        gc.collect()
+        """
         return frame
 
     # @profile()
@@ -1258,6 +1268,7 @@ class Core:
             )
         # pil_img_objをnumpy配列に変換
         resized_frame = self.convert_pil_img_to_ndarray(self.pil_img_obj)
+        # del self.pil_img_obj
         return resized_frame
 
     # target_rectangleの描画
