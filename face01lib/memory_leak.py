@@ -1,26 +1,36 @@
 """DEBUG: #23 Memory leak
 For reference, See bellow
-https://qiita.com/hnw/items/3e01f60eb190f748539a
-https://docs.python.org/ja/3/library/tracemalloc.html
+https://docs.python.org/ja/3/library/tracemalloc.html#
 """
-
-
 import linecache
-import sys
 import tracemalloc
 
 import psutil
 
 
 class Memory_leak:
-    def __init__(self, nframe: int) -> None:
-        self.nframe = nframe
-        self.used_memory1 = psutil.virtual_memory().used
-        print("=" * 20)
-        print("memory_leak.pyが呼び出されました")
-        print("=" * 20)
+    """Output the result of the tracemalloc module with formatted.
+    """    
+    def __init__(self, limit: int, key_type: str, **kwargs: int) -> None:
+        """Output the result of the tracemalloc module with formatted.
 
-    def display_line(self, snapshot, key_type='lineno', limit=10):
+        Args:
+            limit:(int) Limit output lines.
+            key_type:(str) Select lineno or traceback output. Defaults to 'lineno'.
+            nframe:(int, optional) This can be specified only when key_type is 'traceback'. Defaults to 5.
+        """    
+        self.limit = limit
+        self.key_type = key_type
+        self.nframe = kwargs.get('nframe')
+
+        self.used_memory1 = psutil.virtual_memory().used
+
+        print("-" * 30)
+        print(f"Called 'memory_leak.py' with '{self.key_type}' mode...")
+        print("-" * 30)
+
+
+    def __display_line(self, snapshot, key_type='lineno', limit=5):
         self.snapshot = snapshot
         self.key_type = key_type
         self.limit = limit
@@ -29,73 +39,92 @@ class Memory_leak:
             (
                 tracemalloc.Filter(False, "<frozen importlib._bootstrap>"),
                 tracemalloc.Filter(False, "<frozen importlib._bootstrap_external>"),
+                tracemalloc.Filter(False, tracemalloc.__file__),
+                tracemalloc.Filter(False, "<unknown>"),
             )
         )
-        top_stats = snapshot.statistics(self.key_type)
+        stats = snapshot.statistics(self.key_type)
 
-        print("Top %s lines" % self.limit)
+        print("\nTop %s lines" % self.limit)
 
-        for index, stat in enumerate(top_stats[:self.limit], 1):
+        for index, stat in enumerate(stats[:self.limit], 1):
             frame = stat.traceback[0]
             print("#%s: File:%s\n    Line: %s\n    Size: %.1f MiB"
                 % (index, frame.filename, frame.lineno, stat.size / 1024 / 1048))
             line = linecache.getline(frame.filename, frame.lineno).strip()
             if line:
                 print('    %s' % line)
+            linecache.clearcache()
             print("-" * 5)
 
-        other = top_stats[self.limit:]
+        other = stats[self.limit:]
         if other:
             size = sum(stat.size for stat in other)
-            print("%s箇所, その他: %.1f MiB" % (len(other), size / 1024 / 1048))
-        total = sum(stat.size for stat in top_stats)
+            print("%s, Other: %.1f MiB" % (len(other), size / 1024 / 1048))
+        total = sum(stat.size for stat in stats)
         print("Total allocated size: %.1f MiB" % (total / 1024 / 1048))
-        print("=" * 20)
-        print("\n")
-    
-    def display_traceback(self, stats):
+
+
+    def __display_traceback(self, stats, key_type='traceback', limit=5):
         self.stats = stats
-        num = 1
-        for stat in self.stats[:5]:
-            print("\n", "-" * 20)
-            print("# ", num); num += 1
-            print(f'stat: {stat}')
-            for line in stat.traceback.format():
-                print(f'      {line}')
-        print("=" * 20)
-        print("\n")
+        self.key_type = key_type
+        self.limit = limit
 
-    def memory_leak_analyze_start(self, line_or_traceback: str = 'line'):
-        self.line_or_traceback = line_or_traceback
-        if self.line_or_traceback == 'traceback':
-            tracemalloc.start(self.nframe)
-            self.snapshot1 = tracemalloc.take_snapshot().filter_traces(
-                (
-                    tracemalloc.Filter(False, "<frozen importlib._bootstrap>"),
-                    tracemalloc.Filter(False, "<frozen importlib._bootstrap_external>"),
+        print("\nTop %s traceback" % self.limit)
+
+        index = 1
+        for stat in self.stats[:self.limit]:
+            print(f"#{index}\n{stat}")
+            for line in stat.traceback.format():  # traceback.format(limit=5, most_recent_first=True)
+                if line:
+                    print(f"    {line}")
+            print("-" * 5)
+            index += 1
+
+        other = stats[self.limit:]
+        if other:
+            size = sum(stat.size for stat in other)
+            print("%s, Other: %.1f MiB" % (len(other), size / 1024 / 1048))
+        total = sum(stat.size for stat in stats)
+        print("Total allocated size: %.1f MiB" % (total / 1024 / 1048))
+
+
+    def memory_leak_analyze_start(self):
+        if self.key_type == 'traceback':
+            if isinstance(self.nframe, int):
+                tracemalloc.start(self.nframe)
+                self.snapshot1 = tracemalloc.take_snapshot().filter_traces(
+                    (
+                        tracemalloc.Filter(False, "<frozen importlib._bootstrap>"),
+                        tracemalloc.Filter(False, "<frozen importlib._bootstrap_external>"),
+                        tracemalloc.Filter(False, tracemalloc.__file__),
+                        tracemalloc.Filter(False, "<unknown>"),
+                    )
                 )
-            )
-        elif self.line_or_traceback == 'line':
-            tracemalloc.start(self.nframe)
+            else:
+                print("nframe: int")
+                exit(0)
+        
+        elif self.key_type == 'lineno':
+            tracemalloc.start()
+        
         else:
-            print("The argument 'line_or_traceback' must specify either 'line' or 'traceback'."); exit()
+            print("The argument 'key_type' must specify either 'lineno' or 'traceback'."); exit()
 
-    def memory_leak_analyze_stop(self, line_or_traceback: str = 'line'):
-        self.line_or_traceback = line_or_traceback
-        if self.line_or_traceback == 'traceback':
-            snapshot2 = tracemalloc.take_snapshot().filter_traces(
-                (
-                    tracemalloc.Filter(False, "<frozen importlib._bootstrap>"),
-                    tracemalloc.Filter(False, "<frozen importlib._bootstrap_external>"),
-                )
-            )
+
+    def memory_leak_analyze_stop(self):
+        if self.key_type == 'traceback':
+            snapshot2 = tracemalloc.take_snapshot()
             stats = snapshot2.compare_to(self.snapshot1, 'traceback')
-            self.display_traceback(stats)
-        elif self.line_or_traceback == 'line':
+            self.__display_traceback(stats, 'traceback', self.limit)
+        
+        elif self.key_type == 'lineno':
             snapshot = tracemalloc.take_snapshot()
-            self.display_line(snapshot)
+            self.__display_line(snapshot, 'lineno', self.limit)
 
         tracemalloc_memory = tracemalloc.get_tracemalloc_memory()
         used_memory2 = psutil.virtual_memory().used
         used_memory = used_memory2 - self.used_memory1 - tracemalloc_memory
-        print("⭐️" * 3, "Used Memory: %.1f GiB" % (used_memory / 1024 /1048 / 1074))
+        print("-" * 30)
+        print("Used Memory: %.1f GiB" % (used_memory / 1024 /1048 / 1074))
+        print("-" * 30)

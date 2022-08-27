@@ -151,6 +151,9 @@ class Core:
                 if xleft <= 0 or xtop <= 0:  # xleft or xtop がマイナスになる場合があるとバグる
                     continue
                 face_location_list.append((xtop,xright,xbottom,xleft))  # Dlib_api() order
+        
+        """DEBUG Memory leak"""
+        del result
 
         self.resized_frame.flags.writeable = True
         return face_location_list
