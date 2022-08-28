@@ -1,18 +1,27 @@
 from setuptools import setup
 from Cython.Build import cythonize
 import glob
-from os.path import basename, splitext
-from copy import copy
 
 
-py_file_list = glob.glob('/home/terms/bin/FACE01/face01lib/pyx/*pyx')
-for pyfile in py_file_list:
-    setup(
-        ext_modules = cythonize(
-            pyfile,
-            # annotate=True  # htmlファイルを出力
-        )
+# py_file_list = glob.glob('/home/terms/bin/FACE01/face01lib/pyx/*pyx')
+# for pyfile in py_file_list:
+#     setup(
+#         ext_modules = cythonize(
+#             pyfile,
+#         )
+#     )
+
+setup(
+    ext_modules = cythonize(
+        "Core.pyx",
     )
+)
+
+# setup(
+#     ext_modules = cythonize(
+#         "return_face_image.pyx",
+#     )
+# )
 
 """compile
 cd ~/bin/FACE01/face01lib/pyx

@@ -1,18 +1,14 @@
 {
   "version": "0.2.0",
   "configurations": [
-  
     {
       "name": "(gdb) 起動",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${fileDirname}/${fileBasenameNoExtension}",
-      "args": [
-        "1080",
-        "1920"
-      ],
+      "program": "${fileBasenameNoExtension}.cpython-38-x86_64-linux-gnu.so",
+      "args": [],
       "stopAtEntry": false,
-      "cwd": "${fileDirname}",
+      "cwd": "/home/terms/bin/FACE01/face01lib/",
       "environment": [],
       "externalConsole": false,
       "MIMode": "gdb",
@@ -36,6 +32,15 @@
       "program": "${file}",
       "console": "integratedTerminal",
       "justMyCode": true
+    },
+    {
+      "name": "test_numpy_main.py",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01",
+      "program": "/home/terms/bin/FACE01/test_numpy_main.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python"
     },
     {
       "name": "CALL_FACE01.py",

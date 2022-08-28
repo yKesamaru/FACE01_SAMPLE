@@ -1,17 +1,29 @@
+import inspect
 from configparser import ConfigParser
 from os import chdir
 from os.path import dirname, exists
-from sys import exit, version, version_info
+from sys import exit, version, version_info, getsizeof
 from time import perf_counter
 from traceback import format_exc
 
+"""DEBUG: MEMORY LEAK
+from face01lib.memory_leak import Memory_leak
+m = Memory_leak(limit=7, key_type='traceback', nframe=20)
+# m = Memory_leak(limit=7, key_type='lineno')
+m.memory_leak_analyze_start()
+"""
+
+import gc
 import cv2
 from GPUtil import getGPUs
 from psutil import cpu_count, cpu_freq, virtual_memory
 
+from memory_profiler import profile  # @profile()
 from face01lib.api import Dlib_api
+
 Dlib_api_obj = Dlib_api()
 from face01lib.Core import Core
+
 Core_obj = Core()
 from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
@@ -22,9 +34,12 @@ GLOBAL_MEMORY = {
 'alpha' : 0.3,
 'number_of_crops' : 0
 }
+
 name = __name__
 dir = dirname(__file__)
-logger = Logger().logger(name, dir)
+logger = Logger().logger(name, dir, 'debug')
+
+# @profile()
 def configure():
     kaoninshoDir: str = dir
     chdir(kaoninshoDir)
@@ -38,6 +53,7 @@ def configure():
             'model' : conf.get('DEFAULT','model'),
             'headless' : conf.getboolean('MAIN','headless'),
             'anti_spoof' : conf.getboolean('MAIN','anti_spoof'),
+            'output_debug_log' : conf.getboolean('MAIN','output_debug_log'),
             'set_width' : int(conf.get('SPEED_OR_PRECISE','set_width')),
             'similar_percentage' : float(conf.get('SPEED_OR_PRECISE','similar_percentage')),
             'jitters' : int(conf.get('SPEED_OR_PRECISE','jitters')),
@@ -51,6 +67,7 @@ def configure():
             'model_selection' : int(conf.get('dlib','model_selection')),
             'min_detection_confidence' : float(conf.get('dlib','min_detection_confidence')),
             'person_frame_face_encoding' : conf.getboolean('dlib','person_frame_face_encoding'),
+            'same_time_recognize' : int(conf.get('dlib','same_time_recognize')),
             'set_area' : conf.get('INPUT','set_area'),
             'movie' : conf.get('INPUT','movie'),
             'user': conf.get('Authentication','user'),
@@ -91,6 +108,7 @@ conf_dict = configure()
 args_dict =  Initialize().initialize(conf_dict)
 
 """CHECK SYSTEM INFORMATION"""
+# @profile()
 def system_check(args_dict):
     # lock
     with open("SystemCheckLock", "w") as f:
@@ -200,13 +218,30 @@ def Measure_processing_time_backward():
         Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR)
 
 frame_generator_obj = VidCap().frame_generator(args_dict)
+
 # @profile()
 def main_process():
     try:
+
         frame_datas_array = Core_obj.frame_pre_processing(logger, args_dict, frame_generator_obj.__next__())
+        
+        """DEBUG"""
+        logger.debug(inspect.currentframe().f_back.f_code.co_filename)
+        logger.debug(inspect.currentframe().f_back.f_lineno)
+        logger.debug(f'frame_datas_array size: {len(frame_datas_array), getsizeof(frame_datas_array)}')
+        logger.debug(inspect.currentframe().f_back.f_code.co_filename)
+        logger.debug(inspect.currentframe().f_back.f_lineno)
+        logger.debug(f'args_dict size: {len(args_dict), getsizeof(args_dict)}')
+        
         face_encodings, frame_datas_array = Core_obj.face_encoding_process(logger, args_dict, frame_datas_array)
         frame_datas_array = Core_obj.frame_post_processing(logger, args_dict, face_encodings, frame_datas_array, GLOBAL_MEMORY)
+        
         yield frame_datas_array
+
+        # メモリ解放
+        del frame_datas_array
+        gc.collect()
+
     except StopIteration:
         logger.warning("DATA RECEPTION HAS ENDED")
         exit(0)
@@ -220,11 +255,12 @@ def main_process():
 
 # main =================================================================
 if __name__ == '__main__':
-    import cProfile as pr
+    # import cProfile as pr
     import time
+    import traceback
 
     import PySimpleGUI as sg
-    import traceback
+
     # from face01lib.Core import Core
     # Core_obj = Core()
     
@@ -234,7 +270,7 @@ if __name__ == '__main__':
 
     """DEBUG
     Set the number of playback frames"""
-    exec_times: int = 250
+    exec_times: int = 50
     ALL_FRAME = exec_times
 
     # PySimpleGUI layout
@@ -318,6 +354,11 @@ if __name__ == '__main__':
             if args_dict["headless"] == False:
                 if event =='terminate':
                     break
+        
+        # メモリ解放
+        del frame_datas_array
+        gc.collect()
+        
         if args_dict["headless"] == False:
             window.close()
         
@@ -327,4 +368,16 @@ if __name__ == '__main__':
         print(f'Number of frames processed: {ALL_FRAME - exec_times}')
         print(f'Total processing time: {round(profile_HANDLING_FRAME_TIME , 3)}[seconds]')
         print(f'Per frame: {round(profile_HANDLING_FRAME_TIME / (ALL_FRAME - exec_times), 3)}[seconds]')
-    pr.run('common_main(exec_times)', 'restats')
+    # pr.run('common_main(exec_times)', 'restats')
+
+
+    common_main(exec_times)
+
+"""DEBUG: MEMORY LEAK
+m.memory_leak_analyze_stop()
+"""
+
+# from pympler import summary, muppy
+# all_objects = muppy.get_objects()
+# sum1 = summary.summarize(all_objects)
+# summary.print_(sum1)

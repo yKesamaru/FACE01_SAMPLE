@@ -1,6 +1,6 @@
 # cython: language_level=3
-# cython: profile = True
 """
+# cython: profile = True
 # cython: boundscheck = False
 # cython: wraparound = False
 # cython: initializedcheck = False
@@ -28,8 +28,6 @@ __model__ = 'Original model create by Prokofev Kirill, modified by PINT'
 __URL__ = 'https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3'
 
 
-from nptyping import NDArray
-import nptyping
 from datetime import datetime
 from platform import system
 from traceback import format_exc
@@ -66,11 +64,11 @@ onnx_session = onnxruntime.InferenceSession(anti_spoof_model)
 name: str = __name__
 dir: str = dirname(__file__)
 logger = Logger().logger(name, dir)
-Cal_obj.cal_specify_date(logger)
+# Cal_obj.cal_specify_date(logger)
 
 class Core:
     def __init__(self) -> None:
-        Cal().cal_specify_date(logger)
+        Cal_obj.cal_specify_date(logger)
 
     def mp_face_detection_func(self, resized_frame, model_selection=0, min_detection_confidence=0.4):
         face = mp.solutions.face_detection.FaceDetection(  # type: ignore
@@ -145,10 +143,15 @@ class Core:
         self.cal_resized_telop_nums = cal_resized_telop_nums
         self.frame = frame
         x1, y1, x2, y2, a, b = self.cal_resized_telop_nums
+        frame_view = self.frame.view(dtype=np.uint8, type=np.ndarray)
         try:
-            frame[y1:y2, x1:x2] = self.frame[y1:y2, x1:x2] * a + b
+            # TODO: #21 numpyのfunctionを探す
+            # https://numpy.org/devdocs/reference/arrays.indexing.html
+            # frame[y1:y2, x1:x2] = self.frame[y1:y2, x1:x2] * a + b
+            frame[:,y1:y2, x1:x2] = frame_view[:,y1:y2, x1:x2] * a + b
+
         except:
-            self.logger.debug("telopが描画できません")
+            self.logger.debug("cannot draw telop image")
             # TODO np.clip
         return  frame
 
@@ -871,16 +874,23 @@ class Core:
         """
         return modified_frame_list
 
+    def r_face_image(self, frame, face_location):
+        self.frame = frame
+        self.face_location = face_location
+        face_image = Return_face_image().return_face_image(self.frame, self.face_location)
+        return face_image
+
     def return_anti_spoof(self, frame, face_location):
         self.frame = frame
         self.face_location: tuple = face_location
-        face_image = Return_face_image().return_face_image(self.frame, self.face_location)
+        face_image = self.r_face_image(self.frame, self.face_location)
+        # face_image = Return_face_image().return_face_image(self.frame, self.face_location)
         # face_image = self.return_face_image(self.frame, self.face_location)
         # VidCap_obj.frame_imshow_for_debug(face_image)  # DEBUG
 
         """ DEBUG: face_image確認 -> 正方形であることを確認した
         print(self.face_location)
-        cv2.imshow('', face_image)
+        cv2.imshow('Core: DEBUG', face_image)
         cv2.waitKey(3000)
         cv2.destroyAllWindows()
         """

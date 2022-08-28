@@ -1,5 +1,16 @@
 # FACE01について
 # TODO
+## 1.4.08
+numpyの[view](https://numpy.org/doc/1.22/reference/generated/numpy.ndarray.view.html)
+draw_telop()
+- slice
+- ![](img/PASTE_IMAGE_2022-08-13-13-29-35.png)
+- slice + view
+- ![](img/PASTE_IMAGE_2022-08-13-13-30-49.png)
+- viewをtryブロック外へ移動
+- ![](img/PASTE_IMAGE_2022-08-13-13-33-26.png)
+
+
 ## 1.4.05
 [CelebA-Spoofデータセット](https://github.com/ZhangYuanhan-AI/CelebA-Spoof)が商用利用不可だったので、アンチスプーフ機能を外す。
 以下のREADME.mdを除去。
