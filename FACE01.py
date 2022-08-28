@@ -6,12 +6,12 @@ from sys import exit, version, version_info, getsizeof
 from time import perf_counter
 from traceback import format_exc
 
-"""DEBUG: MEMORY LEAK"""
+"""DEBUG: MEMORY LEAK
 from face01lib.memory_leak import Memory_leak
 m = Memory_leak(limit=7, key_type='traceback', nframe=20)
 # m = Memory_leak(limit=7, key_type='lineno')
 m.memory_leak_analyze_start()
-
+"""
 
 import gc
 import cv2
@@ -67,6 +67,7 @@ def configure():
             'model_selection' : int(conf.get('dlib','model_selection')),
             'min_detection_confidence' : float(conf.get('dlib','min_detection_confidence')),
             'person_frame_face_encoding' : conf.getboolean('dlib','person_frame_face_encoding'),
+            'same_time_recognize' : int(conf.get('dlib','same_time_recognize')),
             'set_area' : conf.get('INPUT','set_area'),
             'movie' : conf.get('INPUT','movie'),
             'user': conf.get('Authentication','user'),
@@ -372,9 +373,9 @@ if __name__ == '__main__':
 
     common_main(exec_times)
 
-"""DEBUG: MEMORY LEAK"""
+"""DEBUG: MEMORY LEAK
 m.memory_leak_analyze_stop()
-
+"""
 
 # from pympler import summary, muppy
 # all_objects = muppy.get_objects()

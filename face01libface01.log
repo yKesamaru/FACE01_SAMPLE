@@ -717,3 +717,15 @@ NoneType: None
 [2022-08-25 20:42:53,287] [face01lib.Core] [Core.py] [WARNING] frame_datas_array size: 3
 [2022-08-25 20:42:53,288] [face01lib.Core] [Core.py] [WARNING] /home/terms/bin/FACE01/face01lib/Core.py
 [2022-08-25 20:42:53,289] [face01lib.Core] [Core.py] [WARNING] 564
+[2022-08-28 11:56:04,254] [face01lib.video_capture] [video_capture.py] [WARNING] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-28 11:56:04,256] [face01lib.video_capture] [video_capture.py] [WARNING] 100
+[2022-08-28 12:03:43,277] [face01lib.video_capture] [video_capture.py] [WARNING] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-28 12:03:43,278] [face01lib.video_capture] [video_capture.py] [WARNING] 100
+[2022-08-28 12:05:00,222] [face01lib.video_capture] [video_capture.py] [WARNING] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-28 12:05:00,223] [face01lib.video_capture] [video_capture.py] [WARNING] 100
+[2022-08-28 12:07:39,358] [face01lib.video_capture] [video_capture.py] [WARNING] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-28 12:07:39,359] [face01lib.video_capture] [video_capture.py] [WARNING] 100
+[2022-08-28 12:10:45,248] [face01lib.video_capture] [video_capture.py] [WARNING] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-28 12:10:45,249] [face01lib.video_capture] [video_capture.py] [WARNING] 100
+[2022-08-28 12:13:21,575] [face01lib.video_capture] [video_capture.py] [WARNING] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-28 12:13:21,576] [face01lib.video_capture] [video_capture.py] [WARNING] 100

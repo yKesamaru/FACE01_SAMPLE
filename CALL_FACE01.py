@@ -1,9 +1,8 @@
 
 """DEBUG: MEMORY LEAK"""
 from face01lib.memory_leak import Memory_leak
-Memory_leak_obj = Memory_leak()
-line_or_traceback = 'traceback'  # 'line' or 'traceback'
-Memory_leak_obj.memory_leak_analyze_start(line_or_traceback)
+m = Memory_leak(limit=3, key_type='traceback', nframe=20)
+m.memory_leak_analyze_start()
 
 
 import gc
@@ -39,12 +38,12 @@ if fg.args_dict["output_debug_log"] == True:
 else:
     logger = Logger().logger(name, dir, None)
 
-
+# TODO: __init__
 Cal().cal_specify_date(logger)
 
 """DEBUG
 Set the number of playback frames"""
-exec_times: int = 30
+exec_times: int = 300
 ALL_FRAME = exec_times
 
 # PySimpleGUI layout
@@ -186,10 +185,4 @@ def extract_face_locations(exec_times):
 # pr.run('extract_face_locations(exec_times)', 'restats')
 
 """DEBUG: MEMORY LEAK"""
-Memory_leak_obj.memory_leak_analyze_stop(line_or_traceback)
-
-
-# from pympler import summary, muppy
-# all_objects = muppy.get_objects()
-# sum1 = summary.summarize(all_objects)
-# summary.print_(sum1)
+m.memory_leak_analyze_stop()

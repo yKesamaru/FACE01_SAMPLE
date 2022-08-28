@@ -67,7 +67,7 @@ from face01lib.logger import Logger
 from face01lib.models import Dlib_models
 from face01lib.return_face_image import Return_face_image
 
-# from face01lib.video_capture import VidCap
+from face01lib.video_capture import VidCap
 # VidCap_obj = VidCap()
 
 
@@ -86,17 +86,46 @@ class Core:
         Cal_obj.cal_specify_date(logger)
 
     # @profile()
-    def mp_face_detection_func(self, resized_frame, model_selection=0, min_detection_confidence=0.4):
-        face = mp.solutions.face_detection.FaceDetection(  # type: ignore
-            model_selection=model_selection,
-            min_detection_confidence=min_detection_confidence
+    def mp_face_detection_func(
+            self,
+            resized_frame,
+            model_selection: int=0,
+            min_detection_confidence: float=0.4
+        ):
+        self.resized_frame = resized_frame
+        self.model_selection = model_selection,
+        self.min_detection_confidence: float = min_detection_confidence
+        
+        """DEBUG
+        VidCap().frame_imshow_for_debug(self.resized_frame)
+        print(type(self.resized_frame))
+        """
+
+        # method 1
+        # mp_face_detection = mp.solutions.face_detection
+        # with mp_face_detection.FaceDetection(
+        #     self.model_selection[0],
+        #     self.min_detection_confidence
+        # ) as face_detection:
+        #     results = face_detection.process(self.resized_frame)
+
+        # method 2
+        f = mp.solutions.face_detection.FaceDetection(
+            self.model_selection[0],
+            self.min_detection_confidence
         )
+        
+        results = f.process(self.resized_frame)
+        f.close()
+
+        """DEBUG
+        if not results.detections:
+            exit(0)
+        """
+
         """refer to
         https://solutions.mediapipe.dev/face_detection#python-solution-api
-        """    
-        # 推論処理
-        inference = face.process(resized_frame)
-        """
+        
         Processes an RGB image and returns a list of the detected face location data.
         Args:
             image: An RGB image represented as a numpy ndarray.
@@ -108,7 +137,7 @@ class Core:
             A NamedTuple object with a "detections" field that contains a list of the
             detected face location data.'
         """
-        return inference
+        return results
 
     # @profile()
     def return_face_location_list(
@@ -117,30 +146,36 @@ class Core:
         set_width,
         set_height,
         model_selection,
-        min_detection_confidence
+        min_detection_confidence,
+        same_time_recognize
     ) -> list:
         """
         return: face_location_list
         """
-        self.resized_frame: np.ndarray = resized_frame
+        self.face_location_list_resized_frame: np.ndarray = resized_frame
         self.set_width: int = set_width
         self.set_height: int = set_height
-        self.model_selection = model_selection
+        self.face_location_list_model_selection = model_selection
         self.min_detection_confidence = min_detection_confidence
-        self.resized_frame.flags.writeable = False
+        self.same_time_recognize = same_time_recognize
+
+        self.face_location_list_resized_frame.flags.writeable = False
         face_location_list: list = []
         # person_frame = np.empty((2,0), dtype = np.float64)
         # date = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
 
         result = self.mp_face_detection_func(
-            self.resized_frame,
-            self.model_selection,
+            self.face_location_list_resized_frame,
+            self.face_location_list_model_selection,
             self.min_detection_confidence
         )
         if not result.detections:
             return face_location_list
         else:
+            n = 0
             for detection in result.detections:
+                if n >= self.same_time_recognize:
+                    break
                 xleft:int = int(detection.location_data.relative_bounding_box.xmin * self.set_width)
                 xtop :int= int(detection.location_data.relative_bounding_box.ymin * self.set_height)
                 xright:int = int(detection.location_data.relative_bounding_box.width * self.set_width + xleft)
@@ -151,6 +186,7 @@ class Core:
                 if xleft <= 0 or xtop <= 0:  # xleft or xtop がマイナスになる場合があるとバグる
                     continue
                 face_location_list.append((xtop,xright,xbottom,xleft))  # Dlib_api() order
+                n += 1
         
         """DEBUG Memory leak"""
         del result
@@ -479,7 +515,6 @@ class Core:
         [(144, 197, 242, 99), (97, 489, 215, 371)]
         """
 
-        """いらないのでは？"""
         # 顔がなかったら以降のエンコード処理を行わない
         if len(face_location_list) == 0:
             frame_datas_array = \

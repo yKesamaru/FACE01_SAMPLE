@@ -4,7 +4,7 @@ https://docs.python.org/ja/3/library/tracemalloc.html#
 """
 import linecache
 import tracemalloc
-
+from pympler import summary, muppy
 import psutil
 
 
@@ -128,3 +128,8 @@ class Memory_leak:
         print("-" * 30)
         print("Used Memory: %.1f GiB" % (used_memory / 1024 /1048 / 1074))
         print("-" * 30)
+        # pympler
+        print("\npympler report")
+        all_objects = muppy.get_objects()
+        sum1 = summary.summarize(all_objects)
+        summary.print_(sum1)
