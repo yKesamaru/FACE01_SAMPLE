@@ -86,7 +86,7 @@ Whole example code is [here](../example/Core_return_face_location_list.py).
 This function loads face images in `priset_face_images` folder, and make npKnown.npz file.
 
 
-# `return_anti_spoof`
+# `return_anti_spoof` (Experimental)
 This method returns valuable `spoof_or_real`, `score` and `ELE`.
 
 In general, the results inferred from the trained model are not clearly divided into 1 and 0. For this reason, FACE01 incorporates the concept of `ELE: Equally Likely Events`. `score` originally presents two numbers between 0 ~ 1. At this time, the difference between the two numbers is set to 0.4, and the combination of numbers with a difference of 0.4 or less is considered to be "similarly certain"(=Equally Likely Events). FACE01 expresses this as ELE. That is, if the difference between the two numbers is LESS 0.4, it is not possible to determine whether it is `spoof` or` not spoof`.
