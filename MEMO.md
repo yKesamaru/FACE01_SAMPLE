@@ -1,6 +1,11 @@
 # FACE01について
 # TODO
+## 1.4.09
+- メモリ削減の工夫
+- FACE01 SAMPLEの更新
+
 ## 1.4.08
+Fix: Memory leak
 numpyの[view](https://numpy.org/doc/1.22/reference/generated/numpy.ndarray.view.html)
 draw_telop()
 - slice
