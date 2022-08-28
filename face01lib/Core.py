@@ -147,7 +147,7 @@ class Core:
         set_height,
         model_selection,
         min_detection_confidence,
-        same_time_recognize
+        same_time_recognize = 2
     ) -> list:
         """
         return: face_location_list
@@ -500,7 +500,8 @@ class Core:
                     self.args_dict["set_width"],
                     self.args_dict["set_height"],
                     self.args_dict["model_selection"],
-                    self.args_dict["min_detection_confidence"]
+                    self.args_dict["min_detection_confidence"],
+                    self.args_dict["same_time_recognize"]
                 )
         else:
             date = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
