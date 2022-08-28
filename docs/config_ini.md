@@ -14,6 +14,7 @@ NOTE: Do not edit.
   - Default: True
   - If set `False`, display GUI window, and process speed get slowly.
 - anti_spoof
+  - **Experimental**
   - NOTE: Anti-spoof model is included with this sample, but please do ***not*** use this model as is for commercial use. Please contact tokai-kaoninsho for details.
   - bool
   - Default: False
@@ -66,7 +67,14 @@ NOTE: Do not edit.
   - float
   - Default: 0.4
   - NOTE: You can set `person_frame_face_encoding` to `True` only if `use_pipe` is True.
-person_frame_face_encoding = False
+- person_frame_face_encoding
+  - bool
+  - Default: False
+  - You can set person_frame_face_encoding to True only if `use_pipe` is `True`.
+- same_time_recognize
+  - int
+  - Default: 2
+  - Number of people to recognize at the same time. Default is 2. Valid only if `use_pipe` is `True`.
 
 ##  [INPUT]
 - set_area

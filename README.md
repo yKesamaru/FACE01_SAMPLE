@@ -1,7 +1,7 @@
 ![Logo](https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/g1320.png)
 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE)
-![](https://img.shields.io/badge/Release-v1.4.07-blue)
+![](https://img.shields.io/badge/Release-v1.4.08-blue)
 
 ![](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/img/ROMAN_HOLIDAY.GIF?raw=true)
 ```bash
@@ -18,7 +18,7 @@ Audrey Hepburn
  
 # FACE01 SAMPLE
 This repository contains FACE01 SAMPLE for UBUNTU 20.04.
-If you are a Windows user, please use this on WSLg.
+If you are a Windows user, please use this on WSLg or Docker.
 This sample can be used until December 2022.
 
 # About FACE01
@@ -33,6 +33,11 @@ You can call individual methods or call a set of functions.
 
 
 See [docs/functions](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/functions.md).
+
+# Update
+- v1.4.08
+  - Fix memory leak bug.
+
 
 # Installation
 ```bash
@@ -53,7 +58,7 @@ See [here](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/docker.md
 # Configuration
 Edit `config.ini` file to configure FACE01.
 If you use docker face01_gpu, you can modify the config.ini with `vim`.
-If you want to use the http protocol as the input source, replace the `movie =` part of the `config.ini` file with` movie = http: // <IP> / cgi-bin / <parameter> `. If you want to store the authentication information, enter `user =" ", passwd =" "` in the `config.ini` file as above.
+If you want to use the http protocol as the input source, replace the `movie =` part of the `config.ini` file with ` movie = http: // <IP> / cgi-bin / <parameter> `. If you want to store the authentication information, enter `user =" ", passwd =" "` in the `config.ini` file as above.
 See [docs/config.ini](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/config_ini.md) for details.
 
 # Example
