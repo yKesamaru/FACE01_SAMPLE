@@ -18,16 +18,20 @@ class Logger:
         log_file = dir + 'face01.log'
         file_handler = logging.FileHandler(log_file, mode='a')
         if self.setlevel == 'debug':
+            logger.setLevel(logging.DEBUG)
             file_handler.setLevel(logging.DEBUG)
         else:
+            logger.setLevel(logging.INFO)
             file_handler.setLevel(logging.INFO)
         file_handler.setFormatter(formatter)
 
         stream_handler = logging.StreamHandler()
         if self.setlevel == 'debug':
-            file_handler.setLevel(logging.DEBUG)
+            logger.setLevel(logging.DEBUG)
+            stream_handler.setLevel(logging.DEBUG)
         else:
-            file_handler.setLevel(logging.INFO)
+            stream_handler.setLevel(logging.INFO)
+            logger.setLevel(logging.INFO)
         stream_handler.setFormatter(formatter)
 
         logger.addHandler(file_handler)

@@ -1,8 +1,12 @@
 # FACE01について
 # TODO
 ## 1.4.09
+- imagesの改善
+  - real, spoofの他にtarget_rectangleを作る
 - メモリ削減の工夫
 - FACE01 SAMPLEの更新
+- loggerの不具合
+  - debugモードにならない
 
 ## 1.4.08
 Fix: Memory leak

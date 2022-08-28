@@ -735,3 +735,6 @@ NoneType: None
 [2022-08-28 16:38:39,056] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
 
 [2022-08-28 16:38:39,057] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-29 08:34:42,445] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 08:34:42,451] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 08:34:42,452] [face01lib.Core] [Core.py] [DEBUG] 608

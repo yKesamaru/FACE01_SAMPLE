@@ -3,19 +3,19 @@ from Cython.Build import cythonize
 import glob
 
 
-# py_file_list = glob.glob('/home/terms/bin/FACE01/face01lib/pyx/*pyx')
-# for pyfile in py_file_list:
-#     setup(
-#         ext_modules = cythonize(
-#             pyfile,
-#         )
-#     )
-
-setup(
-    ext_modules = cythonize(
-        "Core.pyx",
+py_file_list = glob.glob('/home/terms/bin/FACE01/face01lib/pyx/*pyx')
+for pyfile in py_file_list:
+    setup(
+        ext_modules = cythonize(
+            pyfile,
+        )
     )
-)
+
+# setup(
+#     ext_modules = cythonize(
+#         "Core.pyx",
+#     )
+# )
 
 # setup(
 #     ext_modules = cythonize(

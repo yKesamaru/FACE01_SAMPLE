@@ -2076,7 +2076,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_2cal_specify_date(CYTHON_UNUSED PyObject *_
  *                 self.logger.info("")
  *                 self.logger.info(" :  y.kesamaru@tokai-kaoninsho.com")             # <<<<<<<<<<<<<<
  * 
- *     def cal_resized_telop_image(self, resized_telop_image):
+ * 
  */
       __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_logger); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 31, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
@@ -2147,8 +2147,8 @@ static PyObject *__pyx_pf_4Calc_3Cal_2cal_specify_date(CYTHON_UNUSED PyObject *_
   return __pyx_r;
 }
 
-/* "Calc.pyx":33
- *                 self.logger.info(" :  y.kesamaru@tokai-kaoninsho.com")
+/* "Calc.pyx":34
+ * 
  * 
  *     def cal_resized_telop_image(self, resized_telop_image):             # <<<<<<<<<<<<<<
  *         self.resized_telop_image = resized_telop_image
@@ -2190,11 +2190,11 @@ static PyObject *__pyx_pw_4Calc_3Cal_5cal_resized_telop_image(PyObject *__pyx_se
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_resized_telop_image)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("cal_resized_telop_image", 1, 2, 2, 1); __PYX_ERR(0, 33, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cal_resized_telop_image", 1, 2, 2, 1); __PYX_ERR(0, 34, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "cal_resized_telop_image") < 0)) __PYX_ERR(0, 33, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "cal_resized_telop_image") < 0)) __PYX_ERR(0, 34, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2207,7 +2207,7 @@ static PyObject *__pyx_pw_4Calc_3Cal_5cal_resized_telop_image(PyObject *__pyx_se
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("cal_resized_telop_image", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 33, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("cal_resized_telop_image", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 34, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Calc.Cal.cal_resized_telop_image", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2240,16 +2240,16 @@ static PyObject *__pyx_pf_4Calc_3Cal_4cal_resized_telop_image(CYTHON_UNUSED PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("cal_resized_telop_image", 0);
 
-  /* "Calc.pyx":34
+  /* "Calc.pyx":35
  * 
  *     def cal_resized_telop_image(self, resized_telop_image):
  *         self.resized_telop_image = resized_telop_image             # <<<<<<<<<<<<<<
  *         x1, y1, x2, y2 = 0, 0, resized_telop_image.shape[1], resized_telop_image.shape[0]
  *         a = (1 - resized_telop_image[:,:,3:] / 255)
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_resized_telop_image, __pyx_v_resized_telop_image) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_resized_telop_image, __pyx_v_resized_telop_image) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
 
-  /* "Calc.pyx":35
+  /* "Calc.pyx":36
  *     def cal_resized_telop_image(self, resized_telop_image):
  *         self.resized_telop_image = resized_telop_image
  *         x1, y1, x2, y2 = 0, 0, resized_telop_image.shape[1], resized_telop_image.shape[0]             # <<<<<<<<<<<<<<
@@ -2258,14 +2258,14 @@ static PyObject *__pyx_pf_4Calc_3Cal_4cal_resized_telop_image(CYTHON_UNUSED PyOb
  */
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_resized_telop_image, __pyx_n_s_shape); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_resized_telop_image, __pyx_n_s_shape); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_GetItemInt(__pyx_t_3, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetItemInt(__pyx_t_3, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_resized_telop_image, __pyx_n_s_shape); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_resized_telop_image, __pyx_n_s_shape); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_3, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_3, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_x1 = __pyx_t_1;
@@ -2275,57 +2275,57 @@ static PyObject *__pyx_pf_4Calc_3Cal_4cal_resized_telop_image(CYTHON_UNUSED PyOb
   __pyx_v_y2 = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "Calc.pyx":36
+  /* "Calc.pyx":37
  *         self.resized_telop_image = resized_telop_image
  *         x1, y1, x2, y2 = 0, 0, resized_telop_image.shape[1], resized_telop_image.shape[0]
  *         a = (1 - resized_telop_image[:,:,3:] / 255)             # <<<<<<<<<<<<<<
  *         b = resized_telop_image[:,:,:3] * (resized_telop_image[:,:,3:] / 255)
  *         cal_resized_telop_nums = (x1, y1, x2, y2, a, b)
  */
-  __pyx_t_5 = __Pyx_PyObject_GetItem(__pyx_v_resized_telop_image, __pyx_tuple__9); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetItem(__pyx_v_resized_telop_image, __pyx_tuple__9); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __Pyx_PyInt_TrueDivideObjC(__pyx_t_5, __pyx_int_255, 0xFF, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_TrueDivideObjC(__pyx_t_5, __pyx_int_255, 0xFF, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_4, 1, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_4, 1, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_a = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "Calc.pyx":37
+  /* "Calc.pyx":38
  *         x1, y1, x2, y2 = 0, 0, resized_telop_image.shape[1], resized_telop_image.shape[0]
  *         a = (1 - resized_telop_image[:,:,3:] / 255)
  *         b = resized_telop_image[:,:,:3] * (resized_telop_image[:,:,3:] / 255)             # <<<<<<<<<<<<<<
  *         cal_resized_telop_nums = (x1, y1, x2, y2, a, b)
  *         return cal_resized_telop_nums
  */
-  __pyx_t_5 = __Pyx_PyObject_GetItem(__pyx_v_resized_telop_image, __pyx_tuple__11); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetItem(__pyx_v_resized_telop_image, __pyx_tuple__11); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_v_resized_telop_image, __pyx_tuple__9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_v_resized_telop_image, __pyx_tuple__9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = __Pyx_PyInt_TrueDivideObjC(__pyx_t_4, __pyx_int_255, 0xFF, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_TrueDivideObjC(__pyx_t_4, __pyx_int_255, 0xFF, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyNumber_Multiply(__pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_4 = PyNumber_Multiply(__pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_b = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "Calc.pyx":38
+  /* "Calc.pyx":39
  *         a = (1 - resized_telop_image[:,:,3:] / 255)
  *         b = resized_telop_image[:,:,:3] * (resized_telop_image[:,:,3:] / 255)
  *         cal_resized_telop_nums = (x1, y1, x2, y2, a, b)             # <<<<<<<<<<<<<<
  *         return cal_resized_telop_nums
  * 
  */
-  __pyx_t_4 = __Pyx_PyInt_From_long(__pyx_v_x1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_long(__pyx_v_x1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = __Pyx_PyInt_From_long(__pyx_v_y1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_long(__pyx_v_y1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = PyTuple_New(6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_4);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4);
@@ -2348,7 +2348,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_4cal_resized_telop_image(CYTHON_UNUSED PyOb
   __pyx_v_cal_resized_telop_nums = ((PyObject*)__pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "Calc.pyx":39
+  /* "Calc.pyx":40
  *         b = resized_telop_image[:,:,:3] * (resized_telop_image[:,:,3:] / 255)
  *         cal_resized_telop_nums = (x1, y1, x2, y2, a, b)
  *         return cal_resized_telop_nums             # <<<<<<<<<<<<<<
@@ -2360,8 +2360,8 @@ static PyObject *__pyx_pf_4Calc_3Cal_4cal_resized_telop_image(CYTHON_UNUSED PyOb
   __pyx_r = __pyx_v_cal_resized_telop_nums;
   goto __pyx_L0;
 
-  /* "Calc.pyx":33
- *                 self.logger.info(" :  y.kesamaru@tokai-kaoninsho.com")
+  /* "Calc.pyx":34
+ * 
  * 
  *     def cal_resized_telop_image(self, resized_telop_image):             # <<<<<<<<<<<<<<
  *         self.resized_telop_image = resized_telop_image
@@ -2386,7 +2386,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_4cal_resized_telop_image(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "Calc.pyx":41
+/* "Calc.pyx":42
  *         return cal_resized_telop_nums
  * 
  *     def cal_resized_logo_image(self, resized_logo_image,  set_height,set_width):             # <<<<<<<<<<<<<<
@@ -2435,23 +2435,23 @@ static PyObject *__pyx_pw_4Calc_3Cal_7cal_resized_logo_image(PyObject *__pyx_sel
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_resized_logo_image)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("cal_resized_logo_image", 1, 4, 4, 1); __PYX_ERR(0, 41, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cal_resized_logo_image", 1, 4, 4, 1); __PYX_ERR(0, 42, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_set_height)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("cal_resized_logo_image", 1, 4, 4, 2); __PYX_ERR(0, 41, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cal_resized_logo_image", 1, 4, 4, 2); __PYX_ERR(0, 42, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_set_width)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("cal_resized_logo_image", 1, 4, 4, 3); __PYX_ERR(0, 41, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cal_resized_logo_image", 1, 4, 4, 3); __PYX_ERR(0, 42, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "cal_resized_logo_image") < 0)) __PYX_ERR(0, 41, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "cal_resized_logo_image") < 0)) __PYX_ERR(0, 42, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -2468,7 +2468,7 @@ static PyObject *__pyx_pw_4Calc_3Cal_7cal_resized_logo_image(PyObject *__pyx_sel
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("cal_resized_logo_image", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 41, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("cal_resized_logo_image", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 42, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Calc.Cal.cal_resized_logo_image", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2500,54 +2500,54 @@ static PyObject *__pyx_pf_4Calc_3Cal_6cal_resized_logo_image(CYTHON_UNUSED PyObj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("cal_resized_logo_image", 0);
 
-  /* "Calc.pyx":42
+  /* "Calc.pyx":43
  * 
  *     def cal_resized_logo_image(self, resized_logo_image,  set_height,set_width):
  *         self.resized_logo_image = resized_logo_image             # <<<<<<<<<<<<<<
  *         self.set_height = set_height
  *         self.set_width = set_width
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_resized_logo_image, __pyx_v_resized_logo_image) < 0) __PYX_ERR(0, 42, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_resized_logo_image, __pyx_v_resized_logo_image) < 0) __PYX_ERR(0, 43, __pyx_L1_error)
 
-  /* "Calc.pyx":43
+  /* "Calc.pyx":44
  *     def cal_resized_logo_image(self, resized_logo_image,  set_height,set_width):
  *         self.resized_logo_image = resized_logo_image
  *         self.set_height = set_height             # <<<<<<<<<<<<<<
  *         self.set_width = set_width
  *         x1, y1, x2, y2 = set_width - resized_logo_image.shape[1], set_height - resized_logo_image.shape[0], set_width, set_height
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_set_height, __pyx_v_set_height) < 0) __PYX_ERR(0, 43, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_set_height, __pyx_v_set_height) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
 
-  /* "Calc.pyx":44
+  /* "Calc.pyx":45
  *         self.resized_logo_image = resized_logo_image
  *         self.set_height = set_height
  *         self.set_width = set_width             # <<<<<<<<<<<<<<
  *         x1, y1, x2, y2 = set_width - resized_logo_image.shape[1], set_height - resized_logo_image.shape[0], set_width, set_height
  *         a = (1 - resized_logo_image[:,:,3:] / 255)
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_set_width, __pyx_v_set_width) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_set_width, __pyx_v_set_width) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
 
-  /* "Calc.pyx":45
+  /* "Calc.pyx":46
  *         self.set_height = set_height
  *         self.set_width = set_width
  *         x1, y1, x2, y2 = set_width - resized_logo_image.shape[1], set_height - resized_logo_image.shape[0], set_width, set_height             # <<<<<<<<<<<<<<
  *         a = (1 - resized_logo_image[:,:,3:] / 255)
  *         b = resized_logo_image[:,:,:3] * (resized_logo_image[:,:,3:] / 255)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_resized_logo_image, __pyx_n_s_shape); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_resized_logo_image, __pyx_n_s_shape); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Subtract(__pyx_v_set_width, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Subtract(__pyx_v_set_width, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_resized_logo_image, __pyx_n_s_shape); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_resized_logo_image, __pyx_n_s_shape); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Subtract(__pyx_v_set_height, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Subtract(__pyx_v_set_height, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = __pyx_v_set_width;
@@ -2563,53 +2563,53 @@ static PyObject *__pyx_pf_4Calc_3Cal_6cal_resized_logo_image(CYTHON_UNUSED PyObj
   __pyx_v_y2 = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "Calc.pyx":46
+  /* "Calc.pyx":47
  *         self.set_width = set_width
  *         x1, y1, x2, y2 = set_width - resized_logo_image.shape[1], set_height - resized_logo_image.shape[0], set_width, set_height
  *         a = (1 - resized_logo_image[:,:,3:] / 255)             # <<<<<<<<<<<<<<
  *         b = resized_logo_image[:,:,:3] * (resized_logo_image[:,:,3:] / 255)
  *         cal_resized_logo_nums = (x1, y1, x2, y2, a, b)
  */
-  __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_v_resized_logo_image, __pyx_tuple__9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_v_resized_logo_image, __pyx_tuple__9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = __Pyx_PyInt_TrueDivideObjC(__pyx_t_4, __pyx_int_255, 0xFF, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_TrueDivideObjC(__pyx_t_4, __pyx_int_255, 0xFF, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_3, 1, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_3, 1, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_a = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "Calc.pyx":47
+  /* "Calc.pyx":48
  *         x1, y1, x2, y2 = set_width - resized_logo_image.shape[1], set_height - resized_logo_image.shape[0], set_width, set_height
  *         a = (1 - resized_logo_image[:,:,3:] / 255)
  *         b = resized_logo_image[:,:,:3] * (resized_logo_image[:,:,3:] / 255)             # <<<<<<<<<<<<<<
  *         cal_resized_logo_nums = (x1, y1, x2, y2, a, b)
  *         return cal_resized_logo_nums
  */
-  __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_v_resized_logo_image, __pyx_tuple__11); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_v_resized_logo_image, __pyx_tuple__11); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_resized_logo_image, __pyx_tuple__9); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_resized_logo_image, __pyx_tuple__9); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyInt_TrueDivideObjC(__pyx_t_3, __pyx_int_255, 0xFF, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_TrueDivideObjC(__pyx_t_3, __pyx_int_255, 0xFF, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyNumber_Multiply(__pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Multiply(__pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_b = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "Calc.pyx":48
+  /* "Calc.pyx":49
  *         a = (1 - resized_logo_image[:,:,3:] / 255)
  *         b = resized_logo_image[:,:,:3] * (resized_logo_image[:,:,3:] / 255)
  *         cal_resized_logo_nums = (x1, y1, x2, y2, a, b)             # <<<<<<<<<<<<<<
  *         return cal_resized_logo_nums
  * 
  */
-  __pyx_t_3 = PyTuple_New(6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_v_x1);
   __Pyx_GIVEREF(__pyx_v_x1);
@@ -2632,7 +2632,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_6cal_resized_logo_image(CYTHON_UNUSED PyObj
   __pyx_v_cal_resized_logo_nums = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "Calc.pyx":49
+  /* "Calc.pyx":50
  *         b = resized_logo_image[:,:,:3] * (resized_logo_image[:,:,3:] / 255)
  *         cal_resized_logo_nums = (x1, y1, x2, y2, a, b)
  *         return cal_resized_logo_nums             # <<<<<<<<<<<<<<
@@ -2644,7 +2644,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_6cal_resized_logo_image(CYTHON_UNUSED PyObj
   __pyx_r = __pyx_v_cal_resized_logo_nums;
   goto __pyx_L0;
 
-  /* "Calc.pyx":41
+  /* "Calc.pyx":42
  *         return cal_resized_telop_nums
  * 
  *     def cal_resized_logo_image(self, resized_logo_image,  set_height,set_width):             # <<<<<<<<<<<<<<
@@ -2673,7 +2673,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_6cal_resized_logo_image(CYTHON_UNUSED PyObj
   return __pyx_r;
 }
 
-/* "Calc.pyx":51
+/* "Calc.pyx":52
  *         return cal_resized_logo_nums
  * 
  *     def to_tolerance(self, similar_percentage) -> float:             # <<<<<<<<<<<<<<
@@ -2716,11 +2716,11 @@ static PyObject *__pyx_pw_4Calc_3Cal_9to_tolerance(PyObject *__pyx_self, PyObjec
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_similar_percentage)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("to_tolerance", 1, 2, 2, 1); __PYX_ERR(0, 51, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("to_tolerance", 1, 2, 2, 1); __PYX_ERR(0, 52, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "to_tolerance") < 0)) __PYX_ERR(0, 51, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "to_tolerance") < 0)) __PYX_ERR(0, 52, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2733,7 +2733,7 @@ static PyObject *__pyx_pw_4Calc_3Cal_9to_tolerance(PyObject *__pyx_self, PyObjec
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("to_tolerance", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 51, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("to_tolerance", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 52, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Calc.Cal.to_tolerance", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2768,7 +2768,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_8to_tolerance(CYTHON_UNUSED PyObject *__pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("to_tolerance", 0);
 
-  /* "Calc.pyx":52
+  /* "Calc.pyx":53
  * 
  *     def to_tolerance(self, similar_percentage) -> float:
  *         __doc__ = 'similar_percentagetolerance'             # <<<<<<<<<<<<<<
@@ -2778,16 +2778,16 @@ static PyObject *__pyx_pf_4Calc_3Cal_8to_tolerance(CYTHON_UNUSED PyObject *__pyx
   __Pyx_INCREF(__pyx_n_u_similar_percentagetolerance);
   __pyx_v___doc__ = __pyx_n_u_similar_percentagetolerance;
 
-  /* "Calc.pyx":57
+  /* "Calc.pyx":58
  *         ## percentage_example = -4.76190475*(0.45*0.45)+(-0.380952375)*0.45+100
  *         ## -4.76190475*(p*p)+(-0.380952375)*p+(100-similar_percentage) = 0
  *         self.similar_percentage = similar_percentage             # <<<<<<<<<<<<<<
  *         tolerance: float = 0.0
  *         tolerance_plus: float = (-1*(-0.380952375) + np.sqrt((-0.380952375)*(-0.380952375)-4*(-4.76190475)*(100-self.similar_percentage))) / (2*(-4.76190475))
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_similar_percentage, __pyx_v_similar_percentage) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_similar_percentage, __pyx_v_similar_percentage) < 0) __PYX_ERR(0, 58, __pyx_L1_error)
 
-  /* "Calc.pyx":58
+  /* "Calc.pyx":59
  *         ## -4.76190475*(p*p)+(-0.380952375)*p+(100-similar_percentage) = 0
  *         self.similar_percentage = similar_percentage
  *         tolerance: float = 0.0             # <<<<<<<<<<<<<<
@@ -2796,34 +2796,34 @@ static PyObject *__pyx_pf_4Calc_3Cal_8to_tolerance(CYTHON_UNUSED PyObject *__pyx
  */
   __pyx_v_tolerance = 0.0;
 
-  /* "Calc.pyx":59
+  /* "Calc.pyx":60
  *         self.similar_percentage = similar_percentage
  *         tolerance: float = 0.0
  *         tolerance_plus: float = (-1*(-0.380952375) + np.sqrt((-0.380952375)*(-0.380952375)-4*(-4.76190475)*(100-self.similar_percentage))) / (2*(-4.76190475))             # <<<<<<<<<<<<<<
  *         tolerance_minus: float = (-1*(-0.380952375)-np.sqrt((-0.380952375)*(-0.380952375)-4*(-4.76190475)*(100-self.similar_percentage))) / (2*(-4.76190475))
  *         if 0 < tolerance_plus < 1:
  */
-  __pyx_t_1 = PyFloat_FromDouble((-1.0 * -0.380952375)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((-1.0 * -0.380952375)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_sqrt); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_sqrt); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyFloat_FromDouble((-0.380952375 * -0.380952375)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble((-0.380952375 * -0.380952375)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = PyFloat_FromDouble((4.0 * -4.76190475)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_5 = PyFloat_FromDouble((4.0 * -4.76190475)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_similar_percentage); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_similar_percentage); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_100, __pyx_t_6, 0x64, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_100, __pyx_t_6, 0x64, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyNumber_Multiply(__pyx_t_5, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_t_5, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyNumber_Subtract(__pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Subtract(__pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -2840,51 +2840,51 @@ static PyObject *__pyx_pf_4Calc_3Cal_8to_tolerance(CYTHON_UNUSED PyObject *__pyx
   __pyx_t_2 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_6, __pyx_t_7) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_7);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 59, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyNumber_Add(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_4 = PyNumber_Add(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble((2.0 * -4.76190475)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble((2.0 * -4.76190475)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyNumber_Divide(__pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyNumber_Divide(__pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_tolerance_plus = __pyx_t_8;
 
-  /* "Calc.pyx":60
+  /* "Calc.pyx":61
  *         tolerance: float = 0.0
  *         tolerance_plus: float = (-1*(-0.380952375) + np.sqrt((-0.380952375)*(-0.380952375)-4*(-4.76190475)*(100-self.similar_percentage))) / (2*(-4.76190475))
  *         tolerance_minus: float = (-1*(-0.380952375)-np.sqrt((-0.380952375)*(-0.380952375)-4*(-4.76190475)*(100-self.similar_percentage))) / (2*(-4.76190475))             # <<<<<<<<<<<<<<
  *         if 0 < tolerance_plus < 1:
  *             tolerance= tolerance_plus
  */
-  __pyx_t_1 = PyFloat_FromDouble((-1.0 * -0.380952375)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((-1.0 * -0.380952375)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_sqrt); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_sqrt); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyFloat_FromDouble((-0.380952375 * -0.380952375)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_4 = PyFloat_FromDouble((-0.380952375 * -0.380952375)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_6 = PyFloat_FromDouble((4.0 * -4.76190475)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble((4.0 * -4.76190475)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_similar_percentage); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_similar_percentage); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyInt_SubtractCObj(__pyx_int_100, __pyx_t_3, 0x64, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_SubtractCObj(__pyx_int_100, __pyx_t_3, 0x64, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyNumber_Multiply(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Multiply(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyNumber_Subtract(__pyx_t_4, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_5 = PyNumber_Subtract(__pyx_t_4, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -2901,24 +2901,24 @@ static PyObject *__pyx_pf_4Calc_3Cal_8to_tolerance(CYTHON_UNUSED PyObject *__pyx
   __pyx_t_2 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_3, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_5);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyNumber_Subtract(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Subtract(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble((2.0 * -4.76190475)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble((2.0 * -4.76190475)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyNumber_Divide(__pyx_t_7, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyNumber_Divide(__pyx_t_7, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_tolerance_minus = __pyx_t_8;
 
-  /* "Calc.pyx":61
+  /* "Calc.pyx":62
  *         tolerance_plus: float = (-1*(-0.380952375) + np.sqrt((-0.380952375)*(-0.380952375)-4*(-4.76190475)*(100-self.similar_percentage))) / (2*(-4.76190475))
  *         tolerance_minus: float = (-1*(-0.380952375)-np.sqrt((-0.380952375)*(-0.380952375)-4*(-4.76190475)*(100-self.similar_percentage))) / (2*(-4.76190475))
  *         if 0 < tolerance_plus < 1:             # <<<<<<<<<<<<<<
@@ -2932,7 +2932,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_8to_tolerance(CYTHON_UNUSED PyObject *__pyx
   __pyx_t_10 = (__pyx_t_9 != 0);
   if (__pyx_t_10) {
 
-    /* "Calc.pyx":62
+    /* "Calc.pyx":63
  *         tolerance_minus: float = (-1*(-0.380952375)-np.sqrt((-0.380952375)*(-0.380952375)-4*(-4.76190475)*(100-self.similar_percentage))) / (2*(-4.76190475))
  *         if 0 < tolerance_plus < 1:
  *             tolerance= tolerance_plus             # <<<<<<<<<<<<<<
@@ -2941,7 +2941,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_8to_tolerance(CYTHON_UNUSED PyObject *__pyx
  */
     __pyx_v_tolerance = __pyx_v_tolerance_plus;
 
-    /* "Calc.pyx":61
+    /* "Calc.pyx":62
  *         tolerance_plus: float = (-1*(-0.380952375) + np.sqrt((-0.380952375)*(-0.380952375)-4*(-4.76190475)*(100-self.similar_percentage))) / (2*(-4.76190475))
  *         tolerance_minus: float = (-1*(-0.380952375)-np.sqrt((-0.380952375)*(-0.380952375)-4*(-4.76190475)*(100-self.similar_percentage))) / (2*(-4.76190475))
  *         if 0 < tolerance_plus < 1:             # <<<<<<<<<<<<<<
@@ -2951,7 +2951,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_8to_tolerance(CYTHON_UNUSED PyObject *__pyx
     goto __pyx_L3;
   }
 
-  /* "Calc.pyx":63
+  /* "Calc.pyx":64
  *         if 0 < tolerance_plus < 1:
  *             tolerance= tolerance_plus
  *         elif 0 < tolerance_minus < 1:             # <<<<<<<<<<<<<<
@@ -2965,7 +2965,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_8to_tolerance(CYTHON_UNUSED PyObject *__pyx
   __pyx_t_9 = (__pyx_t_10 != 0);
   if (__pyx_t_9) {
 
-    /* "Calc.pyx":64
+    /* "Calc.pyx":65
  *             tolerance= tolerance_plus
  *         elif 0 < tolerance_minus < 1:
  *             tolerance= tolerance_minus             # <<<<<<<<<<<<<<
@@ -2974,7 +2974,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_8to_tolerance(CYTHON_UNUSED PyObject *__pyx
  */
     __pyx_v_tolerance = __pyx_v_tolerance_minus;
 
-    /* "Calc.pyx":63
+    /* "Calc.pyx":64
  *         if 0 < tolerance_plus < 1:
  *             tolerance= tolerance_plus
  *         elif 0 < tolerance_minus < 1:             # <<<<<<<<<<<<<<
@@ -2984,7 +2984,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_8to_tolerance(CYTHON_UNUSED PyObject *__pyx
   }
   __pyx_L3:;
 
-  /* "Calc.pyx":65
+  /* "Calc.pyx":66
  *         elif 0 < tolerance_minus < 1:
  *             tolerance= tolerance_minus
  *         return tolerance             # <<<<<<<<<<<<<<
@@ -2992,13 +2992,13 @@ static PyObject *__pyx_pf_4Calc_3Cal_8to_tolerance(CYTHON_UNUSED PyObject *__pyx
  *     def to_percentage(self, tolerance):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_tolerance); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_tolerance); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "Calc.pyx":51
+  /* "Calc.pyx":52
  *         return cal_resized_logo_nums
  * 
  *     def to_tolerance(self, similar_percentage) -> float:             # <<<<<<<<<<<<<<
@@ -3024,7 +3024,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_8to_tolerance(CYTHON_UNUSED PyObject *__pyx
   return __pyx_r;
 }
 
-/* "Calc.pyx":67
+/* "Calc.pyx":68
  *         return tolerance
  * 
  *     def to_percentage(self, tolerance):             # <<<<<<<<<<<<<<
@@ -3067,11 +3067,11 @@ static PyObject *__pyx_pw_4Calc_3Cal_11to_percentage(PyObject *__pyx_self, PyObj
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_tolerance)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("to_percentage", 1, 2, 2, 1); __PYX_ERR(0, 67, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("to_percentage", 1, 2, 2, 1); __PYX_ERR(0, 68, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "to_percentage") < 0)) __PYX_ERR(0, 67, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "to_percentage") < 0)) __PYX_ERR(0, 68, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3084,7 +3084,7 @@ static PyObject *__pyx_pw_4Calc_3Cal_11to_percentage(PyObject *__pyx_self, PyObj
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("to_percentage", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 67, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("to_percentage", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 68, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Calc.Cal.to_percentage", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3110,52 +3110,52 @@ static PyObject *__pyx_pf_4Calc_3Cal_10to_percentage(CYTHON_UNUSED PyObject *__p
   __Pyx_RefNannySetupContext("to_percentage", 0);
   __Pyx_INCREF(__pyx_v_tolerance);
 
-  /* "Calc.pyx":68
+  /* "Calc.pyx":69
  * 
  *     def to_percentage(self, tolerance):
  *         self.tolerance = tolerance             # <<<<<<<<<<<<<<
  *         tolerance = float(tolerance)  # strfloat
  *         percentage = -4.76190475*(tolerance ** 2)+(-0.380952375) * tolerance +100
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_tolerance, __pyx_v_tolerance) < 0) __PYX_ERR(0, 68, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_tolerance, __pyx_v_tolerance) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
 
-  /* "Calc.pyx":69
+  /* "Calc.pyx":70
  *     def to_percentage(self, tolerance):
  *         self.tolerance = tolerance
  *         tolerance = float(tolerance)  # strfloat             # <<<<<<<<<<<<<<
  *         percentage = -4.76190475*(tolerance ** 2)+(-0.380952375) * tolerance +100
  *         return percentage
  */
-  __pyx_t_1 = __Pyx_PyNumber_Float(__pyx_v_tolerance); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyNumber_Float(__pyx_v_tolerance); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF_SET(__pyx_v_tolerance, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "Calc.pyx":70
+  /* "Calc.pyx":71
  *         self.tolerance = tolerance
  *         tolerance = float(tolerance)  # strfloat
  *         percentage = -4.76190475*(tolerance ** 2)+(-0.380952375) * tolerance +100             # <<<<<<<<<<<<<<
  *         return percentage
  * 
  */
-  __pyx_t_1 = PyNumber_Power(__pyx_v_tolerance, __pyx_int_2, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Power(__pyx_v_tolerance, __pyx_int_2, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyNumber_Multiply(__pyx_float_neg_4_76190475, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_float_neg_4_76190475, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Multiply(__pyx_float_neg_0_380952375, __pyx_v_tolerance); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Multiply(__pyx_float_neg_0_380952375, __pyx_v_tolerance); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyNumber_Add(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Add(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_AddObjC(__pyx_t_3, __pyx_int_100, 0x64, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_AddObjC(__pyx_t_3, __pyx_int_100, 0x64, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_percentage = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "Calc.pyx":71
+  /* "Calc.pyx":72
  *         tolerance = float(tolerance)  # strfloat
  *         percentage = -4.76190475*(tolerance ** 2)+(-0.380952375) * tolerance +100
  *         return percentage             # <<<<<<<<<<<<<<
@@ -3167,7 +3167,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_10to_percentage(CYTHON_UNUSED PyObject *__p
   __pyx_r = __pyx_v_percentage;
   goto __pyx_L0;
 
-  /* "Calc.pyx":67
+  /* "Calc.pyx":68
  *         return tolerance
  * 
  *     def to_percentage(self, tolerance):             # <<<<<<<<<<<<<<
@@ -3190,7 +3190,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_10to_percentage(CYTHON_UNUSED PyObject *__p
   return __pyx_r;
 }
 
-/* "Calc.pyx":73
+/* "Calc.pyx":74
  *         return percentage
  * 
  *     def decide_text_position(self, error_messg_rectangle_bottom,error_messg_rectangle_left, error_messg_rectangle_right, error_messg_rectangle_fontsize,error_messg_rectangle_messg):             # <<<<<<<<<<<<<<
@@ -3246,35 +3246,35 @@ static PyObject *__pyx_pw_4Calc_3Cal_13decide_text_position(PyObject *__pyx_self
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_error_messg_rectangle_bottom)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("decide_text_position", 1, 6, 6, 1); __PYX_ERR(0, 73, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("decide_text_position", 1, 6, 6, 1); __PYX_ERR(0, 74, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_error_messg_rectangle_left)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("decide_text_position", 1, 6, 6, 2); __PYX_ERR(0, 73, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("decide_text_position", 1, 6, 6, 2); __PYX_ERR(0, 74, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_error_messg_rectangle_right)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("decide_text_position", 1, 6, 6, 3); __PYX_ERR(0, 73, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("decide_text_position", 1, 6, 6, 3); __PYX_ERR(0, 74, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_error_messg_rectangle_fontsize)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("decide_text_position", 1, 6, 6, 4); __PYX_ERR(0, 73, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("decide_text_position", 1, 6, 6, 4); __PYX_ERR(0, 74, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
         if (likely((values[5] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_error_messg_rectangle_messg)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("decide_text_position", 1, 6, 6, 5); __PYX_ERR(0, 73, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("decide_text_position", 1, 6, 6, 5); __PYX_ERR(0, 74, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "decide_text_position") < 0)) __PYX_ERR(0, 73, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "decide_text_position") < 0)) __PYX_ERR(0, 74, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 6) {
       goto __pyx_L5_argtuple_error;
@@ -3295,7 +3295,7 @@ static PyObject *__pyx_pw_4Calc_3Cal_13decide_text_position(PyObject *__pyx_self
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("decide_text_position", 1, 6, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 73, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("decide_text_position", 1, 6, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 74, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Calc.Cal.decide_text_position", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3325,145 +3325,145 @@ static PyObject *__pyx_pf_4Calc_3Cal_12decide_text_position(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("decide_text_position", 0);
 
-  /* "Calc.pyx":75
+  /* "Calc.pyx":76
  *     def decide_text_position(self, error_messg_rectangle_bottom,error_messg_rectangle_left, error_messg_rectangle_right, error_messg_rectangle_fontsize,error_messg_rectangle_messg):
  *         """"""
  *         self.error_messg_rectangle_bottom = error_messg_rectangle_bottom             # <<<<<<<<<<<<<<
  *         self.error_messg_rectangle_left = error_messg_rectangle_left
  *         self.error_messg_rectangle_right = error_messg_rectangle_right
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_bottom, __pyx_v_error_messg_rectangle_bottom) < 0) __PYX_ERR(0, 75, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_bottom, __pyx_v_error_messg_rectangle_bottom) < 0) __PYX_ERR(0, 76, __pyx_L1_error)
 
-  /* "Calc.pyx":76
+  /* "Calc.pyx":77
  *         """"""
  *         self.error_messg_rectangle_bottom = error_messg_rectangle_bottom
  *         self.error_messg_rectangle_left = error_messg_rectangle_left             # <<<<<<<<<<<<<<
  *         self.error_messg_rectangle_right = error_messg_rectangle_right
  *         self.error_messg_rectangle_fontsize = error_messg_rectangle_fontsize
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_left, __pyx_v_error_messg_rectangle_left) < 0) __PYX_ERR(0, 76, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_left, __pyx_v_error_messg_rectangle_left) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
 
-  /* "Calc.pyx":77
+  /* "Calc.pyx":78
  *         self.error_messg_rectangle_bottom = error_messg_rectangle_bottom
  *         self.error_messg_rectangle_left = error_messg_rectangle_left
  *         self.error_messg_rectangle_right = error_messg_rectangle_right             # <<<<<<<<<<<<<<
  *         self.error_messg_rectangle_fontsize = error_messg_rectangle_fontsize
  *         self.error_messg_rectangle_messg = error_messg_rectangle_messg
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_right, __pyx_v_error_messg_rectangle_right) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_right, __pyx_v_error_messg_rectangle_right) < 0) __PYX_ERR(0, 78, __pyx_L1_error)
 
-  /* "Calc.pyx":78
+  /* "Calc.pyx":79
  *         self.error_messg_rectangle_left = error_messg_rectangle_left
  *         self.error_messg_rectangle_right = error_messg_rectangle_right
  *         self.error_messg_rectangle_fontsize = error_messg_rectangle_fontsize             # <<<<<<<<<<<<<<
  *         self.error_messg_rectangle_messg = error_messg_rectangle_messg
  *         error_messg_rectangle_center = int((self.error_messg_rectangle_left + self.error_messg_rectangle_right)/2)
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_fontsize, __pyx_v_error_messg_rectangle_fontsize) < 0) __PYX_ERR(0, 78, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_fontsize, __pyx_v_error_messg_rectangle_fontsize) < 0) __PYX_ERR(0, 79, __pyx_L1_error)
 
-  /* "Calc.pyx":79
+  /* "Calc.pyx":80
  *         self.error_messg_rectangle_right = error_messg_rectangle_right
  *         self.error_messg_rectangle_fontsize = error_messg_rectangle_fontsize
  *         self.error_messg_rectangle_messg = error_messg_rectangle_messg             # <<<<<<<<<<<<<<
  *         error_messg_rectangle_center = int((self.error_messg_rectangle_left + self.error_messg_rectangle_right)/2)
  *         error_messg_rectangle_chaCenter = int(len(self.error_messg_rectangle_messg)/2)
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_messg, __pyx_v_error_messg_rectangle_messg) < 0) __PYX_ERR(0, 79, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_messg, __pyx_v_error_messg_rectangle_messg) < 0) __PYX_ERR(0, 80, __pyx_L1_error)
 
-  /* "Calc.pyx":80
+  /* "Calc.pyx":81
  *         self.error_messg_rectangle_fontsize = error_messg_rectangle_fontsize
  *         self.error_messg_rectangle_messg = error_messg_rectangle_messg
  *         error_messg_rectangle_center = int((self.error_messg_rectangle_left + self.error_messg_rectangle_right)/2)             # <<<<<<<<<<<<<<
  *         error_messg_rectangle_chaCenter = int(len(self.error_messg_rectangle_messg)/2)
  *         error_messg_rectangle_pos = error_messg_rectangle_center - (error_messg_rectangle_chaCenter * self.error_messg_rectangle_fontsize) - int(self.error_messg_rectangle_fontsize / 2)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_left); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_left); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 81, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_right); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 80, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_right); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 81, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyNumber_Add(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 80, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Add(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 81, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_TrueDivideObjC(__pyx_t_3, __pyx_int_2, 2, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 80, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_TrueDivideObjC(__pyx_t_3, __pyx_int_2, 2, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 81, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 80, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 81, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_error_messg_rectangle_center = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "Calc.pyx":81
+  /* "Calc.pyx":82
  *         self.error_messg_rectangle_messg = error_messg_rectangle_messg
  *         error_messg_rectangle_center = int((self.error_messg_rectangle_left + self.error_messg_rectangle_right)/2)
  *         error_messg_rectangle_chaCenter = int(len(self.error_messg_rectangle_messg)/2)             # <<<<<<<<<<<<<<
  *         error_messg_rectangle_pos = error_messg_rectangle_center - (error_messg_rectangle_chaCenter * self.error_messg_rectangle_fontsize) - int(self.error_messg_rectangle_fontsize / 2)
  *         error_messg_rectangle_position = (error_messg_rectangle_pos + self.error_messg_rectangle_fontsize, self.error_messg_rectangle_bottom - (self.error_messg_rectangle_fontsize * 2))
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_messg); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 81, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_messg); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 82, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyObject_Length(__pyx_t_3); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 81, __pyx_L1_error)
+  __pyx_t_4 = PyObject_Length(__pyx_t_3); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 82, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyInt_FromDouble((((double)__pyx_t_4) / 2.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 81, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_FromDouble((((double)__pyx_t_4) / 2.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 82, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_v_error_messg_rectangle_chaCenter = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "Calc.pyx":82
+  /* "Calc.pyx":83
  *         error_messg_rectangle_center = int((self.error_messg_rectangle_left + self.error_messg_rectangle_right)/2)
  *         error_messg_rectangle_chaCenter = int(len(self.error_messg_rectangle_messg)/2)
  *         error_messg_rectangle_pos = error_messg_rectangle_center - (error_messg_rectangle_chaCenter * self.error_messg_rectangle_fontsize) - int(self.error_messg_rectangle_fontsize / 2)             # <<<<<<<<<<<<<<
  *         error_messg_rectangle_position = (error_messg_rectangle_pos + self.error_messg_rectangle_fontsize, self.error_messg_rectangle_bottom - (self.error_messg_rectangle_fontsize * 2))
  *         return error_messg_rectangle_position
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_fontsize); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_fontsize); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = PyNumber_Multiply(__pyx_v_error_messg_rectangle_chaCenter, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_v_error_messg_rectangle_chaCenter, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyNumber_Subtract(__pyx_v_error_messg_rectangle_center, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Subtract(__pyx_v_error_messg_rectangle_center, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_fontsize); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_fontsize); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyInt_TrueDivideObjC(__pyx_t_2, __pyx_int_2, 2, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_TrueDivideObjC(__pyx_t_2, __pyx_int_2, 2, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Subtract(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Subtract(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_error_messg_rectangle_pos = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "Calc.pyx":83
+  /* "Calc.pyx":84
  *         error_messg_rectangle_chaCenter = int(len(self.error_messg_rectangle_messg)/2)
  *         error_messg_rectangle_pos = error_messg_rectangle_center - (error_messg_rectangle_chaCenter * self.error_messg_rectangle_fontsize) - int(self.error_messg_rectangle_fontsize / 2)
  *         error_messg_rectangle_position = (error_messg_rectangle_pos + self.error_messg_rectangle_fontsize, self.error_messg_rectangle_bottom - (self.error_messg_rectangle_fontsize * 2))             # <<<<<<<<<<<<<<
  *         return error_messg_rectangle_position
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_fontsize); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_fontsize); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyNumber_Add(__pyx_v_error_messg_rectangle_pos, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Add(__pyx_v_error_messg_rectangle_pos, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_bottom); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_bottom); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_fontsize); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_fontsize); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = PyNumber_Multiply(__pyx_t_3, __pyx_int_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_t_5 = PyNumber_Multiply(__pyx_t_3, __pyx_int_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyNumber_Subtract(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Subtract(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2);
@@ -3474,7 +3474,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_12decide_text_position(CYTHON_UNUSED PyObje
   __pyx_v_error_messg_rectangle_position = ((PyObject*)__pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "Calc.pyx":84
+  /* "Calc.pyx":85
  *         error_messg_rectangle_pos = error_messg_rectangle_center - (error_messg_rectangle_chaCenter * self.error_messg_rectangle_fontsize) - int(self.error_messg_rectangle_fontsize / 2)
  *         error_messg_rectangle_position = (error_messg_rectangle_pos + self.error_messg_rectangle_fontsize, self.error_messg_rectangle_bottom - (self.error_messg_rectangle_fontsize * 2))
  *         return error_messg_rectangle_position             # <<<<<<<<<<<<<<
@@ -3486,7 +3486,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_12decide_text_position(CYTHON_UNUSED PyObje
   __pyx_r = __pyx_v_error_messg_rectangle_position;
   goto __pyx_L0;
 
-  /* "Calc.pyx":73
+  /* "Calc.pyx":74
  *         return percentage
  * 
  *     def decide_text_position(self, error_messg_rectangle_bottom,error_messg_rectangle_left, error_messg_rectangle_right, error_messg_rectangle_fontsize,error_messg_rectangle_messg):             # <<<<<<<<<<<<<<
@@ -3512,7 +3512,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_12decide_text_position(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "Calc.pyx":86
+/* "Calc.pyx":87
  *         return error_messg_rectangle_position
  * 
  *     def make_error_messg_rectangle_font(self, fontpath, error_messg_rectangle_fontsize, encoding = 'utf-8'):             # <<<<<<<<<<<<<<
@@ -3562,13 +3562,13 @@ static PyObject *__pyx_pw_4Calc_3Cal_15make_error_messg_rectangle_font(PyObject 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_fontpath)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("make_error_messg_rectangle_font", 0, 3, 4, 1); __PYX_ERR(0, 86, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("make_error_messg_rectangle_font", 0, 3, 4, 1); __PYX_ERR(0, 87, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_error_messg_rectangle_fontsize)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("make_error_messg_rectangle_font", 0, 3, 4, 2); __PYX_ERR(0, 86, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("make_error_messg_rectangle_font", 0, 3, 4, 2); __PYX_ERR(0, 87, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -3578,7 +3578,7 @@ static PyObject *__pyx_pw_4Calc_3Cal_15make_error_messg_rectangle_font(PyObject 
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "make_error_messg_rectangle_font") < 0)) __PYX_ERR(0, 86, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "make_error_messg_rectangle_font") < 0)) __PYX_ERR(0, 87, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -3598,7 +3598,7 @@ static PyObject *__pyx_pw_4Calc_3Cal_15make_error_messg_rectangle_font(PyObject 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("make_error_messg_rectangle_font", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 86, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("make_error_messg_rectangle_font", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 87, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Calc.Cal.make_error_messg_rectangle_font", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3624,41 +3624,41 @@ static PyObject *__pyx_pf_4Calc_3Cal_14make_error_messg_rectangle_font(CYTHON_UN
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("make_error_messg_rectangle_font", 0);
 
-  /* "Calc.pyx":87
+  /* "Calc.pyx":88
  * 
  *     def make_error_messg_rectangle_font(self, fontpath, error_messg_rectangle_fontsize, encoding = 'utf-8'):
  *         self.fontpath = fontpath             # <<<<<<<<<<<<<<
  *         self.error_messg_rectangle_fontsize = error_messg_rectangle_fontsize
  *         error_messg_rectangle_font = ImageFont.truetype(self.fontpath, self.error_messg_rectangle_fontsize, encoding = 'utf-8')
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fontpath, __pyx_v_fontpath) < 0) __PYX_ERR(0, 87, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fontpath, __pyx_v_fontpath) < 0) __PYX_ERR(0, 88, __pyx_L1_error)
 
-  /* "Calc.pyx":88
+  /* "Calc.pyx":89
  *     def make_error_messg_rectangle_font(self, fontpath, error_messg_rectangle_fontsize, encoding = 'utf-8'):
  *         self.fontpath = fontpath
  *         self.error_messg_rectangle_fontsize = error_messg_rectangle_fontsize             # <<<<<<<<<<<<<<
  *         error_messg_rectangle_font = ImageFont.truetype(self.fontpath, self.error_messg_rectangle_fontsize, encoding = 'utf-8')
  *         return error_messg_rectangle_font
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_fontsize, __pyx_v_error_messg_rectangle_fontsize) < 0) __PYX_ERR(0, 88, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_fontsize, __pyx_v_error_messg_rectangle_fontsize) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
 
-  /* "Calc.pyx":89
+  /* "Calc.pyx":90
  *         self.fontpath = fontpath
  *         self.error_messg_rectangle_fontsize = error_messg_rectangle_fontsize
  *         error_messg_rectangle_font = ImageFont.truetype(self.fontpath, self.error_messg_rectangle_fontsize, encoding = 'utf-8')             # <<<<<<<<<<<<<<
  *         return error_messg_rectangle_font
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_ImageFont); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_ImageFont); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_truetype); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_truetype); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fontpath); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fontpath); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_fontsize); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_error_messg_rectangle_fontsize); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1);
@@ -3666,10 +3666,10 @@ static PyObject *__pyx_pf_4Calc_3Cal_14make_error_messg_rectangle_font(CYTHON_UN
   PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_3);
   __pyx_t_1 = 0;
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_encoding, __pyx_kp_u_utf_8) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_encoding, __pyx_kp_u_utf_8) < 0) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -3677,7 +3677,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_14make_error_messg_rectangle_font(CYTHON_UN
   __pyx_v_error_messg_rectangle_font = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "Calc.pyx":90
+  /* "Calc.pyx":91
  *         self.error_messg_rectangle_fontsize = error_messg_rectangle_fontsize
  *         error_messg_rectangle_font = ImageFont.truetype(self.fontpath, self.error_messg_rectangle_fontsize, encoding = 'utf-8')
  *         return error_messg_rectangle_font             # <<<<<<<<<<<<<<
@@ -3689,7 +3689,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_14make_error_messg_rectangle_font(CYTHON_UN
   __pyx_r = __pyx_v_error_messg_rectangle_font;
   goto __pyx_L0;
 
-  /* "Calc.pyx":86
+  /* "Calc.pyx":87
  *         return error_messg_rectangle_position
  * 
  *     def make_error_messg_rectangle_font(self, fontpath, error_messg_rectangle_fontsize, encoding = 'utf-8'):             # <<<<<<<<<<<<<<
@@ -3712,7 +3712,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_14make_error_messg_rectangle_font(CYTHON_UN
   return __pyx_r;
 }
 
-/* "Calc.pyx":92
+/* "Calc.pyx":93
  *         return error_messg_rectangle_font
  * 
  *     def return_percentage(self, p):  # python             # <<<<<<<<<<<<<<
@@ -3755,11 +3755,11 @@ static PyObject *__pyx_pw_4Calc_3Cal_17return_percentage(PyObject *__pyx_self, P
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_p)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("return_percentage", 1, 2, 2, 1); __PYX_ERR(0, 92, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("return_percentage", 1, 2, 2, 1); __PYX_ERR(0, 93, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "return_percentage") < 0)) __PYX_ERR(0, 92, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "return_percentage") < 0)) __PYX_ERR(0, 93, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3772,7 +3772,7 @@ static PyObject *__pyx_pw_4Calc_3Cal_17return_percentage(PyObject *__pyx_self, P
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("return_percentage", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 92, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("return_percentage", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 93, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Calc.Cal.return_percentage", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3797,46 +3797,46 @@ static PyObject *__pyx_pf_4Calc_3Cal_16return_percentage(CYTHON_UNUSED PyObject 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("return_percentage", 0);
 
-  /* "Calc.pyx":93
+  /* "Calc.pyx":94
  * 
  *     def return_percentage(self, p):  # python
  *         self.p = p             # <<<<<<<<<<<<<<
  *         percentage = -4.76190475 *(self.p**2)-(0.380952375*self.p)+100
  *         return percentage
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_p, __pyx_v_p) < 0) __PYX_ERR(0, 93, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_p, __pyx_v_p) < 0) __PYX_ERR(0, 94, __pyx_L1_error)
 
-  /* "Calc.pyx":94
+  /* "Calc.pyx":95
  *     def return_percentage(self, p):  # python
  *         self.p = p
  *         percentage = -4.76190475 *(self.p**2)-(0.380952375*self.p)+100             # <<<<<<<<<<<<<<
  *         return percentage
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_p); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_p); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyNumber_Power(__pyx_t_1, __pyx_int_2, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Power(__pyx_t_1, __pyx_int_2, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Multiply(__pyx_float_neg_4_76190475, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Multiply(__pyx_float_neg_4_76190475, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_p); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_p); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyNumber_Multiply(__pyx_float_0_380952375, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Multiply(__pyx_float_0_380952375, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Subtract(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Subtract(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyInt_AddObjC(__pyx_t_2, __pyx_int_100, 0x64, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_AddObjC(__pyx_t_2, __pyx_int_100, 0x64, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_percentage = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "Calc.pyx":95
+  /* "Calc.pyx":96
  *         self.p = p
  *         percentage = -4.76190475 *(self.p**2)-(0.380952375*self.p)+100
  *         return percentage             # <<<<<<<<<<<<<<
@@ -3848,7 +3848,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_16return_percentage(CYTHON_UNUSED PyObject 
   __pyx_r = __pyx_v_percentage;
   goto __pyx_L0;
 
-  /* "Calc.pyx":92
+  /* "Calc.pyx":93
  *         return error_messg_rectangle_font
  * 
  *     def return_percentage(self, p):  # python             # <<<<<<<<<<<<<<
@@ -3870,7 +3870,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_16return_percentage(CYTHON_UNUSED PyObject 
   return __pyx_r;
 }
 
-/* "Calc.pyx":98
+/* "Calc.pyx":99
  * 
  *     # pil_img
  *     def pil_img_instance(self, frame):             # <<<<<<<<<<<<<<
@@ -3913,11 +3913,11 @@ static PyObject *__pyx_pw_4Calc_3Cal_19pil_img_instance(PyObject *__pyx_self, Py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_frame)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("pil_img_instance", 1, 2, 2, 1); __PYX_ERR(0, 98, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("pil_img_instance", 1, 2, 2, 1); __PYX_ERR(0, 99, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "pil_img_instance") < 0)) __PYX_ERR(0, 98, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "pil_img_instance") < 0)) __PYX_ERR(0, 99, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3930,7 +3930,7 @@ static PyObject *__pyx_pw_4Calc_3Cal_19pil_img_instance(PyObject *__pyx_self, Py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("pil_img_instance", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 98, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("pil_img_instance", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 99, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Calc.Cal.pil_img_instance", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3956,28 +3956,28 @@ static PyObject *__pyx_pf_4Calc_3Cal_18pil_img_instance(CYTHON_UNUSED PyObject *
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("pil_img_instance", 0);
 
-  /* "Calc.pyx":99
+  /* "Calc.pyx":100
  *     # pil_img
  *     def pil_img_instance(self, frame):
  *         self.frame = frame             # <<<<<<<<<<<<<<
  *         pil_img_obj= Image.fromarray(self.frame)
  *         return pil_img_obj
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_frame, __pyx_v_frame) < 0) __PYX_ERR(0, 99, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_frame, __pyx_v_frame) < 0) __PYX_ERR(0, 100, __pyx_L1_error)
 
-  /* "Calc.pyx":100
+  /* "Calc.pyx":101
  *     def pil_img_instance(self, frame):
  *         self.frame = frame
  *         pil_img_obj= Image.fromarray(self.frame)             # <<<<<<<<<<<<<<
  *         return pil_img_obj
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Image); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_Image); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 101, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_fromarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_fromarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 101, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_frame); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_frame); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 101, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -3992,13 +3992,13 @@ static PyObject *__pyx_pf_4Calc_3Cal_18pil_img_instance(CYTHON_UNUSED PyObject *
   __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 101, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_pil_img_obj = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "Calc.pyx":101
+  /* "Calc.pyx":102
  *         self.frame = frame
  *         pil_img_obj= Image.fromarray(self.frame)
  *         return pil_img_obj             # <<<<<<<<<<<<<<
@@ -4010,7 +4010,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_18pil_img_instance(CYTHON_UNUSED PyObject *
   __pyx_r = __pyx_v_pil_img_obj;
   goto __pyx_L0;
 
-  /* "Calc.pyx":98
+  /* "Calc.pyx":99
  * 
  *     # pil_img
  *     def pil_img_instance(self, frame):             # <<<<<<<<<<<<<<
@@ -4033,7 +4033,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_18pil_img_instance(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 
-/* "Calc.pyx":104
+/* "Calc.pyx":105
  * 
  *     # draw_rgb
  *     def  make_draw_rgb_object(self, pil_img_obj_rgb):             # <<<<<<<<<<<<<<
@@ -4076,11 +4076,11 @@ static PyObject *__pyx_pw_4Calc_3Cal_21make_draw_rgb_object(PyObject *__pyx_self
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pil_img_obj_rgb)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("make_draw_rgb_object", 1, 2, 2, 1); __PYX_ERR(0, 104, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("make_draw_rgb_object", 1, 2, 2, 1); __PYX_ERR(0, 105, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "make_draw_rgb_object") < 0)) __PYX_ERR(0, 104, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "make_draw_rgb_object") < 0)) __PYX_ERR(0, 105, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -4093,7 +4093,7 @@ static PyObject *__pyx_pw_4Calc_3Cal_21make_draw_rgb_object(PyObject *__pyx_self
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("make_draw_rgb_object", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 104, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("make_draw_rgb_object", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 105, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Calc.Cal.make_draw_rgb_object", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -4119,27 +4119,27 @@ static PyObject *__pyx_pf_4Calc_3Cal_20make_draw_rgb_object(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("make_draw_rgb_object", 0);
 
-  /* "Calc.pyx":105
+  /* "Calc.pyx":106
  *     # draw_rgb
  *     def  make_draw_rgb_object(self, pil_img_obj_rgb):
  *         self.pil_img_obj_rgb = pil_img_obj_rgb             # <<<<<<<<<<<<<<
  *         draw_rgb = ImageDraw.Draw(self.pil_img_obj_rgb)
  *         return draw_rgb
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_pil_img_obj_rgb, __pyx_v_pil_img_obj_rgb) < 0) __PYX_ERR(0, 105, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_pil_img_obj_rgb, __pyx_v_pil_img_obj_rgb) < 0) __PYX_ERR(0, 106, __pyx_L1_error)
 
-  /* "Calc.pyx":106
+  /* "Calc.pyx":107
  *     def  make_draw_rgb_object(self, pil_img_obj_rgb):
  *         self.pil_img_obj_rgb = pil_img_obj_rgb
  *         draw_rgb = ImageDraw.Draw(self.pil_img_obj_rgb)             # <<<<<<<<<<<<<<
  *         return draw_rgb
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_ImageDraw); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_ImageDraw); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 107, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_Draw); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_Draw); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 107, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_pil_img_obj_rgb); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_pil_img_obj_rgb); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 107, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -4154,13 +4154,13 @@ static PyObject *__pyx_pf_4Calc_3Cal_20make_draw_rgb_object(CYTHON_UNUSED PyObje
   __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_draw_rgb = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "Calc.pyx":107
+  /* "Calc.pyx":108
  *         self.pil_img_obj_rgb = pil_img_obj_rgb
  *         draw_rgb = ImageDraw.Draw(self.pil_img_obj_rgb)
  *         return draw_rgb             # <<<<<<<<<<<<<<
@@ -4170,7 +4170,7 @@ static PyObject *__pyx_pf_4Calc_3Cal_20make_draw_rgb_object(CYTHON_UNUSED PyObje
   __pyx_r = __pyx_v_draw_rgb;
   goto __pyx_L0;
 
-  /* "Calc.pyx":104
+  /* "Calc.pyx":105
  * 
  *     # draw_rgb
  *     def  make_draw_rgb_object(self, pil_img_obj_rgb):             # <<<<<<<<<<<<<<
@@ -4376,34 +4376,34 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "Calc.pyx":36
+  /* "Calc.pyx":37
  *         self.resized_telop_image = resized_telop_image
  *         x1, y1, x2, y2 = 0, 0, resized_telop_image.shape[1], resized_telop_image.shape[0]
  *         a = (1 - resized_telop_image[:,:,3:] / 255)             # <<<<<<<<<<<<<<
  *         b = resized_telop_image[:,:,:3] * (resized_telop_image[:,:,3:] / 255)
  *         cal_resized_telop_nums = (x1, y1, x2, y2, a, b)
  */
-  __pyx_slice__7 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__7)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_slice__7 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__7)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice__7);
   __Pyx_GIVEREF(__pyx_slice__7);
-  __pyx_slice__8 = PySlice_New(__pyx_int_3, Py_None, Py_None); if (unlikely(!__pyx_slice__8)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_slice__8 = PySlice_New(__pyx_int_3, Py_None, Py_None); if (unlikely(!__pyx_slice__8)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice__8);
   __Pyx_GIVEREF(__pyx_slice__8);
-  __pyx_tuple__9 = PyTuple_Pack(3, __pyx_slice__7, __pyx_slice__7, __pyx_slice__8); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(3, __pyx_slice__7, __pyx_slice__7, __pyx_slice__8); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
-  /* "Calc.pyx":37
+  /* "Calc.pyx":38
  *         x1, y1, x2, y2 = 0, 0, resized_telop_image.shape[1], resized_telop_image.shape[0]
  *         a = (1 - resized_telop_image[:,:,3:] / 255)
  *         b = resized_telop_image[:,:,:3] * (resized_telop_image[:,:,3:] / 255)             # <<<<<<<<<<<<<<
  *         cal_resized_telop_nums = (x1, y1, x2, y2, a, b)
  *         return cal_resized_telop_nums
  */
-  __pyx_slice__10 = PySlice_New(Py_None, __pyx_int_3, Py_None); if (unlikely(!__pyx_slice__10)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_slice__10 = PySlice_New(Py_None, __pyx_int_3, Py_None); if (unlikely(!__pyx_slice__10)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice__10);
   __Pyx_GIVEREF(__pyx_slice__10);
-  __pyx_tuple__11 = PyTuple_Pack(3, __pyx_slice__7, __pyx_slice__7, __pyx_slice__10); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_tuple__11 = PyTuple_Pack(3, __pyx_slice__7, __pyx_slice__7, __pyx_slice__10); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
 
@@ -4431,116 +4431,116 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__14);
   __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Calc_pyx, __pyx_n_s_cal_specify_date, 16, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 16, __pyx_L1_error)
 
-  /* "Calc.pyx":33
- *                 self.logger.info(" :  y.kesamaru@tokai-kaoninsho.com")
+  /* "Calc.pyx":34
+ * 
  * 
  *     def cal_resized_telop_image(self, resized_telop_image):             # <<<<<<<<<<<<<<
  *         self.resized_telop_image = resized_telop_image
  *         x1, y1, x2, y2 = 0, 0, resized_telop_image.shape[1], resized_telop_image.shape[0]
  */
-  __pyx_tuple__16 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_resized_telop_image, __pyx_n_s_x1, __pyx_n_s_y1, __pyx_n_s_x2, __pyx_n_s_y2, __pyx_n_s_a, __pyx_n_s_b, __pyx_n_s_cal_resized_telop_nums); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_tuple__16 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_resized_telop_image, __pyx_n_s_x1, __pyx_n_s_y1, __pyx_n_s_x2, __pyx_n_s_y2, __pyx_n_s_a, __pyx_n_s_b, __pyx_n_s_cal_resized_telop_nums); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__16);
   __Pyx_GIVEREF(__pyx_tuple__16);
-  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(2, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Calc_pyx, __pyx_n_s_cal_resized_telop_image, 33, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(2, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Calc_pyx, __pyx_n_s_cal_resized_telop_image, 34, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 34, __pyx_L1_error)
 
-  /* "Calc.pyx":41
+  /* "Calc.pyx":42
  *         return cal_resized_telop_nums
  * 
  *     def cal_resized_logo_image(self, resized_logo_image,  set_height,set_width):             # <<<<<<<<<<<<<<
  *         self.resized_logo_image = resized_logo_image
  *         self.set_height = set_height
  */
-  __pyx_tuple__18 = PyTuple_Pack(11, __pyx_n_s_self, __pyx_n_s_resized_logo_image, __pyx_n_s_set_height, __pyx_n_s_set_width, __pyx_n_s_x1, __pyx_n_s_y1, __pyx_n_s_x2, __pyx_n_s_y2, __pyx_n_s_a, __pyx_n_s_b, __pyx_n_s_cal_resized_logo_nums); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_tuple__18 = PyTuple_Pack(11, __pyx_n_s_self, __pyx_n_s_resized_logo_image, __pyx_n_s_set_height, __pyx_n_s_set_width, __pyx_n_s_x1, __pyx_n_s_y1, __pyx_n_s_x2, __pyx_n_s_y2, __pyx_n_s_a, __pyx_n_s_b, __pyx_n_s_cal_resized_logo_nums); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__18);
   __Pyx_GIVEREF(__pyx_tuple__18);
-  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(4, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Calc_pyx, __pyx_n_s_cal_resized_logo_image, 41, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(4, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Calc_pyx, __pyx_n_s_cal_resized_logo_image, 42, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 42, __pyx_L1_error)
 
-  /* "Calc.pyx":51
+  /* "Calc.pyx":52
  *         return cal_resized_logo_nums
  * 
  *     def to_tolerance(self, similar_percentage) -> float:             # <<<<<<<<<<<<<<
  *         __doc__ = 'similar_percentagetolerance'
  *         ##
  */
-  __pyx_tuple__20 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_similar_percentage, __pyx_n_s_doc, __pyx_n_s_tolerance, __pyx_n_s_tolerance_plus, __pyx_n_s_tolerance_minus); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_tuple__20 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_similar_percentage, __pyx_n_s_doc, __pyx_n_s_tolerance, __pyx_n_s_tolerance_plus, __pyx_n_s_tolerance_minus); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__20);
   __Pyx_GIVEREF(__pyx_tuple__20);
-  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(2, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__20, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Calc_pyx, __pyx_n_s_to_tolerance, 51, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(2, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__20, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Calc_pyx, __pyx_n_s_to_tolerance, 52, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) __PYX_ERR(0, 52, __pyx_L1_error)
 
-  /* "Calc.pyx":67
+  /* "Calc.pyx":68
  *         return tolerance
  * 
  *     def to_percentage(self, tolerance):             # <<<<<<<<<<<<<<
  *         self.tolerance = tolerance
  *         tolerance = float(tolerance)  # strfloat
  */
-  __pyx_tuple__22 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_tolerance, __pyx_n_s_percentage); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_tuple__22 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_tolerance, __pyx_n_s_percentage); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__22);
   __Pyx_GIVEREF(__pyx_tuple__22);
-  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__22, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Calc_pyx, __pyx_n_s_to_percentage, 67, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__22, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Calc_pyx, __pyx_n_s_to_percentage, 68, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(0, 68, __pyx_L1_error)
 
-  /* "Calc.pyx":73
+  /* "Calc.pyx":74
  *         return percentage
  * 
  *     def decide_text_position(self, error_messg_rectangle_bottom,error_messg_rectangle_left, error_messg_rectangle_right, error_messg_rectangle_fontsize,error_messg_rectangle_messg):             # <<<<<<<<<<<<<<
  *         """"""
  *         self.error_messg_rectangle_bottom = error_messg_rectangle_bottom
  */
-  __pyx_tuple__24 = PyTuple_Pack(10, __pyx_n_s_self, __pyx_n_s_error_messg_rectangle_bottom, __pyx_n_s_error_messg_rectangle_left, __pyx_n_s_error_messg_rectangle_right, __pyx_n_s_error_messg_rectangle_fontsize, __pyx_n_s_error_messg_rectangle_messg, __pyx_n_s_error_messg_rectangle_center, __pyx_n_s_error_messg_rectangle_chaCenter, __pyx_n_s_error_messg_rectangle_pos, __pyx_n_s_error_messg_rectangle_position); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_tuple__24 = PyTuple_Pack(10, __pyx_n_s_self, __pyx_n_s_error_messg_rectangle_bottom, __pyx_n_s_error_messg_rectangle_left, __pyx_n_s_error_messg_rectangle_right, __pyx_n_s_error_messg_rectangle_fontsize, __pyx_n_s_error_messg_rectangle_messg, __pyx_n_s_error_messg_rectangle_center, __pyx_n_s_error_messg_rectangle_chaCenter, __pyx_n_s_error_messg_rectangle_pos, __pyx_n_s_error_messg_rectangle_position); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__24);
   __Pyx_GIVEREF(__pyx_tuple__24);
-  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(6, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Calc_pyx, __pyx_n_s_decide_text_position, 73, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(6, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Calc_pyx, __pyx_n_s_decide_text_position, 74, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) __PYX_ERR(0, 74, __pyx_L1_error)
 
-  /* "Calc.pyx":86
+  /* "Calc.pyx":87
  *         return error_messg_rectangle_position
  * 
  *     def make_error_messg_rectangle_font(self, fontpath, error_messg_rectangle_fontsize, encoding = 'utf-8'):             # <<<<<<<<<<<<<<
  *         self.fontpath = fontpath
  *         self.error_messg_rectangle_fontsize = error_messg_rectangle_fontsize
  */
-  __pyx_tuple__26 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_fontpath, __pyx_n_s_error_messg_rectangle_fontsize, __pyx_n_s_encoding, __pyx_n_s_error_messg_rectangle_font); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_tuple__26 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_fontpath, __pyx_n_s_error_messg_rectangle_fontsize, __pyx_n_s_encoding, __pyx_n_s_error_messg_rectangle_font); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__26);
   __Pyx_GIVEREF(__pyx_tuple__26);
-  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(4, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Calc_pyx, __pyx_n_s_make_error_messg_rectangle_font, 86, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 86, __pyx_L1_error)
-  __pyx_tuple__28 = PyTuple_Pack(1, ((PyObject*)__pyx_kp_u_utf_8)); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(4, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Calc_pyx, __pyx_n_s_make_error_messg_rectangle_font, 87, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_tuple__28 = PyTuple_Pack(1, ((PyObject*)__pyx_kp_u_utf_8)); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__28);
   __Pyx_GIVEREF(__pyx_tuple__28);
 
-  /* "Calc.pyx":92
+  /* "Calc.pyx":93
  *         return error_messg_rectangle_font
  * 
  *     def return_percentage(self, p):  # python             # <<<<<<<<<<<<<<
  *         self.p = p
  *         percentage = -4.76190475 *(self.p**2)-(0.380952375*self.p)+100
  */
-  __pyx_tuple__29 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_p, __pyx_n_s_percentage); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_tuple__29 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_p, __pyx_n_s_percentage); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__29);
   __Pyx_GIVEREF(__pyx_tuple__29);
-  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Calc_pyx, __pyx_n_s_return_percentage, 92, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Calc_pyx, __pyx_n_s_return_percentage, 93, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 93, __pyx_L1_error)
 
-  /* "Calc.pyx":98
+  /* "Calc.pyx":99
  * 
  *     # pil_img
  *     def pil_img_instance(self, frame):             # <<<<<<<<<<<<<<
  *         self.frame = frame
  *         pil_img_obj= Image.fromarray(self.frame)
  */
-  __pyx_tuple__31 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_frame, __pyx_n_s_pil_img_obj); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_tuple__31 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_frame, __pyx_n_s_pil_img_obj); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__31);
   __Pyx_GIVEREF(__pyx_tuple__31);
-  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Calc_pyx, __pyx_n_s_pil_img_instance, 98, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Calc_pyx, __pyx_n_s_pil_img_instance, 99, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) __PYX_ERR(0, 99, __pyx_L1_error)
 
-  /* "Calc.pyx":104
+  /* "Calc.pyx":105
  * 
  *     # draw_rgb
  *     def  make_draw_rgb_object(self, pil_img_obj_rgb):             # <<<<<<<<<<<<<<
  *         self.pil_img_obj_rgb = pil_img_obj_rgb
  *         draw_rgb = ImageDraw.Draw(self.pil_img_obj_rgb)
  */
-  __pyx_tuple__33 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_pil_img_obj_rgb, __pyx_n_s_draw_rgb); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_tuple__33 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_pil_img_obj_rgb, __pyx_n_s_draw_rgb); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__33);
   __Pyx_GIVEREF(__pyx_tuple__33);
-  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Calc_pyx, __pyx_n_s_make_draw_rgb_object, 104, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Calc_pyx, __pyx_n_s_make_draw_rgb_object, 105, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -4964,118 +4964,118 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_cal_specify_date, __pyx_t_2) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Calc.pyx":33
- *                 self.logger.info(" :  y.kesamaru@tokai-kaoninsho.com")
+  /* "Calc.pyx":34
+ * 
  * 
  *     def cal_resized_telop_image(self, resized_telop_image):             # <<<<<<<<<<<<<<
  *         self.resized_telop_image = resized_telop_image
  *         x1, y1, x2, y2 = 0, 0, resized_telop_image.shape[1], resized_telop_image.shape[0]
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_4Calc_3Cal_5cal_resized_telop_image, 0, __pyx_n_s_Cal_cal_resized_telop_image, NULL, __pyx_n_s_Calc, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_4Calc_3Cal_5cal_resized_telop_image, 0, __pyx_n_s_Cal_cal_resized_telop_image, NULL, __pyx_n_s_Calc, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_cal_resized_telop_image, __pyx_t_2) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_cal_resized_telop_image, __pyx_t_2) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Calc.pyx":41
+  /* "Calc.pyx":42
  *         return cal_resized_telop_nums
  * 
  *     def cal_resized_logo_image(self, resized_logo_image,  set_height,set_width):             # <<<<<<<<<<<<<<
  *         self.resized_logo_image = resized_logo_image
  *         self.set_height = set_height
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_4Calc_3Cal_7cal_resized_logo_image, 0, __pyx_n_s_Cal_cal_resized_logo_image, NULL, __pyx_n_s_Calc, __pyx_d, ((PyObject *)__pyx_codeobj__19)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_4Calc_3Cal_7cal_resized_logo_image, 0, __pyx_n_s_Cal_cal_resized_logo_image, NULL, __pyx_n_s_Calc, __pyx_d, ((PyObject *)__pyx_codeobj__19)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_cal_resized_logo_image, __pyx_t_2) < 0) __PYX_ERR(0, 41, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_cal_resized_logo_image, __pyx_t_2) < 0) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Calc.pyx":51
+  /* "Calc.pyx":52
  *         return cal_resized_logo_nums
  * 
  *     def to_tolerance(self, similar_percentage) -> float:             # <<<<<<<<<<<<<<
  *         __doc__ = 'similar_percentagetolerance'
  *         ##
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_u_float) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_4Calc_3Cal_9to_tolerance, 0, __pyx_n_s_Cal_to_tolerance, NULL, __pyx_n_s_Calc, __pyx_d, ((PyObject *)__pyx_codeobj__21)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 51, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_return, __pyx_n_u_float) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_4Calc_3Cal_9to_tolerance, 0, __pyx_n_s_Cal_to_tolerance, NULL, __pyx_n_s_Calc, __pyx_d, ((PyObject *)__pyx_codeobj__21)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_to_tolerance, __pyx_t_3) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_to_tolerance, __pyx_t_3) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "Calc.pyx":67
+  /* "Calc.pyx":68
  *         return tolerance
  * 
  *     def to_percentage(self, tolerance):             # <<<<<<<<<<<<<<
  *         self.tolerance = tolerance
  *         tolerance = float(tolerance)  # strfloat
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_4Calc_3Cal_11to_percentage, 0, __pyx_n_s_Cal_to_percentage, NULL, __pyx_n_s_Calc, __pyx_d, ((PyObject *)__pyx_codeobj__23)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_4Calc_3Cal_11to_percentage, 0, __pyx_n_s_Cal_to_percentage, NULL, __pyx_n_s_Calc, __pyx_d, ((PyObject *)__pyx_codeobj__23)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_to_percentage, __pyx_t_3) < 0) __PYX_ERR(0, 67, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_to_percentage, __pyx_t_3) < 0) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "Calc.pyx":73
+  /* "Calc.pyx":74
  *         return percentage
  * 
  *     def decide_text_position(self, error_messg_rectangle_bottom,error_messg_rectangle_left, error_messg_rectangle_right, error_messg_rectangle_fontsize,error_messg_rectangle_messg):             # <<<<<<<<<<<<<<
  *         """"""
  *         self.error_messg_rectangle_bottom = error_messg_rectangle_bottom
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_4Calc_3Cal_13decide_text_position, 0, __pyx_n_s_Cal_decide_text_position, NULL, __pyx_n_s_Calc, __pyx_d, ((PyObject *)__pyx_codeobj__25)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_4Calc_3Cal_13decide_text_position, 0, __pyx_n_s_Cal_decide_text_position, NULL, __pyx_n_s_Calc, __pyx_d, ((PyObject *)__pyx_codeobj__25)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_decide_text_position, __pyx_t_3) < 0) __PYX_ERR(0, 73, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_decide_text_position, __pyx_t_3) < 0) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "Calc.pyx":86
+  /* "Calc.pyx":87
  *         return error_messg_rectangle_position
  * 
  *     def make_error_messg_rectangle_font(self, fontpath, error_messg_rectangle_fontsize, encoding = 'utf-8'):             # <<<<<<<<<<<<<<
  *         self.fontpath = fontpath
  *         self.error_messg_rectangle_fontsize = error_messg_rectangle_fontsize
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_4Calc_3Cal_15make_error_messg_rectangle_font, 0, __pyx_n_s_Cal_make_error_messg_rectangle_f, NULL, __pyx_n_s_Calc, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_4Calc_3Cal_15make_error_messg_rectangle_font, 0, __pyx_n_s_Cal_make_error_messg_rectangle_f, NULL, __pyx_n_s_Calc, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_3, __pyx_tuple__28);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_make_error_messg_rectangle_font, __pyx_t_3) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_make_error_messg_rectangle_font, __pyx_t_3) < 0) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "Calc.pyx":92
+  /* "Calc.pyx":93
  *         return error_messg_rectangle_font
  * 
  *     def return_percentage(self, p):  # python             # <<<<<<<<<<<<<<
  *         self.p = p
  *         percentage = -4.76190475 *(self.p**2)-(0.380952375*self.p)+100
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_4Calc_3Cal_17return_percentage, 0, __pyx_n_s_Cal_return_percentage, NULL, __pyx_n_s_Calc, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_4Calc_3Cal_17return_percentage, 0, __pyx_n_s_Cal_return_percentage, NULL, __pyx_n_s_Calc, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_return_percentage, __pyx_t_3) < 0) __PYX_ERR(0, 92, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_return_percentage, __pyx_t_3) < 0) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "Calc.pyx":98
+  /* "Calc.pyx":99
  * 
  *     # pil_img
  *     def pil_img_instance(self, frame):             # <<<<<<<<<<<<<<
  *         self.frame = frame
  *         pil_img_obj= Image.fromarray(self.frame)
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_4Calc_3Cal_19pil_img_instance, 0, __pyx_n_s_Cal_pil_img_instance, NULL, __pyx_n_s_Calc, __pyx_d, ((PyObject *)__pyx_codeobj__32)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_4Calc_3Cal_19pil_img_instance, 0, __pyx_n_s_Cal_pil_img_instance, NULL, __pyx_n_s_Calc, __pyx_d, ((PyObject *)__pyx_codeobj__32)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_pil_img_instance, __pyx_t_3) < 0) __PYX_ERR(0, 98, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_pil_img_instance, __pyx_t_3) < 0) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "Calc.pyx":104
+  /* "Calc.pyx":105
  * 
  *     # draw_rgb
  *     def  make_draw_rgb_object(self, pil_img_obj_rgb):             # <<<<<<<<<<<<<<
  *         self.pil_img_obj_rgb = pil_img_obj_rgb
  *         draw_rgb = ImageDraw.Draw(self.pil_img_obj_rgb)
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_4Calc_3Cal_21make_draw_rgb_object, 0, __pyx_n_s_Cal_make_draw_rgb_object, NULL, __pyx_n_s_Calc, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_4Calc_3Cal_21make_draw_rgb_object, 0, __pyx_n_s_Cal_make_draw_rgb_object, NULL, __pyx_n_s_Calc, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_make_draw_rgb_object, __pyx_t_3) < 0) __PYX_ERR(0, 104, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_1, __pyx_n_s_make_draw_rgb_object, __pyx_t_3) < 0) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "Calc.pyx":11

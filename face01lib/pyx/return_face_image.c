@@ -5,7 +5,7 @@
     "distutils": {
         "name": "return_face_image",
         "sources": [
-            "return_face_image.pyx"
+            "/home/terms/bin/FACE01/face01lib/pyx/return_face_image.pyx"
         ]
     },
     "module_name": "return_face_image"
@@ -1684,10 +1684,10 @@ static PyObject *__pyx_pw_17return_face_image_17Return_face_image_1return_face_i
 
 static PyObject *__pyx_pf_17return_face_image_17Return_face_image_return_face_image(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_resized_frame, PyObject *__pyx_v_face_location) {
   PyObject *__pyx_v_empty_ndarray = NULL;
-  PyObject *__pyx_v_top = NULL;
-  PyObject *__pyx_v_right = NULL;
-  PyObject *__pyx_v_bottom = NULL;
-  PyObject *__pyx_v_left = NULL;
+  PyObject *__pyx_v_top = 0;
+  PyObject *__pyx_v_right = 0;
+  PyObject *__pyx_v_bottom = 0;
+  PyObject *__pyx_v_left = 0;
   PyObject *__pyx_v_face_image = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_TraceDeclarations
@@ -1756,8 +1756,8 @@ static PyObject *__pyx_pf_17return_face_image_17Return_face_image_return_face_im
  *         self.face_location: tuple = face_location
  * 
  *         if len(self.face_location) > 0:             # <<<<<<<<<<<<<<
- *             top: cython.int = face_location[0]
- *             right: cython.int = face_location[1]
+ *             top: int = face_location[0]
+ *             right: int = face_location[1]
  */
   __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_face_location); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
@@ -1769,9 +1769,9 @@ static PyObject *__pyx_pf_17return_face_image_17Return_face_image_return_face_im
     /* "return_face_image.pyx":39
  * 
  *         if len(self.face_location) > 0:
- *             top: cython.int = face_location[0]             # <<<<<<<<<<<<<<
- *             right: cython.int = face_location[1]
- *             bottom: cython.int = face_location[2]
+ *             top: int = face_location[0]             # <<<<<<<<<<<<<<
+ *             right: int = face_location[1]
+ *             bottom: int = face_location[2]
  */
     if (unlikely(__pyx_v_face_location == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
@@ -1784,10 +1784,10 @@ static PyObject *__pyx_pf_17return_face_image_17Return_face_image_return_face_im
 
     /* "return_face_image.pyx":40
  *         if len(self.face_location) > 0:
- *             top: cython.int = face_location[0]
- *             right: cython.int = face_location[1]             # <<<<<<<<<<<<<<
- *             bottom: cython.int = face_location[2]
- *             left: cython.int = face_location[3]
+ *             top: int = face_location[0]
+ *             right: int = face_location[1]             # <<<<<<<<<<<<<<
+ *             bottom: int = face_location[2]
+ *             left: int = face_location[3]
  */
     if (unlikely(__pyx_v_face_location == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
@@ -1799,10 +1799,10 @@ static PyObject *__pyx_pf_17return_face_image_17Return_face_image_return_face_im
     __pyx_t_4 = 0;
 
     /* "return_face_image.pyx":41
- *             top: cython.int = face_location[0]
- *             right: cython.int = face_location[1]
- *             bottom: cython.int = face_location[2]             # <<<<<<<<<<<<<<
- *             left: cython.int = face_location[3]
+ *             top: int = face_location[0]
+ *             right: int = face_location[1]
+ *             bottom: int = face_location[2]             # <<<<<<<<<<<<<<
+ *             left: int = face_location[3]
  *             face_image = self.resized_frame[top:bottom, left:right]
  */
     if (unlikely(__pyx_v_face_location == Py_None)) {
@@ -1815,9 +1815,9 @@ static PyObject *__pyx_pf_17return_face_image_17Return_face_image_return_face_im
     __pyx_t_4 = 0;
 
     /* "return_face_image.pyx":42
- *             right: cython.int = face_location[1]
- *             bottom: cython.int = face_location[2]
- *             left: cython.int = face_location[3]             # <<<<<<<<<<<<<<
+ *             right: int = face_location[1]
+ *             bottom: int = face_location[2]
+ *             left: int = face_location[3]             # <<<<<<<<<<<<<<
  *             face_image = self.resized_frame[top:bottom, left:right]
  *             """DEBUG
  */
@@ -1831,8 +1831,8 @@ static PyObject *__pyx_pf_17return_face_image_17Return_face_image_return_face_im
     __pyx_t_4 = 0;
 
     /* "return_face_image.pyx":43
- *             bottom: cython.int = face_location[2]
- *             left: cython.int = face_location[3]
+ *             bottom: int = face_location[2]
+ *             left: int = face_location[3]
  *             face_image = self.resized_frame[top:bottom, left:right]             # <<<<<<<<<<<<<<
  *             """DEBUG
  *             from face01lib.video_capture import VidCap
@@ -1874,8 +1874,8 @@ static PyObject *__pyx_pf_17return_face_image_17Return_face_image_return_face_im
  *         self.face_location: tuple = face_location
  * 
  *         if len(self.face_location) > 0:             # <<<<<<<<<<<<<<
- *             top: cython.int = face_location[0]
- *             right: cython.int = face_location[1]
+ *             top: int = face_location[0]
+ *             right: int = face_location[1]
  */
   }
 

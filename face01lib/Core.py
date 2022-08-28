@@ -204,8 +204,8 @@ class Core:
         try:
             # TODO: #21 numpyのfunctionを探す
             # https://numpy.org/devdocs/reference/arrays.indexing.html
-            # frame[y1:y2, x1:x2] = self.frame[y1:y2, x1:x2] * a + b
-            frame[:,y1:y2, x1:x2] = frame_view[:,y1:y2, x1:x2] * a + b
+            frame[y1:y2, x1:x2] = self.frame[y1:y2, x1:x2] * a + b
+            # frame[:,y1:y2, x1:x2] = frame_view[:,y1:y2, x1:x2] * a + b
 
         except:
             self.logger.debug("cannot draw telop image")
@@ -1327,6 +1327,7 @@ class Core:
         self.anti_spoof = args_dict["anti_spoof"],
         self.rect01_png = args_dict["rect01_png"]
         self.rect01_NG_png = args_dict["rect01_NG_png"]
+        self.rect01_REAL_png = args_dict["rect01_REAL_png"]
         self.rect01_SPOOF_png = args_dict["rect01_SPOOF_png"]
         self.rect01_CANNOT_DISTINCTION_png = args_dict["rect01_CANNOT_DISTINCTION_png"]
         self.resized_frame = resized_frame
@@ -1390,14 +1391,14 @@ class Core:
             elif self.name != 'Unknown' and spoof_or_real == 'real' and ELE is False:  ## self.nameが既知の場合
                 face_width: int = self.right - self.left
                 face_height: int = self.bottom - self.top
-                orgHeight, orgWidth = self.rect01_png.shape[:2]
+                orgHeight, orgWidth = self.rect01_REAL_png.shape[:2]
                 width_ratio = 1.0 * (face_width / orgWidth)
                 height_ratio = 1.0 * (face_height / orgHeight)
-                self.rect01_png = cv2.resize(self.rect01_png, None, fx = width_ratio, fy = height_ratio)
-                x1, y1, x2, y2 = self.left, self.top, self.left + self.rect01_png.shape[1], self.top + self.rect01_png.shape[0]
+                self.rect01_REAL_png = cv2.resize(self.rect01_REAL_png, None, fx = width_ratio, fy = height_ratio)
+                x1, y1, x2, y2 = self.left, self.top, self.left + self.rect01_REAL_png.shape[1], self.top + self.rect01_REAL_png.shape[0]
                 try:
-                    self.resized_frame[y1:y2, x1:x2] = self.resized_frame[y1:y2, x1:x2] * (1 - self.rect01_png[:,:,3:] / 255) + \
-                                self.rect01_png[:,:,:3] * (self.rect01_png[:,:,3:] / 255)
+                    self.resized_frame[y1:y2, x1:x2] = self.resized_frame[y1:y2, x1:x2] * (1 - self.rect01_REAL_png[:,:,3:] / 255) + \
+                                self.rect01_REAL_png[:,:,:3] * (self.rect01_REAL_png[:,:,3:] / 255)
                 except:
                     # TODO: np.clip
                     pass
