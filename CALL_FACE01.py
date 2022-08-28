@@ -43,7 +43,7 @@ Cal().cal_specify_date(logger)
 
 """DEBUG
 Set the number of playback frames"""
-exec_times: int = 300
+exec_times: int = 3000
 ALL_FRAME = exec_times
 
 # PySimpleGUI layout
@@ -64,7 +64,6 @@ def common_main(exec_times):
     event = ''
     while True:
         try:
-            # frame_datas_array = fg_main_process_obj.__next__()
             frame_datas_array = fg.main_process().__next__()
             """DEBUG"""
             logger.debug(f"frame_datas_array: {sys.getsizeof(frame_datas_array) / 1024 / 1048}MiB")
