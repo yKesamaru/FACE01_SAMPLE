@@ -18,27 +18,42 @@ https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.p
 """
 # from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 
+
+"""DEBUG: MEMORY LEAK
+from face01lib.memory_leak import Memory_leak
+m = Memory_leak(limit=2, key_type='traceback', nframe=20)
+m.memory_leak_analyze_start()
+"""
+
+
 import dlib
 import numpy as np
-from PIL.Image import open
 from PIL import ImageFile
+from PIL.Image import open
+
 ImageFile.LOAD_TRUNCATED_IMAGES = True
-from face01lib.logger import Logger
-from traceback import format_exc
-from sys import exit
-from os.path import dirname
 import traceback
+from os.path import dirname
+from sys import exit
+from traceback import format_exc
+
+from memory_profiler import profile  # @profile()
+
+from face01lib.logger import Logger
+
 
 name = __name__
 dir = dirname(__file__)
 logger = Logger().logger(name, dir, None)
+
+
 try:
     from face01lib.models import Dlib_models
 except Exception:
-    logger.warning("modelのimportに失敗しました")
-    logger.warning("-" * 20)
-    logger.warning(format_exc(limit=None, chain=True))
-    logger.warning("-" * 20)
+    logger.error("modelのimportに失敗しました")
+    logger.error("-" * 20)
+    logger.error(format_exc(limit=None, chain=True))
+    logger.error("-" * 20)
     exit(0)
 
 
@@ -53,11 +68,13 @@ cnn_face_detector = dlib.cnn_face_detection_model_v1(cnn_face_detection_model)
 face_recognition_model = Dlib_models().face_recognition_model_location()
 face_encoder = dlib.face_recognition_model_v1(face_recognition_model)
 
+
 class Dlib_api:
+    __author__ = 'Original code written by Adam Geitgey, modified by YOSHITSUGU KESAMARU'
+    __email__ = 'y.kesamaru@tokai-kaoninsho.com'
+    __version__ = 'v0.0.1'
+
     # def __init__(self) -> None:
-    #     __author__ = 'Original code written by Adam Geitgey, modified by YOSHITSUGU KESAMARU'
-    #     __email__ = 'y.kesamaru@tokai-kaoninsho.com'
-    #     __version__ = '1.4.02'
 
     def _rect_to_css(self, rect: object) -> tuple:
         self.rect = rect
@@ -129,6 +146,7 @@ class Dlib_api:
             return face_detector(self.img, self.number_of_times_to_upsample)
 
 
+    # @profile()
     def face_locations(
         self,
         img: np.ndarray,
@@ -171,6 +189,7 @@ class Dlib_api:
         return [pose_predictor_5_point(self.resized_frame, face_location) for face_location in self.face_locations]
 
 
+    # @profile()
     def face_encodings(
         self,
         resized_frame,
@@ -230,6 +249,7 @@ class Dlib_api:
                 print(traceback.format_exc())
                 exit(0)
         # print(face_encodings)
+            # del face_encoder.compute_face_descriptor  # Error: read-only object
         return face_encodings
         """
         [compute_face_descriptor](https://blog.dlib.net/2017/02/high-quality-face-recognition-with-deep.html?m=0&commentPage=2)
@@ -250,6 +270,7 @@ class Dlib_api:
         return [pool.submit(multithread, raw_landmark_set, self.resized_frame, self.num_jitters).result() for raw_landmark_set in raw_landmarks]
         """
 
+
     def multithread(self, raw_landmark_set, resized_frame, num_jitters):
         self.raw_landmark_set = raw_landmark_set
         self.resized_frame = resized_frame
@@ -257,6 +278,7 @@ class Dlib_api:
         return np.array(face_encoder.compute_face_descriptor(self.resized_frame, self.raw_landmark_set, self.num_jitters))
 
 
+    # @profile()
     def face_distance(self, face_encodings, face_to_compare):
         self.face_encodings = face_encodings
         self.face_to_compare = face_to_compare
@@ -273,6 +295,7 @@ class Dlib_api:
         return np.linalg.norm(x=(self.face_encodings - self.face_to_compare), axis=1)
 
 
+    # @profile()
     def compare_faces(self, known_face_encodings, face_encoding_to_check, tolerance=0.6):
         self.known_face_encodings = known_face_encodings
         self.face_encoding_to_check = face_encoding_to_check
@@ -293,3 +316,8 @@ class Dlib_api:
             return [True if i == _min else False for i in face_distance_list]
         else:
             return [False] * len(face_distance_list)
+
+
+"""DEBUG: MEMORY LEAK
+m.memory_leak_analyze_stop()
+"""

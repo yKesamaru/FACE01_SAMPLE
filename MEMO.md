@@ -1,12 +1,19 @@
 # FACE01について
 # TODO
 ## 1.4.09
-- imagesの改善
-  - real, spoofの他にtarget_rectangleを作る
 - メモリ削減の工夫
-- FACE01 SAMPLEの更新
+  - ![](img/PASTE_IMAGE_2022-08-31-09-20-50.png)
+- anti_spoofをFalseにしてもanti_spoofメソッドが動いているバグの解決
+  - ![](img/PASTE_IMAGE_2022-09-02-18-34-40.png)
+
+Fix
 - loggerの不具合
   - debugモードにならない
+- telopの表示不良
+- imagesの改善
+  - real, spoofの他にtarget_rectangleを作る
+- FACE01 SAMPLEの更新
+
 
 ## 1.4.08
 Fix: Memory leak

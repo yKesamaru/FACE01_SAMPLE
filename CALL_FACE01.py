@@ -1,9 +1,9 @@
 
-"""DEBUG: MEMORY LEAK"""
+"""DEBUG: MEMORY LEAK
 from face01lib.memory_leak import Memory_leak
-m = Memory_leak(limit=3, key_type='traceback', nframe=20)
+m = Memory_leak(limit=2, key_type='traceback', nframe=20)
 m.memory_leak_analyze_start()
-
+"""
 
 import gc
 import cProfile as pr
@@ -107,31 +107,28 @@ def common_main(exec_times):
                             person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
                         # ELE: Equally Likely Events
                         if name != 'Unknown':
-                            spoof_or_real, score, ELE = Core_obj.return_anti_spoof(frame_datas['img'], person_data["location"])
-                            
                             if fg.args_dict["anti_spoof"] is True:
+                                spoof_or_real, score, ELE = Core_obj.return_anti_spoof(frame_datas['img'], person_data["location"])
                                 if ELE is False:
-                                    pass
-                                    # print(
-                                    #     name, "\n",
-                                    #     "\t", "Anti spoof\t\t", spoof_or_real, "\n",
-                                    #     "\t", "Anti spoof score\t", round(score * 100, 2), "%\n",
-                                    #     "\t", "similarity\t\t", percentage_and_symbol, "\n",
-                                    #     "\t", "coordinate\t\t", location, "\n",
-                                    #     "\t", "time\t\t\t", date, "\n",
-                                    #     "\t", "output\t\t\t", pict, "\n",
-                                    #     "-------\n"
-                                    # )
-                            # else:
-                            #     if ELE is False:
-                            #         print(
-                            #             name, "\n",
-                            #             "\t", "similarity\t\t", percentage_and_symbol, "\n",
-                            #             "\t", "coordinate\t\t", location, "\n",
-                            #             "\t", "time\t\t\t", date, "\n",
-                            #             "\t", "output\t\t\t", pict, "\n",
-                            #             "-------\n"
-                            #         )
+                                    print(
+                                        name, "\n",
+                                        "\t", "Anti spoof\t\t", spoof_or_real, "\n",
+                                        "\t", "Anti spoof score\t", round(score * 100, 2), "%\n",
+                                        "\t", "similarity\t\t", percentage_and_symbol, "\n",
+                                        "\t", "coordinate\t\t", location, "\n",
+                                        "\t", "time\t\t\t", date, "\n",
+                                        "\t", "output\t\t\t", pict, "\n",
+                                        "-------\n"
+                                    )
+                            else:
+                                print(
+                                    name, "\n",
+                                    "\t", "similarity\t\t", percentage_and_symbol, "\n",
+                                    "\t", "coordinate\t\t", location, "\n",
+                                    "\t", "time\t\t\t", date, "\n",
+                                    "\t", "output\t\t\t", pict, "\n",
+                                    "-------\n"
+                                )
                     if fg.args_dict["headless"] == False:
                         imgbytes = cv2.imencode(".png", img)[1].tobytes()
                         window["display"].update(data = imgbytes)
@@ -183,5 +180,6 @@ def extract_face_locations(exec_times):
     print(f'Per frame: {round(profile_HANDLING_FRAME_TIME / i, 3)}[seconds]')
 # pr.run('extract_face_locations(exec_times)', 'restats')
 
-"""DEBUG: MEMORY LEAK"""
+"""DEBUG: MEMORY LEAK
 m.memory_leak_analyze_stop()
+"""

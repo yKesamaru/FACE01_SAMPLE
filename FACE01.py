@@ -37,7 +37,6 @@ GLOBAL_MEMORY = {
 
 name = __name__
 dir = dirname(__file__)
-logger = Logger().logger(name, dir, 'debug')
 
 # @profile()
 def configure():
@@ -106,6 +105,13 @@ conf_dict = configure()
 
 # initialize
 args_dict =  Initialize().initialize(conf_dict)
+
+
+if args_dict["output_debug_log"] == True:
+    logger = Logger().logger(name, dir, 'debug')
+else:
+    logger = Logger().logger(name, dir, None)
+
 
 """CHECK SYSTEM INFORMATION"""
 # @profile()

@@ -71,14 +71,12 @@ from face01lib.video_capture import VidCap
 # VidCap_obj = VidCap()
 
 
-
-
 anti_spoof_model = Dlib_models().anti_spoof_model_location()
 onnx_session = onnxruntime.InferenceSession(anti_spoof_model)
 
 name: str = __name__
 dir: str = dirname(__file__)
-logger = Logger().logger(name, dir, 'debug')
+logger = Logger().logger(name, dir, 'info')
 # Cal_obj.cal_specify_date(logger)
 
 class Core:
