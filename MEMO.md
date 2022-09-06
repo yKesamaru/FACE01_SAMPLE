@@ -1,12 +1,13 @@
 # FACE01について
 # TODO
 ## 1.4.09
+- return_face_image.pyを徹底的にcython最適化して、その様子をzennに掲載する
 - メモリ削減の工夫
   - ![](img/PASTE_IMAGE_2022-08-31-09-20-50.png)
-- anti_spoofをFalseにしてもanti_spoofメソッドが動いているバグの解決
-  - ![](img/PASTE_IMAGE_2022-09-02-18-34-40.png)
 
 Fix
+- anti_spoofをFalseにしてもanti_spoofメソッドが動いているバグの解決
+  - ![](img/PASTE_IMAGE_2022-09-02-18-34-40.png)
 - loggerの不具合
   - debugモードにならない
 - telopの表示不良

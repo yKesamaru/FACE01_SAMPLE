@@ -1,3 +1,6 @@
+#!python
+#cython: language_level=3
+
 """to refer, see bellow
 https://github.com/davisking/dlib
 https://github.com/davisking/dlib-models
@@ -13,6 +16,7 @@ face_recognition: (top, right, bottom, left)
 see bellow
 https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
 """
+# from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 
 
 """DEBUG: MEMORY LEAK
@@ -21,11 +25,9 @@ m = Memory_leak(limit=2, key_type='traceback', nframe=20)
 m.memory_leak_analyze_start()
 """
 
-import cython
-import numpy as np
-from typing import List, Tuple, Union
-import numpy.typing as npt  # See [](https://discuss.python.org/t/how-to-type-annotate-mathematical-operations-that-supports-built-in-numerics-collections-and-numpy-arrays/13509)
+
 import dlib
+import numpy as np
 from PIL import ImageFile
 from PIL.Image import open
 
@@ -55,16 +57,16 @@ except Exception:
     exit(0)
 
 
-face_detector = dlib.get_frontal_face_detector()  # type: ignore
+face_detector = dlib.get_frontal_face_detector()
 
 predictor_5_point_model = Dlib_models().pose_predictor_five_point_model_location()
-pose_predictor_5_point = dlib.shape_predictor(predictor_5_point_model)  # type: ignore
+pose_predictor_5_point = dlib.shape_predictor(predictor_5_point_model)
 
 cnn_face_detection_model = Dlib_models().cnn_face_detector_model_location()
-cnn_face_detector = dlib.cnn_face_detection_model_v1(cnn_face_detection_model)  # type: ignore
+cnn_face_detector = dlib.cnn_face_detection_model_v1(cnn_face_detection_model)
 
 face_recognition_model = Dlib_models().face_recognition_model_location()
-face_encoder = dlib.face_recognition_model_v1(face_recognition_model)  # type: ignore
+face_encoder = dlib.face_recognition_model_v1(face_recognition_model)
 
 
 class Dlib_api:
@@ -74,11 +76,10 @@ class Dlib_api:
 
     # def __init__(self) -> None:
 
-    def _rect_to_css(self, rect: object) -> Tuple[int,int,int,int]:
+    def _rect_to_css(self, rect: object) -> tuple:
         self.rect = rect
         """
-        Convert a dlib 'rect' object to a plain tuple in (top, right, bottom, left) order.
-        This method used only `use_pipe = False`.
+        Convert a dlib 'rect' object to a plain tuple in (top, right, bottom, left) order
 
         :param rect: a dlib 'rect' object
         :return: a plain tuple representation of the rect in (top, right, bottom, left) order
@@ -86,15 +87,15 @@ class Dlib_api:
         return self.rect.top(), self.rect.right(), self.rect.bottom(), self.rect.left()
 
 
-    def _css_to_rect(self, css: Tuple[int,int,int,int]) -> dlib.rectangle:  # type: ignore
-        self.css: Tuple[int,int,int,int] = css
+    def _css_to_rect(self, css):
+        self.css = css
         """
         Convert a tuple in (top, right, bottom, left) order to a dlib `rect` object
 
         :param css:  plain tuple representation of the rect in (top, right, bottom, left) order
-        :return: <class '_dlib_pybind11.rectangle'>
+        :return: a dlib `rect` object
         """
-        return dlib.rectangle(self.css[3], self.css[0], self.css[1], self.css[2])  # type: ignore
+        return dlib.rectangle(self.css[3], self.css[0], self.css[1], self.css[2])
 
 
     def _trim_css_to_bounds(self, css, image_shape):
@@ -102,7 +103,6 @@ class Dlib_api:
         self.image_shape = image_shape
         """
         Make sure a tuple in (top, right, bottom, left) order is within the bounds of the image.
-        This method used only `use_pipe = False`.
 
         :param css:  plain tuple representation of the rect in (top, right, bottom, left) order
         :param image_shape: numpy shape of the image array
@@ -111,21 +111,20 @@ class Dlib_api:
         return max(self.css[0], 0), min(self.css[1], self.image_shape[1]), min(self.css[2], self.image_shape[0]), max(self.css[3], 0)
 
 
-    """NOT USE"""
-    # def load_image_file(self, file, mode='RGB'):
-    #     self.file = file
-    #     self.mode = mode
-    #     """
-    #     Loads an image file (.jpg, .png, etc) into a numpy array
+    def load_image_file(self, file, mode='RGB'):
+        self.file = file
+        self.mode = mode
+        """
+        Loads an image file (.jpg, .png, etc) into a numpy array
 
-    #     :param file: image file name or file object to load
-    #     :param mode: format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
-    #     :return: image contents as numpy array
-    #     """
-    #     im = open(self.file)
-    #     if self.mode:
-    #         im = im.convert(self.mode)
-    #     return np.array(im)
+        :param file: image file name or file object to load
+        :param mode: format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
+        :return: image contents as numpy array
+        """
+        im = open(self.file)
+        if self.mode:
+            im = im.convert(self.mode)
+        return np.array(im)
 
 
     def _raw_face_locations(self, img: np.ndarray, number_of_times_to_upsample:int =0, model: str="cnn"):
@@ -133,8 +132,7 @@ class Dlib_api:
         self.number_of_times_to_upsample = number_of_times_to_upsample
         self.model = model
         """
-        Returns an array of bounding boxes of human faces in a image.
-        This method used only `use_pipe = False`.
+        Returns an array of bounding boxes of human faces in a image
 
         :param img: An image (as a numpy array)
         :param number_of_times_to_upsample: How many times to upsample the image looking for faces. Higher numbers find smaller faces.
@@ -160,8 +158,7 @@ class Dlib_api:
         self.number_of_times_to_upsample = number_of_times_to_upsample
         self.model = model
         """
-        Returns an array of bounding boxes of human faces in a image.
-        This method used only `use_pipe = False`.
+        Returns an array of bounding boxes of human faces in a image
 
         :param img: An image (as a numpy array)
         :param number_of_times_to_upsample: How many times to upsample the image looking for faces. Higher numbers find smaller faces.
@@ -177,45 +174,33 @@ class Dlib_api:
 
     def _raw_face_landmarks(
         self,
-        resized_frame: np.ndarray,
-        face_location_list: Union[List[Tuple[int,int,int,int]], None] = None,
-        model: str ="small"
-    ) -> List:
-        self.resized_frame: np.ndarray = resized_frame
-        self.raw_face_location_list: Union[List[Tuple[int,int,int,int]], None] = face_location_list
+        resized_frame,
+        face_locations = None,
+        model="small"
+    ):
+        self.resized_frame = resized_frame
+        self.face_locations = face_locations
         self. model = model
 
-        if self.raw_face_location_list == None:
-            # self.raw_face_location_list = self._raw_face_locations(self.resized_frame)
-            # return self.raw_face_location_list
-            return []
+        if self.face_locations == None:
+            self.face_locations = self._raw_face_locations(self.resized_frame)
         else:
-            new_face_location_list: List[dlib.rectangle[int,int,int,int]] = []  # type: ignore
-            face_location: Tuple[int,int,int,int]
-            for face_location in self.raw_face_location_list:
-                new_face_location_list.append(self._css_to_rect(face_location))
-            # self.raw_face_location_list = [self._css_to_rect(face_location) for face_location in self.raw_face_location_list]
-            pose_predictor_5_point_list: List[dlib.rectangle] = []  # type: ignore
-            i: dlib.rectangle  # type: ignore
-            for i in new_face_location_list:
-                pose_predictor_5_point_list.append(pose_predictor_5_point(self.resized_frame, i))
-            return pose_predictor_5_point_list
-        # return [pose_predictor_5_point(self.resized_frame, face_location) for face_location in self.face_locations]
+            self.face_locations = [self._css_to_rect(face_location) for face_location in self.face_locations]
+        return [pose_predictor_5_point(self.resized_frame, face_location) for face_location in self.face_locations]
 
 
     # @profile()
     def face_encodings(
         self,
-        resized_frame: np.ndarray,
-        face_location_list: Union[List, None] = None,
-        num_jitters: int = 0,
-        model: str = "small"
-    ) -> List[np.ndarray]:
-        self.resized_frame: np.ndarray = resized_frame
-        self.face_location_list: Union[List, None]  = face_location_list
-        self.num_jitters: int =  num_jitters
-        self.model: str = model
-        MARGIN: float = 0.25
+        resized_frame,
+        face_location_list=None,
+        num_jitters=0,
+        model="small"
+    ):
+        self.resized_frame = resized_frame
+        self.face_location_list = face_location_list
+        self.num_jitters = num_jitters
+        self.model = model
         """
         Given an image, return the 128-dimension face encoding for each face in the image.
 
@@ -234,7 +219,7 @@ class Dlib_api:
         https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
         """
         try:
-            raw_landmarks: List[dlib.rectangle] = self._raw_face_landmarks(  # type: ignore
+            raw_landmarks = self._raw_face_landmarks(
                 self.resized_frame,
                 self.face_location_list,
                 self.model
@@ -246,16 +231,15 @@ class Dlib_api:
             exit(0)
 
         # TEST FOR DEBUG
-        face_encodings: List[np.ndarray] = []
-        raw_landmark_set: dlib.rectangle  # type: ignore
+        face_encodings = []
         for raw_landmark_set in raw_landmarks:
             try:
-                a: np.ndarray = np.array(
+                a = np.array(
                     face_encoder.compute_face_descriptor(
                         self.resized_frame,
                         raw_landmark_set,
                         self.num_jitters,
-                        MARGIN
+                        0.25
                     )
                 )
                 face_encodings.append(a)

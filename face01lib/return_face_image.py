@@ -1,25 +1,19 @@
-# cython: language_level=3
-# cython: profile = True
-"""
-# cython: boundscheck = False
-# cython: wraparound = False
-# cython: initializedcheck = False
-# cython: cdivision = True
-# cython: always_allow_keywords = False
-# cython: unraisable_tracebacks = False
-# cython: binding = False
-"""
-
 """cythonでは使用不可
 from __future__ import annotations
 """
+import cython
+from typing import Tuple
+# if cython.compiled:
+#     cimport numpy as cnp
+# else:
+#     import numpy as np
 import numpy as np
 
 class Return_face_image():
     def return_face_image(
         self,
         resized_frame,
-        face_location: tuple
+        face_location: Tuple[cython.int, ...]
     ):
         """Return face image array which contain ndarray
 
@@ -33,13 +27,13 @@ class Return_face_image():
         self.resized_frame = resized_frame
         empty_ndarray = \
             np.empty(shape=(2,2,3), dtype=np.uint8)
-        self.face_location: tuple = face_location
+        self.face_location: Tuple[cython.int, ...] = face_location
 
         if len(self.face_location) > 0:
-            top: int = face_location[0]
-            right: int = face_location[1]
-            bottom: int = face_location[2]
-            left: int = face_location[3]
+            top: cython.int = face_location[0]
+            right: cython.int = face_location[1]
+            bottom: cython.int = face_location[2]
+            left: cython.int = face_location[3]
             face_image = self.resized_frame[top:bottom, left:right]
             """DEBUG
             from face01lib.video_capture import VidCap
