@@ -1,16 +1,46 @@
-"""to refer, see bellow
-https://github.com/davisking/dlib
-https://github.com/davisking/dlib-models
-https://github.com/ageitgey/face_recognition
+"""COPYRIGHT
+This code is based on 'face_recognition' written by Adam Geitgey (ageitgey),
+and modified by Yoshitsugu Kesamaru (yKesamaru).
+
+ORIGINAL AUTHOR
+- Dlib
+    - davisking
+- face_recognition
+    - ageitgey
+- FACE01, and api.py
+    - yKesamaru
 """
-"""copyright
-This code is based on 'face_recognition' written by Adam Geitgey,
-and modified by Yoshitsugu Kesamaru.
+
+
+"""References
+- Dlib
+    - https://github.com/davisking/dlib
+- Dlib Python API
+    - http://dlib.net/python/index.html
+- dlib/python_example/face_recognition.py
+    - https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
+- Dlib Face Recognition Model
+    - https://github.com/davisking/dlib-models
+- Face Recognition
+    - https://github.com/ageitgey/face_recognition
+- Max-Margin Object Detection(MMOD)
+    - [Ja] https://blog.chowagiken.co.jp/entry/2019/06/28/OpenCV%E3%81%A8dlib%E3%81%AE%E9%A1%94%E6%A4%9C%E5%87%BA%E6%A9%9F%E8%83%BD%E3%81%AE%E6%AF%94%E8%BC%83
+    - https://github.com/davisking/dlib-models
+- Typing (numpy.typing)
+    - https://numpy.org/doc/stable/reference/typing.html#typing-numpy-typing
 """
-"""about coordinate order
-dlib: (Left, Top, Right, Bottom,)
-face_recognition: (top, right, bottom, left)
-see bellow
+
+
+"""Purpose
+This code is written for to Cythonize 'api.py'.
+"""
+
+
+"""NOTE:
+About coordinate order...
+dlib: (Left, Top, Right, Bottom), called 'rect'.
+face_recognition: (top, right, bottom, left), called 'css'.
+See bellow:
 https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
 """
 
@@ -19,12 +49,15 @@ https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.p
 from face01lib.memory_leak import Memory_leak
 m = Memory_leak(limit=2, key_type='traceback', nframe=20)
 m.memory_leak_analyze_start()
+See bellow:
+[Ja] https://zenn.dev/ykesamaru/articles/bd403aa6d03100
 """
+
 
 import cython
 import numpy as np
 from typing import List, Tuple, Union
-import numpy.typing as npt  # See [](https://discuss.python.org/t/how-to-type-annotate-mathematical-operations-that-supports-built-in-numerics-collections-and-numpy-arrays/13509)
+import numpy.typing as npt  # See [Typing (numpy.typing)](https://numpy.org/doc/stable/reference/typing.html#typing-numpy-typing)
 import dlib
 from PIL import ImageFile
 from PIL.Image import open
@@ -48,7 +81,7 @@ logger = Logger().logger(name, dir, None)
 try:
     from face01lib.models import Dlib_models
 except Exception:
-    logger.error("modelのimportに失敗しました")
+    logger.error("Failed to import dlib model")
     logger.error("-" * 20)
     logger.error(format_exc(limit=None, chain=True))
     logger.error("-" * 20)
@@ -74,8 +107,7 @@ class Dlib_api:
 
     # def __init__(self) -> None:
 
-    def _rect_to_css(self, rect: object) -> Tuple[int,int,int,int]:
-        self.rect = rect
+    def _rect_to_css(self, rect: dlib.rectangle) -> Tuple[int,int,int,int]:
         """
         Convert a dlib 'rect' object to a plain tuple in (top, right, bottom, left) order.
         This method used only `use_pipe = False`.
@@ -83,6 +115,7 @@ class Dlib_api:
         :param rect: a dlib 'rect' object
         :return: a plain tuple representation of the rect in (top, right, bottom, left) order
         """
+        self.rect: dlib.rectangle = rect
         return self.rect.top(), self.rect.right(), self.rect.bottom(), self.rect.left()
 
 
@@ -140,78 +173,80 @@ class Dlib_api:
 
     def _raw_face_locations(
             self,
-            img: np.ndarray,
-            number_of_times_to_upsample:int = 0,
-            model: str="cnn"
-        ):
-        self.img: np.ndarray = img
+            resized_frame: npt.NDArray[np.uint8],
+            number_of_times_to_upsample: int = 0,
+            model: str = "cnn"
+        ) -> List[dlib.rectangle]:  # type: ignore
+        self.resized_frame: npt.NDArray[np.uint8] = resized_frame
         self.number_of_times_to_upsample: int = number_of_times_to_upsample
         self.model: str = model
         """
         Returns an array of bounding boxes of human faces in a image.
         This method used only `use_pipe = False`.
 
-        :param img: An image (as a numpy array)
+        :param resized_frame: An image (npt.NDArray[np.uint8])
         :param number_of_times_to_upsample: How many times to upsample the image looking for faces. Higher numbers find smaller faces.
         :param model: Which face detection model to use. "hog" is less accurate but faster on CPUs. "cnn" is a more accurate
                     deep-learning model which is GPU/CUDA accelerated (if available). The default is "hog".
         :return: A list of dlib 'rect' objects of found face locations
         """
         if self.model == "cnn":
-            return cnn_face_detector(self.img, self.number_of_times_to_upsample)
+            return cnn_face_detector(self.resized_frame, self.number_of_times_to_upsample)
         else:
-            return face_detector(self.img, self.number_of_times_to_upsample)
+            return face_detector(self.resized_frame, self.number_of_times_to_upsample)
 
 
     # @profile()
     def face_locations(
         self,
-        img: np.ndarray,
+        resized_frame: npt.NDArray[np.uint8],
         number_of_times_to_upsample: int = 0,
-        model: str="hog"
-        ) -> list:
-        
-        self.img = img
-        self.number_of_times_to_upsample = number_of_times_to_upsample
-        self.model = model
+        model: str = "hog"
+        ) -> List[Tuple]:
         """
         Returns an array of bounding boxes of human faces in a image.
         This method used only `use_pipe = False`.
 
-        :param img: An image (as a numpy array)
+        :param resized_frame: Resized image (npt.NDArray[np.uint8])
         :param number_of_times_to_upsample: How many times to upsample the image looking for faces. Higher numbers find smaller faces.
         :param model: Which face detection model to use. "hog" is less accurate but faster on CPUs. "cnn" is a more accurate
                     deep-learning model which is GPU/CUDA accelerated (if available). The default is "hog".
         :return: A list of tuples of found face locations in css (top, right, bottom, left) order
         """
-        if self.model == "cnn":
-            return [self._trim_css_to_bounds(self._rect_to_css(face.rect), self.img.shape) for face in self._raw_face_locations(self.img, self.number_of_times_to_upsample, "cnn")]
-        else:
-            return [self._trim_css_to_bounds(self._rect_to_css(face), self.img.shape) for face in self._raw_face_locations(self.img, self.number_of_times_to_upsample, self.model)]
+        
+        self.resized_frame: npt.NDArray[np.uint8] = resized_frame
+        self.number_of_times_to_upsample: int = number_of_times_to_upsample
+        self.model: str = model
+        face_locations: List[Tuple] = []
 
+        if self.model == 'cnn':
+            for face in self._raw_face_locations(self.resized_frame, self.number_of_times_to_upsample, self.model):
+                face_locations.append(self._trim_css_to_bounds(self._rect_to_css(face.rect), self.resized_frame.shape))
+        else:
+            for face in self._raw_face_locations(self.resized_frame, self.number_of_times_to_upsample, self.model):
+                face_locations.append(self._trim_css_to_bounds(self._rect_to_css(face), self.resized_frame.shape))
+
+        return face_locations
 
     def _return_raw_face_landmarks(
         self,
-        resized_frame: np.ndarray,
-        face_location_list: List = [],
-        model: str ="small"
-    ) -> List:
-        self.resized_frame: np.ndarray = resized_frame
-        self.raw_face_location_list: List = face_location_list
-        self. model = model
+        resized_frame: npt.NDArray[np.uint8],
+        face_location_list: List[Tuple[int,int,int,int]],
+        model: str = "small"
+    ) -> List[dlib.rectangle]:  # type: ignore
 
-        new_face_location_list: List[dlib.rectangle[int,int,int,int]] = []  # type: ignore
+        new_face_location_list: List[dlib.rectangle[Tuple[int,int,int,int]]] = []  # type: ignore
         raw_face_location: Tuple[int,int,int,int]
 
-        for raw_face_location in self.raw_face_location_list:
+        for raw_face_location in face_location_list:
             new_face_location_list.append(self._css_to_rect(raw_face_location))
         
-        raw_face_landmarks: List[dlib.rectangle] = []  # type: ignore
-        new_face_location: dlib.rectangle  # type: ignore
+        raw_face_landmarks: List[dlib.rectangle[Tuple[int,int,int,int]]] = []  # type: ignore
+        new_face_location: dlib.rectangle[Tuple[int,int,int,int]]  # type: ignore
 
         for new_face_location in new_face_location_list:
             raw_face_landmarks.append(
-                pose_predictor_5_point(self.resized_frame, new_face_location)
+                pose_predictor_5_point(resized_frame, new_face_location)
             )
         
         return raw_face_landmarks
@@ -220,7 +255,7 @@ class Dlib_api:
     # @profile()
     def face_encodings(
         self,
-        resized_frame: np.ndarray,
+        resized_frame: npt.NDArray[np.uint8],
         face_location_list: List = [],  # face_location_listの初期値は[]とする。
         num_jitters: int = 0,
         model: str = "small"
@@ -244,12 +279,12 @@ class Dlib_api:
         see bellow
         https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
         """
-        self.face_encodings_resized_frame: np.ndarray = resized_frame
+        self.face_encodings_resized_frame: npt.NDArray[np.uint8] = resized_frame
         self.face_location_list: List  = face_location_list
         self.num_jitters: int =  num_jitters
         self.face_encodings_model: str = model
         _PADDING: float = 0.25
-        face_encodings: List[np.ndarray] = []
+        face_encodings: List[npt.NDArray[np.float64]] = []
 
         if len(self.face_location_list) > 0:
             raw_face_landmarks: List = self._return_raw_face_landmarks(
@@ -258,10 +293,10 @@ class Dlib_api:
                 self.face_encodings_model
             )
 
-            raw_face_landmark: dlib.rectangle  # type: ignore
+            raw_face_landmark: dlib.full_object_detection
 
             for raw_face_landmark in raw_face_landmarks:
-                face_landmark_ndarray: np.ndarray = np.array(
+                face_landmark_ndarray: npt.NDArray[np.float64] = np.array(
                     face_encoder.compute_face_descriptor(
                         self.face_encodings_resized_frame,
                         raw_face_landmark,
@@ -269,6 +304,7 @@ class Dlib_api:
                         _PADDING
                     )
                 )
+
                 face_encodings.append(face_landmark_ndarray)
 
         return face_encodings
@@ -356,9 +392,3 @@ class Dlib_api:
 m.memory_leak_analyze_stop()
 """
 
-
-"""Reference
-- Max-Margin Object Detection(MMOD)
-    - https://blog.chowagiken.co.jp/entry/2019/06/28/OpenCV%E3%81%A8dlib%E3%81%AE%E9%A1%94%E6%A4%9C%E5%87%BA%E6%A9%9F%E8%83%BD%E3%81%AE%E6%AF%94%E8%BC%83
-    - https://github.com/davisking/dlib-models
-"""
