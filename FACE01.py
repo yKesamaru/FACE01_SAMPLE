@@ -244,9 +244,11 @@ def main_process():
         
         yield frame_datas_array
 
+        """TODO: #25 妥当性の検証
         # メモリ解放
         del frame_datas_array
         gc.collect()
+        """
 
     except StopIteration:
         logger.warning("DATA RECEPTION HAS ENDED")

@@ -34,7 +34,6 @@ line_or_traceback = 'line'  # 'line' or 'traceback'
 Memory_leak_obj.memory_leak_analyze_start(line_or_traceback)
 """
 
-import gc
 import inspect
 from datetime import datetime
 from platform import system
@@ -45,7 +44,10 @@ import cv2
 # from asyncio.log import logger
 import mediapipe as mp
 import mojimoji
+from typing import List, Tuple, Union
 import numpy as np
+import numpy.typing as npt  # See [](https://discuss.python.org/t/how-to-type-annotate-mathematical-operations-that-supports-built-in-numerics-collections-and-numpy-arrays/13509)
+
 from PIL import Image, ImageDraw, ImageFile, ImageFont
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
@@ -551,6 +553,7 @@ class Core:
                 )
             return frame_datas_array
 
+        """NOT USED
         # BUG: anti_spoofを個々に挿入する(1.4.05) ->  frame_pre_processingではanti_spoofを行わないことにする。
         ## anti_spoof機能は独立させて存在させることにする。-> frame_post_processingにも搭載しない。
         # if self.args_dict["anti_spoof"] == True:
@@ -599,7 +602,8 @@ class Core:
         #             'person_data_list': person_data_list
         #         }
         #         frame_datas_array.append(frame_datas)
-                
+        """
+
         frame_datas = {
             'img':self.resized_frame,
             'face_location_list':face_location_list,

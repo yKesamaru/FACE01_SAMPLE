@@ -6631,3 +6631,7 @@ configparser.NoOptionError: No option 'movie' in section: 'DEFAULT'
 [2022-09-07 14:52:29,062] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
 [2022-09-07 14:52:58,243] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
 [2022-09-07 14:53:30,981] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-09-07 15:38:43,497] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-09-07 15:42:17,153] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-09-07 15:56:59,470] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
+[2022-09-07 15:59:24,063] [face01lib/load_priset_image] [load_priset_image.py] [INFO] npKnown.npz を読み込みます
