@@ -189,7 +189,7 @@ class Dlib_api:
             # self.raw_face_location_list = self._raw_face_locations(self.resized_frame)
             # return self.raw_face_location_list
             return []
-        else:
+        elif self.raw_face_location_list != None:
             new_face_location_list: List[dlib.rectangle[int,int,int,int]] = []  # type: ignore
             face_location: Tuple[int,int,int,int]
             for face_location in self.raw_face_location_list:
@@ -207,7 +207,7 @@ class Dlib_api:
     def face_encodings(
         self,
         resized_frame: np.ndarray,
-        face_location_list: Union[List, None] = None,
+        face_location_list: List[int] = [0,0,0,0],
         num_jitters: int = 0,
         model: str = "small"
     ) -> List[np.ndarray]:
