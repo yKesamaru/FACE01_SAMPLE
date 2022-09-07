@@ -385,8 +385,14 @@ class Core:
         self.face_encoding = face_encoding
         self.matches = matches
         self.name = name
+
         # 各プリセット顔画像のエンコーディングと動画中の顔画像エンコーディングとの各顔距離を要素としたアレイを算出
-        face_distances = Dlib_api_obj.face_distance(self.args_dict["known_face_encodings"], self.face_encoding)  ## face_distances -> shape:(677,), face_encoding -> shape:(128,)
+        face_distances = \
+            Dlib_api_obj.face_distance(
+                self.args_dict["known_face_encodings"],
+                self.face_encoding
+            )  ## face_distances -> shape:(677,), face_encoding -> shape:(128,)
+        
         # プリセット顔画像と動画中顔画像との各顔距離を要素とした配列に含まれる要素のうち、最小の要素のインデックスを求める
         best_match_index = np.argmin(face_distances)
         # プリセット顔画像と動画中顔画像との各顔距離を要素とした配列に含まれる要素のうち、最小の要素の値を求める
@@ -652,7 +658,7 @@ class Core:
                     concatenate_face_location_list, concatenate_person_frame = \
                         self.return_concatenate_location_and_frame(resized_frame, face_location_list)
                     face_encodings = \
-                        Dlib_api_obj.face_encodings(
+                        Dlib_api().face_encodings(
                             concatenate_person_frame,
                             concatenate_face_location_list,
                             self.args_dict["jitters"],

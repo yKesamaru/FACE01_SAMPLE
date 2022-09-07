@@ -97,10 +97,15 @@ class Dlib_api:
         return dlib.rectangle(self.css[3], self.css[0], self.css[1], self.css[2])  # type: ignore
 
 
-    def _trim_css_to_bounds(self, css, image_shape):
-        self.css = css
-        self.image_shape = image_shape
+    def _trim_css_to_bounds(
+            self,
+            css: Tuple[int,int,int,int],
+            image_shape: Tuple[int,int,int]
+        ) -> Tuple[int,int,int,int]:
+        self._trim_css_to_bounds_css: Tuple[int,int,int,int] = css
+        self.image_shape: Tuple[int, int, int] = image_shape
         """
+        cssを境界に沿ってtrimする
         Make sure a tuple in (top, right, bottom, left) order is within the bounds of the image.
         This method used only `use_pipe = False`.
 
@@ -108,7 +113,12 @@ class Dlib_api:
         :param image_shape: numpy shape of the image array
         :return: a trimmed plain tuple representation of the rect in (top, right, bottom, left) order
         """
-        return max(self.css[0], 0), min(self.css[1], self.image_shape[1]), min(self.css[2], self.image_shape[0]), max(self.css[3], 0)
+        return (
+            max(self._trim_css_to_bounds_css[0], 0),
+            min(self._trim_css_to_bounds_css[1],self.image_shape[1]),
+            min(self._trim_css_to_bounds_css[2], self.image_shape[0]),
+            max(self._trim_css_to_bounds_css[3], 0)
+        )
 
 
     """NOT USE"""
@@ -128,10 +138,15 @@ class Dlib_api:
     #     return np.array(im)
 
 
-    def _raw_face_locations(self, img: np.ndarray, number_of_times_to_upsample:int =0, model: str="cnn"):
-        self.img = img
-        self.number_of_times_to_upsample = number_of_times_to_upsample
-        self.model = model
+    def _raw_face_locations(
+            self,
+            img: np.ndarray,
+            number_of_times_to_upsample:int = 0,
+            model: str="cnn"
+        ):
+        self.img: np.ndarray = img
+        self.number_of_times_to_upsample: int = number_of_times_to_upsample
+        self.model: str = model
         """
         Returns an array of bounding boxes of human faces in a image.
         This method used only `use_pipe = False`.
@@ -152,7 +167,7 @@ class Dlib_api:
     def face_locations(
         self,
         img: np.ndarray,
-        number_of_times_to_upsample: int=0,
+        number_of_times_to_upsample: int = 0,
         model: str="hog"
         ) -> list:
         
@@ -175,47 +190,42 @@ class Dlib_api:
             return [self._trim_css_to_bounds(self._rect_to_css(face), self.img.shape) for face in self._raw_face_locations(self.img, self.number_of_times_to_upsample, self.model)]
 
 
-    def _raw_face_landmarks(
+    def _return_raw_face_landmarks(
         self,
         resized_frame: np.ndarray,
-        face_location_list: Union[List[Tuple[int,int,int,int]], None] = None,
+        face_location_list: List = [],
         model: str ="small"
     ) -> List:
         self.resized_frame: np.ndarray = resized_frame
-        self.raw_face_location_list: Union[List[Tuple[int,int,int,int]], None] = face_location_list
+        self.raw_face_location_list: List = face_location_list
         self. model = model
 
-        if self.raw_face_location_list == None:
-            # self.raw_face_location_list = self._raw_face_locations(self.resized_frame)
-            # return self.raw_face_location_list
-            return []
-        elif self.raw_face_location_list != None:
-            new_face_location_list: List[dlib.rectangle[int,int,int,int]] = []  # type: ignore
-            face_location: Tuple[int,int,int,int]
-            for face_location in self.raw_face_location_list:
-                new_face_location_list.append(self._css_to_rect(face_location))
-            # self.raw_face_location_list = [self._css_to_rect(face_location) for face_location in self.raw_face_location_list]
-            pose_predictor_5_point_list: List[dlib.rectangle] = []  # type: ignore
-            i: dlib.rectangle  # type: ignore
-            for i in new_face_location_list:
-                pose_predictor_5_point_list.append(pose_predictor_5_point(self.resized_frame, i))
-            return pose_predictor_5_point_list
-        # return [pose_predictor_5_point(self.resized_frame, face_location) for face_location in self.face_locations]
+        new_face_location_list: List[dlib.rectangle[int,int,int,int]] = []  # type: ignore
+        raw_face_location: Tuple[int,int,int,int]
+
+        for raw_face_location in self.raw_face_location_list:
+            new_face_location_list.append(self._css_to_rect(raw_face_location))
+        
+        raw_face_landmarks: List[dlib.rectangle] = []  # type: ignore
+        new_face_location: dlib.rectangle  # type: ignore
+
+        for new_face_location in new_face_location_list:
+            raw_face_landmarks.append(
+                pose_predictor_5_point(self.resized_frame, new_face_location)
+            )
+        
+        return raw_face_landmarks
 
 
     # @profile()
     def face_encodings(
         self,
         resized_frame: np.ndarray,
-        face_location_list: List[int] = [0,0,0,0],
+        face_location_list: List = [],  # face_location_listの初期値は[]とする。
         num_jitters: int = 0,
         model: str = "small"
     ) -> List[np.ndarray]:
-        self.resized_frame: np.ndarray = resized_frame
-        self.face_location_list: Union[List, None]  = face_location_list
-        self.num_jitters: int =  num_jitters
-        self.model: str = model
-        MARGIN: float = 0.25
+
         """
         Given an image, return the 128-dimension face encoding for each face in the image.
 
@@ -224,56 +234,53 @@ class Dlib_api:
         :param num_jitters: How many times to re-sample the face when calculating encoding. Higher is more accurate, but slower (i.e. 100 is 100x slower)
         :param model: Optional - which model to use. "large" (default) or "small" which only returns 5 points but is faster.
         :return: A list of 128-dimensional face encodings (one for each face in the image)
-        """
-        """image size, it should be of size 150x150. Also cropping must be done as `dlib.get_face_chip` would do it.
-        That is, centered and scaled essentially the same way."""
-        """about coordinate order
+        
+        Image size, it should be of size 150x150. Also cropping must be done as `dlib.get_face_chip` would do it.
+        That is, centered and scaled essentially the same way.
+        
+        About coordinate order
         dlib: (Left, Top, Right, Bottom,)
         face_recognition: (top, right, bottom, left)
         see bellow
         https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
         """
-        try:
-            raw_landmarks: List[dlib.rectangle] = self._raw_face_landmarks(  # type: ignore
-                self.resized_frame,
-                self.face_location_list,
-                self.model
-            )
-        except Exception as e:
-            print(f'resized_frame: {self.resized_frame}\nface_location_list:  {self.face_location_list}')
-            print(f'ERROR: {e}')
-            print(traceback.format_exc())
-            exit(0)
-
-        # TEST FOR DEBUG
+        self.face_encodings_resized_frame: np.ndarray = resized_frame
+        self.face_location_list: List  = face_location_list
+        self.num_jitters: int =  num_jitters
+        self.face_encodings_model: str = model
+        _PADDING: float = 0.25
         face_encodings: List[np.ndarray] = []
-        raw_landmark_set: dlib.rectangle  # type: ignore
-        for raw_landmark_set in raw_landmarks:
-            try:
-                a: np.ndarray = np.array(
+
+        if len(self.face_location_list) > 0:
+            raw_face_landmarks: List = self._return_raw_face_landmarks(
+                self.face_encodings_resized_frame,
+                self.face_location_list,
+                self.face_encodings_model
+            )
+
+            raw_face_landmark: dlib.rectangle  # type: ignore
+
+            for raw_face_landmark in raw_face_landmarks:
+                face_landmark_ndarray: np.ndarray = np.array(
                     face_encoder.compute_face_descriptor(
-                        self.resized_frame,
-                        raw_landmark_set,
+                        self.face_encodings_resized_frame,
+                        raw_face_landmark,
                         self.num_jitters,
-                        MARGIN
+                        _PADDING
                     )
                 )
-                face_encodings.append(a)
-            except Exception as e:
-                print(f'resized_frame: {self.resized_frame}\nface_location_list:  {self.raw_landmark_set}')
-                print(f'ERROR: {e}')
-                print(traceback.format_exc())
-                exit(0)
-        # print(face_encodings)
-            # del face_encoder.compute_face_descriptor  # Error: read-only object
+                face_encodings.append(face_landmark_ndarray)
+
         return face_encodings
         """
         [compute_face_descriptor](https://blog.dlib.net/2017/02/high-quality-face-recognition-with-deep.html?m=0&commentPage=2)
-        Davis King said...The landmarks are only used to align the face before the DNN extracts the face descriptor. How many landmarks you use doesn't really matter.
+        Davis King said...
+        The landmarks are only used to align the face before the DNN extracts 
+        the face descriptor. How many landmarks you use doesn't really matter.
         """
 
-        # TODO: 余白の0.25 (padding)
-        # return [np.array(face_encoder.compute_face_descriptor(self.resized_frame, raw_landmark_set, self.num_jitters, 0.25)) for raw_landmark_set in raw_landmarks]
+        # TODO: 余白の0.25 (PADDING)
+        # return [np.array(face_encoder.compute_face_descriptor(self.face_encodings_resized_frame, raw_landmark_set, self.num_jitters, 0.25)) for raw_landmark_set in raw_landmarks]
         # 4th value (0.25) is padding around the face. If padding == 0 then the chip will
         # be closely cropped around the face. Setting larger padding values will result a looser cropping.
         # In particular, a padding of 0.5 would double the width of the cropped area, a value of 1.
@@ -283,32 +290,43 @@ class Dlib_api:
         """マルチスレッド化
         pool = ThreadPoolExecutor()
         # pool = ProcessPoolExecutor(max_workers=1)  # Error while calling cudaGetDevice(&the_device_id) in file /tmp/pip-install-983gqknr/dlib_66282e4ffadf4aa6965801c6f7ff7671/dlib/cuda/gpu_data.cpp:204. code: 3, reason: initialization error
-        return [pool.submit(multithread, raw_landmark_set, self.resized_frame, self.num_jitters).result() for raw_landmark_set in raw_landmarks]
+        return [pool.submit(multithread, raw_landmark_set, self.face_encodings_resized_frame, self.num_jitters).result() for raw_landmark_set in raw_landmarks]
         """
 
 
-    def multithread(self, raw_landmark_set, resized_frame, num_jitters):
-        self.raw_landmark_set = raw_landmark_set
-        self.resized_frame = resized_frame
-        self.num_jitters = num_jitters
-        return np.array(face_encoder.compute_face_descriptor(self.resized_frame, self.raw_landmark_set, self.num_jitters))
+    """NOT USED"""
+    # def multithread(self, raw_landmark_set, resized_frame, num_jitters):
+    #     self.raw_landmark_set = raw_landmark_set
+    #     self.resized_frame = resized_frame
+    #     self.num_jitters = num_jitters
+    #     return np.array(face_encoder.compute_face_descriptor(self.resized_frame, self.raw_landmark_set, self.num_jitters))
 
 
     # @profile()
-    def face_distance(self, face_encodings, face_to_compare):
-        self.face_encodings = face_encodings
-        self.face_to_compare = face_to_compare
+    def face_distance(
+            self,
+            face_encodings: List[npt.NDArray[np.float64]],
+            face_to_compare: npt.NDArray[np.float64]
+            # face_encodings: List[np.ndarray],
+            # face_to_compare: np.ndarray
+        ) -> np.ndarray:
         """
-        Given a list of face encodings, compare them to a known face encoding and get a euclidean distance
-        for each comparison face. The distance tells you how similar the faces are.
+        Given a list of face encodings, compare them to a known face encoding and get a 
+        euclidean distance for each comparison face.
+        The distance tells you how similar the faces are.
 
-        :param faces: List of face encodings to compare (=small_frame)
+        :param face_encodings: List of face encodings to compare (=small_frame)
         :param face_to_compare: A face encoding to compare against (=face_location_list)
-        :return: A numpy ndarray with the distance for each face in the same order as the 'faces' array
+        :return: A numpy ndarray with the distance for each face 
+                          in the same order as the 'faces' array
         """
-        if len(self.face_encodings) == 0:
+        # self.face_encodings = face_encodings
+        # self.face_to_compare = face_to_compare
+
+        if len(face_encodings) == 0:
             return np.empty((2,2,3), dtype=np.uint8)
-        return np.linalg.norm(x=(self.face_encodings - self.face_to_compare), axis=1)
+        
+        return np.linalg.norm(x=(face_encodings - face_to_compare), axis=1)
 
 
     # @profile()
@@ -336,4 +354,11 @@ class Dlib_api:
 
 """DEBUG: MEMORY LEAK
 m.memory_leak_analyze_stop()
+"""
+
+
+"""Reference
+- Max-Margin Object Detection(MMOD)
+    - https://blog.chowagiken.co.jp/entry/2019/06/28/OpenCV%E3%81%A8dlib%E3%81%AE%E9%A1%94%E6%A4%9C%E5%87%BA%E6%A9%9F%E8%83%BD%E3%81%AE%E6%AF%94%E8%BC%83
+    - https://github.com/davisking/dlib-models
 """
