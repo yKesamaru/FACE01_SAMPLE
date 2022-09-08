@@ -110,7 +110,7 @@ class Dlib_api:
     def _rect_to_css(self, rect: dlib.rectangle) -> Tuple[int,int,int,int]:
         """
         Convert a dlib 'rect' object to a plain tuple in (top, right, bottom, left) order.
-        This method used only `use_pipe = False`.
+        This method used only 'use_pipe = False'.
 
         :param rect: a dlib 'rect' object
         :return: a plain tuple representation of the rect in (top, right, bottom, left) order
@@ -122,7 +122,7 @@ class Dlib_api:
     def _css_to_rect(self, css: Tuple[int,int,int,int]) -> dlib.rectangle:  # type: ignore
         self.css: Tuple[int,int,int,int] = css
         """
-        Convert a tuple in (top, right, bottom, left) order to a dlib `rect` object
+        Convert a tuple in (top, right, bottom, left) order to a dlib 'rect' object
 
         :param css:  plain tuple representation of the rect in (top, right, bottom, left) order
         :return: <class '_dlib_pybind11.rectangle'>
@@ -138,9 +138,9 @@ class Dlib_api:
         self._trim_css_to_bounds_css: Tuple[int,int,int,int] = css
         self.image_shape: Tuple[int, int, int] = image_shape
         """
-        cssを境界に沿ってtrimする
+        Trim 'css' along with border.
         Make sure a tuple in (top, right, bottom, left) order is within the bounds of the image.
-        This method used only `use_pipe = False`.
+        This method used only 'use_pipe = False'.
 
         :param css:  plain tuple representation of the rect in (top, right, bottom, left) order
         :param image_shape: numpy shape of the image array
@@ -177,12 +177,9 @@ class Dlib_api:
             number_of_times_to_upsample: int = 0,
             model: str = "cnn"
         ) -> List[dlib.rectangle]:  # type: ignore
-        self.resized_frame: npt.NDArray[np.uint8] = resized_frame
-        self.number_of_times_to_upsample: int = number_of_times_to_upsample
-        self.model: str = model
         """
         Returns an array of bounding boxes of human faces in a image.
-        This method used only `use_pipe = False`.
+        This method used only 'use_pipe = False'.
 
         :param resized_frame: An image (npt.NDArray[np.uint8])
         :param number_of_times_to_upsample: How many times to upsample the image looking for faces. Higher numbers find smaller faces.
@@ -190,6 +187,9 @@ class Dlib_api:
                     deep-learning model which is GPU/CUDA accelerated (if available). The default is "hog".
         :return: A list of dlib 'rect' objects of found face locations
         """
+        self.resized_frame: npt.NDArray[np.uint8] = resized_frame
+        self.number_of_times_to_upsample: int = number_of_times_to_upsample
+        self.model: str = model
         if self.model == "cnn":
             return cnn_face_detector(self.resized_frame, self.number_of_times_to_upsample)
         else:
@@ -205,7 +205,7 @@ class Dlib_api:
         ) -> List[Tuple]:
         """
         Returns an array of bounding boxes of human faces in a image.
-        This method used only `use_pipe = False`.
+        This method used only 'use_pipe = False'.
 
         :param resized_frame: Resized image (npt.NDArray[np.uint8])
         :param number_of_times_to_upsample: How many times to upsample the image looking for faces. Higher numbers find smaller faces.
@@ -227,6 +227,7 @@ class Dlib_api:
                 face_locations.append(self._trim_css_to_bounds(self._rect_to_css(face), self.resized_frame.shape))
 
         return face_locations
+
 
     def _return_raw_face_landmarks(
         self,
@@ -256,7 +257,7 @@ class Dlib_api:
     def face_encodings(
         self,
         resized_frame: npt.NDArray[np.uint8],
-        face_location_list: List = [],  # face_location_listの初期値は[]とする。
+        face_location_list: List = [],  # Initial value of 'face_location_list' is '[]'.
         num_jitters: int = 0,
         model: str = "small"
     ) -> List[np.ndarray]:
@@ -270,14 +271,8 @@ class Dlib_api:
         :param model: Optional - which model to use. "large" (default) or "small" which only returns 5 points but is faster.
         :return: A list of 128-dimensional face encodings (one for each face in the image)
         
-        Image size, it should be of size 150x150. Also cropping must be done as `dlib.get_face_chip` would do it.
+        Image size, it should be of size 150x150. Also cropping must be done as 'dlib.get_face_chip' would do it.
         That is, centered and scaled essentially the same way.
-        
-        About coordinate order
-        dlib: (Left, Top, Right, Bottom,)
-        face_recognition: (top, right, bottom, left)
-        see bellow
-        https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
         """
         self.face_encodings_resized_frame: npt.NDArray[np.uint8] = resized_frame
         self.face_location_list: List  = face_location_list
@@ -315,7 +310,7 @@ class Dlib_api:
         the face descriptor. How many landmarks you use doesn't really matter.
         """
 
-        # TODO: 余白の0.25 (PADDING)
+        # TODO: Padding around faces, 0.25
         # return [np.array(face_encoder.compute_face_descriptor(self.face_encodings_resized_frame, raw_landmark_set, self.num_jitters, 0.25)) for raw_landmark_set in raw_landmarks]
         # 4th value (0.25) is padding around the face. If padding == 0 then the chip will
         # be closely cropped around the face. Setting larger padding values will result a looser cropping.
@@ -353,24 +348,25 @@ class Dlib_api:
 
         :param face_encodings: List of face encodings to compare (=small_frame)
         :param face_to_compare: A face encoding to compare against (=face_location_list)
-        :return: A numpy ndarray with the distance for each face 
-                          in the same order as the 'faces' array
+        :return: A numpy ndarray with the distance for each face in the same order as the 'faces' array
         """
         # self.face_encodings = face_encodings
         # self.face_to_compare = face_to_compare
 
         if len(face_encodings) == 0:
-            return np.empty((2,2,3), dtype=np.uint8)
+            return np.empty((2,2,3), dtype=np.float64)
         
         return np.linalg.norm(x=(face_encodings - face_to_compare), axis=1)
 
 
     # @profile()
-    def compare_faces(self, known_face_encodings, face_encoding_to_check, tolerance=0.6):
-        self.known_face_encodings = known_face_encodings
-        self.face_encoding_to_check = face_encoding_to_check
-        self.tolerance = tolerance
-        """TODO
+    def compare_faces(
+            self,
+            known_face_encodings: List[npt.NDArray[np.float64]],
+            face_encoding_to_check: npt.NDArray[np.float64],
+            tolerance: float = 0.6
+        ) -> List[bool]:
+        """TODO #26
         compare_facesとreturn_face_namesに冗長がある"""
         """
         Compare a list of face encodings against a candidate encoding to see if they match.
@@ -380,12 +376,34 @@ class Dlib_api:
         :param tolerance: How much distance between faces to consider it a match. Lower is more strict. 0.6 is typical best performance.
         :return: A list of True/False values indicating which known_face_encodings match the face encoding to check
         """
-        face_distance_list = list(self.face_distance(self.known_face_encodings, self.face_encoding_to_check))
-        _min = min(face_distance_list)
-        if _min <= self.tolerance:
-            return [True if i == _min else False for i in face_distance_list]
-        else:
+
+        self.known_face_encodings: List[npt.NDArray[np.float64]] = known_face_encodings
+        self.face_encoding_to_check: npt.NDArray[np.float64] = face_encoding_to_check
+        self.tolerance: float = tolerance
+
+        face_distance_list: List[float] = list(
+            self.face_distance(
+                    self.known_face_encodings,
+                    self.face_encoding_to_check
+                )
+            )
+
+        _min: float = min(face_distance_list)
+
+        if _min > self.tolerance:
+            # All elements are 'False' if '_min' is greater than 'self.tolerance'.
             return [False] * len(face_distance_list)
+        else:
+            # Slow ---
+            # for face_distance in face_distance_list:
+                # if _min == face_distance:
+                #     bool_list.append(True)
+                # else:
+                #     bool_list.append(False)
+            # --------
+            # Fast ---
+            return np.where(_min == face_distance_list, True, False)
+            # --------
 
 
 """DEBUG: MEMORY LEAK
