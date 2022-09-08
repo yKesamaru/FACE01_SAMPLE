@@ -73,8 +73,8 @@ from memory_profiler import profile  # @profile()
 from face01lib.logger import Logger
 
 
-name = __name__
-dir = dirname(__file__)
+name: str = __name__
+dir: str = dirname(__file__)
 logger = Logger().logger(name, dir, None)
 
 
@@ -310,7 +310,7 @@ class Dlib_api:
         the face descriptor. How many landmarks you use doesn't really matter.
         """
 
-        # TODO: Padding around faces, 0.25
+        # TODO: #27 Padding around faces, 0.25
         # return [np.array(face_encoder.compute_face_descriptor(self.face_encodings_resized_frame, raw_landmark_set, self.num_jitters, 0.25)) for raw_landmark_set in raw_landmarks]
         # 4th value (0.25) is padding around the face. If padding == 0 then the chip will
         # be closely cropped around the face. Setting larger padding values will result a looser cropping.
@@ -366,7 +366,7 @@ class Dlib_api:
             face_encoding_to_check: npt.NDArray[np.float64],
             tolerance: float = 0.6
         ) -> Tuple[npt.NDArray[np.bool8], float]:
-        """TODO #26
+        """TODO #26: FIX
         compare_facesとreturn_face_namesに冗長がある"""
         """
         Compare a list of face encodings against a candidate encoding to see if they match.

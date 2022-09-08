@@ -6,6 +6,8 @@
   - ![](img/PASTE_IMAGE_2022-08-31-09-20-50.png)
 
 Fix
+- api.pyのCython化のために、アノテーションの徹底とリファクタリングをする
+  - Core.pyにも若干の修正が入った。
 - anti_spoofをFalseにしてもanti_spoofメソッドが動いているバグの解決
   - ![](img/PASTE_IMAGE_2022-09-02-18-34-40.png)
 - loggerの不具合

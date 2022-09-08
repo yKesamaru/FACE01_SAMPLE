@@ -401,6 +401,7 @@ class Core:
 
         return file_name
 
+
     # @profile()
     def return_concatenate_location_and_frame(self, resized_frame, face_location_list):
         self.resized_frame = resized_frame
