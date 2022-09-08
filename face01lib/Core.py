@@ -44,7 +44,7 @@ import cv2
 # from asyncio.log import logger
 import mediapipe as mp
 import mojimoji
-from typing import List, Tuple, Union
+from typing import List, Tuple, Union, Dict
 import numpy as np
 import numpy.typing as npt  # See [](https://discuss.python.org/t/how-to-type-annotate-mathematical-operations-that-supports-built-in-numerics-collections-and-numpy-arrays/13509)
 
@@ -226,14 +226,16 @@ class Core:
         return frame
 
     # @profile()
-    def check_compare_faces(self, logger, known_face_encodings, face_encoding, tolerance) -> list:
+    def check_compare_faces(self, logger, known_face_encodings, face_encoding, tolerance):
         self.logger = logger
         self.known_face_encodings = known_face_encodings
         self.face_encoding = face_encoding
         self.tolerance = tolerance
         try:
-            matches = Dlib_api_obj.compare_faces(self.known_face_encodings, self.face_encoding, self.tolerance)
-            return matches
+            matches: npt.NDArray[np.bool8]
+            min_distance: float
+            matches, min_distance = Dlib_api_obj.compare_faces(self.known_face_encodings, self.face_encoding, self.tolerance)
+            return matches, min_distance
         except:
             self.logger.warning("DEBUG: npKnown.npzが壊れているか予期しないエラーが発生しました。")
             self.logger.warning("npKnown.npzの自動削除は行われません。原因を特定の上、必要な場合npKnown.npzを削除して下さい。")
@@ -381,30 +383,23 @@ class Core:
 
     # Get face_names
     # @profile()
-    def return_face_names(self, args_dict, face_names, face_encoding, matches, name):
-        self.args_dict = args_dict
-        self.face_names = face_names
-        self.face_encoding = face_encoding
-        self.matches = matches
-        self.name = name
+    def return_face_name(
+            self,
+            args_dict: Dict,
+            matches: npt.NDArray[np.bool8],
+            min_distance: float
+        ) -> str:
+        # self.args_dict = args_dict
+        # self.face_names = face_names
+        # self.face_encoding = face_encoding
+        # self.matches = matches
+        # self.name = name
 
-        # 各プリセット顔画像のエンコーディングと動画中の顔画像エンコーディングとの各顔距離を要素としたアレイを算出
-        face_distances = \
-            Dlib_api_obj.face_distance(
-                self.args_dict["known_face_encodings"],
-                self.face_encoding
-            )  ## face_distances -> shape:(677,), face_encoding -> shape:(128,)
-        
-        # プリセット顔画像と動画中顔画像との各顔距離を要素とした配列に含まれる要素のうち、最小の要素のインデックスを求める
-        best_match_index = np.argmin(face_distances)
-        # プリセット顔画像と動画中顔画像との各顔距離を要素とした配列に含まれる要素のうち、最小の要素の値を求める
-        min_face_distance: str = str(min(face_distances))  # あとでファイル名として文字列として加工するので予めstr型にしておく
         # アレイ中のインデックスからknown_face_names中の同インデックスの要素を算出
-        if self.matches[best_match_index]:  # tolerance以下の人物しかここは通らない。
-            file_name = self.args_dict["known_face_names"][best_match_index]
-            self.name = file_name + ':' + min_face_distance
-        self.face_names.append(self.name)
-        return self.face_names
+        index: int = np.where(matches == True)[0][0]
+        file_name: str = str(args_dict["known_face_names"][index]) + ':' + str(min_distance)
+
+        return file_name
 
     # @profile()
     def return_concatenate_location_and_frame(self, resized_frame, face_location_list):
@@ -750,7 +745,7 @@ class Core:
         self.face_encodings = face_encodings
         self.frame_datas_array = frame_datas_array
         self.GLOBAL_MEMORY = GLOBAL_MEMORY
-        face_names = []
+        face_names: List[str] = []
         face_location_list = []
         filename = ''
         debug_frame_turn_count = 0
@@ -772,14 +767,30 @@ class Core:
             overlay = frame_data["overlay"]
             person_data_list = frame_data["person_data_list"]  # person_data_listが変数に格納される
             date = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
+            matches: npt.NDArray[np.bool8]
+            min_distance: float
 
             # 名前リスト作成
             for face_encoding in self.face_encodings:
                 # Initialize name, matches (Inner frame)
-                name = "Unknown"
-                matches = self.check_compare_faces(self.logger, self.args_dict["known_face_encodings"], face_encoding, self.args_dict["tolerance"])
+                name: str = "Unknown"
+                matches, min_distance = self.check_compare_faces(self.logger, self.args_dict["known_face_encodings"], face_encoding, self.args_dict["tolerance"])
+
+                # もし該当人物がいなかったら処理を飛ばす
+                if not np.any(matches == True):
+                    face_names.append(name)
+                    continue
+
                 # 名前リスト(face_names)生成
-                face_names = self.return_face_names(self.args_dict, face_names, face_encoding,  matches, name)
+                face_name: str = self.return_face_name(
+                    self.args_dict,
+                    matches,
+                    min_distance
+                )
+                face_names.append(face_name)
+
+            if len(face_names) == 0:
+                continue
 
             # face_location_listについて繰り返し処理 → **frame_datas_array**作成
             ## つまり人が写っているframeだけに対して以降の処理を行う、ということ。

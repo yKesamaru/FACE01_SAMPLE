@@ -340,7 +340,7 @@ class Dlib_api:
             face_to_compare: npt.NDArray[np.float64]
             # face_encodings: List[np.ndarray],
             # face_to_compare: np.ndarray
-        ) -> np.ndarray:
+        ) -> npt.NDArray[np.float64]:
         """
         Given a list of face encodings, compare them to a known face encoding and get a 
         euclidean distance for each comparison face.
@@ -365,7 +365,7 @@ class Dlib_api:
             known_face_encodings: List[npt.NDArray[np.float64]],
             face_encoding_to_check: npt.NDArray[np.float64],
             tolerance: float = 0.6
-        ) -> List[bool]:
+        ) -> Tuple[npt.NDArray[np.bool8], float]:
         """TODO #26
         compare_facesとreturn_face_namesに冗長がある"""
         """
@@ -388,21 +388,22 @@ class Dlib_api:
                 )
             )
 
-        _min: float = min(face_distance_list)
+        self.min_distance: float = min(face_distance_list)
 
-        if _min > self.tolerance:
-            # All elements are 'False' if '_min' is greater than 'self.tolerance'.
-            return [False] * len(face_distance_list)
+        if self.min_distance > self.tolerance:
+            # All elements are 'False' if 'self.min_distance' is greater than 'self.tolerance'.
+            # return [False] * len(face_distance_list)
+            return np.full(len(face_distance_list), False), self.min_distance
         else:
             # Slow ---
             # for face_distance in face_distance_list:
-                # if _min == face_distance:
+                # if self.min_distance == face_distance:
                 #     bool_list.append(True)
                 # else:
                 #     bool_list.append(False)
             # --------
             # Fast ---
-            return np.where(_min == face_distance_list, True, False)
+            return np.where(self.min_distance == face_distance_list, True, False), self.min_distance
             # --------
 
 
