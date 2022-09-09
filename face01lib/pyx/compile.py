@@ -40,9 +40,9 @@ Options.buffer_max_dims = 4
 extensions = [
     # Extension("*", ["*.py"],  # If use glob.
     Extension(
-        "return_face_image",
-        ["return_face_image.py"],
-        extra_compile_args=['-O3'],
+        "*",
+        ["*.pyx"],
+        # extra_compile_args=['-O3'],  # If you want.
         # language="c++"  # If you want.
     )
 ]
@@ -70,6 +70,8 @@ setup(
 """compile
 cd ~/bin/FACE01/face01lib/pyx
 python compile.py build_ext --inplace
+
+
 pactl set-sink-volume @DEFAULT_SINK@ 30%
 play -v 0.2 -q /home/terms/done.wav
 
