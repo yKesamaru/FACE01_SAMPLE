@@ -6,6 +6,10 @@ from sys import exit, version, version_info, getsizeof
 from time import perf_counter
 from traceback import format_exc
 
+from typing import List, Tuple, Union, Dict
+import numpy as np
+import numpy.typing as npt  # See [](https://discuss.python.org/t/how-to-type-annotate-mathematical-operations-that-supports-built-in-numerics-collections-and-numpy-arrays/13509)
+
 """DEBUG: MEMORY LEAK
 from face01lib.memory_leak import Memory_leak
 m = Memory_leak(limit=7, key_type='traceback', nframe=20)
@@ -229,7 +233,7 @@ frame_generator_obj = VidCap().frame_generator(args_dict)
 def main_process():
     try:
 
-        frame_datas_array = Core_obj.frame_pre_processing(logger, args_dict, frame_generator_obj.__next__())
+        frame_datas_array: List[Dict] = Core_obj.frame_pre_processing(logger, args_dict, frame_generator_obj.__next__())
         
         """DEBUG"""
         logger.debug(inspect.currentframe().f_back.f_code.co_filename)
