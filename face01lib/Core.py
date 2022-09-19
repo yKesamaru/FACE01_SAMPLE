@@ -457,14 +457,19 @@ class Core:
             resized_frame: npt.NDArray[np.uint8],
             face_location_list: List[Tuple[int,int,int,int]]
         ) -> Tuple[List[Tuple[int,int,int,int]], npt.NDArray[np.uint8]]:
-        """Return tuple 1)concatenate_face_location_list, 2)concatenate_person_frame
+        """Return tuple 
+            - concatenate_face_location_list
+            - concatenate_person_frame
 
         Args:
             resized_frame (npt.NDArray[np.uint8]): Resized frame
             face_location_list (List[Tuple[int,int,int,int]]): Face location list
 
         Returns:
-            Tuple[List[Tuple[int,int,int,int]], npt.NDArray[np.uint8]]: 1)concatenate_face_location_list, 2)concatenate_person_frame
+            - concatenate_face_location_list
+                - Tuple[List[Tuple[int,int,int,int]]
+            - concatenate_person_frame
+                - npt.NDArray[np.uint8]]
         """        
         self.return_concatenate_location_and_frame_resized_frame: npt.NDArray[np.uint8] = resized_frame
         self.face_location_list = face_location_list
@@ -671,8 +676,8 @@ class Core:
         ) -> Tuple[List[npt.NDArray[np.float64]], List[Dict]]:
 
         """Encode face data and Return 
-                1) list of encoded data
-                2) frame_datas_array
+            - list of encoded data
+            - frame_datas_array
 
         Args:
             logger (_type_): logger
@@ -680,14 +685,18 @@ class Core:
             frame_datas_array (List[Dict]): frame datas
 
         Returns:
-            Tuple[List[npt.NDArray[np.float64]], List[Dict]]: 1)list of encoded data and 2)frame_datas_array
+            - list of encoded data
+                - Tuple[List[npt.NDArray[np.float64]]
+            - frame_datas_array
+                - List[Dict]]
         
         Definition of person_data_list and frame_datas_array:
             person_data = {
                     'name': name,
                     'pict':filename,
                     'date':date,
-                    'location':(top,right,bottom,left), 'percentage_and_symbol': percentage_and_symbol
+                    'location':(top,right,bottom,left),
+                    'percentage_and_symbol': percentage_and_symbol
                 }
             person_data_list.append(person_data)
 
@@ -829,6 +838,17 @@ class Core:
 
         Returns:
             List[Dict]: List of modified datas
+
+        Modify:
+            - Composite images
+                - Default face image
+                - Rectangle
+                - Percentage
+                - Name
+            - Percentage calculation
+            - Save cropped face images
+            - Make person_data_list
+            - Make frame_datas_list
         """        
         self.logger = logger
         self.args_dict = args_dict
@@ -916,7 +936,8 @@ class Core:
                     except:
                         self.logger.warning('ファイル名に異常が見つかりました',name,'NAME_default.png あるいはNAME_001.png (001部分は001からはじまる連番)にしてください','noFaceフォルダに移動します')
                         move(name, './noFace/')
-                        return
+                        # return
+                        continue
 
                 # nameがUnknownであってもなくても以降の処理を行う。
                 # クロップ画像保存
@@ -1127,10 +1148,27 @@ class Core:
 
 
     # @profile()
-    def return_anti_spoof(self, frame, face_location):
-        self.frame = frame
-        self.face_location: tuple = face_location
-        face_image = self.r_face_image(self.frame, self.face_location)
+    def return_anti_spoof(
+            self,
+            frame: npt.NDArray[np.uint8],
+            face_location: Tuple[int,int,int,int]
+        ) -> Tuple[str, float, bool]:
+        """Return result of anti spoof
+
+        Args:
+            frame (npt.NDArray[np.uint8]): Each of frame
+            face_location (Tuple[int,int,int,int]): Face location
+
+        Returns:
+            Tuple[str, float, bool]: 
+            - spoof_or_real
+            - score
+            - ELE
+                - Equally Likely Events
+        """
+        self.frame: npt.NDArray[np.uint8] = frame
+        self.face_location: Tuple[int,int,int,int] = face_location
+        face_image: npt.NDArray[np.uint8] = self.r_face_image(self.frame, self.face_location)
         # face_image = Return_face_image().return_face_image(self.frame, self.face_location)
         # face_image = self.return_face_image(self.frame, self.face_location)
         # VidCap_obj.frame_imshow_for_debug(face_image)  # DEBUG
@@ -1143,7 +1181,8 @@ class Core:
         """
 
         # 定形処理:リサイズ, 標準化, 成形, float32キャスト, 推論, 後処理
-        input_image = cv2.resize(face_image, dsize=(128, 128))
+        input_image: cv2.Mat = \
+            cv2.resize(face_image, dsize=(128, 128))
         """DEBUG"""
         # VidCap_obj.frame_imshow_for_debug(input_image)
 
@@ -1151,22 +1190,23 @@ class Core:
         input_image = input_image.reshape(-1, 3, 128, 128)
 
         # 推論
-        input_name = onnx_session.get_inputs()[0].name
-        result = onnx_session.run(None, {input_name: input_image})  # [array([[0.08206003, 0.91793996]], dtype=float32)]
-
+        input_name: str = onnx_session.get_inputs()[0].name
+        result: List[npt.NDArray[np.float32]] = \
+            onnx_session.run(None, {input_name: input_image})    # type: ignore
+        
         # 後処理
-        result = np.array(result)  # array([[[0.08206003, 0.91793996]]], dtype=float32)
-        result = np.squeeze(result)  # array([0.08206003, 0.91793996], dtype=float32)
+        result_ndarray: npt.NDArray[np.float32] = np.array(result)
+        result_squeeze: npt.NDArray[np.float32]  = np.squeeze(result_ndarray)
 
-        as_index = np.argmax(result)
+        as_index: np.int64 = np.argmax(result_squeeze)
 
         score: float = 0.0
-        if result[0] > result[1]:
-            score = result[0] - result[1]
+        if result_squeeze[0] > result_squeeze[1]:
+            score = result_squeeze[0] - result_squeeze[1]
         else:
-            score = result[1] - result[0]
+            score = result_squeeze[1] - result_squeeze[0]
         score = round(score, 2)
-        # ELE: Equally Likely Events
+        
         ELE: bool = False
         if score < 0.4:
             ELE = True
