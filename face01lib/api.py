@@ -260,8 +260,8 @@ class Dlib_api:
         face_location_list: List = [],  # Initial value of 'face_location_list' is '[]'.
         num_jitters: int = 0,
         model: str = "small"
-    ) -> List[np.ndarray]:
-
+    ) -> List[npt.NDArray[np.float64]]:
+        
         """
         Given an image, return the 128-dimension face encoding for each face in the image.
 

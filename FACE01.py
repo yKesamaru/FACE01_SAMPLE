@@ -6,7 +6,7 @@ from sys import exit, version, version_info, getsizeof
 from time import perf_counter
 from traceback import format_exc
 
-from typing import List, Tuple, Union, Dict
+from typing import Generator, List, Tuple, Union, Dict
 import numpy as np
 import numpy.typing as npt  # See [](https://discuss.python.org/t/how-to-type-annotate-mathematical-operations-that-supports-built-in-numerics-collections-and-numpy-arrays/13509)
 
@@ -230,21 +230,51 @@ def Measure_processing_time_backward():
 frame_generator_obj = VidCap().frame_generator(args_dict)
 
 # @profile()
-def main_process():
+def main_process() -> Generator:
+    """Generator of frame_datas_array
+
+    Yields:
+        Generator: frame_datas_array
+    
+    More about:
+        main_process function consists 3 part of Core() methods.
+        1) Core.frame_pre_processing
+        2) Core.face_encoding_process
+        3) Core.frame_post_processing
+    """    
     try:
 
-        frame_datas_array: List[Dict] = Core_obj.frame_pre_processing(logger, args_dict, frame_generator_obj.__next__())
+        frame_datas_array: List[Dict] = \
+            Core_obj.frame_pre_processing(
+                logger,
+                args_dict,
+                frame_generator_obj.__next__()
+            )
         
-        """DEBUG"""
+        """DEBUG
         logger.debug(inspect.currentframe().f_back.f_code.co_filename)
         logger.debug(inspect.currentframe().f_back.f_lineno)
         logger.debug(f'frame_datas_array size: {len(frame_datas_array), getsizeof(frame_datas_array)}')
         logger.debug(inspect.currentframe().f_back.f_code.co_filename)
         logger.debug(inspect.currentframe().f_back.f_lineno)
         logger.debug(f'args_dict size: {len(args_dict), getsizeof(args_dict)}')
-        
-        face_encodings, frame_datas_array = Core_obj.face_encoding_process(logger, args_dict, frame_datas_array)
-        frame_datas_array = Core_obj.frame_post_processing(logger, args_dict, face_encodings, frame_datas_array, GLOBAL_MEMORY)
+        """
+
+        face_encodings, frame_datas_array = \
+            Core_obj.face_encoding_process(
+                logger,
+                args_dict,
+                frame_datas_array
+            )
+
+        frame_datas_array = \
+            Core_obj.frame_post_processing(
+                logger,
+                args_dict,
+                face_encodings,
+                frame_datas_array,
+                GLOBAL_MEMORY
+            )
         
         yield frame_datas_array
 

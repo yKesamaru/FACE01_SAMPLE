@@ -86,6 +86,7 @@ class Core:
     def __init__(self) -> None:
         Cal_obj.cal_specify_date(logger)
 
+
     # @profile()
     def mp_face_detection_func(
             self,
@@ -142,6 +143,7 @@ class Core:
         """
         return results
 
+
     # @profile()
     def return_face_location_list(
             self,
@@ -151,7 +153,7 @@ class Core:
             model_selection: int,
             min_detection_confidence: float,
             same_time_recognize: int = 2
-        ) -> List[int]:
+        ) -> List[Tuple[int,int,int,int]]:
         """
         return: face_location_list
         """
@@ -198,6 +200,7 @@ class Core:
         self.resized_frame.flags.writeable = True
         return face_location_list
 
+
     # @profile()
     def draw_telop(
             self,
@@ -227,6 +230,7 @@ class Core:
             # TODO np.clip
         return  frame
 
+
     # @profile()
     def draw_logo(
             self,
@@ -250,6 +254,7 @@ class Core:
             self.logger.debug("logoが描画できません")
             # TODO np.clip
         return frame
+
 
     # @profile()
     def check_compare_faces(self,
@@ -281,6 +286,7 @@ class Core:
             self.logger.warning(format_exc(limit=None, chain=True))
             self.logger.warning("-" * 20)
             exit(0)
+
 
     # @profile()
     def make_frame_datas_array(
@@ -375,6 +381,7 @@ class Core:
         
         return self.frame_datas_array
 
+
     # pil_img_rgbオブジェクトを生成
     # @profile()
     def pil_img_rgb_instance(self, frame):
@@ -422,6 +429,7 @@ class Core:
         imgCroped.save(filename)
         return filename,self.number_of_crops, self.frequency_crop_image
 
+
     # Get face_names
     # @profile()
     def return_face_name(
@@ -447,39 +455,55 @@ class Core:
     def return_concatenate_location_and_frame(
             self,
             resized_frame: npt.NDArray[np.uint8],
-            face_location_list
-        ):
+            face_location_list: List[Tuple[int,int,int,int]]
+        ) -> Tuple[List[Tuple[int,int,int,int]], npt.NDArray[np.uint8]]:
+        """Return tuple 1)concatenate_face_location_list, 2)concatenate_person_frame
+
+        Args:
+            resized_frame (npt.NDArray[np.uint8]): Resized frame
+            face_location_list (List[Tuple[int,int,int,int]]): Face location list
+
+        Returns:
+            Tuple[List[Tuple[int,int,int,int]], npt.NDArray[np.uint8]]: 1)concatenate_face_location_list, 2)concatenate_person_frame
+        """        
         self.return_concatenate_location_and_frame_resized_frame: npt.NDArray[np.uint8] = resized_frame
         self.face_location_list = face_location_list
+
         """face_location_listはresized_frame上の顔座標"""
         finally_height_size:int = 150
-        concatenate_face_location_list = []
+        concatenate_face_location_list: List[Tuple[int,int,int,int]] = []
         detection_counter:int = 0
-        person_frame_list: List = []
-        concatenate_person_frame: np.ndarray = np.empty((0,0), dtype=float)
+        person_frame_list: List[npt.NDArray[np.uint8]] = []
+
+        concatenate_person_frame: npt.NDArray[np.uint8] = np.empty((2,2,3), dtype=np.uint8)
+
         for xtop,xright,xbottom,xleft in self.face_location_list:
-            person_frame = self.return_concatenate_location_and_frame_resized_frame[xtop:xbottom, xleft:xright]
+            person_frame: npt.NDArray[np.uint8] = \
+                self.return_concatenate_location_and_frame_resized_frame[xtop:xbottom, xleft:xright]
+            
             # person_frameをリサイズする
             height:int = xbottom - xtop
             width:int = xright - xleft
             # 拡大・縮小率を算出
             fy:float = finally_height_size / height
             finally_width_size:int = int(width * fy)
-            # fx:float = finally_width_size / width
-            person_frame = cv2.resize(person_frame, dsize=(finally_width_size, finally_height_size))
-            person_frame_list.append(person_frame)
+            
+            resized_person_frame: cv2.Mat = \
+                cv2.resize(person_frame, dsize=(finally_width_size, finally_height_size))
+            person_frame_list.append(resized_person_frame)  # type: ignore
             """DEBUG
             cv2.imshow("DEBUG", person_frame)
             cv2.waitKey(5000)
             cv2.destroyAllWindows()
             """
+
             # 拡大率に合わせて各座標を再計算する
-            # person_frame上の各座標
+            ## person_frame上の各座標
             person_frame_xtop:int = 0
             person_frame_xright:int = finally_width_size
             person_frame_xbottom:int = finally_height_size
             person_frame_xleft:int = 0
-            # 連結されたperson_frame上の各座標
+            ## 連結されたperson_frame上の各座標
             concatenated_xtop:int = person_frame_xtop
             concatenated_xright:int = person_frame_xright + (finally_width_size * detection_counter)
             concatenated_xbottom:int = person_frame_xbottom 
@@ -507,43 +531,65 @@ class Core:
             """
         return concatenate_face_location_list, concatenate_person_frame
 
+
     # フレーム前処理
     # @profile()
+    # @staticmethod
     def frame_pre_processing(
-            self, logger, args_dict, resized_frame: npt.NDArray[np.uint8]
-        ):
+            self,
+            logger,
+            args_dict: Dict,
+            resized_frame: npt.NDArray[np.uint8]
+        ) -> List[Dict]:
+        """Return frame_datas_array
+
+        Args:
+            logger (_type_): logger
+            args_dict (Dict): Dict of Initial settings
+            resized_frame (npt.NDArray[np.uint8]): Resized frame
+
+        Returns:
+            List[Dict]: frame_datas_array
+        """        
         self.logger = logger
-        self.args_dict = args_dict
+        self.args_dict: Dict = args_dict
         self.resized_frame: npt.NDArray[np.uint8] = resized_frame
 
-        person_data_list = []
-        name = 'Unknown'
-        filename = ''
-        frame_datas_array = []
-        face_location_list = []
-        percentage_and_symbol = ''
-        overlay = np.empty((0,0), dtype=float)
-        # spoof_or_real = None
-        # score = 0.0
-        # ELE = True
-        # spoof_dict = {}
+        person_data_list: List[Dict] = []
+        name: str = 'Unknown'
+        filename: str = ''
+        frame_datas_array: List[Dict] = []
+        face_location_list: List[Tuple[int,int,int,int]] = []
+        percentage_and_symbol: str = ''
+        overlay: npt.NDArray[np.uint8] = np.empty((2,2,3), dtype=np.uint8)  # type: ignore
 
         # 描画系（bottom area, 半透明, telop, logo）
         if  self.args_dict["headless"] == False:
-            # 半透明処理（前半）
-            if self.args_dict["show_overlay"]==True:
+            ## 半透明処理（前半）
+            if self.args_dict["show_overlay"] == True:
                 overlay: cv2.Mat = self.resized_frame.copy()
                 """DEBUG: Memory leak"""
                 
-
-            # テロップとロゴマークの合成
+            ## テロップとロゴマークの合成
             if self.args_dict["draw_telop_and_logo"] == True:
-                self.resized_frame: npt.NDArray[np.uint8] =  self.draw_telop(self.logger, self.args_dict["cal_resized_telop_nums"], self.resized_frame)
-                self.resized_frame: npt.NDArray[np.uint8] = self.draw_logo(self.logger, self.args_dict["cal_resized_logo_nums"], self.resized_frame)
+
+                self.resized_frame = \
+                    self.draw_telop(
+                            self.logger,
+                            self.args_dict["cal_resized_telop_nums"],
+                            self.resized_frame
+                        )
+                
+                self.resized_frame = \
+                    self.draw_logo(
+                            self.logger,
+                            self.args_dict["cal_resized_logo_nums"],
+                            self.resized_frame
+                        )
 
         # 顔座標算出
         if self.args_dict["use_pipe"] == True:
-            face_location_list = \
+            face_location_list: List[Tuple[int,int,int,int]] = \
                 self.return_face_location_list(
                     self.resized_frame,
                     self.args_dict["set_width"],
@@ -553,21 +599,18 @@ class Core:
                     self.args_dict["same_time_recognize"]
                 )
         else:
-            date = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
-            face_location_list = \
+            # date: str = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")  # Not use
+            face_location_list: List[Tuple[int,int,int,int]] = \
                 Dlib_api().face_locations(
                 # Dlib_api_obj.face_locations(
                     self.resized_frame,
                     self.args_dict["upsampling"],
                     self.args_dict["mode"]
                 )
-        """face_location_list
-        [(144, 197, 242, 99), (97, 489, 215, 371)]
-        """
 
         # 顔がなかったら以降のエンコード処理を行わない
         if len(face_location_list) == 0:
-            frame_datas_array = \
+            frame_datas_array: List[Dict] = \
                 self.make_frame_datas_array( 
                     overlay,
                     face_location_list,
@@ -580,10 +623,10 @@ class Core:
                 )
             return frame_datas_array
 
-        # 顔が一定数以上なら以降のエンコード処理を行わない
+        # 顔が一定数以上なら以降の処理を行わない
         if len(face_location_list) >= self.args_dict["number_of_people"]:
             self.logger.info(f'{self.args_dict["number_of_people"]}人以上を検出しました')
-            frame_datas_array = \
+            frame_datas_array: List[Dict]  = \
                 self.make_frame_datas_array(
                     overlay,
                     face_location_list,
@@ -596,58 +639,7 @@ class Core:
                 )
             return frame_datas_array
 
-        """NOT USED
-        # BUG: anti_spoofを個々に挿入する(1.4.05) ->  frame_pre_processingではanti_spoofを行わないことにする。
-        ## anti_spoof機能は独立させて存在させることにする。-> frame_post_processingにも搭載しない。
-        # if self.args_dict["anti_spoof"] == True:
-        #     for face_location in face_location_list:
-        #         spoof_or_real, score, ELE = \
-        #             self.return_anti_spoof(self.resized_frame, face_location)
-                
-        #         spoof_dict["spoof_or_real"] = spoof_or_real
-        #         spoof_dict["score"] = score
-        #         spoof_dict["ELE"] = ELE
-
-        #         person_data = {
-        #             'spoof_dict': spoof_dict,
-        #             'name': name,
-        #             'pict':filename,
-        #             'date':date,
-        #             'location':face_location,
-        #             'percentage_and_symbol': percentage_and_symbol
-        #         }
-        #         person_data_list.append(person_data)
-
-        #         frame_datas = {
-        #             'img':self.resized_frame,
-        #             'face_location_list':face_location_list,
-        #             'overlay': overlay,
-        #             'person_data_list': person_data_list
-        #         }
-        #         frame_datas_array.append(frame_datas)
-
-        # elif self.args_dict["anti_spoof"] == False:
-        #     for face_location in face_location_list:
-        #         person_data = {
-        #             'spoof_dict':spoof_dict,  # {}、つまりカラ。
-        #             'name': name,
-        #             'pict':filename,
-        #             'date':date,
-        #             'location':face_location,
-        #             'percentage_and_symbol': percentage_and_symbol
-        #             }
-        #         person_data_list.append(person_data)
-
-        #         frame_datas = {
-        #             'img':self.resized_frame,
-        #             'face_location_list':face_location_list,
-        #             'overlay': overlay,
-        #             'person_data_list': person_data_list
-        #         }
-        #         frame_datas_array.append(frame_datas)
-        """
-
-        frame_datas = {
+        frame_datas: Dict = {
             'img':self.resized_frame,
             'face_location_list':face_location_list,
             'overlay': overlay,
@@ -668,21 +660,52 @@ class Core:
             )
         return frame_datas_array
 
+
     # 顔のエンコーディング
     # @profile()
-    def face_encoding_process(self, logger, args_dict, frame_datas_array):
-        """frame_datas_arrayの定義
-        person_data = {'name': name, 'pict':filename,  'date':date, 'location':(top,right,bottom,left), 'percentage_and_symbol': percentage_and_symbol}
-        person_data_list.append(person_data)
-        frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}
-        frame_datas_array.append(frame_datas)
-        """
-        self.logger = logger
-        self.args_dict = args_dict
-        self.frame_datas_array = frame_datas_array
+    def face_encoding_process(
+            self,
+            logger,
+            args_dict: Dict,
+            frame_datas_array: List[Dict]
+        ) -> Tuple[List[npt.NDArray[np.float64]], List[Dict]]:
 
-        face_encodings = []
-        face_encodings_list = []
+        """Encode face data and Return 
+                1) list of encoded data
+                2) frame_datas_array
+
+        Args:
+            logger (_type_): logger
+            args_dict (Dict): Dict including initial setting
+            frame_datas_array (List[Dict]): frame datas
+
+        Returns:
+            Tuple[List[npt.NDArray[np.float64]], List[Dict]]: 1)list of encoded data and 2)frame_datas_array
+        
+        Definition of person_data_list and frame_datas_array:
+            person_data = {
+                    'name': name,
+                    'pict':filename,
+                    'date':date,
+                    'location':(top,right,bottom,left), 'percentage_and_symbol': percentage_and_symbol
+                }
+            person_data_list.append(person_data)
+
+            frame_datas = {
+                    'img': resized_frame,
+                    'face_location_list': face_location_list,
+                    'overlay': overlay,
+                    'person_data_list': person_data_list
+                }
+            frame_datas_array.append(frame_datas)
+        """
+
+        self.logger = logger
+        self.args_dict: Dict = args_dict
+        self.frame_datas_array: List[Dict] = frame_datas_array
+
+        face_encodings: List[npt.NDArray[np.float64]] = []
+        # face_encodings_list = []  # Not used.
 
         for frame_data in self.frame_datas_array:
             resized_frame: npt.NDArray[np.uint8] = frame_data["img"]
@@ -702,8 +725,15 @@ class Core:
                         Stack arrays in sequence horizontally (column wise).
                         https://numpy.org/doc/stable/reference/generated/numpy.hstack.html
                     """
+
+                    concatenate_face_location_list: List[Tuple[int,int,int,int]]
+                    concatenate_person_frame: npt.NDArray[np.uint8]
+
                     concatenate_face_location_list, concatenate_person_frame = \
-                        self.return_concatenate_location_and_frame(resized_frame, face_location_list)
+                        self.return_concatenate_location_and_frame(
+                            resized_frame,
+                            face_location_list
+                        )
                     face_encodings = \
                         Dlib_api().face_encodings(
                             concatenate_person_frame,
@@ -715,7 +745,6 @@ class Core:
                     try:
                         face_encodings = \
                             Dlib_api().face_encodings(  # Dlib_api_obj.face_encodingsだとエラーが発生する。
-                            # Dlib_api_obj.face_encodings(
                                 resized_frame,
                                 face_location_list,
                                 self.args_dict["jitters"],
@@ -777,24 +806,30 @@ class Core:
     #         return face_image
     #     else:
     #         return empty_ndarray
-    
+
 
     # フレーム後処理
     # @profile()
     def frame_post_processing(
             self,
             logger,
-            args_dict,
-            face_encodings,
-            frame_datas_array,
-            GLOBAL_MEMORY
-        ):
-        """frame_datas_arrayの定義
-        person_data = {'spoof_dict:spoof_dict, 'name': name, 'pict':filename,  'date':date, 'location':(top,right,bottom,left), 'percentage_and_symbol': percentage_and_symbol}
-        person_data_list.append(person_data)
-        frame_datas = {'img':resized_frame, 'face_location_list':face_location_list, 'overlay': overlay, 'person_data_list': person_data_list}
-        frame_datas_array.append(frame_datas)
-        """
+            args_dict: Dict,
+            face_encodings: List[npt.NDArray[np.float64]],
+            frame_datas_array: List[Dict],
+            GLOBAL_MEMORY: Dict
+        ) -> List[Dict]:
+        """Modify each frame's datas.
+
+        Args:
+            logger (_type_): logger
+            args_dict (Dict): Dict of initial settings
+            face_encodings (List[npt.NDArray[np.float64]]): List of encoded face datas
+            frame_datas_array (List[Dict]): List of datas
+            GLOBAL_MEMORY (Dict): Global values
+
+        Returns:
+            List[Dict]: List of modified datas
+        """        
         self.logger = logger
         self.args_dict = args_dict
         self.face_encodings = face_encodings
@@ -1082,12 +1117,14 @@ class Core:
         """
         return modified_frame_list
 
+
     # @profile()
     def r_face_image(self, frame, face_location):
         self.frame = frame
         self.face_location = face_location
         face_image = Return_face_image().return_face_image(self.frame, self.face_location)
         return face_image
+
 
     # @profile()
     def return_anti_spoof(self, frame, face_location):
@@ -1148,6 +1185,7 @@ class Core:
             spoof_or_real = 'cannot_distinction'
             return spoof_or_real, score, ELE
 
+
 # 以下、元libdraw.LibDraw
     # @profile()
     def draw_pink_rectangle(
@@ -1171,7 +1209,8 @@ class Core:
             2
         ) # pink
         return self.resized_frame
-    
+
+
     # @profile()
     def draw_white_rectangle(
             self,
@@ -1191,6 +1230,7 @@ class Core:
         cv2.rectangle(self.resized_frame, (self.left-18, self.top-18), (self.right+18, self.bottom+18), (175, 175, 175), 2) # 灰色内枠
         cv2.rectangle(self.resized_frame, (self.left-20, self.top-20), (self.right+20, self.bottom+20), (255,255,255), 2) # 白色外枠
         return self.resized_frame
+
 
     # パーセンテージ表示
     # @profile()
@@ -1227,6 +1267,7 @@ class Core:
             # パーセンテージをピンク表示
             self.resized_frame: npt.NDArray[np.uint8] = cv2.putText(self.resized_frame, self.percentage_and_symbol, putText_position, font, 1, (255, 87, 243), 1, cv2.LINE_AA)
         return self.resized_frame
+
 
     # デフォルト顔画像の描画処理
     # @profile()
@@ -1279,6 +1320,7 @@ class Core:
         x1, y1, x2, y2 = 0, self.args_dict["set_height"] - face_image_width - 10, face_image_width, self.args_dict["set_height"] - 10
         return x1, y1, x2, y2, default_face_small_image, face_image_width
 
+
     # @profile()
     def draw_default_face(
             self,
@@ -1326,6 +1368,7 @@ class Core:
             resized_frame: npt.NDArray[np.uint8] = self.draw_default_face_image(logger, resized_frame, default_face_small_image, x1, y1, x2, y2, number_of_people, face_image_width)
         return resized_frame
 
+
     # @profile()
     def draw_rectangle_for_name(
             self,
@@ -1345,6 +1388,7 @@ class Core:
             # cv2.rectangle(resized_frame, (left-25, bottom + 25), (right+25, bottom+50), (211, 173, 54), thickness = 1) # 濃い水色の線
             self.resized_frame = cv2.rectangle(self.resized_frame, (self.left-25, self.bottom + 25), (self.right+25, self.bottom+50), (211, 173, 54), cv2.FILLED) # 濃い水色
         return self.resized_frame
+
 
     # 帯状四角形（ピンク）の描画
     # @profile()
@@ -1366,12 +1410,14 @@ class Core:
         cv2.rectangle(self.resized_frame, (error_messg_rectangle_left, error_messg_rectangle_top), (error_messg_rectangle_right, error_messg_rectangle_bottom), (255, 87, 243), cv2.FILLED)  # pink
         return error_messg_rectangle_left, error_messg_rectangle_right, error_messg_rectangle_bottom
 
+
     # drawオブジェクトを生成
     # @profile()
     def  make_draw_object(self, frame):
         self.frame = frame
         draw = ImageDraw.Draw(Image.fromarray(self.frame))
         return draw
+
 
     # @profile()
     def draw_error_messg_rectangle_messg(
@@ -1389,6 +1435,7 @@ class Core:
         self.error_messg_rectangle_font = error_messg_rectangle_font
         draw.text(self.error_messg_rectangle_position, self.error_messg_rectangle_messg, fill=(255, 255, 255, 255), font = self.error_messg_rectangle_font)
 
+
     # @profile()
     def return_fontpath(self, logger):
         # フォントの設定(フォントファイルのパスと文字の大きさ)
@@ -1404,6 +1451,7 @@ class Core:
         else:
             logger.info('オペレーティングシステムの確認が出来ません。システム管理者にご連絡ください')
         return fontpath
+
 
     # @profile()
     def calculate_text_position(
@@ -1427,6 +1475,7 @@ class Core:
         position = (pos, self.bottom + (self.fontsize * 2))
         Unknown_position = (pos + self.fontsize, self.bottom + (self.fontsize * 2))
         return position, Unknown_position
+
 
     # @profile()
     def draw_name(
@@ -1462,6 +1511,7 @@ class Core:
                 local_draw_obj.text(self.position, self.name, fill=(255, 87, 243, 255), font = self.font)
         return self.pil_img_obj
 
+
     # pil_img_objをnumpy配列に変換
     # @profile()
     def convert_pil_img_to_ndarray(
@@ -1475,6 +1525,7 @@ class Core:
         gc.collect()
         """
         return frame
+
 
     # @profile()
     def draw_text_for_name(
@@ -1528,6 +1579,7 @@ class Core:
         resized_frame: npt.NDArray[np.uint8] = self.convert_pil_img_to_ndarray(self.pil_img_obj)
         # del self.pil_img_obj
         return resized_frame
+
 
     # target_rectangleの描画
     # @profile()
@@ -1674,6 +1726,7 @@ class Core:
                     pass
 
         return self.resized_frame
+
 
 """DEBUG: MEMORY LEAK
 Memory_leak_obj.memory_leak_analyze_stop(line_or_traceback)
