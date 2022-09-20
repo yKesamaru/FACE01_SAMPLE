@@ -1,12 +1,12 @@
 #!python
 #cython: language_level=3
 
-from face01lib.Calc import Cal
+from .Calc import Cal
 from datetime import datetime
-from face01lib.load_priset_image import load_priset_image
-from face01lib.video_capture import VidCap  # py
-# import face01lib.vidCap as video_capture  # so
-from face01lib.LoadImage import LoadImage
+from .load_priset_image import load_priset_image
+from .video_capture import VidCap  # py
+# import .vidCap as video_capture  # so
+from .LoadImage import LoadImage
 
 class Initialize:
     def __init__(self) -> None:

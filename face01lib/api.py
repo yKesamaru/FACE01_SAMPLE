@@ -46,7 +46,7 @@ https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.p
 
 
 """DEBUG: MEMORY LEAK
-from face01lib.memory_leak import Memory_leak
+from .memory_leak import Memory_leak
 m = Memory_leak(limit=2, key_type='traceback', nframe=20)
 m.memory_leak_analyze_start()
 See bellow:
@@ -70,7 +70,7 @@ from traceback import format_exc
 
 from memory_profiler import profile  # @profile()
 
-from face01lib.logger import Logger
+from .logger import Logger
 
 
 name: str = __name__
@@ -79,7 +79,7 @@ logger = Logger().logger(name, dir, None)
 
 
 try:
-    from face01lib.models import Dlib_models
+    from .models import Dlib_models
 except Exception:
     logger.error("Failed to import dlib model")
     logger.error("-" * 20)

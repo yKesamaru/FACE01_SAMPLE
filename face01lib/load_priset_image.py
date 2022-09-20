@@ -7,7 +7,7 @@ from shutil import move
 
 from numpy import load, savez
 
-from face01lib.api import Dlib_api
+from .api import Dlib_api
 
 """Logging"""
 logger = logging.getLogger('face01lib/load_priset_image')

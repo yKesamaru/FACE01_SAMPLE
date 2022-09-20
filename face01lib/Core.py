@@ -1,62 +1,100 @@
-# cython: language_level=3
 """
-# cython: profile = True
-# cython: boundscheck = False
-# cython: wraparound = False
-# cython: initializedcheck = False
-# cython: cdivision = True
-# cython: always_allow_keywords = False
-# cython: unraisable_tracebacks = False
-# cython: binding = False
-"""
+- Cython compile option:
+    - Cython options which have enabled
+        - cython: language_level=3
+    - Cython options not enabled
+        - cython: profile = True
+        - cython: boundscheck = False
+        - cython: wraparound = False
+        - cython: initializedcheck = False
+        - cython: cdivision = True
+        - cython: always_allow_keywords = False
+        - cython: unraisable_tracebacks = False
+        - cython: binding = False
 
-"""see bellow
-https://www.youtube.com/watch?app=desktop&v=sGggkVaRMzY
+- Data structure:
+    - Definition of person_data_list and frame_datas_array:
+        - overlay (npt.NDArray[np.uint8]): Copy of frame
+        - face_location_list (List[Tuple[int,int,int,int]]): List of face_location
+        - name (str): Each of person's name
+        - filename (str): File name
+        - percentage_and_symbol (str): Concatenate of digit of percentage and '%' symbol
+        - person_data_list (List): List of person_data
+        - frame_datas_array (List[Dict]): Array of frame_datas
+        - resized_frame (npt.NDArray[np.uint8]): Numpy array of frame
+
+        person_data = {
+                'name': name,
+                'pict':filename,
+                'date':date,
+                'location':(top,right,bottom,left),
+                'percentage_and_symbol': percentage_and_symbol
+            }
+        person_data_list.append(person_data)
+
+        frame_datas = {
+                'img': resized_frame,
+                'face_location_list': face_location_list,
+                'overlay': overlay,
+                'person_data_list': person_data_list
+            }
+        frame_datas_array.append(frame_datas)
+
+- About coordinate order:
+    - dlib: (Left, Top, Right, Bottom,)
+    - Dlib_api(): (top, right, bottom, left)
+    - see bellow
+        - https://github.com/davisking/dlib/blob/master/python_examples/faceapi.py
+
+- References:
+    - About usage of cython:
+        - see bellow
+            - https://www.youtube.com/watch?app=desktop&v=sGggkVaRMzY
+
+    - About mediapipe for python:
+        - see bellow
+            - https://github.com/google/mediapipe/tree/master/mediapipe/python
+            - https://solutions.mediapipe.dev/face_detection#python-solution-api
+
+    - About anti spoof function:
+        - model
+            - Original model create by Prokofev Kirill, modified by PINT
+        - URL
+            - https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3
 """
+# cython: language_level=3
+
 # from __future__ import annotations
 
-"""mediapipe for python, see bellow
-https://github.com/google/mediapipe/tree/master/mediapipe/python
-"""
-"""about coordinate order
-dlib: (Left, Top, Right, Bottom,)
-Dlib_api(): (top, right, bottom, left)
-see bellow
-https://github.com/davisking/dlib/blob/master/python_examples/faceapi.py
-"""
-__model__ = 'Original model create by Prokofev Kirill, modified by PINT'
-__URL__ = 'https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3'
-
 """DEBUG: MEMORY LEAK
-from face01lib.memory_leak import Memory_leak
+from .memory_leak import Memory_leak
 Memory_leak_obj = Memory_leak()
 line_or_traceback = 'line'  # 'line' or 'traceback'
 Memory_leak_obj.memory_leak_analyze_start(line_or_traceback)
 """
 
+
+
 import inspect
 from datetime import datetime
 from platform import system
 from traceback import format_exc
+from typing import Dict, List, Tuple, Union
 
-
-from memory_profiler import profile  # @profile()
 import cv2
-# from asyncio.log import logger
 import mediapipe as mp
 import mojimoji
-from typing import List, Tuple, Union, Dict
 import numpy as np
 import numpy.typing as npt  # See [](https://discuss.python.org/t/how-to-type-annotate-mathematical-operations-that-supports-built-in-numerics-collections-and-numpy-arrays/13509)
-
+from memory_profiler import profile  # @profile()
 from PIL import Image, ImageDraw, ImageFile, ImageFont
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-from face01lib.api import Dlib_api
+from .api import Dlib_api
 
 Dlib_api_obj = Dlib_api()
-from face01lib.Calc import Cal
+from .Calc import Cal
 
 Cal_obj = Cal()
 # from collections import defaultdict
@@ -66,11 +104,11 @@ from shutil import move
 
 import onnxruntime
 
-from face01lib.logger import Logger
-from face01lib.models import Dlib_models
-from face01lib.return_face_image import Return_face_image
+from .logger import Logger
+from .models import Dlib_models
+from .return_face_image import Return_face_image
+from .video_capture import VidCap
 
-from face01lib.video_capture import VidCap
 # VidCap_obj = VidCap()
 
 
@@ -94,6 +132,23 @@ class Core:
             model_selection: int = 0,
             min_detection_confidence: float = 0.4
         ) -> mp.python.solution_base:
+        """Processes an RGB image and returns a list of the detected face location data.
+
+        Args:
+            resized_frame (npt.NDArray[np.uint8]): 
+                Resized image frame
+            model_selection (int, optional): 
+                Value set in 'config.ini'.  Defaults to 0.
+            min_detection_confidence (float, optional): 
+                Value set in 'config.ini'. Defaults to 0.4.
+
+        Returns:
+            A NamedTuple object with a "detections" field that contains a list of the
+            detected face location data.'
+
+        Refer:
+            https://solutions.mediapipe.dev/face_detection#python-solution-api
+        """        
         self.resized_frame: npt.NDArray[np.uint8] = resized_frame
         self.model_selection: Tuple[int] = model_selection,
         self.min_detection_confidence: float = min_detection_confidence
@@ -154,9 +209,8 @@ class Core:
             min_detection_confidence: float,
             same_time_recognize: int = 2
         ) -> List[Tuple[int,int,int,int]]:
-        """
-        return: face_location_list
-        """
+
+
         self.face_location_list_resized_frame: npt.NDArray[np.uint8]= resized_frame
         self.set_width: int = set_width
         self.set_height: int = set_height
@@ -808,7 +862,7 @@ class Core:
     #         left = face_location[3]
     #         face_image = self.resized_frame[top:bottom, left:right]
     #         """DEBUG
-    #         from face01lib.video_capture import VidCap
+    #         from .video_capture import VidCap
     #         VidCap().frame_imshow_for_debug(face_image)
     #         VidCap().frame_imshow_for_debug(self.resized_frame)
     #         """

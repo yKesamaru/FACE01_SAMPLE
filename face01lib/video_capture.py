@@ -33,10 +33,10 @@ from io import BytesIO
 from PIL import Image, ImageFile
 import numpy as np
 from sys import exit
-from face01lib.logger import Logger
-from face01lib.Calc import Cal
-# from face01lib import return_tuple
-# from face01lib.sample import size
+from .logger import Logger
+from .Calc import Cal
+# from  import return_tuple
+# from .sample import size
 
 name = __name__
 dir = dirname(__file__)

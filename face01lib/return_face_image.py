@@ -36,7 +36,7 @@ class Return_face_image():
             left: cython.int = face_location[3]
             face_image = self.resized_frame[top:bottom, left:right]
             """DEBUG
-            from face01lib.video_capture import VidCap
+            from .video_capture import VidCap
             VidCap().frame_imshow_for_debug(face_image)
             VidCap().frame_imshow_for_debug(self.resized_frame)
             """
