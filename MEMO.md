@@ -1,6 +1,8 @@
 # FACE01について
 # TODO
 ## 1.4.09
+- pydoc
+  -  $ python -m pydoc -b
 - Core.pyを中心に型アノテーションをつけてデータ型を整理する
 - クラスメソッド、ストラクトメソッドに変更を進める
 - return_face_image.pyを徹底的にcython最適化して、その様子をzennに掲載する

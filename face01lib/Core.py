@@ -77,6 +77,7 @@ Memory_leak_obj.memory_leak_analyze_start(line_or_traceback)
 
 import inspect
 from datetime import datetime
+from logging import LoggerAdapter
 from platform import system
 from traceback import format_exc
 from typing import Dict, List, Tuple, Union
@@ -200,7 +201,7 @@ class Core:
 
 
     # @profile()
-    def return_face_location_list(
+    def _return_face_location_list(
             self,
             resized_frame: npt.NDArray[np.uint8],
             set_width: int,
@@ -209,7 +210,6 @@ class Core:
             min_detection_confidence: float,
             same_time_recognize: int = 2
         ) -> List[Tuple[int,int,int,int]]:
-
 
         self.face_location_list_resized_frame: npt.NDArray[np.uint8]= resized_frame
         self.set_width: int = set_width
@@ -256,7 +256,7 @@ class Core:
 
 
     # @profile()
-    def draw_telop(
+    def _draw_telop(
             self,
             logger,
             cal_resized_telop_nums: Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]],
@@ -286,7 +286,7 @@ class Core:
 
 
     # @profile()
-    def draw_logo(
+    def _draw_logo(
             self,
             logger,
             cal_resized_logo_nums: Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]],
@@ -311,12 +311,14 @@ class Core:
 
 
     # @profile()
-    def check_compare_faces(self,
+    def _check_compare_faces(
+            self,
             logger,
             known_face_encodings: List[npt.NDArray[np.float64]],
             face_encoding: npt.NDArray[np.float64],
             tolerance: float
         ) -> Tuple[npt.NDArray[np.bool8], float]:
+
         self.logger = logger
         self.known_face_encodings: List[npt.NDArray[np.float64]] = known_face_encodings
         self.face_encoding: npt.NDArray[np.float64] = face_encoding
@@ -355,7 +357,7 @@ class Core:
             resized_frame: npt.NDArray[np.uint8]
         ) -> List[Dict]:
         """Method to make frame_datas_array
-                Return the data sturcture of frame_datas_list. 
+                Return the data structure of frame_datas_list. 
 
         Args:
             overlay (npt.NDArray[np.uint8]): Copy of frame
@@ -381,7 +383,7 @@ class Core:
                 }
                 
                 person_data内のlocationは個々人の顔座標です。
-                個々人を特定しない場合の顔座標はframe_detas['face_location_list']を使ってください。
+                個々人を特定しない場合の顔座標はframe_datas['face_location_list']を使ってください。
             
             person_data_list: 
                 person_data_list.append(person_data)
@@ -438,14 +440,14 @@ class Core:
 
     # pil_img_rgbオブジェクトを生成
     # @profile()
-    def pil_img_rgb_instance(self, frame):
+    def _pil_img_rgb_instance(self, frame):
         self.frame = frame
         pil_img_obj_rgb = Image.fromarray(cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGBA))
         return  pil_img_obj_rgb
 
     # 顔部分の領域をクロップ画像ファイルとして出力
     # @profile()
-    def make_crop_face_image(
+    def _make_crop_face_image(
             self,
             anti_spoof,
             name,
@@ -486,7 +488,7 @@ class Core:
 
     # Get face_names
     # @profile()
-    def return_face_name(
+    def _return_face_name(
             self,
             args_dict: Dict,
             matches: npt.NDArray[np.bool8],
@@ -633,14 +635,14 @@ class Core:
             if self.args_dict["draw_telop_and_logo"] == True:
 
                 self.resized_frame = \
-                    self.draw_telop(
+                    self._draw_telop(
                             self.logger,
                             self.args_dict["cal_resized_telop_nums"],
                             self.resized_frame
                         )
                 
                 self.resized_frame = \
-                    self.draw_logo(
+                    self._draw_logo(
                             self.logger,
                             self.args_dict["cal_resized_logo_nums"],
                             self.resized_frame
@@ -649,7 +651,7 @@ class Core:
         # 顔座標算出
         if self.args_dict["use_pipe"] == True:
             face_location_list: List[Tuple[int,int,int,int]] = \
-                self.return_face_location_list(
+                self._return_face_location_list(
                     self.resized_frame,
                     self.args_dict["set_width"],
                     self.args_dict["set_height"],
@@ -945,7 +947,7 @@ class Core:
             for face_encoding in self.face_encodings:
                 # Initialize name, matches (Inner frame)
                 name: str = "Unknown"
-                matches, min_distance = self.check_compare_faces(self.logger, self.args_dict["known_face_encodings"], face_encoding, self.args_dict["tolerance"])
+                matches, min_distance = self._check_compare_faces(self.logger, self.args_dict["known_face_encodings"], face_encoding, self.args_dict["tolerance"])
 
                 # もし該当人物がいなかったら処理を飛ばす
                 if not np.any(matches == True):
@@ -953,7 +955,7 @@ class Core:
                     continue
 
                 # 名前リスト(face_names)生成
-                face_name: str = self.return_face_name(
+                face_name: str = self._return_face_name(
                     self.args_dict,
                     matches,
                     min_distance
@@ -997,11 +999,11 @@ class Core:
                 # クロップ画像保存
                 if self.args_dict["crop_face_image"]==True:
                     if self.args_dict["frequency_crop_image"] < self.GLOBAL_MEMORY['number_of_crops']:
-                        pil_img_obj_rgb = self.pil_img_rgb_instance(resized_frame)
+                        pil_img_obj_rgb = self._pil_img_rgb_instance(resized_frame)
                         if self.args_dict["crop_with_multithreading"] == True:
                             # """1.3.08 multithreading 9.05s
                             with ThreadPoolExecutor() as executor:
-                                future = executor.submit(self.make_crop_face_image, 
+                                future = executor.submit(self._make_crop_face_image, 
                                     args_dict["anti_spoof"],
                                     name,
                                     dis,
@@ -1018,7 +1020,7 @@ class Core:
                         else:
                             # """ORIGINAL: 1.3.08で変更 8.69s
                             filename,number_of_crops, frequency_crop_image = \
-                                self.make_crop_face_image(
+                                self._make_crop_face_image(
                                     args_dict["anti_spoof"],
                                     name,
                                     dis,
@@ -1042,7 +1044,7 @@ class Core:
                     if p <= self.args_dict["tolerance"]:  # ディスタンスpがtolerance以下の場合
                         if self.args_dict["default_face_image_draw"] == True:
                             resized_frame: npt.NDArray[np.uint8] = \
-                                self.draw_default_face(
+                                self._draw_default_face(
                                     self.logger,
                                     self.args_dict,
                                     name,
@@ -1056,10 +1058,10 @@ class Core:
                     # ピンクまたは白の四角形描画
                     if self.args_dict["rectangle"] == True:
                         if name == 'Unknown':  # プリセット顔画像に対応する顔画像がなかった場合
-                            resized_frame: npt.NDArray[np.uint8] = self.draw_pink_rectangle(resized_frame, top,bottom,left,right)
+                            resized_frame: npt.NDArray[np.uint8] = self._draw_pink_rectangle(resized_frame, top,bottom,left,right)
                         else:  # プリセット顔画像に対応する顔画像があった場合
                             resized_frame: npt.NDArray[np.uint8] = \
-                                self.draw_white_rectangle(
+                                self._draw_white_rectangle(
                                     self.args_dict["rectangle"],
                                     resized_frame,
                                     top,
@@ -1071,7 +1073,7 @@ class Core:
                     # パーセンテージ描画
                     if self.args_dict["show_percentage"]==True:
                         resized_frame: npt.NDArray[np.uint8] = \
-                            self.display_percentage(
+                            self._display_percentage(
                                 percentage_and_symbol,
                                 resized_frame,
                                 p,
@@ -1086,7 +1088,7 @@ class Core:
                     # 名前表示と名前用四角形の描画
                     if self.args_dict["show_name"]==True:
                         resized_frame: npt.NDArray[np.uint8] = \
-                            self.draw_rectangle_for_name(
+                            self._draw_rectangle_for_name(
                                 name,
                                 resized_frame,
                                 left,
@@ -1094,7 +1096,7 @@ class Core:
                             )
                         pil_img_obj= Image.fromarray(resized_frame)
                         resized_frame: npt.NDArray[np.uint8] = \
-                            self.draw_text_for_name(
+                            self._draw_text_for_name(
                                 self.logger,
                                 left,
                                 right,
@@ -1110,7 +1112,7 @@ class Core:
                     # target_rectangleの描画
                     if self.args_dict["target_rectangle"] == True:
                         resized_frame: npt.NDArray[np.uint8] = \
-                            self.draw_target_rectangle(
+                            self._draw_target_rectangle(
                                 person_data_list,
                                 self.args_dict,
                                 resized_frame,
@@ -1194,10 +1196,24 @@ class Core:
 
 
     # @profile()
-    def r_face_image(self, frame, face_location):
-        self.frame = frame
-        self.face_location = face_location
-        face_image = Return_face_image().return_face_image(self.frame, self.face_location)
+    def r_face_image(
+            self,
+            frame: npt.NDArray[np.uint8],
+            face_location: Tuple[int,int,int,int]
+        ) -> npt.NDArray[np.uint8]:
+        """Return face image which expressed for ndarray
+
+        Args:
+            frame (npt.NDArray[np.uint8]): Frame image
+            face_location (Tuple[int,int,int,int]): Face location (coordinate)
+
+        Returns:
+            npt.NDArray[np.uint8]: Face image which expressed for ndarray
+        """        
+        self.frame: npt.NDArray[np.uint8] = frame
+        self.face_location: Tuple[int,int,int,int] = face_location
+        face_image: npt.NDArray[np.uint8] = \
+            Return_face_image().return_face_image(self.frame, self.face_location)
         return face_image
 
 
@@ -1282,7 +1298,7 @@ class Core:
 
 # 以下、元libdraw.LibDraw
     # @profile()
-    def draw_pink_rectangle(
+    def _draw_pink_rectangle(
             self,
             resized_frame: npt.NDArray[np.uint8],
             top,
@@ -1306,7 +1322,7 @@ class Core:
 
 
     # @profile()
-    def draw_white_rectangle(
+    def _draw_white_rectangle(
             self,
             rectangle,
             resized_frame: npt.NDArray[np.uint8],
@@ -1328,7 +1344,7 @@ class Core:
 
     # パーセンテージ表示
     # @profile()
-    def display_percentage(
+    def _display_percentage(
             self,
             percentage_and_symbol,resized_frame: npt.NDArray[np.uint8],
             p,
@@ -1365,7 +1381,7 @@ class Core:
 
     # デフォルト顔画像の描画処理
     # @profile()
-    def draw_default_face_image(
+    def _draw_default_face_image(
             self,
             logger,
             resized_frame: npt.NDArray[np.uint8],
@@ -1399,7 +1415,7 @@ class Core:
 
     # デフォルト顔画像の表示面積調整
     # @profile()
-    def adjust_display_area(
+    def _adjust_display_area(
             self,
             args_dict,
             default_face_image
@@ -1416,7 +1432,7 @@ class Core:
 
 
     # @profile()
-    def draw_default_face(
+    def _draw_default_face(
             self,
             logger,
             args_dict,
@@ -1458,13 +1474,13 @@ class Core:
             """DEBUG
             frame_imshow_for_debug(default_face_image)  # OK
             """
-            x1, y1, x2, y2 , default_face_small_image, face_image_width = self.adjust_display_area(args_dict, default_face_image)
-            resized_frame: npt.NDArray[np.uint8] = self.draw_default_face_image(logger, resized_frame, default_face_small_image, x1, y1, x2, y2, number_of_people, face_image_width)
+            x1, y1, x2, y2 , default_face_small_image, face_image_width = self._adjust_display_area(args_dict, default_face_image)
+            resized_frame: npt.NDArray[np.uint8] = self._draw_default_face_image(logger, resized_frame, default_face_small_image, x1, y1, x2, y2, number_of_people, face_image_width)
         return resized_frame
 
 
     # @profile()
-    def draw_rectangle_for_name(
+    def _draw_rectangle_for_name(
             self,
             name,
             resized_frame: npt.NDArray[np.uint8],
@@ -1486,7 +1502,7 @@ class Core:
 
     # 帯状四角形（ピンク）の描画
     # @profile()
-    def draw_error_messg_rectangle(
+    def _draw_error_messg_rectangle(
             self,
             resized_frame: npt.NDArray[np.uint8],
             set_height,
@@ -1507,14 +1523,14 @@ class Core:
 
     # drawオブジェクトを生成
     # @profile()
-    def  make_draw_object(self, frame):
+    def  _make_draw_object(self, frame):
         self.frame = frame
         draw = ImageDraw.Draw(Image.fromarray(self.frame))
         return draw
 
 
     # @profile()
-    def draw_error_messg_rectangle_messg(
+    def _draw_error_messg_rectangle_messg(
             self,
             draw,
             error_messg_rectangle_position,
@@ -1531,7 +1547,7 @@ class Core:
 
 
     # @profile()
-    def return_fontpath(self, logger):
+    def _return_fontpath(self, logger):
         # フォントの設定(フォントファイルのパスと文字の大きさ)
         operating_system: str  = system()
         fontpath: str = ''
@@ -1548,7 +1564,7 @@ class Core:
 
 
     # @profile()
-    def calculate_text_position(
+    def _calculate_text_position(
             self,
             left,
             right,
@@ -1572,7 +1588,7 @@ class Core:
 
 
     # @profile()
-    def draw_name(
+    def _draw_name(
             self,
             name,pil_img_obj,
             Unknown_position,
@@ -1608,7 +1624,7 @@ class Core:
 
     # pil_img_objをnumpy配列に変換
     # @profile()
-    def convert_pil_img_to_ndarray(
+    def _convert_pil_img_to_ndarray(
             self,
             pil_img_obj
         ):
@@ -1622,7 +1638,7 @@ class Core:
 
 
     # @profile()
-    def draw_text_for_name(
+    def _draw_text_for_name(
             self,
             logger,
             left,
@@ -1645,13 +1661,13 @@ class Core:
         # すべての文字を全角変換する
         self.name = mojimoji.han_to_zen(self.name, ascii=True, kana=True, digit=True)
 
-        fontpath = self.return_fontpath(logger)
+        fontpath = self._return_fontpath(logger)
         """TODO #16 FONTSIZEハードコーティング訂正"""
         fontsize = 14
         font = ImageFont.truetype(fontpath, fontsize, encoding = 'utf-8')
         # テキスト表示位置決定
         position, Unknown_position = \
-            self.calculate_text_position(
+            self._calculate_text_position(
                 self.left,
                 self.right,
                 self.name,
@@ -1660,7 +1676,7 @@ class Core:
             )
         # nameの描画
         self.pil_img_obj = \
-            self.draw_name(
+            self._draw_name(
                 self.name,
                 self.pil_img_obj,
                 Unknown_position,
@@ -1670,14 +1686,14 @@ class Core:
                 position
             )
         # pil_img_objをnumpy配列に変換
-        resized_frame: npt.NDArray[np.uint8] = self.convert_pil_img_to_ndarray(self.pil_img_obj)
+        resized_frame: npt.NDArray[np.uint8] = self._convert_pil_img_to_ndarray(self.pil_img_obj)
         # del self.pil_img_obj
         return resized_frame
 
 
     # target_rectangleの描画
     # @profile()
-    def draw_target_rectangle(
+    def _draw_target_rectangle(
         self,
         person_data_list,
         args_dict,

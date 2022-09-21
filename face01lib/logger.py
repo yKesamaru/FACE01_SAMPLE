@@ -5,6 +5,7 @@ import sys
 
 class Logger:
     def __init__(self) -> None:
+        # TODO: #28 ここでsetlevelを変更するようにする
         self.setlevel: None = None
 
 
