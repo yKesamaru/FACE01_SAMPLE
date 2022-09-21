@@ -3,9 +3,11 @@ See [here](Install_docker.md).
 
 # Pull Docker image
 The easiest way to use Docker is to pull the image.
+![](img/PASTE_IMAGE_2022-08-29-07-43-12.png)
+
 ```bash
 # USE NVIDIA GPU
-docker pull tokaikaoninsho/face01_gpu:1.4.05
+docker pull tokaikaoninsho/face01_gpu:1.4.08
 # OR USE ONLY CPU
 docker pull tokaikaoninsho/face01_no_gpu
 ```
