@@ -25,85 +25,24 @@ from psutil import cpu_count, cpu_freq, virtual_memory
 from memory_profiler import profile  # @profile()
 from face01lib.api import Dlib_api
 
-Dlib_api_obj = Dlib_api()
+Dlib_api_obj: Dlib_api = Dlib_api()
 from face01lib.Core import Core
 
-Core_obj = Core()
+Core_obj: Core = Core()
 from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
 from face01lib.video_capture import VidCap
 
-GLOBAL_MEMORY = {
+GLOBAL_MEMORY: Dict = {
 # 半透明値,
 'alpha' : 0.3,
 'number_of_crops' : 0
 }
 
-name = __name__
-dir = dirname(__file__)
+name: str = __name__
+dir: str = dirname(__file__)
 
 # @profile()
-def configure():
-    kaoninshoDir: str = dir
-    chdir(kaoninshoDir)
-    priset_face_imagesDir: str = f'{dirname(__file__)}/priset_face_images/'
-
-    try:
-        conf = ConfigParser()
-        conf.read('config.ini', 'utf-8')
-        # dict作成
-        conf_dict = {
-            'model' : conf.get('DEFAULT','model'),
-            'headless' : conf.getboolean('MAIN','headless'),
-            'anti_spoof' : conf.getboolean('MAIN','anti_spoof'),
-            'output_debug_log' : conf.getboolean('MAIN','output_debug_log'),
-            'set_width' : int(conf.get('SPEED_OR_PRECISE','set_width')),
-            'similar_percentage' : float(conf.get('SPEED_OR_PRECISE','similar_percentage')),
-            'jitters' : int(conf.get('SPEED_OR_PRECISE','jitters')),
-            'priset_face_images_jitters' : int(conf.get('SPEED_OR_PRECISE','priset_face_images_jitters')),
-            'priset_face_imagesDir' :priset_face_imagesDir,
-            'upsampling' : int(conf.get('SPEED_OR_PRECISE','upsampling')),
-            'mode' : conf.get('SPEED_OR_PRECISE','mode'),
-            'frame_skip' : int(conf.get('SPEED_OR_PRECISE','frame_skip')),
-            'number_of_people' : int(conf.get('SPEED_OR_PRECISE','number_of_people')),
-            'use_pipe' : conf.getboolean('dlib','use_pipe'),
-            'model_selection' : int(conf.get('dlib','model_selection')),
-            'min_detection_confidence' : float(conf.get('dlib','min_detection_confidence')),
-            'person_frame_face_encoding' : conf.getboolean('dlib','person_frame_face_encoding'),
-            'same_time_recognize' : int(conf.get('dlib','same_time_recognize')),
-            'set_area' : conf.get('INPUT','set_area'),
-            'movie' : conf.get('INPUT','movie'),
-            'user': conf.get('Authentication','user'),
-            'passwd': conf.get('Authentication','passwd'),
-            'rectangle' : conf.getboolean('DRAW_INFOMATION','rectangle'),
-            'target_rectangle' : conf.getboolean('DRAW_INFOMATION','target_rectangle'),
-            'draw_telop_and_logo' : conf.getboolean('DRAW_INFOMATION', 'draw_telop_and_logo'),
-            'default_face_image_draw' : conf.getboolean('DRAW_INFOMATION', 'default_face_image_draw'),
-            'show_overlay' : conf.getboolean('DRAW_INFOMATION', 'show_overlay'),
-            'show_percentage' : conf.getboolean('DRAW_INFOMATION', 'show_percentage'),
-            'show_name' : conf.getboolean('DRAW_INFOMATION', 'show_name'),
-            'crop_face_image' : conf.getboolean('SAVE_FACE_IMAGE', 'crop_face_image'),
-            'frequency_crop_image' : int(conf.get('SAVE_FACE_IMAGE','frequency_crop_image')),
-            'crop_with_multithreading' : conf.getboolean('SAVE_FACE_IMAGE','crop_with_multithreading'),
-            'Python_version': conf.get('system_check','Python_version'),
-            'cpu_freq': conf.get('system_check','cpu_freq'),
-            'cpu_count': conf.get('system_check','cpu_count'),
-            'memory': conf.get('system_check','memory'),
-            'gpu_check' : conf.getboolean('system_check','gpu_check'),
-            'calculate_time' : conf.getboolean('DEBUG','calculate_time'),
-            'show_video' : conf.getboolean('Scheduled_to_be_abolished','show_video'),
-            'kaoninshoDir' :kaoninshoDir,
-        }
-        return conf_dict
-    except:
-        logger.warning("config.ini 読み込み中にエラーが発生しました")
-        logger.exception("conf_dictが正常に作成できませんでした")
-        logger.warning("以下のエラーをシステム管理者様へお伝えください")
-        logger.warning("-" * 20)
-        logger.warning(format_exc(limit=None, chain=True))
-        logger.warning("-" * 20)
-        logger.warning("終了します")
-        exit(0)
 
 conf_dict = configure()
 
@@ -397,9 +336,6 @@ if __name__ == '__main__':
                 if event =='terminate':
                     break
         
-        # メモリ解放
-        del frame_datas_array
-        gc.collect()
         
         if args_dict["headless"] == False:
             window.close()
