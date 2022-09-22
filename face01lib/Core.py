@@ -1,3 +1,5 @@
+# cython: language_level=3
+
 """
 - Cython compile option:
     - Cython options which have enabled
@@ -62,7 +64,6 @@
         - URL
             - https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3
 """
-# cython: language_level=3
 
 # from __future__ import annotations
 
@@ -77,10 +78,10 @@ Memory_leak_obj.memory_leak_analyze_start(line_or_traceback)
 
 import inspect
 from datetime import datetime
-from logging import LoggerAdapter
+
 from platform import system
 from traceback import format_exc
-from typing import Dict, List, Tuple, Union
+from typing import Dict, List, Tuple, Union, Generator
 
 import cv2
 import mediapipe as mp
@@ -101,6 +102,7 @@ Cal_obj = Cal()
 # from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from os.path import dirname, exists
+import os
 from shutil import move
 
 import onnxruntime
@@ -117,13 +119,18 @@ anti_spoof_model: str = Dlib_models().anti_spoof_model_location()
 onnx_session = onnxruntime.InferenceSession(anti_spoof_model)
 
 name: str = __name__
-dir: str = dirname(__file__)
-logger = Logger().logger(name, dir, 'info')
-# Cal_obj.cal_specify_date(logger)
+dir: str = os.path.dirname(__file__)
+head, tail = os.path.split(dir)
+
+logger = Logger().logger(name, head, 'info')
+
+
+Cal_obj.cal_specify_date(logger)
+
 
 class Core:
-    def __init__(self) -> None:
-        Cal_obj.cal_specify_date(logger)
+    # def __init__(self) -> None:
+    #     Cal_obj.cal_specify_date(logger)
 
 
     # @profile()
@@ -595,7 +602,6 @@ class Core:
 
     # フレーム前処理
     # @profile()
-    # @staticmethod
     def frame_pre_processing(
             self,
             logger,
@@ -1836,6 +1842,117 @@ class Core:
                     pass
 
         return self.resized_frame
+
+
+    def common_process(
+            self,
+            args_dict: Dict,
+            GLOBAL_MEMORY: Dict
+        ) -> Generator:
+        """Generator of frame_datas_array
+
+        Yields:
+            Generator: frame_datas_array
+        
+        More about:
+            main_process function consists 3 part of Core() methods.
+            1) Core.frame_pre_processing
+            2) Core.face_encoding_process
+            3) Core.frame_post_processing
+        """
+        self.args_dict: Dict = args_dict
+        self.GLOBAL_MEMORY = GLOBAL_MEMORY
+
+        frame_generator_obj = VidCap().frame_generator(self.args_dict)
+
+        try:
+
+            frame_datas_array: List[Dict] = \
+                self.frame_pre_processing(
+                    logger,
+                    args_dict,
+                    frame_generator_obj.__next__()
+                )
+            
+            """DEBUG
+            logger.debug(inspect.currentframe().f_back.f_code.co_filename)
+            logger.debug(inspect.currentframe().f_back.f_lineno)
+            logger.debug(f'frame_datas_array size: {len(frame_datas_array), getsizeof(frame_datas_array)}')
+            logger.debug(inspect.currentframe().f_back.f_code.co_filename)
+            logger.debug(inspect.currentframe().f_back.f_lineno)
+            logger.debug(f'args_dict size: {len(args_dict), getsizeof(args_dict)}')
+            """
+
+            face_encodings, frame_datas_array = \
+                self.face_encoding_process(
+                    logger,
+                    args_dict,
+                    frame_datas_array
+                )
+
+            frame_datas_array = \
+                self.frame_post_processing(
+                    logger,
+                    args_dict,
+                    face_encodings,
+                    frame_datas_array,
+                    GLOBAL_MEMORY
+                )
+            
+            yield frame_datas_array
+
+        except StopIteration:
+            logger.warning("DATA RECEPTION HAS ENDED")
+            exit(0)
+        except Exception as e:
+            logger.warning("ERROR OCURRED")
+            logger.warning("-" * 20)
+            logger.warning(f"ERROR TYPE: {e}")
+            logger.warning(format_exc(limit=None, chain=True))
+            logger.warning("-" * 20)
+            exit(0)
+
+
+    def override_args_dict(
+            self,
+            args_dict: Dict,
+            override_list: List[Tuple]
+        ) -> Dict:
+
+        """Override args_dict for example
+
+        Args:
+            Dict: args_dict
+            List[Tuple]: override_list
+        
+        Returns:
+            Dict: args_dict
+
+        Example:
+            >>> args_dict = Core.override_args_dict(
+                args_dict,
+                [
+                    ('headless', False),
+                    ('crop_face_image', False),
+                    ('output_debug_log', True)
+                ]
+            )
+        
+        Note:
+            If you specified key is not exist, application will fail down 
+            with print out log 'warning'.
+        """
+        element: Tuple
+        for element in override_list:
+            key, value = element
+
+            if not key in args_dict:
+                logger.error(f"{key} dose not exist")
+                exit(0)
+
+            args_dict[key] = value
+        
+        return args_dict
 
 
 """DEBUG: MEMORY LEAK

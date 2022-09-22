@@ -201,5 +201,5 @@
     "ctime": "cpp"
   },
   "C_Cpp.errorSquiggles": "Enabled",
-  "cmake.sourceDirectory": "${workspaceFolder}/face01lib/cpp"
+  "cmake.sourceDirectory": "${workspaceFolder}/."
 }

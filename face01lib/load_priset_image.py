@@ -1,6 +1,6 @@
-#!python
 #cython: language_level=3
-import logging
+
+import os
 from os import chdir, listdir, remove
 from os.path import exists, isdir
 from shutil import move
@@ -8,30 +8,27 @@ from shutil import move
 from numpy import load, savez
 
 from .api import Dlib_api
+from .logger import Logger
 
-"""Logging"""
-logger = logging.getLogger('face01lib/load_priset_image')
-# logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-formatter = logging.Formatter('[%(asctime)s] [%(name)s] [%(filename)s] [%(levelname)s] %(message)s')
-file_handler = logging.FileHandler('face01.log', mode='a')
-file_handler.setLevel(logging.INFO)
-file_handler.setFormatter(formatter)
-stream_handler = logging.StreamHandler()
-stream_handler.setLevel(logging.INFO)
-stream_handler.setFormatter(formatter)
-logger.addHandler(file_handler)
-logger.addHandler(stream_handler)
+name: str = __name__
+dir: str = os.path.dirname(__file__)
+head, tail = os.path.split(dir)
+
+logger = Logger().logger(name, head, 'info')
+
+
+# TODO: #29 ファイル全体のリファクタリング
+
 
 def load_priset_image(
-    self,
-    kaoninshoDir,
-    priset_face_imagesDir,
-    upsampling=0,
-    jitters=100,
-    mode='hog',
-    model='small'
-):
+        self,
+        kaoninshoDir,
+        priset_face_imagesDir,
+        upsampling=0,
+        jitters=100,
+        mode='hog',
+        model='small'
+    ):
     # ローカル変数の宣言と初期化
     known_face_names_list = []
     known_face_encodings_list = []

@@ -1,6 +1,7 @@
 # FACE01について
 # TODO
 ## 1.4.09
+- FACE01.pyを整理する
 - pydoc
   -  $ python -m pydoc -b
 - Core.pyを中心に型アノテーションをつけてデータ型を整理する

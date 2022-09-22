@@ -154,21 +154,20 @@ class Dlib_api:
         )
 
 
-    """NOT USE"""
-    # def load_image_file(self, file, mode='RGB'):
-    #     self.file = file
-    #     self.mode = mode
-    #     """
-    #     Loads an image file (.jpg, .png, etc) into a numpy array
+    def load_image_file(self, file, mode='RGB'):
+        self.file = file
+        self.mode = mode
+        """
+        Loads an image file (.jpg, .png, etc) into a numpy array
 
-    #     :param file: image file name or file object to load
-    #     :param mode: format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
-    #     :return: image contents as numpy array
-    #     """
-    #     im = open(self.file)
-    #     if self.mode:
-    #         im = im.convert(self.mode)
-    #     return np.array(im)
+        :param file: image file name or file object to load
+        :param mode: format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
+        :return: image contents as numpy array
+        """
+        im = open(self.file)
+        if self.mode:
+            im = im.convert(self.mode)
+        return np.array(im)
 
 
     def _raw_face_locations(

@@ -1,16 +1,46 @@
-#!python
 #cython: language_level=3
-
+from typing import Generator, List, Tuple, Union, Dict
 import numpy as np
 from PIL import ImageFont, ImageFile, Image, ImageDraw
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 from datetime import datetime
+from .logger import Logger
+from os.path import dirname, exists
+from time import perf_counter
+
+
+name: str = __name__
+dir: str = dirname(__file__)
+logger = Logger().logger(name, dir, 'info')
 
 
 class Cal:
     def __init__(self) -> None:
         pass
+
+
+    # 処理時間の測定（算出）
+    @staticmethod
+    def Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR):
+            HANDLING_FRAME_TIME = (HANDLING_FRAME_TIME_REAR - HANDLING_FRAME_TIME_FRONT)  ## 小数点以下がミリ秒
+            logger.info(f'Processing time: {round(HANDLING_FRAME_TIME * 1000, 2)}[mSec]')
+
+
+    # 処理時間の測定（前半）
+    @staticmethod
+    def Measure_processing_time_forward():
+        HANDLING_FRAME_TIME_FRONT = perf_counter()
+        return HANDLING_FRAME_TIME_FRONT
+
+
+    # 処理時間の測定（後半）
+    @staticmethod
+    def Measure_processing_time_backward():
+        HANDLING_FRAME_TIME_FRONT = Cal.Measure_processing_time_forward()
+        HANDLING_FRAME_TIME_REAR = perf_counter()
+        Cal.Measure_processing_time(HANDLING_FRAME_TIME_FRONT,HANDLING_FRAME_TIME_REAR)
+
 
     # 指定日付計算: 評価版のみ実行
     def cal_specify_date(self, logger) -> None:

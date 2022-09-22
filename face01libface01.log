@@ -1035,3 +1035,105 @@ NoneType: None
 [2022-09-21 11:14:57,270] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
 [2022-09-21 11:14:57,270] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
 [2022-09-21 11:14:57,270] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-09-22 00:43:16,921] [face01lib.Initialize] [Initialize.py] [WARNING] config.ini 読み込み中にエラーが発生しました
+[2022-09-22 00:43:16,921] [face01lib.Initialize] [Initialize.py] [WARNING] config.ini 読み込み中にエラーが発生しました
+[2022-09-22 00:43:16,921] [face01lib.Initialize] [Initialize.py] [WARNING] config.ini 読み込み中にエラーが発生しました
+[2022-09-22 00:43:16,922] [face01lib.Initialize] [Initialize.py] [ERROR] conf_dictが正常に作成できませんでした
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/configparser.py", line 789, in get
+    value = d[option]
+  File "/usr/lib/python3.8/collections/__init__.py", line 898, in __getitem__
+    return self.__missing__(key)            # support subclasses that define __missing__
+  File "/usr/lib/python3.8/collections/__init__.py", line 890, in __missing__
+    raise KeyError(key)
+KeyError: 'model'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/Initialize.py", line 172, in configure
+    'model' : conf.get('DEFAULT','model'),
+  File "/usr/lib/python3.8/configparser.py", line 792, in get
+    raise NoOptionError(option, section)
+configparser.NoOptionError: No option 'model' in section: 'DEFAULT'
+[2022-09-22 00:43:16,922] [face01lib.Initialize] [Initialize.py] [ERROR] conf_dictが正常に作成できませんでした
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/configparser.py", line 789, in get
+    value = d[option]
+  File "/usr/lib/python3.8/collections/__init__.py", line 898, in __getitem__
+    return self.__missing__(key)            # support subclasses that define __missing__
+  File "/usr/lib/python3.8/collections/__init__.py", line 890, in __missing__
+    raise KeyError(key)
+KeyError: 'model'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/Initialize.py", line 172, in configure
+    'model' : conf.get('DEFAULT','model'),
+  File "/usr/lib/python3.8/configparser.py", line 792, in get
+    raise NoOptionError(option, section)
+configparser.NoOptionError: No option 'model' in section: 'DEFAULT'
+[2022-09-22 00:43:16,922] [face01lib.Initialize] [Initialize.py] [ERROR] conf_dictが正常に作成できませんでした
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/configparser.py", line 789, in get
+    value = d[option]
+  File "/usr/lib/python3.8/collections/__init__.py", line 898, in __getitem__
+    return self.__missing__(key)            # support subclasses that define __missing__
+  File "/usr/lib/python3.8/collections/__init__.py", line 890, in __missing__
+    raise KeyError(key)
+KeyError: 'model'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/Initialize.py", line 172, in configure
+    'model' : conf.get('DEFAULT','model'),
+  File "/usr/lib/python3.8/configparser.py", line 792, in get
+    raise NoOptionError(option, section)
+configparser.NoOptionError: No option 'model' in section: 'DEFAULT'
+[2022-09-22 00:43:16,924] [face01lib.Initialize] [Initialize.py] [WARNING] 以下のエラーをシステム管理者様へお伝えください
+[2022-09-22 00:43:16,924] [face01lib.Initialize] [Initialize.py] [WARNING] 以下のエラーをシステム管理者様へお伝えください
+[2022-09-22 00:43:16,924] [face01lib.Initialize] [Initialize.py] [WARNING] 以下のエラーをシステム管理者様へお伝えください
+[2022-09-22 00:43:16,924] [face01lib.Initialize] [Initialize.py] [WARNING] --------------------
+[2022-09-22 00:43:16,924] [face01lib.Initialize] [Initialize.py] [WARNING] --------------------
+[2022-09-22 00:43:16,924] [face01lib.Initialize] [Initialize.py] [WARNING] --------------------
+[2022-09-22 08:48:54,152] [face01lib.Initialize] [Initialize.py] [WARNING] config.ini 読み込み中にエラーが発生しました
+[2022-09-22 08:48:54,152] [face01lib.Initialize] [Initialize.py] [ERROR] conf_dictが正常に作成できませんでした
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/configparser.py", line 789, in get
+    value = d[option]
+  File "/usr/lib/python3.8/collections/__init__.py", line 898, in __getitem__
+    return self.__missing__(key)            # support subclasses that define __missing__
+  File "/usr/lib/python3.8/collections/__init__.py", line 890, in __missing__
+    raise KeyError(key)
+KeyError: 'model'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/Initialize.py", line 172, in configure
+    'model' : conf.get('DEFAULT','model'),
+  File "/usr/lib/python3.8/configparser.py", line 792, in get
+    raise NoOptionError(option, section)
+configparser.NoOptionError: No option 'model' in section: 'DEFAULT'
+[2022-09-22 08:48:54,154] [face01lib.Initialize] [Initialize.py] [WARNING] 以下のエラーをシステム管理者様へお伝えください
+[2022-09-22 08:48:54,154] [face01lib.Initialize] [Initialize.py] [WARNING] --------------------
+[2022-09-22 09:12:36,177] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-09-22 09:12:36,178] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-22 09:12:36,179] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-09-22 09:12:36,179] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-22 09:12:36,180] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-09-22 09:26:26,086] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-09-22 09:26:26,087] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-22 09:26:26,087] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-09-22 09:26:26,088] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-22 09:26:26,088] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-09-22 09:27:36,860] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-09-22 09:27:36,861] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-22 09:27:36,861] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-09-22 09:27:36,861] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-22 09:27:36,862] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
