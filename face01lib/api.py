@@ -365,8 +365,6 @@ class Dlib_api:
             face_encoding_to_check: npt.NDArray[np.float64],
             tolerance: float = 0.6
         ) -> Tuple[npt.NDArray[np.bool8], float]:
-        """TODO #26: FIX
-        compare_facesとreturn_face_namesに冗長がある"""
         """
         Compare a list of face encodings against a candidate encoding to see if they match.
 

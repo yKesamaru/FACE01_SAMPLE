@@ -11,6 +11,8 @@
   - ![](img/PASTE_IMAGE_2022-08-31-09-20-50.png)
 
 Fix
+- config.iniの'model = small'をなくす
+- GLOBAL_MEMORYをconfig.iniに組み込む
 - api.pyのCython化のために、アノテーションの徹底とリファクタリングをする
   - Core.pyにも若干の修正が入った。
 - anti_spoofをFalseにしてもanti_spoofメソッドが動いているバグの解決

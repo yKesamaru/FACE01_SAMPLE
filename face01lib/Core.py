@@ -111,6 +111,7 @@ from .logger import Logger
 from .models import Dlib_models
 from .return_face_image import Return_face_image
 from .video_capture import VidCap
+VidCap_obj = VidCap()
 
 # VidCap_obj = VidCap()
 
@@ -325,7 +326,17 @@ class Core:
             face_encoding: npt.NDArray[np.float64],
             tolerance: float
         ) -> Tuple[npt.NDArray[np.bool8], float]:
+        """Return match list and min value using dlib_api
 
+        Args:
+            logger (_type_): logger
+            known_face_encodings (List[npt.NDArray[np.float64]]): List of known face encodes
+            face_encoding (npt.NDArray[np.float64]): Face encoding data to be compared
+            tolerance (float): 
+
+        Returns:
+            Tuple[npt.NDArray[np.bool8], float]: match list, min value
+        """        
         self.logger = logger
         self.known_face_encodings: List[npt.NDArray[np.float64]] = known_face_encodings
         self.face_encoding: npt.NDArray[np.float64] = face_encoding
@@ -436,11 +447,11 @@ class Core:
             }
             self.frame_datas_array.append(frame_datas)
 
-        """DEBUG"""
+        """DEBUG
         logger.debug(f'frame_datas_array size: {len(self.frame_datas_array)}')
         logger.debug(inspect.currentframe().f_back.f_code.co_filename)
         logger.debug(inspect.currentframe().f_back.f_lineno)
-        
+        """
         
         return self.frame_datas_array
 
@@ -493,7 +504,6 @@ class Core:
         return filename,self.number_of_crops, self.frequency_crop_image
 
 
-    # Get face_names
     # @profile()
     def _return_face_name(
             self,
@@ -501,11 +511,19 @@ class Core:
             matches: npt.NDArray[np.bool8],
             min_distance: float
         ) -> str:
-        # self.args_dict = args_dict
-        # self.face_names = face_names
-        # self.face_encoding = face_encoding
-        # self.matches = matches
-        # self.name = name
+        """Get face_name
+
+        Args:
+            args_dict (Dict): args_dict
+            matches (npt.NDArray[np.bool8]): List of bool value
+            min_distance (float): min value
+
+        Returns:
+            str: Name who is
+        """        
+        self.args_dict = args_dict
+        self.matches = matches
+        self.min_distance = min_distance
 
         # アレイ中のインデックスからknown_face_names中の同インデックスの要素を算出
         index: int = np.where(matches == True)[0][0]
@@ -628,13 +646,13 @@ class Core:
         frame_datas_array: List[Dict] = []
         face_location_list: List[Tuple[int,int,int,int]] = []
         percentage_and_symbol: str = ''
-        overlay: npt.NDArray[np.uint8] = np.empty((2,2,3), dtype=np.uint8)  # type: ignore
+        overlay: npt.NDArray[np.uint8] = np.empty((2,2,3), dtype=np.uint8)
 
         # 描画系（bottom area, 半透明, telop, logo）
         if  self.args_dict["headless"] == False:
             ## 半透明処理（前半）
             if self.args_dict["show_overlay"] == True:
-                overlay: cv2.Mat = self.resized_frame.copy()
+                overlay= self.resized_frame.copy()
                 """DEBUG: Memory leak"""
                 
             ## テロップとロゴマークの合成
@@ -656,7 +674,7 @@ class Core:
 
         # 顔座標算出
         if self.args_dict["use_pipe"] == True:
-            face_location_list: List[Tuple[int,int,int,int]] = \
+            face_location_list = \
                 self._return_face_location_list(
                     self.resized_frame,
                     self.args_dict["set_width"],
@@ -693,7 +711,7 @@ class Core:
         # 顔が一定数以上なら以降の処理を行わない
         if len(face_location_list) >= self.args_dict["number_of_people"]:
             self.logger.info(f'{self.args_dict["number_of_people"]}人以上を検出しました')
-            frame_datas_array: List[Dict]  = \
+            frame_datas_array  = \
                 self.make_frame_datas_array(
                     overlay,
                     face_location_list,
@@ -712,19 +730,9 @@ class Core:
             'overlay': overlay,
             'person_data_list': person_data_list
         }
+
         frame_datas_array.append(frame_datas)
-        
-        frame_datas_array = \
-            self.make_frame_datas_array(
-                overlay,
-                face_location_list,
-                name,
-                filename,
-                percentage_and_symbol,
-                person_data_list,
-                frame_datas_array,
-                self.resized_frame
-            )
+
         return frame_datas_array
 
 
@@ -810,16 +818,17 @@ class Core:
                             concatenate_person_frame,
                             concatenate_face_location_list,
                             self.args_dict["jitters"],
-                            self.args_dict["model"]
+                            "small"
                         )
                 elif self.args_dict["use_pipe"] == True and  self.args_dict["person_frame_face_encoding"] == False:
                     try:
+                        # TODO: #30 Dlib_api_obj.face_encodingsだとエラーが発生する理由をきちんとする
                         face_encodings = \
                             Dlib_api().face_encodings(  # Dlib_api_obj.face_encodingsだとエラーが発生する。
                                 resized_frame,
                                 face_location_list,
                                 self.args_dict["jitters"],
-                                self.args_dict["model"]
+                                "small"
                             )
                         if face_encodings == []:
                             return face_encodings, self.frame_datas_array
@@ -843,7 +852,7 @@ class Core:
                             resized_frame,
                             face_location_list,
                             self.args_dict["jitters"],
-                            self.args_dict["model"]
+                            "small"
                         )
                 
                 # face_encodings_list = face_encodings_list.append(face_encodings)
@@ -886,8 +895,7 @@ class Core:
             logger,
             args_dict: Dict,
             face_encodings: List[npt.NDArray[np.float64]],
-            frame_datas_array: List[Dict],
-            GLOBAL_MEMORY: Dict
+            frame_datas_array: List[Dict]
         ) -> List[Dict]:
         """Modify each frame's datas.
 
@@ -896,7 +904,6 @@ class Core:
             args_dict (Dict): Dict of initial settings
             face_encodings (List[npt.NDArray[np.float64]]): List of encoded face datas
             frame_datas_array (List[Dict]): List of datas
-            GLOBAL_MEMORY (Dict): Global values
 
         Returns:
             List[Dict]: List of modified datas
@@ -913,14 +920,13 @@ class Core:
             - Make frame_datas_list
         """        
         self.logger = logger
-        self.args_dict = args_dict
-        self.face_encodings = face_encodings
-        self.frame_datas_array = frame_datas_array
-        self.GLOBAL_MEMORY = GLOBAL_MEMORY
+        self.args_dict: Dict = args_dict
+        self.face_encodings: List[npt.NDArray[np.float64]] = face_encodings
+        self.frame_datas_array: List[Dict] = frame_datas_array
         face_names: List[str] = []
-        face_location_list = []
-        filename = ''
-        debug_frame_turn_count = 0
+        face_location_list: List[Tuple[int,int,int,int]] = []
+        filename: str = ''
+        # debug_frame_turn_count = 0  # Not use
         modified_frame_list = []
 
         # frame_datas_arrayについて一度づつ回す
@@ -933,9 +939,9 @@ class Core:
                     if self.args_dict["show_overlay"]==True:
                         cv2.addWeighted(
                             frame_data["overlay"],
-                            self.GLOBAL_MEMORY["alpha"],
+                            self.args_dict["alpha"],
                             frame_data["img"],
-                            1-self.GLOBAL_MEMORY["alpha"],
+                            1-self.args_dict["alpha"],
                             0,
                             frame_data["img"]
                         )
@@ -943,9 +949,11 @@ class Core:
 
             resized_frame: npt.NDArray[np.uint8] = frame_data["img"]
             face_location_list = frame_data["face_location_list"]
-            overlay = frame_data["overlay"]
+            overlay: npt.NDArray[np.uint8] = frame_data["overlay"]
             person_data_list = frame_data["person_data_list"]  # person_data_listが変数に格納される
             date = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
+            
+            face_encoding: npt.NDArray[np.float64]
             matches: npt.NDArray[np.bool8]
             min_distance: float
 
@@ -953,20 +961,25 @@ class Core:
             for face_encoding in self.face_encodings:
                 # Initialize name, matches (Inner frame)
                 name: str = "Unknown"
-                matches, min_distance = self._check_compare_faces(self.logger, self.args_dict["known_face_encodings"], face_encoding, self.args_dict["tolerance"])
 
-                # もし該当人物がいなかったら処理を飛ばす
-                if not np.any(matches == True):
-                    face_names.append(name)
+                matches, min_distance = \
+                        self._check_compare_faces(
+                                self.logger,
+                                self.args_dict["known_face_encodings"],
+                                face_encoding,
+                                self.args_dict["tolerance"]
+                            )
+
+                if not np.any(matches == True):  # If there is no such person
+                    face_names.append(name)  # Set "Unknown"
                     continue
-
-                # 名前リスト(face_names)生成
-                face_name: str = self._return_face_name(
-                    self.args_dict,
-                    matches,
-                    min_distance
-                )
-                face_names.append(face_name)
+                else:  # If there is an applicable person
+                    face_name: str = self._return_face_name(
+                        self.args_dict,
+                        matches,
+                        min_distance
+                    )
+                face_names.append(face_name)  # set the person's name
 
             if len(face_names) == 0:
                 continue
@@ -1004,7 +1017,7 @@ class Core:
                 # nameがUnknownであってもなくても以降の処理を行う。
                 # クロップ画像保存
                 if self.args_dict["crop_face_image"]==True:
-                    if self.args_dict["frequency_crop_image"] < self.GLOBAL_MEMORY['number_of_crops']:
+                    if self.args_dict["frequency_crop_image"] < self.args_dict["number_of_crops"]:
                         pil_img_obj_rgb = self._pil_img_rgb_instance(resized_frame)
                         if self.args_dict["crop_with_multithreading"] == True:
                             # """1.3.08 multithreading 9.05s
@@ -1018,7 +1031,7 @@ class Core:
                                     left,
                                     right,
                                     bottom,
-                                    self.GLOBAL_MEMORY['number_of_crops'],
+                                    self.args_dict["number_of_crops"],
                                     self.args_dict["frequency_crop_image"]
                                 )
                                 filename,number_of_crops, frequency_crop_image = future.result()
@@ -1035,13 +1048,13 @@ class Core:
                                     left,
                                     right,
                                     bottom,
-                                    self.GLOBAL_MEMORY['number_of_crops'],
+                                    self.args_dict["number_of_crops"],
                                     self.args_dict["frequency_crop_image"]
                                 )
                             # """
-                        self.GLOBAL_MEMORY['number_of_crops'] = 0
+                        self.args_dict["number_of_crops"] = 0
                     else:
-                        self.GLOBAL_MEMORY['number_of_crops'] += 1
+                        self.args_dict["number_of_crops"] += 1
 
                 # 描画系
                 if self.args_dict["headless"] == False:
@@ -1077,7 +1090,7 @@ class Core:
                                 )
                         
                     # パーセンテージ描画
-                    if self.args_dict["show_percentage"]==True:
+                    if self.args_dict["show_percentage"] == True:
                         resized_frame: npt.NDArray[np.uint8] = \
                             self._display_percentage(
                                 percentage_and_symbol,
@@ -1186,10 +1199,10 @@ class Core:
             if self.args_dict["headless"] == False:
                 # 半透明処理（後半）_1frameに対して1回
                 if self.args_dict["show_overlay"]==True:
-                    # cv2.addWeighted(overlay, self.GLOBAL_MEMORY["alpha"], resized_frame, 1-self.GLOBAL_MEMORY["alpha"], 0, resized_frame)
+                    # cv2.addWeighted(overlay, self.args_dict["alpha"], resized_frame, 1-self.args_dict["alpha"], 0, resized_frame)
                     for modified_frame in modified_frame_list:
                         cv2.addWeighted(
-                            modified_frame["overlay"], self.GLOBAL_MEMORY["alpha"], modified_frame["img"], 1-self.GLOBAL_MEMORY["alpha"], 0, modified_frame["img"]
+                            modified_frame["overlay"], self.args_dict["alpha"], modified_frame["img"], 1-self.args_dict["alpha"], 0, modified_frame["img"]
                         )
                     # """DEBUG"""
                     # frame_imshow_for_debug(resized_frame)
@@ -1846,71 +1859,78 @@ class Core:
 
     def common_process(
             self,
-            args_dict: Dict,
-            GLOBAL_MEMORY: Dict
+            args_dict: Dict
         ) -> Generator:
+
         """Generator of frame_datas_array
 
         Yields:
             Generator: frame_datas_array
+                - frame_datas_array: List[Dict]
         
         More about:
             main_process function consists 3 part of Core() methods.
-            1) Core.frame_pre_processing
-            2) Core.face_encoding_process
-            3) Core.frame_post_processing
+            1) Core().frame_pre_processing
+            2) Core().face_encoding_process
+            3) Core().frame_post_processing
+        
+        Example:
+            Make generator object
+            >>> obj = Core().common_process(args_dict)
+            Call '__next__()' method
+            >>> while True:
+                        frame_datas_array = obj.__next__()
         """
+        
         self.args_dict: Dict = args_dict
-        self.GLOBAL_MEMORY = GLOBAL_MEMORY
 
-        frame_generator_obj = VidCap().frame_generator(self.args_dict)
+        frame_generator_obj = VidCap_obj.frame_generator(self.args_dict)
+        while True:
+            try:
 
-        try:
+                frame_datas_array: List[Dict] = \
+                    self.frame_pre_processing(
+                        logger,
+                        args_dict,
+                        frame_generator_obj.__next__()
+                    )
+                
+                """DEBUG
+                logger.debug(inspect.currentframe().f_back.f_code.co_filename)
+                logger.debug(inspect.currentframe().f_back.f_lineno)
+                logger.debug(f'frame_datas_array size: {len(frame_datas_array), getsizeof(frame_datas_array)}')
+                logger.debug(inspect.currentframe().f_back.f_code.co_filename)
+                logger.debug(inspect.currentframe().f_back.f_lineno)
+                logger.debug(f'args_dict size: {len(args_dict), getsizeof(args_dict)}')
+                """
 
-            frame_datas_array: List[Dict] = \
-                self.frame_pre_processing(
-                    logger,
-                    args_dict,
-                    frame_generator_obj.__next__()
-                )
-            
-            """DEBUG
-            logger.debug(inspect.currentframe().f_back.f_code.co_filename)
-            logger.debug(inspect.currentframe().f_back.f_lineno)
-            logger.debug(f'frame_datas_array size: {len(frame_datas_array), getsizeof(frame_datas_array)}')
-            logger.debug(inspect.currentframe().f_back.f_code.co_filename)
-            logger.debug(inspect.currentframe().f_back.f_lineno)
-            logger.debug(f'args_dict size: {len(args_dict), getsizeof(args_dict)}')
-            """
+                face_encodings, frame_datas_array = \
+                    self.face_encoding_process(
+                        logger,
+                        args_dict,
+                        frame_datas_array
+                    )
 
-            face_encodings, frame_datas_array = \
-                self.face_encoding_process(
-                    logger,
-                    args_dict,
-                    frame_datas_array
-                )
+                frame_datas_array = \
+                    self.frame_post_processing(
+                        logger,
+                        args_dict,
+                        face_encodings,
+                        frame_datas_array
+                    )
+                
+                yield frame_datas_array
 
-            frame_datas_array = \
-                self.frame_post_processing(
-                    logger,
-                    args_dict,
-                    face_encodings,
-                    frame_datas_array,
-                    GLOBAL_MEMORY
-                )
-            
-            yield frame_datas_array
-
-        except StopIteration:
-            logger.warning("DATA RECEPTION HAS ENDED")
-            exit(0)
-        except Exception as e:
-            logger.warning("ERROR OCURRED")
-            logger.warning("-" * 20)
-            logger.warning(f"ERROR TYPE: {e}")
-            logger.warning(format_exc(limit=None, chain=True))
-            logger.warning("-" * 20)
-            exit(0)
+            except StopIteration:
+                logger.warning("DATA RECEPTION HAS ENDED")
+                exit(0)
+            except Exception as e:
+                logger.warning("ERROR OCURRED")
+                logger.warning("-" * 20)
+                logger.warning(f"ERROR TYPE: {e}")
+                logger.warning(format_exc(limit=None, chain=True))
+                logger.warning("-" * 20)
+                exit(0)
 
 
     def override_args_dict(
@@ -1932,23 +1952,33 @@ class Core:
             >>> args_dict = Core.override_args_dict(
                 args_dict,
                 [
-                    ('headless', False),
                     ('crop_face_image', False),
                     ('output_debug_log', True)
                 ]
             )
         
         Note:
-            If you specified key is not exist, application will fail down 
-            with print out log 'warning'.
+            - *THIS METHOD IS EXPERIMENTAL*
+                - Unexpected side effects may occur.
+            - If you specified key is not exist, application will fail down 
+                with print out log 'warning'.
+            - You cannot change key 'headless'. If override it, application will fall down.
         """
+        logger.warning("'override' method is EXPERIMENTAL")
+        logger.warning("Unexpected side effects may occur")
+        
         element: Tuple
         for element in override_list:
             key, value = element
 
             if not key in args_dict:
                 logger.error(f"{key} dose not exist")
-                exit(0)
+                exit()
+
+            if key == 'headless':
+                logger.warning("You cannot change key 'headless' from True to False.")
+                logger.warning("exit")
+                exit()
 
             args_dict[key] = value
         

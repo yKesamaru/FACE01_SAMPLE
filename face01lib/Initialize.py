@@ -31,10 +31,81 @@ class Initialize:
     def __init__(self) -> None:
         pass
 
+
+    def _configure(self) -> Dict:
+
+        """Load conf.ini and return conf_dict dictionary
+
+        Args:
+            self
+        Returns:
+            Dict: conf_dict
+        """        
+        priset_face_imagesDir: str = f'{head}/priset_face_images/'
+
+        try:
+            conf: ConfigParser = ConfigParser()
+            conf.read('config.ini', 'utf-8')
+            # dict作成
+            conf_dict: Dict = {
+                # 'model' : conf.get('DEFAULT','model'),
+                'number_of_crops' : int(conf.get('DEFAULT','number_of_crops')),
+                'headless' : conf.getboolean('MAIN','headless'),
+                'anti_spoof' : conf.getboolean('MAIN','anti_spoof'),
+                'output_debug_log' : conf.getboolean('MAIN','output_debug_log'),
+                'set_width' : int(conf.get('SPEED_OR_PRECISE','set_width')),
+                'similar_percentage' : float(conf.get('SPEED_OR_PRECISE','similar_percentage')),
+                'jitters' : int(conf.get('SPEED_OR_PRECISE','jitters')),
+                'priset_face_images_jitters' : int(conf.get('SPEED_OR_PRECISE','priset_face_images_jitters')),
+                'priset_face_imagesDir' :priset_face_imagesDir,
+                'upsampling' : int(conf.get('SPEED_OR_PRECISE','upsampling')),
+                'mode' : conf.get('SPEED_OR_PRECISE','mode'),
+                'frame_skip' : int(conf.get('SPEED_OR_PRECISE','frame_skip')),
+                'number_of_people' : int(conf.get('SPEED_OR_PRECISE','number_of_people')),
+                'use_pipe' : conf.getboolean('dlib','use_pipe'),
+                'model_selection' : int(conf.get('dlib','model_selection')),
+                'min_detection_confidence' : float(conf.get('dlib','min_detection_confidence')),
+                'person_frame_face_encoding' : conf.getboolean('dlib','person_frame_face_encoding'),
+                'same_time_recognize' : int(conf.get('dlib','same_time_recognize')),
+                'set_area' : conf.get('INPUT','set_area'),
+                'movie' : conf.get('INPUT','movie'),
+                'user': conf.get('Authentication','user'),
+                'passwd': conf.get('Authentication','passwd'),
+                'rectangle' : conf.getboolean('DRAW_INFOMATION','rectangle'),
+                'target_rectangle' : conf.getboolean('DRAW_INFOMATION','target_rectangle'),
+                'draw_telop_and_logo' : conf.getboolean('DRAW_INFOMATION', 'draw_telop_and_logo'),
+                'default_face_image_draw' : conf.getboolean('DRAW_INFOMATION', 'default_face_image_draw'),
+                'show_overlay' : conf.getboolean('DRAW_INFOMATION', 'show_overlay'),
+                'alpha': float(conf.get('DRAW_INFOMATION','alpha')),
+                'show_percentage' : conf.getboolean('DRAW_INFOMATION', 'show_percentage'),
+                'show_name' : conf.getboolean('DRAW_INFOMATION', 'show_name'),
+                'crop_face_image' : conf.getboolean('SAVE_FACE_IMAGE', 'crop_face_image'),
+                'frequency_crop_image' : int(conf.get('SAVE_FACE_IMAGE','frequency_crop_image')),
+                'crop_with_multithreading' : conf.getboolean('SAVE_FACE_IMAGE','crop_with_multithreading'),
+                'Python_version': conf.get('system_check','Python_version'),
+                'cpu_freq': conf.get('system_check','cpu_freq'),
+                'cpu_count': conf.get('system_check','cpu_count'),
+                'memory': conf.get('system_check','memory'),
+                'gpu_check' : conf.getboolean('system_check','gpu_check'),
+                'calculate_time' : conf.getboolean('DEBUG','calculate_time'),
+                'show_video' : conf.getboolean('Scheduled_to_be_abolished','show_video'),
+                'kaoninshoDir' :head,
+            }
+            return conf_dict
+        except:
+            logger.warning("config.ini 読み込み中にエラーが発生しました")
+            logger.exception("conf_dictが正常に作成できませんでした")
+            logger.warning("以下のエラーをシステム管理者様へお伝えください")
+            logger.warning("-" * 20)
+            logger.warning(format_exc(limit=None, chain=True))
+            logger.warning("-" * 20)
+            logger.warning("終了します")
+            exit(0)
+
+
     # Initialize variables, load images
     def initialize(
             self,
-            conf_dict: Dict
         ) -> Dict:
 
         """Initialize values
@@ -47,7 +118,7 @@ class Initialize:
             >>> args_dict: Dict =  Initialize().initialize(Initialize().configure())
         """        
 
-        self.conf_dict: Dict = conf_dict
+        self.conf_dict: Dict = self._configure()
         headless: bool = self.conf_dict["headless"]
         
         known_face_encodings: List[npt.NDArray[np.float64]]
@@ -153,71 +224,3 @@ class Initialize:
 
         return args_dict
 
-
-    def configure(self) -> Dict:
-
-        """Load conf.ini and return conf_dict dictionary
-
-        Args:
-            self
-        Returns:
-            Dict: conf_dict
-        """        
-        priset_face_imagesDir: str = f'{head}/priset_face_images/'
-
-        try:
-            conf: ConfigParser = ConfigParser()
-            conf.read('config.ini', 'utf-8')
-            # dict作成
-            conf_dict: Dict = {
-                'model' : conf.get('DEFAULT','model'),
-                'headless' : conf.getboolean('MAIN','headless'),
-                'anti_spoof' : conf.getboolean('MAIN','anti_spoof'),
-                'output_debug_log' : conf.getboolean('MAIN','output_debug_log'),
-                'set_width' : int(conf.get('SPEED_OR_PRECISE','set_width')),
-                'similar_percentage' : float(conf.get('SPEED_OR_PRECISE','similar_percentage')),
-                'jitters' : int(conf.get('SPEED_OR_PRECISE','jitters')),
-                'priset_face_images_jitters' : int(conf.get('SPEED_OR_PRECISE','priset_face_images_jitters')),
-                'priset_face_imagesDir' :priset_face_imagesDir,
-                'upsampling' : int(conf.get('SPEED_OR_PRECISE','upsampling')),
-                'mode' : conf.get('SPEED_OR_PRECISE','mode'),
-                'frame_skip' : int(conf.get('SPEED_OR_PRECISE','frame_skip')),
-                'number_of_people' : int(conf.get('SPEED_OR_PRECISE','number_of_people')),
-                'use_pipe' : conf.getboolean('dlib','use_pipe'),
-                'model_selection' : int(conf.get('dlib','model_selection')),
-                'min_detection_confidence' : float(conf.get('dlib','min_detection_confidence')),
-                'person_frame_face_encoding' : conf.getboolean('dlib','person_frame_face_encoding'),
-                'same_time_recognize' : int(conf.get('dlib','same_time_recognize')),
-                'set_area' : conf.get('INPUT','set_area'),
-                'movie' : conf.get('INPUT','movie'),
-                'user': conf.get('Authentication','user'),
-                'passwd': conf.get('Authentication','passwd'),
-                'rectangle' : conf.getboolean('DRAW_INFOMATION','rectangle'),
-                'target_rectangle' : conf.getboolean('DRAW_INFOMATION','target_rectangle'),
-                'draw_telop_and_logo' : conf.getboolean('DRAW_INFOMATION', 'draw_telop_and_logo'),
-                'default_face_image_draw' : conf.getboolean('DRAW_INFOMATION', 'default_face_image_draw'),
-                'show_overlay' : conf.getboolean('DRAW_INFOMATION', 'show_overlay'),
-                'show_percentage' : conf.getboolean('DRAW_INFOMATION', 'show_percentage'),
-                'show_name' : conf.getboolean('DRAW_INFOMATION', 'show_name'),
-                'crop_face_image' : conf.getboolean('SAVE_FACE_IMAGE', 'crop_face_image'),
-                'frequency_crop_image' : int(conf.get('SAVE_FACE_IMAGE','frequency_crop_image')),
-                'crop_with_multithreading' : conf.getboolean('SAVE_FACE_IMAGE','crop_with_multithreading'),
-                'Python_version': conf.get('system_check','Python_version'),
-                'cpu_freq': conf.get('system_check','cpu_freq'),
-                'cpu_count': conf.get('system_check','cpu_count'),
-                'memory': conf.get('system_check','memory'),
-                'gpu_check' : conf.getboolean('system_check','gpu_check'),
-                'calculate_time' : conf.getboolean('DEBUG','calculate_time'),
-                'show_video' : conf.getboolean('Scheduled_to_be_abolished','show_video'),
-                'kaoninshoDir' :head,
-            }
-            return conf_dict
-        except:
-            logger.warning("config.ini 読み込み中にエラーが発生しました")
-            logger.exception("conf_dictが正常に作成できませんでした")
-            logger.warning("以下のエラーをシステム管理者様へお伝えください")
-            logger.warning("-" * 20)
-            logger.warning(format_exc(limit=None, chain=True))
-            logger.warning("-" * 20)
-            logger.warning("終了します")
-            exit(0)
