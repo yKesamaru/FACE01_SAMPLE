@@ -1,4 +1,7 @@
 #cython: language_level=3
+"""Load image class
+
+"""
 import cv2
 import numpy as np
 from PIL import Image, ImageFile

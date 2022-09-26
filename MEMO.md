@@ -2,6 +2,7 @@
 # TODO
 ## 1.4.09
 - FACE01.pyを整理する
+  - FACE01.pyというファイルはなくしてexample集に加える
 - pydoc
   -  $ python -m pydoc -b
 - Core.pyを中心に型アノテーションをつけてデータ型を整理する
@@ -11,6 +12,9 @@
   - ![](img/PASTE_IMAGE_2022-08-31-09-20-50.png)
 
 Fix
+- api.pyのdocstringをgoogleスタイルに変更
+  - sphinxでの利用を想定するため統一化する
+- kaoninshoDirをRootDirに変更
 - config.iniの'model = small'をなくす
 - GLOBAL_MEMORYをconfig.iniに組み込む
 - api.pyのCython化のために、アノテーションの徹底とリファクタリングをする

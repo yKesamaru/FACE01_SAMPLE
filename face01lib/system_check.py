@@ -1,5 +1,9 @@
 #cython: language_level=3
-
+"""CHECK SYSTEM INFORMATION
+This module is EXPERIMENTAL
+"""  
+"""TODO: #32 リファクタリングと要件再定義
+"""
 from GPUtil import getGPUs
 from psutil import cpu_count, cpu_freq, virtual_memory
 from .logger import Logger
@@ -21,13 +25,13 @@ class System_check:
         Cal_obj.cal_specify_date(logger)
 
     @staticmethod
-    def system_check(args_dict):
+    def system_check(CONFIG):
     # lock
         with open("SystemCheckLock", "w") as f:
             f.write('')
         logger.info("FACE01の推奨動作環境を満たしているかシステムチェックを実行します")
         logger.info("- Python version check")
-        major_ver, minor_ver_1, minor_ver_2 = args_dict["Python_version"].split('.', maxsplit = 3)
+        major_ver, minor_ver_1, minor_ver_2 = CONFIG["Python_version"].split('.', maxsplit = 3)
         if (version_info < (int(major_ver), int(minor_ver_1), int(minor_ver_2))):
             logger.warning("警告: Python 3.8.10以降を使用してください")
             exit(0)
@@ -35,7 +39,7 @@ class System_check:
             logger.info(f"  [OK] {str(version)}")
         # CPU
         logger.info("- CPU check")
-        if cpu_freq().max < float(args_dict["cpu_freq"]) * 1_000 or cpu_count(logical=False) < int(args_dict["cpu_count"]):
+        if cpu_freq().max < float(CONFIG["cpu_freq"]) * 1_000 or cpu_count(logical=False) < int(CONFIG["cpu_count"]):
             logger.warning("CPU性能が足りません")
             logger.warning("処理速度が実用に達しない恐れがあります")
             logger.warning("終了します")
@@ -45,7 +49,7 @@ class System_check:
             logger.info(f"  [OK] {cpu_count(logical=False)}core")
         # MEMORY
         logger.info("- Memory check")
-        if virtual_memory().total < int(args_dict["memory"]) * 1_000_000_000:
+        if virtual_memory().total < int(CONFIG["memory"]) * 1_000_000_000:
             logger.warning("メモリーが足りません")
             logger.warning("少なくとも4GByte以上が必要です")
             logger.warning("終了します")
@@ -57,7 +61,7 @@ class System_check:
                 logger.info(f"  [OK] {str(virtual_memory().total)[0:2]}GByte")
         # GPU
         logger.info("- CUDA devices check")
-        if args_dict["gpu_check"] == True:
+        if CONFIG["gpu_check"] == True:
             if Dlib_api_obj.dlib.cuda.get_num_devices() == 0:
                 logger.warning("CUDAが有効なデバイスが見つかりません")
                 logger.warning("終了します")

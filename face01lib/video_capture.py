@@ -278,12 +278,12 @@ class VidCap:
     # @lru_cache(maxsize=None)
     def frame_generator(
             self,
-            args_dict: Dict
+            CONFIG: Dict
         ) -> Generator:
         """Generator: Return resized frame data
 
         Args:
-            args_dict (Dict): args_dict
+            CONFIG (Dict): CONFIG
 
         Raises:
             StopIteration: `ret` == False, then raise `StopIteration`
@@ -291,21 +291,21 @@ class VidCap:
         Yields:
             Generator: Resized frame data (npt.NDArray[np.uint8])
         """        
-        self.args_dict: Dict = args_dict
+        self.CONFIG: Dict = CONFIG
 
         """Initial values"""
         frame_skip_counter: int
-        set_width: int = self.args_dict["set_width"]
-        set_height: int = self.args_dict["set_height"]
-        movie: str = self.args_dict["movie"]
-        set_area: str = self.args_dict["set_area"]
+        set_width: int = self.CONFIG["set_width"]
+        set_height: int = self.CONFIG["set_height"]
+        movie: str = self.CONFIG["movie"]
+        set_area: str = self.CONFIG["set_area"]
         
         ret: bool
         vcap: cv2.VideoCapture
         frame: npt.NDArray[np.uint8]
 
-        # kaoninshoDir: str = self.args_dict["kaoninshoDir"]
-        # chdir(kaoninshoDir)  # Not use
+        # RootDir: str = self.CONFIG["RootDir"]
+        # chdir(RootDir)  # Not use
 
         # Calculate coordinates of corners: Tuple[int,int,int,int] for 'angle of view'.
         TOP_LEFT: Tuple[int,int,int,int]
@@ -316,8 +316,8 @@ class VidCap:
 
         TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER = \
             self._cal_angle_coordinate(
-                    self.args_dict["height"],
-                    self.args_dict["width"]
+                    self.CONFIG["height"],
+                    self.CONFIG["width"]
                 )
 
         if (movie == 'usb' or movie == 'USB'):   # USB カメラ読み込み時使用
@@ -332,9 +332,9 @@ class VidCap:
             logger.info(f'CAMERA DEVICE NUMBER: {camera_number}')
             while vcap.isOpened(): 
                 # frame_skipの数値に満たない場合は処理をスキップ
-                for frame_skip_counter in range(1, self.args_dict["frame_skip"]):
+                for frame_skip_counter in range(1, self.CONFIG["frame_skip"]):
                     ret, frame = vcap.read()
-                    if frame_skip_counter < self.args_dict["frame_skip"]:
+                    if frame_skip_counter < self.CONFIG["frame_skip"]:
                         continue
                     if ret == False:
                         logger.warning("ERROR OCURRED\nREPORTED BY FACE01")
@@ -365,10 +365,10 @@ class VidCap:
                 # responseの内容について分岐
                 while True:
                     # frame_skipの数値に満たない場合は処理をスキップ
-                    for frame_skip_counter in range(1, self.args_dict["frame_skip"]):
-                        response = requests.get(url, auth = HTTPDigestAuth(self.args_dict["user"], self.args_dict["passwd"]))
+                    for frame_skip_counter in range(1, self.CONFIG["frame_skip"]):
+                        response = requests.get(url, auth = HTTPDigestAuth(self.CONFIG["user"], self.CONFIG["passwd"]))
                         # print(f'response: {response}')
-                        if frame_skip_counter < self.args_dict["frame_skip"]:
+                        if frame_skip_counter < self.CONFIG["frame_skip"]:
                             continue
                     # {'Status': '200', 'Connection': 'Close', 'Set-Cookie': 'Session=0', 'Accept-Ranges': 'bytes',
                     #  'Cache-Control': 'no-cache', 'Content-length': '40140', 'Content-type': 'image/jpeg'}
@@ -435,7 +435,7 @@ class VidCap:
                 # self.frame_imshow_for_debug(frame)
                 
                 # frame_skipの数値に満たない場合は処理をスキップ
-                if cnt < self.args_dict["frame_skip"]:
+                if cnt < self.CONFIG["frame_skip"]:
                     cnt += 1
                     continue
                 cnt = 0

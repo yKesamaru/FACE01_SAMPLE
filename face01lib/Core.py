@@ -507,27 +507,27 @@ class Core:
     # @profile()
     def _return_face_name(
             self,
-            args_dict: Dict,
+            CONFIG: Dict,
             matches: npt.NDArray[np.bool8],
             min_distance: float
         ) -> str:
         """Get face_name
 
         Args:
-            args_dict (Dict): args_dict
+            CONFIG (Dict): CONFIG
             matches (npt.NDArray[np.bool8]): List of bool value
             min_distance (float): min value
 
         Returns:
             str: Name who is
         """        
-        self.args_dict = args_dict
+        self.CONFIG = CONFIG
         self.matches = matches
         self.min_distance = min_distance
 
         # アレイ中のインデックスからknown_face_names中の同インデックスの要素を算出
         index: int = np.where(matches == True)[0][0]
-        file_name: str = str(args_dict["known_face_names"][index]) + ':' + str(min_distance)
+        file_name: str = str(CONFIG["known_face_names"][index]) + ':' + str(min_distance)
 
         return file_name
 
@@ -623,21 +623,21 @@ class Core:
     def frame_pre_processing(
             self,
             logger,
-            args_dict: Dict,
+            CONFIG: Dict,
             resized_frame: npt.NDArray[np.uint8]
         ) -> List[Dict]:
         """Return frame_datas_array
 
         Args:
             logger (_type_): logger
-            args_dict (Dict): Dict of Initial settings
+            CONFIG (Dict): Dict of Initial settings
             resized_frame (npt.NDArray[np.uint8]): Resized frame
 
         Returns:
             List[Dict]: frame_datas_array
         """        
         self.logger = logger
-        self.args_dict: Dict = args_dict
+        self.CONFIG: Dict = CONFIG
         self.resized_frame: npt.NDArray[np.uint8] = resized_frame
 
         person_data_list: List[Dict] = []
@@ -649,39 +649,39 @@ class Core:
         overlay: npt.NDArray[np.uint8] = np.empty((2,2,3), dtype=np.uint8)
 
         # 描画系（bottom area, 半透明, telop, logo）
-        if  self.args_dict["headless"] == False:
+        if  self.CONFIG["headless"] == False:
             ## 半透明処理（前半）
-            if self.args_dict["show_overlay"] == True:
+            if self.CONFIG["show_overlay"] == True:
                 overlay= self.resized_frame.copy()
                 """DEBUG: Memory leak"""
                 
             ## テロップとロゴマークの合成
-            if self.args_dict["draw_telop_and_logo"] == True:
+            if self.CONFIG["draw_telop_and_logo"] == True:
 
                 self.resized_frame = \
                     self._draw_telop(
                             self.logger,
-                            self.args_dict["cal_resized_telop_nums"],
+                            self.CONFIG["cal_resized_telop_nums"],
                             self.resized_frame
                         )
                 
                 self.resized_frame = \
                     self._draw_logo(
                             self.logger,
-                            self.args_dict["cal_resized_logo_nums"],
+                            self.CONFIG["cal_resized_logo_nums"],
                             self.resized_frame
                         )
 
         # 顔座標算出
-        if self.args_dict["use_pipe"] == True:
+        if self.CONFIG["use_pipe"] == True:
             face_location_list = \
                 self._return_face_location_list(
                     self.resized_frame,
-                    self.args_dict["set_width"],
-                    self.args_dict["set_height"],
-                    self.args_dict["model_selection"],
-                    self.args_dict["min_detection_confidence"],
-                    self.args_dict["same_time_recognize"]
+                    self.CONFIG["set_width"],
+                    self.CONFIG["set_height"],
+                    self.CONFIG["model_selection"],
+                    self.CONFIG["min_detection_confidence"],
+                    self.CONFIG["same_time_recognize"]
                 )
         else:
             # date: str = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")  # Not use
@@ -689,8 +689,8 @@ class Core:
                 Dlib_api().face_locations(
                 # Dlib_api_obj.face_locations(
                     self.resized_frame,
-                    self.args_dict["upsampling"],
-                    self.args_dict["mode"]
+                    self.CONFIG["upsampling"],
+                    self.CONFIG["mode"]
                 )
 
         # 顔がなかったら以降のエンコード処理を行わない
@@ -709,8 +709,8 @@ class Core:
             return frame_datas_array
 
         # 顔が一定数以上なら以降の処理を行わない
-        if len(face_location_list) >= self.args_dict["number_of_people"]:
-            self.logger.info(f'{self.args_dict["number_of_people"]}人以上を検出しました')
+        if len(face_location_list) >= self.CONFIG["number_of_people"]:
+            self.logger.info(f'{self.CONFIG["number_of_people"]}人以上を検出しました')
             frame_datas_array  = \
                 self.make_frame_datas_array(
                     overlay,
@@ -741,7 +741,7 @@ class Core:
     def face_encoding_process(
             self,
             logger,
-            args_dict: Dict,
+            CONFIG: Dict,
             frame_datas_array: List[Dict]
         ) -> Tuple[List[npt.NDArray[np.float64]], List[Dict]]:
 
@@ -751,7 +751,7 @@ class Core:
 
         Args:
             logger (_type_): logger
-            args_dict (Dict): Dict including initial setting
+            CONFIG (Dict): Dict including initial setting
             frame_datas_array (List[Dict]): frame datas
 
         Returns:
@@ -780,7 +780,7 @@ class Core:
         """
 
         self.logger = logger
-        self.args_dict: Dict = args_dict
+        self.CONFIG: Dict = CONFIG
         self.frame_datas_array: List[Dict] = frame_datas_array
 
         face_encodings: List[npt.NDArray[np.float64]] = []
@@ -795,7 +795,7 @@ class Core:
             elif len(face_location_list) > 0:  # 顔がある場合
 
                 # 顔ロケーションからエンコーディングを求める
-                if self.args_dict["use_pipe"] == True and  self.args_dict["person_frame_face_encoding"] == True:
+                if self.CONFIG["use_pipe"] == True and  self.CONFIG["person_frame_face_encoding"] == True:
                     """FIX
                     人数分を繰り返し処理しているので時間がかかる。
                     dlibは一つの画像に複数の座標を与えて一度に処理をする。
@@ -817,17 +817,17 @@ class Core:
                         Dlib_api().face_encodings(
                             concatenate_person_frame,
                             concatenate_face_location_list,
-                            self.args_dict["jitters"],
+                            self.CONFIG["jitters"],
                             "small"
                         )
-                elif self.args_dict["use_pipe"] == True and  self.args_dict["person_frame_face_encoding"] == False:
+                elif self.CONFIG["use_pipe"] == True and  self.CONFIG["person_frame_face_encoding"] == False:
                     try:
                         # TODO: #30 Dlib_api_obj.face_encodingsだとエラーが発生する理由をきちんとする
                         face_encodings = \
                             Dlib_api().face_encodings(  # Dlib_api_obj.face_encodingsだとエラーが発生する。
                                 resized_frame,
                                 face_location_list,
-                                self.args_dict["jitters"],
+                                self.CONFIG["jitters"],
                                 "small"
                             )
                         if face_encodings == []:
@@ -837,7 +837,7 @@ class Core:
                         self.logger.warning(f'ERROR: {e}')
                         self.logger.warning(format_exc())
                         exit(0)
-                elif self.args_dict["use_pipe"] == False and  self.args_dict["person_frame_face_encoding"] == True:
+                elif self.CONFIG["use_pipe"] == False and  self.CONFIG["person_frame_face_encoding"] == True:
                     self.logger.warning("config.ini:")
                     self.logger.warning("You cannot set person_frame_face_encoding = True if use_pipe = False")
                     self.logger.warning("Change the settings appropriately")
@@ -845,13 +845,13 @@ class Core:
                     self.logger.warning(format_exc(limit=None, chain=True))
                     self.logger.warning("-" * 20)
                     exit(0)
-                elif self.args_dict["use_pipe"] == False and self.args_dict["person_frame_face_encoding"] == False:
+                elif self.CONFIG["use_pipe"] == False and self.CONFIG["person_frame_face_encoding"] == False:
                     face_encodings = \
                         Dlib_api().face_encodings(
                         # Dlib_api_obj.face_encodings(
                             resized_frame,
                             face_location_list,
-                            self.args_dict["jitters"],
+                            self.CONFIG["jitters"],
                             "small"
                         )
                 
@@ -893,7 +893,7 @@ class Core:
     def frame_post_processing(
             self,
             logger,
-            args_dict: Dict,
+            CONFIG: Dict,
             face_encodings: List[npt.NDArray[np.float64]],
             frame_datas_array: List[Dict]
         ) -> List[Dict]:
@@ -901,7 +901,7 @@ class Core:
 
         Args:
             logger (_type_): logger
-            args_dict (Dict): Dict of initial settings
+            CONFIG (Dict): Dict of initial settings
             face_encodings (List[npt.NDArray[np.float64]]): List of encoded face datas
             frame_datas_array (List[Dict]): List of datas
 
@@ -920,7 +920,7 @@ class Core:
             - Make frame_datas_list
         """        
         self.logger = logger
-        self.args_dict: Dict = args_dict
+        self.CONFIG: Dict = CONFIG
         self.face_encodings: List[npt.NDArray[np.float64]] = face_encodings
         self.frame_datas_array: List[Dict] = frame_datas_array
         face_names: List[str] = []
@@ -934,14 +934,14 @@ class Core:
 
             # frame_dataにface_location_listがなければ処理をとばす
             if "face_location_list" not in frame_data:
-                if self.args_dict["headless"] == False:
+                if self.CONFIG["headless"] == False:
                     # 半透明処理（後半）_1frameに対して1回
-                    if self.args_dict["show_overlay"]==True:
+                    if self.CONFIG["show_overlay"]==True:
                         cv2.addWeighted(
                             frame_data["overlay"],
-                            self.args_dict["alpha"],
+                            self.CONFIG["alpha"],
                             frame_data["img"],
-                            1-self.args_dict["alpha"],
+                            1-self.CONFIG["alpha"],
                             0,
                             frame_data["img"]
                         )
@@ -965,9 +965,9 @@ class Core:
                 matches, min_distance = \
                         self._check_compare_faces(
                                 self.logger,
-                                self.args_dict["known_face_encodings"],
+                                self.CONFIG["known_face_encodings"],
                                 face_encoding,
-                                self.args_dict["tolerance"]
+                                self.CONFIG["tolerance"]
                             )
 
                 if not np.any(matches == True):  # If there is no such person
@@ -975,7 +975,7 @@ class Core:
                     continue
                 else:  # If there is an applicable person
                     face_name: str = self._return_face_name(
-                        self.args_dict,
+                        self.CONFIG,
                         matches,
                         min_distance
                     )
@@ -1016,14 +1016,14 @@ class Core:
 
                 # nameがUnknownであってもなくても以降の処理を行う。
                 # クロップ画像保存
-                if self.args_dict["crop_face_image"]==True:
-                    if self.args_dict["frequency_crop_image"] < self.args_dict["number_of_crops"]:
+                if self.CONFIG["crop_face_image"]==True:
+                    if self.CONFIG["frequency_crop_image"] < self.CONFIG["number_of_crops"]:
                         pil_img_obj_rgb = self._pil_img_rgb_instance(resized_frame)
-                        if self.args_dict["crop_with_multithreading"] == True:
+                        if self.CONFIG["crop_with_multithreading"] == True:
                             # """1.3.08 multithreading 9.05s
                             with ThreadPoolExecutor() as executor:
                                 future = executor.submit(self._make_crop_face_image, 
-                                    args_dict["anti_spoof"],
+                                    CONFIG["anti_spoof"],
                                     name,
                                     dis,
                                     pil_img_obj_rgb,
@@ -1031,8 +1031,8 @@ class Core:
                                     left,
                                     right,
                                     bottom,
-                                    self.args_dict["number_of_crops"],
-                                    self.args_dict["frequency_crop_image"]
+                                    self.CONFIG["number_of_crops"],
+                                    self.CONFIG["frequency_crop_image"]
                                 )
                                 filename,number_of_crops, frequency_crop_image = future.result()
                             # """
@@ -1040,7 +1040,7 @@ class Core:
                             # """ORIGINAL: 1.3.08で変更 8.69s
                             filename,number_of_crops, frequency_crop_image = \
                                 self._make_crop_face_image(
-                                    args_dict["anti_spoof"],
+                                    CONFIG["anti_spoof"],
                                     name,
                                     dis,
                                     pil_img_obj_rgb,
@@ -1048,24 +1048,24 @@ class Core:
                                     left,
                                     right,
                                     bottom,
-                                    self.args_dict["number_of_crops"],
-                                    self.args_dict["frequency_crop_image"]
+                                    self.CONFIG["number_of_crops"],
+                                    self.CONFIG["frequency_crop_image"]
                                 )
                             # """
-                        self.args_dict["number_of_crops"] = 0
+                        self.CONFIG["number_of_crops"] = 0
                     else:
-                        self.args_dict["number_of_crops"] += 1
+                        self.CONFIG["number_of_crops"] += 1
 
                 # 描画系
-                if self.args_dict["headless"] == False:
+                if self.CONFIG["headless"] == False:
 
                     # デフォルト顔画像の描画
-                    if p <= self.args_dict["tolerance"]:  # ディスタンスpがtolerance以下の場合
-                        if self.args_dict["default_face_image_draw"] == True:
+                    if p <= self.CONFIG["tolerance"]:  # ディスタンスpがtolerance以下の場合
+                        if self.CONFIG["default_face_image_draw"] == True:
                             resized_frame: npt.NDArray[np.uint8] = \
                                 self._draw_default_face(
                                     self.logger,
-                                    self.args_dict,
+                                    self.CONFIG,
                                     name,
                                     resized_frame,
                                     number_of_people
@@ -1075,13 +1075,13 @@ class Core:
                             # frame_imshow_for_debug(resized_frame)
 
                     # ピンクまたは白の四角形描画
-                    if self.args_dict["rectangle"] == True:
+                    if self.CONFIG["rectangle"] == True:
                         if name == 'Unknown':  # プリセット顔画像に対応する顔画像がなかった場合
                             resized_frame: npt.NDArray[np.uint8] = self._draw_pink_rectangle(resized_frame, top,bottom,left,right)
                         else:  # プリセット顔画像に対応する顔画像があった場合
                             resized_frame: npt.NDArray[np.uint8] = \
                                 self._draw_white_rectangle(
-                                    self.args_dict["rectangle"],
+                                    self.CONFIG["rectangle"],
                                     resized_frame,
                                     top,
                                     left,
@@ -1090,7 +1090,7 @@ class Core:
                                 )
                         
                     # パーセンテージ描画
-                    if self.args_dict["show_percentage"] == True:
+                    if self.CONFIG["show_percentage"] == True:
                         resized_frame: npt.NDArray[np.uint8] = \
                             self._display_percentage(
                                 percentage_and_symbol,
@@ -1099,13 +1099,13 @@ class Core:
                                 left,
                                 right,
                                 bottom,
-                                self.args_dict["tolerance"]
+                                self.CONFIG["tolerance"]
                             )
                         """DEBUG"""
                         # frame_imshow_for_debug(resized_frame)
 
                     # 名前表示と名前用四角形の描画
-                    if self.args_dict["show_name"]==True:
+                    if self.CONFIG["show_name"]==True:
                         resized_frame: npt.NDArray[np.uint8] = \
                             self._draw_rectangle_for_name(
                                 name,
@@ -1122,18 +1122,18 @@ class Core:
                                 bottom,
                                 name,
                                 p,
-                                self.args_dict["tolerance"],
+                                self.CONFIG["tolerance"],
                                 pil_img_obj
                             )
                         """DEBUG"""
                         # frame_imshow_for_debug(resized_frame)
 
                     # target_rectangleの描画
-                    if self.args_dict["target_rectangle"] == True:
+                    if self.CONFIG["target_rectangle"] == True:
                         resized_frame: npt.NDArray[np.uint8] = \
                             self._draw_target_rectangle(
                                 person_data_list,
-                                self.args_dict,
+                                self.CONFIG,
                                 resized_frame,
                                 top,
                                 bottom,
@@ -1169,7 +1169,7 @@ class Core:
 
             # _1frameに対して1回 <- ?
             ## 人が写っているframeをforで回している途中です。
-            if self.args_dict["headless"] == False:
+            if self.CONFIG["headless"] == False:
                 frame_datas = {
                     'img':resized_frame,
                     'face_location_list':face_location_list,
@@ -1182,7 +1182,7 @@ class Core:
                 """
                 modified_frame_list.append(frame_datas)
 
-            elif self.args_dict["headless"] == True:
+            elif self.CONFIG["headless"] == True:
                 frame_datas = {
                     'img':resized_frame,
                     'face_location_list':face_location_list,
@@ -1196,13 +1196,13 @@ class Core:
             #     # self.frame_datas_array.append(frame_datas)
             #     modified_frame_list.append(frame_datas)
 
-            if self.args_dict["headless"] == False:
+            if self.CONFIG["headless"] == False:
                 # 半透明処理（後半）_1frameに対して1回
-                if self.args_dict["show_overlay"]==True:
-                    # cv2.addWeighted(overlay, self.args_dict["alpha"], resized_frame, 1-self.args_dict["alpha"], 0, resized_frame)
+                if self.CONFIG["show_overlay"]==True:
+                    # cv2.addWeighted(overlay, self.CONFIG["alpha"], resized_frame, 1-self.CONFIG["alpha"], 0, resized_frame)
                     for modified_frame in modified_frame_list:
                         cv2.addWeighted(
-                            modified_frame["overlay"], self.args_dict["alpha"], modified_frame["img"], 1-self.args_dict["alpha"], 0, modified_frame["img"]
+                            modified_frame["overlay"], self.CONFIG["alpha"], modified_frame["img"], 1-self.CONFIG["alpha"], 0, modified_frame["img"]
                         )
                     # """DEBUG"""
                     # frame_imshow_for_debug(resized_frame)
@@ -1436,17 +1436,17 @@ class Core:
     # @profile()
     def _adjust_display_area(
             self,
-            args_dict,
+            CONFIG,
             default_face_image
         ) -> tuple:
-        self.args_dict = args_dict
+        self.CONFIG = CONFIG
         self.default_face_image = default_face_image
         """TODO
         繰り返し計算させないようリファクタリング"""
-        face_image_width = int(self.args_dict["set_width"] / 15)
+        face_image_width = int(self.CONFIG["set_width"] / 15)
         default_face_small_image = cv2.resize(self.default_face_image, dsize=(face_image_width, face_image_width))  # 幅・高さともに同じとする
         # 高さ = face_image_width
-        x1, y1, x2, y2 = 0, self.args_dict["set_height"] - face_image_width - 10, face_image_width, self.args_dict["set_height"] - 10
+        x1, y1, x2, y2 = 0, self.CONFIG["set_height"] - face_image_width - 10, face_image_width, self.CONFIG["set_height"] - 10
         return x1, y1, x2, y2, default_face_small_image, face_image_width
 
 
@@ -1454,17 +1454,17 @@ class Core:
     def _draw_default_face(
             self,
             logger,
-            args_dict,
+            CONFIG,
             name,
             resized_frame: npt.NDArray[np.uint8],
             number_of_people
         ):
         self.logger = logger
-        self.args_dict = args_dict
+        self.CONFIG = CONFIG
         self.name = name
         self.resized_frame: npt.NDArray[np.uint8] = resized_frame
         self.number_of_people = number_of_people
-        default_face_image_dict = self.args_dict["default_face_image_dict"]
+        default_face_image_dict = self.CONFIG["default_face_image_dict"]
 
         default_name_png = self.name + '_default.png'
         default_face_image_name_png = './priset_face_images/' + default_name_png
@@ -1493,7 +1493,7 @@ class Core:
             """DEBUG
             frame_imshow_for_debug(default_face_image)  # OK
             """
-            x1, y1, x2, y2 , default_face_small_image, face_image_width = self._adjust_display_area(args_dict, default_face_image)
+            x1, y1, x2, y2 , default_face_small_image, face_image_width = self._adjust_display_area(CONFIG, default_face_image)
             resized_frame: npt.NDArray[np.uint8] = self._draw_default_face_image(logger, resized_frame, default_face_small_image, x1, y1, x2, y2, number_of_people, face_image_width)
         return resized_frame
 
@@ -1715,7 +1715,7 @@ class Core:
     def _draw_target_rectangle(
         self,
         person_data_list,
-        args_dict,
+        CONFIG,
         resized_frame: npt.NDArray[np.uint8],
         top,
         bottom,
@@ -1724,12 +1724,12 @@ class Core:
         name
     ):
         self.person_data_list = person_data_list,
-        self.anti_spoof = args_dict["anti_spoof"],
-        self.rect01_png = args_dict["rect01_png"]
-        self.rect01_NG_png = args_dict["rect01_NG_png"]
-        self.rect01_REAL_png = args_dict["rect01_REAL_png"]
-        self.rect01_SPOOF_png = args_dict["rect01_SPOOF_png"]
-        self.rect01_CANNOT_DISTINCTION_png = args_dict["rect01_CANNOT_DISTINCTION_png"]
+        self.anti_spoof = CONFIG["anti_spoof"],
+        self.rect01_png = CONFIG["rect01_png"]
+        self.rect01_NG_png = CONFIG["rect01_NG_png"]
+        self.rect01_REAL_png = CONFIG["rect01_REAL_png"]
+        self.rect01_SPOOF_png = CONFIG["rect01_SPOOF_png"]
+        self.rect01_CANNOT_DISTINCTION_png = CONFIG["rect01_CANNOT_DISTINCTION_png"]
         self.resized_frame: npt.NDArray[np.uint8] = resized_frame
         self.top = top
         self.bottom = bottom
@@ -1859,7 +1859,7 @@ class Core:
 
     def common_process(
             self,
-            args_dict: Dict
+            CONFIG: Dict
         ) -> Generator:
 
         """Generator of frame_datas_array
@@ -1876,22 +1876,22 @@ class Core:
         
         Example:
             Make generator object
-            >>> obj = Core().common_process(args_dict)
+            >>> obj = Core().common_process(CONFIG)
             Call '__next__()' method
             >>> while True:
                         frame_datas_array = obj.__next__()
         """
         
-        self.args_dict: Dict = args_dict
+        self.CONFIG: Dict = CONFIG
 
-        frame_generator_obj = VidCap_obj.frame_generator(self.args_dict)
+        frame_generator_obj = VidCap_obj.frame_generator(self.CONFIG)
         while True:
             try:
 
                 frame_datas_array: List[Dict] = \
                     self.frame_pre_processing(
                         logger,
-                        args_dict,
+                        CONFIG,
                         frame_generator_obj.__next__()
                     )
                 
@@ -1901,20 +1901,20 @@ class Core:
                 logger.debug(f'frame_datas_array size: {len(frame_datas_array), getsizeof(frame_datas_array)}')
                 logger.debug(inspect.currentframe().f_back.f_code.co_filename)
                 logger.debug(inspect.currentframe().f_back.f_lineno)
-                logger.debug(f'args_dict size: {len(args_dict), getsizeof(args_dict)}')
+                logger.debug(f'CONFIG size: {len(CONFIG), getsizeof(CONFIG)}')
                 """
 
                 face_encodings, frame_datas_array = \
                     self.face_encoding_process(
                         logger,
-                        args_dict,
+                        CONFIG,
                         frame_datas_array
                     )
 
                 frame_datas_array = \
                     self.frame_post_processing(
                         logger,
-                        args_dict,
+                        CONFIG,
                         face_encodings,
                         frame_datas_array
                     )
@@ -1935,22 +1935,22 @@ class Core:
 
     def override_args_dict(
             self,
-            args_dict: Dict,
+            CONFIG: Dict,
             override_list: List[Tuple]
         ) -> Dict:
 
-        """Override args_dict for example
+        """Override CONFIG for example
 
         Args:
-            Dict: args_dict
+            Dict: CONFIG
             List[Tuple]: override_list
         
         Returns:
-            Dict: args_dict
+            Dict: CONFIG
 
         Example:
-            >>> args_dict = Core.override_args_dict(
-                args_dict,
+            >>> CONFIG = Core.override_args_dict(
+                CONFIG,
                 [
                     ('crop_face_image', False),
                     ('output_debug_log', True)
@@ -1971,7 +1971,7 @@ class Core:
         for element in override_list:
             key, value = element
 
-            if not key in args_dict:
+            if not key in CONFIG:
                 logger.error(f"{key} dose not exist")
                 exit()
 
@@ -1980,9 +1980,9 @@ class Core:
                 logger.warning("exit")
                 exit()
 
-            args_dict[key] = value
+            CONFIG[key] = value
         
-        return args_dict
+        return CONFIG
 
 
 """DEBUG: MEMORY LEAK

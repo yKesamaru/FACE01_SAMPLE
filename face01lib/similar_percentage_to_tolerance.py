@@ -1,9 +1,8 @@
-#!python
 #cython: language_level=3
-"""Calc.pyを作成したためこのファイルは廃止予定"""
-
-
-__doc__ = 'similar_percentageを受取りtoleranceを返す'
+"""Receive similar_percentage and return tolerance
+*deprecated*
+"""
+"""TODO: #31 Calc.pyを作成したためこのファイルは廃止予定"""
 
 from numpy import sqrt
 import logging
@@ -34,7 +33,7 @@ tolerance: float = 0.0
 # --------------------
 
 def to_tolerance(similar_percentage) -> float:
-
+    """Not use"""
     ## 算出式
     ## percentage = -4.76190475*(p*p)+(-0.380952375)*p+100
     ## percentage_example = -4.76190475*(0.45*0.45)+(-0.380952375)*0.45+100
@@ -50,6 +49,7 @@ def to_tolerance(similar_percentage) -> float:
     return tolerance
 
 def to_percentage(tolerance):
+    """Not use"""
     # str型で渡されてもいいようにfloatに型変換
     tolerance = float(tolerance)
 

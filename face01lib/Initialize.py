@@ -1,5 +1,9 @@
 #cython: language_level=3
+"""Load config.ini and return CONFIG dictionary data
 
+    Returns:
+        dict: CONFIG
+    """
 import os
 from configparser import ConfigParser
 from datetime import datetime
@@ -9,7 +13,7 @@ from typing import Dict, List, Tuple, Union
 import numpy as np
 import numpy.typing as npt
 
-from face01lib.logger import Logger
+from .logger import Logger
 
 from .Calc import Cal
 from .load_priset_image import load_priset_image
@@ -27,10 +31,6 @@ logger = Logger().logger(name, head, 'info')
 
 
 class Initialize:
-
-    def __init__(self) -> None:
-        pass
-
 
     def _configure(self) -> Dict:
 
@@ -89,7 +89,7 @@ class Initialize:
                 'gpu_check' : conf.getboolean('system_check','gpu_check'),
                 'calculate_time' : conf.getboolean('DEBUG','calculate_time'),
                 'show_video' : conf.getboolean('Scheduled_to_be_abolished','show_video'),
-                'kaoninshoDir' :head,
+                'RootDir' :head,
             }
             return conf_dict
         except:
@@ -111,11 +111,11 @@ class Initialize:
         """Initialize values
 
         Returns:
-            Dict: args_dict
+            Dict: CONFIG
             Dictionary of initialized preferences
         
         Example:
-            >>> args_dict: Dict =  Initialize().initialize(Initialize().configure())
+            >>> CONFIG: Dict =  Initialize().initialize()
         """        
 
         self.conf_dict: Dict = self._configure()
@@ -126,7 +126,7 @@ class Initialize:
         known_face_encodings, known_face_names = \
             load_priset_image(
                     self,
-                    self.conf_dict["kaoninshoDir"],
+                    self.conf_dict["RootDir"],
                     self.conf_dict["priset_face_imagesDir"]
                 )
 
@@ -207,20 +207,22 @@ class Initialize:
             }
 
         # 辞書結合
-        args_dict: Dict = {**init_dict, **self.conf_dict}
+        CONFIG: Dict = {**init_dict, **self.conf_dict}
 
         # ヘッドレス実装
         if headless == True:
-            args_dict['rectangle'] = False
-            args_dict['target_rectangle'] = False
-            args_dict['show_video'] = False
-            args_dict['default_face_image_draw'] = False
-            args_dict['show_overlay'] = False
-            args_dict['show_percentage'] = False
-            args_dict['show_name'] = False
-            args_dict['draw_telop_and_logo'] = False
-            args_dict['person_frame_face_encoding'] = False
-            args_dict['headless'] = True
+            CONFIG['rectangle'] = False
+            CONFIG['target_rectangle'] = False
+            CONFIG['show_video'] = False
+            CONFIG['default_face_image_draw'] = False
+            CONFIG['show_overlay'] = False
+            CONFIG['show_percentage'] = False
+            CONFIG['show_name'] = False
+            CONFIG['draw_telop_and_logo'] = False
+            CONFIG['person_frame_face_encoding'] = False
+            CONFIG['headless'] = True
 
-        return args_dict
+        os.chdir(CONFIG["RootDir"])
+
+        return CONFIG
 

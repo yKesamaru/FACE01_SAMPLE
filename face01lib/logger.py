@@ -1,16 +1,39 @@
 #cython: language_level=3
+"""Manage log
+
+"""
 import logging
-# from memory_profiler import profile
 import sys
 
 class Logger:
+
     def __init__(self) -> None:
         # TODO: #28 ここでsetlevelを変更するようにする
         self.setlevel: None = None
 
 
-    # @profile(precision=4)
-    def logger(self, name, dir, setlevel):
+    def logger(
+            self,
+            name: str,
+            dir: str,
+            setlevel: str
+        ):
+        """Manage log
+
+        Args:
+            name (str): File name
+            dir (str): Directory name
+            setlevel (str): Set level (ex. debug)
+
+        Returns:
+            Logger object: logger
+
+        Example:
+            >>> name: str = __name__
+            >>> dir: str = dirname(__file__)
+            >>> logger = Logger().logger(name, dir, 'info')
+
+        """        
         self.name = name
         self.dir = dir
         self.setlevel = setlevel
@@ -40,4 +63,5 @@ class Logger:
 
         logger.addHandler(file_handler)
         logger.addHandler(stream_handler)
+
         return logger

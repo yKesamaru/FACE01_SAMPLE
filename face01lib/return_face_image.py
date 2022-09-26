@@ -1,5 +1,7 @@
-"""cythonでは使用不可
-from __future__ import annotations
+#cython: language_level=3
+"""Return face image data as ndarray"""
+"""
+from __future__ import annotations  # cythonでは使用不可
 """
 import cython
 from typing import Tuple
@@ -10,6 +12,7 @@ from typing import Tuple
 import numpy as np
 
 class Return_face_image():
+    
     def return_face_image(
         self,
         resized_frame,
