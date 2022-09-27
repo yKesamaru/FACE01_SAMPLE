@@ -6,7 +6,7 @@ from datetime import datetime
 from os.path import dirname
 from time import perf_counter
 from typing import Tuple
-
+from functools import wraps
 import numpy as np
 import numpy.typing as npt
 from PIL import Image, ImageDraw, ImageFile, ImageFont
@@ -14,11 +14,6 @@ from PIL import Image, ImageDraw, ImageFile, ImageFont
 from .logger import Logger
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
-
-# Make Logger object
-name: str = __name__
-dir: str = dirname(__file__)
-logger = Logger().logger(name, dir, 'info')
 
 
 class Cal:
@@ -31,12 +26,22 @@ class Cal:
     x2: int
     y2: int
 
+    def __init__(self, log_level: str = 'info') -> None:
+        # Setup logger: common way
+        self.log_level: str = log_level
+        import os.path
+        name: str = __name__
+        dir: str = os.path.dirname(__file__)
+        parent_dir, _ = os.path.split(dir)
+
+        self.logger = Logger(self.log_level).logger(name, parent_dir)
     
+
     @staticmethod
     def Measure_processing_time(
             HANDLING_FRAME_TIME_FRONT,
             HANDLING_FRAME_TIME_REAR
-        ) -> None:
+        ) -> float:
         """Measurement of processing time (calculation) and output to log
 
         Args:
@@ -46,8 +51,9 @@ class Cal:
         HANDLING_FRAME_TIME = \
             (HANDLING_FRAME_TIME_REAR - HANDLING_FRAME_TIME_FRONT)  ## 小数点以下がミリ秒
         
-        logger.info(f'Processing time: {round(HANDLING_FRAME_TIME * 1000, 2)}[mSec]')
+        # logger.info(f'Processing time: {round(HANDLING_FRAME_TIME, 3)}[Sec]')
 
+        return HANDLING_FRAME_TIME
 
     @staticmethod
     def Measure_processing_time_forward() -> float:
@@ -62,16 +68,31 @@ class Cal:
 
 
     @staticmethod
-    def Measure_processing_time_backward() -> None:
+    def Measure_processing_time_backward() -> float:
         """Measurement of processing time (second half)
+
+        Returns:
+            float: Second half point
         """        
-        HANDLING_FRAME_TIME_FRONT = \
-            Cal.Measure_processing_time_forward()
-        HANDLING_FRAME_TIME_REAR = perf_counter()
-        Cal.Measure_processing_time(
-                HANDLING_FRAME_TIME_FRONT,
-                HANDLING_FRAME_TIME_REAR
-            )
+        HANDLING_FRAME_TIME_REAR: float = perf_counter()
+
+        return HANDLING_FRAME_TIME_REAR
+
+    
+    def Measure_func(self, func) :
+        """Used as a decorator to time a function"""
+        self.func = func
+
+        @wraps(self.func)
+        def wrapper(*args, **kargs) :
+            start: float = perf_counter()
+            result = func(*args,**kargs)
+            elapsed_time: float =  round((perf_counter() - start) * 1000, 2)
+
+            print(f"{func.__name__}.............{elapsed_time}[mSec]")
+
+            return result
+        return wrapper
 
 
     def cal_specify_date(self, logger) -> None:

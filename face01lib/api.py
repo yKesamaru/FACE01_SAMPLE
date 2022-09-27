@@ -66,39 +66,47 @@ from memory_profiler import profile  # @profile()
 from .logger import Logger
 
 
-name: str = __name__
-dir: str = dirname(__file__)
-logger = Logger().logger(name, dir, None)
-
-
-try:
-    from .models import Dlib_models
-except Exception:
-    logger.error("Failed to import dlib model")
-    logger.error("-" * 20)
-    logger.error(format_exc(limit=None, chain=True))
-    logger.error("-" * 20)
-    exit(0)
-
-
-face_detector = dlib.get_frontal_face_detector()  # type: ignore
-
-predictor_5_point_model = Dlib_models().pose_predictor_five_point_model_location()
-pose_predictor_5_point = dlib.shape_predictor(predictor_5_point_model)  # type: ignore
-
-cnn_face_detection_model = Dlib_models().cnn_face_detector_model_location()
-cnn_face_detector = dlib.cnn_face_detection_model_v1(cnn_face_detection_model)  # type: ignore
-
-face_recognition_model = Dlib_models().face_recognition_model_location()
-face_encoder = dlib.face_recognition_model_v1(face_recognition_model)  # type: ignore
-
 
 class Dlib_api:
+
     __author__ = 'Original code written by Adam Geitgey, modified by YOSHITSUGU KESAMARU'
     __email__ = 'y.kesamaru@tokai-kaoninsho.com'
     __version__ = 'v0.0.1'
 
-    # def __init__(self) -> None:
+
+    def __init__(self, log_level: str = 'info') -> None:
+        # Setup logger: common way
+        self.log_level: str = log_level
+        import os.path
+        name: str = __name__
+        dir: str = os.path.dirname(__file__)
+        parent_dir, _ = os.path.split(dir)
+
+        self.logger = Logger(self.log_level).logger(name, parent_dir)
+        
+
+        try:
+            from .models import Dlib_models
+            Dlib_models_obj = Dlib_models()
+        except Exception:
+            self.logger.error("Failed to import dlib model")
+            self.logger.error("-" * 20)
+            self.logger.error(format_exc(limit=None, chain=True))
+            self.logger.error("-" * 20)
+            exit(0)
+
+
+        self.face_detector = dlib.get_frontal_face_detector()  # type: ignore
+
+        self.predictor_5_point_model = Dlib_models_obj.pose_predictor_five_point_model_location()
+        self.pose_predictor_5_point = dlib.shape_predictor(self.predictor_5_point_model)  # type: ignore
+
+        self.cnn_face_detection_model = Dlib_models_obj.cnn_face_detector_model_location()
+        self.cnn_face_detector = dlib.cnn_face_detection_model_v1(self.cnn_face_detection_model)  # type: ignore
+
+        self.face_recognition_model = Dlib_models_obj.face_recognition_model_location()
+        self.face_encoder = dlib.face_recognition_model_v1(self.face_recognition_model)  # type: ignore
+
 
     def _rect_to_css(self, rect: dlib.rectangle) -> Tuple[int,int,int,int]:
         """Convert a dlib 'rect' object to a plain tuple in (top, right, bottom, left) order.
@@ -211,9 +219,9 @@ class Dlib_api:
         self.number_of_times_to_upsample: int = number_of_times_to_upsample
         self.model: str = model
         if self.model == "cnn":
-            return cnn_face_detector(self.resized_frame, self.number_of_times_to_upsample)
+            return self.cnn_face_detector(self.resized_frame, self.number_of_times_to_upsample)
         else:
-            return face_detector(self.resized_frame, self.number_of_times_to_upsample)
+            return self.face_detector(self.resized_frame, self.number_of_times_to_upsample)
 
 
     # @profile()
@@ -293,7 +301,7 @@ class Dlib_api:
 
         for new_face_location in new_face_location_list:
             raw_face_landmarks.append(
-                pose_predictor_5_point(resized_frame, new_face_location)
+                self.pose_predictor_5_point(resized_frame, new_face_location)
             )
         
         return raw_face_landmarks
@@ -347,7 +355,7 @@ class Dlib_api:
 
             for raw_face_landmark in raw_face_landmarks:
                 face_landmark_ndarray: npt.NDArray[np.float64] = np.array(
-                    face_encoder.compute_face_descriptor(
+                    self.face_encoder.compute_face_descriptor(
                         self.face_encodings_resized_frame,
                         raw_face_landmark,
                         self.num_jitters,
@@ -366,7 +374,7 @@ class Dlib_api:
         """
 
         # TODO: #27 Padding around faces, 0.25
-        # return [np.array(face_encoder.compute_face_descriptor(self.face_encodings_resized_frame, raw_landmark_set, self.num_jitters, 0.25)) for raw_landmark_set in raw_landmarks]
+        # return [np.array(self.face_encoder.compute_face_descriptor(self.face_encodings_resized_frame, raw_landmark_set, self.num_jitters, 0.25)) for raw_landmark_set in raw_landmarks]
         # 4th value (0.25) is padding around the face. If padding == 0 then the chip will
         # be closely cropped around the face. Setting larger padding values will result a looser cropping.
         # In particular, a padding of 0.5 would double the width of the cropped area, a value of 1.
@@ -385,7 +393,7 @@ class Dlib_api:
     #     self.raw_landmark_set = raw_landmark_set
     #     self.resized_frame = resized_frame
     #     self.num_jitters = num_jitters
-    #     return np.array(face_encoder.compute_face_descriptor(self.resized_frame, self.raw_landmark_set, self.num_jitters))
+    #     return np.array(self.face_encoder.compute_face_descriptor(self.resized_frame, self.raw_landmark_set, self.num_jitters))
 
 
     # @profile()

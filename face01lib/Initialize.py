@@ -22,15 +22,20 @@ from .LoadImage import LoadImage
 from .video_capture import VidCap  # py
 
 
-name: str = __name__
-dir: str = os.path.dirname(__file__)
-head, tail = os.path.split(dir)
-
-logger = Logger().logger(name, head, 'info')
-
-
-
 class Initialize:
+
+    def __init__(self, log_level: str = 'info') -> None:
+        # Setup logger: common way
+        self.log_level: str = log_level
+        import os.path
+        name: str = __name__
+        dir: str = os.path.dirname(__file__)
+        parent_dir, _ = os.path.split(dir)
+
+        self.logger = Logger(self.log_level).logger(name, parent_dir)
+
+        self.parent_dir: str = parent_dir
+    
 
     def _configure(self) -> Dict:
 
@@ -41,18 +46,20 @@ class Initialize:
         Returns:
             Dict: conf_dict
         """        
-        priset_face_imagesDir: str = f'{head}/priset_face_images/'
+        priset_face_imagesDir: str = f'{self.parent_dir}/priset_face_images/'
+
+        os.chdir(self.parent_dir)
 
         try:
             conf: ConfigParser = ConfigParser()
-            conf.read('config.ini', 'utf-8')
+            success = conf.read('config.ini', 'utf-8')
             # dict作成
             conf_dict: Dict = {
-                # 'model' : conf.get('DEFAULT','model'),
                 'number_of_crops' : int(conf.get('DEFAULT','number_of_crops')),
                 'headless' : conf.getboolean('MAIN','headless'),
                 'anti_spoof' : conf.getboolean('MAIN','anti_spoof'),
                 'output_debug_log' : conf.getboolean('MAIN','output_debug_log'),
+                'log_level' : conf.get('MAIN', 'log_level'),
                 'set_width' : int(conf.get('SPEED_OR_PRECISE','set_width')),
                 'similar_percentage' : float(conf.get('SPEED_OR_PRECISE','similar_percentage')),
                 'jitters' : int(conf.get('SPEED_OR_PRECISE','jitters')),
@@ -89,17 +96,17 @@ class Initialize:
                 'gpu_check' : conf.getboolean('system_check','gpu_check'),
                 'calculate_time' : conf.getboolean('DEBUG','calculate_time'),
                 'show_video' : conf.getboolean('Scheduled_to_be_abolished','show_video'),
-                'RootDir' :head,
+                'RootDir' : self.parent_dir,
             }
             return conf_dict
         except:
-            logger.warning("config.ini 読み込み中にエラーが発生しました")
-            logger.exception("conf_dictが正常に作成できませんでした")
-            logger.warning("以下のエラーをシステム管理者様へお伝えください")
-            logger.warning("-" * 20)
-            logger.warning(format_exc(limit=None, chain=True))
-            logger.warning("-" * 20)
-            logger.warning("終了します")
+            self.logger.warning("config.ini 読み込み中にエラーが発生しました")
+            self.logger.exception("conf_dictが正常に作成できませんでした")
+            self.logger.warning("以下のエラーをシステム管理者様へお伝えください")
+            self.logger.warning("-" * 20)
+            self.logger.warning(format_exc(limit=None, chain=True))
+            self.logger.warning("-" * 20)
+            self.logger.warning("終了します")
             exit(0)
 
 

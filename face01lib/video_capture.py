@@ -5,8 +5,7 @@
 
 import inspect
 from io import BytesIO
-from os import chdir, environ
-from os.path import dirname
+from os import environ
 from sys import exit
 from traceback import format_exc
 from typing import Dict, Generator, List, Tuple
@@ -21,22 +20,26 @@ from requests.auth import HTTPDigestAuth
 from .Calc import Cal
 from .logger import Logger
 
-# from  import return_tuple
-# from .sample import size
 
-name: str = __name__
-dir: str = dirname(__file__)
-logger = Logger().logger(name, dir, None)
-
-Cal().cal_specify_date(logger)
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 """TODO #18 opencvの環境変数変更 要調査"""
 # environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;udp"
 environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;tcp"
 
+
 class VidCap:
-    # def __init__(self) -> None:
-    #     pass
+
+    def __init__(self, log_level: str = 'info') -> None:
+        # Setup logger: common way
+        self.log_level: str = log_level
+        import os.path
+        name: str = __name__
+        dir: str = os.path.dirname(__file__)
+        parent_dir, _ = os.path.split(dir)
+
+        self.logger = Logger(self.log_level).logger(name, parent_dir)
+
+        Cal().cal_specify_date(self.logger)
 
     # デバッグ用imshow()
     def frame_imshow_for_debug(
@@ -57,8 +60,8 @@ class VidCap:
 
         if isinstance(self.frame_maybe, np.ndarray):
             cv2.imshow("DEBUG", self.frame_maybe)
-            logger.debug(inspect.currentframe().f_back.f_code.co_filename)
-            logger.debug(inspect.currentframe().f_back.f_lineno)
+            self.logger.debug(inspect.currentframe().f_back.f_code.co_filename)
+            self.logger.debug(inspect.currentframe().f_back.f_lineno)
             cv2.moveWindow('window DEBUG', 0, 0)
             cv2.waitKey(3000)
             cv2.destroyAllWindows()
@@ -67,8 +70,8 @@ class VidCap:
                 fr: npt.NDArray[np.uint8] = fra["img"]
                 cv2.imshow("DEBUG", fr)
                 cv2.moveWindow('window DEBUG', 0, 0)
-                logger.debug(inspect.currentframe().f_back.f_code.co_filename)
-                logger.debug(inspect.currentframe().f_back.f_lineno)
+                self.logger.debug(inspect.currentframe().f_back.f_code.co_filename)
+                self.logger.debug(inspect.currentframe().f_back.f_lineno)
                 cv2.waitKey(3000)
                 cv2.destroyAllWindows()
 
@@ -128,11 +131,11 @@ class VidCap:
         width: int = int(width)
 
         if width <= 0:
-            logger.warning("can't receive")
-            logger.warning("-" * 20)
-            logger.warning(format_exc(limit=None, chain=True))
-            logger.warning("-" * 20)
-            logger.warning("exit")
+            self.logger.warning("can't receive")
+            self.logger.warning("-" * 20)
+            self.logger.warning(format_exc(limit=None, chain=True))
+            self.logger.warning("-" * 20)
+            self.logger.warning("exit")
             exit(0)
         
         set_height: int = int((self.set_width * height) / width)
@@ -247,13 +250,13 @@ class VidCap:
                     self.finalize(vcap)
                     break
                 if camera_number == 4 and ret is False:
-                    logger.warning("USBカメラの受信が出来ません")
-                    logger.warning("以下のエラーをシステム管理者へお伝えください")
-                    logger.warning("-" * 20)
-                    logger.warning(format_exc(limit=None, chain=True))
-                    logger.exception("USBカメラとの通信に異常が発生しました")
-                    logger.warning("-" * 20)
-                    logger.warning("終了します")
+                    self.logger.warning("USBカメラの受信が出来ません")
+                    self.logger.warning("以下のエラーをシステム管理者へお伝えください")
+                    self.logger.warning("-" * 20)
+                    self.logger.warning(format_exc(limit=None, chain=True))
+                    self.logger.exception("USBカメラとの通信に異常が発生しました")
+                    self.logger.warning("-" * 20)
+                    self.logger.warning("終了します")
                     self.finalize(vcap)
                     exit(0)
             print(f'live_camera_number: {live_camera_number}')
@@ -329,7 +332,7 @@ class VidCap:
                 if ret:
                     live_camera_number = camera_number 
                     break
-            logger.info(f'CAMERA DEVICE NUMBER: {camera_number}')
+            self.logger.info(f'CAMERA DEVICE NUMBER: {camera_number}')
             while vcap.isOpened(): 
                 # frame_skipの数値に満たない場合は処理をスキップ
                 for frame_skip_counter in range(1, self.CONFIG["frame_skip"]):
@@ -337,10 +340,10 @@ class VidCap:
                     if frame_skip_counter < self.CONFIG["frame_skip"]:
                         continue
                     if ret == False:
-                        logger.warning("ERROR OCURRED\nREPORTED BY FACE01")
-                        logger.warning("-" * 20)
-                        logger.warning(format_exc(limit=None, chain=True))
-                        logger.warning("-" * 20)
+                        self.logger.warning("ERROR OCURRED\nREPORTED BY FACE01")
+                        self.logger.warning("-" * 20)
+                        self.logger.warning(format_exc(limit=None, chain=True))
+                        self.logger.warning("-" * 20)
                         self.finalize(vcap)
                     break
                 else:
@@ -400,26 +403,26 @@ class VidCap:
                         try:
                             yield resized_frame
                         except TypeError as e:
-                            logger.warning(e)
+                            self.logger.warning(e)
                         except Exception as e:
-                            logger.warning(e)
+                            self.logger.warning(e)
                         finally:
                             yield resized_frame
                     else:
-                        logger.warning("以下のエラーをシステム管理者へお伝えください")
-                        logger.warning(f"ステータスコード: {response.headers['Status']}")
-                        logger.warning(f"コンテントタイプ: {response.headers['Content-type']}")
-                        logger.warning("-" * 20)
-                        logger.warning(format_exc(limit=None, chain=True))
-                        logger.warning("-" * 20)
+                        self.logger.warning("以下のエラーをシステム管理者へお伝えください")
+                        self.logger.warning(f"ステータスコード: {response.headers['Status']}")
+                        self.logger.warning(f"コンテントタイプ: {response.headers['Content-type']}")
+                        self.logger.warning("-" * 20)
+                        self.logger.warning(format_exc(limit=None, chain=True))
+                        self.logger.warning("-" * 20)
                         exit(0)
             except:
-                logger.warning("以下のエラーをシステム管理者へお伝えください")
-                logger.warning("-" * 20)
-                logger.warning(format_exc(limit=None, chain=True))
-                logger.exception("通信に異常が発生しました")
-                logger.warning("-" * 20)
-                logger.warning("終了します")
+                self.logger.warning("以下のエラーをシステム管理者へお伝えください")
+                self.logger.warning("-" * 20)
+                self.logger.warning(format_exc(limit=None, chain=True))
+                self.logger.exception("通信に異常が発生しました")
+                self.logger.warning("-" * 20)
+                self.logger.warning("終了します")
                 exit(0)
         
         else:  # RTSPの場合は通常のテスト動画と同じ
@@ -441,11 +444,11 @@ class VidCap:
                 cnt = 0
 
                 if ret == False:
-                    logger.warning("ERROR OCURRED")
-                    logger.warning("DATA RECEPTION HAS ENDED")
-                    logger.warning("-" * 20)
-                    logger.warning(format_exc(limit=None, chain=True))
-                    logger.warning("-" * 20)
+                    self.logger.warning("ERROR OCURRED")
+                    self.logger.warning("DATA RECEPTION HAS ENDED")
+                    self.logger.warning("-" * 20)
+                    self.logger.warning(format_exc(limit=None, chain=True))
+                    self.logger.warning("-" * 20)
                     self.finalize(vcap)
                     raise StopIteration()
                     break

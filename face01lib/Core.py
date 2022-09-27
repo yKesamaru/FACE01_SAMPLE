@@ -77,61 +77,59 @@ Memory_leak_obj.memory_leak_analyze_start(line_or_traceback)
 
 
 import inspect
+import os
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
-
+from os.path import dirname, exists
 from platform import system
+from shutil import move
 from traceback import format_exc
-from typing import Dict, List, Tuple, Union, Generator
+from typing import Dict, Generator, List, Tuple, Union
 
 import cv2
 import mediapipe as mp
 import mojimoji
 import numpy as np
 import numpy.typing as npt  # See [](https://discuss.python.org/t/how-to-type-annotate-mathematical-operations-that-supports-built-in-numerics-collections-and-numpy-arrays/13509)
+import onnxruntime
 from memory_profiler import profile  # @profile()
 from PIL import Image, ImageDraw, ImageFile, ImageFont
 
-ImageFile.LOAD_TRUNCATED_IMAGES = True
-
 from .api import Dlib_api
-
-Dlib_api_obj = Dlib_api()
 from .Calc import Cal
-
-Cal_obj = Cal()
-# from collections import defaultdict
-from concurrent.futures import ThreadPoolExecutor
-from os.path import dirname, exists
-import os
-from shutil import move
-
-import onnxruntime
-
 from .logger import Logger
 from .models import Dlib_models
 from .return_face_image import Return_face_image
 from .video_capture import VidCap
-VidCap_obj = VidCap()
 
-# VidCap_obj = VidCap()
+Cal_obj = Cal()
+VidCap_obj = VidCap()
+Dlib_api_obj = Dlib_api()
+Return_face_image_obj = Return_face_image()
+
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
 anti_spoof_model: str = Dlib_models().anti_spoof_model_location()
 onnx_session = onnxruntime.InferenceSession(anti_spoof_model)
 
-name: str = __name__
-dir: str = os.path.dirname(__file__)
-head, tail = os.path.split(dir)
-
-logger = Logger().logger(name, head, 'info')
-
-
-Cal_obj.cal_specify_date(logger)
 
 
 class Core:
-    # def __init__(self) -> None:
-    #     Cal_obj.cal_specify_date(logger)
+
+    def __init__(self, log_level: str = 'info') -> None:
+
+        # Setup logger: common way
+        self.log_level: str = log_level
+        import os.path
+        name: str = __name__
+        dir: str = os.path.dirname(__file__)
+        parent_dir, _ = os.path.split(dir)
+
+        self.logger = Logger(self.log_level).logger(name, parent_dir)
+
+
+        Cal_obj.cal_specify_date(self.logger)
 
 
     # @profile()
@@ -686,7 +684,7 @@ class Core:
         else:
             # date: str = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")  # Not use
             face_location_list: List[Tuple[int,int,int,int]] = \
-                Dlib_api().face_locations(
+                Dlib_api_obj.face_locations(
                 # Dlib_api_obj.face_locations(
                     self.resized_frame,
                     self.CONFIG["upsampling"],
@@ -738,6 +736,7 @@ class Core:
 
     # 顔のエンコーディング
     # @profile()
+    @Cal_obj.Measure_func
     def face_encoding_process(
             self,
             logger,
@@ -814,7 +813,7 @@ class Core:
                             face_location_list
                         )
                     face_encodings = \
-                        Dlib_api().face_encodings(
+                        Dlib_api_obj.face_encodings(
                             concatenate_person_frame,
                             concatenate_face_location_list,
                             self.CONFIG["jitters"],
@@ -822,16 +821,16 @@ class Core:
                         )
                 elif self.CONFIG["use_pipe"] == True and  self.CONFIG["person_frame_face_encoding"] == False:
                     try:
-                        # TODO: #30 Dlib_api_obj.face_encodingsだとエラーが発生する理由をきちんとする
                         face_encodings = \
-                            Dlib_api().face_encodings(  # Dlib_api_obj.face_encodingsだとエラーが発生する。
+                            Dlib_api_obj.face_encodings(
                                 resized_frame,
                                 face_location_list,
                                 self.CONFIG["jitters"],
                                 "small"
                             )
-                        if face_encodings == []:
-                            return face_encodings, self.frame_datas_array
+                        # TODO: #34 use_pipe = TrueとFalseによる'face_encodings'の処理速度の違いを究明する
+                        # if face_encodings == []:
+                        #     return face_encodings, self.frame_datas_array
                     except Exception as e:
                         self.logger.warning(f'resized_frame: {resized_frame}\nface_location_list:  {face_location_list}')
                         self.logger.warning(f'ERROR: {e}')
@@ -847,8 +846,7 @@ class Core:
                     exit(0)
                 elif self.CONFIG["use_pipe"] == False and self.CONFIG["person_frame_face_encoding"] == False:
                     face_encodings = \
-                        Dlib_api().face_encodings(
-                        # Dlib_api_obj.face_encodings(
+                        Dlib_api_obj.face_encodings(
                             resized_frame,
                             face_location_list,
                             self.CONFIG["jitters"],
@@ -1232,7 +1230,7 @@ class Core:
         self.frame: npt.NDArray[np.uint8] = frame
         self.face_location: Tuple[int,int,int,int] = face_location
         face_image: npt.NDArray[np.uint8] = \
-            Return_face_image().return_face_image(self.frame, self.face_location)
+            Return_face_image_obj.return_face_image(self.frame, self.face_location)
         return face_image
 
 
@@ -1258,7 +1256,7 @@ class Core:
         self.frame: npt.NDArray[np.uint8] = frame
         self.face_location: Tuple[int,int,int,int] = face_location
         face_image: npt.NDArray[np.uint8] = self.r_face_image(self.frame, self.face_location)
-        # face_image = Return_face_image().return_face_image(self.frame, self.face_location)
+        # face_image = Return_face_image_obj.return_face_image(self.frame, self.face_location)
         # face_image = self.return_face_image(self.frame, self.face_location)
         # VidCap_obj.frame_imshow_for_debug(face_image)  # DEBUG
 
@@ -1890,30 +1888,30 @@ class Core:
 
                 frame_datas_array: List[Dict] = \
                     self.frame_pre_processing(
-                        logger,
+                        self.logger,
                         CONFIG,
                         frame_generator_obj.__next__()
                     )
                 
                 """DEBUG
-                logger.debug(inspect.currentframe().f_back.f_code.co_filename)
-                logger.debug(inspect.currentframe().f_back.f_lineno)
-                logger.debug(f'frame_datas_array size: {len(frame_datas_array), getsizeof(frame_datas_array)}')
-                logger.debug(inspect.currentframe().f_back.f_code.co_filename)
-                logger.debug(inspect.currentframe().f_back.f_lineno)
-                logger.debug(f'CONFIG size: {len(CONFIG), getsizeof(CONFIG)}')
+                self.logger.debug(inspect.currentframe().f_back.f_code.co_filename)
+                self.logger.debug(inspect.currentframe().f_back.f_lineno)
+                self.logger.debug(f'frame_datas_array size: {len(frame_datas_array), getsizeof(frame_datas_array)}')
+                self.logger.debug(inspect.currentframe().f_back.f_code.co_filename)
+                self.logger.debug(inspect.currentframe().f_back.f_lineno)
+                self.logger.debug(f'CONFIG size: {len(CONFIG), getsizeof(CONFIG)}')
                 """
 
                 face_encodings, frame_datas_array = \
                     self.face_encoding_process(
-                        logger,
+                        self.logger,
                         CONFIG,
                         frame_datas_array
                     )
 
                 frame_datas_array = \
                     self.frame_post_processing(
-                        logger,
+                        self.logger,
                         CONFIG,
                         face_encodings,
                         frame_datas_array
@@ -1922,14 +1920,14 @@ class Core:
                 yield frame_datas_array
 
             except StopIteration:
-                logger.warning("DATA RECEPTION HAS ENDED")
+                self.logger.warning("DATA RECEPTION HAS ENDED")
                 exit(0)
             except Exception as e:
-                logger.warning("ERROR OCURRED")
-                logger.warning("-" * 20)
-                logger.warning(f"ERROR TYPE: {e}")
-                logger.warning(format_exc(limit=None, chain=True))
-                logger.warning("-" * 20)
+                self.logger.warning("ERROR OCURRED")
+                self.logger.warning("-" * 20)
+                self.logger.warning(f"ERROR TYPE: {e}")
+                self.logger.warning(format_exc(limit=None, chain=True))
+                self.logger.warning("-" * 20)
                 exit(0)
 
 

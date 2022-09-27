@@ -3,6 +3,10 @@
 """
 from __future__ import annotations  # cythonでは使用不可
 """
+
+# TODO: #33 リファクタリング
+
+
 import cython
 from typing import Tuple
 # if cython.compiled:

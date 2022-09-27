@@ -1,42 +1,65 @@
 #cython: language_level=3
 """Manage log
 
-"""
+Set log level
+
+Args:
+    str: set_level
+    Chose from bellow
+    - 'debug'
+    - 'info'
+    You can pass value as CONFIG["set_level"]
+
+Example:
+    >>> # Setup logger: common way
+    >>> import os.path
+    >>> from .Initialize import Initialize
+    >>> name: str = __name__
+    >>> dir: str = os.path.dirname(__file__)
+    >>> parent_dir, _ = os.path.split(dir)
+    >>> CONFIG = Initialize().initialize()
+    >>> 
+    >>> logger = Logger(CONFIG["log_level"]).logger(name, parent_dir)
+"""        
+
 import logging
 import sys
+from typing import Dict
 
 class Logger:
 
-    def __init__(self) -> None:
-        # TODO: #28 ここでsetlevelを変更するようにする
-        self.setlevel: None = None
+    def __init__(self, log_level: str = 'info') -> None:
+        self.log_level: str = log_level
 
 
     def logger(
             self,
             name: str,
-            dir: str,
-            setlevel: str
+            dir: str
         ):
         """Manage log
 
         Args:
             name (str): File name
             dir (str): Directory name
-            setlevel (str): Set level (ex. debug)
 
         Returns:
             Logger object: logger
 
         Example:
+            >>> # Setup logger: common way
+            >>> import os.path
+            >>> from .Initialize import Initialize
             >>> name: str = __name__
-            >>> dir: str = dirname(__file__)
-            >>> logger = Logger().logger(name, dir, 'info')
+            >>> dir: str = os.path.dirname(__file__)
+            >>> parent_dir, _ = os.path.split(dir)
+            >>> CONFIG = Initialize().initialize()
+            >>> 
+            >>> logger = Logger(CONFIG["log_level"]).logger(name, parent_dir)
 
         """        
         self.name = name
         self.dir = dir
-        self.setlevel = setlevel
 
         logger = logging.getLogger(self.name)
 
@@ -44,7 +67,7 @@ class Logger:
         
         log_file = dir + 'face01.log'
         file_handler = logging.FileHandler(log_file, mode='a')
-        if self.setlevel == 'debug':
+        if self.log_level == 'debug':
             logger.setLevel(logging.DEBUG)
             file_handler.setLevel(logging.DEBUG)
         else:
@@ -53,7 +76,7 @@ class Logger:
         file_handler.setFormatter(formatter)
 
         stream_handler = logging.StreamHandler(stream=sys.stdout)
-        if self.setlevel == 'debug':
+        if self.log_level == 'debug':
             logger.setLevel(logging.DEBUG)
             stream_handler.setLevel(logging.DEBUG)
         else:

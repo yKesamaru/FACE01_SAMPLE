@@ -1137,3 +1137,9 @@ configparser.NoOptionError: No option 'model' in section: 'DEFAULT'
 
 [2022-09-22 09:27:36,861] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
 [2022-09-22 09:27:36,862] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-09-26 16:47:56,685] [face01lib.Calc] [Calc.py] [INFO] Processing time: 0.0[mSec]
+[2022-09-26 16:51:24,134] [face01lib.Calc] [Calc.py] [INFO] Processing time: 0.0[mSec]
+[2022-09-26 17:22:30,704] [face01lib.Calc] [Calc.py] [INFO] Processing time: 3312.36[mSec]
+[2022-09-26 17:22:30,704] [face01lib.Calc] [Calc.py] [INFO] Processing time: 3312.36[mSec]
+[2022-09-26 17:34:01,802] [face01lib.Calc] [Calc.py] [INFO] Processing time: 9.547[Sec]
+[2022-09-26 17:34:01,807] [face01lib.Calc] [Calc.py] [INFO] Processing time: 9.547[Sec]

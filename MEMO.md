@@ -1,6 +1,10 @@
 # FACE01について
 # TODO
 ## 1.4.09
+- log周りを改善する
+  - config.iniにlog_levelを追加
+  - logger.pyを改善
+- exampleをいくつか作成する
 - FACE01.pyを整理する
   - FACE01.pyというファイルはなくしてexample集に加える
 - pydoc
