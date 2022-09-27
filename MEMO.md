@@ -1,7 +1,15 @@
 # FACE01について
 # TODO
 ## 1.4.09
+- cython化
+  - benchmark_GUI_window.pyの結果
+    - cython
+      - ![](img/PASTE_IMAGE_2022-09-27-18-27-31.png)
+    - python
+      - ![](img/PASTE_IMAGE_2022-09-27-18-30-09.png)
 - sphinxでドキュメントを整備する
+  - sphinx-apidoc -f -o ./docs .
+  - sphinx-build -b html ./docs ./docs/_build
 - pydoc
   -  $ python -m pydoc -b
 - Core.pyを中心に型アノテーションをつけてデータ型を整理する
