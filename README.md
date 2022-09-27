@@ -1,7 +1,7 @@
 ![Logo](https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/g1320.png)
 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE)
-![](https://img.shields.io/badge/Release-v1.4.08-blue)
+![](https://img.shields.io/badge/Release-v1.4.09-blue)
 
 ![](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/img/ROMAN_HOLIDAY.GIF?raw=true)
 ```bash
@@ -35,8 +35,10 @@ You can call individual methods or call a set of functions.
 See [docs/functions](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/functions.md).
 
 # Update
-- v1.4.08
-  - Fix memory leak bug.
+- v1.4.09
+  - More faster
+  - Some bugs fix
+  - Add examples
 
 
 # Installation
@@ -62,8 +64,10 @@ If you want to use the http protocol as the input source, replace the `movie =` 
 See [docs/config.ini](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/config_ini.md) for details.
 
 # Example
-`python CALL_FACE01.py`
-See [CALL_FACE01.py](CALL_FACE01.py) to refer the entire code.
+There are some example files in the example folder.
+Let's try `example/simple.py` here.
+`python3 example/simple.py`
+See [simple.py](example/simple.py) to refer the entire code.
 ## If you want to extract only face coordinates
 Set `headless = True` on `config.ini`.
 
