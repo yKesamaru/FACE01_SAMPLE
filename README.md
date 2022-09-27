@@ -68,7 +68,8 @@ There are some example files in the example folder.
 Let's try `example/simple.py` here.
 `python3 example/simple.py`
 See [simple.py](example/simple.py) to refer the entire code.
-## If you want to extract only face coordinates
+
+## If you want to get only face recognition
 Set `headless = True` on `config.ini`.
 
 ## Import FACE01 library
@@ -78,10 +79,12 @@ from face01lib.Initialize import Initialize
 ```
 ## Set the number of playback frames
 If you just want to try FACE01 a bit, you can limit the number of frames it loads.
+
 ```python
 if __name__ == '__main__':
     main(exec_times = 5)
 ```
+
 ```python
 
 def main(exec_times: int = 50):
@@ -132,21 +135,26 @@ def main(exec_times: int = 50):
  ...
 
 ```
+
 The face images are output to the `/output/` folder.
 ![](https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/img/PASTE_IMAGE_2022-07-20-07-36-26.png)
 
 Try `example/benchmark_CUI.py` in the same examples folder.
 You can see the profile result.
 Your browser will automatically display a very cool and easy to use graph using `snakeviz`.
+
 ```bash
 snakeviz restats
 ```
+
 ![](https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/img/PASTE_IMAGE_2022-07-20-07-23-21.png)
 
 ## If you want to display GUI window
 Want to display in a cool GUI window?
 Try `example/benchmark_GUI_window.py`.
-Don't forget to set `headless=True` on `config.ini`.
+
+*Don't forget* to set `headless=True` on `config.ini`.
+
 ```python
 import cv2
 import PySimpleGUI as sg
@@ -226,6 +234,7 @@ def main(exec_times: int = 50):
 if __name__ == '__main__':
     main(exec_times = 50)
 ```
+
 All the code can be get [here](example/display_GUI_window.py).
 
 ## Result
