@@ -22,7 +22,6 @@ sys.path.append(parent_dir)
 
 from typing import Dict
 
-from face01lib.Calc import Cal
 from face01lib.Core import Core
 from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
@@ -43,11 +42,14 @@ def main(exec_times: int = 50):
         exit()
 
 
-    name = __name__
-    if CONFIG["output_debug_log"] == True:
-        logger = Logger().logger(name, dir, 'debug')
-    else:
-        logger = Logger().logger(name, dir, 'info')
+    # Setup logger
+    log_level: str = 'debug'
+    import os.path
+    name: str = __name__
+    dir: str = os.path.dirname(__file__)
+    parent_dir, _ = os.path.split(dir)
+
+    logger = Logger(log_level).logger(name, parent_dir)
 
 
     gen = Core().common_process(CONFIG)
@@ -63,23 +65,11 @@ def main(exec_times: int = 50):
             
             for person_data in frame_datas['person_data_list']:
                 if not person_data['name'] == 'Unknown':
-                    logger.
-                    print(
-                        person_data['name'], "\n",
-                        "\t", "similarity\t\t", person_data['percentage_and_symbol'], "\n",
-                        "\t", "coordinate\t\t", person_data['location'], "\n",
-                        "\t", "time\t\t\t", person_data['date'], "\n",
-                        "\t", "output\t\t\t", person_data['pict'], "\n",
-                        "-------\n"
-                    )
+                    logger.debug(person_data['name'])
+                    logger.debug(person_data['percentage_and_symbol'])
+                    logger.debug(person_data['location'])
+                    logger.debug("-----------------")
             
     
-    END = Cal.Measure_processing_time_backward()
-
-    print(f'Total processing time: {round(Cal.Measure_processing_time(START, END) , 3)}[seconds]')
-    print(f'Per frame: {round(Cal.Measure_processing_time(START, END) / ( exec_times), 3)}[seconds]')
-
-
 if __name__ == '__main__':
-    pr.run('main(exec_times = 50)', 'restats')
-    subprocess.run(["snakeviz", "restats"])
+    main(exec_times = 50)

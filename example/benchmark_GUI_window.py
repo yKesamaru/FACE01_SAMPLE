@@ -113,5 +113,5 @@ def main(exec_times: int = 50):
 
 
 if __name__ == '__main__':
-    pr.run('main(exec_times = 5)', 'restats')
+    pr.run('main(exec_times = 50)', 'restats')
     subprocess.run(["snakeviz", "restats"])

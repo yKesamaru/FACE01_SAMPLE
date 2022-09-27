@@ -736,7 +736,7 @@ class Core:
 
     # 顔のエンコーディング
     # @profile()
-    @Cal_obj.Measure_func
+    # @Cal_obj.Measure_func
     def face_encoding_process(
             self,
             logger,

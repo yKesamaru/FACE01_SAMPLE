@@ -64,6 +64,5 @@ def main(exec_times: int = 50):
                     )
             
     
-
 if __name__ == '__main__':
     main(exec_times = 5)
