@@ -1,12 +1,7 @@
 # FACE01について
 # TODO
 ## 1.4.09
-- log周りを改善する
-  - config.iniにlog_levelを追加
-  - logger.pyを改善
-- exampleをいくつか作成する
-- FACE01.pyを整理する
-  - FACE01.pyというファイルはなくしてexample集に加える
+- sphinxでドキュメントを整備する
 - pydoc
   -  $ python -m pydoc -b
 - Core.pyを中心に型アノテーションをつけてデータ型を整理する
@@ -16,6 +11,12 @@
   - ![](img/PASTE_IMAGE_2022-08-31-09-20-50.png)
 
 Fix
+- log周りを改善する
+  - config.iniにlog_levelを追加
+  - logger.pyを改善
+- exampleをいくつか作成する
+- FACE01.pyを整理する
+  - FACE01.pyというファイルはなくしてexample集に加える
 - api.pyのdocstringをgoogleスタイルに変更
   - sphinxでの利用を想定するため統一化する
 - kaoninshoDirをRootDirに変更

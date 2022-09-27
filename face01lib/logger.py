@@ -5,21 +5,12 @@ Set log level
 
 Args:
     str: set_level
-    Chose from bellow
-    - 'debug'
-    - 'info'
-    You can pass value as CONFIG["set_level"]
+    
+        - Chose from bellow
+            - 'debug'
+            - 'info'
+        - You can pass value as CONFIG["set_level"]
 
-Example:
-    >>> # Setup logger: common way
-    >>> import os.path
-    >>> from .Initialize import Initialize
-    >>> name: str = __name__
-    >>> dir: str = os.path.dirname(__file__)
-    >>> parent_dir, _ = os.path.split(dir)
-    >>> CONFIG = Initialize().initialize()
-    >>> 
-    >>> logger = Logger(CONFIG["log_level"]).logger(name, parent_dir)
 """        
 
 import logging
@@ -47,9 +38,9 @@ class Logger:
             Logger object: logger
 
         Example:
-            >>> # Setup logger: common way
             >>> import os.path
             >>> from .Initialize import Initialize
+            >>> 
             >>> name: str = __name__
             >>> dir: str = os.path.dirname(__file__)
             >>> parent_dir, _ = os.path.split(dir)

@@ -1,6 +1,7 @@
 # cython: language_level=3
 
-"""
+"""Reference
+
 - Cython compile option:
     - Cython options which have enabled
         - cython: language_level=3
@@ -28,8 +29,8 @@
         person_data = {
                 'name': name,
                 'pict':filename,
-                'date':date,
-                'location':(top,right,bottom,left),
+                'date': date,
+                'location': (top,right,bottom,left),
                 'percentage_and_symbol': percentage_and_symbol
             }
         person_data_list.append(person_data)
@@ -63,6 +64,7 @@
             - Original model create by Prokofev Kirill, modified by PINT
         - URL
             - https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3
+
 """
 
 # from __future__ import annotations
@@ -139,15 +141,13 @@ class Core:
             model_selection: int = 0,
             min_detection_confidence: float = 0.4
         ) -> mp.python.solution_base:
+
         """Processes an RGB image and returns a list of the detected face location data.
 
         Args:
-            resized_frame (npt.NDArray[np.uint8]): 
-                Resized image frame
-            model_selection (int, optional): 
-                Value set in 'config.ini'.  Defaults to 0.
-            min_detection_confidence (float, optional): 
-                Value set in 'config.ini'. Defaults to 0.4.
+            resized_frame (npt.NDArray[np.uint8]): Resized image frame
+            model_selection (int, optional): Value set in 'config.ini'.  Defaults to 0.
+            min_detection_confidence (float, optional): Value set in 'config.ini'. Defaults to 0.4.
 
         Returns:
             A NamedTuple object with a "detections" field that contains a list of the
@@ -155,6 +155,7 @@ class Core:
 
         Refer:
             https://solutions.mediapipe.dev/face_detection#python-solution-api
+
         """        
         self.resized_frame: npt.NDArray[np.uint8] = resized_frame
         self.model_selection: Tuple[int] = model_selection,
@@ -189,10 +190,12 @@ class Core:
             exit(0)
         """
 
-        """refer to
+        """Reference
+
         https://solutions.mediapipe.dev/face_detection#python-solution-api
         
         Processes an RGB image and returns a list of the detected face location data.
+
         Args:
             image: An RGB image represented as a numpy ndarray.
         Raises:
@@ -202,6 +205,7 @@ class Core:
         Returns:
             A NamedTuple object with a "detections" field that contains a list of the
             detected face location data.'
+
         """
         return results
 
@@ -330,10 +334,11 @@ class Core:
             logger (_type_): logger
             known_face_encodings (List[npt.NDArray[np.float64]]): List of known face encodes
             face_encoding (npt.NDArray[np.float64]): Face encoding data to be compared
-            tolerance (float): 
+            tolerance (float): tolerance value
 
         Returns:
             Tuple[npt.NDArray[np.bool8], float]: match list, min value
+
         """        
         self.logger = logger
         self.known_face_encodings: List[npt.NDArray[np.float64]] = known_face_encodings
@@ -373,7 +378,8 @@ class Core:
             resized_frame: npt.NDArray[np.uint8]
         ) -> List[Dict]:
         """Method to make frame_datas_array
-                Return the data structure of frame_datas_list. 
+
+        Return the data structure of frame_datas_list. 
 
         Args:
             overlay (npt.NDArray[np.uint8]): Copy of frame
@@ -389,31 +395,32 @@ class Core:
             List[Dict]: List of frame_datas_array
 
         Example:
-            person_data:
-                {
-                    'name': name,
-                    'pict': filename,
-                    'date': date,
-                    'location': (top,right,bottom,left),
-                    'percentage_and_symbol': percentage_and_symbol
-                }
-                
+            - person_data:
+            >>>     {
+            >>>         'name': name,
+            >>>         'pict': filename,
+            >>>         'date': date,
+            >>>         'location': (top,right,bottom,left),
+            >>>         'percentage_and_symbol': percentage_and_symbol
+            >>>     }
+            
                 person_data内のlocationは個々人の顔座標です。
                 個々人を特定しない場合の顔座標はframe_datas['face_location_list']を使ってください。
-            
-            person_data_list: 
-                person_data_list.append(person_data)
-            
-            frame_datas:
-                {
-                    'img': resized_frame,
-                    'face_location_list': face_location_list,
-                    'overlay': overlay,
-                    'person_data_list': person_data_list
-                }
 
-            frame_datas_list: 
-                frame_datas_array.append(frame_datas)
+            - person_data_list: 
+            >>>    person_data_list.append(person_data)
+            
+            - frame_datas:
+            >>>    {
+            >>>        'img': resized_frame,
+            >>>        'face_location_list': face_location_list,
+            >>>        'overlay': overlay,
+            >>>        'person_data_list': person_data_list
+            >>>    }
+
+            - frame_datas_list: 
+            >>>     frame_datas_array.append(frame_datas)
+
         """
 
         self.overlay: npt.NDArray[np.uint8] = overlay
@@ -518,6 +525,7 @@ class Core:
 
         Returns:
             str: Name who is
+
         """        
         self.CONFIG = CONFIG
         self.matches = matches
@@ -537,6 +545,7 @@ class Core:
             face_location_list: List[Tuple[int,int,int,int]]
         ) -> Tuple[List[Tuple[int,int,int,int]], npt.NDArray[np.uint8]]:
         """Return tuple 
+
             - concatenate_face_location_list
             - concatenate_person_frame
 
@@ -545,10 +554,11 @@ class Core:
             face_location_list (List[Tuple[int,int,int,int]]): Face location list
 
         Returns:
-            - concatenate_face_location_list
-                - Tuple[List[Tuple[int,int,int,int]]
-            - concatenate_person_frame
-                - npt.NDArray[np.uint8]]
+            concatenate_face_location_list (Tuple[List[Tuple[int,int,int,int]])
+                List of concatenated coordinates
+            concatenate_person_frame (npt.NDArray[np.uint8]])
+                Image data of concatenated person image data
+
         """        
         self.return_concatenate_location_and_frame_resized_frame: npt.NDArray[np.uint8] = resized_frame
         self.face_location_list = face_location_list

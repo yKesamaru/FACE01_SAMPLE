@@ -3,7 +3,6 @@
 Calculation results are output to log"""
 
 from datetime import datetime
-from os.path import dirname
 from time import perf_counter
 from typing import Tuple
 from functools import wraps
