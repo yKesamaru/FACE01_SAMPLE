@@ -23,7 +23,6 @@ from typing import Dict
 
 from face01lib.Core import Core
 from face01lib.Initialize import Initialize
-from face01lib.Calc import Cal
 
 
 def main(exec_times: int = 50):
@@ -62,7 +61,7 @@ def main(exec_times: int = 50):
                         "\t", "output\t\t\t", person_data['pict'], "\n",
                         "-------\n"
                     )
-            
-    
+
+
 if __name__ == '__main__':
     main(exec_times = 5)

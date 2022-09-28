@@ -1,9 +1,24 @@
 ![Logo](https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/g1320.png)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/w/yKesamaru/FACE01_SAMPLE)
 
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE)
+![](https://img.shields.io/badge/Release-v1.4.08-blue)
+
+![](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/img/ROMAN_HOLIDAY.GIF?raw=true)
+```bash
+# result
+Audrey Hepburn 
+         Anti spoof              real 
+         Anti spoof score        100.0 %
+         similarity              99.1% 
+         coordinate              (123, 390, 334, 179) 
+         time                    2022,08,09,04,19,35,552949 
+         output                  output/Audrey Hepburn_2022,08,09,04,19,35,556237_0.39.png 
+ -------
+ ```
+ 
 # FACE01 SAMPLE
 This repository contains FACE01 SAMPLE for UBUNTU 20.04.
-If you are a Windows user, please use this on WSLg.
+If you are a Windows user, please use this on WSLg or Docker.
 This sample can be used until December 2022.
 
 # About FACE01
@@ -19,6 +34,11 @@ You can call individual methods or call a set of functions.
 
 See [docs/functions](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/functions.md).
 
+# Update
+- v1.4.08
+  - Fix memory leak bug.
+
+
 # Installation
 ```bash
 wget https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/INSTALL_FACE01.sh
@@ -32,66 +52,13 @@ If you are using another Linux distribution, use `Docker`, `Boxes`, or `lxd`.
 
 Alternatively, refer to INSTALL_FACE01.sh and install manually.
 
-## If you want using Docker
-### To install Docker
-See [here](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/install_docker.md).
-You can choose from `To build Docker` or `Pull Docker image`.
-#### To build Docker
-See [here](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/to_build_docker_image.md)
-
-#### Pull Docker image
-##### Use Nvidia GPU
-```bash
-docker pull tokaikaoninsho/face01_gpu
-docker run --rm -it --gpus all -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.03
-. bin/activate
-python CALL_FACE01.py
-```
-
-- Digest
-    - sha256:01c94cc3b60bab1846b4fcfb44f1fefa7afcfeac809109b0ec30a2ad867f0475
-- OS/ARCH
-  - linux/amd64
-- Compressed Size
-  - 8.85 GB
-
-##### Only use CPU
-```bash
-docker pull tokaikaoninsho/face01_no_gpu
-docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:1.4.03
-. bin/activate
-python CALL_FACE01.py
-```
-
-- Digest
-    - sha256:08a694fecff1a0f3358ac7c6046109304416f4f484f00b037a477b42717e2221
-- OS/ARCH
-  - linux/amd64
-- Compressed Size
-  - 2.08 GB
-
-### Start FACE01 example
-#### Dockerfile_gpu
-This docker image is build with dockerfile named 'Dockerfile_gpu'.
-```bash
-# Launch Docker image
-docker run --rm -it --gpus all -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.03
-# Enter the Python virtual environment
-docker@e85311b5908e:~/FACE01_SAMPLE$ . bin/activate
-(FACE01_SAMPLE) docker@e85311b5908e:~/FACE01_SAMPLE$ 
-# Launch FACE01_SAMPLE
-(FACE01_SAMPLE) docker@e85311b5908e:~/FACE01_SAMPLE$ python CALL_FACE01.py
-```
-
-![](https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/img/PASTE_IMAGE_2022-07-20-07-00-03.png)
-#### Dockerfile_no_gpu
-
-```bash
-docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:1.4.03
+# If you want using Docker
+See [here](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/docker.md).
 
 # Configuration
 Edit `config.ini` file to configure FACE01.
-If you want to use the http protocol as the input source, replace the `movie =` part of the `config.ini` file with` movie = http: // <IP> / cgi-bin / <parameter> `. If you want to store the authentication information, enter `user =" ", passwd =" "` in the `config.ini` file as above.
+If you use docker face01_gpu, you can modify the config.ini with `vim`.
+If you want to use the http protocol as the input source, replace the `movie =` part of the `config.ini` file with ` movie = http: // <IP> / cgi-bin / <parameter> `. If you want to store the authentication information, enter `user =" ", passwd =" "` in the `config.ini` file as above.
 See [docs/config.ini](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/config_ini.md) for details.
 
 # Example
@@ -184,11 +151,6 @@ def common_main(exec_times):
             break
         else:
             print(f'exec_times: {exec_times}')
-            if fg.args_dict["headless"] == False:
-                event, _ = window.read(timeout = 1)
-                if event == sg.WIN_CLOSED:
-                    print("The window was closed manually")
-                    break
             for frame_datas in frame_datas_array:
                 if "face_location_list" in frame_datas:
                     img, face_location_list, overlay, person_data_list = \
@@ -205,14 +167,6 @@ def common_main(exec_times):
                                 "\t", "output\t", pict, "\n",
                                 "-------\n"
                             )
-                    if fg.args_dict["headless"] == False:
-                        imgbytes = cv2.imencode(".png", img)[1].tobytes()
-                        window["display"].update(data = imgbytes)
-        if fg.args_dict["headless"] == False:
-            if event =='terminate':
-                break
-    if fg.args_dict["headless"] == False:
-        window.close()
     
     profile_HANDLING_FRAME_TIME_REAR = time.perf_counter()
     profile_HANDLING_FRAME_TIME = (profile_HANDLING_FRAME_TIME_REAR - profile_HANDLING_FRAME_TIME_FRONT) 
@@ -284,56 +238,75 @@ if fg.args_dict["headless"] == False:
         location=(0,0), modal = True, titlebar_icon="./images/g1320.png", icon="./images/g1320.png"
     )
 
-# @profile()
 def common_main(exec_times):
     profile_HANDLING_FRAME_TIME_FRONT = time.perf_counter()
     event = ''
     while True:
         try:
-            frame_datas_array = fg.main_process().__next__()
+            frame_datas_array = main_process().__next__()
         except Exception as e:
             print(e)
+            print(traceback.format_exc())
             exit(0)
         exec_times = exec_times - 1
         if  exec_times <= 0:
             break
         else:
             print(f'exec_times: {exec_times}')
-            if fg.args_dict["headless"] == False:
+            if args_dict["headless"] == False:
                 event, _ = window.read(timeout = 1)
                 if event == sg.WIN_CLOSED:
                     print("The window was closed manually")
                     break
             for frame_datas in frame_datas_array:
                 if "face_location_list" in frame_datas:
-                    img, face_location_list, overlay, person_data_list = \
-                        frame_datas['img'], frame_datas["face_location_list"], frame_datas["overlay"], frame_datas['person_data_list']
+                    img = frame_datas['img']
+                    person_data_list = frame_datas['person_data_list']
+                    
                     for person_data in person_data_list:
-                        if len(person_data) == 0:
+                        if person_data == {}:
                             continue
-                        name, pict, date,  location, percentage_and_symbol = \
-                            person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
+
+                        name = person_data['name']
+                        pict = person_data['pict']
+                        date = person_data['date']
+                        location = person_data['location']
+                        percentage_and_symbol = person_data['percentage_and_symbol']
+
+                        spoof_or_real, score, ELE = \
+                            Core_obj.return_anti_spoof(img, location)
                         # ELE: Equally Likely Events
                         if not name == 'Unknown':
-                            result, score, ELE = Core_obj.return_anti_spoof(frame_datas['img'], person_data["location"])
-                            if ELE is False:
-                                print(
-                                    name, "\n",
-                                    "\t", "Anti spoof\t\t", result, "\n",
-                                    "\t", "Anti spoof score\t", round(score * 100, 2), "%\n",
-                                    "\t", "similarity\t\t", percentage_and_symbol, "\n",
-                                    "\t", "coordinate\t\t", location, "\n",
-                                    "\t", "time\t\t\t", date, "\n",
-                                    "\t", "output\t\t\t", pict, "\n",
-                                    "-------\n"
-                                )
-                    if fg.args_dict["headless"] == False:
+                            # Bug fix
+                            if args_dict["anti_spoof"] == True:
+                                if ELE == False and spoof_or_real == 'real':
+                                    print(
+                                        name, "\n",
+                                        "\t", "Anti spoof\t\t", spoof_or_real, "\n",
+                                        "\t", "Anti spoof score\t", round(score * 100, 2), "%\n",
+                                        "\t", "similarity\t\t", percentage_and_symbol, "\n",
+                                        "\t", "coordinate\t\t", location, "\n",
+                                        "\t", "time\t\t\t", date, "\n",
+                                        "\t", "output\t\t\t", pict, "\n",
+                                        "-------\n"
+                                    )
+                            else:
+                                if ELE == False:
+                                    print(
+                                        name, "\n",
+                                        "\t", "similarity\t\t", percentage_and_symbol, "\n",
+                                        "\t", "coordinate\t\t", location, "\n",
+                                        "\t", "time\t\t\t", date, "\n",
+                                        "\t", "output\t\t\t", pict, "\n",
+                                        "-------\n"
+                                    )
+                    if args_dict["headless"] == False:
                         imgbytes = cv2.imencode(".png", img)[1].tobytes()
                         window["display"].update(data = imgbytes)
-        if fg.args_dict["headless"] == False:
+        if args_dict["headless"] == False:
             if event =='terminate':
                 break
-    if fg.args_dict["headless"] == False:
+    if args_dict["headless"] == False:
         window.close()
     
     profile_HANDLING_FRAME_TIME_REAR = time.perf_counter()
@@ -349,7 +322,7 @@ pr.run('common_main(exec_times)', 'restats')
 ...
 exec_times: 1
 麻生太郎 
-         Anti spoof              not_spoof 
+         Anti spoof              real 
          Anti spoof score        89.0 %
          similarity              99.2% 
          coordinate              (113, 529, 277, 365) 
@@ -378,4 +351,8 @@ Per frame: 0.213[seconds]
 1. [dlib](https://github.com/davisking/dlib)
 2. [face_recognition](https://github.com/ageitgey/face_recognition)
 3. [mediapipe](https://github.com/google/mediapipe)
-
+4. [open_model_zoo](https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/public/anti-spoof-mn3)
+5. [light-weight-face-anti-spoofing](https://github.com/kprokofi/light-weight-face-anti-spoofing)
+6. [openvino2tensorflow](https://github.com/PINTO0309/openvino2tensorflow)
+7. [PINTO_model_zoo](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3)
+8. [FaceDetection-Anti-Spoof-Demo](https://github.com/Kazuhito00/FaceDetection-Anti-Spoof-Demo)

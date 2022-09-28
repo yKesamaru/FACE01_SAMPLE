@@ -2,8 +2,68 @@
 # TODO
 ## 1.4.09
 - sphinxでドキュメントを整備する
+  ```bash
+  # working dir にsphinxフォルダを作成
+  mkdir ./sphinx
+  # sphinx-quickstart でsphinxフォルダ内に設定ファイルを作成
+  sphinx-quickstart sphinx
+  sphinx-apidoc -f -o ./sphinx ./sphinx
+  # index.rstを編集
+
+  sphinx-build -b html ./sphinx ./docs
+  ```
+  - mkdir ./sphinx
+  - sphinx-quickstart sphinx
+  - sphinx-apidoc -f -o ./sphinx ./sphinx
+  - sphinx-build -b html ./sphinx ./docs
+  - titleを変更
+    - index.rst
+  <!-- - sphinx-quickstart docs
   - sphinx-apidoc -f -o ./docs .
-  - sphinx-build -b html ./docs ./docs/_build
+  - sphinx-build -b html ./docs ./docs/_build -->
+  ```python: conf.py
+  project = 'FACE01'
+  copyright = '2022, yKesamaru'
+  author = 'yKesamaru'
+
+  import sys, os
+  sys.path.append(os.path.abspath("example"))
+  sys.path.append(os.path.abspath("face01lib"))
+  sys.path.append(os.path.abspath("."))
+
+  # 'sphinx.ext.viewcode',  # Do not use! The source code becomes completely exposed.
+  extensions = [
+      'sphinx.ext.napoleon',
+      'sphinx.ext.autodoc',
+      'sphinx.ext.todo',
+  ]
+  # Napoleon settings
+  napoleon_google_docstring = True
+  napoleon_numpy_docstring = False
+  napoleon_include_init_with_doc = False
+  napoleon_include_private_with_doc = False
+  napoleon_include_special_with_doc = False
+  napoleon_use_admonition_for_examples = False
+  napoleon_use_admonition_for_notes = False
+  napoleon_use_admonition_for_references = False
+  # napoleon_use_ivar = False
+  # napoleon_use_param = True
+  # napoleon_use_rtype = True
+  napoleon_preprocess_types = False
+  # napoleon_type_aliases = None
+  napoleon_attr_annotations = True
+
+  templates_path = ['_templates']
+  exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+
+  language = 'en'
+
+  html_theme = 'sphinx_rtd_theme'
+  html_static_path = ['_static']
+
+  todo_include_todos = True
+```
+
 - pydoc
   -  $ python -m pydoc -b
 - Core.pyを中心に型アノテーションをつけてデータ型を整理する

@@ -34,6 +34,15 @@
       "justMyCode": true
     },
     {
+      "name": "display_GUI_window.py",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01/example",
+      "program": "/home/terms/bin/FACE01/example/display_GUI_window.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python"
+    },
+    {
       "name": "simple.py",
       "type": "python",
       "request": "launch",

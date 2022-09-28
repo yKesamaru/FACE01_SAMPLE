@@ -201,5 +201,7 @@
     "ctime": "cpp"
   },
   "C_Cpp.errorSquiggles": "Enabled",
-  "cmake.sourceDirectory": "${workspaceFolder}/."
+  "cmake.sourceDirectory": "${workspaceFolder}/.",
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8CategorySeverity.E": "Error"
 }
