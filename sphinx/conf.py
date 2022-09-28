@@ -15,10 +15,10 @@ sys.path.append(os.path.abspath("example"))
 sys.path.append(os.path.abspath("face01lib"))
 sys.path.append(os.path.abspath("."))
 
+# 'sphinx.ext.viewcode',  # Do not use! The source code becomes completely exposed.
 extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.autodoc',
-    'sphinx.ext.viewcode',
     'sphinx.ext.todo',
 ]
 # Napoleon settings
@@ -51,4 +51,4 @@ html_static_path = ['_static']
 # -- Options for todo extension ----------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/extensions/todo.html#configuration
 
-todo_include_todos = True
+todo_include_todos = False
