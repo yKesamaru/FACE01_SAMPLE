@@ -32,7 +32,7 @@ You can call individual methods or call a set of functions.
 - ...and many others!
 
 
-See [docs/functions](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/functions.md).
+See [Useful FACE01 library](https://ykesamaru.github.io/FACE01_SAMPLE/).
 
 # Update
 - v1.4.09
