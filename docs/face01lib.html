@@ -465,7 +465,7 @@ Calculation results are output to log</p>
 </section>
 <section id="face01lib-core-module">
 <h2>face01lib.Core module<a class="headerlink" href="#face01lib-core-module" title="Permalink to this heading"></a></h2>
-<p>Reference</p>
+<p>Reference.</p>
 <ul>
 <li><dl class="simple">
 <dt>‘cython’ compile option:</dt><dd><ul class="simple">
@@ -610,10 +610,12 @@ Calculation results are output to log</p>
 <dt class="sig sig-object py" id="face01lib.Core.Core">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.Core.</span></span><span class="sig-name descname"><span class="pre">Core</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.Core.Core" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Core class.</p>
+<p>This class include many useful methods.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Core.Core.common_process">
 <span class="sig-name descname"><span class="pre">common_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CONFIG</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Generator</span></span></span><a class="headerlink" href="#face01lib.Core.Core.common_process" title="Permalink to this definition"></a></dt>
-<dd><p>Generator of frame_datas_array</p>
+<dd><p>Generator of frame_datas_array.</p>
 <dl class="field-list">
 <dt class="field-odd">Yields</dt>
 <dd class="field-odd"><p><em>Generator</em> –</p>
@@ -627,31 +629,35 @@ Calculation results are output to log</p>
 </dl>
 <dl class="simple">
 <dt>More about:</dt><dd><p>main_process function consists 3 part of Core() methods.
-1) Core().frame_pre_processing
-2) Core().face_encoding_process
-3) Core().frame_post_processing</p>
+- Core().frame_pre_processing
+- Core().face_encoding_process
+- Core().frame_post_processing</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<p>Make generator object
-&gt;&gt;&gt; obj = Core().common_process(CONFIG)
-Call ‘__next__()’ method
-&gt;&gt;&gt; while True:</p>
-<blockquote>
-<div><p>frame_datas_array = obj.__next__()</p>
-</div></blockquote>
+<ul class="simple">
+<li><p>Make generator object</p></li>
+</ul>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">obj</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span><span class="o">.</span><span class="n">common_process</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Call ‘__next__()’ method</p></li>
+</ul>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="go">            frame_datas_array = obj.__next__()</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Core.Core.face_encoding_process">
 <span class="sig-name descname"><span class="pre">face_encoding_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CONFIG</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_datas_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.Core.Core.face_encoding_process" title="Permalink to this definition"></a></dt>
-<dd><dl class="simple">
-<dt>Encode face data and Return</dt><dd><ul class="simple">
+<dd><p>Encode face data and Return bellow.</p>
+<ul class="simple">
 <li><p>list of encoded data</p></li>
 <li><p>frame_datas_array</p></li>
 </ul>
-</dd>
-</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -752,7 +758,7 @@ Call ‘__next__()’ method
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Core.Core.frame_pre_processing">
 <span class="sig-name descname"><span class="pre">frame_pre_processing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CONFIG</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resized_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.Core.Core.frame_pre_processing" title="Permalink to this definition"></a></dt>
-<dd><p>Return frame_datas_array</p>
+<dd><p>Return frame_datas_array.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -773,7 +779,7 @@ Call ‘__next__()’ method
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Core.Core.make_frame_datas_array">
 <span class="sig-name descname"><span class="pre">make_frame_datas_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overlay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_location_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentage_and_symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">person_data_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_datas_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resized_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.Core.Core.make_frame_datas_array" title="Permalink to this definition"></a></dt>
-<dd><p>Method to make frame_datas_array</p>
+<dd><p>Method to make frame_datas_array.</p>
 <p>Return the data structure of frame_datas_list.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -808,10 +814,6 @@ Call ‘__next__()’ method
 <span class="gp">&gt;&gt;&gt; </span>    <span class="p">}</span>
 </pre></div>
 </div>
-<blockquote>
-<div><p>person_data内のlocationは個々人の顔座標です。
-個々人を特定しない場合の顔座標はframe_datas[‘face_location_list’]を使ってください。</p>
-</div></blockquote>
 <ul class="simple">
 <li><p>person_data_list:</p></li>
 </ul>
@@ -863,7 +865,7 @@ detected face location data.’</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Core.Core.override_args_dict">
 <span class="sig-name descname"><span class="pre">override_args_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CONFIG</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">override_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#face01lib.Core.Core.override_args_dict" title="Permalink to this definition"></a></dt>
-<dd><p>Override CONFIG for example</p>
+<dd><p>Override CONFIG for example.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -911,7 +913,7 @@ detected face location data.’</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Core.Core.r_face_image">
 <span class="sig-name descname"><span class="pre">r_face_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.Core.Core.r_face_image" title="Permalink to this definition"></a></dt>
-<dd><p>Return face image which expressed for ndarray</p>
+<dd><p>Return face image which expressed for ndarray.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -931,7 +933,12 @@ detected face location data.’</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Core.Core.return_anti_spoof">
 <span class="sig-name descname"><span class="pre">return_anti_spoof</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.Core.Core.return_anti_spoof" title="Permalink to this definition"></a></dt>
-<dd><p>Return result of anti spoof</p>
+<dd><p>Return result of anti spoof.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function is EXPERIMENTAL!
+It might occur side effects.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -962,13 +969,11 @@ detected face location data.’</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Core.Core.return_concatenate_location_and_frame">
 <span class="sig-name descname"><span class="pre">return_concatenate_location_and_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resized_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_location_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.Core.Core.return_concatenate_location_and_frame" title="Permalink to this definition"></a></dt>
-<dd><p>Return tuple</p>
-<blockquote>
-<div><ul class="simple">
+<dd><p>Return tuple.</p>
+<ul class="simple">
 <li><p>concatenate_face_location_list</p></li>
 <li><p>concatenate_person_frame</p></li>
 </ul>
-</div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -993,7 +998,7 @@ detected face location data.’</p>
 </section>
 <section id="face01lib-initialize-module">
 <h2>face01lib.Initialize module<a class="headerlink" href="#face01lib-initialize-module" title="Permalink to this heading"></a></h2>
-<p>Load config.ini and return CONFIG dictionary data</p>
+<p>Load config.ini and return CONFIG dictionary data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">returns</dt>
 <dd class="field-odd"><p>CONFIG</p>
@@ -1006,10 +1011,12 @@ detected face location data.’</p>
 <dt class="sig sig-object py" id="face01lib.Initialize.Initialize">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.Initialize.</span></span><span class="sig-name descname"><span class="pre">Initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.Initialize.Initialize" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Initialize class.</p>
+<p>Load config.ini, return Dict style.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Initialize.Initialize.initialize">
 <span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#face01lib.Initialize.Initialize.initialize" title="Permalink to this definition"></a></dt>
-<dd><p>Initialize values</p>
+<dd><p>Initialize values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>CONFIG
@@ -1030,19 +1037,20 @@ Dictionary of initialized preferences</p>
 </section>
 <section id="face01lib-loadimage-module">
 <h2>face01lib.LoadImage module<a class="headerlink" href="#face01lib-loadimage-module" title="Permalink to this heading"></a></h2>
-<p>Load image class</p>
+<p>Load image class.</p>
 <span class="target" id="module-face01lib.LoadImage"></span><dl class="py class">
 <dt class="sig sig-object py" id="face01lib.LoadImage.LoadImage">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.LoadImage.</span></span><span class="sig-name descname"><span class="pre">LoadImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headless</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conf_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.LoadImage.LoadImage" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class include method to load images.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.LoadImage.LoadImage.LI">
 <span class="sig-name descname"><span class="pre">LI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span></span></span><a class="headerlink" href="#face01lib.LoadImage.LoadImage.LI" title="Permalink to this definition"></a></dt>
-<dd><p>Return values</p>
+<dd><p>Return values.</p>
 <blockquote>
-<div><p>Load images, and return all together in a tuple</p>
+<div><p>Load images, and return all together in a tuple.</p>
 <dl class="simple">
-<dt>Args:</dt><dd><p>self,
+<dt>Args:</dt><dd><p>self: self
 int: set_height
 int: set_width</p>
 </dd>
@@ -1073,17 +1081,19 @@ Union[cv2.Mat, None]: unregistered_face_image</p>
 </section>
 <section id="face01lib-api-module">
 <h2>face01lib.api module<a class="headerlink" href="#face01lib-api-module" title="Permalink to this heading"></a></h2>
-<dl>
+<p>Summary.</p>
+<dl class="simple">
 <dt>COPYRIGHT:</dt><dd><p>This code is based on ‘face_recognition’ written by Adam Geitgey (ageitgey),
 and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
-<p>ORIGINAL AUTHOR
-- Dlib</p>
-<blockquote>
-<div><ul class="simple">
+</dd>
+<dt>ORIGINAL AUTHOR:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>Dlib</dt><dd><ul>
 <li><p>davisking</p></li>
 </ul>
-</div></blockquote>
-<ul class="simple">
+</dd>
+</dl>
+</li>
 <li><dl class="simple">
 <dt>face_recognition</dt><dd><ul>
 <li><p>ageitgey</p></li>
@@ -1158,14 +1168,18 @@ and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
 <p class="admonition-title">Note</p>
 <p>About coordinate order…
 - dlib: (Left, Top, Right, Bottom), called ‘rect’.
-- face_recognition: (top, right, bottom, left), called ‘css’.
-See bellow:
+- face_recognition: (top, right, bottom, left), called ‘css’.</p>
+<p>See bellow:
 <a class="reference external" href="https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py">https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py</a></p>
 </div>
 <span class="target" id="module-face01lib.api"></span><dl class="py class">
 <dt class="sig sig-object py" id="face01lib.api.Dlib_api">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.api.</span></span><span class="sig-name descname"><span class="pre">Dlib_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.api.Dlib_api" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Dlib api.</p>
+<p>Author: Original code written by Adam Geitgey, modified by YOSHITSUGU KESAMARU</p>
+<p>Email: <a class="reference external" href="mailto:y&#46;kesamaru&#37;&#52;&#48;tokai-kaoninsho&#46;com">y<span>&#46;</span>kesamaru<span>&#64;</span>tokai-kaoninsho<span>&#46;</span>com</a></p>
+<p>Version: 1.4.09</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.api.Dlib_api.compare_faces">
 <span class="sig-name descname"><span class="pre">compare_faces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">known_face_encodings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_encoding_to_check</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.6</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">bool_</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.api.Dlib_api.compare_faces" title="Permalink to this definition"></a></dt>
@@ -1190,9 +1204,8 @@ See bellow:
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.api.Dlib_api.face_distance">
 <span class="sig-name descname"><span class="pre">face_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">face_encodings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_to_compare</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.api.Dlib_api.face_distance" title="Permalink to this definition"></a></dt>
-<dd><p>Given a list of face encodings, compare them to a known face encoding and get a
-euclidean distance for each comparison face.
-The distance tells you how similar the faces are.</p>
+<dd><p>Given a list of face encodings, compare them to a known face encoding and get a  euclidean distance for each comparison face.</p>
+<p>The distance tells you how similar the faces are.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1266,7 +1279,7 @@ That is, centered and scaled essentially the same way.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.api.Dlib_api.load_image_file">
 <span class="sig-name descname"><span class="pre">load_image_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'RGB'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.api.Dlib_api.load_image_file" title="Permalink to this definition"></a></dt>
-<dd><p>Loads an image file (.jpg, .png, etc) into a numpy array</p>
+<dd><p>Loads an image file (.jpg, .png, etc) into a numpy array.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1290,11 +1303,11 @@ That is, centered and scaled essentially the same way.</p>
 </section>
 <section id="face01lib-load-priset-image-module">
 <h2>face01lib.load_priset_image module<a class="headerlink" href="#face01lib-load-priset-image-module" title="Permalink to this heading"></a></h2>
-<p>Load priset images</p>
+<p>Load priset images.</p>
 <span class="target" id="module-face01lib.load_priset_image"></span><dl class="py function">
 <dt class="sig sig-object py" id="face01lib.load_priset_image.load_priset_image">
 <span class="sig-prename descclassname"><span class="pre">face01lib.load_priset_image.</span></span><span class="sig-name descname"><span class="pre">load_priset_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RootDir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priset_face_imagesDir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsampling</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'hog'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'small'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.load_priset_image.load_priset_image" title="Permalink to this definition"></a></dt>
-<dd><p>Load face image from priset_face_images folder</p>
+<dd><p>Load face image from priset_face_images folder.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1307,14 +1320,15 @@ That is, centered and scaled essentially the same way.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><p>known_face_encodings_list, known_face_names_list
-- known_face_encodings_list</p>
-<blockquote>
-<div><ul class="simple">
+<dd class="field-even"><p><p>known_face_encodings_list, known_face_names_list</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>known_face_encodings_list</dt><dd><ul>
 <li><p>List of encoded many face images as ndarray</p></li>
 </ul>
-</div></blockquote>
-<ul class="simple">
+</dd>
+</dl>
+</li>
 <li><dl class="simple">
 <dt>known_face_names_list</dt><dd><ul>
 <li><p>List of name which encoded as ndarray</p></li>
@@ -1330,8 +1344,7 @@ That is, centered and scaled essentially the same way.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">known_face_encodings</span><span class="p">,</span> <span class="n">known_face_names</span> <span class="o">=</span> \
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">load_priset_image</span><span class="p">(</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">known_face_encodings</span><span class="p">,</span> <span class="n">known_face_names</span> <span class="o">=</span>         <span class="o">&gt;&gt;&gt;</span>     <span class="n">load_priset_image</span><span class="p">(</span>
 <span class="gp">&gt;&gt;&gt; </span>            <span class="bp">self</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>            <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;RootDir&quot;</span><span class="p">],</span>
 <span class="gp">&gt;&gt;&gt; </span>            <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;priset_face_imagesDir&quot;</span><span class="p">]</span>
@@ -1343,32 +1356,16 @@ That is, centered and scaled essentially the same way.</p>
 </section>
 <section id="face01lib-logger-module">
 <h2>face01lib.logger module<a class="headerlink" href="#face01lib-logger-module" title="Permalink to this heading"></a></h2>
-<p>Manage log</p>
-<p>Set log level</p>
-<dl class="field-list simple">
-<dt class="field-odd">param str</dt>
-<dd class="field-odd"><p>set_level</p>
-<ul class="simple">
-<li><dl class="simple">
-<dt>Chose from bellow</dt><dd><ul>
-<li><p>‘debug’</p></li>
-<li><p>‘info’</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><p>You can pass value as CONFIG[“set_level”]</p></li>
-</ul>
-</dd>
-</dl>
+<p>Manage log.</p>
 <span class="target" id="module-face01lib.logger"></span><dl class="py class">
 <dt class="sig sig-object py" id="face01lib.logger.Logger">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.logger.</span></span><span class="sig-name descname"><span class="pre">Logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.logger.Logger" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Set log level.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.logger.Logger.logger">
 <span class="sig-name descname"><span class="pre">logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.logger.Logger.logger" title="Permalink to this definition"></a></dt>
-<dd><p>Manage log</p>
+<dd><p>Manage log.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1402,15 +1399,16 @@ That is, centered and scaled essentially the same way.</p>
 </section>
 <section id="face01lib-return-face-image-module">
 <h2>face01lib.return_face_image module<a class="headerlink" href="#face01lib-return-face-image-module" title="Permalink to this heading"></a></h2>
-<p>Return face image data as ndarray</p>
+<p>Return face image data as ndarray.</p>
 <span class="target" id="module-face01lib.return_face_image"></span><dl class="py class">
 <dt class="sig sig-object py" id="face01lib.return_face_image.Return_face_image">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.return_face_image.</span></span><span class="sig-name descname"><span class="pre">Return_face_image</span></span><a class="headerlink" href="#face01lib.return_face_image.Return_face_image" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class include a method for return face image function.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.return_face_image.Return_face_image.return_face_image">
 <span class="sig-name descname"><span class="pre">return_face_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resized_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.return_face_image.Return_face_image.return_face_image" title="Permalink to this definition"></a></dt>
-<dd><p>Return face image array which contain ndarray</p>
+<dd><p>Return face image array which contain ndarray.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1432,16 +1430,27 @@ That is, centered and scaled essentially the same way.</p>
 </section>
 <section id="face01lib-system-check-module">
 <h2>face01lib.system_check module<a class="headerlink" href="#face01lib-system-check-module" title="Permalink to this heading"></a></h2>
-<p>CHECK SYSTEM INFORMATION
-This module is EXPERIMENTAL</p>
+<p>CHECK SYSTEM INFORMATION.</p>
+<p>This module is EXPERIMENTAL</p>
 <span class="target" id="module-face01lib.system_check"></span><dl class="py class">
 <dt class="sig sig-object py" id="face01lib.system_check.System_check">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.system_check.</span></span><span class="sig-name descname"><span class="pre">System_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.system_check.System_check" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>System check class.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is EXPERIMENTAL class, so it might occur side effects.</p>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.system_check.System_check.system_check">
 <span class="sig-name descname"><span class="pre">system_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CONFIG</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.system_check.System_check.system_check" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Check user system configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>CONFIG</strong> (<em>Dict</em>) – Receive CONFIG which described in config.ini.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
