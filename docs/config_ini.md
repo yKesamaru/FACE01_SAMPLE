@@ -3,9 +3,9 @@ You can configure FACE01 using the `config.ini` file.
 Format is `key = value`.
 ## [DEFAULT]
 NOTE: Do not edit.
-- model
-  - str
-  - Default: small
+- number_of_crops
+  - int
+  - Default: 0
   - Do *not* override.
 
 ## [Main]
@@ -18,6 +18,10 @@ NOTE: Do not edit.
   - NOTE: Anti-spoof model is included with this sample, but please do ***not*** use this model as is for commercial use. Please contact tokai-kaoninsho for details.
   - bool
   - Default: False
+- log_level
+  - str
+  - Default: 'info'
+  - If you want to debug, modify this value to 'debug'
 
 ## [SPEED OR PRECISE]
 - set_width
@@ -50,7 +54,7 @@ NOTE: Do not edit.
 - number_of_people
   - int
   - Default: 10
-  - Do not analyze more than the specified number of people.
+  - Do not 'analyze' (Encode and Recognize Process) more than the specified number of people.
 
 ##  [dlib]
 - use_pipe
@@ -83,12 +87,12 @@ NOTE: Do not edit.
   - Zoom. You can select from `NONE`, `TOP_LEFT`, `TOP_RIGHT`, `BOTTOM_LEFT`, `BOTTOM_RIGHT`, `CENTER`.
 - movie
   - str
-  - Default: some_people.mp4
+  - Default: assets/some_people.mp4
   - For test, you can select from bellow.
     - usb (or USB)
       - USB Cam
-    - test.mp4 (Only a person.)
-    - 顔無し区間を含んだテスト動画.mp4
+    - assets/test.mp4 (Only a person.)
+    - assets/顔無し区間を含んだテスト動画.mp4
       - Movie file which contain no person frames.
     - rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4
       - RTSP stream for test.
@@ -121,6 +125,10 @@ NOTE: Do not edit.
   - bool
   - Default: True
   - Make the information display on the screen semi-transparent
+- alpha
+  - float
+  - Default: 0.3
+  - Adjust the translucency of 'overlay'
 - show_percentage
   - bool
   - Default: True
