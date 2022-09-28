@@ -69,12 +69,21 @@ COPY noFace /home/${DOCKER_USER}/FACE01_SAMPLE/noFace
 COPY images /home/${DOCKER_USER}/FACE01_SAMPLE/images
 COPY requirements.txt /home/${DOCKER_USER}/FACE01_SAMPLE/
 COPY config.ini /home/${DOCKER_USER}/FACE01_SAMPLE/
-COPY FACE01.py /home/${DOCKER_USER}/FACE01_SAMPLE/
-COPY CALL_FACE01.py /home/${DOCKER_USER}/FACE01_SAMPLE/
+
+## Folder newly prepared from v1.4.09
+COPY docs /home/${DOCKER_USER}/FACE01_SAMPLE/docs
+COPY example /home/${DOCKER_USER}/FACE01_SAMPLE/example
+COPY tests /home/${DOCKER_USER}/FACE01_SAMPLE/tests
+COPY assets /home/${DOCKER_USER}/FACE01_SAMPLE/assets
+
+## Folders and files obsolete from v1.4.09
+# COPY FACE01.py /home/${DOCKER_USER}/FACE01_SAMPLE/
+# COPY CALL_FACE01.py /home/${DOCKER_USER}/FACE01_SAMPLE/
+# COPY *.mp4 /home/${DOCKER_USER}/FACE01_SAMPLE/
+
 COPY npKnown.npz /home/${DOCKER_USER}/FACE01_SAMPLE/
 COPY dlib-19.24.tar.bz2 /home/${DOCKER_USER}/FACE01_SAMPLE/
 COPY SystemCheckLock /home/${DOCKER_USER}/FACE01_SAMPLE/
-COPY *.mp4 /home/${DOCKER_USER}/FACE01_SAMPLE/
 RUN echo ${DOCKER_PASSWORD} | sudo -S chown -R ${DOCKER_USER} /home/${DOCKER_USER}/FACE01_SAMPLE
 COPY priset_face_images /home/${DOCKER_USER}/FACE01_SAMPLE/priset_face_images
 
