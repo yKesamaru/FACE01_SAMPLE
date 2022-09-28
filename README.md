@@ -67,7 +67,7 @@ See [docs/config.ini](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/doc
 There are some example files in the example folder.
 Let's try `example/simple.py` here.
 `python3 example/simple.py`
-See [simple.py](example/simple.py) to refer the entire code.
+See [simple.py](./example/simple.py) to refer the entire code.
 
 ## If you want to get only face recognition
 Set `headless = True` on `config.ini`.
