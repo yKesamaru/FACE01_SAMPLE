@@ -21,9 +21,8 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="face01lib.models package" href="face01lib.models.html" />
-    <link rel="prev" title="FACE01" href="index.html" /> 
+    <link rel="prev" title="Welcome to FACE01’s documentation!" href="index.html" /> 
 </head>
-
 
 <body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
@@ -156,6 +155,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-face01lib">Module contents</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">tests package</a></li>
 </ul>
 
         </div>
@@ -209,12 +209,13 @@
 </section>
 <section id="face01lib-calc-module">
 <h2>face01lib.Calc module<a class="headerlink" href="#face01lib-calc-module" title="Permalink to this heading"></a></h2>
-<p>A module that performs various calculations
-Calculation results are output to log</p>
+<p>A module that performs various calculations.</p>
+<p>Calculation results are output to log</p>
 <span class="target" id="module-face01lib.Calc"></span><dl class="py class">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.Calc.</span></span><span class="sig-name descname"><span class="pre">Cal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.Calc.Cal" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Cal class include various calculation methods.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal.HANDLING_FRAME_TIME">
 <span class="sig-name descname"><span class="pre">HANDLING_FRAME_TIME</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#face01lib.Calc.Cal.HANDLING_FRAME_TIME" title="Permalink to this definition"></a></dt>
@@ -233,13 +234,13 @@ Calculation results are output to log</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal.Measure_func">
 <span class="sig-name descname"><span class="pre">Measure_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.Calc.Cal.Measure_func" title="Permalink to this definition"></a></dt>
-<dd><p>Used as a decorator to time a function</p>
+<dd><p>Used as a decorator to time a function.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal.Measure_processing_time">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Measure_processing_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">HANDLING_FRAME_TIME_FRONT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HANDLING_FRAME_TIME_REAR</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#face01lib.Calc.Cal.Measure_processing_time" title="Permalink to this definition"></a></dt>
-<dd><p>Measurement of processing time (calculation) and output to log</p>
+<dd><p>Measurement of processing time (calculation) and output to log.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -253,7 +254,7 @@ Calculation results are output to log</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal.Measure_processing_time_backward">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Measure_processing_time_backward</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#face01lib.Calc.Cal.Measure_processing_time_backward" title="Permalink to this definition"></a></dt>
-<dd><p>Measurement of processing time (second half)</p>
+<dd><p>Measurement of processing time (second half).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Second half point</p>
@@ -267,7 +268,7 @@ Calculation results are output to log</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal.Measure_processing_time_forward">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Measure_processing_time_forward</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#face01lib.Calc.Cal.Measure_processing_time_forward" title="Permalink to this definition"></a></dt>
-<dd><p>Measurement of processing time (first half)</p>
+<dd><p>Measurement of processing time (first half).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>First half point</p>
@@ -281,7 +282,7 @@ Calculation results are output to log</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal.cal_resized_logo_image">
 <span class="sig-name descname"><span class="pre">cal_resized_logo_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resized_logo_image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.Calc.Cal.cal_resized_logo_image" title="Permalink to this definition"></a></dt>
-<dd><p>Calculate logo image data</p>
+<dd><p>Calculate logo image data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -298,8 +299,7 @@ Calculation results are output to log</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cal_resized_logo_nums</span> <span class="o">=</span> \
-<span class="go">            Cal().cal_resized_logo_image(</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cal_resized_logo_nums</span> <span class="o">=</span>                         <span class="n">Cal</span><span class="p">()</span><span class="o">.</span><span class="n">cal_resized_logo_image</span><span class="p">(</span>
 <span class="go">                resized_logo_image,</span>
 <span class="go">                set_height,</span>
 <span class="go">                set_width</span>
@@ -311,7 +311,7 @@ Calculation results are output to log</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal.cal_resized_telop_image">
 <span class="sig-name descname"><span class="pre">cal_resized_telop_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resized_telop_image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.Calc.Cal.cal_resized_telop_image" title="Permalink to this definition"></a></dt>
-<dd><p>Calculate telop image data</p>
+<dd><p>Calculate telop image data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>resized_telop_image</strong> (<em>npt.NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Resized telop image data</p>
@@ -324,8 +324,7 @@ Calculation results are output to log</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cal_resized_telop_nums</span> <span class="o">=</span> \
-<span class="go">            Cal().cal_resized_telop_image(resized_telop_image)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cal_resized_telop_nums</span> <span class="o">=</span>                         <span class="n">Cal</span><span class="p">()</span><span class="o">.</span><span class="n">cal_resized_telop_image</span><span class="p">(</span><span class="n">resized_telop_image</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -333,19 +332,19 @@ Calculation results are output to log</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal.cal_specify_date">
 <span class="sig-name descname"><span class="pre">cal_specify_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#face01lib.Calc.Cal.cal_specify_date" title="Permalink to this definition"></a></dt>
-<dd><p>Run evaluation version only</p>
+<dd><p>Run evaluation version only.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal.decide_text_position">
 <span class="sig-name descname"><span class="pre">decide_text_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error_messg_rectangle_bottom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_messg_rectangle_left</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_messg_rectangle_right</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_messg_rectangle_fontsize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_messg_rectangle_messg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.Calc.Cal.decide_text_position" title="Permalink to this definition"></a></dt>
-<dd><p>Not use</p>
+<dd><p>Not use.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal.make_draw_rgb_object">
 <span class="sig-name descname"><span class="pre">make_draw_rgb_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pil_img_obj_rgb</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.Calc.Cal.make_draw_rgb_object" title="Permalink to this definition"></a></dt>
-<dd><p>Generate object</p>
+<dd><p>Generate object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>pil_img_obj_rgb</strong> (<em>object</em>) – object</p>
@@ -362,13 +361,13 @@ Calculation results are output to log</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal.make_error_messg_rectangle_font">
 <span class="sig-name descname"><span class="pre">make_error_messg_rectangle_font</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fontpath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_messg_rectangle_fontsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.Calc.Cal.make_error_messg_rectangle_font" title="Permalink to this definition"></a></dt>
-<dd><p>Not use</p>
+<dd><p>Not use.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal.pil_img_instance">
 <span class="sig-name descname"><span class="pre">pil_img_instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.Calc.Cal.pil_img_instance" title="Permalink to this definition"></a></dt>
-<dd><p>Generate pil_img object</p>
+<dd><p>Generate pil_img object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>frame</strong> (<em>npt.NDArray</em><em>[</em><em>np.uint8</em><em>]</em>) – Image data</p>
@@ -385,7 +384,7 @@ Calculation results are output to log</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal.return_percentage">
 <span class="sig-name descname"><span class="pre">return_percentage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#face01lib.Calc.Cal.return_percentage" title="Permalink to this definition"></a></dt>
-<dd><p>Receive ‘distance’ and return percentage</p>
+<dd><p>Receive ‘distance’ and return percentage.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>p</strong> (<em>float</em>) – distance</p>
@@ -406,7 +405,7 @@ Calculation results are output to log</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal.to_percentage">
 <span class="sig-name descname"><span class="pre">to_percentage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#face01lib.Calc.Cal.to_percentage" title="Permalink to this definition"></a></dt>
-<dd><p>Receive ‘tolerance’ and return ‘percentage’</p>
+<dd><p>Receive ‘tolerance’ and return ‘percentage’.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>tolerance</strong> (<em>float</em>) – tolerance</p>
@@ -423,7 +422,7 @@ Calculation results are output to log</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal.to_tolerance">
 <span class="sig-name descname"><span class="pre">to_tolerance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">similar_percentage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#face01lib.Calc.Cal.to_tolerance" title="Permalink to this definition"></a></dt>
-<dd><p>Receive similar_percentage and return tolerance</p>
+<dd><p>Receive similar_percentage and return tolerance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>similar_percentage</strong> (<em>float</em>) – ‘Probability of similarity’ described in config.ini</p>
@@ -1577,7 +1576,7 @@ the input video data</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="FACE01" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to FACE01’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="face01lib.models.html" class="btn btn-neutral float-right" title="face01lib.models package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
