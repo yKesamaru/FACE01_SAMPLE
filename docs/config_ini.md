@@ -1,6 +1,12 @@
 # config.ini
 You can configure FACE01 using the `config.ini` file.
-Format is `key = value`.
+
+- Format is `key = value`.
+- If you use docker face01_gpu, you can modify the config.ini with `vim`.
+- If you want to use the http protocol as the input source, replace the `movie =` part of the `config.ini` file with ` movie = http: // <IP> / cgi-bin / <parameter> `. 
+- If you want to store the authentication information, enter `user =" ", passwd =" "` in the `config.ini` file as above.
+
+
 ## [DEFAULT]
 NOTE: Do not edit.
 - number_of_crops
