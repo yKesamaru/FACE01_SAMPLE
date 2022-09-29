@@ -15,7 +15,7 @@ Audrey Hepburn
          output                  output/Audrey Hepburn_2022,08,09,04,19,35,556237_0.39.png 
  -------
  ```
- 
+
 
 # About FACE01
 FACE01 is a **face recognition library** that integrates various functions and can be called from **Python**.
