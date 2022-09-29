@@ -16,14 +16,10 @@ Audrey Hepburn
  -------
  ```
  
-# FACE01 SAMPLE
-This repository contains FACE01 SAMPLE for UBUNTU 20.04.
-If you are a Windows user, please use this on WSLg or Docker.
-This sample can be used until December 2022.
 
 # About FACE01
-FACE01 is a face recognition library that integrates various functions and can be called from Python.
-You can call individual methods or call a set of functions.
+FACE01 is a **face recognition library** that integrates various functions and can be called from **Python**.
+
 
 - `Real-time face recognition` is possible from face datas of **more than 10,000 people**
 - Super high-speed face coordinate output function
@@ -31,10 +27,9 @@ You can call individual methods or call a set of functions.
 - You can set to modify output frame image
 - Centralized management of functions by configuration file
 - You can choose input protocol ex. RTSP, HTTP and USB
+- You can call individual methods or call a set of functions
 - You can use many function for `face-recognition` and `Image-processing` (See [Useful FACE01 library](https://ykesamaru.github.io/FACE01_SAMPLE/))
 - ...and many others!
-
-
 
 
 # Update
@@ -79,6 +74,11 @@ See [simple.py](./example/simple.py) to refer the entire code.
  ...
 
 ```
+
+# Note
+This repository contains FACE01 SAMPLE for UBUNTU 20.04.
+If you are a Windows user, please use this on WSLg or Docker.
+This sample can be used until December 2022.
 
 
 # Acknowledgments
