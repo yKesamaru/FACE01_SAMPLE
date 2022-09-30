@@ -735,3 +735,411 @@ NoneType: None
 [2022-08-28 16:38:39,056] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
 
 [2022-08-28 16:38:39,057] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-08-29 08:34:42,445] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 08:34:42,451] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 08:34:42,452] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 08:35:19,670] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 08:35:19,671] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 08:35:19,673] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 08:35:20,276] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 08:35:20,277] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 08:35:20,278] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 08:35:20,833] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 08:35:20,834] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 08:35:20,835] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 08:35:21,364] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 08:35:21,365] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 08:35:21,366] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 08:35:21,908] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 08:35:21,909] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 08:35:21,910] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 08:35:22,446] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 08:35:22,447] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 08:35:22,448] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 08:35:22,981] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 08:35:22,983] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 08:35:22,984] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 08:35:23,424] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 08:35:23,425] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 08:35:23,426] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 08:35:23,891] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 08:35:23,893] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 08:35:23,895] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 08:35:24,452] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 08:35:24,453] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 08:35:24,454] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:19:24,573] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:19:24,574] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:19:24,576] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:19:29,920] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:19:29,921] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:19:29,923] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:19:30,502] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:19:30,502] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:19:30,503] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:19:30,965] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:19:30,965] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:19:30,966] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:19:31,443] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:19:31,444] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:19:31,445] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:19:31,987] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:19:31,988] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:19:31,990] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:19:32,517] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:19:32,519] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:19:32,521] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:19:33,081] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:19:33,082] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:19:33,082] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:19:33,548] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:19:33,549] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:19:33,550] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:19:34,021] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:19:34,022] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:19:34,023] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:19:34,534] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:19:34,535] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:19:34,536] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:19:35,099] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:19:35,101] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:19:35,103] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:19:35,649] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:19:35,650] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:19:35,650] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:19:36,195] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:19:36,197] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:19:36,199] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:19:36,726] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:19:36,728] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:19:36,731] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:19:37,165] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:19:37,166] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:19:37,167] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:19:37,673] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:19:37,675] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:19:37,676] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:19:38,170] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:19:38,171] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:19:38,173] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:19:38,686] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:19:38,687] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:19:38,690] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:07,351] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:07,351] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:07,352] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:09,791] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:09,792] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:09,792] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:10,228] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:10,228] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:10,228] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:10,649] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:10,650] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:10,650] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:11,051] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:11,051] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:11,052] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:11,490] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:11,490] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:11,491] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:11,935] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:11,936] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:11,936] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:12,359] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:12,360] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:12,361] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:12,713] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:12,714] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:12,715] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:13,104] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:13,105] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:13,105] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:13,566] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:13,566] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:13,567] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:13,987] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:13,987] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:13,988] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:14,400] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:14,401] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:14,402] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:14,836] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:14,837] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:14,837] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:15,282] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:15,283] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:15,283] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:15,660] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:15,661] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:15,661] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:16,047] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:16,048] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:16,049] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:16,432] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:16,433] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:16,433] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:16,841] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:16,842] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:16,843] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:17,296] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:17,297] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:17,297] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:17,683] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:17,683] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:17,684] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:18,069] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:18,069] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:18,070] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:18,433] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:18,434] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:18,435] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:18,890] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:18,891] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:18,892] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:19,267] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:19,268] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:19,269] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:19,691] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:19,692] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:19,693] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:20,183] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:20,184] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:20,184] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-29 17:21:20,671] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-29 17:21:20,671] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-29 17:21:20,672] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-30 07:42:28,551] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-30 07:42:28,552] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-30 07:42:28,552] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-30 07:42:33,111] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-30 07:42:33,112] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-30 07:42:33,112] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-30 07:42:33,565] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-30 07:42:33,566] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-30 07:42:33,566] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-30 07:42:33,975] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-30 07:42:33,976] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-30 07:42:33,976] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-30 07:42:34,370] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-30 07:42:34,371] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-30 07:42:34,371] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-30 07:42:34,815] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-30 07:42:34,815] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-30 07:42:34,816] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-30 07:42:35,239] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-30 07:42:35,240] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-30 07:42:35,241] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-30 07:42:35,659] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-30 07:42:35,660] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-30 07:42:35,661] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-30 07:42:36,017] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-30 07:42:36,017] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-30 07:42:36,017] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-30 07:42:36,408] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-30 07:42:36,408] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-30 07:42:36,409] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-30 07:42:36,846] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-30 07:42:36,846] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-30 07:42:36,847] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-30 07:42:37,280] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-30 07:42:37,280] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-30 07:42:37,281] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-30 07:42:37,725] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-30 07:42:37,725] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-30 07:42:37,726] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-30 07:42:38,182] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-30 07:42:38,182] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-30 07:42:38,183] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-30 07:42:38,612] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-30 07:42:38,613] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-30 07:42:38,613] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-08-30 07:42:38,985] [face01lib.Core] [Core.py] [DEBUG] frame_datas_array size: 3
+[2022-08-30 07:42:38,986] [face01lib.Core] [Core.py] [DEBUG] /home/terms/bin/FACE01/face01lib/Core.py
+[2022-08-30 07:42:38,987] [face01lib.Core] [Core.py] [DEBUG] 608
+[2022-09-07 12:33:30,444] [face01lib.video_capture] [video_capture.py] [WARNING] ERROR OCURRED
+[2022-09-07 12:33:30,448] [face01lib.video_capture] [video_capture.py] [WARNING] DATA RECEPTION HAS ENDED
+[2022-09-07 12:33:30,448] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-07 12:33:30,448] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-09-07 12:33:30,449] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:38,183] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-09-21 11:14:38,183] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-09-21 11:14:38,183] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-09-21 11:14:38,183] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-09-21 11:14:38,183] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-09-21 11:14:38,183] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-09-21 11:14:38,185] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:38,185] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:38,185] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:38,185] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:38,185] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:38,185] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:38,186] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-09-21 11:14:38,186] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-09-21 11:14:38,186] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-09-21 11:14:38,186] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-09-21 11:14:38,186] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-09-21 11:14:38,186] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-09-21 11:14:38,188] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:38,188] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:38,188] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:38,188] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:38,188] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:38,188] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:38,190] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-09-21 11:14:38,190] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-09-21 11:14:38,190] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-09-21 11:14:38,190] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-09-21 11:14:38,190] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-09-21 11:14:38,190] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-09-21 11:14:57,268] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-09-21 11:14:57,268] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-09-21 11:14:57,268] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-09-21 11:14:57,268] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-09-21 11:14:57,268] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-09-21 11:14:57,268] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-09-21 11:14:57,268] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:57,268] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:57,268] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:57,268] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:57,268] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:57,268] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:57,269] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-09-21 11:14:57,269] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-09-21 11:14:57,269] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-09-21 11:14:57,269] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-09-21 11:14:57,269] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-09-21 11:14:57,269] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-09-21 11:14:57,269] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:57,269] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:57,269] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:57,269] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:57,269] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:57,269] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-21 11:14:57,270] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-09-21 11:14:57,270] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-09-21 11:14:57,270] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-09-21 11:14:57,270] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-09-21 11:14:57,270] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-09-21 11:14:57,270] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-09-22 00:43:16,921] [face01lib.Initialize] [Initialize.py] [WARNING] config.ini 読み込み中にエラーが発生しました
+[2022-09-22 00:43:16,921] [face01lib.Initialize] [Initialize.py] [WARNING] config.ini 読み込み中にエラーが発生しました
+[2022-09-22 00:43:16,921] [face01lib.Initialize] [Initialize.py] [WARNING] config.ini 読み込み中にエラーが発生しました
+[2022-09-22 00:43:16,922] [face01lib.Initialize] [Initialize.py] [ERROR] conf_dictが正常に作成できませんでした
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/configparser.py", line 789, in get
+    value = d[option]
+  File "/usr/lib/python3.8/collections/__init__.py", line 898, in __getitem__
+    return self.__missing__(key)            # support subclasses that define __missing__
+  File "/usr/lib/python3.8/collections/__init__.py", line 890, in __missing__
+    raise KeyError(key)
+KeyError: 'model'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/Initialize.py", line 172, in configure
+    'model' : conf.get('DEFAULT','model'),
+  File "/usr/lib/python3.8/configparser.py", line 792, in get
+    raise NoOptionError(option, section)
+configparser.NoOptionError: No option 'model' in section: 'DEFAULT'
+[2022-09-22 00:43:16,922] [face01lib.Initialize] [Initialize.py] [ERROR] conf_dictが正常に作成できませんでした
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/configparser.py", line 789, in get
+    value = d[option]
+  File "/usr/lib/python3.8/collections/__init__.py", line 898, in __getitem__
+    return self.__missing__(key)            # support subclasses that define __missing__
+  File "/usr/lib/python3.8/collections/__init__.py", line 890, in __missing__
+    raise KeyError(key)
+KeyError: 'model'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/Initialize.py", line 172, in configure
+    'model' : conf.get('DEFAULT','model'),
+  File "/usr/lib/python3.8/configparser.py", line 792, in get
+    raise NoOptionError(option, section)
+configparser.NoOptionError: No option 'model' in section: 'DEFAULT'
+[2022-09-22 00:43:16,922] [face01lib.Initialize] [Initialize.py] [ERROR] conf_dictが正常に作成できませんでした
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/configparser.py", line 789, in get
+    value = d[option]
+  File "/usr/lib/python3.8/collections/__init__.py", line 898, in __getitem__
+    return self.__missing__(key)            # support subclasses that define __missing__
+  File "/usr/lib/python3.8/collections/__init__.py", line 890, in __missing__
+    raise KeyError(key)
+KeyError: 'model'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/Initialize.py", line 172, in configure
+    'model' : conf.get('DEFAULT','model'),
+  File "/usr/lib/python3.8/configparser.py", line 792, in get
+    raise NoOptionError(option, section)
+configparser.NoOptionError: No option 'model' in section: 'DEFAULT'
+[2022-09-22 00:43:16,924] [face01lib.Initialize] [Initialize.py] [WARNING] 以下のエラーをシステム管理者様へお伝えください
+[2022-09-22 00:43:16,924] [face01lib.Initialize] [Initialize.py] [WARNING] 以下のエラーをシステム管理者様へお伝えください
+[2022-09-22 00:43:16,924] [face01lib.Initialize] [Initialize.py] [WARNING] 以下のエラーをシステム管理者様へお伝えください
+[2022-09-22 00:43:16,924] [face01lib.Initialize] [Initialize.py] [WARNING] --------------------
+[2022-09-22 00:43:16,924] [face01lib.Initialize] [Initialize.py] [WARNING] --------------------
+[2022-09-22 00:43:16,924] [face01lib.Initialize] [Initialize.py] [WARNING] --------------------
+[2022-09-22 08:48:54,152] [face01lib.Initialize] [Initialize.py] [WARNING] config.ini 読み込み中にエラーが発生しました
+[2022-09-22 08:48:54,152] [face01lib.Initialize] [Initialize.py] [ERROR] conf_dictが正常に作成できませんでした
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/configparser.py", line 789, in get
+    value = d[option]
+  File "/usr/lib/python3.8/collections/__init__.py", line 898, in __getitem__
+    return self.__missing__(key)            # support subclasses that define __missing__
+  File "/usr/lib/python3.8/collections/__init__.py", line 890, in __missing__
+    raise KeyError(key)
+KeyError: 'model'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/terms/bin/FACE01/face01lib/Initialize.py", line 172, in configure
+    'model' : conf.get('DEFAULT','model'),
+  File "/usr/lib/python3.8/configparser.py", line 792, in get
+    raise NoOptionError(option, section)
+configparser.NoOptionError: No option 'model' in section: 'DEFAULT'
+[2022-09-22 08:48:54,154] [face01lib.Initialize] [Initialize.py] [WARNING] 以下のエラーをシステム管理者様へお伝えください
+[2022-09-22 08:48:54,154] [face01lib.Initialize] [Initialize.py] [WARNING] --------------------
+[2022-09-22 09:12:36,177] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-09-22 09:12:36,178] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-22 09:12:36,179] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-09-22 09:12:36,179] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-22 09:12:36,180] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-09-22 09:26:26,086] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-09-22 09:26:26,087] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-22 09:26:26,087] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-09-22 09:26:26,088] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-22 09:26:26,088] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-09-22 09:27:36,860] [face01lib.video_capture] [video_capture.py] [WARNING] 受信できません
+[2022-09-22 09:27:36,861] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-22 09:27:36,861] [face01lib.video_capture] [video_capture.py] [WARNING] NoneType: None
+
+[2022-09-22 09:27:36,861] [face01lib.video_capture] [video_capture.py] [WARNING] --------------------
+[2022-09-22 09:27:36,862] [face01lib.video_capture] [video_capture.py] [WARNING] 終了します
+[2022-09-26 16:47:56,685] [face01lib.Calc] [Calc.py] [INFO] Processing time: 0.0[mSec]
+[2022-09-26 16:51:24,134] [face01lib.Calc] [Calc.py] [INFO] Processing time: 0.0[mSec]
+[2022-09-26 17:22:30,704] [face01lib.Calc] [Calc.py] [INFO] Processing time: 3312.36[mSec]
+[2022-09-26 17:22:30,704] [face01lib.Calc] [Calc.py] [INFO] Processing time: 3312.36[mSec]
+[2022-09-26 17:34:01,802] [face01lib.Calc] [Calc.py] [INFO] Processing time: 9.547[Sec]
+[2022-09-26 17:34:01,807] [face01lib.Calc] [Calc.py] [INFO] Processing time: 9.547[Sec]

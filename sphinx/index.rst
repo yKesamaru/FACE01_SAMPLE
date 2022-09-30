@@ -1,0 +1,23 @@
+.. FACE01 documentation master file, created by
+   sphinx-quickstart on Thu Sep 29 11:28:46 2022.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+FACE01
+==================================
+
+.. toctree::
+   :maxdepth: 4
+   :caption: Contents:
+
+   face01lib
+   example
+   tests
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

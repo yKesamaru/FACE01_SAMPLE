@@ -1,6 +1,66 @@
 # FACE01について
 # TODO
+## 1.4.10
+- 各モジュールドキュメントの充実化
+- sphinxエラーの適宜解消
+- tokai-kaoninsho.comへの追加・記事の削除や訂正
+  - [東海顔認証のドキュメント一覧](https://tokai-kaoninsho.com/category/%e3%83%89%e3%82%ad%e3%83%a5%e3%83%a1%e3%83%b3%e3%83%88/)の更新
+- add setup.py
+- priset_face_imagesへの顔登録の方法などドキュメント化
+- exampleを追加
+- unittestの追加
+- config.iniを条件分岐可能にする
+  - [参考](https://kodocode.net/python-begin-settings/#toc_id_4)
+- 
+
+Fix
+- GitHub Pagesは設定によってmasterブランチの./docsフォルダにコミットがなされた時に自動的に走るようになっている。
+
+
+
+## 1.4.09
+- return_face_image.pyを徹底的にcython最適化して、その様子をzennに掲載する
+- メモリ削減の工夫
+  - ![](img/PASTE_IMAGE_2022-08-31-09-20-50.png)
+
+Fix
+- sphinxでドキュメントを整備する
+  - `sphinx保存フォルダ`にて管理
+- pydoc
+  -  $ python -m pydoc -b
+- Core.pyを中心に型アノテーションをつけてデータ型を整理する
+- クラスメソッド、ストラクトメソッドに変更を進める
+- cython化
+  - benchmark_GUI_window.pyの結果
+    - cython
+      - ![](img/PASTE_IMAGE_2022-09-27-18-27-31.png)
+    - python
+      - ![](img/PASTE_IMAGE_2022-09-27-18-30-09.png)
+- log周りを改善する
+  - config.iniにlog_levelを追加
+  - logger.pyを改善
+- exampleをいくつか作成する
+- FACE01.pyを整理する
+  - FACE01.pyというファイルはなくしてexample集に加える
+- api.pyのdocstringをgoogleスタイルに変更
+  - sphinxでの利用を想定するため統一化する
+- kaoninshoDirをRootDirに変更
+- config.iniの'model = small'をなくす
+- GLOBAL_MEMORYをconfig.iniに組み込む
+- api.pyのCython化のために、アノテーションの徹底とリファクタリングをする
+  - Core.pyにも若干の修正が入った。
+- anti_spoofをFalseにしてもanti_spoofメソッドが動いているバグの解決
+  - ![](img/PASTE_IMAGE_2022-09-02-18-34-40.png)
+- loggerの不具合
+  - debugモードにならない
+- telopの表示不良
+- imagesの改善
+  - real, spoofの他にtarget_rectangleを作る
+- FACE01 SAMPLEの更新
+
+
 ## 1.4.08
+Fix: Memory leak
 numpyの[view](https://numpy.org/doc/1.22/reference/generated/numpy.ndarray.view.html)
 draw_telop()
 - slice

@@ -1,35 +1,78 @@
 #cython: language_level=3
+"""Manage log."""
+
 import logging
+import sys
+from typing import Dict
 
 class Logger:
-    def __init__(self) -> None:
-        self.setlevel = None
+    """Set log level."""    
+    def __init__(self, log_level: str = 'info') -> None:
+        """init.
 
-    def logger(self, name, dir, setlevel):
+        Args:
+            log_level(str): Set log level. Default to 'info'.
+            Chose from bellow
+            - 'debug'
+            - 'info'
+
+        You can pass value as CONFIG["set_level"]
+        """        
+        self.log_level: str = log_level
+
+
+    def logger(
+            self,
+            name: str,
+            dir: str
+        ):
+        """Manage log.
+
+        Args:
+            name (str): File name
+            dir (str): Directory name
+
+        Returns:
+            Logger object: logger
+
+        Example:
+            >>> import os.path
+            >>> from .Initialize import Initialize
+            >>> 
+            >>> name: str = __name__
+            >>> dir: str = os.path.dirname(__file__)
+            >>> parent_dir, _ = os.path.split(dir)
+            >>> CONFIG = Initialize().initialize()
+            >>> 
+            >>> logger = Logger(CONFIG["log_level"]).logger(name, parent_dir)
+        """        
         self.name = name
         self.dir = dir
-        self.setlevel = setlevel
 
         logger = logging.getLogger(self.name)
 
-        # logger.setLevel(logging.INFO)
         formatter = logging.Formatter('[%(asctime)s] [%(name)s] [%(filename)s] [%(levelname)s] %(message)s')
         
         log_file = dir + 'face01.log'
         file_handler = logging.FileHandler(log_file, mode='a')
-        if self.setlevel == 'debug':
+        if self.log_level == 'debug':
+            logger.setLevel(logging.DEBUG)
             file_handler.setLevel(logging.DEBUG)
         else:
+            logger.setLevel(logging.INFO)
             file_handler.setLevel(logging.INFO)
         file_handler.setFormatter(formatter)
 
-        stream_handler = logging.StreamHandler()
-        if self.setlevel == 'debug':
-            file_handler.setLevel(logging.DEBUG)
+        stream_handler = logging.StreamHandler(stream=sys.stdout)
+        if self.log_level == 'debug':
+            logger.setLevel(logging.DEBUG)
+            stream_handler.setLevel(logging.DEBUG)
         else:
-            file_handler.setLevel(logging.INFO)
+            stream_handler.setLevel(logging.INFO)
+            logger.setLevel(logging.INFO)
         stream_handler.setFormatter(formatter)
 
         logger.addHandler(file_handler)
         logger.addHandler(stream_handler)
+
         return logger
