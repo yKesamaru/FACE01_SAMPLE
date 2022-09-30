@@ -39,24 +39,24 @@ FACE01 is a **face recognition library** that integrates various functions and c
   - Add examples
 
 
-# Installation
-See [here](docs/Installation.md).
-
-# If you want using Docker
+# Docker
+The easiest way to use Docker is to pull the image.
 See [here](docs/docker.md).
+
+If you cannot use Docker by any means, please refer to [here](docs/Installation.md).
+
 
 # Configuration
 See [here](docs/config_ini.md).
 
+
 # Example
 There are some example files in the example folder.
-Let's try `example/simple.py` here.
+Let's try `example/simple.py` on Docker.
 `python3 example/simple.py`
-See [simple.py](./example/simple.py) to refer the entire code.
 
 ## Result
 ```bash
-
 [2022-09-27 19:20:48,174] [face01lib.load_priset_image] [simple.py] [INFO] Loading npKnown.npz
 菅義偉 
          similarity              99.1% 
@@ -77,7 +77,7 @@ See [simple.py](./example/simple.py) to refer the entire code.
 
 # Note
 This repository contains FACE01 SAMPLE for UBUNTU 20.04.
-If you are a Windows user, please use this on WSLg or Docker.
+If you are a Windows user, please use this on Docker.
 This sample can be used until December 2022.
 
 
