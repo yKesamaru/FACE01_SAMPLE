@@ -1,5 +1,5 @@
 #cython: language_level = 3
-"""Load priset images"""
+"""Load priset images."""
 import os
 from os.path import exists, isdir
 from shutil import move
@@ -33,7 +33,7 @@ def load_priset_image(
         mode: str = 'hog',
         model: str = 'small'
     ) -> Tuple[List, List]:
-    """Load face image from priset_face_images folder
+    """Load face image from priset_face_images folder.
 
     Args:
         RootDir (str): Root directory
@@ -45,18 +45,19 @@ def load_priset_image(
 
     Returns:
         Tuple[List, List]: known_face_encodings_list, known_face_names_list
+
         - known_face_encodings_list
             - List of encoded many face images as ndarray
+
         - known_face_names_list
             - List of name which encoded as ndarray
 
     Example:
-        >>> known_face_encodings, known_face_names = \\
-        >>>     load_priset_image(
-        >>>             self,
-        >>>             self.conf_dict["RootDir"],
-        >>>             self.conf_dict["priset_face_imagesDir"]
-        >>>         )
+        >>> known_face_encodings, known_face_names = load_priset_image(
+            self,
+            self.conf_dict["RootDir"],
+            self.conf_dict["priset_face_imagesDir"]
+        )
     """    
     # Initialize
     known_face_names_list: List[str] = []

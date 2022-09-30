@@ -1,7 +1,6 @@
 #cython: language_level=3
 
-"""The VidCap class contains methods that initially process 
-    the input video data"""
+"""The VidCap class."""
 
 import inspect
 from io import BytesIO
@@ -28,8 +27,16 @@ environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;tcp"
 
 
 class VidCap:
+    """VidCap class.
 
+    contains methods that initially process the input video data
+    """    
     def __init__(self, log_level: str = 'info') -> None:
+        """init.
+
+        Args:
+            log_level (str, optional): Receive log level value. Defaults to 'info'.
+        """        
         # Setup logger: common way
         self.log_level: str = log_level
         import os.path
@@ -83,7 +90,7 @@ class VidCap:
             set_height: int,
             frame: npt.NDArray[np.uint8]
         ) -> npt.NDArray[np.uint8]:
-        """Return resized frame data
+        """Return resized frame data.
 
         Args:
             set_width (int): Width described in config.ini
@@ -108,7 +115,7 @@ class VidCap:
             set_width: int,
             vcap: cv2.VideoCapture
         ) -> Tuple[int,...]:
-        """Return input movie file's property
+        """Return input movie file's property.
 
         Args:
             set_width (int): Width which set in config.ini
@@ -147,7 +154,7 @@ class VidCap:
     def _cal_angle_coordinate(self, height: int, width: int) -> Tuple[Tuple[int,int,int,int], ...]:
         self.height: int = height
         self.width: int = width
-        """画角(TOP_LEFT,TOP_RIGHT)予めを算出
+        """Pre-calculate the angle of view (TOP_LEFT, TOP_RIGHT).
 
         Args:
             height (int)
@@ -175,7 +182,7 @@ class VidCap:
             BOTTOM_RIGHT: Tuple[int,int,int,int],
             CENTER: Tuple[int,int,int,int]
         ) -> npt.NDArray[np.uint8]:
-        """Return ndarray data which area specification coordinates for frame
+        """Return ndarray data which area specification coordinates for frame.
 
         Args:
             set_area (str): Described in config.ini
@@ -221,7 +228,7 @@ class VidCap:
 
 
     def return_vcap(self, movie: str) -> cv2.VideoCapture:
-        """Return vcap object
+        """Return vcap object.
 
         Args:
             movie (str): movie
@@ -268,7 +275,7 @@ class VidCap:
 
 
     def finalize(self, vcap: cv2.VideoCapture) -> None:
-        """Release vcap and Destroy window
+        """Release vcap and Destroy window.
 
         Args:
             vcap (cv2.VideoCapture): vcap which is handle of input video process
@@ -283,7 +290,7 @@ class VidCap:
             self,
             CONFIG: Dict
         ) -> Generator:
-        """Generator: Return resized frame data
+        """Generator: Return resized frame data.
 
         Args:
             CONFIG (Dict): CONFIG

@@ -1,4 +1,4 @@
-"""Return face image data as ndarray"""
+"""Return face image data as ndarray."""
 """
 from __future__ import annotations  # 'cython'では使用不可
 """
@@ -8,13 +8,13 @@ import numpy as np
 import numpy.typing as npt
 
 class Return_face_image():
-    
+    """This class include a method for return face image function."""    
     def return_face_image(
         self,
         resized_frame: npt.NDArray[np.uint8],
         face_location: Tuple[int,int,int,int]
     ) ->  npt.NDArray[np.uint8]:
-        """Return face image array which contain ndarray
+        """Return face image array which contain ndarray.
 
         Args:
             resized_frame (numpy.ndarray): frame data
@@ -22,7 +22,6 @@ class Return_face_image():
 
         Returns:
             list ( npt.NDArray[np.uint8]): face image of ndarray or empty array
-
         """        
         self.resized_frame = resized_frame
         empty_ndarray = \

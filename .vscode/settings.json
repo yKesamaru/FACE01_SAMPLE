@@ -203,5 +203,13 @@
   "C_Cpp.errorSquiggles": "Enabled",
   "cmake.sourceDirectory": "${workspaceFolder}/.",
   "python.linting.flake8Enabled": true,
-  "python.linting.flake8CategorySeverity.E": "Error"
+  "python.linting.flake8CategorySeverity.E": "Error",
+  "python.linting.banditEnabled": false,
+  "python.linting.mypyEnabled": false,
+  "python.linting.pycodestyleEnabled": false,
+  "python.linting.enabled": true,
+  "python.linting.pydocstyleEnabled": true,
+  "python.linting.pydocstyleArgs": [
+    "--convention=google"
+  ]
 }

@@ -1,9 +1,9 @@
 #cython: language_level=3
-"""Load config.ini and return CONFIG dictionary data
+"""Load config.ini and return CONFIG dictionary data.
 
-    Returns:
-        dict: CONFIG
-    """
+Returns:
+    dict: CONFIG
+"""
 import os
 from configparser import ConfigParser
 from datetime import datetime
@@ -22,8 +22,16 @@ from face01lib.video_capture import VidCap  # py
 # import .vidCap as video_capture  # so
 
 class Initialize:
-
+    """Initialize class.
+    
+    Load config.ini, return Dict style.
+    """    
     def __init__(self, log_level: str = 'info') -> None:
+        """init.
+
+        Args:
+            log_level (str, optional): Receive log level value. Defaults to 'info'.
+        """        
         # Setup logger: common way
         self.log_level: str = log_level
         import os.path
@@ -37,8 +45,7 @@ class Initialize:
     
 
     def _configure(self) -> Dict:
-
-        """Load conf.ini and return conf_dict dictionary
+        """Load conf.ini and return conf_dict dictionary.
 
         Args:
             self
@@ -113,8 +120,7 @@ class Initialize:
     def initialize(
             self,
         ) -> Dict:
-
-        """Initialize values
+        """Initialize values.
 
         Returns:
             Dict: CONFIG
@@ -123,7 +129,6 @@ class Initialize:
         Example:
             >>> CONFIG: Dict =  Initialize().initialize()
         """        
-
         self.conf_dict: Dict = self._configure()
         headless: bool = self.conf_dict["headless"]
         

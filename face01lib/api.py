@@ -1,11 +1,12 @@
 #cython: language_level = 3
 
-"""
+"""Summary.
+
 COPYRIGHT:
     This code is based on 'face_recognition' written by Adam Geitgey (ageitgey),
     and modified by Yoshitsugu Kesamaru (yKesamaru).
-    
-    ORIGINAL AUTHOR
+
+ORIGINAL AUTHOR:
     - Dlib
         - davisking
     - face_recognition
@@ -32,10 +33,14 @@ References:
 
 NOTE:
     About coordinate order...
+
     - dlib: (Left, Top, Right, Bottom), called 'rect'.
     - face_recognition: (top, right, bottom, left), called 'css'.
-    See bellow:
+
+    See bellow
+
     https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
+
 """
 
 
@@ -64,13 +69,25 @@ from face01lib.logger import Logger
 
 
 class Dlib_api:
+    """Dlib api.
 
-    __author__ = 'Original code written by Adam Geitgey, modified by YOSHITSUGU KESAMARU'
-    __email__ = 'y.kesamaru@tokai-kaoninsho.com'
-    __version__ = 'v0.0.1'
+    Author: Original code written by Adam Geitgey, modified by YOSHITSUGU KESAMARU
+
+    Email: y.kesamaru@tokai-kaoninsho.com
+
+    Version: 1.4.09
+    """
 
 
-    def __init__(self, log_level: str = 'info') -> None:
+    def __init__(
+            self,
+            log_level: str = 'info'
+        ) -> None:
+        """init.
+
+        Args:
+            log_level (str, optional): Receive log level value. Defaults to 'info'.
+        """        
         # Setup logger: common way
         self.log_level: str = log_level
         import os.path
@@ -168,15 +185,12 @@ class Dlib_api:
             file: str,
             mode: str = 'RGB'
         ) -> npt.NDArray[np.uint8]:
-        """Loads an image file (.jpg, .png, etc) into a numpy array
+        """Loads an image file (.jpg, .png, etc) into a numpy array.
 
         Args:
-            str: file
-            - image file name or file object to load
+            file (str): image file name or file object to load
+            mode (str): format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
 
-            str: mode
-            - format to convert the image to. Only 'RGB' (8-bit RGB, 3 channels) and 'L' (black and white) are supported.
-        
         Returns:
             npt.NDArray[np.uint8]: image contents as numpy array
         """
@@ -232,20 +246,13 @@ class Dlib_api:
         This method used only 'use_pipe = False'.
 
         Args:
-            npt.NDArray[np.uint8]: resized_frame
-            - Resized image
-
-            int: number_of_times_to_upsample
-            - How many times to upsample the image looking for faces. Higher numbers find smaller faces.
-
-            str: model
-            - Which face detection model to use. "hog" is less accurate but faster on CPUs. "cnn" is a more accurate deep-learning model which is GPU/CUDA accelerated (if available). The default is "hog".
-
+            resized_frame (npt.NDArray[np.uint8]): Resized image
+            number_of_times_to_upsample (int): How many times to upsample the image looking for faces. Higher numbers find smaller faces.
+            model (str): Which face detection model to use. "hog" is less accurate but faster on CPUs. "cnn" is a more accurate deep-learning model which is GPU/CUDA accelerated (if available). The default is "hog".
 
         Returns:
             A list of tuples of found face locations in css (top, right, bottom, left) order
         """
-        
         self.resized_frame: npt.NDArray[np.uint8] = resized_frame
         self.number_of_times_to_upsample: int = number_of_times_to_upsample
         self.model: str = model
@@ -305,27 +312,19 @@ class Dlib_api:
 
     # @profile()
     def face_encodings(
-        self,
-        resized_frame: npt.NDArray[np.uint8],
-        face_location_list: List = [],  # Initial value of 'face_location_list' is '[]'.
-        num_jitters: int = 0,
-        model: str = "small"
-    ) -> List[npt.NDArray[np.float64]]:
-        
+            self,
+            resized_frame: npt.NDArray[np.uint8],
+            face_location_list: List = [],  # Initial value of 'face_location_list' is '[]'.
+            num_jitters: int = 0,
+            model: str = "small"
+        ) -> List[npt.NDArray[np.float64]]:
         """Given an image, return the 128-dimension face encoding for each face in the image.
 
         Args:
-            npt.NDArray[np.uint8]: resized_frame
-            - The image that contains one or more faces (=small_frame)
-
-            List: face_location_list
-            - Optional - the bounding boxes of each face if you already know them. (=face_location_list)
-
-            int: num_jitters
-            - How many times to re-sample the face when calculating encoding. Higher is more accurate, but slower (i.e. 100 is 100x slower)
-
-            str: model
-            - Optional - which model to use. "large" (default) or "small" which only returns 5 points but is faster.
+            resized_frame (npt.NDArray[np.uint8]): The image that contains one or more faces (=small_frame)
+            face_location_list (List): Optional - the bounding boxes of each face if you already know them. (=face_location_list)
+            num_jitters (int): How many times to re-sample the face when calculating encoding. Higher is more accurate, but slower (i.e. 100 is 100x slower)
+            model (str): Do not modify.
 
         Returns:
             List[npt.NDArray[np.float64]]: A list of 128-dimensional face encodings (one for each face in the image)
@@ -400,16 +399,13 @@ class Dlib_api:
             # face_encodings: List[np.ndarray],
             # face_to_compare: np.ndarray
         ) -> npt.NDArray[np.float64]:
-        """Given a list of face encodings, compare them to a known face encoding and get a 
-        euclidean distance for each comparison face.
+        """Given a list of face encodings, compare them to a known face encoding and get a  euclidean distance for each comparison face.
+
         The distance tells you how similar the faces are.
 
         Args:
-            List[npt.NDArray[np.float64]]: face_encodings
-            - List of face encodings to compare (=small_frame)
-
-            npt.NDArray[np.float64]: face_to_compare
-            - A face encoding to compare against (=face_location_list)
+            face_encodings (List[npt.NDArray[np.float64]]): List of face encodings to compare (=small_frame)
+            face_to_compare (npt.NDArray[np.float64]): A face encoding to compare against (=face_location_list)
 
         Returns:
             npt.NDArray[np.float64]: A numpy ndarray with the distance for each face in the same order as the 'faces' array
@@ -433,19 +429,13 @@ class Dlib_api:
         """Compare a list of face encodings against a candidate encoding to see if they match.
 
         Args:
-            List[npt.NDArray[np.float64]]: known_face_encodings
-            - A list of known face encodings
-
-            npt.NDArray[np.float64]: face_encoding_to_check
-            - A single face encoding to compare against the list
-
-            float: tolerance
-            - How much distance between faces to consider it a match. Lower is more strict. 0.6 is typical best performance.
+            known_face_encodings (List[npt.NDArray[np.float64]]): A list of known face encodings
+            face_encoding_to_check (npt.NDArray[np.float64]): A single face encoding to compare against the list
+            tolerance (float): How much distance between faces to consider it a match. Lower is more strict. 0.6 is typical best performance.
 
         Returns:
             A list of True/False values indicating which known_face_encodings match the face encoding to check
         """
-
         self.known_face_encodings: List[npt.NDArray[np.float64]] = known_face_encodings
         self.face_encoding_to_check: npt.NDArray[np.float64] = face_encoding_to_check
         self.tolerance: float = tolerance
@@ -474,9 +464,3 @@ class Dlib_api:
             # Fast ---
             return np.where(self.min_distance == face_distance_list, True, False), self.min_distance
             # --------
-
-
-"""DEBUG: MEMORY LEAK
-m.memory_leak_analyze_stop()
-"""
-

@@ -1,4 +1,4 @@
-"""Reference
+"""Reference.
 
 - 'cython' compile option:
     - 'cython' options which have enabled
@@ -24,22 +24,22 @@
         - frame_datas_array (List[Dict]): Array of frame_datas
         - resized_frame (npt.NDArray[np.uint8]): Numpy array of frame
 
-        person_data = {
+        >>> person_data = {
                 'name': name,
                 'pict':filename,
                 'date': date,
                 'location': (top,right,bottom,left),
                 'percentage_and_symbol': percentage_and_symbol
             }
-        person_data_list.append(person_data)
+        >>> person_data_list.append(person_data)
 
-        frame_datas = {
+        >>> frame_datas = {
                 'img': resized_frame,
                 'face_location_list': face_location_list,
                 'overlay': overlay,
                 'person_data_list': person_data_list
             }
-        frame_datas_array.append(frame_datas)
+        >>> frame_datas_array.append(frame_datas)
 
 - About coordinate order:
     - dlib: (Left, Top, Right, Bottom,)
@@ -107,9 +107,17 @@ onnx_session = onnxruntime.InferenceSession(anti_spoof_model)
 
 
 class Core:
+    """Core class.
+
+    This class include many useful methods.
+    """    
 
     def __init__(self, log_level: str = 'info') -> None:
+        """init.
 
+        Args:
+            log_level (str, optional): Receive log level value. Defaults to 'info'.
+        """        
         # Setup logger: common way
         self.log_level: str = log_level
         import os.path
@@ -130,7 +138,6 @@ class Core:
             model_selection: int = 0,
             min_detection_confidence: float = 0.4
         ) -> mp.python.solution_base:
-
         """Processes an RGB image and returns a list of the detected face location data.
 
         Args:
@@ -144,7 +151,6 @@ class Core:
 
         Refer:
             https://solutions.mediapipe.dev/face_detection#python-solution-api
-
         """        
         self.resized_frame: npt.NDArray[np.uint8] = resized_frame
         self.model_selection: Tuple[int] = model_selection,
@@ -194,7 +200,6 @@ class Core:
         Returns:
             A NamedTuple object with a "detections" field that contains a list of the
             detected face location data.'
-
         """
         return results
 
@@ -209,7 +214,6 @@ class Core:
             min_detection_confidence: float,
             same_time_recognize: int = 2
         ) -> List[Tuple[int,int,int,int]]:
-
         self.face_location_list_resized_frame: npt.NDArray[np.uint8]= resized_frame
         self.set_width: int = set_width
         self.set_height: int = set_height
@@ -317,7 +321,7 @@ class Core:
             face_encoding: npt.NDArray[np.float64],
             tolerance: float
         ) -> Tuple[npt.NDArray[np.bool8], float]:
-        """Return match list and min value using dlib_api
+        """Return match list and min value using dlib_api.
 
         Args:
             logger (_type_): logger
@@ -327,7 +331,6 @@ class Core:
 
         Returns:
             Tuple[npt.NDArray[np.bool8], float]: match list, min value
-
         """        
         self.logger = logger
         self.known_face_encodings: List[npt.NDArray[np.float64]] = known_face_encodings
@@ -366,7 +369,7 @@ class Core:
             frame_datas_array: List[Dict],
             resized_frame: npt.NDArray[np.uint8]
         ) -> List[Dict]:
-        """Method to make frame_datas_array
+        """Method to make frame_datas_array.
 
         Return the data structure of frame_datas_list. 
 
@@ -384,34 +387,33 @@ class Core:
             List[Dict]: List of frame_datas_array
 
         Example:
-            - person_data:
-            >>>     {
-            >>>         'name': name,
-            >>>         'pict': filename,
-            >>>         'date': date,
-            >>>         'location': (top,right,bottom,left),
-            >>>         'percentage_and_symbol': percentage_and_symbol
-            >>>     }
-            
-                person_data内のlocationは個々人の顔座標です。
-                個々人を特定しない場合の顔座標はframe_datas['face_location_list']を使ってください。
+            person_data
 
-            - person_data_list: 
-            >>>    person_data_list.append(person_data)
-            
-            - frame_datas:
-            >>>    {
-            >>>        'img': resized_frame,
-            >>>        'face_location_list': face_location_list,
-            >>>        'overlay': overlay,
-            >>>        'person_data_list': person_data_list
-            >>>    }
+            >>> {
+                'name': name,
+                'pict': filename,
+                'date': date,
+                'location': (top,right,bottom,left),
+                'percentage_and_symbol': percentage_and_symbol
+            }
 
-            - frame_datas_list: 
-            >>>     frame_datas_array.append(frame_datas)
+            person_data_list
 
+            >>> person_data_list.append(person_data)
+
+            frame_datas
+
+            >>> {
+                'img': resized_frame,
+                'face_location_list': face_location_list,
+                'overlay': overlay,
+                'person_data_list': person_data_list
+            }
+
+            frame_datas_list
+
+            >>> frame_datas_array.append(frame_datas)
         """
-
         self.overlay: npt.NDArray[np.uint8] = overlay
         self.face_location_list: List[Tuple[int,int,int,int]] = face_location_list
         self.name: str = name
@@ -505,7 +507,7 @@ class Core:
             matches: npt.NDArray[np.bool8],
             min_distance: float
         ) -> str:
-        """Get face_name
+        """Get face_name.
 
         Args:
             CONFIG (Dict): CONFIG
@@ -513,8 +515,7 @@ class Core:
             min_distance (float): min value
 
         Returns:
-            str: Name who is
-
+            str: Name who is.
         """        
         self.CONFIG = CONFIG
         self.matches = matches
@@ -533,10 +534,10 @@ class Core:
             resized_frame: npt.NDArray[np.uint8],
             face_location_list: List[Tuple[int,int,int,int]]
         ) -> Tuple[List[Tuple[int,int,int,int]], npt.NDArray[np.uint8]]:
-        """Return tuple 
+        """Return tuple.
 
-            - concatenate_face_location_list
-            - concatenate_person_frame
+        - concatenate_face_location_list
+        - concatenate_person_frame
 
         Args:
             resized_frame (npt.NDArray[np.uint8]): Resized frame
@@ -547,7 +548,6 @@ class Core:
                 List of concatenated coordinates
             concatenate_person_frame (npt.NDArray[np.uint8]])
                 Image data of concatenated person image data
-
         """        
         self.return_concatenate_location_and_frame_resized_frame: npt.NDArray[np.uint8] = resized_frame
         self.face_location_list = face_location_list
@@ -623,7 +623,7 @@ class Core:
             CONFIG: Dict,
             resized_frame: npt.NDArray[np.uint8]
         ) -> List[Dict]:
-        """Return frame_datas_array
+        """Return frame_datas_array.
 
         Args:
             logger (_type_): logger
@@ -742,10 +742,10 @@ class Core:
             CONFIG: Dict,
             frame_datas_array: List[Dict]
         ) -> Tuple[List[npt.NDArray[np.float64]], List[Dict]]:
+        """Encode face data and Return bellow.
 
-        """Encode face data and Return 
-            - list of encoded data
-            - frame_datas_array
+        - list of encoded data
+        - frame_datas_array
 
         Args:
             logger (_type_): logger
@@ -759,24 +759,23 @@ class Core:
                 - List[Dict]]
         
         Definition of person_data_list and frame_datas_array:
-            person_data = {
+            >>> person_data = {
                     'name': name,
                     'pict':filename,
                     'date':date,
                     'location':(top,right,bottom,left),
                     'percentage_and_symbol': percentage_and_symbol
                 }
-            person_data_list.append(person_data)
+            >>> person_data_list.append(person_data)
 
-            frame_datas = {
+            >>> frame_datas = {
                     'img': resized_frame,
                     'face_location_list': face_location_list,
                     'overlay': overlay,
                     'person_data_list': person_data_list
                 }
-            frame_datas_array.append(frame_datas)
+            >>> frame_datas_array.append(frame_datas)
         """
-
         self.logger = logger
         self.CONFIG: Dict = CONFIG
         self.frame_datas_array: List[Dict] = frame_datas_array
@@ -1217,7 +1216,7 @@ class Core:
             frame: npt.NDArray[np.uint8],
             face_location: Tuple[int,int,int,int]
         ) -> npt.NDArray[np.uint8]:
-        """Return face image which expressed for ndarray
+        """Return face image which expressed for ndarray.
 
         Args:
             frame (npt.NDArray[np.uint8]): Frame image
@@ -1239,7 +1238,11 @@ class Core:
             frame: npt.NDArray[np.uint8],
             face_location: Tuple[int,int,int,int]
         ) -> Tuple[str, float, bool]:
-        """Return result of anti spoof
+        """Return result of anti spoof.
+
+        Note:
+            This function is EXPERIMENTAL!
+            It might occur side effects.
 
         Args:
             frame (npt.NDArray[np.uint8]): Each of frame
@@ -1524,8 +1527,7 @@ class Core:
             set_height,
             set_width
         ):
-        """廃止予定
-        """        
+        """Deprecated."""        
         self.resized_frame: npt.NDArray[np.uint8] = resized_frame
         self.set_height = set_height
         self.set_width = set_width
@@ -1553,8 +1555,7 @@ class Core:
             error_messg_rectangle_messg,
             error_messg_rectangle_font
         ):
-        """廃止予定
-        """
+        """Deprecated."""
         self.draw = draw
         self.error_messg_rectangle_position = error_messg_rectangle_position
         self.error_messg_rectangle_messg = error_messg_rectangle_messg
@@ -1858,27 +1859,27 @@ class Core:
             self,
             CONFIG: Dict
         ) -> Generator:
+        """Generator of frame_datas_array.
 
-        """Generator of frame_datas_array
+        common_process function consists 3 part of Core() methods.
+        - Core().frame_pre_processing
+        - Core().face_encoding_process
+        - Core().frame_post_processing
 
         Yields:
             Generator: frame_datas_array
                 - frame_datas_array: List[Dict]
         
-        More about:
-            main_process function consists 3 part of Core() methods.
-            1) Core().frame_pre_processing
-            2) Core().face_encoding_process
-            3) Core().frame_post_processing
-        
         Example:
             Make generator object
+
             >>> obj = Core().common_process(CONFIG)
+
             Call '__next__()' method
+
             >>> while True:
-                        frame_datas_array = obj.__next__()
+                frame_datas_array = obj.__next__()
         """
-        
         self.CONFIG: Dict = CONFIG
 
         frame_generator_obj = VidCap_obj.frame_generator(self.CONFIG)
@@ -1935,8 +1936,7 @@ class Core:
             CONFIG: Dict,
             override_list: List[Tuple]
         ) -> Dict:
-
-        """Override CONFIG for example
+        """Override CONFIG for example.
 
         Args:
             Dict: CONFIG
@@ -1960,7 +1960,6 @@ class Core:
             - If you specified key is not exist, application will fail down 
                 with print out log 'warning'.
             - You cannot change key 'headless'. If override it, application will fall down.
-
         """
         self.logger.warning("'override' method is EXPERIMENTAL")
         self.logger.warning("Unexpected side effects may occur")

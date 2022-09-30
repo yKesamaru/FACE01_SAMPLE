@@ -1,7 +1,8 @@
 #cython: language_level=3
-"""A module that performs various calculations
-Calculation results are output to log"""
+"""A module that performs various calculations.
 
+Calculation results are output to log
+"""
 from datetime import datetime
 from time import perf_counter
 from typing import Tuple
@@ -16,7 +17,7 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
 class Cal:
-
+    """Cal class include various calculation methods."""
     HANDLING_FRAME_TIME: float
     HANDLING_FRAME_TIME_FRONT: float
     HANDLING_FRAME_TIME_REAR: float
@@ -27,6 +28,11 @@ class Cal:
 
 
     def __init__(self, log_level: str = 'info') -> None:
+        """init.
+
+        Args:
+            log_level (str, optional): Receive log level value. Defaults to 'info'.
+        """        
         # Setup logger: common way
         self.log_level: str = log_level
         import os.path
@@ -42,7 +48,7 @@ class Cal:
             HANDLING_FRAME_TIME_FRONT,
             HANDLING_FRAME_TIME_REAR
         ) -> float:
-        """Measurement of processing time (calculation) and output to log
+        """Measurement of processing time (calculation) and output to log.
 
         Args:
             HANDLING_FRAME_TIME_FRONT (float): First half point
@@ -57,7 +63,7 @@ class Cal:
 
     @staticmethod
     def Measure_processing_time_forward() -> float:
-        """Measurement of processing time (first half)
+        """Measurement of processing time (first half).
 
         Returns:
             float: First half point
@@ -69,7 +75,7 @@ class Cal:
 
     @staticmethod
     def Measure_processing_time_backward() -> float:
-        """Measurement of processing time (second half)
+        """Measurement of processing time (second half).
 
         Returns:
             float: Second half point
@@ -80,7 +86,7 @@ class Cal:
 
     
     def Measure_func(self, func) :
-        """Used as a decorator to time a function"""
+        """Used as a decorator to time a function."""
         self.func = func
 
         @wraps(self.func)
@@ -96,29 +102,29 @@ class Cal:
 
 
     def cal_specify_date(self, logger) -> None:
-        """Run evaluation version only"""
+        """Run evaluation version only."""
         self.logger = logger
-        limit_date = datetime(2022,12, 1, 0, 0, 0)   # 指定日付
+        limit_date = datetime(2023,12, 1, 0, 0, 0)   # 指定日付
         today = datetime.now()
 
         if today >= limit_date:
-            self.logger.warning("試用期限を過ぎました")
-            self.logger.warning("引き続きご利用になる場合は下記までご連絡下さい")
-            self.logger.warning("東海顔認証 担当: 袈裟丸 y.kesamaru@tokai-kaoninsho.com")
+            self.logger.warning("Trial period expired")
+            self.logger.warning("If you wish to continue using FACE01, please contact us.")
+            self.logger.warning("email: y.kesamaru@tokai-kaoninsho.com")
             exit(0)
         elif today < limit_date:
             remaining_days = limit_date - today
             if remaining_days.days < 30:
-                self.logger.info("お使いいただける残日数は",  str(remaining_days.days) + "日です")
-                self.logger.info("引き続きご利用になる場合は下記までご連絡下さい")
-                self.logger.info("東海顔認証 担当: 袈裟丸 y.kesamaru@tokai-kaoninsho.com")
+                self.logger.info("Remaining days of use: ",  str(remaining_days.days))
+                self.logger.warning("If you wish to continue using FACE01, please contact us.")
+                self.logger.warning("email: y.kesamaru@tokai-kaoninsho.com")
 
 
     def cal_resized_telop_image(
             self,
             resized_telop_image: npt.NDArray[np.float64]
         ) -> Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]]:
-        """Calculate telop image data
+        """Calculate telop image data.
 
         Args:
             resized_telop_image (npt.NDArray[np.float64]): Resized telop image data
@@ -127,8 +133,7 @@ class Cal:
             Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]]: Tuple
         
         Example:
-            >>> cal_resized_telop_nums = \\
-                        Cal().cal_resized_telop_image(resized_telop_image)
+            >>> cal_resized_telop_nums = Cal().cal_resized_telop_image(resized_telop_image)
         """        
         self.resized_telop_image = resized_telop_image
 
@@ -146,7 +151,7 @@ class Cal:
             set_height: int,
             set_width: int
         ) -> Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]]:
-        """Calculate logo image data
+        """Calculate logo image data.
 
         Args:
             resized_logo_image (npt.NDArray[np.float64]): Resized logo image data
@@ -157,12 +162,11 @@ class Cal:
             Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]]: Return tuple
 
         Example:
-            >>> cal_resized_logo_nums = \\
-                        Cal().cal_resized_logo_image(
-                            resized_logo_image,
-                            set_height,
-                            set_width
-                        )
+            >>> cal_resized_logo_nums = Cal().cal_resized_logo_image(
+                    resized_logo_image,
+                    set_height,
+                    set_width
+                )
         """        
         self.resized_logo_image: npt.NDArray[np.float64] = resized_logo_image
         self.set_height: int = set_height
@@ -182,7 +186,7 @@ class Cal:
             self,
             similar_percentage: float
         ) -> float:
-        """Receive similar_percentage and return tolerance
+        """Receive similar_percentage and return tolerance.
 
         Args:
             similar_percentage (float): 'Probability of similarity' described in config.ini
@@ -193,7 +197,6 @@ class Cal:
         Example:
             >>> tolerance: float = Cal().to_tolerance(self.CONFIG["similar_percentage"])
         """        
-        
         ## 算出式
         ## percentage = -4.76190475*(p*p)+(-0.380952375)*p+100
         ## percentage_example = -4.76190475*(0.45*0.45)+(-0.380952375)*0.45+100
@@ -217,7 +220,7 @@ class Cal:
             self,
             tolerance: float
         ) -> float:
-        """Receive 'tolerance' and return 'percentage'
+        """Receive 'tolerance' and return 'percentage'.
 
         Args:
             tolerance (float): tolerance
@@ -240,7 +243,7 @@ class Cal:
             error_messg_rectangle_fontsize,
             error_messg_rectangle_messg
         ):
-        """Not use"""
+        """Not use."""
         self.error_messg_rectangle_bottom = error_messg_rectangle_bottom
         self.error_messg_rectangle_left = error_messg_rectangle_left
         self.error_messg_rectangle_right = error_messg_rectangle_right
@@ -260,7 +263,7 @@ class Cal:
             error_messg_rectangle_fontsize: str,
             encoding = 'utf-8'
         ):
-        """Not use"""
+        """Not use."""
         self.fontpath = fontpath
         self.error_messg_rectangle_fontsize = error_messg_rectangle_fontsize
         
@@ -273,7 +276,7 @@ class Cal:
             self,
             p: float
         ) -> float:  # python版
-        """Receive 'distance' and return percentage
+        """Receive 'distance' and return percentage.
 
         Args:
             p (float): distance
@@ -294,7 +297,7 @@ class Cal:
             self,
             frame: npt.NDArray[np.uint8]
         ) :
-        """Generate pil_img object
+        """Generate pil_img object.
 
         Args:
             frame (npt.NDArray[np.uint8]): Image data
@@ -313,7 +316,7 @@ class Cal:
             self,
             pil_img_obj_rgb
         ):
-        """Generate object
+        """Generate object.
 
         Args:
             pil_img_obj_rgb (object): object

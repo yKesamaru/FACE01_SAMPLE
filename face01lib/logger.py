@@ -1,25 +1,23 @@
 #cython: language_level=3
-"""Manage log
-
-Set log level
-
-Args:
-    str: set_level
-    
-        - Chose from bellow
-            - 'debug'
-            - 'info'
-        - You can pass value as CONFIG["set_level"]
-
-"""        
+"""Manage log."""
 
 import logging
 import sys
 from typing import Dict
 
 class Logger:
-
+    """Set log level."""    
     def __init__(self, log_level: str = 'info') -> None:
+        """init.
+
+        Args:
+            log_level(str): Set log level. Default to 'info'.
+            Chose from bellow
+            - 'debug'
+            - 'info'
+
+        You can pass value as CONFIG["set_level"]
+        """        
         self.log_level: str = log_level
 
 
@@ -28,7 +26,7 @@ class Logger:
             name: str,
             dir: str
         ):
-        """Manage log
+        """Manage log.
 
         Args:
             name (str): File name
@@ -47,7 +45,6 @@ class Logger:
             >>> CONFIG = Initialize().initialize()
             >>> 
             >>> logger = Logger(CONFIG["log_level"]).logger(name, parent_dir)
-
         """        
         self.name = name
         self.dir = dir

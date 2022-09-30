@@ -1,5 +1,6 @@
 #cython: language_level=3
-"""CHECK SYSTEM INFORMATION
+"""CHECK SYSTEM INFORMATION.
+
 This module is EXPERIMENTAL
 """  
 """TODO: #32 リファクタリングと要件再定義
@@ -16,8 +17,18 @@ Cal_obj = Cal()
 
 
 class System_check:
-
+    """System check class.
+    
+    Note:
+        This is EXPERIMENTAL class, so it might occur side effects.
+    """    
     def __init__(self, log_level: str = 'info') -> None:
+        """init.
+
+        Args:
+            log_level (str, optional): Receive log level value. Defaults to 'info'.
+
+        """        
         # Setup logger: common way
         self.log_level: str = log_level
         import os.path
@@ -32,7 +43,12 @@ class System_check:
 
 
     def system_check(self, CONFIG):
-    # lock
+        """Check user system configuration.
+
+        Args:
+            CONFIG (Dict): Receive CONFIG which described in config.ini.
+        """        
+        # lock
         with open("SystemCheckLock", "w") as f:
             f.write('')
         self.logger.info("FACE01の推奨動作環境を満たしているかシステムチェックを実行します")

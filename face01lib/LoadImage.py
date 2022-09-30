@@ -1,7 +1,5 @@
 #cython: language_level=3
-"""Load image class
-
-"""
+"""Load image class."""
 import cv2
 import numpy as np
 from PIL import Image, ImageFile
@@ -16,9 +14,9 @@ from face01lib.Calc import Cal
 
 
 class LoadImage:
-
+    """This class include method to load images."""    
     def __init__(self, headless: bool, conf_dict: Dict) -> None:
-        """Initialize
+        """Initialize.
 
         Args:
             headless (bool): Default value (config.ini)
@@ -45,35 +43,35 @@ class LoadImage:
             self.load_unregistered_face_image = True
 
 
-    def LI(self, set_height: int, set_width: int) -> Tuple:
+    def LI(
+            self,
+            set_height: int,
+            set_width: int
+        ) -> Tuple:
+        """Return values.
 
-        """Return values
-
-        Load images, and return all together in a tuple
+        Load images, and return all together in a tuple.
 
         Args:
-            self,
-            int: set_height
-            int: set_width
-        
-        Returns:
-            cv2.Mat: rect01_png
-            cv2.Mat: rect01_NG_png
-            cv2.Mat: rect01_REAL_png
-            cv2.Mat: rect01_SPOOF_png
-            cv2.Mat: rect01_CANNOT_DISTINCTION_png
-            Union[cv2.Mat, None]: resized_telop_image
-            Union[Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]], None]
-: cal_resized_telop_nums
-            Union[cv2.Mat, None]: resized_logo_image
-            Union[Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]], None]
-: cal_resized_logo_nums
-            bool: load_unregistered_face_image
-            Union[cv2.Mat, None]: telop_image
-            Union[cv2.Mat, None]: logo_image
-            Union[cv2.Mat, None]: unregistered_face_image
-        """        
+            self: self
+            set_height (int): Height described in config.ini
+            set_width (int): Width described in config.ini
 
+        Returns:
+            rect01_png (cv2.Mat): Loaded image data as ndarray
+            rect01_NG_png (cv2.Mat): Loaded image data as ndarray
+            rect01_REAL_png (cv2.Mat): Loaded image data as ndarray
+            rect01_SPOOF_png (cv2.Mat): Loaded image data as ndarray
+            rect01_CANNOT_DISTINCTION_png (cv2.Mat): Loaded image data as ndarray
+            resized_telop_image (Union[cv2.Mat, None]): Loaded image data as ndarray
+            cal_resized_telop_nums : Return Tuple or None 
+            resized_logo_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None
+            cal_resized_logo_nums (Union[Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]], None]): 
+            load_unregistered_face_image (bool): Bool
+            telop_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None
+            logo_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None
+            unregistered_face_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None
+        """        
         rect01_png: cv2.Mat = cv2.imread("images/rect01.png", cv2.IMREAD_UNCHANGED)
         rect01_NG_png: cv2.Mat = cv2.imread("images/rect01_NG.png", cv2.IMREAD_UNCHANGED)
         rect01_REAL_png: cv2.Mat = cv2.imread("images/rect01_REAL.png", cv2.IMREAD_UNCHANGED)

@@ -1,20 +1,24 @@
 # FACE01について
 # TODO
+## 1.4.10
+- sphinxドキュメントの充実化、エラーの解消
+- add setup.py
+- priset_face_imagesへの顔登録の方法などドキュメント化
+- exampleを追加
+- tokai-kaoninsho.comへの追加・記事の削除や訂正
+- unittestの追加
+
+
+
+
+
 ## 1.4.09
 - sphinxでドキュメントを整備する
-  ```bash
-  # working dir にsphinxフォルダを作成
-  mkdir ./sphinx
-  # sphinx-quickstart でsphinxフォルダ内に設定ファイルを作成
-  sphinx-quickstart sphinx
-  sphinx-apidoc -f -o ./sphinx ./sphinx
-  # index.rstを編集
+  - `sphinx保存フォルダ`にて管理
 
-  sphinx-build -b html ./sphinx ./docs
-  ```
   - mkdir ./sphinx
   - sphinx-quickstart sphinx
-  - sphinx-apidoc -f -o ./sphinx ./sphinx
+  - sphinx-apidoc -f -o ./sphinx .
   - sphinx-build -b html ./sphinx ./docs
   - titleを変更
     - index.rst
@@ -35,7 +39,6 @@
   extensions = [
       'sphinx.ext.napoleon',
       'sphinx.ext.autodoc',
-      'sphinx.ext.todo',
   ]
   # Napoleon settings
   napoleon_google_docstring = True
@@ -61,18 +64,18 @@
   html_theme = 'sphinx_rtd_theme'
   html_static_path = ['_static']
 
-  todo_include_todos = True
+  todo_include_todos = False
 ```
 
-- pydoc
-  -  $ python -m pydoc -b
-- Core.pyを中心に型アノテーションをつけてデータ型を整理する
-- クラスメソッド、ストラクトメソッドに変更を進める
 - return_face_image.pyを徹底的にcython最適化して、その様子をzennに掲載する
 - メモリ削減の工夫
   - ![](img/PASTE_IMAGE_2022-08-31-09-20-50.png)
 
 Fix
+- pydoc
+  -  $ python -m pydoc -b
+- Core.pyを中心に型アノテーションをつけてデータ型を整理する
+- クラスメソッド、ストラクトメソッドに変更を進める
 - cython化
   - benchmark_GUI_window.pyの結果
     - cython

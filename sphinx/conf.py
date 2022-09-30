@@ -18,8 +18,7 @@ sys.path.append(os.path.abspath("."))
 # 'sphinx.ext.viewcode',  # Do not use! The source code becomes completely exposed.
 extensions = [
     'sphinx.ext.napoleon',
-    'sphinx.ext.autodoc',
-    'sphinx.ext.todo',
+    'sphinx.ext.autodoc'
 ]
 # Napoleon settings
 napoleon_google_docstring = True
@@ -45,10 +44,13 @@ language = 'en'
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'sphinx_rtd_theme'
+# html_theme = 'python_docs_theme'  # pythonドキュメントと同じはずだけど、よくないなぁ。エラーのせいか？
+# html_theme = 'classic'  # 表示が崩れる、よくない
+# html_theme = 'scrolls'  # 文字化け、よくない
+# html_theme = 'bizstyle'  # Nice!一部表示崩れあり…
+html_theme = 'sphinx_rtd_theme'  # 表示崩れあり、よくない
 html_static_path = ['_static']
 
 # -- Options for todo extension ----------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/extensions/todo.html#configuration
 
-todo_include_todos = True
