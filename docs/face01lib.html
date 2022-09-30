@@ -21,7 +21,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="face01lib.models package" href="face01lib.models.html" />
-    <link rel="prev" title="Welcome to FACE01’s documentation!" href="index.html" /> 
+    <link rel="prev" title="FACE01" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -299,11 +299,11 @@
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cal_resized_logo_nums</span> <span class="o">=</span>                         <span class="n">Cal</span><span class="p">()</span><span class="o">.</span><span class="n">cal_resized_logo_image</span><span class="p">(</span>
-<span class="go">                resized_logo_image,</span>
-<span class="go">                set_height,</span>
-<span class="go">                set_width</span>
-<span class="go">            )</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cal_resized_logo_nums</span> <span class="o">=</span> <span class="n">Cal</span><span class="p">()</span><span class="o">.</span><span class="n">cal_resized_logo_image</span><span class="p">(</span>
+<span class="go">        resized_logo_image,</span>
+<span class="go">        set_height,</span>
+<span class="go">        set_width</span>
+<span class="go">    )</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -324,7 +324,7 @@
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cal_resized_telop_nums</span> <span class="o">=</span>                         <span class="n">Cal</span><span class="p">()</span><span class="o">.</span><span class="n">cal_resized_telop_image</span><span class="p">(</span><span class="n">resized_telop_image</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cal_resized_telop_nums</span> <span class="o">=</span> <span class="n">Cal</span><span class="p">()</span><span class="o">.</span><span class="n">cal_resized_telop_image</span><span class="p">(</span><span class="n">resized_telop_image</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -507,29 +507,25 @@
 <li><p>frame_datas_array (List[Dict]): Array of frame_datas</p></li>
 <li><p>resized_frame (npt.NDArray[np.uint8]): Numpy array of frame</p></li>
 </ul>
-<dl>
-<dt>person_data = {</dt><dd><blockquote>
-<div><p>‘name’: name,
-‘pict’:filename,
-‘date’: date,
-‘location’: (top,right,bottom,left),
-‘percentage_and_symbol’: percentage_and_symbol</p>
-</div></blockquote>
-<p>}</p>
-</dd>
-</dl>
-<p>person_data_list.append(person_data)</p>
-<dl>
-<dt>frame_datas = {</dt><dd><blockquote>
-<div><p>‘img’: resized_frame,
-‘face_location_list’: face_location_list,
-‘overlay’: overlay,
-‘person_data_list’: person_data_list</p>
-</div></blockquote>
-<p>}</p>
-</dd>
-</dl>
-<p>frame_datas_array.append(frame_datas)</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">person_data</span> <span class="o">=</span> <span class="p">{</span>
+<span class="go">        &#39;name&#39;: name,</span>
+<span class="go">        &#39;pict&#39;:filename,</span>
+<span class="go">        &#39;date&#39;: date,</span>
+<span class="go">        &#39;location&#39;: (top,right,bottom,left),</span>
+<span class="go">        &#39;percentage_and_symbol&#39;: percentage_and_symbol</span>
+<span class="go">    }</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">person_data_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">person_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">frame_datas</span> <span class="o">=</span> <span class="p">{</span>
+<span class="go">        &#39;img&#39;: resized_frame,</span>
+<span class="go">        &#39;face_location_list&#39;: face_location_list,</span>
+<span class="go">        &#39;overlay&#39;: overlay,</span>
+<span class="go">        &#39;person_data_list&#39;: person_data_list</span>
+<span class="go">    }</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frame_datas_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frame_datas</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
@@ -616,6 +612,10 @@
 <dt class="sig sig-object py" id="face01lib.Core.Core.common_process">
 <span class="sig-name descname"><span class="pre">common_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CONFIG</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Generator</span></span></span><a class="headerlink" href="#face01lib.Core.Core.common_process" title="Permalink to this definition"></a></dt>
 <dd><p>Generator of frame_datas_array.</p>
+<p>common_process function consists 3 part of Core() methods.
+- Core().frame_pre_processing
+- Core().face_encoding_process
+- Core().frame_post_processing</p>
 <dl class="field-list">
 <dt class="field-odd">Yields</dt>
 <dd class="field-odd"><p><em>Generator</em> –</p>
@@ -627,25 +627,14 @@
 </dl>
 </dd>
 </dl>
-<dl class="simple">
-<dt>More about:</dt><dd><p>main_process function consists 3 part of Core() methods.
-- Core().frame_pre_processing
-- Core().face_encoding_process
-- Core().frame_post_processing</p>
-</dd>
-</dl>
 <p class="rubric">Example</p>
-<ul class="simple">
-<li><p>Make generator object</p></li>
-</ul>
+<p>Make generator object</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">obj</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span><span class="o">.</span><span class="n">common_process</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>Call ‘__next__()’ method</p></li>
-</ul>
+<p>Call ‘__next__()’ method</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="go">            frame_datas_array = obj.__next__()</span>
+<span class="go">    frame_datas_array = obj.__next__()</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -687,29 +676,25 @@
 </dd>
 </dl>
 <dl>
-<dt>Definition of person_data_list and frame_datas_array:</dt><dd><dl>
-<dt>person_data = {</dt><dd><blockquote>
-<div><p>‘name’: name,
-‘pict’:filename,
-‘date’:date,
-‘location’:(top,right,bottom,left),
-‘percentage_and_symbol’: percentage_and_symbol</p>
-</div></blockquote>
-<p>}</p>
-</dd>
-</dl>
-<p>person_data_list.append(person_data)</p>
-<dl>
-<dt>frame_datas = {</dt><dd><blockquote>
-<div><p>‘img’: resized_frame,
-‘face_location_list’: face_location_list,
-‘overlay’: overlay,
-‘person_data_list’: person_data_list</p>
-</div></blockquote>
-<p>}</p>
-</dd>
-</dl>
-<p>frame_datas_array.append(frame_datas)</p>
+<dt>Definition of person_data_list and frame_datas_array:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">person_data</span> <span class="o">=</span> <span class="p">{</span>
+<span class="go">        &#39;name&#39;: name,</span>
+<span class="go">        &#39;pict&#39;:filename,</span>
+<span class="go">        &#39;date&#39;:date,</span>
+<span class="go">        &#39;location&#39;:(top,right,bottom,left),</span>
+<span class="go">        &#39;percentage_and_symbol&#39;: percentage_and_symbol</span>
+<span class="go">    }</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">person_data_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">person_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">frame_datas</span> <span class="o">=</span> <span class="p">{</span>
+<span class="go">        &#39;img&#39;: resized_frame,</span>
+<span class="go">        &#39;face_location_list&#39;: face_location_list,</span>
+<span class="go">        &#39;overlay&#39;: overlay,</span>
+<span class="go">        &#39;person_data_list&#39;: person_data_list</span>
+<span class="go">    }</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frame_datas_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frame_datas</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </dd></dl>
@@ -802,39 +787,31 @@
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<ul class="simple">
-<li><p>person_data:</p></li>
-</ul>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span>    <span class="p">{</span>
-<span class="gp">&gt;&gt;&gt; </span>        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>        <span class="s1">&#39;pict&#39;</span><span class="p">:</span> <span class="n">filename</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>        <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>        <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">top</span><span class="p">,</span><span class="n">right</span><span class="p">,</span><span class="n">bottom</span><span class="p">,</span><span class="n">left</span><span class="p">),</span>
-<span class="gp">&gt;&gt;&gt; </span>        <span class="s1">&#39;percentage_and_symbol&#39;</span><span class="p">:</span> <span class="n">percentage_and_symbol</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="p">}</span>
+<p>person_data</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">{</span>
+<span class="go">    &#39;name&#39;: name,</span>
+<span class="go">    &#39;pict&#39;: filename,</span>
+<span class="go">    &#39;date&#39;: date,</span>
+<span class="go">    &#39;location&#39;: (top,right,bottom,left),</span>
+<span class="go">    &#39;percentage_and_symbol&#39;: percentage_and_symbol</span>
+<span class="go">}</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>person_data_list:</p></li>
-</ul>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span>   <span class="n">person_data_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">person_data</span><span class="p">)</span>
+<p>person_data_list</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">person_data_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">person_data</span><span class="p">)</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>frame_datas:</p></li>
-</ul>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span>   <span class="p">{</span>
-<span class="gp">&gt;&gt;&gt; </span>       <span class="s1">&#39;img&#39;</span><span class="p">:</span> <span class="n">resized_frame</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>       <span class="s1">&#39;face_location_list&#39;</span><span class="p">:</span> <span class="n">face_location_list</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>       <span class="s1">&#39;overlay&#39;</span><span class="p">:</span> <span class="n">overlay</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>       <span class="s1">&#39;person_data_list&#39;</span><span class="p">:</span> <span class="n">person_data_list</span>
-<span class="gp">&gt;&gt;&gt; </span>   <span class="p">}</span>
+<p>frame_datas</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">{</span>
+<span class="go">    &#39;img&#39;: resized_frame,</span>
+<span class="go">    &#39;face_location_list&#39;: face_location_list,</span>
+<span class="go">    &#39;overlay&#39;: overlay,</span>
+<span class="go">    &#39;person_data_list&#39;: person_data_list</span>
+<span class="go">}</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>frame_datas_list:</p></li>
-</ul>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span>    <span class="n">frame_datas_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frame_datas</span><span class="p">)</span>
+<p>frame_datas_list</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">frame_datas_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frame_datas</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1047,31 +1024,32 @@ Dictionary of initialized preferences</p>
 <dt class="sig sig-object py" id="face01lib.LoadImage.LoadImage.LI">
 <span class="sig-name descname"><span class="pre">LI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span></span></span><a class="headerlink" href="#face01lib.LoadImage.LoadImage.LI" title="Permalink to this definition"></a></dt>
 <dd><p>Return values.</p>
-<blockquote>
-<div><p>Load images, and return all together in a tuple.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>self: self
-int: set_height
-int: set_width</p>
+<p>Load images, and return all together in a tuple.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> – self</p></li>
+<li><p><strong>set_height</strong> (<em>int</em>) – Height described in config.ini</p></li>
+<li><p><strong>set_width</strong> (<em>int</em>) – Width described in config.ini</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>cv2.Mat: rect01_png
-cv2.Mat: rect01_NG_png
-cv2.Mat: rect01_REAL_png
-cv2.Mat: rect01_SPOOF_png
-cv2.Mat: rect01_CANNOT_DISTINCTION_png
-Union[cv2.Mat, None]: resized_telop_image
-Union[Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]], None]</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Loaded image data as ndarray
+rect01_NG_png (cv2.Mat): Loaded image data as ndarray
+rect01_REAL_png (cv2.Mat): Loaded image data as ndarray
+rect01_SPOOF_png (cv2.Mat): Loaded image data as ndarray
+rect01_CANNOT_DISTINCTION_png (cv2.Mat): Loaded image data as ndarray
+resized_telop_image (Union[cv2.Mat, None]): Loaded image data as ndarray
+cal_resized_telop_nums : Return Tuple or None
+resized_logo_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None
+cal_resized_logo_nums (Union[Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]], None]):
+load_unregistered_face_image (bool): Bool
+telop_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None
+logo_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None
+unregistered_face_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None</p>
 </dd>
-</dl>
-</div></blockquote>
-<dl class="simple">
-<dt>: cal_resized_telop_nums</dt><dd><p>Union[cv2.Mat, None]: resized_logo_image
-Union[Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]], None]</p>
-</dd>
-<dt>: cal_resized_logo_nums</dt><dd><p>bool: load_unregistered_face_image
-Union[cv2.Mat, None]: telop_image
-Union[cv2.Mat, None]: logo_image
-Union[cv2.Mat, None]: unregistered_face_image</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>rect01_png (cv2.Mat)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1166,11 +1144,13 @@ and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>About coordinate order…
-- dlib: (Left, Top, Right, Bottom), called ‘rect’.
-- face_recognition: (top, right, bottom, left), called ‘css’.</p>
-<p>See bellow:
-<a class="reference external" href="https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py">https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py</a></p>
+<p>About coordinate order…</p>
+<ul class="simple">
+<li><p>dlib: (Left, Top, Right, Bottom), called ‘rect’.</p></li>
+<li><p>face_recognition: (top, right, bottom, left), called ‘css’.</p></li>
+</ul>
+<p>See bellow</p>
+<p><a class="reference external" href="https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py">https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py</a></p>
 </div>
 <span class="target" id="module-face01lib.api"></span><dl class="py class">
 <dt class="sig sig-object py" id="face01lib.api.Dlib_api">
@@ -1187,12 +1167,9 @@ and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>List</strong><strong>[</strong><strong>npt.NDArray</strong><strong>[</strong><strong>np.float64</strong><strong>]</strong><strong>]</strong> – known_face_encodings</p></li>
-<li><p><strong>encodings</strong> (<em>- A list</em><em> of </em><em>known face</em>) – </p></li>
-<li><p><strong>npt.NDArray</strong><strong>[</strong><strong>np.float64</strong><strong>]</strong> – face_encoding_to_check</p></li>
-<li><p><strong>list</strong> (<em>- A single face encoding to compare against the</em>) – </p></li>
-<li><p><strong>float</strong> – tolerance</p></li>
-<li><p><strong>performance.</strong> (<em>- How much distance between faces to consider it a match. Lower is more strict. 0.6 is typical best</em>) – </p></li>
+<li><p><strong>known_face_encodings</strong> (<em>List</em><em>[</em><em>npt.NDArray</em><em>[</em><em>np.float64</em><em>]</em><em>]</em>) – A list of known face encodings</p></li>
+<li><p><strong>face_encoding_to_check</strong> (<em>npt.NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – A single face encoding to compare against the list</p></li>
+<li><p><strong>tolerance</strong> (<em>float</em>) – How much distance between faces to consider it a match. Lower is more strict. 0.6 is typical best performance.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1209,10 +1186,8 @@ and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>List</strong><strong>[</strong><strong>npt.NDArray</strong><strong>[</strong><strong>np.float64</strong><strong>]</strong><strong>]</strong> – face_encodings</p></li>
-<li><p><strong>compare</strong> (<em>- List</em><em> of </em><em>face encodings to</em>) – </p></li>
-<li><p><strong>npt.NDArray</strong><strong>[</strong><strong>np.float64</strong><strong>]</strong> – face_to_compare</p></li>
-<li><p><strong>against</strong> (<em>- A face encoding to compare</em>) – </p></li>
+<li><p><strong>face_encodings</strong> (<em>List</em><em>[</em><em>npt.NDArray</em><em>[</em><em>np.float64</em><em>]</em><em>]</em>) – List of face encodings to compare (=small_frame)</p></li>
+<li><p><strong>face_to_compare</strong> (<em>npt.NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – A face encoding to compare against (=face_location_list)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1231,15 +1206,10 @@ and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>npt.NDArray</strong><strong>[</strong><strong>np.uint8</strong><strong>]</strong> – resized_frame</p></li>
-<li><p><strong>faces</strong> (<em>- The image that contains one</em><em> or </em><em>more</em>) – </p></li>
-<li><p><strong>List</strong> – face_location_list</p></li>
-<li><p><strong>them.</strong> (<em>- Optional - the bounding boxes</em><em> of </em><em>each face if you already know</em>) – </p></li>
-<li><p><strong>int</strong> – num_jitters</p></li>
-<li><p><strong>accurate</strong> (<em>- How many times to re-sample the face when calculating encoding. Higher is more</em>) – </p></li>
-<li><p><strong>slower</strong> (<em>but</em>) – </p></li>
-<li><p><strong>str</strong> – model</p></li>
-<li><p><strong>&quot;large&quot;</strong> (<em>- Optional - which model to use.</em>) – </p></li>
+<li><p><strong>resized_frame</strong> (<em>npt.NDArray</em><em>[</em><em>np.uint8</em><em>]</em>) – The image that contains one or more faces (=small_frame)</p></li>
+<li><p><strong>face_location_list</strong> (<em>List</em>) – Optional - the bounding boxes of each face if you already know them. (=face_location_list)</p></li>
+<li><p><strong>num_jitters</strong> (<em>int</em>) – How many times to re-sample the face when calculating encoding. Higher is more accurate, but slower (i.e. 100 is 100x slower)</p></li>
+<li><p><strong>model</strong> (<em>str</em>) – Do not modify.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1262,12 +1232,9 @@ That is, centered and scaled essentially the same way.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>npt.NDArray</strong><strong>[</strong><strong>np.uint8</strong><strong>]</strong> – resized_frame</p></li>
-<li><p><strong>image</strong> (<em>- Resized</em>) – </p></li>
-<li><p><strong>int</strong> – number_of_times_to_upsample</p></li>
-<li><p><strong>faces.</strong> (<em>- How many times to upsample the image looking for faces. Higher numbers find smaller</em>) – </p></li>
-<li><p><strong>str</strong> – model</p></li>
-<li><p><strong>accelerated</strong> (<em>- Which face detection model to use. &quot;hog&quot; is less accurate but faster on CPUs. &quot;cnn&quot; is a more accurate deep-learning model which is GPU/CUDA</em>) – </p></li>
+<li><p><strong>resized_frame</strong> (<em>npt.NDArray</em><em>[</em><em>np.uint8</em><em>]</em>) – Resized image</p></li>
+<li><p><strong>number_of_times_to_upsample</strong> (<em>int</em>) – How many times to upsample the image looking for faces. Higher numbers find smaller faces.</p></li>
+<li><p><strong>model</strong> (<em>str</em>) – Which face detection model to use. “hog” is less accurate but faster on CPUs. “cnn” is a more accurate deep-learning model which is GPU/CUDA accelerated (if available). The default is “hog”.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1283,10 +1250,8 @@ That is, centered and scaled essentially the same way.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>str</strong> – file</p></li>
-<li><p><strong>load</strong> (<em>- image file name</em><em> or </em><em>file object to</em>) – </p></li>
-<li><p><strong>str</strong> – mode</p></li>
-<li><p><strong>'RGB'</strong> (<em>- format to convert the image to. Only</em>) – </p></li>
+<li><p><strong>file</strong> (<em>str</em>) – image file name or file object to load</p></li>
+<li><p><strong>mode</strong> (<em>str</em>) – format to convert the image to. Only ‘RGB’ (8-bit RGB, 3 channels) and ‘L’ (black and white) are supported.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1344,11 +1309,11 @@ That is, centered and scaled essentially the same way.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">known_face_encodings</span><span class="p">,</span> <span class="n">known_face_names</span> <span class="o">=</span>         <span class="o">&gt;&gt;&gt;</span>     <span class="n">load_priset_image</span><span class="p">(</span>
-<span class="gp">&gt;&gt;&gt; </span>            <span class="bp">self</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>            <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;RootDir&quot;</span><span class="p">],</span>
-<span class="gp">&gt;&gt;&gt; </span>            <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;priset_face_imagesDir&quot;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span>        <span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">known_face_encodings</span><span class="p">,</span> <span class="n">known_face_names</span> <span class="o">=</span> <span class="n">load_priset_image</span><span class="p">(</span>
+<span class="go">    self,</span>
+<span class="go">    self.conf_dict[&quot;RootDir&quot;],</span>
+<span class="go">    self.conf_dict[&quot;priset_face_imagesDir&quot;]</span>
+<span class="go">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1457,16 +1422,17 @@ That is, centered and scaled essentially the same way.</p>
 </section>
 <section id="face01lib-video-capture-module">
 <h2>face01lib.video_capture module<a class="headerlink" href="#face01lib-video-capture-module" title="Permalink to this heading"></a></h2>
-<p>The VidCap class contains methods that initially process
-the input video data</p>
+<p>The VidCap class.</p>
 <span class="target" id="module-face01lib.video_capture"></span><dl class="py class">
 <dt class="sig sig-object py" id="face01lib.video_capture.VidCap">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.video_capture.</span></span><span class="sig-name descname"><span class="pre">VidCap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.video_capture.VidCap" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>VidCap class.</p>
+<p>contains methods that initially process the input video data</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.video_capture.VidCap.finalize">
 <span class="sig-name descname"><span class="pre">finalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vcap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">VideoCapture</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#face01lib.video_capture.VidCap.finalize" title="Permalink to this definition"></a></dt>
-<dd><p>Release vcap and Destroy window</p>
+<dd><p>Release vcap and Destroy window.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>vcap</strong> (<em>cv2.VideoCapture</em>) – vcap which is handle of input video process</p>
@@ -1477,7 +1443,7 @@ the input video data</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.video_capture.VidCap.frame_generator">
 <span class="sig-name descname"><span class="pre">frame_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CONFIG</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Generator</span></span></span><a class="headerlink" href="#face01lib.video_capture.VidCap.frame_generator" title="Permalink to this definition"></a></dt>
-<dd><p>Generator: Return resized frame data</p>
+<dd><p>Generator: Return resized frame data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>CONFIG</strong> (<em>Dict</em>) – CONFIG</p>
@@ -1509,7 +1475,7 @@ the input video data</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.video_capture.VidCap.resize_frame">
 <span class="sig-name descname"><span class="pre">resize_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.video_capture.VidCap.resize_frame" title="Permalink to this definition"></a></dt>
-<dd><p>Return resized frame data</p>
+<dd><p>Return resized frame data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1530,7 +1496,7 @@ the input video data</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.video_capture.VidCap.return_movie_property">
 <span class="sig-name descname"><span class="pre">return_movie_property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">VideoCapture</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.video_capture.VidCap.return_movie_property" title="Permalink to this definition"></a></dt>
-<dd><p>Return input movie file’s property</p>
+<dd><p>Return input movie file’s property.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1550,7 +1516,7 @@ the input video data</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.video_capture.VidCap.return_vcap">
 <span class="sig-name descname"><span class="pre">return_vcap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">movie</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">VideoCapture</span></span></span><a class="headerlink" href="#face01lib.video_capture.VidCap.return_vcap" title="Permalink to this definition"></a></dt>
-<dd><p>Return vcap object</p>
+<dd><p>Return vcap object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>movie</strong> (<em>str</em>) – movie</p>
@@ -1576,7 +1542,7 @@ the input video data</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to FACE01’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="FACE01" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="face01lib.models.html" class="btn btn-neutral float-right" title="face01lib.models package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
