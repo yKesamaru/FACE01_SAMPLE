@@ -1,77 +1,31 @@
 # FACE01について
 # TODO
 ## 1.4.10
-- sphinxドキュメントの充実化、エラーの解消
+- 各モジュールドキュメントの充実化
+- sphinxエラーの適宜解消
+- tokai-kaoninsho.comへの追加・記事の削除や訂正
+  - [東海顔認証のドキュメント一覧](https://tokai-kaoninsho.com/category/%e3%83%89%e3%82%ad%e3%83%a5%e3%83%a1%e3%83%b3%e3%83%88/)の更新
 - add setup.py
 - priset_face_imagesへの顔登録の方法などドキュメント化
 - exampleを追加
-- tokai-kaoninsho.comへの追加・記事の削除や訂正
 - unittestの追加
+- config.iniを条件分岐可能にする
+  - [参考](https://kodocode.net/python-begin-settings/#toc_id_4)
+- 
 
-
+Fix
+- GitHub Pagesは設定によってmasterブランチの./docsフォルダにコミットがなされた時に自動的に走るようになっている。
 
 
 
 ## 1.4.09
-- sphinxでドキュメントを整備する
-  - `sphinx保存フォルダ`にて管理
-
-  - mkdir ./sphinx
-  - sphinx-quickstart sphinx
-  - sphinx-apidoc -f -o ./sphinx .
-  - sphinx-build -b html ./sphinx ./docs
-  - titleを変更
-    - index.rst
-  <!-- - sphinx-quickstart docs
-  - sphinx-apidoc -f -o ./docs .
-  - sphinx-build -b html ./docs ./docs/_build -->
-  ```python: conf.py
-  project = 'FACE01'
-  copyright = '2022, yKesamaru'
-  author = 'yKesamaru'
-
-  import sys, os
-  sys.path.append(os.path.abspath("example"))
-  sys.path.append(os.path.abspath("face01lib"))
-  sys.path.append(os.path.abspath("."))
-
-  # 'sphinx.ext.viewcode',  # Do not use! The source code becomes completely exposed.
-  extensions = [
-      'sphinx.ext.napoleon',
-      'sphinx.ext.autodoc',
-  ]
-  # Napoleon settings
-  napoleon_google_docstring = True
-  napoleon_numpy_docstring = False
-  napoleon_include_init_with_doc = False
-  napoleon_include_private_with_doc = False
-  napoleon_include_special_with_doc = False
-  napoleon_use_admonition_for_examples = False
-  napoleon_use_admonition_for_notes = False
-  napoleon_use_admonition_for_references = False
-  # napoleon_use_ivar = False
-  # napoleon_use_param = True
-  # napoleon_use_rtype = True
-  napoleon_preprocess_types = False
-  # napoleon_type_aliases = None
-  napoleon_attr_annotations = True
-
-  templates_path = ['_templates']
-  exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
-
-  language = 'en'
-
-  html_theme = 'sphinx_rtd_theme'
-  html_static_path = ['_static']
-
-  todo_include_todos = False
-```
-
 - return_face_image.pyを徹底的にcython最適化して、その様子をzennに掲載する
 - メモリ削減の工夫
   - ![](img/PASTE_IMAGE_2022-08-31-09-20-50.png)
 
 Fix
+- sphinxでドキュメントを整備する
+  - `sphinx保存フォルダ`にて管理
 - pydoc
   -  $ python -m pydoc -b
 - Core.pyを中心に型アノテーションをつけてデータ型を整理する

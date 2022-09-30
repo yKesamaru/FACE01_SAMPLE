@@ -43,12 +43,14 @@ language = 'en'
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
+# テーマ
+# https://sphinx-themes.org/#theme-sphinx-rtd-theme
 
 # html_theme = 'python_docs_theme'  # pythonドキュメントと同じはずだけど、よくないなぁ。エラーのせいか？
 # html_theme = 'classic'  # 表示が崩れる、よくない
 # html_theme = 'scrolls'  # 文字化け、よくない
 # html_theme = 'bizstyle'  # Nice!一部表示崩れあり…
-html_theme = 'sphinx_rtd_theme'  # 表示崩れあり、よくない
+html_theme = 'sphinx_rtd_theme'  # Read the Docs
 html_static_path = ['_static']
 
 # -- Options for todo extension ----------------------------------------------
