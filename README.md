@@ -52,28 +52,9 @@ See [here](docs/config_ini.md).
 
 # Example
 There are some example files in the example folder.
-Let's try `example/simple.py` on Docker.
-`python3 example/simple.py`
+Let's try *step-by-step* examples.
+See [here](docs/example.md).
 
-## Result
-```bash
-[2022-09-27 19:20:48,174] [face01lib.load_priset_image] [simple.py] [INFO] Loading npKnown.npz
-菅義偉 
-         similarity              99.1% 
-         coordinate              (138, 240, 275, 104) 
-         time                    2022,09,27,19,20,49,835926 
-         output                   
- -------
-
-麻生太郎 
-         similarity              99.6% 
-         coordinate              (125, 558, 261, 422) 
-         time                    2022,09,27,19,20,49,835926 
-         output                   
- -------
- ...
-
-```
 
 # Note
 This repository contains FACE01 SAMPLE for UBUNTU 20.04.
