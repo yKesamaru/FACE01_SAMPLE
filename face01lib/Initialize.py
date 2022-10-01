@@ -26,14 +26,21 @@ class Initialize:
     
     Load config.ini, return Dict style.
     """    
-    def __init__(self, log_level: str = 'info') -> None:
+    def __init__(
+            self,
+            section: str = 'DEFAULT',
+            log_level: str = 'info'
+        ) -> None:
         """init.
 
         Args:
+            section (str, optional): Specify section which is defined in config.ini. Defaults to 'DEFAULT'.
             log_level (str, optional): Receive log level value. Defaults to 'info'.
         """        
-        # Setup logger: common way
+        self.section = section
         self.log_level: str = log_level
+        
+        # Setup logger: common way
         import os.path
         name: str = __name__
         dir: str = os.path.dirname(__file__)
@@ -42,7 +49,7 @@ class Initialize:
         self.logger = Logger(self.log_level).logger(name, parent_dir)
 
         self.parent_dir: str = parent_dir
-    
+
 
     def _configure(self) -> Dict:
         """Load conf.ini and return conf_dict dictionary.
@@ -61,47 +68,47 @@ class Initialize:
             success = conf.read('config.ini', 'utf-8')
             # dict作成
             conf_dict: Dict = {
-                'number_of_crops' : int(conf.get('DEFAULT','number_of_crops')),
-                'headless' : conf.getboolean('MAIN','headless'),
-                'anti_spoof' : conf.getboolean('MAIN','anti_spoof'),
-                'output_debug_log' : conf.getboolean('MAIN','output_debug_log'),
-                'log_level' : conf.get('MAIN', 'log_level'),
-                'set_width' : int(conf.get('SPEED_OR_PRECISE','set_width')),
-                'similar_percentage' : float(conf.get('SPEED_OR_PRECISE','similar_percentage')),
-                'jitters' : int(conf.get('SPEED_OR_PRECISE','jitters')),
-                'priset_face_images_jitters' : int(conf.get('SPEED_OR_PRECISE','priset_face_images_jitters')),
+                'headless' : conf.getboolean(self.section,'headless'),
+                'anti_spoof' : conf.getboolean(self.section,'anti_spoof'),
+                'output_debug_log' : conf.getboolean(self.section,'output_debug_log'),
+                'number_of_crops' : int(conf.get(self.section,'number_of_crops')),
+                'log_level' : conf.get(self.section, 'log_level'),
+                'set_width' : int(conf.get(self.section,'set_width')),
+                'similar_percentage' : float(conf.get(self.section,'similar_percentage')),
+                'jitters' : int(conf.get(self.section,'jitters')),
+                'priset_face_images_jitters' : int(conf.get(self.section,'priset_face_images_jitters')),
                 'priset_face_imagesDir' :priset_face_imagesDir,
-                'upsampling' : int(conf.get('SPEED_OR_PRECISE','upsampling')),
-                'mode' : conf.get('SPEED_OR_PRECISE','mode'),
-                'frame_skip' : int(conf.get('SPEED_OR_PRECISE','frame_skip')),
-                'number_of_people' : int(conf.get('SPEED_OR_PRECISE','number_of_people')),
-                'use_pipe' : conf.getboolean('dlib','use_pipe'),
-                'model_selection' : int(conf.get('dlib','model_selection')),
-                'min_detection_confidence' : float(conf.get('dlib','min_detection_confidence')),
-                'person_frame_face_encoding' : conf.getboolean('dlib','person_frame_face_encoding'),
-                'same_time_recognize' : int(conf.get('dlib','same_time_recognize')),
-                'set_area' : conf.get('INPUT','set_area'),
-                'movie' : conf.get('INPUT','movie'),
-                'user': conf.get('Authentication','user'),
-                'passwd': conf.get('Authentication','passwd'),
-                'rectangle' : conf.getboolean('DRAW_INFOMATION','rectangle'),
-                'target_rectangle' : conf.getboolean('DRAW_INFOMATION','target_rectangle'),
-                'draw_telop_and_logo' : conf.getboolean('DRAW_INFOMATION', 'draw_telop_and_logo'),
-                'default_face_image_draw' : conf.getboolean('DRAW_INFOMATION', 'default_face_image_draw'),
-                'show_overlay' : conf.getboolean('DRAW_INFOMATION', 'show_overlay'),
-                'alpha': float(conf.get('DRAW_INFOMATION','alpha')),
-                'show_percentage' : conf.getboolean('DRAW_INFOMATION', 'show_percentage'),
-                'show_name' : conf.getboolean('DRAW_INFOMATION', 'show_name'),
-                'crop_face_image' : conf.getboolean('SAVE_FACE_IMAGE', 'crop_face_image'),
-                'frequency_crop_image' : int(conf.get('SAVE_FACE_IMAGE','frequency_crop_image')),
-                'crop_with_multithreading' : conf.getboolean('SAVE_FACE_IMAGE','crop_with_multithreading'),
-                'Python_version': conf.get('system_check','Python_version'),
-                'cpu_freq': conf.get('system_check','cpu_freq'),
-                'cpu_count': conf.get('system_check','cpu_count'),
-                'memory': conf.get('system_check','memory'),
-                'gpu_check' : conf.getboolean('system_check','gpu_check'),
-                'calculate_time' : conf.getboolean('DEBUG','calculate_time'),
-                'show_video' : conf.getboolean('Scheduled_to_be_abolished','show_video'),
+                'upsampling' : int(conf.get(self.section,'upsampling')),
+                'mode' : conf.get(self.section,'mode'),
+                'frame_skip' : int(conf.get(self.section,'frame_skip')),
+                'number_of_people' : int(conf.get(self.section,'number_of_people')),
+                'use_pipe' : conf.getboolean(self.section,'use_pipe'),
+                'model_selection' : int(conf.get(self.section,'model_selection')),
+                'min_detection_confidence' : float(conf.get(self.section,'min_detection_confidence')),
+                'person_frame_face_encoding' : conf.getboolean(self.section,'person_frame_face_encoding'),
+                'same_time_recognize' : int(conf.get(self.section,'same_time_recognize')),
+                'set_area' : conf.get(self.section,'set_area'),
+                'movie' : conf.get(self.section,'movie'),
+                'user': conf.get(self.section,'user'),
+                'passwd': conf.get(self.section,'passwd'),
+                'rectangle' : conf.getboolean(self.section,'rectangle'),
+                'target_rectangle' : conf.getboolean(self.section,'target_rectangle'),
+                'draw_telop_and_logo' : conf.getboolean(self.section, 'draw_telop_and_logo'),
+                'default_face_image_draw' : conf.getboolean(self.section, 'default_face_image_draw'),
+                'show_overlay' : conf.getboolean(self.section, 'show_overlay'),
+                'alpha': float(conf.get(self.section,'alpha')),
+                'show_percentage' : conf.getboolean(self.section, 'show_percentage'),
+                'show_name' : conf.getboolean(self.section, 'show_name'),
+                'crop_face_image' : conf.getboolean(self.section, 'crop_face_image'),
+                'frequency_crop_image' : int(conf.get(self.section,'frequency_crop_image')),
+                'crop_with_multithreading' : conf.getboolean(self.section,'crop_with_multithreading'),
+                'Python_version': conf.get(self.section,'Python_version'),
+                'cpu_freq': conf.get(self.section,'cpu_freq'),
+                'cpu_count': conf.get(self.section,'cpu_count'),
+                'memory': conf.get(self.section,'memory'),
+                'gpu_check' : conf.getboolean(self.section,'gpu_check'),
+                'calculate_time' : conf.getboolean(self.section,'calculate_time'),
+                'show_video' : conf.getboolean(self.section,'show_video'),
                 'RootDir' : self.parent_dir,
             }
             return conf_dict
@@ -221,17 +228,17 @@ class Initialize:
         CONFIG: Dict = {**init_dict, **self.conf_dict}
 
         # ヘッドレス実装
-        if headless == True:
-            CONFIG['rectangle'] = False
-            CONFIG['target_rectangle'] = False
-            CONFIG['show_video'] = False
-            CONFIG['default_face_image_draw'] = False
-            CONFIG['show_overlay'] = False
-            CONFIG['show_percentage'] = False
-            CONFIG['show_name'] = False
-            CONFIG['draw_telop_and_logo'] = False
-            CONFIG['person_frame_face_encoding'] = False
-            CONFIG['headless'] = True
+        # if headless == True:
+        #     CONFIG['rectangle'] = False
+        #     CONFIG['target_rectangle'] = False
+        #     CONFIG['show_video'] = False
+        #     CONFIG['default_face_image_draw'] = False
+        #     CONFIG['show_overlay'] = False
+        #     CONFIG['show_percentage'] = False
+        #     CONFIG['show_name'] = False
+        #     CONFIG['draw_telop_and_logo'] = False
+        #     CONFIG['person_frame_face_encoding'] = False
+        #     CONFIG['headless'] = True
 
         os.chdir(CONFIG["RootDir"])
 

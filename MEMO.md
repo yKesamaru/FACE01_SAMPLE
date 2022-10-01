@@ -1,16 +1,16 @@
 # FACE01について
 # TODO
 ## 1.4.10
-- 各モジュールドキュメントの充実化
+- exampleを追加
+  - priset_face_imagesへの顔登録の方法などドキュメント化
+- unittestの追加
+- config.iniを条件分岐可能にする
+  - [参考](https://kodocode.net/python-begin-settings/#toc_id_4)
 - sphinxエラーの適宜解消
 - tokai-kaoninsho.comへの追加・記事の削除や訂正
   - [東海顔認証のドキュメント一覧](https://tokai-kaoninsho.com/category/%e3%83%89%e3%82%ad%e3%83%a5%e3%83%a1%e3%83%b3%e3%83%88/)の更新
 - add setup.py
-- priset_face_imagesへの顔登録の方法などドキュメント化
-- exampleを追加
-- unittestの追加
-- config.iniを条件分岐可能にする
-  - [参考](https://kodocode.net/python-begin-settings/#toc_id_4)
+- 各モジュールドキュメントの充実化
 - 
 
 Fix

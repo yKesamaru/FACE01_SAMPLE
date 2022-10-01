@@ -1,4 +1,4 @@
-"""Example of benchmark for face recognition
+"""Example of benchmark for face recognition.
 
 Summary:
     In this example, you can test benchmark for CUI mode.
@@ -9,12 +9,11 @@ Summary:
 Usage:
     >>> python3 benchmark_CUI.py
 
-NOTE:
+Note:
     For this example, set config.ini as follows.
     > [MAIN]
     > headless = True
 """
-
 # Operate directory: Common to all examples
 import os.path
 import sys

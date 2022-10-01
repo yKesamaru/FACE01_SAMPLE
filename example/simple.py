@@ -1,11 +1,11 @@
-"""Example of benchmark for face recognition
+"""Example of simple face recognition script.
 
 Summary:
 
 Usage:
     >>> python3 simple.py
 
-NOTE:
+Note:
     For this example, set config.ini as follows.
     > [MAIN]
     > headless = True
@@ -26,9 +26,15 @@ from face01lib.Initialize import Initialize
 
 
 def main(exec_times: int = 50):
+    """Simple example.
 
+    This simple example script prints out results of face recognition process.
+
+    Args:
+        exec_times (int, optional): Number of frames for process. Defaults to 50.
+    """    
     # Initialize
-    CONFIG: Dict =  Initialize().initialize()
+    CONFIG: Dict =  Initialize('DEFAULT', 'info').initialize()
 
 
     if CONFIG["headless"] == False:
@@ -39,7 +45,7 @@ def main(exec_times: int = 50):
         """)
         exit()
 
-
+    # Make generator
     gen = Core().common_process(CONFIG)
     
 
@@ -64,4 +70,5 @@ def main(exec_times: int = 50):
 
 
 if __name__ == '__main__':
+    # Call main function. Pass 5.
     main(exec_times = 5)
