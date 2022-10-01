@@ -138,7 +138,7 @@ class VidCap:
         width: int = int(width)
 
         if width <= 0:
-            self.logger.warning("can't receive")
+            self.logger.warning("Can't receive input data")
             self.logger.warning("-" * 20)
             self.logger.warning(format_exc(limit=None, chain=True))
             self.logger.warning("-" * 20)
