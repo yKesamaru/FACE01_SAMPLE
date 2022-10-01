@@ -12,14 +12,14 @@ git clone https://github.com/yKesamaru/FACE01_SAMPLE.git
 To make image
 ```bash
 cd FACE01_SAMPLE
-docker build -t face01_gpu:1.4.09 -f docker/Dockerfile_gpu . --network host
+docker build -t face01_gpu:1.4.10 -f docker/Dockerfile_gpu . --network host
 ```
 
 
 ## Build FACE01 docker image * ***without*** * nvidia-docker2 package
 ```bash
 cd FACE01_SAMPLE
-docker build -t face01_no_gpu:1.4.09 -f docker/Dockerfile_no_gpu . --network host
+docker build -t face01_no_gpu:1.4.10 -f docker/Dockerfile_no_gpu . --network host
 ```
 
 
@@ -50,7 +50,7 @@ docker push <hub-user>/<repo-name>[:<tag>]
 ```bash
 docker images
 REPOSITORY    TAG                       IMAGE ID       CREATED         SIZE
-face01_gpu    1.4.09                    41b1d82ee908   7 seconds ago   17.5GB
+face01_gpu    1.4.10                    41b1d82ee908   7 seconds ago   17.5GB
 ```
 
 
@@ -59,7 +59,7 @@ face01_gpu    1.4.09                    41b1d82ee908   7 seconds ago   17.5GB
 docker run --rm -it \
         --gpus all -e DISPLAY=$DISPLAY \
         --device /dev/video0:/dev/video0:mwr \
-        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.09 
+        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.10 
 
 # Check nvidia-smi
 docker@ee44d08e933f:~/FACE01_SAMPLE$ nvidia-smi

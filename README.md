@@ -1,7 +1,7 @@
 ![Logo](https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/g1320.png)
 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE)
-![](https://img.shields.io/badge/Release-v1.4.09-blue)
+![](https://img.shields.io/badge/Release-v1.4.10-blue)
 
 ![](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/img/ROMAN_HOLIDAY.GIF?raw=true)
 ```bash
@@ -32,13 +32,6 @@ FACE01 is a **face recognition library** that integrates various functions and c
 - ...and many others!
 
 
-# Update
-- v1.4.09
-  - More faster
-  - Some bugs fix
-  - Add examples
-
-
 # Docker
 The easiest way to use Docker is to pull the image.
 See [here](docs/docker.md).
@@ -54,6 +47,14 @@ See [here](docs/config_ini.md).
 There are some example files in the example folder.
 Let's try *step-by-step* examples.
 See [here](docs/example.md).
+
+
+# Update
+- v1.4.10
+  - Update
+    - config.ini
+    - Initialize module
+  - Add examples
 
 
 # Note

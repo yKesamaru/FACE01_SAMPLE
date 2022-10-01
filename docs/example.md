@@ -43,23 +43,23 @@ which vim
 ## [Simple face recognition](simple.md)
 Let' try `simple.py`.
 simple.py is an example script for CUI behavior.
-Make sure `headless=True` in `conf.ini`.
-If `headless = False`, modify the value to `True`.
 
 ```python
 python example/simple.py
 ```
+See [here](simple.md).
 
 
 ## [Display GUI window](display_GUI_win.md)
 Want to display in a cool GUI window?
 Try `example/benchmark_GUI_window.py`.
-So, set the value `headless = False` in `config.ini` as opposed to simple.py.
+See [here](display_GUI_win.md).
 
 
 ## [Display 'telop' and 'logo' images which you're company's.](ch_telop.md)
 Do you want your window to display your company logo or something?
 Of course you can!
+See [here](ch_telop.md).
 
 
 ## [Want to benchmark?](benchmark_CUI.md)
