@@ -4,11 +4,6 @@ Summary:
 
 Usage:
     >>> python3 simple.py
-
-Note:
-    For this example, set config.ini as follows.
-    > [MAIN]
-    > headless = True
 """
 
 # Operate directory: Common to all examples
@@ -36,14 +31,6 @@ def main(exec_times: int = 50):
     # Initialize
     CONFIG: Dict =  Initialize('DEFAULT', 'info').initialize()
 
-
-    if CONFIG["headless"] == False:
-        print("""
-        For this example, set config.ini as follows.
-            > [MAIN] 
-            > headless = True 
-        """)
-        exit()
 
     # Make generator
     gen = Core().common_process(CONFIG)

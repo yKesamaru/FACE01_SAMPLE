@@ -1,14 +1,10 @@
-"""Example of benchmark for face recognition
+"""Example of benchmark for face recognition.
 
 Summary:
     In this example, you can learn about log functions.
 
-
 Usage:
     >>> python3 logging.py
-
-NOTE:
-    Befor running, change False to True 'output_debug_log = False' in config.ini
 """
 
 # Operate directory: Common to all examples
@@ -28,18 +24,15 @@ from face01lib.logger import Logger
 
 
 def main(exec_times: int = 50):
+    """Setup logger example.
 
+    Output log with define log-level.
+
+    Args:
+        exec_times (int, optional): Number of frames for process. Defaults to 50.
+    """
     # Initialize
-    CONFIG: Dict =  Initialize().initialize()
-
-
-    if CONFIG["headless"] == False:
-        print("""
-        For this example, set config.ini as follows.
-            > [MAIN] 
-            > headless = True 
-        """)
-        exit()
+    CONFIG: Dict =  Initialize('DEFAULT', 'info').initialize()
 
 
     # Setup logger
@@ -51,7 +44,7 @@ def main(exec_times: int = 50):
 
     logger = Logger(log_level).logger(name, parent_dir)
 
-
+    # Make generator
     gen = Core().common_process(CONFIG)
     
 
@@ -72,4 +65,4 @@ def main(exec_times: int = 50):
             
     
 if __name__ == '__main__':
-    main(exec_times = 50)
+    main(exec_times = 5)
