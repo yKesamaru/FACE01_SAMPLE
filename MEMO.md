@@ -2,18 +2,18 @@
 # TODO
 ## 1.4.10
 - exampleを追加
-- sphinxドキュメントにmarkdownファイルを追加する
-  - https://zenn.dev/y_mrok/books/sphinx-no-tsukaikata/viewer/chapter26
-  - priset_face_imagesへの顔登録の方法などドキュメント化
 - unittestの追加
-- sphinxエラーの適宜解消
-- tokai-kaoninsho.comへの追加・記事の削除や訂正
-  - [東海顔認証のドキュメント一覧](https://tokai-kaoninsho.com/category/%e3%83%89%e3%82%ad%e3%83%a5%e3%83%a1%e3%83%b3%e3%83%88/)の更新
 - add setup.py
 - 各モジュールドキュメントの充実化
+- tokai-kaoninsho.comへの追加・記事の削除や訂正
+  - [東海顔認証のドキュメント一覧](https://tokai-kaoninsho.com/category/%e3%83%89%e3%82%ad%e3%83%a5%e3%83%a1%e3%83%b3%e3%83%88/)の更新
 - 
 
 Fix
+- [中止]sphinxドキュメントにmarkdownファイルを追加する
+  - https://zenn.dev/y_mrok/books/sphinx-no-tsukaikata/viewer/chapter26
+- priset_face_imagesへの顔登録の方法などドキュメント化
+- sphinxエラーの適宜解消
 - config.iniを条件分岐可能にする
   - [参考](https://kodocode.net/python-begin-settings/#toc_id_4)
 - GitHub Pagesは設定によってmasterブランチの./docsフォルダにコミットがなされた時に自動的に走るようになっている。
