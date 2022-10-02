@@ -3,11 +3,12 @@ See [here](Install_docker.md).
 
 
 # Pull Docker image
-The easiest way to use Docker is to pull the image.
+\****The easiest way to use Docker is to pull the image.***\*  
+
 ![](img/PASTE_IMAGE_2022-08-29-07-43-12.png)
 
-***NOTE***
-If you are using a PC with NVIDIA GPU installed, the Docker Image you should pull is `face01_gpu:1.4.10`.
+***NOTE*** (IMPORTANT!)
+If you are using a PC with NVIDIA GPU installed, the Docker Image you should pull is `face01_gpu:1.4.10`.  
 If not, the Docker Image you should pull is `face01_no_gpu:1.4.10`.
 
 

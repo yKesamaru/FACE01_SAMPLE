@@ -15,7 +15,7 @@ Let's check the **checks you must pass** as step. 1.
 - [x] (If using Nvidia GPU) CUDA driver is already installed
 
 
-Have you checked everything?
+Have you checked everything?  
 OK! Let's get started!
 
 
@@ -51,14 +51,14 @@ See [here](simple.md).
 
 
 ## [Display GUI window](display_GUI_win.md)
-Want to display in a cool GUI window?
-Try `example/benchmark_GUI_window.py`.
+Want to display in a cool GUI window?  
+Try `example/benchmark_GUI_window.py`.  
 See [here](display_GUI_win.md).
 
 
 ## [Display 'telop' and 'logo' images which you're company's.](ch_telop.md)
-Do you want your window to display your company logo or something?
-Of course you can!
+Do you want your window to display your company logo or something?  
+Of course you can!  
 See [here](ch_telop.md).
 
 

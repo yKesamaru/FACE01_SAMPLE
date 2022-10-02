@@ -146,7 +146,7 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
 
 
 - set_area
-  - Zoom. 
+  - Zoom.
      You can select from `NONE`, `TOP_LEFT`, `TOP_RIGHT`, `BOTTOM_LEFT`, `BOTTOM_RIGHT`, `CENTER`.
   - Type: Type: str
   - Default: NONE
