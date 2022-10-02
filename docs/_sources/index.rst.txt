@@ -15,17 +15,12 @@ See bellow for a simpler way to use FACE01.
 
 `Step-by-step to use FACE01 library <https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/example.md>`_
 
-..
-   .. include:: ../docs/functions.md
-
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 5
    :caption: Contents:
 
-   face01lib
-   example
-   tests
+   modules
 
 Indices and tables
 ==================
