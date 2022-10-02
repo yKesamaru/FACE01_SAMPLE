@@ -7,26 +7,35 @@ The [DEFAULT] section specifies standard default values, and this setting is exa
 
 ## Note (Important!)
 Before to modify config.ini, you should be familiar with the ConfigParser module.
+
 To refer ConfigParser module, see bellow.
+
 https://docs.python.org/3/library/configparser.html
 
 ## Inheritance
 Each section inherits from the [DEFAULT] section.
+
 Therefore, specify only items (key & value) that override [DEFAULT] in each section.
 
 ## Format
 Format is `key = value`.
 
 ## Edit
-If you use docker Image, you can modify the config.ini with `vim`.
+If you use docker Image, you can edit to modify the config.ini with `vim`.
+```bash
+# Example
+$ vim ./config.ini
+```
 
 # Example and explain each items.
 
 ## [DEFAULT]
 
 [DEFAULT] section is for simple example.
+
 This [DEFAULT] setting for only use CUI mode.
-Also, this setting is for user who's PC is not installed Nvidia GPU card or IOT devices.
+
+Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card or IOT devices.
 
 [DEFAULT] section is the inheritor of all sections.
 
