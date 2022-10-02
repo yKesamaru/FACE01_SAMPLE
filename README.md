@@ -48,7 +48,7 @@ See [here](docs/config_ini.md).
 # Example
 There are some example files in the example folder.  
 Let's try *step-by-step* examples.  
-See [here](docs/example.md).
+See [here](docs/example_doc.md).
 
 
 # Update
