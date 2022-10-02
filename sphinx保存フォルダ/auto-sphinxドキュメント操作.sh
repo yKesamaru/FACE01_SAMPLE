@@ -15,7 +15,8 @@ function my_command() {
 cd /home/terms/bin/FACE01;
 sphinx-apidoc -f -o ./sphinx .;
 
-sphinx-build -b html -E ./sphinx ./docs;
+sphinx-build -b html -a -E ./sphinx ./docs;
+
 
 cp -f ./docs/*html ../DIST/docs/;
 cp -f ./docs/searchindex.js ../DIST/docs/;
@@ -29,9 +30,11 @@ git rm --cached ../DIST/docs/*.md
 cp -f ./example/*.py ../DIST/example/
 git rm --cached ../DIST/example/*.py
 
-# 同期
+# docsフォルダの同期
 rsync -r -t --progress -u -l -H -s /home/terms/bin/FACE01/docs/ /home/terms/bin/DIST/docs/
 rsync -r -t --progress -u -l -H -s /home/terms/bin/DIST/docs/ /home/terms/bin/FACE01/docs/
+
+
     return 0
 }
 

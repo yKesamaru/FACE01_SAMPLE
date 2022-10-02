@@ -15,12 +15,20 @@ sys.path.append(os.path.abspath("example"))
 sys.path.append(os.path.abspath("face01lib"))
 sys.path.append(os.path.abspath("."))
 
+
+sys.path.insert(0, os.path.abspath('..'))
+
 # 'sphinx.ext.viewcode',  # Do not use! The source code becomes completely exposed.
 extensions = [
-    'sphinx.ext.napoleon',
     'sphinx.ext.autodoc',
-    'myst_parser'
+    'sphinx.ext.napoleon'
 ]
+# extensions = [
+#     'sphinx.ext.napoleon',
+#     'sphinx.ext.autodoc',
+#     'myst_parser'
+# ]
+
 # Napoleon settings
 napoleon_google_docstring = True
 napoleon_numpy_docstring = False
@@ -58,6 +66,9 @@ html_static_path = ['_static']
 # https://www.sphinx-doc.org/en/master/usage/extensions/todo.html#configuration
 
 source_suffix = {
-    '.rst': 'restructuredtext',
-    '.md': 'markdown',
+    '.rst': 'restructuredtext'
 }
+# source_suffix = {
+#     '.rst': 'restructuredtext',
+#     '.md': 'markdown',
+# }
