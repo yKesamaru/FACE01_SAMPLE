@@ -19,11 +19,13 @@ Have you checked everything?
 OK! Let's get started!
 
 
-## [Register face images](register_faces.md)
+# [Register face images](register_faces.md)
 This article describes how to register face images.
 
+See [here](register_faces.md).
 
-## activate virtual python mode
+
+# activate virtual python mode
 Start the virtual environment using venv of the Python standard library.
 
 ```bash
@@ -31,7 +33,8 @@ Start the virtual environment using venv of the Python standard library.
 . bin/activate
 ```
 
-## Check vim installed
+
+# Check vim installed
 The Docker Image comes with vim installed so you can edit `conf.ini`.
 
 ```bash
@@ -40,7 +43,14 @@ which vim
 ```
 
 
-## [Simple face recognition](simple.md)
+# [Simple flow for using FACE01](simple_flow.md)
+It is an example of how to use FACE01, but let's look at a simple flow.
+
+See [here](simple_flow.md).
+
+
+
+# [Simple face recognition](simple.md)
 Let' try `simple.py`.
 simple.py is an example script for CUI behavior.
 
@@ -50,17 +60,17 @@ python example/simple.py
 See [here](simple.md).
 
 
-## [Display GUI window](display_GUI_win.md)
+# [Display GUI window](display_GUI_win.md)
 Want to display in a cool GUI window?  
-Try `example/benchmark_GUI_window.py`.  
+Try `example/display_GUI_window.py`.  
 See [here](display_GUI_win.md).
 
 
-## [Display 'telop' and 'logo' images which you're company's.](ch_telop.md)
+# [Display 'telop' and 'logo' images which you're company's.](ch_telop.md)
 Do you want your window to display your company logo or something?  
 Of course you can!  
 See [here](ch_telop.md).
 
 
-## [Want to benchmark?](benchmark_CUI.md)
+# [Want to benchmark?](benchmark_CUI.md)
 See [here](benchmark_CUI.md).

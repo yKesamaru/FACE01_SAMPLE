@@ -1,23 +1,10 @@
 # More functions tutorial
-FACE01 have many functions inner `face01lib/'.
+FACE01 have many functions inner `face01lib/'.  
 This section, we will talk about how to use useable functions in FACE01.
 
-We need to configure in `config.ini`, so should import FACE01.
-```python
-import FACE01 as fg
-```
+**Note**
+To refer exhaustive document of all public class and method in FACE01, see [here](https://ykesamaru.github.io/FACE01_SAMPLE/index.html).
 
-In this tutorial, for testing functions, we have to input movie file. So every example import VidCap class.
-You will get video frames object which is declared in `config.ini` file, and `VidCap().frame_generator()` needs augment `fg.args_dict`.
-```python
-from face01lib.video_capture import VidCap
-next_frame_gen_obj = VidCap().frame_generator(fg.args_dict)
-```
-For getting frames, we have to call `__next__`.
-```python
-while True:
-    next_frame = next_frame_gen_obj.__next__()
-```
 
 # `Dlib_api` class
 This class is modified from [face_recognition](https://github.com/ageitgey/face_recognition) by ageitgey. And model data from [dlib](https://github.com/davisking/dlib) by davisking. We will not to use 68 face model but also 5 face model. In FACE01 repository, not exist 68 face model and using it's code.
