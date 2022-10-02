@@ -23,11 +23,15 @@ cp -f ./docs/objects.inv ../DIST/docs/;
 git rm --cached ../DIST/docs/*.html
 git rm --cached ../DIST/docs/searchindex.js
 git rm --cached ../DIST/docs/objects.inv
+git rm --cached ../DIST/docs/*.md
 
 # exampleフォルダの更新もついでに。
 cp -f ./example/*.py ../DIST/example/
 git rm --cached ../DIST/example/*.py
 
+# 同期
+rsync -r -t --progress -u -l -H -s /home/terms/bin/FACE01/docs/ /home/terms/bin/DIST/docs/
+rsync -r -t --progress -u -l -H -s /home/terms/bin/DIST/docs/ /home/terms/bin/FACE01/docs/
     return 0
 }
 
