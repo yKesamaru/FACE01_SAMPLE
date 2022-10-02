@@ -13,7 +13,7 @@ This document is a exhaustive man page for FACE01's public class, methods and so
 
 See bellow for a simpler way to use FACE01.
 
-`Step-by-step to use FACE01 library <https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/example.md>`_
+`Step-by-step to use FACE01 library <https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/example_doc.md>`_
 
 
 .. toctree::
