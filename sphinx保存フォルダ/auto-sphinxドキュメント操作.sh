@@ -17,9 +17,16 @@ sphinx-apidoc -f -o ./sphinx .;
 
 sphinx-build -b html -E ./sphinx ./docs;
 
-cp ./docs/*html ../DIST/docs/;
-cp ./docs/searchindex.js ../DIST/docs/;
-cp ./docs/objects.inv ../DIST/docs/;
+cp -f ./docs/*html ../DIST/docs/;
+cp -f ./docs/searchindex.js ../DIST/docs/;
+cp -f ./docs/objects.inv ../DIST/docs/;
+git rm --cached ../DIST/docs/*.html
+git rm --cached ../DIST/docs/searchindex.js
+git rm --cached ../DIST/docs/objects.inv
+
+# exampleフォルダの更新もついでに。
+cp -f ./example/*.py ../DIST/example/
+git rm --cached ../DIST/example/*.py
 
     return 0
 }
