@@ -1,6 +1,6 @@
 # FACE01について
 # TODO
-## 1.4.10
+## 1.4.11
 - exampleを追加
 - unittestの追加
 - add setup.py
@@ -9,6 +9,7 @@
   - [東海顔認証のドキュメント一覧](https://tokai-kaoninsho.com/category/%e3%83%89%e3%82%ad%e3%83%a5%e3%83%a1%e3%83%b3%e3%83%88/)の更新
 - 
 
+## 1.4.10
 Fix
 - [中止]sphinxドキュメントにmarkdownファイルを追加する
   - https://zenn.dev/y_mrok/books/sphinx-no-tsukaikata/viewer/chapter26
