@@ -56,6 +56,7 @@ Also, this setting is for user who's PC is not installed Nvidia GPU card or IOT 
   - Type: str
   - Default: info
 
+
 - set_width
   - Specify width of GUI window.
   - Type: int
@@ -93,7 +94,7 @@ Also, this setting is for user who's PC is not installed Nvidia GPU card or IOT 
 
 
 - frame_skip
-  - Specify the number to drop frame. Do not make it less than 2 if use HLS.
+  - Specify the number to `drop frame`. Do not make it less than 2 *if use HLS*.
   - Type: int
   - Default: 5
 
@@ -114,19 +115,13 @@ Also, this setting is for user who's PC is not installed Nvidia GPU card or IOT 
   - O OR 1
     - 0: Within 2 meters from the camera,
     - 1: Within 5 meters. 
-    
-    More than that, specify use_pipe = False.
-    
-    The minimum confidence value from the face detection model for the detection to be considered successful. 
-    
-    If wearing the mask, set it to about 0.3. The lower the number, the higher the possibility of erroneous recognition other than the face. The standard is 0.4 to 0.5.
-
   - NOTE: This value is set only when `use_pipe` is `True`.
   - Type: int
   - Default: 1
 
 
 - min_detection_confidence
+- The minimum confidence value from the face detection model for the detection to be considered successful. If wearing the mask, set it to about 0.3. The lower the number, the higher the possibility of erroneous recognition other than the face. The standard is 0.4 to 0.5.
   - NOTE: You can set `person_frame_face_encoding` to `True` only if `use_pipe` is True.
   - Type: float
   - Default: 0.4
@@ -152,8 +147,6 @@ Also, this setting is for user who's PC is not installed Nvidia GPU card or IOT 
 
 
 - movie
-  - Type: Type: str
-  - Default: assets/some_people.mp4
   - For test, you can select from bellow.
     - usb (or USB)
       - USB Cam
@@ -164,100 +157,132 @@ Also, this setting is for user who's PC is not installed Nvidia GPU card or IOT 
       - RTSP Type: Type: stream for test.
     - http://219.102.239.58/cgi-bin/camera?resolution=750
       - Live Type: Type: stream using HTTP for test: Live cam at Tokyo.
-- user = ""
-- passwd = ""
+  - Type: Type: str
+  - Default: assets/test.mp4
+
+
+- user
+  - User ID for RTSP.
+  - Type: str
+  - Default: None
+
+- passwd
+  - User password for RTSP.
+  - Type: str
+  - Default: None
+
 
 - rectangle
+  - Display a legacy face frame on the screen.
   - Type: bool
   - Default: False
-  - Display a legacy face frame on the screen
+
+
 - target_rectangle
-  - Type: bool
-  - Default: True
   - Display a modern face frame on the screen
   - NOTE: You can select only one of `rectangle` or `target_rectangle`.
+  - Type: bool
+  - Default: False
+
+
 - draw_telop_and_logo
+  - Display of telop and log
   - Type: bool
-  - Default: True
-  - Display of telop and logo
+  - Default: False
+
+
 - default_face_image_draw
+  - Display the registered face image on the scree
   - Type: bool
-  - Default: True
-  - Display the registered face image on the screen
+  - Default: False
+
+
 - show_overlay
-  - Type: bool
-  - Default: True
   - Make the information display on the screen semi-transparent
+  - Type: bool
+  - Default: False
+
+
 - alpha
+  - Adjust the translucency of 'overlay
   - Type: float
   - Default: 0.3
-  - Adjust the translucency of 'overlay'
-- show_percentage
-  - Type: bool
-  - Default: True
-  - Show similarity
-- show_name
-  - Type: bool
-  - Default: True
-  - Show name
 
-## [SAVE FACE IMAGE]
+
+- show_percentage
+  - Draw similarity in window.
+  - Type: bool
+  - Default: False
+
+
+- show_name
+  - Draw name in window.
+  - Type: bool
+  - Default: False
+
+## [SAVE FACE IMAGE
+
+
 - crop_face_image
+  - Save face image.
   - Type: bool
   - Default: True
-  - Save face images
+
+
 - frequency_crop_image
+  - Save face images per frame to storage.
   - Type: int
   - Default: 5
-  - Save face images per frame
-- crop_with_multithreading
-  - Type: bool
-  - Default: True
-  - Save face images using multi-threading. If using slower storage, set 'True'.
 
-NOTE: Do not edit.
+
+- crop_with_multithreading
+  - Save face images using multi-threading. If using slower storage, set 'True'.
+  - Type: bool
+  - Default: False
+
+
 - Python_version
   - Type: Type: str
-  - Default: 3.8.10
+  - Default: 3.8.1
+
+
 - cpu_freq
   - Type: float
   - Default: 2.5
-  - GHz
+
+
 - cpu_count
   - Type: int
-  - Default: 4
+  - Default: 
+
+
 - memory
   - Type: int
   - Default: 4
-  - GByte
+  - GByt
+
+
 - gpu_check
   - Type: bool
   - Default: True
-NOTE: Do not edit.
+NOTE: Do not edit
+
+
 - calculate_time
   - Type: bool
   - Default: True
   - time measurement
-NOTE: Do not edit.
+NOTE: Do not edit
+
+
 - show_video
   - Type: bool
   - Default: False
-NOTE: Do not edit.
+NOTE: Do not edit
+
+
 - number_of_crops
   - Type: int
   - Default: 0
   - Do *not* override.
 
-## [Main]
-
-## [SPEED OR PRECISE]
-##  [dlib]
-##  [INPUT]
-
-## [Authentication]
-
-## [DRAW INFORMATION]
-## [system_check]
-## [DEBUG]
-
-## [Scheduled to be abolished]
