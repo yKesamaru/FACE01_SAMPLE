@@ -6,10 +6,8 @@
 The [DEFAULT] section specifies standard default values, and this setting is example.
 
 ## Note (Important!)
-Before to modify config.ini, you should be familiar with the ConfigParser module.
-
-To refer ConfigParser module, see bellow.
-
+Before to modify config.ini, you should be familiar with the ConfigParser module.  
+To refer ConfigParser module, see bellow.  
 https://docs.python.org/3/library/configparser.html
 
 ## Inheritance
@@ -31,8 +29,7 @@ $ vim ./config.ini
 
 ## [DEFAULT]
 
-[DEFAULT] section is for simple example.
-
+[DEFAULT] section is for simple example.  
 This [DEFAULT] setting for only use CUI mode.
 
 Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card or IOT devices.
