@@ -1,4 +1,4 @@
-"""Example of benchmark for face recognition
+"""Example of benchmark for face recognition.
 
 Summary:
     In this example, you can test benchmark for create GUI window.
@@ -8,13 +8,7 @@ Summary:
 
 Usage:
     >>> python3 benchmark_GUI_window.py
-
-NOTE:
-    For this example, set config.ini as follows.
-    > [MAIN]
-    > headless = False
 """
-
 # Operate directory: Common to all examples
 import os.path
 import sys
@@ -35,18 +29,13 @@ from face01lib.Calc import Cal
 
 
 def main(exec_times: int = 50):
+    """Make GUI window and benchmark on you're own browser.
 
+    Args:
+        exec_times (int, optional): Number of frames for process. Defaults to 50.
+    """
     # Initialize
-    CONFIG: Dict =  Initialize().initialize()
-
-
-    if CONFIG["headless"] == True:
-        print("""
-        For this example, set config.ini as follows.
-            > [MAIN] 
-            > headless = False
-        """)
-        exit()
+    CONFIG: Dict =  Initialize('DISPLAY_GUI').initialize()
 
 
     # Make PySimpleGUI layout
@@ -113,5 +102,5 @@ def main(exec_times: int = 50):
 
 
 if __name__ == '__main__':
-    pr.run('main(exec_times = 50)', 'restats')
+    pr.run('main(exec_times = 30)', 'restats')
     subprocess.run(["snakeviz", "restats"])

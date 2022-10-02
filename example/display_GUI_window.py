@@ -1,4 +1,4 @@
-"""Example of GUI display and face recognition data output
+"""Example of GUI display and face recognition data output.
 
 Summary:
     In this example you can learn how to display GUI and output 
@@ -9,11 +9,6 @@ Summary:
 
 Usage:
     >>> python3 display_GUI_window.py
-
-NOTE:
-    For this example, set config.ini as follows.
-    > [MAIN]
-    > headless = False
 """
 # Operate directory: Common to all examples
 import os.path
@@ -33,18 +28,13 @@ from face01lib.Initialize import Initialize
 
 
 def main(exec_times: int = 50):
+    """Display window.
 
+    Args:
+        exec_times (int, optional): Receive value of number which is processed. Defaults to 50.
+    """
     # Initialize
-    CONFIG: Dict =  Initialize().initialize()
-
-
-    if CONFIG["headless"] == True:
-        print("""
-        For this example, set config.ini as follows.
-            > [MAIN] 
-            > headless = False
-        """)
-        exit()
+    CONFIG: Dict =  Initialize('DISPLAY_GUI').initialize()
 
 
     # Make PySimpleGUI layout
@@ -64,6 +54,7 @@ def main(exec_times: int = 50):
     )
 
 
+    # Make generator
     gen = Core().common_process(CONFIG)
     
 
@@ -101,4 +92,4 @@ def main(exec_times: int = 50):
 
 
 if __name__ == '__main__':
-    main(exec_times = 50)
+    main(exec_times = 20)

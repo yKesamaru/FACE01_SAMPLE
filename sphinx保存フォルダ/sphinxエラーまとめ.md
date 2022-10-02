@@ -8,9 +8,12 @@ touch ./docs/.nojekyll
 # sphinx-quickstart でsphinxフォルダ内に設定ファイルを作成
 sphinx-quickstart sphinx
 sphinx-apidoc -f -o ./sphinx .
+
 # index.rstを編集
 # titleをFACE01にする
 sphinx-build -b html -E ./sphinx ./docs
+
+
 ```
 
 # エラー一覧

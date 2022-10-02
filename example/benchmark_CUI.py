@@ -1,4 +1,4 @@
-"""Example of benchmark for face recognition
+"""Example of benchmark for face recognition.
 
 Summary:
     In this example, you can test benchmark for CUI mode.
@@ -8,13 +8,7 @@ Summary:
 
 Usage:
     >>> python3 benchmark_CUI.py
-
-NOTE:
-    For this example, set config.ini as follows.
-    > [MAIN]
-    > headless = True
 """
-
 # Operate directory: Common to all examples
 import os.path
 import sys
@@ -33,18 +27,13 @@ from face01lib.Calc import Cal
 
 
 def main(exec_times: int = 50):
+    """Open automatically benchmark on you're own browser.
 
+    Args:
+        exec_times (int, optional): Number of frames for process. Defaults to 50.
+    """
     # Initialize
     CONFIG: Dict =  Initialize().initialize()
-
-
-    if CONFIG["headless"] == False:
-        print("""
-        For this example, set config.ini as follows.
-            > [MAIN] 
-            > headless = True 
-        """)
-        exit()
 
 
     gen = Core().common_process(CONFIG)
@@ -82,5 +71,5 @@ def main(exec_times: int = 50):
 
 
 if __name__ == '__main__':
-    pr.run('main(exec_times = 50)', 'restats')
+    pr.run('main(exec_times = 5)', 'restats')
     subprocess.run(["snakeviz", "restats"])
