@@ -226,8 +226,6 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
   - Type: bool
   - Default: False
 
-## [SAVE FACE IMAGE
-
 
 - crop_face_image
   - Save face image.
@@ -271,20 +269,17 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
 - gpu_check
   - Type: bool
   - Default: True
-NOTE: Do not edit
 
 
 - calculate_time
   - Type: bool
   - Default: True
   - time measurement
-NOTE: Do not edit
 
 
 - show_video
   - Type: bool
   - Default: False
-NOTE: Do not edit
 
 
 - number_of_crops
