@@ -4,6 +4,7 @@
 - exampleを追加
 - unittestの追加
 - add setup.py
+- pipe相当の機能の復活を考える
 - 各モジュールドキュメントの充実化
 - tokai-kaoninsho.comへの追加・記事の削除や訂正
   - [東海顔認証のドキュメント一覧](https://tokai-kaoninsho.com/category/%e3%83%89%e3%82%ad%e3%83%a5%e3%83%a1%e3%83%b3%e3%83%88/)の更新

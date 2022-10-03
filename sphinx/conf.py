@@ -1,5 +1,5 @@
-# Configuration file for the Sphinx documentation builder.
-#
+"""Configuration file for the Sphinx documentation builder."""
+
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
@@ -11,12 +11,12 @@ copyright = '2022, yKesamaru'
 author = 'yKesamaru'
 
 import sys, os
+sys.path.insert(0, os.path.abspath('..'))
+sys.path.append(os.path.abspath("."))
 sys.path.append(os.path.abspath("example"))
 sys.path.append(os.path.abspath("face01lib"))
-sys.path.append(os.path.abspath("."))
 
 
-sys.path.insert(0, os.path.abspath('..'))
 
 # 'sphinx.ext.viewcode',  # Do not use! The source code becomes completely exposed.
 extensions = [
