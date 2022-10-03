@@ -71,7 +71,9 @@ python ~/bin/FACE01/example/display_GUI_window.py
 
 
 # 避難させていたpyファイルをface01lib/へ戻す
-# cp ~/bin/FACE01/face01lib/python_files/*.py ~/bin/FACE01/face01lib/
+rm ~/bin/FACE01/face01lib/*.cpython-38-x86_64-linux-gnu.so
+mv ~/bin/FACE01/face01lib/python_files/*.py \
+    ~/bin/FACE01/face01lib/
 
 
 pactl set-sink-volume @DEFAULT_SINK@ 30%
