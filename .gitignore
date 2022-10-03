@@ -3,7 +3,6 @@ DST.code-workspace
 __pycache__
 bin
 dlib-19.24
-example
 face01lib/CMakeLists.txt
 face01lib/.vscode
 face01lib/cspell.json
