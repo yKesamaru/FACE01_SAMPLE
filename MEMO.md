@@ -1,6 +1,7 @@
 # FACE01について
 # TODO
 ## 1.4.11
+- system_check.pyのcythonコンパイルが失敗するので、きちんと書き直す
 - exampleを追加
 - unittestの追加
 - add setup.py
