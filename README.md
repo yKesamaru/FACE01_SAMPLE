@@ -29,7 +29,6 @@ FACE01 is a **face recognition library** that integrates various functions and c
 - You can set to modify output frame image
 - Centralized management of functions by configuration file
 - You can choose input protocol ex. RTSP, HTTP and USB
-- You can call individual methods or call a set of functions
 - You can use many function for `face-recognition` and `Image-processing` (See [Useful FACE01 library](https://ykesamaru.github.io/FACE01_SAMPLE/))
 - ...and many others!
 
@@ -49,6 +48,8 @@ See [here](docs/config_ini.md).
 There are some example files in the example folder.  
 Let's try *step-by-step* examples.  
 See [here](docs/example_doc.md).
+
+If you want to see the exhaustive document, see [here](https://ykesamaru.github.io/FACE01_SAMPLE/)).
 
 
 # Update
