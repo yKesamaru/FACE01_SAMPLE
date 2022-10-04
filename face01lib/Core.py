@@ -1,17 +1,5 @@
-"""Reference.
 
-- 'cython' compile option:
-    - 'cython' options which have enabled
-        - 'cython': language_level=3
-    - 'cython' options not enabled
-        - 'cython': profile = True
-        - 'cython': boundscheck = False
-        - 'cython': wraparound = False
-        - 'cython': initializedcheck = False
-        - 'cython': cdivision = True
-        - 'cython': always_allow_keywords = False
-        - 'cython': unraisable_tracebacks = False
-        - 'cython': binding = False
+"""Reference.
 
 - Data structure:
     - Definition of person_data_list and frame_datas_array:
@@ -64,6 +52,18 @@
             - https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3
 
 """
+"""- 'cython' compile option:
+    - 'cython' options which have enabled
+        - 'cython': language_level=3
+    - 'cython' options not enabled
+        - 'cython': profile = True
+        - 'cython': boundscheck = False
+        - 'cython': wraparound = False
+        - 'cython': initializedcheck = False
+        - 'cython': cdivision = True
+        - 'cython': always_allow_keywords = False
+        - 'cython': unraisable_tracebacks = False
+        - 'cython': binding = False"""
 
 # from __future__ import annotations
 

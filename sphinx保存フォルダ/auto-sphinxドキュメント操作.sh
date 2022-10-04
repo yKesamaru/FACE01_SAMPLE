@@ -13,20 +13,29 @@ IFS=$'\n\t'
 
 function my_command() {
 cd ~/bin/FACE01;
+
+# Make rst files
 # sphinx-apidoc -f -o ./sphinx .;
 
+
+# build
 sphinx-build -b html -a -E ./sphinx ./docs;
+
 
 # docsフォルダの同期
 rsync -r -t --progress -u -l -H -s /home/terms/bin/FACE01/docs/ /home/terms/bin/DIST/docs/
 rsync -r -t --progress -u -l -H -s /home/terms/bin/DIST/docs/ /home/terms/bin/FACE01/docs/
 
-git rm --cached ../DIST/docs/*
+
+# git cacheの更新
+# git rm --cached ../DIST/docs/*
+git add ../DIST/docs/*
+
 
 # exampleフォルダの更新もついでに。
 cp -f ./example/*.py ../DIST/example/
-git rm --cached ../DIST/example/*.py
-
+# git rm --cached ../DIST/example/*.py
+git add ../DIST/example/*.py
 
 
     return 0
