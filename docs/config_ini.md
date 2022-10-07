@@ -149,9 +149,12 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
   - Zoom.
      You can select from `NONE`, `TOP_LEFT`, `TOP_RIGHT`, `BOTTOM_LEFT`, `BOTTOM_RIGHT`, `CENTER`.
   - Type: Type: str
-  - Default: NONE
+  - Default: NONE  
+  set_area = 'NONE'
   ![set_area = 'NONE'](img/none-fs8.png)
+  set_area = 'CENTER'
   ![set_area = 'CENTER'](img/setarea_center.png)
+  set_area = 'TOP_LEFT'
   ![set_area = 'TOP_LEFT'](img/setarea_topleft.png)
 
 - movie
