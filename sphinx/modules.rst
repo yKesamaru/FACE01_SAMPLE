@@ -1,9 +1,7 @@
-FACE01
+sphinx
 ======
 
 .. toctree::
    :maxdepth: 4
 
-   face01lib
-   example
-   tests
+   conf
