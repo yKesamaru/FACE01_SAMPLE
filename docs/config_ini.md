@@ -182,6 +182,7 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
   - Display a legacy face frame on the screen.
   - Type: bool
   - Default: False
+  ![](img/FACE01-simple_rectangle.png)
 
 
 - target_rectangle
@@ -189,6 +190,7 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
   - NOTE: You can select only one of `rectangle` or `target_rectangle`.
   - Type: bool
   - Default: False
+  ![](img/FACE01-targetrectangle.png)
 
 
 - draw_telop_and_logo
