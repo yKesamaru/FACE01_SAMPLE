@@ -11,8 +11,7 @@ This document is a exhaustive man page for FACE01's public class, methods and so
 .. Caution::
    Please note that this is automated to always follow the latest version, so not compatible with previous version of FACE01.
 
-See bellow for a simpler way to use FACE01.
-
+See `here <https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/example_doc.md>_` for a simpler way to use FACE01.
 `Step-by-step to use FACE01 library <https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/example_doc.md>`_
 
 
