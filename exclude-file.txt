@@ -1,0 +1,34 @@
+CMakeLists.txt
+bk_memory_leak_profile.txt        exclude-file.txt         memray-flamegraph-output.html  share
+DOCUMENT.md
+   bk_memray-flamegraph-output.html  face01.log               noFace
+    sphinx
+FACE01.code-workspace              build
+        face01lib                npKnown.npz                    sphinx保存フォルダ
+INSTALL_FACE01.sh                  check_images
+ face01libface01.log      output
+    system_check.py
+MEMO.md
+       config.ini
+   images                   output.bin
+test_numpy.zenn.md
+Memory_leak.txt                    cython
+       img
+ priset_face_images             tests
+README.md
+     dlib
+         include                  python_and_pybind11_install    tmp
+SystemCheckLock                    dlib-19.24
+   lib
+ pyvenv.cfg
+uninstall_pip.txt
+__pycache__
+   dlib-19.24.tar.bz2                lib64                    recognated
+assets
+        docker
+       make_DockerImages.sh     requirements.txt
+bin
+           docs
+         make_so_files.sh         restats
+bk2_memray-flamegraph-output.html  example
+      memory_leak_profile.txt  rsync_FACE01_DIST.sh

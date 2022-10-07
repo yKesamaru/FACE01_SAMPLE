@@ -1,0 +1,35 @@
+{
+    "configurations": [
+        {
+            "name": "linux-clang-x64",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/include/python3.8/**",
+                "/home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include/**",
+                "/usr/include/**"
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "${default}",
+            "compilerArgs": [
+                "-L",
+                "/home/terms/bin/FACE01/lib/python3.8/site-packages",
+                "-I",
+                "/usr/include/python3.8",
+                "-I",
+                "/home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include",
+                "-I",
+                "/usr/include",
+                "-fPIC",
+                "`python3 -m pybind11 --includes`",
+                "`python3-config --extension-suffix`",
+                "-O0",
+                "-g"
+            ],
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "compileCommands": ""
+        }
+    ],
+    "version": 4
+}

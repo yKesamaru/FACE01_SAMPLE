@@ -1,0 +1,4 @@
+; movie = http://153.220.3.203:80/SnapshotJPEG?Resolution=1280
+; movie = http://128.53.158.70:82/cgi-bin/camera?resolution=1280
+; movie = http://219.102.239.58:80/cgi-bin/camera?resolution=1280
+; movie = http://211.19.94.111:82/cgi-bin/camera?resolution=640

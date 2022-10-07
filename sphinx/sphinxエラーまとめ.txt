@@ -1,0 +1,54 @@
+- Core.py:docstring of face01lib.Core:33
+	- WARNING
+	- Block quote ends without a blank line; unexpected unindent.
+- Core.py:docstring of face01lib.Core:34
+	- WARNING
+	- Definition list ends without a blank line; unexpected unindent.
+- Core.py:docstring of face01lib.Core:41
+	- WARNING
+	- Block quote ends without a blank line; unexpected unindent.
+- Core.py:docstring of face01lib.Core:42
+	- WARNING
+	- Definition list ends without a blank line; unexpected unindent.
+- Core.py:docstring of face01lib.Core.Core.common_process:20
+	- ERROR
+	- Unexpected indentation.
+- Core.py:docstring of face01lib.Core.Core.face_encoding_process:26
+	- WARNING
+	- Block quote ends without a blank line; unexpected unindent.
+- Core.py:docstring of face01lib.Core.Core.face_encoding_process:27
+	- WARNING
+	- Definition list ends without a blank line; unexpected unindent.
+- Core.py:docstring of face01lib.Core.Core.face_encoding_process:34
+	- WARNING
+	- Block quote ends without a blank line; unexpected unindent.
+- Core.py:docstring of face01lib.Core.Core.face_encoding_process:35
+	- WARNING
+	- Definition list ends without a blank line; unexpected unindent.
+- Core.py:docstring of face01lib.Core.Core.make_frame_datas_array:28
+	- WARNING
+	- Bullet list ends without a blank line; unexpected unindent.
+- Core.py:docstring of face01lib.Core.Core.make_frame_datas_array:40
+	- WARNING
+	- Bullet list ends without a blank line; unexpected unindent.
+- Core.py:docstring of face01lib.Core.Core.make_frame_datas_array:43
+	- WARNING
+	- Bullet list ends without a blank line; unexpected unindent.
+- Core.py:docstring of face01lib.Core.Core.make_frame_datas_array:51
+	- WARNING
+	- Bullet list ends without a blank line; unexpected unindent.
+- LoadImage.py:docstring of face01lib.LoadImage.LoadImage.LI:18
+	- WARNING
+	- Block quote ends without a blank line; unexpected unindent.
+- api.py:docstring of face01lib.api:7
+	- ERROR
+	- Unexpected indentation.
+- api.py:docstring of face01lib.api:8
+	- WARNING
+	- Block quote ends without a blank line; unexpected unindent.
+- load_priset_image.py:docstring of face01lib.load_priset_image.load_priset_image:18
+	- ERROR
+	- Unexpected indentation.
+- load_priset_image.py:docstring of face01lib.load_priset_image.load_priset_image:19
+	- WARNING
+	- Block quote ends without a blank line; unexpected unindent.

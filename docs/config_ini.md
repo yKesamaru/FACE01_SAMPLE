@@ -149,14 +149,9 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
   - Zoom.
      You can select from `NONE`, `TOP_LEFT`, `TOP_RIGHT`, `BOTTOM_LEFT`, `BOTTOM_RIGHT`, `CENTER`.
   - Type: Type: str
-  - Default: NONE  
-  set_area = 'NONE'  
-  ![set_area = 'NONE'](img/none-fs8.png)  
-  set_area = 'CENTER'  
-  ![set_area = 'CENTER'](img/setarea_center.png)  
-  set_area = 'TOP_LEFT'  
-  ![set_area = 'TOP_LEFT'](img/setarea_topleft.png)  
-  
+  - Default: NONE
+
+
 - movie
   - For test, you can select from bellow.
     - usb (or USB)
@@ -187,7 +182,6 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
   - Display a legacy face frame on the screen.
   - Type: bool
   - Default: False
-  ![](img/FACE01-simple_rectangle.png)
 
 
 - target_rectangle
@@ -195,7 +189,6 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
   - NOTE: You can select only one of `rectangle` or `target_rectangle`.
   - Type: bool
   - Default: False
-  ![](img/FACE01-targetrectangle.png)
 
 
 - draw_telop_and_logo

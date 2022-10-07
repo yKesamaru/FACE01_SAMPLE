@@ -1,0 +1,68 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "g++のお手前ビルド",
+			"command": "/usr/bin/g++",
+			"args": [
+				"`source /home/terms/bin/FACE01/bin/activate`",
+				"-g",
+				"-O0",
+				"${file}",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}",
+				"-I",
+				"/usr/include",
+				"-I",
+				"/home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include",
+				"-L",
+				"/home/terms/bin/FACE01/lib/python3.8/site-packages",
+				"-fPIC",
+				"`pybind11_add_module(add_cpp MODULE add_cpp.cpp)`",
+				"-fdiagnostics-color=always"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "コンパイラ: /usr/bin/g++"
+		},
+		{
+			"type": "cppbuild",
+			"label": "CPPのビルド",
+			"command": "/usr/bin/cpp",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}",
+				"`source /home/terms/bin/FACE01/bin/activate`",
+				"-I",
+				"/usr/include",
+				"-I",
+				"/home/terms/bin/FACE01/lib/python3.8/site-packages/pybind11/include",
+				"-L",
+				"/home/terms/bin/FACE01/lib/python3.8/site-packages",
+				"-fPIC",
+				"`pybind11_add_module(add_cpp MODULE add_cpp.cpp)`",
+				"-fdiagnostics-color=always"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "コンパイラ: /usr/bin/cpp"
+		}
+	]
+}

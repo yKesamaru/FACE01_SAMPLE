@@ -1,0 +1,214 @@
+    # """マルチプロセス実装用プロファイリングコード
+        # import cProfile as pr
+
+        # # PySimpleGUIレイアウト
+        # if args_dict["headless"] == False:
+        #     layout = [
+        #         [sg.Image(filename='', key='display', pad=(0,0))],
+        #         [sg.Button('終了', key='terminate', pad=(0,10))]
+        #     ]
+        #     window = sg.Window(
+        #         'FACE01 プロファイリング利用例', layout, alpha_channel = 1, margins=(10, 10),
+        #         location=(150,130), modal = True
+        #     )
+
+        # profile_HANDLING_FRAME_TIME: float = 0.0
+        # profile_HANDLING_FRAME_TIME_FRONT: float = 0.0
+        # profile_HANDLING_FRAME_TIME_REAR: float = 0.0
+        # def main_process(exec_times):
+            # pass
+            # profile_HANDLING_FRAME_TIME_FRONT = time.perf_counter()
+
+            # for frame_datas_array in main():
+
+        # pr.run('main_process(exec_times)', 'restats')
+    # """
+
+    """プロファイリング用コード
+        import cProfile as pr
+        headless = False
+        # headless = True
+        if headless == False:
+            layout = [
+                [sg.Image(filename='', key='display', pad=(0,0))],
+                [sg.Button('終了', key='terminate', pad=(0,10))]
+            ]
+            window = sg.Window(
+            'FACE01 プロファイリング利用例', layout, alpha_channel = 1, margins=(10, 10),
+            location=(350,130), modal = True
+        )
+        
+        exec_times: int = 50
+        profile_HANDLING_FRAME_TIME: float = 0.0
+        profile_HANDLING_FRAME_TIME_FRONT: float = 0.0
+        profile_HANDLING_FRAME_TIME_REAR: float = 0.0
+
+        def profile(exec_times):
+            profile_HANDLING_FRAME_TIME_FRONT = time.perf_counter()
+            main_func_signature = initialize(configure(), headless)
+            for frame_datas in main(main_func_signature):
+                exec_times = exec_times - 1
+                if  exec_times <= 0:
+                    break
+                else:
+                    print(f'exec_times: {exec_times}')
+                    if headless == False:
+                        event, _ = window.read(timeout = 1)
+                    try:
+                        img, person_data_list = frame_datas['img'], frame_datas['person_data_list']
+                    except:
+                        continue
+                    for person_data in person_data_list:
+                        name, pict, date,  location, percentage_and_symbol = person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
+                        if not name == 'Unknown':
+                            print(
+                                "プロファイリング用コードが動作しています", "\n",
+                                "statsファイルが出力されます", "\n",
+                                name, "\n",
+                                "\t", "類似度\t", percentage_and_symbol, "\n",
+                                "\t", "座標\t", location, "\n",
+                                "\t", "時刻\t", date, "\n",
+                                "\t", "出力\t", pict, "\n",
+                                "-------\n"
+                            )
+                    del person_data_list
+
+                    if headless == False:
+                        imgbytes = cv2.imencode(".png", img)[1].tobytes()
+                        window["display"].update(data = imgbytes)
+                if headless == False:
+                    if event =='terminate':
+                        break
+            if headless == False:
+                window.close()
+            print('終了します')
+            profile_HANDLING_FRAME_TIME_REAR = time.perf_counter()
+            profile_HANDLING_FRAME_TIME = (profile_HANDLING_FRAME_TIME_REAR - profile_HANDLING_FRAME_TIME_FRONT) 
+            print(f'profile()関数の処理時間合計: {round(profile_HANDLING_FRAME_TIME , 3)}[秒]')
+        pr.run('profile(exec_times)', 'restats')
+    """
+
+    """ 並行処理用コード_1
+        from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
+        # pool = ProcessPoolExecutor()
+        pool = ThreadPoolExecutor()
+        # window実装
+        layout = [
+            # [sg.Text('FACE01 GRAPHICS ver.1.2.8', font=('BIZ-UDGOTHICB.TTC', 15)), sg.Text('GUI実装例', font=('BIZ-UDGOTHICB.TTC', 10))],
+            [sg.Image(filename='', key='cam1', pad=(0,0))],
+            [sg.Button('終了', key='terminate', pad=(0,10))]
+        ]
+        window = sg.Window(
+            'window1', layout, alpha_channel = 1, margins=(0, 0),
+            no_titlebar = True, grab_anywhere = True,
+            location=(350,130), modal = True
+        )
+        # 並行処理
+        def multi(x):
+            img, person_data_list = x['img'], x['person_data_list']
+            for person_data in person_data_list:
+                name, pict, date,  location, percentage_and_symbol = person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
+                if not name == 'Unknown':
+                    print(
+                        "並行処理用コード_1が動作しています", "\n",
+                        name, "\n",
+                        "\t", "類似度\t", percentage_and_symbol, "\n",
+                        "\t", "座標\t", location, "\n",
+                        "\t", "時刻\t", date, "\n",
+                        "\t", "出力\t", pict, "\n",
+                        "-------\n"
+                    )
+                person_data_list.pop(0)
+                return img
+        for array_x in xs:
+            for x in array_x:
+                event, _ = window.read(timeout = 1)
+                # befor_time = time.perf_counter()
+                result = pool.submit(multi, x)
+                if  not result.result() is None:
+                    imgbytes = cv2.imencode(".png", result.result())[1].tobytes()
+                    window["cam1"].update(data = imgbytes)
+                    # after_time = time.perf_counter()
+                    # print(f'xs処理時間: {round((after_time - befor_time) * 1000, 2)}[ミリ秒]')
+            if event=='terminate':
+                break
+        window.close()
+        print('終了します')
+    """
+
+    """ 並行処理用コード_2
+        from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
+        # pool = ProcessPoolExecutor()
+        pool = ThreadPoolExecutor()
+        # window実装
+        layout = [
+            # [sg.Text('FACE01 GRAPHICS ver.1.2.8', font=('BIZ-UDGOTHICB.TTC', 15)), sg.Text('GUI実装例', font=('BIZ-UDGOTHICB.TTC', 10))],
+            [sg.Image(filename='', key='cam1', pad=(0,0))],
+            [sg.Button('終了', key='terminate', pad=(0,10))]
+        ]
+        window = sg.Window(
+            'window1', layout, alpha_channel = 1, margins=(0, 0),
+            no_titlebar = True, grab_anywhere = True,
+            location=(350,130), modal = True
+        )
+        # 並行処理
+        def multi(array_x):
+            for x in array_x:
+                img, person_data_list = x['img'], x['person_data_list']
+                for person_data in person_data_list:
+                    name, pict, date,  location, percentage_and_symbol = person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
+                    if not name == 'Unknown':
+                        print(
+                            "並行処理用コード_2が動作しています", "\n",
+                            name, "\n",
+                            "\t", "類似度\t", percentage_and_symbol, "\n",
+                            "\t", "座標\t", location, "\n",
+                            "\t", "時刻\t", date, "\n",
+                            "\t", "出力\t", pict, "\n",
+                            "-------\n"
+                        )
+                    person_data_list.pop(0)
+                    return img
+        # main処理
+        for array_x in xs:
+            event, _ = window.read(timeout = 1)
+            result = pool.submit(multi, array_x)
+            if  not result.result() is None:
+                imgbytes = cv2.imencode(".png", result.result())[1].tobytes()
+                window["cam1"].update(data = imgbytes)
+                # after_time = time.perf_counter()
+                # print(f'xs処理時間: {round((after_time - befor_time) * 1000, 2)}[ミリ秒]')
+            if event=='terminate':
+                break
+        window.close()
+        print('終了します')
+    """
+
+    """BUG 並行処理用コード_3
+        from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
+        pool = ProcessPoolExecutor()
+        # pool = ThreadPoolExecutor()
+        # 並行処理
+        def multi(xs):
+            for array_x in xs:
+                for x in array_x:
+                    img, person_data_list = x['img'], x['person_data_list']
+                    for person_data in person_data_list:
+                        name, pict, date,  location, percentage_and_symbol = person_data['name'], person_data['pict'], person_data['date'],  person_data['location'], person_data['percentage_and_symbol']
+                        if not name == 'Unknown':
+                            print(
+                                "並行処理用コード_3が動作しています", "\n",
+                                name, "\n",
+                                "\t", "類似度\t", percentage_and_symbol, "\n",
+                                "\t", "座標\t", location, "\n",
+                                "\t", "時刻\t", date, "\n",
+                                "\t", "出力\t", pict, "\n",
+                                "-------\n"
+                            )
+                        person_data_list.pop(0)
+                        return img
+            print('終了します')
+        while True:
+            result = pool.submit(multi, xs)
+    """
+
