@@ -1,9 +1,11 @@
 """Example of simple face recognition script.
 
 Summary:
+    In this example, you can learn how to execute FACE01 as simple.
 
 Usage:
     >>> python3 simple.py
+
 """
 
 # Operate directory: Common to all examples
@@ -34,7 +36,7 @@ def main(exec_times: int = 50):
 
     # Make generator
     gen = Core().common_process(CONFIG)
-    
+
 
     # Repeat 'exec_times' times
     for i in range(1, exec_times):
