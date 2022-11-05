@@ -13,6 +13,22 @@ If not, the Docker Image you should pull is `face01_no_gpu:1.4.10`.
 
 
 ## When using `face01_gpu:1.4.10`
+First, Check if GPU is available.
+```bash
+lspci | grep -i nvidia
+```
+Make sure nvidia-docker is installed.
+```bash
+docker run --gpus all --rm nvidia/cuda nvidia-smi
+```
+(To add NVIDIA GPU support to Docker, install the [NVIDIA Container Toolkit](https://github.com/NVIDIA/nvidia-docker/blob/master/README.md#quickstart). nvidia-container-runtime is only available on Linux.
+See https://www.tensorflow.org/install/docker#gpu_support [ja])
+  - Reference
+    - NVIDIA Container Toolkit
+      - [Overview](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/overview.html)
+      - [User Guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html)
+
+
 ```bash
 # Download Docker Image
 docker pull tokaikaoninsho/face01_gpu:1.4.10
