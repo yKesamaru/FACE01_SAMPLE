@@ -76,4 +76,4 @@ See [here](ch_telop.md).
 See [here](benchmark_CUI.md).
 
 
-# For more information about FACE01 many Classes and methods, see [FACE01 document](https://ykesamaru.github.io/FACE01_SAMPLE/).
+**For more information about FACE01 many Classes and methods, see [FACE01 document](https://ykesamaru.github.io/FACE01_SAMPLE/).**

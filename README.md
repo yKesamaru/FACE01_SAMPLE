@@ -18,6 +18,14 @@ Audrey Hepburn
  -------
  ```
 
+TOC
+1. [About FACE01](#about-face01)
+2. [Docker](#docker)
+3. [Configuration](#configuration)
+4. [Example](#example)
+5. [Update](#update)
+6. [Note](#note)
+7. [Acknowledgments](#acknowledgments)
 
 # About FACE01
 FACE01 is a **face recognition library** that integrates various functions and can be called from **Python**.
@@ -49,7 +57,7 @@ There are some example files in the example folder.
 Let's try *step-by-step* examples.  
 See [here](docs/example_doc.md).
 
-If you want to see the exhaustive document, see [here](https://ykesamaru.github.io/FACE01_SAMPLE/)).
+If you want to see the exhaustive document, see [here](https://ykesamaru.github.io/FACE01_SAMPLE/).
 
 
 # Update
