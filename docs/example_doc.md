@@ -7,6 +7,19 @@ Are you ready?
 
 Let's check the **checks you must pass** as step. 1.
 
+TOC
+1. [Step-by-step to use FACE01 library](#step-by-step-to-use-face01-library)
+   1. [Checks you must pass](#checks-you-must-pass)
+   2. [Register face images](#register-face-images)
+   3. [activate virtual python mode](#activate-virtual-python-mode)
+   4. [Check vim installed](#check-vim-installed)
+2. [Simple flow for using FACE01](#simple-flow-for-using-face01)
+3. [Simple face recognition](#simple-face-recognition)
+4. [Display GUI window](#display-gui-window)
+5. [Display 'telop' and 'logo' images which you're company's.](#display-telop-and-logo-images-which-youre-companys)
+6. [Want to benchmark?](#want-to-benchmark)
+7. [Example list](#example-list)
+
 ## Checks you must pass
 ✅
 - [x] Basic operation of Python
@@ -19,13 +32,13 @@ Have you checked everything?
 OK! Let's get started!
 
 
-# [Register face images](register_faces.md)
+## [Register face images](register_faces.md)
 This article describes how to register face images.
 
 See [here](register_faces.md).
 
 
-# activate virtual python mode
+## activate virtual python mode
 Start the virtual environment using venv of the Python standard library.
 
 ```bash
@@ -34,7 +47,7 @@ Start the virtual environment using venv of the Python standard library.
 ```
 
 
-# Check vim installed
+## Check vim installed
 The Docker Image comes with vim installed so you can edit `conf.ini`.
 
 ```bash
@@ -65,6 +78,11 @@ Want to display in a cool GUI window?
 Try `example/display_GUI_window.py`.  
 See [here](display_GUI_win.md).
 
+```python
+python example/display_GUI_window.py
+```
+See [here](simple.md).
+
 
 # [Display 'telop' and 'logo' images which you're company's.](ch_telop.md)
 Do you want your window to display your company logo or something?  
@@ -74,6 +92,28 @@ See [here](ch_telop.md).
 
 # [Want to benchmark?](benchmark_CUI.md)
 See [here](benchmark_CUI.md).
+
+# Example list
+```python
+# 1. Simple
+python example/simple.py
+
+# 2. Display GUI window
+python example/display_GUI_window.py
+
+# 3. logging
+python example/example_logging.py
+
+# 4. data structure
+python example/data_structure.py
+
+# 5. Benchmark with CUI mode
+python example/benchmark_CUI.py
+
+# 6. Benchmark with GUI mode
+python example/benchmark_GUI_window.py
+
+```
 
 
 **For more information about FACE01 many Classes and methods, see [FACE01 document](https://ykesamaru.github.io/FACE01_SAMPLE/).**

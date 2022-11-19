@@ -1,6 +1,10 @@
 # Want to benchmark?
 
 Try `example/benchmark_CUI.py` in the same examples folder.
+```python
+python example/benchmark_CUI.py
+```
+
 You can see the profile result.
 Your browser will automatically display a very cool and easy to use graph using `snakeviz`.
 
