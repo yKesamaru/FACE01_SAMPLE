@@ -71,7 +71,7 @@ If you want to see the exhaustive document, see [here](https://ykesamaru.github.
 # Note
 This repository contains FACE01 SAMPLE for UBUNTU 20.04.  
 If you are a Windows user, please use this on Docker.  
-This sample can be used until December 2022.  
+This sample can be used until December 2023.  
 
 
 # Acknowledgments
