@@ -19,3 +19,7 @@ priset_face_images/*.png
 priset_face_images/debug/*.png
 restats
 share
+share/*
+priset_face_images/*
+preset_face_images/*
+CTKtest

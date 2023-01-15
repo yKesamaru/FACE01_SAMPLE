@@ -1,16 +1,204 @@
 {
-    // IntelliSense を使用して利用可能な属性を学べます。
-    // 既存の属性の説明をホバーして表示します。
-    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "bashdb",
+      "request": "launch",
+      "name": "bashデバッグ",
+      "cwd": "${workspaceFolder}",
+      "program": "${file}",
+      "args": []
+    },
+    {
+      "name": "(gdb) 起動",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileBasenameNoExtension}.cpython-38-x86_64-linux-gnu.so",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "/home/terms/bin/FACE01/face01lib/",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
         {
-            "name": "Python: 現在のファイル",
-            "type": "python",
-            "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal",
-            "justMyCode": true
+          "description": "gdb の再フォーマットを有効にする",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "逆アセンブリ フレーバーを Intel に設定",
+          "text": "-gdb-set disassembly-flavor intel",
+          "ignoreFailures": true
         }
-    ]
+      ]
+    },
+    {
+      "name": "WAKANA",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "aligned_",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01/example",
+      "program": "/home/terms/bin/FACE01/example/aligned_crop_face.py",
+      "args": ["/home/terms/bin/keras/example_data/train/鷲尾/"],
+      // "args": ["/home/terms/bin/keras/example_data/train/鷲尾", "0.4", "200"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "distort_barrel",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01/example",
+      "program": "/home/terms/bin/FACE01/example/distort_barrel.py",
+      "args": [
+        "/home/terms/bin/keras/example_data/train/鷲尾/"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "lightweight_GUI.py",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01/example",
+      "program": "/home/terms/bin/FACE01/example/lightweight_GUI.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python"
+    },
+    {
+      "name": "anti_spoof.py",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01/example",
+      "program": "/home/terms/bin/FACE01/example/anti_spoof.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python"
+    },
+    {
+      "name": "face_coordinates.py",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01/example",
+      "program": "/home/terms/bin/FACE01/example/face_coordinates.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python"
+    },
+    {
+      "name": "display_GUI_window.py",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01/example",
+      "program": "/home/terms/bin/FACE01/example/display_GUI_window.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python"
+    },
+    {
+      "name": "get_encoded_data.py",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01/example",
+      "program": "/home/terms/bin/FACE01/example/get_encoded_data.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python3"
+    },
+    {
+      "name": "meshgrid.py",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01/example",
+      "program": "/home/terms/bin/FACE01/example/meshgrid.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python3"
+    },
+    {
+      "name": "simple.py",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01/example",
+      "program": "/home/terms/bin/FACE01/example/simple.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python3"
+    },
+    {
+      "name": "benchmark_GUI_window.py",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01/example",
+      "program": "/home/terms/bin/FACE01/example/benchmark_GUI_window.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python"
+    },
+    {
+      "name": "benchmark_CUI.py",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01/example",
+      "program": "/home/terms/bin/FACE01/example/benchmark_CUI.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python"
+    },
+    {
+      "name": "test_numpy_main.py",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01",
+      "program": "/home/terms/bin/FACE01/test_numpy_main.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python"
+    },
+    {
+      "name": "CALL_FACE01.py",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01",
+      "program": "/home/terms/bin/FACE01/CALL_FACE01.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python"
+    },
+    {
+      "name": "FACE01.py",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01",
+      "program": "/home/terms/bin/FACE01/FACE01.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python"
+    },
+    {
+      "name": "Module_test",
+      "type": "python",
+      "request": "launch",
+      "cwd": "/home/terms/bin/FACE01/face01lib",
+      "program": "module_test.py",
+      "console": "integratedTerminal",
+      "python": "/home/terms/bin/FACE01/bin/python"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "cwd": "/home/terms/bin/FACE01",
+      "program": "/home/terms/bin/FACE01/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
 }
