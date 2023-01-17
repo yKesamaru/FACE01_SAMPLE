@@ -79,7 +79,7 @@ COPY npKnown.npz /home/${DOCKER_USER}/FACE01_SAMPLE/
 COPY dlib-19.24.tar.bz2 /home/${DOCKER_USER}/FACE01_SAMPLE/
 COPY SystemCheckLock /home/${DOCKER_USER}/FACE01_SAMPLE/
 RUN echo ${DOCKER_PASSWORD} | sudo -S chown -R ${DOCKER_USER} /home/${DOCKER_USER}/FACE01_SAMPLE
-COPY priset_face_images /home/${DOCKER_USER}/FACE01_SAMPLE/priset_face_images
+COPY preset_face_images /home/${DOCKER_USER}/FACE01_SAMPLE/preset_face_images
 
 COPY docker/Docker_INSTALL_FACE01_CPU.sh /home/${DOCKER_USER}/FACE01_SAMPLE/
 WORKDIR /home/${DOCKER_USER}/FACE01_SAMPLE

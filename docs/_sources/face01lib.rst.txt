@@ -52,10 +52,18 @@ face01lib.api module
    :undoc-members:
    :show-inheritance:
 
-face01lib.load\_priset\_image module
+face01lib.compile module
+------------------------
+
+.. automodule:: face01lib.compile
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+face01lib.load\_preset\_image module
 ------------------------------------
 
-.. automodule:: face01lib.load_priset_image
+.. automodule:: face01lib.load_preset_image
    :members:
    :undoc-members:
    :show-inheritance:
@@ -76,10 +84,18 @@ face01lib.return\_face\_image module
    :undoc-members:
    :show-inheritance:
 
-face01lib.system\_check module
-------------------------------
+face01lib.spoof module
+----------------------
 
-.. automodule:: face01lib.system_check
+.. automodule:: face01lib.spoof
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+face01lib.utils module
+----------------------
+
+.. automodule:: face01lib.utils
    :members:
    :undoc-members:
    :show-inheritance:
