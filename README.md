@@ -2,7 +2,7 @@
 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE)
 
-![](https://img.shields.io/badge/Release-v1.4.10-blue)
+![](https://img.shields.io/badge/Release-v1.4.11-blue)
 
 ![](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/img/ROMAN_HOLIDAY.GIF?raw=true)
 
@@ -61,10 +61,8 @@ If you want to see the exhaustive document, see [here](https://ykesamaru.github.
 
 
 # Update
-- v1.4.10
-  - Update
-    - config.ini
-    - Initialize module
+- v1.4.11
+  - Add Utils
   - Add examples
 
 
