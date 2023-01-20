@@ -10,6 +10,13 @@ Args:
 Usage:
     >>> python3 example/aligned_crop_face.py path size
 
+Result:
+    .. image:: ../docs/img/face_alignment.png
+        :scale: 50%
+        :alt: face_alignment
+
+Image:
+    https://www.pakutaso.com/20230104005post-42856.html
 """
 
 # Operate directory: Common to all examples

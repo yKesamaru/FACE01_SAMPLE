@@ -36,6 +36,7 @@ def main(path: str, size: int = 200) -> None:
 
     This simple example script takes a path which contained png, jpg, jpeg files in the directory, 
     distort barrel and saves them.
+    See https://tokai-kaoninsho.com/%e3%82%b3%e3%83%a9%e3%83%a0/%e3%83%ac%e3%83%b3%e3%82%ba%e3%81%ae%e6%ad%aa%e6%9b%b2%e5%8f%8e%e5%b7%ae%e3%81%a8%e5%af%be%e5%bf%9c%e6%96%b9%e6%b3%956/
     
     Args:
         path (str): absolute path
@@ -50,6 +51,14 @@ def main(path: str, size: int = 200) -> None:
     Note:
         ImageMagick must be installed on your system.
         - See[ImageMagick](https://imagemagick.org/script/download.php)
+    
+    Result:
+        .. image:: ../docs/img/distort_barrel.png
+            :scale: 100%
+            :alt: distort_barrel
+
+    Image:
+        https://www.pakutaso.com/20220158028post-38602.html
     """
     utils.distort_barrel(path, size)
 

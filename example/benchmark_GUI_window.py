@@ -8,6 +8,15 @@ Summary:
 
 Usage:
     >>> python3 benchmark_GUI_window.py
+
+Result:
+    .. image:: ../docs/img/benchmark_GUI_window.png
+        :scale: 50%
+        :alt: benchmark_GUI_window
+
+    .. image:: ../docs/img/benchmark_GUI.png
+        :scale: 50%
+        :alt: benchmark_GUI
 """
 # Operate directory: Common to all examples
 import os.path
