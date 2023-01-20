@@ -24,7 +24,7 @@ Config.ini setting:
         set_width = 750
         similar_percentage = 99.1
         jitters = 0
-        priset_face_images_jitters = 10
+        preset_face_images_jitters = 10
         upsampling = 0
         mode = hog
         frame_skip = 5
@@ -89,26 +89,26 @@ Result:
         }
 
 Data structure:
-    The frame_datas_array variable is a dictionary-like variable that contains the variables described below.
+    The `frame_datas_array` variable is a dictionary-like variable that contains the variables described below.
     
     * Dictionary
 
-        * img
-        * face_location_list
-        * overlay
-        * person_data_list
+        * img: NDArray of a frame
+        * face_location_list: List of face-coordinates
+        * overlay: Shallow copy of img
+        * person_data_list: List of person-coordinate which is included in `face_location_list`
 
-    In addition, the person_data_list variable is an array that contains the variables described below.
+    In addition, the `person_data_list` variable is an array that contains the variables described below.
     
     * List
 
         * Dictionary
 
-            * name
-            * pict
-            * date
-            * location
-            * percentage_and_symbol
+            * name: name
+            * pict: Saved image's file name which is cropped by face-coordinate in a frame
+            * date: 
+            * location: Face-coordinate
+            * percentage_and_symbol: xx%
 """
 
 # Operate directory: Common to all examples
@@ -125,7 +125,7 @@ from face01lib.Core import Core
 from face01lib.Initialize import Initialize
 
 
-def main(exec_times: int = 50):
+def main(exec_times: int = 50) -> None:
     """Output data structure.
 
     Data structure of FACE01 can be get as frame_datas_array variable.
@@ -142,7 +142,7 @@ def main(exec_times: int = 50):
 
 
     # Repeat 'exec_times' times
-    for i in range(1, exec_times):
+    for i in range(0, exec_times):
 
         # Call __next__() from the generator object
         frame_datas_array = gen.__next__()
@@ -153,4 +153,4 @@ def main(exec_times: int = 50):
 
 if __name__ == '__main__':
     # Call main function.
-    main(exec_times = 5)
+    main(exec_times = 1)

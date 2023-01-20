@@ -4,9 +4,10 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FACE01 Document &mdash; FACE01  documentation</title>
+  <title>FACE01 Document &mdash; FACE01 1.4.11 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -20,7 +21,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="FACE01" href="modules.html" /> 
+    <link rel="next" title="example package" href="example.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -29,6 +30,7 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
             <a href="#" class="icon icon-home"> FACE01
+            <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo_dist.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -40,7 +42,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">FACE01</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_SAMPLE">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
 </ul>
 
         </div>
@@ -56,10 +61,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>FACE01 Document</li>
+      <li><a href="#" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">FACE01 Document</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -72,162 +76,207 @@
 <p>This document is a exhaustive man page for FACE01’s public class, methods and some simple examples.</p>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>Please note that this is automated to always follow the latest version, so not compatible with previous version of FACE01.</p>
+<p>Please note that this is automated to always follow the latest version (v1.4.11), so not compatible with previous version of FACE01.</p>
 </div>
 <p>See bellow for a simpler way to use FACE01.</p>
 <p><a class="reference external" href="https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/example_doc.md">Step-by-step to use FACE01 library</a></p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">FACE01</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="face01lib.html">face01lib package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="face01lib.html#subpackages">Subpackages</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="face01lib.models.html">face01lib.models package</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.models.html#module-face01lib.models">Module contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">example package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#module-example.CTKtest">example.CTKtest module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="example.html#example.CTKtest.App"><code class="docutils literal notranslate"><span class="pre">App</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="example.html#example.CTKtest.App.change_appearance_mode_event"><code class="docutils literal notranslate"><span class="pre">App.change_appearance_mode_event()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="example.html#example.CTKtest.App.change_scaling_event"><code class="docutils literal notranslate"><span class="pre">App.change_scaling_event()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="example.html#example.CTKtest.App.open_input_dialog_event"><code class="docutils literal notranslate"><span class="pre">App.open_input_dialog_event()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="example.html#example.CTKtest.App.sidebar_button_event"><code class="docutils literal notranslate"><span class="pre">App.sidebar_button_event()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="face01lib.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib-calc-module">face01lib.Calc module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal"><code class="docutils literal notranslate"><span class="pre">Cal</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.HANDLING_FRAME_TIME"><code class="docutils literal notranslate"><span class="pre">Cal.HANDLING_FRAME_TIME</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.HANDLING_FRAME_TIME_FRONT"><code class="docutils literal notranslate"><span class="pre">Cal.HANDLING_FRAME_TIME_FRONT</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.HANDLING_FRAME_TIME_REAR"><code class="docutils literal notranslate"><span class="pre">Cal.HANDLING_FRAME_TIME_REAR</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.Measure_func"><code class="docutils literal notranslate"><span class="pre">Cal.Measure_func()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.Measure_processing_time"><code class="docutils literal notranslate"><span class="pre">Cal.Measure_processing_time()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.Measure_processing_time_backward"><code class="docutils literal notranslate"><span class="pre">Cal.Measure_processing_time_backward()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.Measure_processing_time_forward"><code class="docutils literal notranslate"><span class="pre">Cal.Measure_processing_time_forward()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.cal_resized_logo_image"><code class="docutils literal notranslate"><span class="pre">Cal.cal_resized_logo_image()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.cal_resized_telop_image"><code class="docutils literal notranslate"><span class="pre">Cal.cal_resized_telop_image()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.cal_specify_date"><code class="docutils literal notranslate"><span class="pre">Cal.cal_specify_date()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.decide_text_position"><code class="docutils literal notranslate"><span class="pre">Cal.decide_text_position()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.make_draw_rgb_object"><code class="docutils literal notranslate"><span class="pre">Cal.make_draw_rgb_object()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.make_error_messg_rectangle_font"><code class="docutils literal notranslate"><span class="pre">Cal.make_error_messg_rectangle_font()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.pil_img_instance"><code class="docutils literal notranslate"><span class="pre">Cal.pil_img_instance()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.return_percentage"><code class="docutils literal notranslate"><span class="pre">Cal.return_percentage()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.to_percentage"><code class="docutils literal notranslate"><span class="pre">Cal.to_percentage()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.to_tolerance"><code class="docutils literal notranslate"><span class="pre">Cal.to_tolerance()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.x1"><code class="docutils literal notranslate"><span class="pre">Cal.x1</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.x2"><code class="docutils literal notranslate"><span class="pre">Cal.x2</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.y1"><code class="docutils literal notranslate"><span class="pre">Cal.y1</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.y2"><code class="docutils literal notranslate"><span class="pre">Cal.y2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#module-example.aligned_crop_face">example.aligned_crop_face module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="example.html#example.aligned_crop_face.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#example-anti-spoof-module">example.anti_spoof module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#module-example.benchmark_CUI">example.benchmark_CUI module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="example.html#example.benchmark_CUI.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#module-example.benchmark_GUI_window">example.benchmark_GUI_window module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="example.html#example.benchmark_GUI_window.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#module-example.data_structure">example.data_structure module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="example.html#example.data_structure.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#module-example.display_GUI_window">example.display_GUI_window module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="example.html#example.display_GUI_window.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#module-example.distort_barrel">example.distort_barrel module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="example.html#example.distort_barrel.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#module-example.draw_datas">example.draw_datas module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="example.html#example.draw_datas.f_norm"><code class="docutils literal notranslate"><span class="pre">f_norm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="example.html#example.draw_datas.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#module-example.example_logging">example.example_logging module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="example.html#example.example_logging.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#module-example.face_coordinates">example.face_coordinates module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="example.html#example.face_coordinates.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#module-example.get_encoded_data">example.get_encoded_data module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="example.html#example.get_encoded_data.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#example-lightweight-gui-module">example.lightweight_GUI module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#module-example.simple">example.simple module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="example.html#example.simple.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#module-example">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="face01lib.html">face01lib package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.models.html">face01lib.models package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.models.html#module-face01lib.models">Module contents</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib-core-module">face01lib.Core module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Core.Core"><code class="docutils literal notranslate"><span class="pre">Core</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.common_process"><code class="docutils literal notranslate"><span class="pre">Core.common_process()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.face_encoding_process"><code class="docutils literal notranslate"><span class="pre">Core.face_encoding_process()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.frame_post_processing"><code class="docutils literal notranslate"><span class="pre">Core.frame_post_processing()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.frame_pre_processing"><code class="docutils literal notranslate"><span class="pre">Core.frame_pre_processing()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.make_frame_datas_array"><code class="docutils literal notranslate"><span class="pre">Core.make_frame_datas_array()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.mp_face_detection_func"><code class="docutils literal notranslate"><span class="pre">Core.mp_face_detection_func()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.override_args_dict"><code class="docutils literal notranslate"><span class="pre">Core.override_args_dict()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.r_face_image"><code class="docutils literal notranslate"><span class="pre">Core.r_face_image()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.return_anti_spoof"><code class="docutils literal notranslate"><span class="pre">Core.return_anti_spoof()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.return_concatenate_location_and_frame"><code class="docutils literal notranslate"><span class="pre">Core.return_concatenate_location_and_frame()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.Calc">face01lib.Calc module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal"><code class="docutils literal notranslate"><span class="pre">Cal</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.HANDLING_FRAME_TIME"><code class="docutils literal notranslate"><span class="pre">Cal.HANDLING_FRAME_TIME</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.HANDLING_FRAME_TIME_FRONT"><code class="docutils literal notranslate"><span class="pre">Cal.HANDLING_FRAME_TIME_FRONT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.HANDLING_FRAME_TIME_REAR"><code class="docutils literal notranslate"><span class="pre">Cal.HANDLING_FRAME_TIME_REAR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.Measure_func"><code class="docutils literal notranslate"><span class="pre">Cal.Measure_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.Measure_processing_time"><code class="docutils literal notranslate"><span class="pre">Cal.Measure_processing_time()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.Measure_processing_time_backward"><code class="docutils literal notranslate"><span class="pre">Cal.Measure_processing_time_backward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.Measure_processing_time_forward"><code class="docutils literal notranslate"><span class="pre">Cal.Measure_processing_time_forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.cal_resized_logo_image"><code class="docutils literal notranslate"><span class="pre">Cal.cal_resized_logo_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.cal_resized_telop_image"><code class="docutils literal notranslate"><span class="pre">Cal.cal_resized_telop_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.cal_specify_date"><code class="docutils literal notranslate"><span class="pre">Cal.cal_specify_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.decide_text_position"><code class="docutils literal notranslate"><span class="pre">Cal.decide_text_position()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.make_draw_rgb_object"><code class="docutils literal notranslate"><span class="pre">Cal.make_draw_rgb_object()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.make_error_messg_rectangle_font"><code class="docutils literal notranslate"><span class="pre">Cal.make_error_messg_rectangle_font()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.pil_img_instance"><code class="docutils literal notranslate"><span class="pre">Cal.pil_img_instance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.return_percentage"><code class="docutils literal notranslate"><span class="pre">Cal.return_percentage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.to_percentage"><code class="docutils literal notranslate"><span class="pre">Cal.to_percentage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.to_tolerance"><code class="docutils literal notranslate"><span class="pre">Cal.to_tolerance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.x1"><code class="docutils literal notranslate"><span class="pre">Cal.x1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.x2"><code class="docutils literal notranslate"><span class="pre">Cal.x2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.y1"><code class="docutils literal notranslate"><span class="pre">Cal.y1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Calc.Cal.y2"><code class="docutils literal notranslate"><span class="pre">Cal.y2</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib-initialize-module">face01lib.Initialize module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Initialize.Initialize"><code class="docutils literal notranslate"><span class="pre">Initialize</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.Initialize.Initialize.initialize"><code class="docutils literal notranslate"><span class="pre">Initialize.initialize()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.Core">face01lib.Core module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib.Core.Core"><code class="docutils literal notranslate"><span class="pre">Core</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.common_process"><code class="docutils literal notranslate"><span class="pre">Core.common_process()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.face_encoding_process"><code class="docutils literal notranslate"><span class="pre">Core.face_encoding_process()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.frame_post_processing"><code class="docutils literal notranslate"><span class="pre">Core.frame_post_processing()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.frame_pre_processing"><code class="docutils literal notranslate"><span class="pre">Core.frame_pre_processing()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.make_frame_datas_array"><code class="docutils literal notranslate"><span class="pre">Core.make_frame_datas_array()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.mp_face_detection_func"><code class="docutils literal notranslate"><span class="pre">Core.mp_face_detection_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.override_args_dict"><code class="docutils literal notranslate"><span class="pre">Core.override_args_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.r_face_image"><code class="docutils literal notranslate"><span class="pre">Core.r_face_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.return_anti_spoof"><code class="docutils literal notranslate"><span class="pre">Core.return_anti_spoof()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Core.Core.return_concatenate_location_and_frame"><code class="docutils literal notranslate"><span class="pre">Core.return_concatenate_location_and_frame()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib-loadimage-module">face01lib.LoadImage module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.LoadImage.LoadImage"><code class="docutils literal notranslate"><span class="pre">LoadImage</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.LoadImage.LoadImage.LI"><code class="docutils literal notranslate"><span class="pre">LoadImage.LI()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.Initialize">face01lib.Initialize module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib.Initialize.Initialize"><code class="docutils literal notranslate"><span class="pre">Initialize</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.Initialize.Initialize.initialize"><code class="docutils literal notranslate"><span class="pre">Initialize.initialize()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib-api-module">face01lib.api module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.api.Dlib_api"><code class="docutils literal notranslate"><span class="pre">Dlib_api</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.api.Dlib_api.compare_faces"><code class="docutils literal notranslate"><span class="pre">Dlib_api.compare_faces()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.api.Dlib_api.face_distance"><code class="docutils literal notranslate"><span class="pre">Dlib_api.face_distance()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.api.Dlib_api.face_encodings"><code class="docutils literal notranslate"><span class="pre">Dlib_api.face_encodings()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.api.Dlib_api.face_locations"><code class="docutils literal notranslate"><span class="pre">Dlib_api.face_locations()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.api.Dlib_api.load_image_file"><code class="docutils literal notranslate"><span class="pre">Dlib_api.load_image_file()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.LoadImage">face01lib.LoadImage module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib.LoadImage.LoadImage"><code class="docutils literal notranslate"><span class="pre">LoadImage</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.LoadImage.LoadImage.LI"><code class="docutils literal notranslate"><span class="pre">LoadImage.LI()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib-load-priset-image-module">face01lib.load_priset_image module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.load_priset_image.load_priset_image"><code class="docutils literal notranslate"><span class="pre">load_priset_image()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib-logger-module">face01lib.logger module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.logger.Logger"><code class="docutils literal notranslate"><span class="pre">Logger</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.logger.Logger.logger"><code class="docutils literal notranslate"><span class="pre">Logger.logger()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib-return-face-image-module">face01lib.return_face_image module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.return_face_image.Return_face_image"><code class="docutils literal notranslate"><span class="pre">Return_face_image</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.return_face_image.Return_face_image.return_face_image"><code class="docutils literal notranslate"><span class="pre">Return_face_image.return_face_image()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.api">face01lib.api module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib.api.Dlib_api"><code class="docutils literal notranslate"><span class="pre">Dlib_api</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.api.Dlib_api.compare_faces"><code class="docutils literal notranslate"><span class="pre">Dlib_api.compare_faces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.api.Dlib_api.face_distance"><code class="docutils literal notranslate"><span class="pre">Dlib_api.face_distance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.api.Dlib_api.face_encodings"><code class="docutils literal notranslate"><span class="pre">Dlib_api.face_encodings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.api.Dlib_api.face_locations"><code class="docutils literal notranslate"><span class="pre">Dlib_api.face_locations()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.api.Dlib_api.load_image_file"><code class="docutils literal notranslate"><span class="pre">Dlib_api.load_image_file()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib-system-check-module">face01lib.system_check module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.system_check.System_check"><code class="docutils literal notranslate"><span class="pre">System_check</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.system_check.System_check.system_check"><code class="docutils literal notranslate"><span class="pre">System_check.system_check()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#face01lib-compile-module">face01lib.compile module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.load_preset_image">face01lib.load_preset_image module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib.load_preset_image.load_preset_image"><code class="docutils literal notranslate"><span class="pre">load_preset_image()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.logger">face01lib.logger module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib.logger.Logger"><code class="docutils literal notranslate"><span class="pre">Logger</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.logger.Logger.logger"><code class="docutils literal notranslate"><span class="pre">Logger.logger()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib-video-capture-module">face01lib.video_capture module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.video_capture.VidCap"><code class="docutils literal notranslate"><span class="pre">VidCap</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.video_capture.VidCap.finalize"><code class="docutils literal notranslate"><span class="pre">VidCap.finalize()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.video_capture.VidCap.frame_generator"><code class="docutils literal notranslate"><span class="pre">VidCap.frame_generator()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.video_capture.VidCap.frame_imshow_for_debug"><code class="docutils literal notranslate"><span class="pre">VidCap.frame_imshow_for_debug()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.video_capture.VidCap.resize_frame"><code class="docutils literal notranslate"><span class="pre">VidCap.resize_frame()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.video_capture.VidCap.return_movie_property"><code class="docutils literal notranslate"><span class="pre">VidCap.return_movie_property()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="face01lib.html#face01lib.video_capture.VidCap.return_vcap"><code class="docutils literal notranslate"><span class="pre">VidCap.return_vcap()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.return_face_image">face01lib.return_face_image module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib.return_face_image.Return_face_image"><code class="docutils literal notranslate"><span class="pre">Return_face_image</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.return_face_image.Return_face_image.return_face_image"><code class="docutils literal notranslate"><span class="pre">Return_face_image.return_face_image()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="face01lib.html#module-face01lib">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="example.html">example package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="example.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="example.html#example-benchmark-cui-module">example.benchmark_CUI module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="example.html#example.benchmark_CUI.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="example.html#example-benchmark-gui-window-module">example.benchmark_GUI_window module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="example.html#example.benchmark_GUI_window.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="example.html#example-display-gui-window-module">example.display_GUI_window module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="example.html#example.display_GUI_window.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="example.html#example-example-logging-module">example.example_logging module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="example.html#example.example_logging.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="example.html#example-simple-module">example.simple module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="example.html#example.simple.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="example.html#module-example">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="tests.html">tests package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tests.html#module-tests">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.spoof">face01lib.spoof module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib.spoof.Spoof"><code class="docutils literal notranslate"><span class="pre">Spoof</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.spoof.Spoof.iris"><code class="docutils literal notranslate"><span class="pre">Spoof.iris()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.spoof.Spoof.make_qr_code"><code class="docutils literal notranslate"><span class="pre">Spoof.make_qr_code()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.spoof.Spoof.obj_detect"><code class="docutils literal notranslate"><span class="pre">Spoof.obj_detect()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.utils">face01lib.utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib.utils.Utils"><code class="docutils literal notranslate"><span class="pre">Utils</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.utils.Utils.align_and_resize_maintain_aspect_ratio"><code class="docutils literal notranslate"><span class="pre">Utils.align_and_resize_maintain_aspect_ratio()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.utils.Utils.create_concat_images"><code class="docutils literal notranslate"><span class="pre">Utils.create_concat_images()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.utils.Utils.distort_barrel"><code class="docutils literal notranslate"><span class="pre">Utils.distort_barrel()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.utils.Utils.get_files_from_path"><code class="docutils literal notranslate"><span class="pre">Utils.get_files_from_path()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.video_capture">face01lib.video_capture module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.html#face01lib.video_capture.VidCap"><code class="docutils literal notranslate"><span class="pre">VidCap</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.video_capture.VidCap.finalize"><code class="docutils literal notranslate"><span class="pre">VidCap.finalize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.video_capture.VidCap.frame_generator"><code class="docutils literal notranslate"><span class="pre">VidCap.frame_generator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.video_capture.VidCap.frame_imshow_for_debug"><code class="docutils literal notranslate"><span class="pre">VidCap.frame_imshow_for_debug()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.video_capture.VidCap.resize_frame"><code class="docutils literal notranslate"><span class="pre">VidCap.resize_frame()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.video_capture.VidCap.return_movie_property"><code class="docutils literal notranslate"><span class="pre">VidCap.return_movie_property()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.html#face01lib.video_capture.VidCap.return_vcap"><code class="docutils literal notranslate"><span class="pre">VidCap.return_vcap()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_SAMPLE">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
 </ul>
 </div>
 </section>
@@ -244,13 +293,13 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="modules.html" class="btn btn-neutral float-right" title="FACE01" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="example.html" class="btn btn-neutral float-right" title="example package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, yKesamaru.</p>
+    <p>&#169; Copyright 2023, yKesamaru.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

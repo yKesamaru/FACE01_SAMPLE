@@ -1,7 +1,7 @@
-example\_logging module
+version\_control module
 =======================
 
-.. automodule:: example_logging
+.. automodule:: version_control
    :members:
    :undoc-members:
    :show-inheritance:

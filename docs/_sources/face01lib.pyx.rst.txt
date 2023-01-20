@@ -1,0 +1,93 @@
+face01lib.pyx package
+=====================
+
+Submodules
+----------
+
+face01lib.pyx.Calc module
+-------------------------
+
+.. automodule:: face01lib.pyx.Calc
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+face01lib.pyx.Core module
+-------------------------
+
+.. automodule:: face01lib.pyx.Core
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+face01lib.pyx.Initialize module
+-------------------------------
+
+.. automodule:: face01lib.pyx.Initialize
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+face01lib.pyx.LoadImage module
+------------------------------
+
+.. automodule:: face01lib.pyx.LoadImage
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+face01lib.pyx.api module
+------------------------
+
+.. automodule:: face01lib.pyx.api
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+face01lib.pyx.compile module
+----------------------------
+
+.. automodule:: face01lib.pyx.compile
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+face01lib.pyx.load\_priset\_image module
+----------------------------------------
+
+.. automodule:: face01lib.pyx.load_priset_image
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+face01lib.pyx.logger module
+---------------------------
+
+.. automodule:: face01lib.pyx.logger
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+face01lib.pyx.return\_face\_image module
+----------------------------------------
+
+.. automodule:: face01lib.pyx.return_face_image
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+face01lib.pyx.video\_capture module
+-----------------------------------
+
+.. automodule:: face01lib.pyx.video_capture
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: face01lib.pyx
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -4,6 +4,8 @@ FACE01
 .. toctree::
    :maxdepth: 4
 
-   face01lib
    example
+   face01lib
+   system_check
    tests
+   version_control

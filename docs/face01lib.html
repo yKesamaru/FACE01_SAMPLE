@@ -4,9 +4,10 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>face01lib package &mdash; FACE01  documentation</title>
+  <title>face01lib package &mdash; FACE01 1.4.11 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -21,7 +22,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="face01lib.models package" href="face01lib.models.html" />
-    <link rel="prev" title="FACE01" href="modules.html" /> 
+    <link rel="prev" title="example package" href="example.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -30,6 +31,7 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
             <a href="index.html" class="icon icon-home"> FACE01
+            <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo_dist.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -41,60 +43,136 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">FACE01</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">face01lib package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="face01lib.models.html">face01lib.models package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">example package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">face01lib package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.models.html">face01lib.models package</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#face01lib-calc-module">face01lib.Calc module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal"><code class="docutils literal notranslate"><span class="pre">Cal</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-face01lib.Calc">face01lib.Calc module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#face01lib.Calc.Cal"><code class="docutils literal notranslate"><span class="pre">Cal</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.HANDLING_FRAME_TIME"><code class="docutils literal notranslate"><span class="pre">Cal.HANDLING_FRAME_TIME</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.HANDLING_FRAME_TIME_FRONT"><code class="docutils literal notranslate"><span class="pre">Cal.HANDLING_FRAME_TIME_FRONT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.HANDLING_FRAME_TIME_REAR"><code class="docutils literal notranslate"><span class="pre">Cal.HANDLING_FRAME_TIME_REAR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.Measure_func"><code class="docutils literal notranslate"><span class="pre">Cal.Measure_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.Measure_processing_time"><code class="docutils literal notranslate"><span class="pre">Cal.Measure_processing_time()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.Measure_processing_time_backward"><code class="docutils literal notranslate"><span class="pre">Cal.Measure_processing_time_backward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.Measure_processing_time_forward"><code class="docutils literal notranslate"><span class="pre">Cal.Measure_processing_time_forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.cal_resized_logo_image"><code class="docutils literal notranslate"><span class="pre">Cal.cal_resized_logo_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.cal_resized_telop_image"><code class="docutils literal notranslate"><span class="pre">Cal.cal_resized_telop_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.cal_specify_date"><code class="docutils literal notranslate"><span class="pre">Cal.cal_specify_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.decide_text_position"><code class="docutils literal notranslate"><span class="pre">Cal.decide_text_position()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.make_draw_rgb_object"><code class="docutils literal notranslate"><span class="pre">Cal.make_draw_rgb_object()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.make_error_messg_rectangle_font"><code class="docutils literal notranslate"><span class="pre">Cal.make_error_messg_rectangle_font()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.pil_img_instance"><code class="docutils literal notranslate"><span class="pre">Cal.pil_img_instance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.return_percentage"><code class="docutils literal notranslate"><span class="pre">Cal.return_percentage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.to_percentage"><code class="docutils literal notranslate"><span class="pre">Cal.to_percentage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.to_tolerance"><code class="docutils literal notranslate"><span class="pre">Cal.to_tolerance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.x1"><code class="docutils literal notranslate"><span class="pre">Cal.x1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.x2"><code class="docutils literal notranslate"><span class="pre">Cal.x2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.y1"><code class="docutils literal notranslate"><span class="pre">Cal.y1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Calc.Cal.y2"><code class="docutils literal notranslate"><span class="pre">Cal.y2</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#face01lib-core-module">face01lib.Core module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#face01lib.Core.Core"><code class="docutils literal notranslate"><span class="pre">Core</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#face01lib-initialize-module">face01lib.Initialize module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#face01lib.Initialize.Initialize"><code class="docutils literal notranslate"><span class="pre">Initialize</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-face01lib.Core">face01lib.Core module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#face01lib.Core.Core"><code class="docutils literal notranslate"><span class="pre">Core</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Core.Core.common_process"><code class="docutils literal notranslate"><span class="pre">Core.common_process()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Core.Core.face_encoding_process"><code class="docutils literal notranslate"><span class="pre">Core.face_encoding_process()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Core.Core.frame_post_processing"><code class="docutils literal notranslate"><span class="pre">Core.frame_post_processing()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Core.Core.frame_pre_processing"><code class="docutils literal notranslate"><span class="pre">Core.frame_pre_processing()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Core.Core.make_frame_datas_array"><code class="docutils literal notranslate"><span class="pre">Core.make_frame_datas_array()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Core.Core.mp_face_detection_func"><code class="docutils literal notranslate"><span class="pre">Core.mp_face_detection_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Core.Core.override_args_dict"><code class="docutils literal notranslate"><span class="pre">Core.override_args_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Core.Core.r_face_image"><code class="docutils literal notranslate"><span class="pre">Core.r_face_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Core.Core.return_anti_spoof"><code class="docutils literal notranslate"><span class="pre">Core.return_anti_spoof()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Core.Core.return_concatenate_location_and_frame"><code class="docutils literal notranslate"><span class="pre">Core.return_concatenate_location_and_frame()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#face01lib-loadimage-module">face01lib.LoadImage module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#face01lib.LoadImage.LoadImage"><code class="docutils literal notranslate"><span class="pre">LoadImage</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#face01lib-api-module">face01lib.api module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#face01lib.api.Dlib_api"><code class="docutils literal notranslate"><span class="pre">Dlib_api</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-face01lib.Initialize">face01lib.Initialize module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#face01lib.Initialize.Initialize"><code class="docutils literal notranslate"><span class="pre">Initialize</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.Initialize.Initialize.initialize"><code class="docutils literal notranslate"><span class="pre">Initialize.initialize()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#face01lib-load-priset-image-module">face01lib.load_priset_image module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#face01lib.load_priset_image.load_priset_image"><code class="docutils literal notranslate"><span class="pre">load_priset_image()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#face01lib-logger-module">face01lib.logger module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#face01lib.logger.Logger"><code class="docutils literal notranslate"><span class="pre">Logger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-face01lib.LoadImage">face01lib.LoadImage module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#face01lib.LoadImage.LoadImage"><code class="docutils literal notranslate"><span class="pre">LoadImage</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.LoadImage.LoadImage.LI"><code class="docutils literal notranslate"><span class="pre">LoadImage.LI()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#face01lib-return-face-image-module">face01lib.return_face_image module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#face01lib.return_face_image.Return_face_image"><code class="docutils literal notranslate"><span class="pre">Return_face_image</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#face01lib-system-check-module">face01lib.system_check module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#face01lib.system_check.System_check"><code class="docutils literal notranslate"><span class="pre">System_check</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-face01lib.api">face01lib.api module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#face01lib.api.Dlib_api"><code class="docutils literal notranslate"><span class="pre">Dlib_api</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.api.Dlib_api.compare_faces"><code class="docutils literal notranslate"><span class="pre">Dlib_api.compare_faces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.api.Dlib_api.face_distance"><code class="docutils literal notranslate"><span class="pre">Dlib_api.face_distance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.api.Dlib_api.face_encodings"><code class="docutils literal notranslate"><span class="pre">Dlib_api.face_encodings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.api.Dlib_api.face_locations"><code class="docutils literal notranslate"><span class="pre">Dlib_api.face_locations()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.api.Dlib_api.load_image_file"><code class="docutils literal notranslate"><span class="pre">Dlib_api.load_image_file()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#face01lib-video-capture-module">face01lib.video_capture module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#face01lib.video_capture.VidCap"><code class="docutils literal notranslate"><span class="pre">VidCap</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-face01lib">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#face01lib-compile-module">face01lib.compile module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-face01lib.load_preset_image">face01lib.load_preset_image module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#face01lib.load_preset_image.load_preset_image"><code class="docutils literal notranslate"><span class="pre">load_preset_image()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="example.html">example package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tests.html">tests package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-face01lib.logger">face01lib.logger module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#face01lib.logger.Logger"><code class="docutils literal notranslate"><span class="pre">Logger</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.logger.Logger.logger"><code class="docutils literal notranslate"><span class="pre">Logger.logger()</span></code></a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-face01lib.return_face_image">face01lib.return_face_image module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#face01lib.return_face_image.Return_face_image"><code class="docutils literal notranslate"><span class="pre">Return_face_image</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.return_face_image.Return_face_image.return_face_image"><code class="docutils literal notranslate"><span class="pre">Return_face_image.return_face_image()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-face01lib.spoof">face01lib.spoof module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#face01lib.spoof.Spoof"><code class="docutils literal notranslate"><span class="pre">Spoof</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.spoof.Spoof.iris"><code class="docutils literal notranslate"><span class="pre">Spoof.iris()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.spoof.Spoof.make_qr_code"><code class="docutils literal notranslate"><span class="pre">Spoof.make_qr_code()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.spoof.Spoof.obj_detect"><code class="docutils literal notranslate"><span class="pre">Spoof.obj_detect()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-face01lib.utils">face01lib.utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#face01lib.utils.Utils"><code class="docutils literal notranslate"><span class="pre">Utils</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.utils.Utils.align_and_resize_maintain_aspect_ratio"><code class="docutils literal notranslate"><span class="pre">Utils.align_and_resize_maintain_aspect_ratio()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.utils.Utils.create_concat_images"><code class="docutils literal notranslate"><span class="pre">Utils.create_concat_images()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.utils.Utils.distort_barrel"><code class="docutils literal notranslate"><span class="pre">Utils.distort_barrel()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.utils.Utils.get_files_from_path"><code class="docutils literal notranslate"><span class="pre">Utils.get_files_from_path()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-face01lib.video_capture">face01lib.video_capture module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#face01lib.video_capture.VidCap"><code class="docutils literal notranslate"><span class="pre">VidCap</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.video_capture.VidCap.finalize"><code class="docutils literal notranslate"><span class="pre">VidCap.finalize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.video_capture.VidCap.frame_generator"><code class="docutils literal notranslate"><span class="pre">VidCap.frame_generator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.video_capture.VidCap.frame_imshow_for_debug"><code class="docutils literal notranslate"><span class="pre">VidCap.frame_imshow_for_debug()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.video_capture.VidCap.resize_frame"><code class="docutils literal notranslate"><span class="pre">VidCap.resize_frame()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.video_capture.VidCap.return_movie_property"><code class="docutils literal notranslate"><span class="pre">VidCap.return_movie_property()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.video_capture.VidCap.return_vcap"><code class="docutils literal notranslate"><span class="pre">VidCap.return_vcap()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-face01lib">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_SAMPLE">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
 </ul>
 
         </div>
@@ -110,11 +188,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="modules.html">FACE01</a> &raquo;</li>
-      <li>face01lib package</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">face01lib package</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/face01lib.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -147,11 +223,11 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
 </section>
-<section id="face01lib-calc-module">
-<h2>face01lib.Calc module<a class="headerlink" href="#face01lib-calc-module" title="Permalink to this heading"></a></h2>
+<section id="module-face01lib.Calc">
+<span id="face01lib-calc-module"></span><h2>face01lib.Calc module<a class="headerlink" href="#module-face01lib.Calc" title="Permalink to this heading"></a></h2>
 <p>A module that performs various calculations.</p>
 <p>Calculation results are output to log</p>
-<span class="target" id="module-face01lib.Calc"></span><dl class="py class">
+<dl class="py class">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.Calc.</span></span><span class="sig-name descname"><span class="pre">Cal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.Calc.Cal" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -238,13 +314,15 @@
 <dd class="field-odd"><p>Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]]</p>
 </dd>
 </dl>
-<p class="rubric">Example</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cal_resized_logo_nums</span> <span class="o">=</span> <span class="n">Cal</span><span class="p">()</span><span class="o">.</span><span class="n">cal_resized_logo_image</span><span class="p">(</span>
 <span class="go">        resized_logo_image,</span>
 <span class="go">        set_height,</span>
 <span class="go">        set_width</span>
 <span class="go">    )</span>
 </pre></div>
+</div>
 </div>
 </dd></dl>
 
@@ -263,9 +341,11 @@
 <dd class="field-odd"><p>Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]]</p>
 </dd>
 </dl>
-<p class="rubric">Example</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cal_resized_telop_nums</span> <span class="o">=</span> <span class="n">Cal</span><span class="p">()</span><span class="o">.</span><span class="n">cal_resized_telop_image</span><span class="p">(</span><span class="n">resized_telop_image</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </dd></dl>
 
@@ -336,9 +416,11 @@
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
-<p class="rubric">Example</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">percentage</span> <span class="o">=</span> <span class="n">Cal</span><span class="p">()</span><span class="o">.</span><span class="n">return_percentage</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </dd></dl>
 
@@ -374,9 +456,11 @@
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
-<p class="rubric">Example</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Cal</span><span class="p">()</span><span class="o">.</span><span class="n">to_tolerance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;similar_percentage&quot;</span><span class="p">])</span>
 </pre></div>
+</div>
 </div>
 </dd></dl>
 
@@ -403,37 +487,10 @@
 </dd></dl>
 
 </section>
-<section id="face01lib-core-module">
-<h2>face01lib.Core module<a class="headerlink" href="#face01lib-core-module" title="Permalink to this heading"></a></h2>
+<section id="module-face01lib.Core">
+<span id="face01lib-core-module"></span><h2>face01lib.Core module<a class="headerlink" href="#module-face01lib.Core" title="Permalink to this heading"></a></h2>
 <p>Reference.</p>
 <ul>
-<li><dl class="simple">
-<dt>‘cython’ compile option:</dt><dd><ul class="simple">
-<li><dl class="simple">
-<dt>‘cython’ options which have enabled</dt><dd><ul>
-<li><p>‘cython’: language_level=3</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>‘cython’ options not enabled</dt><dd><ul>
-<li><p>‘cython’: profile = True</p></li>
-<li><p>‘cython’: boundscheck = False</p></li>
-<li><p>‘cython’: wraparound = False</p></li>
-<li><p>‘cython’: initializedcheck = False</p></li>
-<li><p>‘cython’: cdivision = True</p></li>
-<li><p>‘cython’: always_allow_keywords = False</p></li>
-<li><p>‘cython’: unraisable_tracebacks = False</p></li>
-<li><p>‘cython’: binding = False</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
 <li><dl>
 <dt>Data structure:</dt><dd><ul>
 <li><dl>
@@ -542,7 +599,7 @@
 </dl>
 </li>
 </ul>
-<span class="target" id="module-face01lib.Core"></span><dl class="py class">
+<dl class="py class">
 <dt class="sig sig-object py" id="face01lib.Core.Core">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.Core.</span></span><span class="sig-name descname"><span class="pre">Core</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.Core.Core" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -552,10 +609,12 @@
 <dt class="sig sig-object py" id="face01lib.Core.Core.common_process">
 <span class="sig-name descname"><span class="pre">common_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CONFIG</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Generator</span></span></span><a class="headerlink" href="#face01lib.Core.Core.common_process" title="Permalink to this definition"></a></dt>
 <dd><p>Generator of frame_datas_array.</p>
-<p>common_process function consists 3 part of Core() methods.
-- Core().frame_pre_processing
-- Core().face_encoding_process
-- Core().frame_post_processing</p>
+<p>common_process function consists 3 part of Core() methods.</p>
+<ol class="arabic simple">
+<li><p>Core().frame_pre_processing</p></li>
+<li><p>Core().face_encoding_process</p></li>
+<li><p>Core().frame_post_processing</p></li>
+</ol>
 <dl class="field-list">
 <dt class="field-odd">Yields</dt>
 <dd class="field-odd"><p><em>Generator</em> –</p>
@@ -567,7 +626,8 @@
 </dl>
 </dd>
 </dl>
-<p class="rubric">Example</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
 <p>Make generator object</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">obj</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span><span class="o">.</span><span class="n">common_process</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span>
 </pre></div>
@@ -576,6 +636,7 @@
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 <span class="go">    frame_datas_array = obj.__next__()</span>
 </pre></div>
+</div>
 </div>
 </dd></dl>
 
@@ -683,7 +744,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Core.Core.frame_pre_processing">
 <span class="sig-name descname"><span class="pre">frame_pre_processing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CONFIG</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resized_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.Core.Core.frame_pre_processing" title="Permalink to this definition"></a></dt>
-<dd><p>Return frame_datas_array.</p>
+<dd><p>Return <cite>frame_datas_array</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -693,12 +754,88 @@
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>frame_datas_array</p>
+<dd class="field-even"><p><cite>frame_datas_array</cite></p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>List[Dict]</p>
 </dd>
 </dl>
+<dl>
+<dt>Processing:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>If CONFIG[“headless”] == False</dt><dd><ul>
+<li><p>copy frame data for <cite>overlay</cite></p></li>
+<li><p>composite <cite>telop</cite> and <cite>logo</cite></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Compute face coordinates</p></li>
+<li><dl class="simple">
+<dt>Make <cite>frame_datas</cite></dt><dd><ul>
+<li><p><cite>img</cite></p></li>
+<li><p><cite>face_location_list</cite></p></li>
+<li><dl class="simple">
+<dt><cite>overlay</cite></dt><dd><ul>
+<li><dl class="simple">
+<dt>If <cite>CONFIG[“headless”] == True</cite>, insert <cite>dummy data</cite></dt><dd><ul>
+<li><p>np.empty((2,2,3), dtype=np.uint8)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><cite>person_data_list</cite></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Make <cite>frame_datas_array</cite></dt><dd><ul>
+<li><p>frame_datas_array.append(frame_datas)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt>Data structure of <cite>frame_datas_array</cite>:</dt><dd><ul class="simple">
+<li><p><cite>overlay</cite> (npt.NDArray[np.uint8])</p></li>
+<li><p><cite>face_location_list</cite> (List[Tuple[int,int,int,int]])</p></li>
+<li><p><cite>name</cite> (str)</p></li>
+<li><p><cite>filename</cite> (str)</p></li>
+<li><p><cite>percentage_and_symbol</cite> (str)</p></li>
+<li><p><cite>person_data_list</cite> (List)</p></li>
+<li><p><cite>frame_datas_array</cite> (List[Dict])</p></li>
+<li><p><cite>resized_frame</cite> (npt.NDArray[np.uint8])</p></li>
+</ul>
+<p>See <cite>Core.make_frame_datas_array()</cite></p>
+</dd>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">exec_times</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="go"># Initialize</span>
+<span class="go">CONFIG: Dict =  Initialize(&#39;FACE-COORDINATE&#39;, &#39;info&#39;).initialize()</span>
+<span class="go"># Make generator</span>
+<span class="go">frame_generator_obj = VidCap().frame_generator(CONFIG)</span>
+<span class="go"># Make logger</span>
+<span class="go">import os.path</span>
+<span class="go">dir: str = os.path.dirname(__file__)</span>
+<span class="go">log = Logger().logger(__file__, dir)</span>
+<span class="go"># Make generator</span>
+<span class="go">core = Core()</span>
+<span class="go"># Repeat &#39;exec_times&#39; times</span>
+<span class="go">for i in range(0, exec_times):</span>
+<span class="go">    # Call __next__() from the generator object</span>
+<span class="go">    resized_frame = frame_generator_obj.__next__()</span>
+<span class="go">    frame_datas_array = core.frame_pre_processing(log, CONFIG,resized_frame)</span>
+</pre></div>
+</div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -726,7 +863,8 @@
 <dd class="field-odd"><p>List[Dict]</p>
 </dd>
 </dl>
-<p class="rubric">Example</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
 <p>person_data</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">{</span>
 <span class="go">    &#39;name&#39;: name,</span>
@@ -754,11 +892,12 @@
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">frame_datas_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frame_datas</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Core.Core.mp_face_detection_func">
-<span class="sig-name descname"><span class="pre">mp_face_detection_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resized_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_selection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_detection_confidence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.4</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">&lt;module</span> <span class="pre">'mediapipe.python.solution_base'</span> <span class="pre">from</span> <span class="pre">'/home/terms/bin/FACE01/lib/python3.8/site-packages/mediapipe/python/solution_base.py'&gt;</span></span></span><a class="headerlink" href="#face01lib.Core.Core.mp_face_detection_func" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">mp_face_detection_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resized_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_selection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_detection_confidence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.Core.Core.mp_face_detection_func" title="Permalink to this definition"></a></dt>
 <dd><p>Processes an RGB image and returns a list of the detected face location data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -777,6 +916,10 @@ detected face location data.’</p>
 <dt>Refer:</dt><dd><p><a class="reference external" href="https://solutions.mediapipe.dev/face_detection#python-solution-api">https://solutions.mediapipe.dev/face_detection#python-solution-api</a></p>
 </dd>
 </dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><cite>number_of_people</cite> and <cite>same_time_recognize</cite> in config.ini are disabled when using <cite>mp_face_detection_func</cite>.</p>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -797,7 +940,8 @@ detected face location data.’</p>
 <dd class="field-odd"><p>Dict</p>
 </dd>
 </dl>
-<p class="rubric">Example</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CONFIG</span> <span class="o">=</span> <span class="n">Core</span><span class="o">.</span><span class="n">override_args_dict</span><span class="p">(</span>
 <span class="go">    CONFIG,</span>
 <span class="go">    [</span>
@@ -806,6 +950,7 @@ detected face location data.’</p>
 <span class="go">    ]</span>
 <span class="go">)</span>
 </pre></div>
+</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -913,8 +1058,8 @@ It might occur side effects.</p>
 </dd></dl>
 
 </section>
-<section id="face01lib-initialize-module">
-<h2>face01lib.Initialize module<a class="headerlink" href="#face01lib-initialize-module" title="Permalink to this heading"></a></h2>
+<section id="module-face01lib.Initialize">
+<span id="face01lib-initialize-module"></span><h2>face01lib.Initialize module<a class="headerlink" href="#module-face01lib.Initialize" title="Permalink to this heading"></a></h2>
 <p>Load config.ini and return CONFIG dictionary data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">returns</dt>
@@ -924,7 +1069,7 @@ It might occur side effects.</p>
 <dd class="field-even"><p>dict</p>
 </dd>
 </dl>
-<span class="target" id="module-face01lib.Initialize"></span><dl class="py class">
+<dl class="py class">
 <dt class="sig sig-object py" id="face01lib.Initialize.Initialize">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.Initialize.</span></span><span class="sig-name descname"><span class="pre">Initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'DEFAULT'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.Initialize.Initialize" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -943,19 +1088,21 @@ Dictionary of initialized preferences</p>
 <dd class="field-even"><p>Dict</p>
 </dd>
 </dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span>  <span class="n">Initialize</span><span class="p">()</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span>  <span class="n">Initialize</span><span class="p">(</span><span class="s2">&quot;SECTION&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
 </pre></div>
+</div>
 </div>
 </dd></dl>
 
 </dd></dl>
 
 </section>
-<section id="face01lib-loadimage-module">
-<h2>face01lib.LoadImage module<a class="headerlink" href="#face01lib-loadimage-module" title="Permalink to this heading"></a></h2>
+<section id="module-face01lib.LoadImage">
+<span id="face01lib-loadimage-module"></span><h2>face01lib.LoadImage module<a class="headerlink" href="#module-face01lib.LoadImage" title="Permalink to this heading"></a></h2>
 <p>Load image class.</p>
-<span class="target" id="module-face01lib.LoadImage"></span><dl class="py class">
+<dl class="py class">
 <dt class="sig sig-object py" id="face01lib.LoadImage.LoadImage">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.LoadImage.</span></span><span class="sig-name descname"><span class="pre">LoadImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headless</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conf_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.LoadImage.LoadImage" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -997,8 +1144,8 @@ unregistered_face_image (Union[cv2.Mat, None]): Loaded image data as ndarray or 
 </dd></dl>
 
 </section>
-<section id="face01lib-api-module">
-<h2>face01lib.api module<a class="headerlink" href="#face01lib-api-module" title="Permalink to this heading"></a></h2>
+<section id="module-face01lib.api">
+<span id="face01lib-api-module"></span><h2>face01lib.api module<a class="headerlink" href="#module-face01lib.api" title="Permalink to this heading"></a></h2>
 <p>Summary.</p>
 <dl class="simple">
 <dt>COPYRIGHT:</dt><dd><p>This code is based on ‘face_recognition’ written by Adam Geitgey (ageitgey),
@@ -1092,7 +1239,7 @@ and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
 <p>See bellow</p>
 <p><a class="reference external" href="https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py">https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py</a></p>
 </div>
-<span class="target" id="module-face01lib.api"></span><dl class="py class">
+<dl class="py class">
 <dt class="sig sig-object py" id="face01lib.api.Dlib_api">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.api.</span></span><span class="sig-name descname"><span class="pre">Dlib_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.api.Dlib_api" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -1206,18 +1353,21 @@ That is, centered and scaled essentially the same way.</p>
 </dd></dl>
 
 </section>
-<section id="face01lib-load-priset-image-module">
-<h2>face01lib.load_priset_image module<a class="headerlink" href="#face01lib-load-priset-image-module" title="Permalink to this heading"></a></h2>
-<p>Load priset images.</p>
-<span class="target" id="module-face01lib.load_priset_image"></span><dl class="py function">
-<dt class="sig sig-object py" id="face01lib.load_priset_image.load_priset_image">
-<span class="sig-prename descclassname"><span class="pre">face01lib.load_priset_image.</span></span><span class="sig-name descname"><span class="pre">load_priset_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RootDir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priset_face_imagesDir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsampling</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'hog'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'small'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.load_priset_image.load_priset_image" title="Permalink to this definition"></a></dt>
-<dd><p>Load face image from priset_face_images folder.</p>
+<section id="face01lib-compile-module">
+<h2>face01lib.compile module<a class="headerlink" href="#face01lib-compile-module" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-face01lib.load_preset_image">
+<span id="face01lib-load-preset-image-module"></span><h2>face01lib.load_preset_image module<a class="headerlink" href="#module-face01lib.load_preset_image" title="Permalink to this heading"></a></h2>
+<p>Load preset images.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.load_preset_image.load_preset_image">
+<span class="sig-prename descclassname"><span class="pre">face01lib.load_preset_image.</span></span><span class="sig-name descname"><span class="pre">load_preset_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RootDir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preset_face_imagesDir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsampling</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'hog'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'small'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.load_preset_image.load_preset_image" title="Permalink to this definition"></a></dt>
+<dd><p>Load face image from preset_face_images folder.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>RootDir</strong> (<em>str</em>) – Root directory</p></li>
-<li><p><strong>priset_face_imagesDir</strong> (<em>str</em>) – Path to priset_face_images folder</p></li>
+<li><p><strong>preset_face_imagesDir</strong> (<em>str</em>) – Path to preset_face_images folder</p></li>
 <li><p><strong>upsampling</strong> (<em>int</em><em>, </em><em>optional</em>) – Value of upsampling. Defaults to 0.</p></li>
 <li><p><strong>jitters</strong> (<em>int</em><em>, </em><em>optional</em>) – Value of jitters. Defaults to 100.</p></li>
 <li><p><strong>mode</strong> (<em>str</em><em>, </em><em>optional</em>) – You can select from hog or cnn. Defaults to ‘hog’.</p></li>
@@ -1248,21 +1398,23 @@ That is, centered and scaled essentially the same way.</p>
 <dd class="field-odd"><p>Tuple[List, List]</p>
 </dd>
 </dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">known_face_encodings</span><span class="p">,</span> <span class="n">known_face_names</span> <span class="o">=</span> <span class="n">load_priset_image</span><span class="p">(</span>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">known_face_encodings</span><span class="p">,</span> <span class="n">known_face_names</span> <span class="o">=</span> <span class="n">load_preset_image</span><span class="p">(</span>
 <span class="go">    self,</span>
 <span class="go">    self.conf_dict[&quot;RootDir&quot;],</span>
-<span class="go">    self.conf_dict[&quot;priset_face_imagesDir&quot;]</span>
+<span class="go">    self.conf_dict[&quot;preset_face_imagesDir&quot;]</span>
 <span class="go">)</span>
 </pre></div>
+</div>
 </div>
 </dd></dl>
 
 </section>
-<section id="face01lib-logger-module">
-<h2>face01lib.logger module<a class="headerlink" href="#face01lib-logger-module" title="Permalink to this heading"></a></h2>
+<section id="module-face01lib.logger">
+<span id="face01lib-logger-module"></span><h2>face01lib.logger module<a class="headerlink" href="#module-face01lib.logger" title="Permalink to this heading"></a></h2>
 <p>Manage log.</p>
-<span class="target" id="module-face01lib.logger"></span><dl class="py class">
+<dl class="py class">
 <dt class="sig sig-object py" id="face01lib.logger.Logger">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.logger.</span></span><span class="sig-name descname"><span class="pre">Logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.logger.Logger" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -1285,7 +1437,8 @@ That is, centered and scaled essentially the same way.</p>
 <dd class="field-odd"><p>Logger object</p>
 </dd>
 </dl>
-<p class="rubric">Example</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os.path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.Initialize</span> <span class="kn">import</span> <span class="n">Initialize</span>
 <span class="go">&gt;&gt;&gt;</span>
@@ -1297,15 +1450,16 @@ That is, centered and scaled essentially the same way.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;log_level&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">parent_dir</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
 </dd></dl>
 
 </dd></dl>
 
 </section>
-<section id="face01lib-return-face-image-module">
-<h2>face01lib.return_face_image module<a class="headerlink" href="#face01lib-return-face-image-module" title="Permalink to this heading"></a></h2>
+<section id="module-face01lib.return_face_image">
+<span id="face01lib-return-face-image-module"></span><h2>face01lib.return_face_image module<a class="headerlink" href="#module-face01lib.return_face_image" title="Permalink to this heading"></a></h2>
 <p>Return face image data as ndarray.</p>
-<span class="target" id="module-face01lib.return_face_image"></span><dl class="py class">
+<dl class="py class">
 <dt class="sig sig-object py" id="face01lib.return_face_image.Return_face_image">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.return_face_image.</span></span><span class="sig-name descname"><span class="pre">Return_face_image</span></span><a class="headerlink" href="#face01lib.return_face_image.Return_face_image" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -1333,26 +1487,115 @@ That is, centered and scaled essentially the same way.</p>
 </dd></dl>
 
 </section>
-<section id="face01lib-system-check-module">
-<h2>face01lib.system_check module<a class="headerlink" href="#face01lib-system-check-module" title="Permalink to this heading"></a></h2>
-<p>CHECK SYSTEM INFORMATION.</p>
-<p>This module is EXPERIMENTAL</p>
-<span class="target" id="module-face01lib.system_check"></span><dl class="py class">
-<dt class="sig sig-object py" id="face01lib.system_check.System_check">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.system_check.</span></span><span class="sig-name descname"><span class="pre">System_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.system_check.System_check" title="Permalink to this definition"></a></dt>
+<section id="module-face01lib.spoof">
+<span id="face01lib-spoof-module"></span><h2>face01lib.spoof module<a class="headerlink" href="#module-face01lib.spoof" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="face01lib.spoof.Spoof">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.spoof.</span></span><span class="sig-name descname"><span class="pre">Spoof</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.spoof.Spoof" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>System check class.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This is EXPERIMENTAL class, so it might occur side effects.</p>
-</div>
 <dl class="py method">
-<dt class="sig sig-object py" id="face01lib.system_check.System_check.system_check">
-<span class="sig-name descname"><span class="pre">system_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CONFIG</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.system_check.System_check.system_check" title="Permalink to this definition"></a></dt>
-<dd><p>Check user system configuration.</p>
+<dt class="sig sig-object py" id="face01lib.spoof.Spoof.iris">
+<span class="sig-name descname"><span class="pre">iris</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.spoof.Spoof.iris" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.spoof.Spoof.make_qr_code">
+<span class="sig-name descname"><span class="pre">make_qr_code</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.spoof.Spoof.make_qr_code" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.spoof.Spoof.obj_detect">
+<span class="sig-name descname"><span class="pre">obj_detect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.spoof.Spoof.obj_detect" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-face01lib.utils">
+<span id="face01lib-utils-module"></span><h2>face01lib.utils module<a class="headerlink" href="#module-face01lib.utils" title="Permalink to this heading"></a></h2>
+<p>The utils class.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="face01lib.utils.Utils">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.utils.</span></span><span class="sig-name descname"><span class="pre">Utils</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.utils.Utils" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Utils class.</p>
+<p>contains convenience methods</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.utils.Utils.align_and_resize_maintain_aspect_ratio">
+<span class="sig-name descname"><span class="pre">align_and_resize_maintain_aspect_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#face01lib.utils.Utils.align_and_resize_maintain_aspect_ratio" title="Permalink to this definition"></a></dt>
+<dd><p>Align and resize input image with maintain aspect ratio.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>CONFIG</strong> (<em>Dict</em>) – Receive CONFIG which described in config.ini.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – file path which contain file name</p></li>
+<li><p><strong>padding</strong> (<em>float</em>) – Padding around the face. Large = 0.8, Medium = 0.4, Small = 0.25. Default = 0.4</p></li>
+<li><p><strong>size</strong> (<em>int</em><em>, </em><em>optional</em>) – Resized size of image data. Default is 200.</p></li>
+<li><p><strong>contain</strong> (<em>str</em>) – Contain word in the directory</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.utils.Utils.create_concat_images">
+<span class="sig-name descname"><span class="pre">create_concat_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#face01lib.utils.Utils.create_concat_images" title="Permalink to this definition"></a></dt>
+<dd><p>Create tile images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> (<em>str</em>) – absolute file path</p></li>
+<li><p><strong>size</strong> (<em>int</em>) – image size. Default is 200.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.utils.Utils.distort_barrel">
+<span class="sig-name descname"><span class="pre">distort_barrel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">closing_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#face01lib.utils.Utils.distort_barrel" title="Permalink to this definition"></a></dt>
+<dd><p>Distort barrel.</p>
+<p>Takes a path which contained png, jpg, jpeg files in the directory,
+distort barrel and saves them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – absolute path</p></li>
+<li><p><strong>size</strong> (<em>int</em><em>, </em><em>optional</em>) – Width and height. Defaults to 200.</p></li>
+<li><p><strong>initial_value</strong> (<em>float</em>) – Initial value. Default is -0.2.</p></li>
+<li><p><strong>closing_value</strong> (<em>float</em>) – Closing value. Default is 0.2.</p></li>
+<li><p><strong>step_value</strong> (<em>float</em>) – Step value. Default is 0.01.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ImageMagick must be installed on your system.
+- See[ImageMagick](<a class="reference external" href="https://imagemagick.org/script/download.php">https://imagemagick.org/script/download.php</a>)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.utils.Utils.get_files_from_path">
+<span class="sig-name descname"><span class="pre">get_files_from_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'resize'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#face01lib.utils.Utils.get_files_from_path" title="Permalink to this definition"></a></dt>
+<dd><p>Receive path, return files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – Directory path</p></li>
+<li><p><strong>contain</strong> (<em>str</em>) – Contain word</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Files in received path (absolute path)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1360,10 +1603,10 @@ That is, centered and scaled essentially the same way.</p>
 </dd></dl>
 
 </section>
-<section id="face01lib-video-capture-module">
-<h2>face01lib.video_capture module<a class="headerlink" href="#face01lib-video-capture-module" title="Permalink to this heading"></a></h2>
+<section id="module-face01lib.video_capture">
+<span id="face01lib-video-capture-module"></span><h2>face01lib.video_capture module<a class="headerlink" href="#module-face01lib.video_capture" title="Permalink to this heading"></a></h2>
 <p>The VidCap class.</p>
-<span class="target" id="module-face01lib.video_capture"></span><dl class="py class">
+<dl class="py class">
 <dt class="sig sig-object py" id="face01lib.video_capture.VidCap">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.video_capture.</span></span><span class="sig-name descname"><span class="pre">VidCap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.video_capture.VidCap" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -1482,14 +1725,14 @@ That is, centered and scaled essentially the same way.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="modules.html" class="btn btn-neutral float-left" title="FACE01" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="example.html" class="btn btn-neutral float-left" title="example package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="face01lib.models.html" class="btn btn-neutral float-right" title="face01lib.models package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, yKesamaru.</p>
+    <p>&#169; Copyright 2023, yKesamaru.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
