@@ -113,6 +113,15 @@ python example/benchmark_CUI.py
 # 6. Benchmark with GUI mode
 python example/benchmark_GUI_window.py
 
+# Other
+- example/aligned_crop_face.py
+- example/anti_spoof.py
+- example/distort_barrel.py
+- example/draw_datas.py
+- example/face_coordinates.py
+- example/get_encoded_data.py
+- example/lightweight_GUI.py
+
 ```
 
 
