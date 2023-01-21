@@ -42,6 +42,7 @@ FACE01 is a **face recognition library** that integrates various functions and c
 - ...and many others!
 
 # Install
+Setting up your FACE01 develop environment is really easy !
 ## INSTALL_FACE01.sh
 See [here](docs/Installation.md).
 ## Docker
@@ -98,3 +99,4 @@ I would like to acknowledgments those who have published such wonderful librarie
 6. [openvino2tensorflow](https://github.com/PINTO0309/openvino2tensorflow) / Katsuya Hyodo (PINTO0309)
 7. [PINTO_model_zoo](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3) / Katsuya Hyodo (PINTO0309)
 8. [FaceDetection-Anti-Spoof-Demo](https://github.com/Kazuhito00/FaceDetection-Anti-Spoof-Demo) / KazuhitoTakahashi (Kazuhito00)
+9. Some images from [Pakutaso](https://www.pakutaso.com/), [pixabay](https://pixabay.com/ja/)
