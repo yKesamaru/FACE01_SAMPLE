@@ -53,6 +53,7 @@ If you cannot use Docker by any means, please refer to [here](docs/Installation.
 # Document
 - [Step-by-step to use FACE01 library](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/example_doc.md#step-by-step-to-use-face01-library)
 <img src="docs/img/step-by-step.png" width="200px" >
+
 - [Comprehensive and detailed documentation](https://ykesamaru.github.io/FACE01_SAMPLE/index.html)
 <img src="docs/img/document.png" width="200px" >
 
