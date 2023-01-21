@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/g1320.png" width="200px">
 
-![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE) ![](https://img.shields.io/badge/Release-v1.4.11-blue) ![](https://img.shields.io/badge/Python-%3E%3D3.8-blue)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE) ![](https://img.shields.io/badge/Release-v1.4.11-blue) ![](https://img.shields.io/badge/Python-%3E%3D3.8-blue) ![](https://img.shields.io/github/deployments/yKesamaru/FACE01_SAMPLE/github-pages)
 
 ![](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/img/ROMAN_HOLIDAY.GIF?raw=true)
 
