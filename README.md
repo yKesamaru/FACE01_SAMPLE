@@ -1,8 +1,6 @@
-![Logo](https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/g1320.png)
+<img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/g1320.png" width="200px">
 
-![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE)
-
-![](https://img.shields.io/badge/Release-v1.4.11-blue)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE) ![](https://img.shields.io/badge/Release-v1.4.11-blue) ![](https://img.shields.io/badge/Python-%3E%3D3.8-blue)
 
 ![](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/img/ROMAN_HOLIDAY.GIF?raw=true)
 
@@ -20,7 +18,9 @@ Audrey Hepburn
 
 TOC
 1. [About FACE01](#about-face01)
-2. [Docker](#docker)
+2. [Install](#install)
+   1. [INSTALL\_FACE01.sh](#install_face01sh)
+   2. [Docker](#docker)
 3. [Configuration](#configuration)
 4. [Example](#example)
 5. [Update](#update)
@@ -40,8 +40,10 @@ FACE01 is a **face recognition library** that integrates various functions and c
 - You can use many function for `face-recognition` and `Image-processing` (See [Useful FACE01 library](https://ykesamaru.github.io/FACE01_SAMPLE/))
 - ...and many others!
 
-
-# Docker
+# Install
+## INSTALL_FACE01.sh
+See [here](docs/Installation.md).
+## Docker
 The easiest way to use Docker is to pull the image.  
 See [here](docs/docker.md).
 
@@ -56,7 +58,11 @@ See [here](docs/config_ini.md).
 There are some example files in the example folder.  
 Let's try *step-by-step* examples.  
 See [here](docs/example_doc.md).
-
+<div>
+<img src="docs/img/benchmark_GUI.png" width="200px" >
+<img src="docs/img/distort_barrel.png" width="200px" >
+<img src="docs/img/benchmark_GUI_window.png" width="200px" >
+</div>
 If you want to see the exhaustive document, see [here](https://ykesamaru.github.io/FACE01_SAMPLE/).
 
 
