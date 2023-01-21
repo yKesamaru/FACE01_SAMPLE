@@ -21,11 +21,12 @@ TOC
 2. [Install](#install)
    1. [INSTALL\_FACE01.sh](#install_face01sh)
    2. [Docker](#docker)
-3. [Configuration](#configuration)
-4. [Example](#example)
-5. [Update](#update)
-6. [Note](#note)
-7. [Acknowledgments](#acknowledgments)
+3. [Document](#document)
+4. [Configuration](#configuration)
+5. [Example](#example)
+6. [Update](#update)
+7. [Note](#note)
+8. [Acknowledgments](#acknowledgments)
 
 # About FACE01
 FACE01 is a **face recognition library** that integrates various functions and can be called from **Python**.
@@ -49,6 +50,11 @@ See [here](docs/docker.md).
 
 If you cannot use Docker by any means, please refer to [here](docs/Installation.md).
 
+# Document
+- [Step-by-step to use FACE01 library](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/example_doc.md#step-by-step-to-use-face01-library)
+<img src="docs/img/step-by-step.png" width="200px" >
+- [Comprehensive and detailed documentation](https://ykesamaru.github.io/FACE01_SAMPLE/index.html)
+<img src="docs/img/document.png" width="200px" >
 
 # Configuration
 See [here](docs/config_ini.md).
@@ -58,11 +64,14 @@ See [here](docs/config_ini.md).
 There are some example files in the example folder.  
 Let's try *step-by-step* examples.  
 See [here](docs/example_doc.md).
+
 <div>
 <img src="docs/img/benchmark_GUI.png" width="200px" >
 <img src="docs/img/distort_barrel.png" width="200px" >
 <img src="docs/img/benchmark_GUI_window.png" width="200px" >
+<img src="docs/img/20_times.png" width="200px" >
 </div>
+
 If you want to see the exhaustive document, see [here](https://ykesamaru.github.io/FACE01_SAMPLE/).
 
 
