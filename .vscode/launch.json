@@ -68,7 +68,7 @@
       "name": "lightweight_GUI.py",
       "type": "python",
       "request": "launch",
-      "cwd": "/home/terms/bin/FACE01/example",
+      "cwd": "/home/terms/bin/FACE01/",
       "program": "/home/terms/bin/FACE01/example/lightweight_GUI.py",
       "console": "integratedTerminal",
       "python": "/home/terms/bin/FACE01/bin/python"

@@ -4,13 +4,14 @@ Summary:
     In this example, you can learn how to execute FACE01 as simple.
 
 Usage:
-    >>> python3 simple.py
-
+    .. code-block:: bash
+    
+        python3 example/simple.py
 """
-
 # Operate directory: Common to all examples
 import os.path
 import sys
+
 dir: str = os.path.dirname(__file__)
 parent_dir, _ = os.path.split(dir)
 sys.path.append(parent_dir)
@@ -20,7 +21,19 @@ from typing import Dict
 
 from face01lib.Core import Core
 from face01lib.Initialize import Initialize
+from face01lib.logger import Logger
 
+# Initialize
+CONFIG: Dict =  Initialize('DEFAULT', 'info').initialize()
+# Set up logger
+logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
+"""Initialize and Setup logger.
+When coding a program that uses FACE01, code `initialize` and `logger` first.
+This will read the configuration file `config.ini` and log errors etc.
+"""
+
+# Make generator
+gen = Core().common_process(CONFIG)
 
 def main(exec_times: int = 50) -> None:
     """Simple example.
@@ -30,14 +43,6 @@ def main(exec_times: int = 50) -> None:
     Args:
         exec_times (int, optional): Number of frames for process. Defaults to 50.
     """    
-    # Initialize
-    CONFIG: Dict =  Initialize('DEFAULT', 'info').initialize()
-
-
-    # Make generator
-    gen = Core().common_process(CONFIG)
-
-
     # Repeat 'exec_times' times
     for i in range(0, exec_times):
 

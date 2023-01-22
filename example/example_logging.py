@@ -3,8 +3,23 @@
 Summary:
     In this example, you can learn about log functions.
 
+    You can choose from two types of `log_level`,
+        - info
+        - debug
+    in `CONFIG: Dict =  Initialize('DEFAULT', 'log_level').initialize()`.
+    
+Example:
+    .. code-block:: python
+    
+        # Initialize
+        CONFIG: Dict =  Initialize('DEFAULT', 'debug').initialize()
+        # Set up logger
+        logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
+
 Usage:
-    >>> python3 logging.py
+    .. code-block:: bash
+    
+        python3 example/logging.py
 """
 
 # Operate directory: Common to all examples
@@ -21,6 +36,21 @@ from typing import Dict
 from face01lib.Core import Core
 from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
+import os.path
+
+
+name: str = __name__
+dir: str = os.path.dirname(__file__)
+parent_dir, _ = os.path.split(dir)
+
+# Initialize
+CONFIG: Dict =  Initialize('DEFAULT', 'debug').initialize()
+# Set up logger
+logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
+"""Initialize and Setup logger.
+When coding a program that uses FACE01, code `initialize` and `logger` first.
+This will read the configuration file `config.ini` and log errors etc.
+"""
 
 
 def main(exec_times: int = 50) -> None:
@@ -31,19 +61,6 @@ def main(exec_times: int = 50) -> None:
     Args:
         exec_times (int, optional): Number of frames for process. Defaults to 50.
     """
-    # Initialize
-    CONFIG: Dict =  Initialize('DEFAULT', 'info').initialize()
-
-
-    # Setup logger
-    log_level: str = 'debug'
-    import os.path
-    name: str = __name__
-    dir: str = os.path.dirname(__file__)
-    parent_dir, _ = os.path.split(dir)
-
-    logger = Logger(log_level).logger(name, parent_dir)
-
     # Make generator
     gen = Core().common_process(CONFIG)
     
@@ -65,4 +82,4 @@ def main(exec_times: int = 50) -> None:
             
     
 if __name__ == '__main__':
-    main(exec_times = 1)
+    main(exec_times = 10)

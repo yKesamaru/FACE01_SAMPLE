@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/g1320.png" width="200px">
 
-![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE) ![](https://img.shields.io/badge/Release-v1.4.11-blue) ![](https://img.shields.io/badge/Python-%3E%3D3.8-blue) ![](https://img.shields.io/github/deployments/yKesamaru/FACE01_SAMPLE/github-pages)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE) ![](https://img.shields.io/badge/Release-v1.4.12-blue) ![](https://img.shields.io/badge/Python-%3E%3D3.8-blue) ![](https://img.shields.io/github/deployments/yKesamaru/FACE01_SAMPLE/github-pages)
 
 ![](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/img/ROMAN_HOLIDAY.GIF?raw=true)
 
@@ -53,10 +53,12 @@ If you cannot use Docker by any means, please refer to [here](docs/Installation.
 
 # Document
 - [Step-by-step to use FACE01 library](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/example_doc.md#step-by-step-to-use-face01-library)
-<img src="docs/img/step-by-step.png" width="200px" >
+
+  <img src="docs/img/step-by-step.png" width="200px" >
 
 - [Comprehensive and detailed documentation](https://ykesamaru.github.io/FACE01_SAMPLE/index.html)
-<img src="docs/img/document.png" width="200px" >
+
+  <img src="docs/img/document.png" width="200px" >
 
 # Configuration
 See [here](docs/config_ini.md).
@@ -78,7 +80,7 @@ If you want to see the exhaustive document, see [here](https://ykesamaru.github.
 
 
 # Update
-- v1.4.11
+- v1.4.12
   - Add Utils
   - Add examples
 

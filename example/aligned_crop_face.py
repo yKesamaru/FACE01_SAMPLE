@@ -8,7 +8,9 @@ Args:
     size (int, optional): Specify the number of px for the extracted face image with an integer. Default is 200.
 
 Usage:
-    >>> python3 example/aligned_crop_face.py path size
+    .. code-block:: bash
+    
+        python3 example/aligned_crop_face.py path size
 
 Result:
     .. image:: ../docs/img/face_alignment.png
@@ -16,7 +18,7 @@ Result:
         :alt: face_alignment
 
 Image:
-    https://www.pakutaso.com/20230104005post-42856.html
+    Pakutaso https://www.pakutaso.com/20230104005post-42856.html
 """
 
 # Operate directory: Common to all examples
@@ -30,11 +32,18 @@ sys.path.append(parent_dir)
 from typing import Dict
 
 from face01lib.Initialize import Initialize
+from face01lib.logger import Logger
 from face01lib.utils import Utils
-
 
 # Initialize
 CONFIG: Dict =  Initialize('DEFAULT', 'info').initialize()
+# Set up logger
+logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
+"""Initialize and Setup logger.
+When coding a program that uses FACE01, code `initialize` and `logger` first.
+This will read the configuration file `config.ini` and log errors etc.
+"""
+
 utils = Utils(CONFIG['log_level'])
 
 

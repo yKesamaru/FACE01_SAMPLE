@@ -7,7 +7,9 @@ Summary:
     To quite, press "Cnt + c" in terminal(or console) where this example is running.
 
 Usage:
-    >>> python3 benchmark_GUI_window.py
+    .. code-block:: bash
+    
+        python3 example/benchmark_GUI_window.py
 
 Result:
     .. image:: ../docs/img/benchmark_GUI_window.png
@@ -21,6 +23,7 @@ Result:
 # Operate directory: Common to all examples
 import os.path
 import sys
+
 dir: str = os.path.dirname(__file__)
 parent_dir, _ = os.path.split(dir)
 sys.path.append(parent_dir)
@@ -32,9 +35,20 @@ from typing import Dict
 
 import cv2
 import PySimpleGUI as sg
+
+from face01lib.Calc import Cal
 from face01lib.Core import Core
 from face01lib.Initialize import Initialize
-from face01lib.Calc import Cal
+from face01lib.logger import Logger
+
+# Initialize
+CONFIG: Dict =  Initialize('DEFAULT', 'info').initialize()
+# Set up logger
+logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
+"""Initialize and Setup logger.
+When coding a program that uses FACE01, code `initialize` and `logger` first.
+This will read the configuration file `config.ini` and log errors etc.
+"""
 
 
 def main(exec_times: int = 50) -> None:
@@ -43,10 +57,6 @@ def main(exec_times: int = 50) -> None:
     Args:
         exec_times (int, optional): Number of frames for process. Defaults to 50.
     """
-    # Initialize
-    CONFIG: Dict =  Initialize('DISPLAY_GUI').initialize()
-
-
     # Make PySimpleGUI layout
     sg.theme('LightGray')
     layout = [

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>example package &mdash; FACE01 1.4.11 documentation</title>
+  <title>example package &mdash; FACE01 1.4.12 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico"/>
@@ -56,6 +56,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.aligned_crop_face">example.aligned_crop_face module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.aligned_crop_face.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example.aligned_crop_face.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
@@ -65,6 +66,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.benchmark_GUI_window">example.benchmark_GUI_window module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.benchmark_GUI_window.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example.benchmark_GUI_window.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
@@ -77,6 +79,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.distort_barrel">example.distort_barrel module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.distort_barrel.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example.distort_barrel.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
@@ -86,10 +89,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.example_logging">example.example_logging module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.example_logging.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example.example_logging.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.face_coordinates">example.face_coordinates module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.face_coordinates.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example.face_coordinates.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
@@ -97,8 +102,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#example.get_encoded_data.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#example-lightweight-gui-module">example.lightweight_GUI module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.lightweight_GUI">example.lightweight_GUI module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.lightweight_GUI.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example.lightweight_GUI.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.simple">example.simple module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.simple.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example.simple.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
@@ -191,15 +201,23 @@
 </dd>
 </dl>
 <dl>
-<dt>Usage:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">python3</span> <span class="n">example</span><span class="o">/</span><span class="n">aligned_crop_face</span><span class="o">.</span><span class="n">py</span> <span class="n">path</span> <span class="n">size</span>
+<dt>Usage:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/aligned_crop_face.py<span class="w"> </span>path<span class="w"> </span>size
 </pre></div>
 </div>
 </dd>
 <dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/face_alignment.png"><img alt="face_alignment" src="_images/face_alignment.png" style="width: 371.5px; height: 428.5px;" /></a>
 </dd>
-<dt>Image:</dt><dd><p><a class="reference external" href="https://www.pakutaso.com/20230104005post-42856.html">https://www.pakutaso.com/20230104005post-42856.html</a></p>
+<dt>Image:</dt><dd><p>Pakutaso <a class="reference external" href="https://www.pakutaso.com/20230104005post-42856.html">https://www.pakutaso.com/20230104005post-42856.html</a></p>
 </dd>
 </dl>
+<dl class="py data">
+<dt class="sig sig-object py" id="example.aligned_crop_face.logger">
+<span class="sig-prename descclassname"><span class="pre">example.aligned_crop_face.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01/example/aligned_crop_face.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.aligned_crop_face.logger" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize and Setup logger.
+When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
+This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="example.aligned_crop_face.main">
 <span class="sig-prename descclassname"><span class="pre">example.aligned_crop_face.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.aligned_crop_face.main" title="Permalink to this definition"></a></dt>
@@ -254,7 +272,7 @@ To quite, press “Cnt + c” in terminal(or console) where this example is runn
 <p>After running, it will automatically display the benchmark in your browser.
 To quite, press “Cnt + c” in terminal(or console) where this example is running.</p>
 </dd>
-<dt>Usage:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">python3</span> <span class="n">benchmark_GUI_window</span><span class="o">.</span><span class="n">py</span>
+<dt>Usage:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/benchmark_GUI_window.py
 </pre></div>
 </div>
 </dd>
@@ -262,6 +280,14 @@ To quite, press “Cnt + c” in terminal(or console) where this example is runn
 <a class="reference internal image-reference" href="_images/benchmark_GUI.png"><img alt="benchmark_GUI" src="_images/benchmark_GUI.png" style="width: 545.5px; height: 357.0px;" /></a>
 </dd>
 </dl>
+<dl class="py data">
+<dt class="sig sig-object py" id="example.benchmark_GUI_window.logger">
+<span class="sig-prename descclassname"><span class="pre">example.benchmark_GUI_window.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01/example/benchmark_GUI_window.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.benchmark_GUI_window.logger" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize and Setup logger.
+When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
+This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="example.benchmark_GUI_window.main">
 <span class="sig-prename descclassname"><span class="pre">example.benchmark_GUI_window.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.benchmark_GUI_window.main" title="Permalink to this definition"></a></dt>
@@ -459,18 +485,27 @@ See below for how to use PySimpleGUI.
 </dd>
 </dl>
 <dl>
-<dt>Usage:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">python3</span> <span class="n">example</span><span class="o">/</span><span class="n">distort_barrel</span><span class="o">.</span><span class="n">py</span> <span class="n">path</span> <span class="n">size</span>
+<dt>Usage:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/distort_barrel.py<span class="w"> </span>path<span class="w"> </span>size
 </pre></div>
 </div>
 </dd>
 </dl>
+<dl class="py data">
+<dt class="sig sig-object py" id="example.distort_barrel.logger">
+<span class="sig-prename descclassname"><span class="pre">example.distort_barrel.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01/example/distort_barrel.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.distort_barrel.logger" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize and Setup logger.
+When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
+This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="example.distort_barrel.main">
 <span class="sig-prename descclassname"><span class="pre">example.distort_barrel.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.distort_barrel.main" title="Permalink to this definition"></a></dt>
 <dd><p>Simple example.</p>
 <p>This simple example script takes a path which contained png, jpg, jpeg files in the directory,
 distort barrel and saves them.
-See <a class="reference external" href="https://tokai-kaoninsho.com/%e3%82%b3%e3%83%a9%e3%83%a0/%e3%83%ac%e3%83%b3%e3%82%ba%e3%81%ae%e6%ad%aa%e6%9b%b2%e5%8f%8e%e5%b7%ae%e3%81%a8%e5%af%be%e5%bf%9c%e6%96%b9%e6%b3%956/">https://tokai-kaoninsho.com/%e3%82%b3%e3%83%a9%e3%83%a0/%e3%83%ac%e3%83%b3%e3%82%ba%e3%81%ae%e6%ad%aa%e6%9b%b2%e5%8f%8e%e5%b7%ae%e3%81%a8%e5%af%be%e5%bf%9c%e6%96%b9%e6%b3%956/</a></p>
+Tokai-kaoninsho:レンズの歪曲収差と対応方法(6)_</p>
+<p>See _Tokai-kaoninsho:レンズの歪曲収差と対応方法(6) <a class="reference external" href="https://tokai-kaoninsho.com/%e3%82%b3%e3%83%a9%e3%83%a0/%e3%83%ac%e3%83%b3%e3%82%ba%e3%81%ae%e6%ad%aa%e6%9b%b2%e5%8f%8e%e5%b7%ae%e3%81%a8%e5%af%be%e5%bf%9c%e6%96%b9%e6%b3%956/">https://tokai-kaoninsho.com/%e3%82%b3%e3%83%a9%e3%83%a0/%e3%83%ac%e3%83%b3%e3%82%ba%e3%81%ae%e6%ad%aa%e6%9b%b2%e5%8f%8e%e5%b7%ae%e3%81%a8%e5%af%be%e5%bf%9c%e6%96%b9%e6%b3%956/</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -488,12 +523,16 @@ See <a class="reference external" href="https://tokai-kaoninsho.com/%e3%82%b3%e3
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>ImageMagick must be installed on your system.
-- See[ImageMagick](<a class="reference external" href="https://imagemagick.org/script/download.php">https://imagemagick.org/script/download.php</a>)</p>
+<a href="#id1"><span class="problematic" id="id2">ImageMagick_</span></a></p>
+<ul class="simple">
+<li><p>See _ImageMagick <a class="reference external" href="https://imagemagick.org/script/download.php">https://imagemagick.org/script/download.php</a></p></li>
+</ul>
 </div>
 <dl>
 <dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/distort_barrel.png"><img alt="distort_barrel" src="_images/distort_barrel.png" style="width: 753.0px; height: 323.0px;" /></a>
 </dd>
-<dt>Image:</dt><dd><p><a class="reference external" href="https://www.pakutaso.com/20220158028post-38602.html">https://www.pakutaso.com/20220158028post-38602.html</a></p>
+<dt>Image:</dt><dd><p><a href="#id3"><span class="problematic" id="id4">Pakutaso_</span></a></p>
+<p>_Pakutaso <a class="reference external" href="https://www.pakutaso.com/20220158028post-38602.html">https://www.pakutaso.com/20220158028post-38602.html</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -551,12 +590,39 @@ See <a class="reference external" href="https://tokai-kaoninsho.com/%e3%82%b3%e3
 <p>Example of benchmark for face recognition.</p>
 <dl>
 <dt>Summary:</dt><dd><p>In this example, you can learn about log functions.</p>
+<dl class="simple">
+<dt>You can choose from two types of <cite>log_level</cite>,</dt><dd><ul class="simple">
+<li><p>info</p></li>
+<li><p>debug</p></li>
+</ul>
 </dd>
-<dt>Usage:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">python3</span> <span class="n">logging</span><span class="o">.</span><span class="n">py</span>
+</dl>
+<p>in <cite>CONFIG: Dict =  Initialize(‘DEFAULT’, ‘log_level’).initialize()</cite>.</p>
+</dd>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize</span>
+<span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span>  <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DEFAULT&#39;</span><span class="p">,</span> <span class="s1">&#39;debug&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<span class="c1"># Set up logger</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<dl>
+<dt>Usage:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/logging.py
 </pre></div>
 </div>
 </dd>
 </dl>
+<dl class="py data">
+<dt class="sig sig-object py" id="example.example_logging.logger">
+<span class="sig-prename descclassname"><span class="pre">example.example_logging.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01/example/example_logging.py</span> <span class="pre">(DEBUG)&gt;</span></em><a class="headerlink" href="#example.example_logging.logger" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize and Setup logger.
+When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
+This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="example.example_logging.main">
 <span class="sig-prename descclassname"><span class="pre">example.example_logging.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.example_logging.main" title="Permalink to this definition"></a></dt>
@@ -576,7 +642,7 @@ See <a class="reference external" href="https://tokai-kaoninsho.com/%e3%82%b3%e3
 <dl>
 <dt>Summary:</dt><dd><p>In this example, you can learn how to get face coordinates and cropped face images.</p>
 </dd>
-<dt>Usage:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">python3</span> <span class="n">example</span> <span class="n">face_coordinates</span><span class="o">.</span><span class="n">py</span>
+<dt>Usage:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/face_coordinates.py
 </pre></div>
 </div>
 </dd>
@@ -615,6 +681,14 @@ See <a class="reference external" href="https://tokai-kaoninsho.com/%e3%82%b3%e3
 </div>
 </dd>
 </dl>
+<dl class="py data">
+<dt class="sig sig-object py" id="example.face_coordinates.logger">
+<span class="sig-prename descclassname"><span class="pre">example.face_coordinates.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01/example/face_coordinates.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.face_coordinates.logger" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize and Setup logger.
+When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
+This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="example.face_coordinates.main">
 <span class="sig-prename descclassname"><span class="pre">example.face_coordinates.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.face_coordinates.main" title="Permalink to this definition"></a></dt>
@@ -656,8 +730,39 @@ Not more two persons in same input.</p>
 </dd></dl>
 
 </section>
-<section id="example-lightweight-gui-module">
-<h2>example.lightweight_GUI module<a class="headerlink" href="#example-lightweight-gui-module" title="Permalink to this heading"></a></h2>
+<section id="module-example.lightweight_GUI">
+<span id="example-lightweight-gui-module"></span><h2>example.lightweight_GUI module<a class="headerlink" href="#module-example.lightweight_GUI" title="Permalink to this heading"></a></h2>
+<p>Example of LIGHTWEIGHT GUI window.</p>
+<dl>
+<dt>Summary:</dt><dd><p>In this example, you can learn how to make LIGHTWEIGHT GUI application.
+PySimpleGUI is used for GUI display.
+See below for how to use PySimpleGUI.
+<a class="reference external" href="https://www.pysimplegui.org/en/latest/">https://www.pysimplegui.org/en/latest/</a></p>
+</dd>
+<dt>Usage:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">python3</span> <span class="n">lightweight_GUI</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="py data">
+<dt class="sig sig-object py" id="example.lightweight_GUI.logger">
+<span class="sig-prename descclassname"><span class="pre">example.lightweight_GUI.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01/example/lightweight_GUI.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.lightweight_GUI.logger" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize and Setup logger.
+When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
+This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="example.lightweight_GUI.main">
+<span class="sig-prename descclassname"><span class="pre">example.lightweight_GUI.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.lightweight_GUI.main" title="Permalink to this definition"></a></dt>
+<dd><p>LIGHTWEIGHT GUI application example.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Receive value of number which is processed. Defaults to 500.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="module-example.simple">
 <span id="example-simple-module"></span><h2>example.simple module<a class="headerlink" href="#module-example.simple" title="Permalink to this heading"></a></h2>
@@ -665,11 +770,19 @@ Not more two persons in same input.</p>
 <dl>
 <dt>Summary:</dt><dd><p>In this example, you can learn how to execute FACE01 as simple.</p>
 </dd>
-<dt>Usage:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">python3</span> <span class="n">simple</span><span class="o">.</span><span class="n">py</span>
+<dt>Usage:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/simple.py
 </pre></div>
 </div>
 </dd>
 </dl>
+<dl class="py data">
+<dt class="sig sig-object py" id="example.simple.logger">
+<span class="sig-prename descclassname"><span class="pre">example.simple.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01/example/simple.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.simple.logger" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize and Setup logger.
+When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
+This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="example.simple.main">
 <span class="sig-prename descclassname"><span class="pre">example.simple.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.simple.main" title="Permalink to this definition"></a></dt>
