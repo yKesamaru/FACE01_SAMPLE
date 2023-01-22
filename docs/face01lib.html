@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>face01lib package &mdash; FACE01 1.4.11 documentation</title>
+  <title>face01lib package &mdash; FACE01 1.4.12 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico"/>
@@ -1069,6 +1069,23 @@ It might occur side effects.</p>
 <dd class="field-even"><p>dict</p>
 </dd>
 </dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please read About config.ini file <a class="reference external" href="https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/config_ini.md#about-configini-file">https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/config_ini.md#about-configini-file</a> about config.ini.
+(docs/config_ini.md)</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">‘config.ini’ is the configuration file of FACE01 using Python ConfigParser module.</div>
+<div class="line">The [DEFAULT] section specifies standard default values, and this setting is example.</div>
+<div class="line">Before to modify config.ini, you should be familiar with the ConfigParser module.</div>
+<div class="line">To refer ConfigParser module, see bellow.</div>
+<div class="line"><a class="reference external" href="https://docs.python.org/3/library/configparser.html">https://docs.python.org/3/library/configparser.html</a></div>
+<div class="line">Each section inherits from the [DEFAULT] section.</div>
+<div class="line">Therefore, specify only items (key &amp; value) that override [DEFAULT] in each section.</div>
+</div>
+</div></blockquote>
+<a class="reference internal image-reference" href="_images/About_config_ini_file.png"><img alt="config_ini.md" src="_images/About_config_ini_file.png" style="width: 626.0px; height: 364.0px;" /></a>
+</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.Initialize.Initialize">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.Initialize.</span></span><span class="sig-name descname"><span class="pre">Initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'DEFAULT'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.Initialize.Initialize" title="Permalink to this definition"></a></dt>
@@ -1090,7 +1107,7 @@ Dictionary of initialized preferences</p>
 </dl>
 <div class="admonition-example admonition">
 <p class="admonition-title">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span>  <span class="n">Initialize</span><span class="p">(</span><span class="s2">&quot;SECTION&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span>  <span class="n">Initialize</span><span class="p">(</span><span class="s2">&quot;SECTION&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1427,7 +1444,7 @@ That is, centered and scaled essentially the same way.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<em>str</em>) – File name</p></li>
-<li><p><strong>dir</strong> (<em>str</em>) – Directory name</p></li>
+<li><p><strong>dir</strong> (<em>str</em>) – Directory name. (Usually the root directory of FACE01)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1437,17 +1454,16 @@ That is, centered and scaled essentially the same way.</p>
 <dd class="field-odd"><p>Logger object</p>
 </dd>
 </dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os.path</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.Initialize</span> <span class="kn">import</span> <span class="n">Initialize</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="vm">__name__</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CONFIG</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">()</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;log_level&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">parent_dir</span><span class="p">)</span>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<div class="line-block">
+<div class="line"><cite>parent_dir</cite> in the above example refers to the root directory of FACE01.</div>
+<div class="line">i.e. <cite>CONFIG[‘RootDir’]</cite> in the code below.</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize</span>
+<span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span>  <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;LIGHTWEIGHT_GUI&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<span class="c1"># Set up logger</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1526,6 +1542,11 @@ In general, multiple aberrations that occur are mainly corrected by calibration.
 <div><a class="reference internal image-reference" href="_images/woman-1.gif"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/woman-1.gif" style="width: 251.0px; height: 267.5px;" /></a>
 <a class="reference internal image-reference" href="_images/distort_barrel.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/distort_barrel.png" style="width: 376.5px; height: 161.5px;" /></a>
 </div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>ImageMagick must be installed on your system.</strong>
+- See ImageMagick <a class="reference external" href="https://imagemagick.org/script/download.php">https://imagemagick.org/script/download.php</a></p>
+</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.utils.Utils">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.utils.</span></span><span class="sig-name descname"><span class="pre">Utils</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.utils.Utils" title="Permalink to this definition"></a></dt>
@@ -1596,8 +1617,8 @@ distort barrel and saves them.</p>
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>ImageMagick must be installed on your system.
-- See[ImageMagick](<a class="reference external" href="https://imagemagick.org/script/download.php">https://imagemagick.org/script/download.php</a>)</p>
+<p><strong>ImageMagick must be installed on your system.</strong>
+- See ImageMagick <a class="reference external" href="https://imagemagick.org/script/download.php">https://imagemagick.org/script/download.php</a></p>
 </div>
 <dl>
 <dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/distort_barrel.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/distort_barrel.png" style="width: 376.5px; height: 161.5px;" /></a>

@@ -4,7 +4,9 @@ Summary:
     In this example, you can learn how to get face coordinates and cropped face images.
 
 Usage:
-    >>> python3 example face_coordinates.py
+    .. code-block:: bash
+    
+        python3 example/face_coordinates.py
 
 Config.ini setting:
     Set config.ini as described below as an example to get face-coordinate and get cropped face images.
@@ -45,10 +47,10 @@ Result:
         }
 
 """
-
 # Operate directory: Common to all examples
 import os.path
 import sys
+
 dir: str = os.path.dirname(__file__)
 parent_dir, _ = os.path.split(dir)
 sys.path.append(parent_dir)
@@ -61,24 +63,27 @@ from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
 from face01lib.video_capture import VidCap
 
+# Initialize
+CONFIG: Dict =  Initialize('FACE-COORDINATE', 'info').initialize()
+# Set up logger
+logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
+"""Initialize and Setup logger.
+When coding a program that uses FACE01, code `initialize` and `logger` first.
+This will read the configuration file `config.ini` and log errors etc.
+"""
+
+
 def main(exec_times: int = 50) -> None:
     """Output face coordinates.
 
     Args:
         exec_times (int, optional): Number of frames for process. Defaults to 50.
     """    
-    # Initialize
-    CONFIG: Dict =  Initialize('FACE-COORDINATE', 'info').initialize()
-
     # Make generator
     frame_generator_obj = VidCap().frame_generator(CONFIG)
 
-    # Make logger
-    log = Logger().logger(__file__, dir)
-
     # Make generator
     core = Core()
-
 
     # Repeat 'exec_times' times
     for i in range(0, exec_times):
