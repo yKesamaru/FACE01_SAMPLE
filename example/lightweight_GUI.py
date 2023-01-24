@@ -7,7 +7,25 @@ Summary:
     https://www.pysimplegui.org/en/latest/
 
 Usage:
-    >>> python3 lightweight_GUI.py
+    .. code-block:: python
+    
+        python3 example/lightweight_GUI.py
+
+Result:
+    .. image:: ../docs/img/PASTE_IMAGE_2023-01-23-22-30-18.png
+        :scale: 50%
+        :alt: config_ini.md
+    
+    .. code-block:: bash
+    
+        [2023-01-23 22:33:18,752] [face01lib.load_preset_image] [load_preset_image.py] [INFO] Loading npKnown.npz
+        安倍晋三 
+                similarity              99.7% 
+                coordinate              (134, 431, 248, 317) 
+                time                    2023,01,23,22,33,23,445574 
+                output                  output/安倍晋三_2023,01,23,22,33,23,446640_0.19.png 
+        -------
+
 """
 # Operate directory: Common to all examples
 import os.path

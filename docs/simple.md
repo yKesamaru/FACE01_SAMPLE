@@ -1,6 +1,12 @@
 # If you want to get only face recognition
 
-Don't forget to set `headless = True` on `config.ini`.
+```bash
+# activate virtual environment
+source bin/activate
+
+# run script
+python example/simple.py
+```
 
 ## Result
 ```bash
@@ -23,5 +29,6 @@ Don't forget to set `headless = True` on `config.ini`.
 ```
 
 The face images are output to the `/output/` folder.
+
 ![](https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/img/PASTE_IMAGE_2022-07-20-07-36-26.png)
 

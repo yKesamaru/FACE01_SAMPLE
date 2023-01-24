@@ -27,6 +27,16 @@ from face01lib.logger import Logger
 from face01lib.video_capture import VidCap
 
 
+# Initialize
+CONFIG: Dict =  Initialize('FACE-COORDINATE', 'info').initialize()
+# Set up logger
+logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
+"""Initialize and Setup logger.
+When coding a program that uses FACE01, code `initialize` and `logger` first.
+This will read the configuration file `config.ini` and log errors etc.
+"""
+
+
 def main(exec_times: int = 50) -> None:
     """Simple example.
 
@@ -35,14 +45,8 @@ def main(exec_times: int = 50) -> None:
     Args:
         exec_times (int, optional): Number of frames for process. Defaults to 50.
     """    
-    # Initialize
-    CONFIG: Dict =  Initialize('DEFAULT', 'info').initialize()
-
     # Make generator
     frame_generator_obj = VidCap().frame_generator(CONFIG)
-
-    # Make logger
-    log = Logger().logger(__file__, dir)
 
     # Make generator
     core = Core()
@@ -55,9 +59,9 @@ def main(exec_times: int = 50) -> None:
 
         # VidCap().frame_imshow_for_debug(resized_frame)
 
-        frame_datas_array = core.frame_pre_processing(log, CONFIG, resized_frame)
+        frame_datas_array = core.frame_pre_processing(logger, CONFIG, resized_frame)
         face_encodings, frame_datas_array = \
-            core.face_encoding_process(log, CONFIG, frame_datas_array)
+            core.face_encoding_process(logger, CONFIG, frame_datas_array)
 
         for encoded_data in face_encodings:
             print(f"face encoded data: {encoded_data}\n")

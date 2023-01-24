@@ -1,3 +1,5 @@
+# 💥 This document is not used!
+
 # More functions tutorial
 FACE01 have many functions inner `face01lib/'.  
 This section, we will talk about how to use useable functions in FACE01.
@@ -5,6 +7,19 @@ This section, we will talk about how to use useable functions in FACE01.
 **Note**
 To refer exhaustive document of all public class and method in FACE01, see [here](https://ykesamaru.github.io/FACE01_SAMPLE/index.html).
 
+# Preparation
+## Initialize and Setup logger.
+When coding a program that uses FACE01, code `initialize` and `logger` first.  
+This will read the configuration file `config.ini` and log errors etc.  
+```python
+from face01lib.Initialize import Initialize
+from face01lib.logger import Logger
+
+# Initialize
+CONFIG: Dict =  Initialize('LIGHTWEIGHT_GUI', 'info').initialize()
+# Set up logger
+logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
+```
 
 # `Dlib_api` class
 This class is modified from [face_recognition](https://github.com/ageitgey/face_recognition) by ageitgey. And model data from [dlib](https://github.com/davisking/dlib) by davisking. We will not to use 68 face model but also 5 face model. In FACE01 repository, not exist 68 face model and using it's code.
@@ -16,7 +31,7 @@ Dlib_api_obj = Dlib_api()
 ## face_locations
 Returns an array of bounding boxes of faces in a frame.
 ```python
-face_list = Dlib_api().face_locations(img, number_of_times_to_upsample, model)
+face_list = Dlib_api_obj.face_locations(img, number_of_times_to_upsample, model)
 ``` 
 ### example
 ```python
@@ -37,7 +52,6 @@ for i in range(exec_times):
 [(125, 199, 261, 62), (92, 521, 256, 357)]
 [(138, 185, 275, 49), (92, 521, 256, 357)]
 ```
-Whole example code is [here](example/../../example/api_face_locations.py).
 
 # `Core` class
 Import Core class.
@@ -47,30 +61,22 @@ from face01lib.Core import Core
 ## return_face_location_list
 Return face location list. This function is much faster against `api.face_locations`.
 ```python
-set_width = fg.args_dict['set_width']
-set_height = fg.args_dict['set_height']
-for i in range(exec_times):
-    next_frame = next_frame_gen_obj.__next__()
-    print(Core().return_face_location_list(next_frame, set_width, set_height,0, 0.4))
+frame_datas_array = core.frame_pre_processing(logger, CONFIG,resized_frame)
+
+for frame_datas in frame_datas_array:
+    print(f"face coordinates: {frame_datas['face_location_list']}\n")
 ```
 ### result
 ```bash
-...
-[(135, 191, 281, 45), (91, 530, 257, 364)]
-[(139, 192, 275, 56), (115, 527, 268, 374)]
-[(134, 196, 274, 56)]
-[(136, 199, 276, 59)]
-[(131, 202, 277, 56), (121, 528, 280, 369)]
-[(134, 200, 278, 56)]
-[(137, 198, 277, 58)]
-[(133, 199, 275, 57)]
-[(132, 199, 274, 57), (117, 527, 269, 375)]
-[(134, 197, 273, 58), (103, 529, 263, 369)]
-```
-Whole example code is [here](../example/Core_return_face_location_list.py).
+[2023-01-23 09:28:02,587] [face01lib.load_preset_image] [load_preset_image.py] [INFO] Loading npKnown.npz
+face coordinates: [(161, 443, 311, 294)]
 
-# `load_priset_image`
-This function loads face images in `priset_face_images` folder, and make npKnown.npz file.
+face coordinates: [(162, 438, 286, 314)]
+```
+Whole example code is [here](../example/face_coordinates.py).
+
+# `load_preset_image`
+This function loads face images in `preset_face_images` folder, and make npKnown.npz file.
 
 
 # `return_anti_spoof` (Experimental)
@@ -121,4 +127,3 @@ set_width:  750
  set_height: 421 
  fps:  30 
 ```
-Whole code is [here](../example/return_movie_property.py).

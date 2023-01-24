@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>face01lib package &mdash; FACE01 1.4.12 documentation</title>
+  <title>face01lib package &mdash; FACE01 1.4.13 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico"/>
@@ -1126,9 +1126,12 @@ Dictionary of initialized preferences</p>
 <p>This class include method to load images.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.LoadImage.LoadImage.LI">
-<span class="sig-name descname"><span class="pre">LI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span></span></span><a class="headerlink" href="#face01lib.LoadImage.LoadImage.LI" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">LI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Mat</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.LoadImage.LoadImage.LI" title="Permalink to this definition"></a></dt>
 <dd><p>Return values.</p>
-<p>Load images, and return all together in a tuple.</p>
+<dl class="simple">
+<dt>Summary:</dt><dd><p>Load images, and return all together in a tuple.</p>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1138,22 +1141,23 @@ Dictionary of initialized preferences</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Loaded image data as ndarray
-rect01_NG_png (cv2.Mat): Loaded image data as ndarray
-rect01_REAL_png (cv2.Mat): Loaded image data as ndarray
-rect01_SPOOF_png (cv2.Mat): Loaded image data as ndarray
-rect01_CANNOT_DISTINCTION_png (cv2.Mat): Loaded image data as ndarray
-resized_telop_image (Union[cv2.Mat, None]): Loaded image data as ndarray
-cal_resized_telop_nums : Return Tuple or None
-resized_logo_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None
-cal_resized_logo_nums (Union[Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]], None]):
-load_unregistered_face_image (bool): Bool
-telop_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None
-logo_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None
-unregistered_face_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>rect01_png (cv2.Mat)</p>
+<dd class="field-even"><p><p>Tuple.</p>
+<ul class="simple">
+<li><p>rect01_png (cv2.Mat): Loaded image data as ndarray</p></li>
+<li><p>rect01_NG_png (cv2.Mat): Loaded image data as ndarray</p></li>
+<li><p>rect01_REAL_png (cv2.Mat): Loaded image data as ndarray</p></li>
+<li><p>rect01_SPOOF_png (cv2.Mat): Loaded image data as ndarray</p></li>
+<li><p>rect01_CANNOT_DISTINCTION_png (cv2.Mat): Loaded image data as ndarray</p></li>
+<li><p>resized_telop_image (Union[cv2.Mat, None]): Loaded image data as ndarray</p></li>
+<li><p>cal_resized_telop_nums : Return Tuple or None</p></li>
+<li><p>resized_logo_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None</p></li>
+<li><p>cal_resized_logo_nums (Union[Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]], None]):</p></li>
+<li><p>load_unregistered_face_image (bool): Bool</p></li>
+<li><p>telop_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None</p></li>
+<li><p>logo_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None</p></li>
+<li><p>unregistered_face_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1560,7 +1564,7 @@ In general, multiple aberrations that occur are mainly corrected by calibration.
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>path</strong> (<em>str</em>) – file path which contain file name</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – file path which contain file name. (‘.jpg’ or ‘.jpeg’ or ‘.png’. These must be lower case.) If path is <cite>directory</cite>, All files contained in this directory are targeted.</p></li>
 <li><p><strong>padding</strong> (<em>float</em>) – Padding around the face. Large = 0.8, Medium = 0.4, Small = 0.25. Default = 0.4</p></li>
 <li><p><strong>size</strong> (<em>int</em><em>, </em><em>optional</em>) – Resized size of image data. Default is 200.</p></li>
 <li><p><strong>contain</strong> (<em>str</em>) – Contain word in the directory</p></li>

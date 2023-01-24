@@ -118,7 +118,7 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
 
 
 - model_selection
-  - O OR 1
+  - 0 OR 1
     - 0: Within 2 meters from the camera,
     - 1: Within 5 meters. 
   - NOTE: This value is set only when `use_pipe` is `True`.
