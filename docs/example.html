@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>example package &mdash; FACE01 1.4.12 documentation</title>
+  <title>example package &mdash; FACE01 1.4.13 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico"/>
@@ -99,6 +99,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.get_encoded_data">example.get_encoded_data module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.get_encoded_data.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example.get_encoded_data.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
@@ -717,6 +718,14 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <p>Make sure this example must be applied for ‘one person’.
 Not more two persons in same input.</p>
 </div>
+<dl class="py data">
+<dt class="sig sig-object py" id="example.get_encoded_data.logger">
+<span class="sig-prename descclassname"><span class="pre">example.get_encoded_data.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01/example/get_encoded_data.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.get_encoded_data.logger" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize and Setup logger.
+When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
+This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="example.get_encoded_data.main">
 <span class="sig-prename descclassname"><span class="pre">example.get_encoded_data.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.get_encoded_data.main" title="Permalink to this definition"></a></dt>
@@ -739,7 +748,18 @@ PySimpleGUI is used for GUI display.
 See below for how to use PySimpleGUI.
 <a class="reference external" href="https://www.pysimplegui.org/en/latest/">https://www.pysimplegui.org/en/latest/</a></p>
 </dd>
-<dt>Usage:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">python3</span> <span class="n">lightweight_GUI</span><span class="o">.</span><span class="n">py</span>
+<dt>Usage:</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">example</span><span class="o">/</span><span class="n">lightweight_GUI</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</dd>
+<dt>Result:</dt><dd><a class="reference internal image-reference" href="../docs/img/PASTE_IMAGE_2023-01-23-22-30-18.png"><img alt="config_ini.md" src="../docs/img/PASTE_IMAGE_2023-01-23-22-30-18.png" /></a>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="m">2023</span>-01-23<span class="w"> </span><span class="m">22</span>:33:18,752<span class="o">]</span><span class="w"> </span><span class="o">[</span>face01lib.load_preset_image<span class="o">]</span><span class="w"> </span><span class="o">[</span>load_preset_image.py<span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Loading<span class="w"> </span>npKnown.npz
+安倍晋三
+<span class="w">        </span>similarity<span class="w">              </span><span class="m">99</span>.7%
+<span class="w">        </span>coordinate<span class="w">              </span><span class="o">(</span><span class="m">134</span>,<span class="w"> </span><span class="m">431</span>,<span class="w"> </span><span class="m">248</span>,<span class="w"> </span><span class="m">317</span><span class="o">)</span>
+<span class="w">        </span><span class="nb">time</span><span class="w">                    </span><span class="m">2023</span>,01,23,22,33,23,445574
+<span class="w">        </span>output<span class="w">                  </span>output/安倍晋三_2023,01,23,22,33,23,446640_0.19.png
+-------
 </pre></div>
 </div>
 </dd>

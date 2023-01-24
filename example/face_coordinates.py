@@ -93,7 +93,7 @@ def main(exec_times: int = 50) -> None:
         
         VidCap().frame_imshow_for_debug(resized_frame)
         
-        frame_datas_array = core.frame_pre_processing(log, CONFIG,resized_frame)
+        frame_datas_array = core.frame_pre_processing(logger, CONFIG,resized_frame)
 
         for frame_datas in frame_datas_array:
             print(f"face coordinates: {frame_datas['face_location_list']}\n")
