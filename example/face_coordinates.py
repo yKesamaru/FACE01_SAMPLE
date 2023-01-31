@@ -3,7 +3,7 @@
 Summary:
     In this example, you can learn how to get face coordinates and cropped face images.
 
-Usage:
+Example:
     .. code-block:: bash
     
         python3 example/face_coordinates.py
@@ -45,6 +45,9 @@ Result:
 
         face coordinates: [(156, 233, 304, 85), (114, 593, 276, 431), (130, 704, 349, 485), (319, 334, 449, 204), (281, 645, 405, 521), (23, 810, 313, 520), (349, 394, 573, 170), (244, 302, 408, 138), (344, 692, 514, 522), (21, 256, 215, 62)]
         }
+        
+Source code:
+    `face_coordinates.py <../example/face_coordinates.py>`_
 
 """
 # Operate directory: Common to all examples
@@ -77,7 +80,11 @@ def main(exec_times: int = 50) -> None:
     """Output face coordinates.
 
     Args:
-        exec_times (int, optional): Number of frames for process. Defaults to 50.
+        exec_times (int, optional): Number of frames for process. Defaults to 50 times.
+
+    Returns:
+        None
+
     """    
     # Make generator
     frame_generator_obj = VidCap().frame_generator(CONFIG)

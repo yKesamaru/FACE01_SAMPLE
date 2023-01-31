@@ -6,8 +6,13 @@ Summary:
     After running, it will automatically display the benchmark in your browser.
     To quite, press "Cnt + c" in terminal(or console) where this example is running.
 
-Usage:
-    >>> python3 benchmark_CUI.py
+Example:
+    .. code-block:: bash
+    
+        python3 benchmark_CUI.py
+        
+Source code:
+    `benchmark_CUI.py <../example/benchmark_CUI.py>`_
 """
 # Operate directory: Common to all examples
 import os.path
@@ -30,7 +35,10 @@ def main(exec_times: int = 50) -> None:
     """Open automatically benchmark on you're own browser.
 
     Args:
-        exec_times (int, optional): Number of frames for process. Defaults to 50.
+        exec_times (int, optional): Number of frames for process. Defaults to 50 times.
+
+    Returns:
+        None
     """
     # Initialize
     CONFIG: Dict =  Initialize().initialize()

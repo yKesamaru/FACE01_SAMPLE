@@ -3,10 +3,13 @@
 Summary:
     In this example, you can learn how to execute FACE01 as simple.
 
-Usage:
+Example:
     .. code-block:: bash
     
         python3 example/simple.py
+        
+Source code:
+    `simple.py <../example/simple.py>`_
 """
 # Operate directory: Common to all examples
 import os.path
@@ -41,7 +44,11 @@ def main(exec_times: int = 50) -> None:
     This simple example script prints out results of face recognition process.
 
     Args:
-        exec_times (int, optional): Number of frames for process. Defaults to 50.
+        exec_times (int, optional): Number of frames for process. Defaults to 50 times.
+
+    Returns:
+        None
+
     """    
     # Repeat 'exec_times' times
     for i in range(0, exec_times):

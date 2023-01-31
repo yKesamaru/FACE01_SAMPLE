@@ -3,8 +3,10 @@
 Summary:
     In this example, you can learn how to draw datas.
 
-Usage:
-    >>> python3 example/draw_datas.py
+Example:
+    .. code-block:: bash
+    
+        python3 example/draw_datas.py
 
 Result:
     .. image:: ../docs/img/4_times.png
@@ -15,6 +17,8 @@ Result:
         :scale: 50%
         :alt: 20 times
 
+Source code:
+    `draw_datas.py <../example/draw_datas.py>`_
 """
 
 # Operate directory: Common to all examples
@@ -56,7 +60,10 @@ def main(exec_times: int = 50) -> None:
     This simple example script prints out results of face encoded datas.
 
     Args:
-        exec_times (int, optional): Number of frames for process. Defaults to 50.
+        exec_times (int, optional): Number of frames for process. Defaults to 50 times.
+
+    Returns:
+        None
     """    
     # Initialize
     CONFIG: Dict =  Initialize('DEFAULT', 'info').initialize()

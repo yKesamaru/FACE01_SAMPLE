@@ -208,7 +208,9 @@
 </dd>
 <dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/face_alignment.png"><img alt="face_alignment" src="_images/face_alignment.png" style="width: 371.5px; height: 428.5px;" /></a>
 </dd>
-<dt>Image:</dt><dd><p>Pakutaso <a class="reference external" href="https://www.pakutaso.com/20230104005post-42856.html">https://www.pakutaso.com/20230104005post-42856.html</a></p>
+<dt>Image:</dt><dd><p><a class="reference external" href="https://www.pakutaso.com/20230104005post-42856.html">Pakutaso</a></p>
+</dd>
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/aligned_crop_face.py">aligned_crop_face.py</a></p>
 </dd>
 </dl>
 <dl class="py data">
@@ -230,8 +232,11 @@ extracts the face, aligns, crops and saves them.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> (<em>str</em>) – Directory path where images containing faces exist</p></li>
 <li><p><strong>padding</strong> (<em>float</em>) – Padding around the face. Large = 0.8, Medium = 0.4, Small = 0.25. Default = 0.4</p></li>
-<li><p><strong>size</strong> (<em>int</em><em>, </em><em>optional</em>) – Specify the number of px for the extracted face image with an integer. Default is 200.</p></li>
+<li><p><strong>size</strong> (<em>int</em><em>, </em><em>optional</em>) – Specify the number of px for the extracted face image with an integer. Default is 200px.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -248,9 +253,15 @@ extracts the face, aligns, crops and saves them.</p>
 <p>After running, it will automatically display the benchmark in your browser.
 To quite, press “Cnt + c” in terminal(or console) where this example is running.</p>
 </dd>
-<dt>Usage:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">python3</span> <span class="n">benchmark_CUI</span><span class="o">.</span><span class="n">py</span>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>benchmark_CUI.py
 </pre></div>
 </div>
+</div>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/benchmark_CUI.py">benchmark_CUI.py</a></p>
 </dd>
 </dl>
 <dl class="py function">
@@ -259,7 +270,10 @@ To quite, press “Cnt + c” in terminal(or console) where this example is runn
 <dd><p>Open automatically benchmark on you’re own browser.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50.</p>
+<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -273,12 +287,18 @@ To quite, press “Cnt + c” in terminal(or console) where this example is runn
 <p>After running, it will automatically display the benchmark in your browser.
 To quite, press “Cnt + c” in terminal(or console) where this example is running.</p>
 </dd>
-<dt>Usage:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/benchmark_GUI_window.py
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/benchmark_GUI_window.py
 </pre></div>
 </div>
-</dd>
+</div>
+<dl>
 <dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/benchmark_GUI_window.png"><img alt="benchmark_GUI_window" src="_images/benchmark_GUI_window.png" style="width: 384.5px; height: 389.0px;" /></a>
 <a class="reference internal image-reference" href="_images/benchmark_GUI.png"><img alt="benchmark_GUI" src="_images/benchmark_GUI.png" style="width: 545.5px; height: 357.0px;" /></a>
+</dd>
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/benchmark_GUI_window.py">benchmark_GUI_window.py</a></p>
 </dd>
 </dl>
 <dl class="py data">
@@ -295,7 +315,10 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <dd><p>Make GUI window and benchmark on you’re own browser.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50.</p>
+<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -304,13 +327,17 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <section id="module-example.data_structure">
 <span id="example-data-structure-module"></span><h2>example.data_structure module<a class="headerlink" href="#module-example.data_structure" title="Permalink to this heading"></a></h2>
 <p>Data structure of FACE01.</p>
-<dl>
+<dl class="simple">
 <dt>Summary:</dt><dd><p>In this example, you can learn data structure of FACE01.</p>
 </dd>
-<dt>Usage:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">python3</span> <span class="n">example</span> <span class="n">data_structure</span><span class="o">.</span><span class="n">py</span>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example<span class="w"> </span>data_structure.py
 </pre></div>
 </div>
-</dd>
+</div>
+<dl>
 <dt>Config.ini setting:</dt><dd><p>Data structure of FACE01 is closely related to what you set in config.ini.
 The contents of config.ini described below are the settings for face-detection and face-recognition. GUI windows are not displayed.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>DEFAULT<span class="o">]</span>
@@ -423,6 +450,8 @@ The contents of config.ini described below are the settings for face-detection a
 </li>
 </ul>
 </dd>
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/data_structure.py">data_structure.py</a></p>
+</dd>
 </dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="example.data_structure.main">
@@ -431,7 +460,10 @@ The contents of config.ini described below are the settings for face-detection a
 <p>Data structure of FACE01 can be get as frame_datas_array variable.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50.</p>
+<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -440,16 +472,21 @@ The contents of config.ini described below are the settings for face-detection a
 <section id="module-example.display_GUI_window">
 <span id="example-display-gui-window-module"></span><h2>example.display_GUI_window module<a class="headerlink" href="#module-example.display_GUI_window" title="Permalink to this heading"></a></h2>
 <p>Example of GUI display and face recognition data output.</p>
-<dl>
+<dl class="simple">
 <dt>Summary:</dt><dd><p>In this example you can learn how to display GUI and output
 face recognition.
 PySimpleGUI is used for GUI display.
-See below for how to use PySimpleGUI.
-<a class="reference external" href="https://www.pysimplegui.org/en/latest/">https://www.pysimplegui.org/en/latest/</a></p>
+See below for how to use <a class="reference external" href="https://www.pysimplegui.org/en/latest/">PySimpleGUI.</a></p>
 </dd>
-<dt>Usage:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">python3</span> <span class="n">display_GUI_window</span><span class="o">.</span><span class="n">py</span>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>display_GUI_window.py
 </pre></div>
 </div>
+</div>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/display_GUI_window.py">display_GUI_window.py</a></p>
 </dd>
 </dl>
 <dl class="py function">
@@ -458,7 +495,10 @@ See below for how to use PySimpleGUI.
 <dd><p>Display window.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Receive value of number which is processed. Defaults to 50.</p>
+<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Receive value of number which is processed. Defaults to 50 times.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -479,16 +519,20 @@ See below for how to use PySimpleGUI.
 <dd class="field-even"><p>str</p>
 </dd>
 <dt class="field-odd">param size</dt>
-<dd class="field-odd"><p>Specify the number of px for the extracted face image with an integer. Default is 200.</p>
+<dd class="field-odd"><p>Specify the number of px for the extracted face image with an integer. Default is 200px.</p>
 </dd>
 <dt class="field-even">type size</dt>
 <dd class="field-even"><p>int, optional</p>
 </dd>
 </dl>
-<dl>
-<dt>Usage:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/distort_barrel.py<span class="w"> </span>path<span class="w"> </span>size
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/distort_barrel.py<span class="w"> </span>path<span class="w"> </span>size
 </pre></div>
 </div>
+</div>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/distort_barrel.py">distort_barrel.py</a></p>
 </dd>
 </dl>
 <dl class="py data">
@@ -504,9 +548,8 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <span class="sig-prename descclassname"><span class="pre">example.distort_barrel.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.distort_barrel.main" title="Permalink to this definition"></a></dt>
 <dd><p>Simple example.</p>
 <p>This simple example script takes a path which contained png, jpg, jpeg files in the directory,
-distort barrel and saves them.
-Tokai-kaoninsho:レンズの歪曲収差と対応方法(6)_</p>
-<p>See _Tokai-kaoninsho:レンズの歪曲収差と対応方法(6) <a class="reference external" href="https://tokai-kaoninsho.com/%e3%82%b3%e3%83%a9%e3%83%a0/%e3%83%ac%e3%83%b3%e3%82%ba%e3%81%ae%e6%ad%aa%e6%9b%b2%e5%8f%8e%e5%b7%ae%e3%81%a8%e5%af%be%e5%bf%9c%e6%96%b9%e6%b3%956/">https://tokai-kaoninsho.com/%e3%82%b3%e3%83%a9%e3%83%a0/%e3%83%ac%e3%83%b3%e3%82%ba%e3%81%ae%e6%ad%aa%e6%9b%b2%e5%8f%8e%e5%b7%ae%e3%81%a8%e5%af%be%e5%bf%9c%e6%96%b9%e6%b3%956/</a></p>
+distort barrel and saves them.</p>
+<p>See <a class="reference external" href="https://tokai-kaoninsho.com/%e3%82%b3%e3%83%a9%e3%83%a0/%e3%83%ac%e3%83%b3%e3%82%ba%e3%81%ae%e6%ad%aa%e6%9b%b2%e5%8f%8e%e5%b7%ae%e3%81%a8%e5%af%be%e5%bf%9c%e6%96%b9%e6%b3%956/">Tokai-kaoninsho:レンズの歪曲収差と対応方法(6)</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -523,17 +566,15 @@ Tokai-kaoninsho:レンズの歪曲収差と対応方法(6)_</p>
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>ImageMagick must be installed on your system.
-<a href="#id1"><span class="problematic" id="id2">ImageMagick_</span></a></p>
+<p>ImageMagick must be installed on your system.</p>
 <ul class="simple">
-<li><p>See _ImageMagick <a class="reference external" href="https://imagemagick.org/script/download.php">https://imagemagick.org/script/download.php</a></p></li>
+<li><p>See <a class="reference external" href="https://imagemagick.org/script/download.php">ImageMagick</a></p></li>
 </ul>
 </div>
 <dl>
 <dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/distort_barrel.png"><img alt="distort_barrel" src="_images/distort_barrel.png" style="width: 753.0px; height: 323.0px;" /></a>
 </dd>
-<dt>Image:</dt><dd><p><a href="#id3"><span class="problematic" id="id4">Pakutaso_</span></a></p>
-<p>_Pakutaso <a class="reference external" href="https://www.pakutaso.com/20220158028post-38602.html">https://www.pakutaso.com/20220158028post-38602.html</a></p>
+<dt>Image:</dt><dd><p><a class="reference external" href="https://www.pakutaso.com/20220158028post-38602.html">Pakutaso</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -542,15 +583,21 @@ Tokai-kaoninsho:レンズの歪曲収差と対応方法(6)_</p>
 <section id="module-example.draw_datas">
 <span id="example-draw-datas-module"></span><h2>example.draw_datas module<a class="headerlink" href="#module-example.draw_datas" title="Permalink to this heading"></a></h2>
 <p>Example of to draw datas using matplotlib.</p>
-<dl>
+<dl class="simple">
 <dt>Summary:</dt><dd><p>In this example, you can learn how to draw datas.</p>
 </dd>
-<dt>Usage:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">python3</span> <span class="n">example</span><span class="o">/</span><span class="n">draw_datas</span><span class="o">.</span><span class="n">py</span>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/draw_datas.py
 </pre></div>
 </div>
-</dd>
+</div>
+<dl>
 <dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/4_times.png"><img alt="4 times" src="_images/4_times.png" style="width: 614.5px; height: 371.5px;" /></a>
 <a class="reference internal image-reference" href="_images/20_times.png"><img alt="20 times" src="_images/20_times.png" style="width: 598.0px; height: 377.5px;" /></a>
+</dd>
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/draw_datas.py">draw_datas.py</a></p>
 </dd>
 </dl>
 <dl class="py function">
@@ -580,7 +627,10 @@ Tokai-kaoninsho:レンズの歪曲収差と対応方法(6)_</p>
 <p>This simple example script prints out results of face encoded datas.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50.</p>
+<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -610,10 +660,14 @@ Tokai-kaoninsho:レンズの歪曲収差と対応方法(6)_</p>
 </pre></div>
 </div>
 </div>
-<dl>
-<dt>Usage:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/logging.py
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/logging.py
 </pre></div>
 </div>
+</div>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/example_logging.py">example_logging.py</a></p>
 </dd>
 </dl>
 <dl class="py data">
@@ -631,7 +685,10 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <p>Output log with define log-level.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50.</p>
+<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -640,13 +697,17 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <section id="module-example.face_coordinates">
 <span id="example-face-coordinates-module"></span><h2>example.face_coordinates module<a class="headerlink" href="#module-example.face_coordinates" title="Permalink to this heading"></a></h2>
 <p>Get only face coordinates.</p>
-<dl>
+<dl class="simple">
 <dt>Summary:</dt><dd><p>In this example, you can learn how to get face coordinates and cropped face images.</p>
 </dd>
-<dt>Usage:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/face_coordinates.py
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/face_coordinates.py
 </pre></div>
 </div>
-</dd>
+</div>
+<dl>
 <dt>Config.ini setting:</dt><dd><p>Set config.ini as described below as an example to get face-coordinate and get cropped face images.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>FACE-COORDINATE<span class="o">]</span>
 <span class="nv">headless</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>True
@@ -681,6 +742,8 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 </pre></div>
 </div>
 </dd>
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/face_coordinates.py">face_coordinates.py</a></p>
+</dd>
 </dl>
 <dl class="py data">
 <dt class="sig sig-object py" id="example.face_coordinates.logger">
@@ -696,7 +759,10 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <dd><p>Output face coordinates.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50.</p>
+<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -705,19 +771,25 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <section id="module-example.get_encoded_data">
 <span id="example-get-encoded-data-module"></span><h2>example.get_encoded_data module<a class="headerlink" href="#module-example.get_encoded_data" title="Permalink to this heading"></a></h2>
 <p>Example of to get face encoded data.</p>
-<dl>
+<dl class="simple">
 <dt>Summary:</dt><dd><p>In this example, you can learn how to get face encoded datas.</p>
 </dd>
-<dt>Usage:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">python3</span> <span class="n">example</span><span class="o">/</span><span class="n">get_encoded_data</span><span class="o">.</span><span class="n">py</span>
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/get_encoded_data.py
 </pre></div>
 </div>
-</dd>
-</dl>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Make sure this example must be applied for ‘one person’.
 Not more two persons in same input.</p>
 </div>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/get_encoded_data.py">get_encoded_data.py</a></p>
+</dd>
+</dl>
 <dl class="py data">
 <dt class="sig sig-object py" id="example.get_encoded_data.logger">
 <span class="sig-prename descclassname"><span class="pre">example.get_encoded_data.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01/example/get_encoded_data.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.get_encoded_data.logger" title="Permalink to this definition"></a></dt>
@@ -733,7 +805,10 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <p>This simple example script prints out results of face encoded datas.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50.</p>
+<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -742,17 +817,24 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <section id="module-example.lightweight_GUI">
 <span id="example-lightweight-gui-module"></span><h2>example.lightweight_GUI module<a class="headerlink" href="#module-example.lightweight_GUI" title="Permalink to this heading"></a></h2>
 <p>Example of LIGHTWEIGHT GUI window.</p>
-<dl>
+<dl class="simple">
 <dt>Summary:</dt><dd><p>In this example, you can learn how to make LIGHTWEIGHT GUI application.
 PySimpleGUI is used for GUI display.
-See below for how to use PySimpleGUI.
-<a class="reference external" href="https://www.pysimplegui.org/en/latest/">https://www.pysimplegui.org/en/latest/</a></p>
+See below for how to use <a class="reference external" href="https://www.pysimplegui.org/en/latest/">PySimpleGUI.</a></p>
 </dd>
-<dt>Usage:</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">example</span><span class="o">/</span><span class="n">lightweight_GUI</span><span class="o">.</span><span class="n">py</span>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Face detection and face recognition processing are performed only when the capture button is pressed, so it is useful in situations where only the CPU can be used. (Assuming that the GPU cannot be used)</p>
+</div>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/lightweight_GUI.py
 </pre></div>
 </div>
-</dd>
-<dt>Result:</dt><dd><a class="reference internal image-reference" href="../docs/img/PASTE_IMAGE_2023-01-23-22-30-18.png"><img alt="config_ini.md" src="../docs/img/PASTE_IMAGE_2023-01-23-22-30-18.png" /></a>
+</div>
+<dl>
+<dt>Results:</dt><dd><a class="reference internal image-reference" href="_images/PASTE_IMAGE_2023-01-23-22-30-18.png"><img alt="config_ini.md" src="_images/PASTE_IMAGE_2023-01-23-22-30-18.png" style="width: 391.5px; height: 272.0px;" /></a>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="m">2023</span>-01-23<span class="w"> </span><span class="m">22</span>:33:18,752<span class="o">]</span><span class="w"> </span><span class="o">[</span>face01lib.load_preset_image<span class="o">]</span><span class="w"> </span><span class="o">[</span>load_preset_image.py<span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Loading<span class="w"> </span>npKnown.npz
 安倍晋三
 <span class="w">        </span>similarity<span class="w">              </span><span class="m">99</span>.7%
@@ -762,6 +844,8 @@ See below for how to use PySimpleGUI.
 -------
 </pre></div>
 </div>
+</dd>
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/lightweight_GUI.py">lightweight_GUI.py</a></p>
 </dd>
 </dl>
 <dl class="py data">
@@ -780,6 +864,9 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Receive value of number which is processed. Defaults to 500.</p>
 </dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -787,12 +874,18 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <section id="module-example.simple">
 <span id="example-simple-module"></span><h2>example.simple module<a class="headerlink" href="#module-example.simple" title="Permalink to this heading"></a></h2>
 <p>Example of simple face recognition script.</p>
-<dl>
+<dl class="simple">
 <dt>Summary:</dt><dd><p>In this example, you can learn how to execute FACE01 as simple.</p>
 </dd>
-<dt>Usage:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/simple.py
+</dl>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/simple.py
 </pre></div>
 </div>
+</div>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/simple.py">simple.py</a></p>
 </dd>
 </dl>
 <dl class="py data">
@@ -810,7 +903,10 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <p>This simple example script prints out results of face recognition process.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50.</p>
+<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>

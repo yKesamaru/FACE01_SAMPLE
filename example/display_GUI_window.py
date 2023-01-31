@@ -4,11 +4,15 @@ Summary:
     In this example you can learn how to display GUI and output 
     face recognition.
     PySimpleGUI is used for GUI display. 
-    See below for how to use PySimpleGUI.
-    https://www.pysimplegui.org/en/latest/
+    See below for how to use `PySimpleGUI. <https://www.pysimplegui.org/en/latest/>`_ 
 
-Usage:
-    >>> python3 display_GUI_window.py
+Example:
+    .. code-block:: bash
+    
+        python3 display_GUI_window.py
+        
+Source code:
+    `display_GUI_window.py <../example/display_GUI_window.py>`_
 """
 # Operate directory: Common to all examples
 import os.path
@@ -31,7 +35,10 @@ def main(exec_times: int = 50) -> None:
     """Display window.
 
     Args:
-        exec_times (int, optional): Receive value of number which is processed. Defaults to 50.
+        exec_times (int, optional): Receive value of number which is processed. Defaults to 50 times.
+
+    Returns:
+        None
     """
     # Initialize
     CONFIG: Dict =  Initialize('DISPLAY_GUI').initialize()

@@ -3,12 +3,18 @@
 Summary:
     In this example, you can learn how to get face encoded datas.
 
-Usage:
-    >>> python3 example/get_encoded_data.py
+Example:
+    .. code-block:: bash
+    
+        python3 example/get_encoded_data.py
 
-Note:
+.. note::
+
    Make sure this example must be applied for 'one person'.
    Not more two persons in same input.
+        
+Source code:
+    `get_encoded_data.py <../example/get_encoded_data.py>`_
 """
 
 # Operate directory: Common to all examples
@@ -43,7 +49,11 @@ def main(exec_times: int = 50) -> None:
     This simple example script prints out results of face encoded datas.
 
     Args:
-        exec_times (int, optional): Number of frames for process. Defaults to 50.
+        exec_times (int, optional): Number of frames for process. Defaults to 50 times.
+
+    Returns:
+        None
+
     """    
     # Make generator
     frame_generator_obj = VidCap().frame_generator(CONFIG)

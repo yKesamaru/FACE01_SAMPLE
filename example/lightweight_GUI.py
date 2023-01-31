@@ -3,16 +3,18 @@
 Summary:
     In this example, you can learn how to make LIGHTWEIGHT GUI application.
     PySimpleGUI is used for GUI display. 
-    See below for how to use PySimpleGUI.
-    https://www.pysimplegui.org/en/latest/
-
-Usage:
-    .. code-block:: python
+    See below for how to use `PySimpleGUI. <https://www.pysimplegui.org/en/latest/>`_ 
+    
+.. note::
+    Face detection and face recognition processing are performed only when the capture button is pressed, so it is useful in situations where only the CPU can be used. (Assuming that the GPU cannot be used)
+    
+Example:
+    .. code-block:: bash
     
         python3 example/lightweight_GUI.py
 
-Result:
-    .. image:: ../docs/img/PASTE_IMAGE_2023-01-23-22-30-18.png
+Results:
+    .. image:: ../example/img/PASTE_IMAGE_2023-01-23-22-30-18.png
         :scale: 50%
         :alt: config_ini.md
     
@@ -25,7 +27,9 @@ Result:
                 time                    2023,01,23,22,33,23,445574 
                 output                  output/安倍晋三_2023,01,23,22,33,23,446640_0.19.png 
         -------
-
+        
+Source code:
+    `lightweight_GUI.py <../example/lightweight_GUI.py>`_
 """
 # Operate directory: Common to all examples
 import os.path
@@ -63,6 +67,10 @@ def main(exec_times: int = 500) -> None:
 
     Args:
         exec_times (int, optional): Receive value of number which is processed. Defaults to 500.
+
+    Returns:
+        None
+
     """
     # Make PySimpleGUI layout
     sg.theme('LightGray')
