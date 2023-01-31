@@ -16,10 +16,13 @@ Example:
         # Set up logger
         logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
 
-Usage:
+Example:
     .. code-block:: bash
     
         python3 example/logging.py
+        
+Source code:
+    `example_logging.py <../example/example_logging.py>`_
 """
 
 # Operate directory: Common to all examples
@@ -59,7 +62,11 @@ def main(exec_times: int = 50) -> None:
     Output log with define log-level.
 
     Args:
-        exec_times (int, optional): Number of frames for process. Defaults to 50.
+        exec_times (int, optional): Number of frames for process. Defaults to 50 times.
+
+    Returns:
+        None
+
     """
     # Make generator
     gen = Core().common_process(CONFIG)

@@ -18,7 +18,10 @@ Result:
         :alt: face_alignment
 
 Image:
-    Pakutaso https://www.pakutaso.com/20230104005post-42856.html
+    `Pakutaso <https://www.pakutaso.com/20230104005post-42856.html>`_
+        
+Source code:
+    `aligned_crop_face.py <../example/aligned_crop_face.py>`_
 """
 
 # Operate directory: Common to all examples
@@ -56,7 +59,10 @@ def main(path: str, padding: float = 0.4, size: int = 200) -> None:
     Args:
         path (str): Directory path where images containing faces exist
         padding (float): Padding around the face. Large = 0.8, Medium = 0.4, Small = 0.25. Default = 0.4
-        size (int, optional): Specify the number of px for the extracted face image with an integer. Default is 200.
+        size (int, optional): Specify the number of px for the extracted face image with an integer. Default is 200px.
+
+    Returns:
+        None
     """
     utils.align_and_resize_maintain_aspect_ratio(path, padding, size)
 

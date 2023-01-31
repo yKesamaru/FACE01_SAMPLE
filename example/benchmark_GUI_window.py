@@ -6,7 +6,7 @@ Summary:
     After running, it will automatically display the benchmark in your browser.
     To quite, press "Cnt + c" in terminal(or console) where this example is running.
 
-Usage:
+Example:
     .. code-block:: bash
     
         python3 example/benchmark_GUI_window.py
@@ -19,6 +19,9 @@ Result:
     .. image:: ../docs/img/benchmark_GUI.png
         :scale: 50%
         :alt: benchmark_GUI
+        
+Source code:
+    `benchmark_GUI_window.py <../example/benchmark_GUI_window.py>`_
 """
 # Operate directory: Common to all examples
 import os.path
@@ -55,7 +58,10 @@ def main(exec_times: int = 50) -> None:
     """Make GUI window and benchmark on you're own browser.
 
     Args:
-        exec_times (int, optional): Number of frames for process. Defaults to 50.
+        exec_times (int, optional): Number of frames for process. Defaults to 50 times.
+
+    Returns:
+        None
     """
     # Make PySimpleGUI layout
     sg.theme('LightGray')

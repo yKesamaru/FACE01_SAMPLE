@@ -3,8 +3,10 @@
 Summary:
     In this example, you can learn data structure of FACE01.
 
-Usage:
-    >>> python3 example data_structure.py
+Example:
+    .. code-block:: bash
+    
+        python3 example data_structure.py
     
 Config.ini setting:
     Data structure of FACE01 is closely related to what you set in config.ini.
@@ -109,6 +111,9 @@ Data structure:
             * date: 
             * location: Face-coordinate
             * percentage_and_symbol: xx%
+        
+Source code:
+    `data_structure.py <../example/data_structure.py>`_
 """
 
 # Operate directory: Common to all examples
@@ -131,7 +136,10 @@ def main(exec_times: int = 50) -> None:
     Data structure of FACE01 can be get as frame_datas_array variable.
 
     Args:
-        exec_times (int, optional): Number of frames for process. Defaults to 50.
+        exec_times (int, optional): Number of frames for process. Defaults to 50 times.
+
+    Returns:
+        None
     """    
     # Initialize
     CONFIG: Dict =  Initialize('DEFAULT', 'info').initialize()

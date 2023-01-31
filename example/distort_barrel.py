@@ -5,12 +5,15 @@ Summary:
     
 Args:
     path (str): Directory path where images containing faces exist
-    size (int, optional): Specify the number of px for the extracted face image with an integer. Default is 200.
+    size (int, optional): Specify the number of px for the extracted face image with an integer. Default is 200px.
 
-Usage:
+Example:
     .. code-block:: bash
     
         python3 example/distort_barrel.py path size
+        
+Source code:
+    `distort_barrel.py <../example/distort_barrel.py>`_
 """
 
 # Operate directory: Common to all examples
@@ -45,9 +48,8 @@ def main(path: str, size: int = 200) -> None:
 
     This simple example script takes a path which contained png, jpg, jpeg files in the directory, 
     distort barrel and saves them.
-    Tokai-kaoninsho:レンズの歪曲収差と対応方法(6)_
     
-    See _Tokai-kaoninsho:レンズの歪曲収差と対応方法(6) https://tokai-kaoninsho.com/%e3%82%b3%e3%83%a9%e3%83%a0/%e3%83%ac%e3%83%b3%e3%82%ba%e3%81%ae%e6%ad%aa%e6%9b%b2%e5%8f%8e%e5%b7%ae%e3%81%a8%e5%af%be%e5%bf%9c%e6%96%b9%e6%b3%956/
+    See `Tokai-kaoninsho:レンズの歪曲収差と対応方法(6) <https://tokai-kaoninsho.com/%e3%82%b3%e3%83%a9%e3%83%a0/%e3%83%ac%e3%83%b3%e3%82%ba%e3%81%ae%e6%ad%aa%e6%9b%b2%e5%8f%8e%e5%b7%ae%e3%81%a8%e5%af%be%e5%bf%9c%e6%96%b9%e6%b3%956/>`_ 
     
     Args:
         path (str): absolute path
@@ -56,14 +58,14 @@ def main(path: str, size: int = 200) -> None:
         closing_value (float): Closing value. Default is 0.2.
         step_value (float): Step value. Default is 0.01.
 
-    Return:
+    Returns:
         None
 
-    Note:
+    .. note::
+    
         ImageMagick must be installed on your system.
-        ImageMagick_
         
-        - See _ImageMagick https://imagemagick.org/script/download.php
+        - See `ImageMagick <https://imagemagick.org/script/download.php>`_ 
     
     Result:
         .. image:: ../docs/img/distort_barrel.png
@@ -71,9 +73,7 @@ def main(path: str, size: int = 200) -> None:
             :alt: distort_barrel
 
     Image:
-        Pakutaso_
-        
-        _Pakutaso https://www.pakutaso.com/20220158028post-38602.html
+        `Pakutaso <https://www.pakutaso.com/20220158028post-38602.html>`_ 
     """
     utils.distort_barrel(path, size)
 
