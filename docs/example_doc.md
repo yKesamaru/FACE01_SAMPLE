@@ -1,5 +1,5 @@
 # Step-by-step to use FACE01 library
-Welcome to FACE01 world!
+**Welcome to FACE01 world!**
 
 In this article, I will introduce the necessary knowledge and techniques to create an application that uses face recognition using FACE01 with an example program.
 
@@ -19,6 +19,9 @@ TOC
 5. [Display 'telop' and 'logo' images which you're company's.](#display-telop-and-logo-images-which-youre-companys)
 6. [Want to benchmark?](#want-to-benchmark)
 7. [Example list](#example-list)
+8. [Troubleshooting:thinking:](#troubleshootingthinking)
+   1. [CUDA not working](#cuda-not-working)
+   2. [What to do when dlib.DLIB\_USE\_CUDA is False](#what-to-do-when-dlibdlib_use_cuda-is-false)
 
 ## Checks you must pass
 ✅
@@ -124,5 +127,10 @@ python example/benchmark_GUI_window.py
 
 ```
 
-
 **For more information about FACE01 many Classes and methods, see [FACE01 document](https://ykesamaru.github.io/FACE01_SAMPLE/).**
+
+# Troubleshooting:thinking:
+## CUDA not working
+See [Remove all cuda lib and re-install method](reinstall_gpu.md)
+## What to do when dlib.DLIB_USE_CUDA is False
+See [What to do when dlib.DLIB_USE_CUDA is False](dlib.DLIB_USE_CUDA.md)

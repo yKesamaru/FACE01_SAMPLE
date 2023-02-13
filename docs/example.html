@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>example package &mdash; FACE01 1.4.13 documentation</title>
+  <title>example package &mdash; FACE01 1.4.14 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico"/>
@@ -19,6 +19,9 @@
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within FACE01 1.4.14 documentation"
+          href="_static/opensearch.xml"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="face01lib package" href="face01lib.html" />
@@ -30,12 +33,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> FACE01
-            <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo_dist.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo_dist.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -134,7 +141,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">example package</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -188,16 +195,16 @@
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">param path</dt>
+<dt class="field-odd">param path<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Directory path where images containing faces exist</p>
 </dd>
-<dt class="field-even">type path</dt>
+<dt class="field-even">type path<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
 </dd>
-<dt class="field-odd">param size</dt>
+<dt class="field-odd">param size<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Specify the number of px for the extracted face image with an integer. Default is 200.</p>
 </dd>
-<dt class="field-even">type size</dt>
+<dt class="field-even">type size<span class="colon">:</span></dt>
 <dd class="field-even"><p>int, optional</p>
 </dd>
 </dl>
@@ -228,14 +235,14 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <p>This simple example script takes a path which contained png, jpg, jpeg files in the directory,
 extracts the face, aligns, crops and saves them.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> (<em>str</em>) – Directory path where images containing faces exist</p></li>
 <li><p><strong>padding</strong> (<em>float</em>) – Padding around the face. Large = 0.8, Medium = 0.4, Small = 0.25. Default = 0.4</p></li>
 <li><p><strong>size</strong> (<em>int</em><em>, </em><em>optional</em>) – Specify the number of px for the extracted face image with an integer. Default is 200px.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -269,10 +276,10 @@ To quite, press “Cnt + c” in terminal(or console) where this example is runn
 <span class="sig-prename descclassname"><span class="pre">example.benchmark_CUI.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.benchmark_CUI.main" title="Permalink to this definition"></a></dt>
 <dd><p>Open automatically benchmark on you’re own browser.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -314,10 +321,10 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <span class="sig-prename descclassname"><span class="pre">example.benchmark_GUI_window.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.benchmark_GUI_window.main" title="Permalink to this definition"></a></dt>
 <dd><p>Make GUI window and benchmark on you’re own browser.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -459,10 +466,10 @@ The contents of config.ini described below are the settings for face-detection a
 <dd><p>Output data structure.</p>
 <p>Data structure of FACE01 can be get as frame_datas_array variable.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -494,10 +501,10 @@ See below for how to use <a class="reference external" href="https://www.pysimpl
 <span class="sig-prename descclassname"><span class="pre">example.display_GUI_window.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.display_GUI_window.main" title="Permalink to this definition"></a></dt>
 <dd><p>Display window.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Receive value of number which is processed. Defaults to 50 times.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -512,16 +519,16 @@ See below for how to use <a class="reference external" href="https://www.pysimpl
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">param path</dt>
+<dt class="field-odd">param path<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Directory path where images containing faces exist</p>
 </dd>
-<dt class="field-even">type path</dt>
+<dt class="field-even">type path<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
 </dd>
-<dt class="field-odd">param size</dt>
+<dt class="field-odd">param size<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Specify the number of px for the extracted face image with an integer. Default is 200px.</p>
 </dd>
-<dt class="field-even">type size</dt>
+<dt class="field-even">type size<span class="colon">:</span></dt>
 <dd class="field-even"><p>int, optional</p>
 </dd>
 </dl>
@@ -551,7 +558,7 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 distort barrel and saves them.</p>
 <p>See <a class="reference external" href="https://tokai-kaoninsho.com/%e3%82%b3%e3%83%a9%e3%83%a0/%e3%83%ac%e3%83%b3%e3%82%ba%e3%81%ae%e6%ad%aa%e6%9b%b2%e5%8f%8e%e5%b7%ae%e3%81%a8%e5%af%be%e5%bf%9c%e6%96%b9%e6%b3%956/">Tokai-kaoninsho:レンズの歪曲収差と対応方法(6)</a></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> (<em>str</em>) – absolute path</p></li>
 <li><p><strong>size</strong> (<em>int</em><em>, </em><em>optional</em>) – Width and height. Defaults to 200.</p></li>
@@ -560,7 +567,7 @@ distort barrel and saves them.</p>
 <li><p><strong>step_value</strong> (<em>float</em>) – Step value. Default is 0.01.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -605,16 +612,16 @@ distort barrel and saves them.</p>
 <span class="sig-prename descclassname"><span class="pre">example.draw_datas.</span></span><span class="sig-name descname"><span class="pre">f_norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">face_encoded_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_encoded_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#example.draw_datas.f_norm" title="Permalink to this definition"></a></dt>
 <dd><p>Return <cite>Frobenius norm</cite>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>face_encoded_list</strong> (<em>List</em>) – Face encoded list</p></li>
 <li><p><strong>face_encoded_data</strong> (<em>np.NDArray</em>) – Face encoded data as np.ndarray</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Frobenius norm</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Any</p>
 </dd>
 </dl>
@@ -626,10 +633,10 @@ distort barrel and saves them.</p>
 <dd><p>Simple example.</p>
 <p>This simple example script prints out results of face encoded datas.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -684,10 +691,10 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <dd><p>Setup logger example.</p>
 <p>Output log with define log-level.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -758,10 +765,10 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <span class="sig-prename descclassname"><span class="pre">example.face_coordinates.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.face_coordinates.main" title="Permalink to this definition"></a></dt>
 <dd><p>Output face coordinates.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -804,10 +811,10 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <dd><p>Simple example.</p>
 <p>This simple example script prints out results of face encoded datas.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -861,10 +868,10 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <span class="sig-prename descclassname"><span class="pre">example.lightweight_GUI.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.lightweight_GUI.main" title="Permalink to this definition"></a></dt>
 <dd><p>LIGHTWEIGHT GUI application example.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Receive value of number which is processed. Defaults to 500.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -902,10 +909,10 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <dd><p>Simple example.</p>
 <p>This simple example script prints out results of face recognition process.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>

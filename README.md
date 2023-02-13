@@ -2,14 +2,14 @@
 
 <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/g1320.png" width="200px">
 
-⚡️ **SUPER HIGHT SPEED RECOGNITION**  
+⚡️ **SUPER HIGH SPEED RECOGNITION**  
 ⚡️ **USEFUL MANY METHODS**  
 ⚡️ **RICH AND COMPREHENSIVE DOCUMENTATION**  
 FACE01 -- LET'S START !  
 
 ___
 
-![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE) ![](https://img.shields.io/badge/Release-v1.4.13-blue) ![](https://img.shields.io/badge/Python-%3E%3D3.8-blue) ![](https://img.shields.io/github/deployments/yKesamaru/FACE01_SAMPLE/github-pages)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE) ![](https://img.shields.io/badge/Release-v1.4.14-blue) ![](https://img.shields.io/badge/Python-%3E%3D3.8-blue) ![](https://img.shields.io/github/deployments/yKesamaru/FACE01_SAMPLE/github-pages)
 [![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://open.vscode.dev/yKesamaru/FACE01_SAMPLE)
 
 ![](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/img/ROMAN_HOLIDAY.GIF?raw=true)
@@ -112,7 +112,7 @@ If you want to see the exhaustive document, see [here](https://ykesamaru.github.
 
 # Update
 ---
-- 🔖 v1.4.13
+- 🔖 v1.4.14
   - Many bug fix :hammer:
   - Add documents :memo: 
 
