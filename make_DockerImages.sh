@@ -2,6 +2,11 @@
 set -Ceux -o pipefail
 IFS=$'\n\t'
 
+# License for the Code.
+# 
+# Copyright Owner: Yoshitsugu Kesamaru
+# Please refer to the separate license file for the license of the code.
+
 
 # Automation docker operation from local build to push to DockerHub.
 

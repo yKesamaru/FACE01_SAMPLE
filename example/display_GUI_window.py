@@ -1,3 +1,9 @@
+"""License for the Code.
+
+Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.
+"""
+
 """Example of GUI display and face recognition data output.
 
 Summary:
@@ -99,4 +105,4 @@ def main(exec_times: int = 50) -> None:
 
 
 if __name__ == '__main__':
-    main(exec_times = 20)
+    main(exec_times = 200)

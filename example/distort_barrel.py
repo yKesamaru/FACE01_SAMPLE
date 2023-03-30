@@ -1,3 +1,9 @@
+"""License for the Code.
+
+Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.
+"""
+
 """Example of to distort images.
 
 Summary:
@@ -43,7 +49,13 @@ This will read the configuration file `config.ini` and log errors etc.
 utils = Utils(CONFIG['log_level'])
 
 
-def main(path: str, size: int = 200) -> None:
+def main(
+    path: str,
+    size: int = 200,
+    initial_value: float = -0.1,
+    closing_value: float = 0.1,
+    step_value: float = 0.05
+    ) -> None:
     """Simple example.
 
     This simple example script takes a path which contained png, jpg, jpeg files in the directory, 
@@ -54,8 +66,8 @@ def main(path: str, size: int = 200) -> None:
     Args:
         path (str): absolute path
         size (int, optional): Width and height. Defaults to 200.
-        initial_value (float): Initial value. Default is -0.2.
-        closing_value (float): Closing value. Default is 0.2.
+        initial_value (float): Initial value. Default is -0.1.
+        closing_value (float): Closing value. Default is 0.1.
         step_value (float): Step value. Default is 0.01.
 
     Returns:

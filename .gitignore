@@ -5,6 +5,7 @@ lib64
 pyvenv.cfg
 
 # .vscode
+.vscode
 face01lib/.vscode
 DST.code-workspace
 face01lib/face01lib.code-workspace
@@ -23,3 +24,7 @@ share/*
 priset_face_images/*
 preset_face_images/*
 CTKtest
+
+sphinx
+build
+*build*

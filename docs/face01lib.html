@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>face01lib package &mdash; FACE01 1.4.14 documentation</title>
@@ -33,16 +33,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="index.html" class="icon icon-home">
-            FACE01
-              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo_dist.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> FACE01
+            <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo_dist.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -158,7 +154,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#face01lib.utils.Utils.align_and_resize_maintain_aspect_ratio"><code class="docutils literal notranslate"><span class="pre">Utils.align_and_resize_maintain_aspect_ratio()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#face01lib.utils.Utils.create_concat_images"><code class="docutils literal notranslate"><span class="pre">Utils.create_concat_images()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#face01lib.utils.Utils.distort_barrel"><code class="docutils literal notranslate"><span class="pre">Utils.distort_barrel()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.utils.Utils.get_face_encoding"><code class="docutils literal notranslate"><span class="pre">Utils.get_face_encoding()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#face01lib.utils.Utils.get_files_from_path"><code class="docutils literal notranslate"><span class="pre">Utils.get_files_from_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.utils.Utils.get_jitter_image"><code class="docutils literal notranslate"><span class="pre">Utils.get_jitter_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.utils.Utils.temp_sleep"><code class="docutils literal notranslate"><span class="pre">Utils.temp_sleep()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -195,7 +194,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
       <li class="breadcrumb-item active">face01lib package</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -232,8 +231,9 @@
 </section>
 <section id="module-face01lib.Calc">
 <span id="face01lib-calc-module"></span><h2>face01lib.Calc module<a class="headerlink" href="#module-face01lib.Calc" title="Permalink to this heading"></a></h2>
-<p>A module that performs various calculations.</p>
-<p>Calculation results are output to log</p>
+<p>License for the Code.</p>
+<p>Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.Calc.</span></span><span class="sig-name descname"><span class="pre">Cal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.Calc.Cal" title="Permalink to this definition"></a></dt>
@@ -265,7 +265,7 @@
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Measure_processing_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">HANDLING_FRAME_TIME_FRONT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HANDLING_FRAME_TIME_REAR</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#face01lib.Calc.Cal.Measure_processing_time" title="Permalink to this definition"></a></dt>
 <dd><p>Measurement of processing time (calculation) and output to log.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>HANDLING_FRAME_TIME_FRONT</strong> (<em>float</em>) – First half point</p></li>
 <li><p><strong>HANDLING_FRAME_TIME_REAR</strong> (<em>float</em>) – Second half point</p></li>
@@ -279,10 +279,10 @@
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Measure_processing_time_backward</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#face01lib.Calc.Cal.Measure_processing_time_backward" title="Permalink to this definition"></a></dt>
 <dd><p>Measurement of processing time (second half).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Second half point</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dt class="field-even">Return type</dt>
 <dd class="field-even"><p>float</p>
 </dd>
 </dl>
@@ -293,10 +293,10 @@
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Measure_processing_time_forward</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#face01lib.Calc.Cal.Measure_processing_time_forward" title="Permalink to this definition"></a></dt>
 <dd><p>Measurement of processing time (first half).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>First half point</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dt class="field-even">Return type</dt>
 <dd class="field-even"><p>float</p>
 </dd>
 </dl>
@@ -307,17 +307,17 @@
 <span class="sig-name descname"><span class="pre">cal_resized_logo_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resized_logo_image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.Calc.Cal.cal_resized_logo_image" title="Permalink to this definition"></a></dt>
 <dd><p>Calculate logo image data.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>resized_logo_image</strong> (<em>npt.NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Resized logo image data</p></li>
 <li><p><strong>set_height</strong> (<em>int</em>) – Height</p></li>
 <li><p><strong>set_width</strong> (<em>int</em>) – Width</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Return tuple</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]]</p>
 </dd>
 </dl>
@@ -338,13 +338,13 @@
 <span class="sig-name descname"><span class="pre">cal_resized_telop_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resized_telop_image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.Calc.Cal.cal_resized_telop_image" title="Permalink to this definition"></a></dt>
 <dd><p>Calculate telop image data.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>resized_telop_image</strong> (<em>npt.NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – Resized telop image data</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Tuple</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]]</p>
 </dd>
 </dl>
@@ -373,13 +373,13 @@
 <span class="sig-name descname"><span class="pre">make_draw_rgb_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pil_img_obj_rgb</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.Calc.Cal.make_draw_rgb_object" title="Permalink to this definition"></a></dt>
 <dd><p>Generate object.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>pil_img_obj_rgb</strong> (<em>object</em>) – object</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>object</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>object</p>
 </dd>
 </dl>
@@ -396,13 +396,13 @@
 <span class="sig-name descname"><span class="pre">pil_img_instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.Calc.Cal.pil_img_instance" title="Permalink to this definition"></a></dt>
 <dd><p>Generate pil_img object.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>frame</strong> (<em>npt.NDArray</em><em>[</em><em>np.uint8</em><em>]</em>) – Image data</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>PIL object</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>object</p>
 </dd>
 </dl>
@@ -413,13 +413,13 @@
 <span class="sig-name descname"><span class="pre">return_percentage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#face01lib.Calc.Cal.return_percentage" title="Permalink to this definition"></a></dt>
 <dd><p>Receive ‘distance’ and return percentage.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>p</strong> (<em>float</em>) – distance</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>percentage</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -436,13 +436,13 @@
 <span class="sig-name descname"><span class="pre">to_percentage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#face01lib.Calc.Cal.to_percentage" title="Permalink to this definition"></a></dt>
 <dd><p>Receive ‘tolerance’ and return ‘percentage’.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>tolerance</strong> (<em>float</em>) – tolerance</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>percentage</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -453,13 +453,13 @@
 <span class="sig-name descname"><span class="pre">to_tolerance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">similar_percentage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#face01lib.Calc.Cal.to_tolerance" title="Permalink to this definition"></a></dt>
 <dd><p>Receive similar_percentage and return tolerance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>similar_percentage</strong> (<em>float</em>) – ‘Probability of similarity’ described in config.ini</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>tolerance</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -496,116 +496,9 @@
 </section>
 <section id="module-face01lib.Core">
 <span id="face01lib-core-module"></span><h2>face01lib.Core module<a class="headerlink" href="#module-face01lib.Core" title="Permalink to this heading"></a></h2>
-<p>Reference.</p>
-<ul>
-<li><dl>
-<dt>Data structure:</dt><dd><ul>
-<li><dl>
-<dt>Definition of person_data_list and frame_datas_array:</dt><dd><ul class="simple">
-<li><p>overlay (npt.NDArray[np.uint8]): Copy of frame</p></li>
-<li><p>face_location_list (List[Tuple[int,int,int,int]]): List of face_location</p></li>
-<li><p>name (str): Each of person’s name</p></li>
-<li><p>filename (str): File name</p></li>
-<li><p>percentage_and_symbol (str): Concatenate of digit of percentage and ‘%’ symbol</p></li>
-<li><p>person_data_list (List): List of person_data</p></li>
-<li><p>frame_datas_array (List[Dict]): Array of frame_datas</p></li>
-<li><p>resized_frame (npt.NDArray[np.uint8]): Numpy array of frame</p></li>
-</ul>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">person_data</span> <span class="o">=</span> <span class="p">{</span>
-<span class="go">        &#39;name&#39;: name,</span>
-<span class="go">        &#39;pict&#39;:filename,</span>
-<span class="go">        &#39;date&#39;: date,</span>
-<span class="go">        &#39;location&#39;: (top,right,bottom,left),</span>
-<span class="go">        &#39;percentage_and_symbol&#39;: percentage_and_symbol</span>
-<span class="go">    }</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">person_data_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">person_data</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">frame_datas</span> <span class="o">=</span> <span class="p">{</span>
-<span class="go">        &#39;img&#39;: resized_frame,</span>
-<span class="go">        &#39;face_location_list&#39;: face_location_list,</span>
-<span class="go">        &#39;overlay&#39;: overlay,</span>
-<span class="go">        &#39;person_data_list&#39;: person_data_list</span>
-<span class="go">    }</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">frame_datas_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frame_datas</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>About coordinate order:</dt><dd><ul class="simple">
-<li><p>dlib: (Left, Top, Right, Bottom,)</p></li>
-<li><p>Dlib_api(): (top, right, bottom, left)</p></li>
-<li><dl class="simple">
-<dt>see bellow</dt><dd><ul>
-<li><p><a class="reference external" href="https://github.com/davisking/dlib/blob/master/python_examples/faceapi.py">https://github.com/davisking/dlib/blob/master/python_examples/faceapi.py</a></p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>References:</dt><dd><ul class="simple">
-<li><dl class="simple">
-<dt>About usage of ‘cython’:</dt><dd><ul>
-<li><dl class="simple">
-<dt>see bellow</dt><dd><ul>
-<li><p><a class="reference external" href="https://www.youtube.com/watch?app=desktop&amp;v=sGggkVaRMzY">https://www.youtube.com/watch?app=desktop&amp;v=sGggkVaRMzY</a></p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>About mediapipe for python:</dt><dd><ul>
-<li><dl class="simple">
-<dt>see bellow</dt><dd><ul>
-<li><p><a class="reference external" href="https://github.com/google/mediapipe/tree/master/mediapipe/python">https://github.com/google/mediapipe/tree/master/mediapipe/python</a></p></li>
-<li><p><a class="reference external" href="https://solutions.mediapipe.dev/face_detection#python-solution-api">https://solutions.mediapipe.dev/face_detection#python-solution-api</a></p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>About anti spoof function:</dt><dd><ul>
-<li><dl class="simple">
-<dt>model</dt><dd><ul>
-<li><p>Original model create by Prokofev Kirill, modified by PINT</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>URL</dt><dd><ul>
-<li><p><a class="reference external" href="https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3">https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3</a></p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
+<p>License for the Code.</p>
+<p>Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.Core.Core">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.Core.</span></span><span class="sig-name descname"><span class="pre">Core</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.Core.Core" title="Permalink to this definition"></a></dt>
@@ -623,7 +516,7 @@
 <li><p>Core().frame_post_processing</p></li>
 </ol>
 <dl class="field-list">
-<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dt class="field-odd">Yields</dt>
 <dd class="field-odd"><p><em>Generator</em> –</p>
 <dl class="simple">
 <dt>frame_datas_array</dt><dd><ul class="simple">
@@ -656,14 +549,14 @@
 <li><p>frame_datas_array</p></li>
 </ul>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>logger</strong> (<em>_type_</em>) – logger</p></li>
 <li><p><strong>CONFIG</strong> (<em>Dict</em>) – Dict including initial setting</p></li>
 <li><p><strong>frame_datas_array</strong> (<em>List</em><em>[</em><em>Dict</em><em>]</em>) – frame datas</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><ul class="simple">
 <li><dl class="simple">
 <dt>list of encoded data</dt><dd><ul>
@@ -712,7 +605,7 @@
 <span class="sig-name descname"><span class="pre">frame_post_processing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CONFIG</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_encodings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_datas_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.Core.Core.frame_post_processing" title="Permalink to this definition"></a></dt>
 <dd><p>Modify each frame’s datas.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>logger</strong> (<em>_type_</em>) – logger</p></li>
 <li><p><strong>CONFIG</strong> (<em>Dict</em>) – Dict of initial settings</p></li>
@@ -720,10 +613,10 @@
 <li><p><strong>frame_datas_array</strong> (<em>List</em><em>[</em><em>Dict</em><em>]</em>) – List of datas</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>List of modified datas</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>List[Dict]</p>
 </dd>
 </dl>
@@ -753,17 +646,17 @@
 <span class="sig-name descname"><span class="pre">frame_pre_processing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CONFIG</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resized_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.Core.Core.frame_pre_processing" title="Permalink to this definition"></a></dt>
 <dd><p>Return <cite>frame_datas_array</cite>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>logger</strong> (<em>_type_</em>) – logger</p></li>
 <li><p><strong>CONFIG</strong> (<em>Dict</em>) – Dict of Initial settings</p></li>
 <li><p><strong>resized_frame</strong> (<em>npt.NDArray</em><em>[</em><em>np.uint8</em><em>]</em>) – Resized frame</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><cite>frame_datas_array</cite></p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>List[Dict]</p>
 </dd>
 </dl>
@@ -851,7 +744,7 @@
 <dd><p>Method to make frame_datas_array.</p>
 <p>Return the data structure of frame_datas_list.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>overlay</strong> (<em>npt.NDArray</em><em>[</em><em>np.uint8</em><em>]</em>) – Copy of frame</p></li>
 <li><p><strong>face_location_list</strong> (<em>List</em><em>[</em><em>Tuple</em><em>[</em><em>int</em><em>,</em><em>int</em><em>,</em><em>int</em><em>,</em><em>int</em><em>]</em><em>]</em>) – List of face_location</p></li>
@@ -863,10 +756,10 @@
 <li><p><strong>resized_frame</strong> (<em>npt.NDArray</em><em>[</em><em>np.uint8</em><em>]</em>) – Numpy array of frame</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>List of frame_datas_array</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>List[Dict]</p>
 </dd>
 </dl>
@@ -907,14 +800,14 @@
 <span class="sig-name descname"><span class="pre">mp_face_detection_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resized_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_selection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_detection_confidence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.Core.Core.mp_face_detection_func" title="Permalink to this definition"></a></dt>
 <dd><p>Processes an RGB image and returns a list of the detected face location data.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>resized_frame</strong> (<em>npt.NDArray</em><em>[</em><em>np.uint8</em><em>]</em>) – Resized image frame</p></li>
 <li><p><strong>model_selection</strong> (<em>int</em><em>, </em><em>optional</em>) – Value set in ‘config.ini’.  Defaults to 0.</p></li>
 <li><p><strong>min_detection_confidence</strong> (<em>float</em><em>, </em><em>optional</em>) – Value set in ‘config.ini’. Defaults to 0.4.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>A NamedTuple object with a “detections” field that contains a list of the
 detected face location data.’</p>
 </dd>
@@ -934,16 +827,16 @@ detected face location data.’</p>
 <span class="sig-name descname"><span class="pre">override_args_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CONFIG</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">override_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#face01lib.Core.Core.override_args_dict" title="Permalink to this definition"></a></dt>
 <dd><p>Override CONFIG for example.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>Dict</strong> – CONFIG</p></li>
 <li><p><strong>List</strong><strong>[</strong><strong>Tuple</strong><strong>]</strong> – override_list</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>CONFIG</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>Dict</p>
 </dd>
 </dl>
@@ -984,16 +877,16 @@ detected face location data.’</p>
 <span class="sig-name descname"><span class="pre">r_face_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.Core.Core.r_face_image" title="Permalink to this definition"></a></dt>
 <dd><p>Return face image which expressed for ndarray.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>frame</strong> (<em>npt.NDArray</em><em>[</em><em>np.uint8</em><em>]</em>) – Frame image</p></li>
 <li><p><strong>face_location</strong> (<em>Tuple</em><em>[</em><em>int</em><em>,</em><em>int</em><em>,</em><em>int</em><em>,</em><em>int</em><em>]</em>) – Face location (coordinate)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Face image which expressed for ndarray</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>npt.NDArray[np.uint8]</p>
 </dd>
 </dl>
@@ -1009,13 +902,13 @@ detected face location data.’</p>
 It might occur side effects.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>frame</strong> (<em>npt.NDArray</em><em>[</em><em>np.uint8</em><em>]</em>) – Each of frame</p></li>
 <li><p><strong>face_location</strong> (<em>Tuple</em><em>[</em><em>int</em><em>,</em><em>int</em><em>,</em><em>int</em><em>,</em><em>int</em><em>]</em>) – Face location</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>spoof_or_real</p></li>
 <li><p>score</p></li>
@@ -1029,7 +922,7 @@ It might occur side effects.</p>
 </ul>
 </p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>Tuple[str, float, bool]</p>
 </dd>
 </dl>
@@ -1044,13 +937,13 @@ It might occur side effects.</p>
 <li><p>concatenate_person_frame</p></li>
 </ul>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>resized_frame</strong> (<em>npt.NDArray</em><em>[</em><em>np.uint8</em><em>]</em>) – Resized frame</p></li>
 <li><p><strong>face_location_list</strong> (<em>List</em><em>[</em><em>Tuple</em><em>[</em><em>int</em><em>,</em><em>int</em><em>,</em><em>int</em><em>,</em><em>int</em><em>]</em><em>]</em>) – Face location list</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><dl class="simple">
 <dt>concatenate_face_location_list (Tuple[List[Tuple[int,int,int,int]])</dt><dd><p>List of concatenated coordinates</p>
 </dd>
@@ -1067,32 +960,9 @@ It might occur side effects.</p>
 </section>
 <section id="module-face01lib.Initialize">
 <span id="face01lib-initialize-module"></span><h2>face01lib.Initialize module<a class="headerlink" href="#module-face01lib.Initialize" title="Permalink to this heading"></a></h2>
-<p>Load config.ini and return CONFIG dictionary data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>CONFIG</p>
-</dd>
-<dt class="field-even">rtype<span class="colon">:</span></dt>
-<dd class="field-even"><p>dict</p>
-</dd>
-</dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Please read About config.ini file <a class="reference external" href="https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/config_ini.md#about-configini-file">https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/config_ini.md#about-configini-file</a> about config.ini.
-(docs/config_ini.md)</p>
-<blockquote>
-<div><div class="line-block">
-<div class="line">‘config.ini’ is the configuration file of FACE01 using Python ConfigParser module.</div>
-<div class="line">The [DEFAULT] section specifies standard default values, and this setting is example.</div>
-<div class="line">Before to modify config.ini, you should be familiar with the ConfigParser module.</div>
-<div class="line">To refer ConfigParser module, see bellow.</div>
-<div class="line"><a class="reference external" href="https://docs.python.org/3/library/configparser.html">https://docs.python.org/3/library/configparser.html</a></div>
-<div class="line">Each section inherits from the [DEFAULT] section.</div>
-<div class="line">Therefore, specify only items (key &amp; value) that override [DEFAULT] in each section.</div>
-</div>
-</div></blockquote>
-<a class="reference internal image-reference" href="_images/About_config_ini_file.png"><img alt="config_ini.md" src="_images/About_config_ini_file.png" style="width: 626.0px; height: 364.0px;" /></a>
-</div>
+<p>License for the Code.</p>
+<p>Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.Initialize.Initialize">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.Initialize.</span></span><span class="sig-name descname"><span class="pre">Initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'DEFAULT'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.Initialize.Initialize" title="Permalink to this definition"></a></dt>
@@ -1104,11 +974,11 @@ It might occur side effects.</p>
 <span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#face01lib.Initialize.Initialize.initialize" title="Permalink to this definition"></a></dt>
 <dd><p>Initialize values.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>CONFIG
 Dictionary of initialized preferences</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dt class="field-even">Return type</dt>
 <dd class="field-even"><p>Dict</p>
 </dd>
 </dl>
@@ -1125,7 +995,9 @@ Dictionary of initialized preferences</p>
 </section>
 <section id="module-face01lib.LoadImage">
 <span id="face01lib-loadimage-module"></span><h2>face01lib.LoadImage module<a class="headerlink" href="#module-face01lib.LoadImage" title="Permalink to this heading"></a></h2>
-<p>Load image class.</p>
+<p>License for the Code.</p>
+<p>Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.LoadImage.LoadImage">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.LoadImage.</span></span><span class="sig-name descname"><span class="pre">LoadImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headless</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conf_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.LoadImage.LoadImage" title="Permalink to this definition"></a></dt>
@@ -1140,14 +1012,14 @@ Dictionary of initialized preferences</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>self</strong> – self</p></li>
 <li><p><strong>set_height</strong> (<em>int</em>) – Height described in config.ini</p></li>
 <li><p><strong>set_width</strong> (<em>int</em>) – Width described in config.ini</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><p>Tuple.</p>
 <ul class="simple">
 <li><p>rect01_png (cv2.Mat): Loaded image data as ndarray</p></li>
@@ -1174,99 +1046,9 @@ Dictionary of initialized preferences</p>
 </section>
 <section id="module-face01lib.api">
 <span id="face01lib-api-module"></span><h2>face01lib.api module<a class="headerlink" href="#module-face01lib.api" title="Permalink to this heading"></a></h2>
-<p>Summary.</p>
-<dl class="simple">
-<dt>COPYRIGHT:</dt><dd><p>This code is based on ‘face_recognition’ written by Adam Geitgey (ageitgey),
-and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
-</dd>
-<dt>ORIGINAL AUTHOR:</dt><dd><ul class="simple">
-<li><dl class="simple">
-<dt>Dlib</dt><dd><ul>
-<li><p>davisking</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>face_recognition</dt><dd><ul>
-<li><p>ageitgey</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>FACE01, and api.py</dt><dd><ul>
-<li><p>yKesamaru</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">References</p>
-<ul class="simple">
-<li><dl class="simple">
-<dt>Dlib</dt><dd><ul>
-<li><p><a class="reference external" href="https://github.com/davisking/dlib">https://github.com/davisking/dlib</a></p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Dlib Python API</dt><dd><ul>
-<li><p><a class="reference external" href="http://dlib.net/python/index.html">http://dlib.net/python/index.html</a></p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>dlib/python_example/face_recognition.py</dt><dd><ul>
-<li><p><a class="reference external" href="https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py">https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py</a></p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Dlib Face Recognition Model</dt><dd><ul>
-<li><p><a class="reference external" href="https://github.com/davisking/dlib-models">https://github.com/davisking/dlib-models</a></p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Face Recognition</dt><dd><ul>
-<li><p><a class="reference external" href="https://github.com/ageitgey/face_recognition">https://github.com/ageitgey/face_recognition</a></p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Max-Margin Object Detection(MMOD)</dt><dd><ul>
-<li><p>[Ja] <a class="reference external" href="https://blog.chowagiken.co.jp/entry/2019/06/28/OpenCV%E3%81%A8dlib%E3%81%AE%E9%A1%94%E6%A4%9C%E5%87%BA%E6%A9%9F%E8%83%BD%E3%81%AE%E6%AF%94%E8%BC%83">https://blog.chowagiken.co.jp/entry/2019/06/28/OpenCV%E3%81%A8dlib%E3%81%AE%E9%A1%94%E6%A4%9C%E5%87%BA%E6%A9%9F%E8%83%BD%E3%81%AE%E6%AF%94%E8%BC%83</a></p></li>
-<li><p><a class="reference external" href="https://github.com/davisking/dlib-models">https://github.com/davisking/dlib-models</a></p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Typing (numpy.typing)</dt><dd><ul>
-<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#typing-numpy-typing">https://numpy.org/doc/stable/reference/typing.html#typing-numpy-typing</a></p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>About coordinate order…</p>
-<ul class="simple">
-<li><p>dlib: (Left, Top, Right, Bottom), called ‘rect’.</p></li>
-<li><p>face_recognition: (top, right, bottom, left), called ‘css’.</p></li>
-</ul>
-<p>See bellow</p>
-<p><a class="reference external" href="https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py">https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py</a></p>
-</div>
+<p>License for the Code.</p>
+<p>Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.api.Dlib_api">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.api.</span></span><span class="sig-name descname"><span class="pre">Dlib_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.api.Dlib_api" title="Permalink to this definition"></a></dt>
@@ -1280,15 +1062,15 @@ and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
 <span class="sig-name descname"><span class="pre">compare_faces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">known_face_encodings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_encoding_to_check</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.6</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">bool_</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.api.Dlib_api.compare_faces" title="Permalink to this definition"></a></dt>
 <dd><p>Compare a list of face encodings against a candidate encoding to see if they match.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>known_face_encodings</strong> (<em>List</em><em>[</em><em>npt.NDArray</em><em>[</em><em>np.float64</em><em>]</em><em>]</em>) – A list of known face encodings</p></li>
 <li><p><strong>face_encoding_to_check</strong> (<em>npt.NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – A single face encoding to compare against the list</p></li>
 <li><p><strong>tolerance</strong> (<em>float</em>) – How much distance between faces to consider it a match. Lower is more strict. 0.6 is typical best performance.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A list of True/False values indicating which known_face_encodings match the face encoding to check</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A tuple of True/False values indicating which known_face_encodings match the face encoding to check, and the min distance between them.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1299,16 +1081,16 @@ and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
 <dd><p>Given a list of face encodings, compare them to a known face encoding and get a  euclidean distance for each comparison face.</p>
 <p>The distance tells you how similar the faces are.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>face_encodings</strong> (<em>List</em><em>[</em><em>npt.NDArray</em><em>[</em><em>np.float64</em><em>]</em><em>]</em>) – List of face encodings to compare (=small_frame)</p></li>
 <li><p><strong>face_to_compare</strong> (<em>npt.NDArray</em><em>[</em><em>np.float64</em><em>]</em>) – A face encoding to compare against (=face_location_list)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>A numpy ndarray with the distance for each face in the same order as the ‘faces’ array</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>npt.NDArray[np.float64]</p>
 </dd>
 </dl>
@@ -1319,7 +1101,7 @@ and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
 <span class="sig-name descname"><span class="pre">face_encodings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resized_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_location_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'small'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.api.Dlib_api.face_encodings" title="Permalink to this definition"></a></dt>
 <dd><p>Given an image, return the 128-dimension face encoding for each face in the image.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>resized_frame</strong> (<em>npt.NDArray</em><em>[</em><em>np.uint8</em><em>]</em>) – The image that contains one or more faces (=small_frame)</p></li>
 <li><p><strong>face_location_list</strong> (<em>List</em>) – Optional - the bounding boxes of each face if you already know them. (=face_location_list)</p></li>
@@ -1327,13 +1109,13 @@ and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
 <li><p><strong>model</strong> (<em>str</em>) – Do not modify.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><p>A list of 128-dimensional face encodings (one for each face in the image)</p>
 <p>Image size, it should be of size 150x150. Also cropping must be done as ‘dlib.get_face_chip’ would do it.
 That is, centered and scaled essentially the same way.</p>
 </p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>List[npt.NDArray[np.float64]]</p>
 </dd>
 </dl>
@@ -1341,18 +1123,18 @@ That is, centered and scaled essentially the same way.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.api.Dlib_api.face_locations">
-<span class="sig-name descname"><span class="pre">face_locations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resized_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_times_to_upsample</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'hog'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.api.Dlib_api.face_locations" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">face_locations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resized_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_times_to_upsample</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'hog'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.api.Dlib_api.face_locations" title="Permalink to this definition"></a></dt>
 <dd><p>Returns an array of bounding boxes of human faces in a image.</p>
 <p>This method used only ‘use_pipe = False’.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>resized_frame</strong> (<em>npt.NDArray</em><em>[</em><em>np.uint8</em><em>]</em>) – Resized image</p></li>
 <li><p><strong>number_of_times_to_upsample</strong> (<em>int</em>) – How many times to upsample the image looking for faces. Higher numbers find smaller faces.</p></li>
-<li><p><strong>model</strong> (<em>str</em>) – Which face detection model to use. “hog” is less accurate but faster on CPUs. “cnn” is a more accurate deep-learning model which is GPU/CUDA accelerated (if available). The default is “hog”.</p></li>
+<li><p><strong>mode</strong> (<em>str</em>) – Which face detection mode to use. “hog” is less accurate but faster on CPUs. “cnn” is a more accurate deep-learning mode which is GPU/CUDA accelerated (if available). The default is “hog”.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>A list of tuples of found face locations in css (top, right, bottom, left) order</p>
 </dd>
 </dl>
@@ -1363,16 +1145,16 @@ That is, centered and scaled essentially the same way.</p>
 <span class="sig-name descname"><span class="pre">load_image_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'RGB'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.api.Dlib_api.load_image_file" title="Permalink to this definition"></a></dt>
 <dd><p>Loads an image file (.jpg, .png, etc) into a numpy array.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file</strong> (<em>str</em>) – image file name or file object to load</p></li>
 <li><p><strong>mode</strong> (<em>str</em>) – format to convert the image to. Only ‘RGB’ (8-bit RGB, 3 channels) and ‘L’ (black and white) are supported.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>image contents as numpy array</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>npt.NDArray[np.uint8]</p>
 </dd>
 </dl>
@@ -1386,13 +1168,15 @@ That is, centered and scaled essentially the same way.</p>
 </section>
 <section id="module-face01lib.load_preset_image">
 <span id="face01lib-load-preset-image-module"></span><h2>face01lib.load_preset_image module<a class="headerlink" href="#module-face01lib.load_preset_image" title="Permalink to this heading"></a></h2>
-<p>Load preset images.</p>
+<p>License for the Code.</p>
+<p>Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="face01lib.load_preset_image.load_preset_image">
-<span class="sig-prename descclassname"><span class="pre">face01lib.load_preset_image.</span></span><span class="sig-name descname"><span class="pre">load_preset_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RootDir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preset_face_imagesDir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsampling</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'hog'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'small'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.load_preset_image.load_preset_image" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">face01lib.load_preset_image.</span></span><span class="sig-name descname"><span class="pre">load_preset_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">RootDir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preset_face_imagesDir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsampling</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'hog'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'small'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.load_preset_image.load_preset_image" title="Permalink to this definition"></a></dt>
 <dd><p>Load face image from preset_face_images folder.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>RootDir</strong> (<em>str</em>) – Root directory</p></li>
 <li><p><strong>preset_face_imagesDir</strong> (<em>str</em>) – Path to preset_face_images folder</p></li>
@@ -1402,7 +1186,7 @@ That is, centered and scaled essentially the same way.</p>
 <li><p><strong>model</strong> (<em>str</em><em>, </em><em>optional</em>) – You cannot modify this value.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><p>known_face_encodings_list, known_face_names_list</p>
 <ul class="simple">
 <li><dl class="simple">
@@ -1422,7 +1206,7 @@ That is, centered and scaled essentially the same way.</p>
 </ul>
 </p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>Tuple[List, List]</p>
 </dd>
 </dl>
@@ -1441,7 +1225,9 @@ That is, centered and scaled essentially the same way.</p>
 </section>
 <section id="module-face01lib.logger">
 <span id="face01lib-logger-module"></span><h2>face01lib.logger module<a class="headerlink" href="#module-face01lib.logger" title="Permalink to this heading"></a></h2>
-<p>Manage log.</p>
+<p>License for the Code.</p>
+<p>Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.logger.Logger">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.logger.</span></span><span class="sig-name descname"><span class="pre">Logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.logger.Logger" title="Permalink to this definition"></a></dt>
@@ -1452,16 +1238,16 @@ That is, centered and scaled essentially the same way.</p>
 <span class="sig-name descname"><span class="pre">logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.logger.Logger.logger" title="Permalink to this definition"></a></dt>
 <dd><p>Manage log.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<em>str</em>) – File name</p></li>
 <li><p><strong>dir</strong> (<em>str</em>) – Directory name. (Usually the root directory of FACE01)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>logger</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>Logger object</p>
 </dd>
 </dl>
@@ -1485,7 +1271,9 @@ That is, centered and scaled essentially the same way.</p>
 </section>
 <section id="module-face01lib.return_face_image">
 <span id="face01lib-return-face-image-module"></span><h2>face01lib.return_face_image module<a class="headerlink" href="#module-face01lib.return_face_image" title="Permalink to this heading"></a></h2>
-<p>Return face image data as ndarray.</p>
+<p>License for the Code.</p>
+<p>Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.return_face_image.Return_face_image">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.return_face_image.</span></span><span class="sig-name descname"><span class="pre">Return_face_image</span></span><a class="headerlink" href="#face01lib.return_face_image.Return_face_image" title="Permalink to this definition"></a></dt>
@@ -1496,16 +1284,16 @@ That is, centered and scaled essentially the same way.</p>
 <span class="sig-name descname"><span class="pre">return_face_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resized_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.return_face_image.Return_face_image.return_face_image" title="Permalink to this definition"></a></dt>
 <dd><p>Return face image array which contain ndarray.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>resized_frame</strong> (<em>numpy.ndarray</em>) – frame data</p></li>
 <li><p><strong>face_location</strong> (<em>tuple</em>) – face location which ordered top, right, bottom, left</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>face image of ndarray or empty array</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>list ( npt.NDArray[np.uint8])</p>
 </dd>
 </dl>
@@ -1516,6 +1304,9 @@ That is, centered and scaled essentially the same way.</p>
 </section>
 <section id="module-face01lib.spoof">
 <span id="face01lib-spoof-module"></span><h2>face01lib.spoof module<a class="headerlink" href="#module-face01lib.spoof" title="Permalink to this heading"></a></h2>
+<p>License for the Code.</p>
+<p>Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.spoof.Spoof">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.spoof.</span></span><span class="sig-name descname"><span class="pre">Spoof</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.spoof.Spoof" title="Permalink to this definition"></a></dt>
@@ -1540,24 +1331,9 @@ That is, centered and scaled essentially the same way.</p>
 </section>
 <section id="module-face01lib.utils">
 <span id="face01lib-utils-module"></span><h2>face01lib.utils module<a class="headerlink" href="#module-face01lib.utils" title="Permalink to this heading"></a></h2>
-<p>The utils class.</p>
-<p>When creating a deep learning model, we usually perform data augmentation processing to increase the base data.
-In general, multiple aberrations that occur are mainly corrected by calibration. However, as far as I have seen, heard and experienced, it is “common way” that it is not calibrated (except for strong face recognition). As long as we use the normal model, this leads to a large accuracy loss.</p>
-<blockquote>
-<div><a class="reference internal image-reference" href="_images/face_distortion.gif"><img alt="Face distortion." src="_images/face_distortion.gif" style="width: 240.0px; height: 133.0px;" /></a>
-<p>Image taken from <a class="reference external" href="https://imgur.com/VdKIQqF">https://imgur.com/VdKIQqF</a></p>
-<a class="reference internal image-reference" href="_images/face_distort_and_model.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/face_distort_and_model.png" style="width: 223.5px; height: 303.0px;" /></a>
-</div></blockquote>
-<p>By using the utils.distort_barrel() method, we believe that we can greatly ensure the robustness of distortion caused by the camera lens.</p>
-<blockquote>
-<div><a class="reference internal image-reference" href="_images/woman-1.gif"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/woman-1.gif" style="width: 251.0px; height: 267.5px;" /></a>
-<a class="reference internal image-reference" href="_images/distort_barrel.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/distort_barrel.png" style="width: 376.5px; height: 161.5px;" /></a>
-</div></blockquote>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><strong>ImageMagick must be installed on your system.</strong>
-- See ImageMagick <a class="reference external" href="https://imagemagick.org/script/download.php">https://imagemagick.org/script/download.php</a></p>
-</div>
+<p>License for the Code.</p>
+<p>Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.utils.Utils">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.utils.</span></span><span class="sig-name descname"><span class="pre">Utils</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.utils.Utils" title="Permalink to this definition"></a></dt>
@@ -1566,10 +1342,10 @@ In general, multiple aberrations that occur are mainly corrected by calibration.
 <p>contains convenience methods</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.utils.Utils.align_and_resize_maintain_aspect_ratio">
-<span class="sig-name descname"><span class="pre">align_and_resize_maintain_aspect_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#face01lib.utils.Utils.align_and_resize_maintain_aspect_ratio" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">align_and_resize_maintain_aspect_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.utils.Utils.align_and_resize_maintain_aspect_ratio" title="Permalink to this definition"></a></dt>
 <dd><p>Align and resize input image with maintain aspect ratio.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> (<em>str</em>) – file path which contain file name. (‘.jpg’ or ‘.jpeg’ or ‘.png’. These must be lower case.) If path is <cite>directory</cite>, All files contained in this directory are targeted.</p></li>
 <li><p><strong>padding</strong> (<em>float</em>) – Padding around the face. Large = 0.8, Medium = 0.4, Small = 0.25. Default = 0.4</p></li>
@@ -1577,8 +1353,11 @@ In general, multiple aberrations that occur are mainly corrected by calibration.
 <li><p><strong>contain</strong> (<em>str</em>) – Contain word in the directory</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of files that failed to align and resize.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>error_files (list)</p>
 </dd>
 </dl>
 <dl>
@@ -1592,7 +1371,7 @@ In general, multiple aberrations that occur are mainly corrected by calibration.
 <span class="sig-name descname"><span class="pre">create_concat_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#face01lib.utils.Utils.create_concat_images" title="Permalink to this definition"></a></dt>
 <dd><p>Create tile images.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>img</strong> (<em>str</em>) – absolute file path</p></li>
 <li><p><strong>size</strong> (<em>int</em>) – image size. Default is 200.</p></li>
@@ -1608,21 +1387,21 @@ In general, multiple aberrations that occur are mainly corrected by calibration.
 
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.utils.Utils.distort_barrel">
-<span class="sig-name descname"><span class="pre">distort_barrel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">closing_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#face01lib.utils.Utils.distort_barrel" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">distort_barrel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">closing_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.01</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#face01lib.utils.Utils.distort_barrel" title="Permalink to this definition"></a></dt>
 <dd><p>Distort barrel.</p>
 <p>Takes a path which contained png, jpg, jpeg files in the directory,
 distort barrel and saves them.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> (<em>str</em>) – absolute path</p></li>
 <li><p><strong>size</strong> (<em>int</em><em>, </em><em>optional</em>) – Width and height. Defaults to 200.</p></li>
-<li><p><strong>initial_value</strong> (<em>float</em>) – Initial value. Default is -0.2.</p></li>
-<li><p><strong>closing_value</strong> (<em>float</em>) – Closing value. Default is 0.2.</p></li>
+<li><p><strong>initial_value</strong> (<em>float</em>) – Initial value. Default is -0.1.</p></li>
+<li><p><strong>closing_value</strong> (<em>float</em>) – Closing value. Default is 0.1.</p></li>
 <li><p><strong>step_value</strong> (<em>float</em>) – Step value. Default is 0.01.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1638,23 +1417,90 @@ distort barrel and saves them.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="face01lib.utils.Utils.get_face_encoding">
+<span class="sig-name descname"><span class="pre">get_face_encoding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_times_to_upsample</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cnn'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'small'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.utils.Utils.get_face_encoding" title="Permalink to this definition"></a></dt>
+<dd><p>get_face_encoding : get face encoding from image file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image_path</strong> (<em>str</em>) – image file path.</p></li>
+<li><p><strong>num_jitters</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of jitters. Defaults to 0.</p></li>
+<li><p><strong>number_of_times_to_upsample</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of times to upsample the image looking for faces. Defaults to 0.</p></li>
+<li><p><strong>mode</strong> (<em>str</em><em>, </em><em>optional</em>) – cnn or hog. Defaults to ‘cnn’.</p></li>
+<li><p><strong>model</strong> (<em>str</em><em>, </em><em>optional</em>) – small or large. Defaults to ‘small’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>face encoding data or None if not detected face.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>NDArray data (npt.NDArray[np.float64])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="face01lib.utils.Utils.get_files_from_path">
 <span class="sig-name descname"><span class="pre">get_files_from_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'resize'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#face01lib.utils.Utils.get_files_from_path" title="Permalink to this definition"></a></dt>
 <dd><p>Receive path, return files.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> (<em>str</em>) – Directory path</p></li>
-<li><p><strong>contain</strong> (<em>str</em>) – Contain word</p></li>
+<li><p><strong>contain</strong> (<em>str</em>) – Contain word. If you want to get all files, set <cite>*</cite>. Default is <cite>resize</cite>.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Files in received path (absolute path)</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>list</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.utils.Utils.get_jitter_image">
+<span class="sig-name descname"><span class="pre">get_jitter_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disturb_color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.utils.Utils.get_jitter_image" title="Permalink to this definition"></a></dt>
+<dd><p>Jitter images at the specified path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – path</p></li>
+<li><p><strong>num_jitters</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of jitters. Defaults to 10.</p></li>
+<li><p><strong>size</strong> (<em>int</em><em>, </em><em>optional</em>) – Resize image to size(px). Defaults to 200px.</p></li>
+<li><p><strong>disturb_color</strong> (<em>bool</em><em>, </em><em>optional</em>) – Disturb color. Defaults to True.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Note:
+This method is based on davisking/dlib/python_example/face_jitter.py.
+<a class="reference external" href="https://github.com/davisking/dlib/blob/master/python_examples/face_jitter.py">https://github.com/davisking/dlib/blob/master/python_examples/face_jitter.py</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.utils.Utils.temp_sleep">
+<span class="sig-name descname"><span class="pre">temp_sleep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">80.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">60</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.utils.Utils.temp_sleep" title="Permalink to this definition"></a></dt>
+<dd><p>temp_sleep : sleep time for cpu temperature.</p>
+<p>If the CPU temperature exceeds the value specified by the argument <cite>temp</cite>, it sleeps for the time specified by <cite>sleep_time</cite>.
+If the <cite>sensors</cite> command fails to get the CPU temperature, it will try to execute it 3 times at 1 second intervals. If it still can’t get it, exit the program.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temp</strong> (<em>float</em><em>, </em><em>optional</em>) – cpu temperature. Defaults to 80.0.</p></li>
+<li><p><strong>sleep_time</strong> (<em>int</em><em>, </em><em>optional</em>) – sleep time. Defaults to 60.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <cite>sensors</cite> and <cite>notify-send</cite> commands are required to use this method.
+The <cite>sensors</cite> command is included in the <cite>lm-sensors</cite> package.
+The <cite>notify-send</cite> command is included in the <cite>libnotify-bin</cite> package.</p>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -1662,7 +1508,9 @@ distort barrel and saves them.</p>
 </section>
 <section id="module-face01lib.video_capture">
 <span id="face01lib-video-capture-module"></span><h2>face01lib.video_capture module<a class="headerlink" href="#module-face01lib.video_capture" title="Permalink to this heading"></a></h2>
-<p>The VidCap class.</p>
+<p>License for the Code.</p>
+<p>Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.video_capture.VidCap">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.video_capture.</span></span><span class="sig-name descname"><span class="pre">VidCap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.video_capture.VidCap" title="Permalink to this definition"></a></dt>
@@ -1674,7 +1522,7 @@ distort barrel and saves them.</p>
 <span class="sig-name descname"><span class="pre">finalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vcap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">VideoCapture</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#face01lib.video_capture.VidCap.finalize" title="Permalink to this definition"></a></dt>
 <dd><p>Release vcap and Destroy window.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>vcap</strong> (<em>cv2.VideoCapture</em>) – vcap which is handle of input video process</p>
 </dd>
 </dl>
@@ -1685,13 +1533,13 @@ distort barrel and saves them.</p>
 <span class="sig-name descname"><span class="pre">frame_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CONFIG</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Generator</span></span></span><a class="headerlink" href="#face01lib.video_capture.VidCap.frame_generator" title="Permalink to this definition"></a></dt>
 <dd><p>Generator: Return resized frame data.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>CONFIG</strong> (<em>Dict</em>) – CONFIG</p>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dt class="field-even">Raises</dt>
 <dd class="field-even"><p><strong>StopIteration</strong> – <cite>ret</cite> == False, then raise <cite>StopIteration</cite></p>
 </dd>
-<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dt class="field-odd">Yields</dt>
 <dd class="field-odd"><p><em>Generator</em> – Resized frame data (npt.NDArray[np.uint8])</p>
 </dd>
 </dl>
@@ -1703,10 +1551,10 @@ distort barrel and saves them.</p>
 <dd><p>Used for debugging.</p>
 <p>Display the given frame data in a GUI window for 3 seconds.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>frame</strong> (<em>npt.NDArray</em><em>[</em><em>np.uint8</em><em>]</em>) – Image data called ‘frame’</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1717,17 +1565,17 @@ distort barrel and saves them.</p>
 <span class="sig-name descname"><span class="pre">resize_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.video_capture.VidCap.resize_frame" title="Permalink to this definition"></a></dt>
 <dd><p>Return resized frame data.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>set_width</strong> (<em>int</em>) – Width described in config.ini</p></li>
 <li><p><strong>set_height</strong> (<em>int</em>) – Height described in config.ini</p></li>
 <li><p><strong>frame</strong> (<em>npt.NDArray</em><em>[</em><em>np.uint8</em><em>]</em>) – Image data</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>small_frame</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>npt.NDArray[np.uint8]</p>
 </dd>
 </dl>
@@ -1738,16 +1586,16 @@ distort barrel and saves them.</p>
 <span class="sig-name descname"><span class="pre">return_movie_property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">VideoCapture</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.video_capture.VidCap.return_movie_property" title="Permalink to this definition"></a></dt>
 <dd><p>Return input movie file’s property.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>set_width</strong> (<em>int</em>) – Width which set in config.ini</p></li>
 <li><p><strong>vcap</strong> (<em>cv2.VideoCapture</em>) – Handle of input movie processing</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>self.set_width, fps, height, width, set_height</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>Tuple[int,…]</p>
 </dd>
 </dl>
@@ -1758,13 +1606,13 @@ distort barrel and saves them.</p>
 <span class="sig-name descname"><span class="pre">return_vcap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">movie</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">VideoCapture</span></span></span><a class="headerlink" href="#face01lib.video_capture.VidCap.return_vcap" title="Permalink to this definition"></a></dt>
 <dd><p>Return vcap object.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>movie</strong> (<em>str</em>) – movie</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>cv2.VideoCapture</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>object</p>
 </dd>
 </dl>
@@ -1775,6 +1623,9 @@ distort barrel and saves them.</p>
 </section>
 <section id="module-face01lib">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-face01lib" title="Permalink to this heading"></a></h2>
+<p>License for the Code.</p>
+<p>Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.</p>
 </section>
 </section>
 

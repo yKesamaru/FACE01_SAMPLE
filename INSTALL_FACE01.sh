@@ -6,6 +6,12 @@ set -x
 # THIS IS *ONLY* USE FOR UBUNTU *20.04*
 # -----------------------------------------------------------------
 
+# License for the Code.
+# 
+# Copyright Owner: Yoshitsugu Kesamaru
+# Please refer to the separate license file for the license of the code.
+
+
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y build-essential
 sudo apt install -y cmake

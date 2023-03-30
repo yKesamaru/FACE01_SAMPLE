@@ -1,3 +1,9 @@
+"""License for the Code.
+
+Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.
+"""
+
 """Example of to detect, rotate and crop face images.
 
 Summary:
