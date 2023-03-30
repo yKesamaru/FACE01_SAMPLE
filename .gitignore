@@ -28,3 +28,13 @@ CTKtest
 sphinx
 build
 *build*
+
+SETTING_MANAGER.py
+make_DockerImages.sh
+make_dockerImage.sh
+face01libface01.log
+face01.log
+顔無し区間を含んだテスト動画.mp4 
+DIST.code-workspace
+Dockerfile
+SETTING_MANAGER_FOR_FACE01_1.4.05.py
