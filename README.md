@@ -9,7 +9,7 @@ FACE01 -- LET'S START !
 
 ___
 
-![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE) ![](https://img.shields.io/badge/Release-v1.4.14-blue) ![](https://img.shields.io/badge/Python-%3E%3D3.8-blue) ![](https://img.shields.io/github/deployments/yKesamaru/FACE01_SAMPLE/github-pages)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE) ![](https://img.shields.io/badge/Release-v2.0.01-blue) ![](https://img.shields.io/badge/Python-%3E%3D3.8-blue) ![](https://img.shields.io/github/deployments/yKesamaru/FACE01_SAMPLE/github-pages)
 [![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://open.vscode.dev/yKesamaru/FACE01_SAMPLE)
 
 ![](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/img/ROMAN_HOLIDAY.GIF?raw=true)
@@ -32,20 +32,23 @@ Audrey Hepburn
 
 📖 TOC
 1. [About FACE01](#about-face01)
-2. [Install](#install)
+2. [ℹ️: Note](#ℹ️-note)
+3. [Install](#install)
    1. [INSTALL\_FACE01.sh](#install_face01sh)
    2. [Docker](#docker)
-3. [Example](#example)
-4. [Document](#document)
-5. [Configuration](#configuration)
-6. [Update](#update)
-7. [Note](#note)
-8. [Acknowledgments](#acknowledgments)
+4. [Example](#example)
+5. [Document](#document)
+6. [Configuration](#configuration)
+7. [Update](#update)
+8. [Note](#note)
+9. [Acknowledgments](#acknowledgments)
 
 # About FACE01
 ---
 ✨ FACE01 is a **face recognition library** that integrates various functions and can be called from **Python**.
 
+- 🎉 EfficientNetV2 Arcface Model is now available ! 
+  - `EfficientNetV2 Arcface Model`は日本人の顔認証に特化したモデルです。
 - `Real-time face recognition` is possible from face datas of **more than 10,000 people**
 - Super high-speed face coordinate output function
 - Face image saving function with date and time information
@@ -55,6 +58,10 @@ Audrey Hepburn
 - You can use many function for `face-recognition` and `Image-processing` (See [Useful FACE01 library](https://ykesamaru.github.io/FACE01_SAMPLE/))
 - ...and many others!
 
+
+# ℹ️: Note
+> - このリポジトリが提供するファイルは、無料でお使いいただけます。
+> - 商用利用にあたっては別途ライセンスが必要です。
 
 # Install
 ---
@@ -112,9 +119,8 @@ If you want to see the exhaustive document, see [here](https://ykesamaru.github.
 
 # Update
 ---
-- 🔖 v1.4.14
-  - Many bug fix :hammer:
-  - Add documents :memo: 
+- 🔖 v2.0.01
+  - Add `EfficientNetV2 Arcface Model`
 
 
 # Note

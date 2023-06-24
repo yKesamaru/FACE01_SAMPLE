@@ -1,9 +1,3 @@
-"""License for the Code.
-
-Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.
-"""
-
 """Example of to detect, rotate and crop face images.
 
 Summary:
@@ -70,7 +64,12 @@ def main(path: str, padding: float = 0.4, size: int = 200) -> None:
     Returns:
         None
     """
-    utils.align_and_resize_maintain_aspect_ratio(path, padding, size)
+    utils.align_and_resize_maintain_aspect_ratio(
+        path,
+        upper_limit_length=1024,
+        padding=0.4,
+        size=200
+        )
 
 
 if __name__ == '__main__':

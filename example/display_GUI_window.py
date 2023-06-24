@@ -15,7 +15,7 @@ Summary:
 Example:
     .. code-block:: bash
     
-        python3 display_GUI_window.py
+        python3 example/display_GUI_window.py
         
 Source code:
     `display_GUI_window.py <../example/display_GUI_window.py>`_
@@ -47,7 +47,8 @@ def main(exec_times: int = 50) -> None:
         None
     """
     # Initialize
-    CONFIG: Dict =  Initialize('DISPLAY_GUI').initialize()
+    CONFIG: Dict =  Initialize('bug_DISPLAY_GUI').initialize()
+    # CONFIG: Dict =  Initialize('DISPLAY_GUI').initialize()
 
 
     # Make PySimpleGUI layout
@@ -96,8 +97,8 @@ def main(exec_times: int = 50) -> None:
                         "-------\n"
                     )
             
-                imgbytes = cv2.imencode(".png", frame_datas['img'])[1].tobytes()
-                window["display"].update(data = imgbytes)
+            imgbytes = cv2.imencode(".png", frame_datas['img'])[1].tobytes()
+            window["display"].update(data = imgbytes)
             
         if event =='terminate':
             break
