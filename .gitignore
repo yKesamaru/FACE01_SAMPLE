@@ -40,7 +40,7 @@ Dockerfile
 SETTING_MANAGER_FOR_FACE01_1.4.05.py
 docs/__pycache__
 docs/_build
-docs/_static
+# docs/_static
 docs/_templates
 docs/_themes
 docs/sphinx
