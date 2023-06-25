@@ -42,6 +42,7 @@ Audrey Hepburn
 7. [Update](#update)
 8. [Note](#note)
 9. [Acknowledgments](#acknowledgments)
+10. [References](#references)
 
 # About FACE01
 ---
@@ -61,6 +62,9 @@ Audrey Hepburn
 
 # ℹ️: Note
 > - このリポジトリが提供するファイルは、無料でお使いいただけます。
+> 教育機関でご利用の場合、ソースコードを研究・教育にご利用できます。
+>   詳しくは[日本のAI教育を支援する、顔認識ライブラリ`FACE01`の提供について](docs/academic.md)をご覧ください。
+<br />
 > - 商用利用にあたっては別途ライセンスが必要です。
 
 # Install
@@ -143,3 +147,14 @@ If you want to see the exhaustive document, see [here](https://ykesamaru.github.
 7. [PINTO_model_zoo](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3) / Katsuya Hyodo (PINTO0309)
 8. [FaceDetection-Anti-Spoof-Demo](https://github.com/Kazuhito00/FaceDetection-Anti-Spoof-Demo) / KazuhitoTakahashi (Kazuhito00)
 9. Some images from [Pakutaso](https://www.pakutaso.com/), [pixabay](https://pixabay.com/ja/)
+
+# References
+---
+- [Deep Face Recognition A Survey](https://arxiv.org/pdf/1804.06655.pdf)
+- [EfficientNetV2: Smaller Models and Faster Training](https://arxiv.org/pdf/2104.00298.pdf)
+- [ArcFace: Additive Angular Margin Loss for Deep](https://arxiv.org/pdf/1801.07698.pdf)
+- [MobileFaceNets: Efficient CNNs for Accurate Real-Time Face Verification on Mobile Devices](https://arxiv.org/ftp/arxiv/papers/1804/1804.07573.pdf)
+- [Dlib Python API](http://dlib.net/python/index.html)
+- [Pytorch documentation and Python API](https://pytorch.org/docs/stable/index.html)
+- [ONNX documentation](https://onnx.ai/onnx/)
+- [教育と著作権](http://www.ic.daito.ac.jp/~mizutani/literacy/copyright.pdf): 水谷正大 著, 大東文化大学 (2021)
