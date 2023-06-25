@@ -44,6 +44,14 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
   - Default: True
 
 
+- deep+learning_model
+  - 従来のdlibモデル(`dlib_face_recognition_resnet_model_v1.dat`)と日本人の顔認証に特化したモデル(`efficientnetv2_arcface.onnx`)を切り替えることが出来ます。
+    - int: 0 or 1
+      - `dlib_face_recognition_resnet_model_v1.dat`: 0
+      - `efficientnetv2_arcface.onnx`: 1
+  - **NOTE**
+    - 各モデルが生成する`npKnown.npz`は互いに互換性がありません。よって、`deep_learning_model`を変更した場合、既に作成されている`npKnown.npz`は手動で削除する必要があります。モデル切り替え後の`npKnown.npz`は新たに自動的に作成されます。
+
 - anti_spoof
   - **Experimental**
   - Anti-spoof model is included with this sample, but please do ***not*** use this model as is for commercial use. Please contact tokai-kaoninsho for details.
