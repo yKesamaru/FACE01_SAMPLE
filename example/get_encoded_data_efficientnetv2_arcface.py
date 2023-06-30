@@ -25,13 +25,15 @@ from typing import Dict, List
 
 import cv2
 import dlib
+import numpy.typing as npt
 
 from face01lib.api import Dlib_api
 from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
-from face01lib.video_capture import VidCap
+from face01lib.utils import Utils
 
 api_obj = Dlib_api()
+utils_obj = Utils()
 
 # Initialize
 CONFIG: Dict =  Initialize('EFFICIENTNETV2_ARCFACE_MODEL', 'info')._configure()
@@ -42,20 +44,19 @@ When coding a program that uses FACE01, code `initialize` and `logger` first.
 This will read the configuration file `config.ini` and log errors etc.
 """
 
-# Load '麻生.png' in the example/img folder
-img = dlib.load_rgb_image(os.path.join(dir, 'img', '麻生.png'))
+face_path = 'example/img/麻生太郎_default.png'
 
-# Check the loaded face image file
-## Convert face_image from BGR to RGB
+# Load '麻生.png' in the example/img folder
+img = dlib.load_rgb_image(face_path)
+
+# Convert face_image from BGR to RGB
 face_image = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-VidCap().frame_imshow_for_debug(face_image)
 
 face_locations: List = api_obj.face_locations(img, mode="cnn")
-face_encodings: List = api_obj.face_encodings(
+face_encodings: List[npt.NDArray] = api_obj.face_encodings(
         deep_learning_model=1,
         resized_frame=img,
         face_location_list=face_locations
     )
 
 print(face_encodings)
-

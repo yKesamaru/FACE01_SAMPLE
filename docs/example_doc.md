@@ -124,7 +124,7 @@ python example/benchmark_GUI_window.py
 - example/face_coordinates.py
 - example/get_encoded_data.py
 - example/lightweight_GUI.py
-
+...and others.
 ```
 
 **For more information about FACE01 many Classes and methods, see [FACE01 document](https://ykesamaru.github.io/FACE01_SAMPLE/).**
