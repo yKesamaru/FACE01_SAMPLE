@@ -17,14 +17,14 @@ Source code:
 """
 
 # Operate directory: Common to all examples
-import os.path
+import os
 import sys
+from tqdm import tqdm
+from typing import Dict
 
 dir: str = os.path.dirname(__file__)
 parent_dir, _ = os.path.split(dir)
 sys.path.append(parent_dir)
-
-from typing import Dict
 
 from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
@@ -45,10 +45,11 @@ utils = Utils(CONFIG['log_level'])
 
 def main(
     path: str,
-    size: int = 200,
+    size: int = 224,
+    padding: float = 0.1,
     initial_value: float = -0.1,
     closing_value: float = 0.1,
-    step_value: float = 0.05
+    step_value: float = 0.1
     ) -> None:
     """Simple example.
 
@@ -59,10 +60,10 @@ def main(
     
     Args:
         path (str): absolute path
-        size (int, optional): Width and height. Defaults to 200.
-        initial_value (float): Initial value. Default is -0.1.
-        closing_value (float): Closing value. Default is 0.1.
-        step_value (float): Step value. Default is 0.01.
+        size (int, optional): Width and height. Defaults to 224.
+        initial_value (float): Initial value. Default is -0.05.
+        closing_value (float): Closing value. Default is 0.05.
+        step_value (float): Step value. Default is 0.05.
 
     Returns:
         None
@@ -81,9 +82,18 @@ def main(
     Image:
         `Pakutaso <https://www.pakutaso.com/20220158028post-38602.html>`_ 
     """
-    utils.distort_barrel(path, size)
+    os.chdir(path)
+    # pathディレクトリをrootとして、pathディレクトリ以下のディレクトリを取得
+    dir_list = os.listdir(path)
+    for dir in tqdm(dir_list):
+        utils.distort_barrel(dir, size)
 
 
 if __name__ == '__main__':
     args: list = sys.argv
-    main(args[1], size=200)
+    main(
+        args[1],
+        size=224,
+        padding=0.1,
+        step_value=0.1
+        )
