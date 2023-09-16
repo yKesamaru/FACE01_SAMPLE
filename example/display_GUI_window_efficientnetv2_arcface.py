@@ -78,7 +78,7 @@ def main(exec_times: int = 50) -> None:
         # Call __next__() from the generator object
         frame_datas_array = gen.__next__()
 
-        event, _ = window.read(timeout = 1)
+        event, _ = window.read(timeout = 1)  # type: ignore
 
         if event == sg.WIN_CLOSED:
             print("The window was closed manually")
@@ -97,7 +97,7 @@ def main(exec_times: int = 50) -> None:
                         "-------\n"
                     )
             
-            imgbytes = cv2.imencode(".png", frame_datas['img'])[1].tobytes()
+            imgbytes = cv2.imencode(".png", frame_datas['img'])[1].tobytes()  # type: ignore
             window["display"].update(data = imgbytes)
             
         if event =='terminate':

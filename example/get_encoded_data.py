@@ -20,6 +20,7 @@ Source code:
 # Operate directory: Common to all examples
 import os.path
 import sys
+
 dir: str = os.path.dirname(__file__)
 parent_dir, _ = os.path.split(dir)
 sys.path.append(parent_dir)
@@ -31,7 +32,6 @@ from face01lib.Core import Core
 from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
 from face01lib.video_capture import VidCap
-
 
 # Initialize
 CONFIG: Dict =  Initialize('FACE-COORDINATE', 'info').initialize()

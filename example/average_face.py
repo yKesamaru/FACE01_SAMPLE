@@ -18,24 +18,28 @@ Example:
 Source code:
     `similarity.py <../example/similarity.py>`_
 """
+import glob
+import os
+
 # Operate directory: Common to all examples
 import cv2
-import numpy as np
-import os
-import glob
 import mediapipe as mp
+import numpy as np
 
 # Initializing the Mediapipe face landmark detector
 mp_face_mesh = mp.solutions.face_mesh  # type: ignore
 face_mesh = mp_face_mesh.FaceMesh()
 
 # Change directory where average_face.txt exists
-# root_dir = '/home/terms/bin/FACE01'
-# os.chdir(root_dir)
+root_dir = '/home/terms/ドキュメント/find_similar_faces/assets/average_face/高橋一生'
+# root_dir = '/home/terms/ドキュメント/similarity_of_two_persons/tmp/mix'
+# root_dir = '/home/terms/ドキュメント/similarity_of_two_persons/tmp/eguchi'
+# root_dir = '/home/terms/ドキュメント/similarity_of_two_persons/tmp/hokuto'
+os.chdir(root_dir)
 
 def align_face(image):
     # Detecting face landmarks
-    results = face_mesh.process(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+    results = face_mesh.process(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))  # type: ignore
 
     if results.multi_face_landmarks:
         for face_landmarks in results.multi_face_landmarks:
@@ -52,34 +56,31 @@ def align_face(image):
             (cX, cY) = (w // 2, h // 2)
 
             # Rotating the image to align the face frontally
-            M = cv2.getRotationMatrix2D((cX, cY), angle, 1.0)
-            aligned = cv2.warpAffine(image, M, (w, h), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
+            M = cv2.getRotationMatrix2D((cX, cY), angle, 1.0)  # type: ignore
+            aligned = cv2.warpAffine(image, M, (w, h), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)  # type: ignore
 
             return aligned
 
-# Loading the directory names
-with open(os.path.join('example', 'average_face.txt'), 'r') as f:
-    male_dirs = f.read().splitlines()
+if __name__ == '__main__':
+    png_list = glob.glob(f'{root_dir}/*.png')
 
+    images = []
+    for png_file in png_list:
+        image = cv2.imread(png_file)  # type: ignore
+        try:
+            aligned = align_face(image)
+            resized = cv2.resize(aligned, (224, 224))  # type: ignore
+            images.append(resized)
+        except:
+            continue
 
-# Reading images, aligning faces, and resizing
-images = []
-for dir_name in male_dirs:
-# for dir_name in male_dirs + female_dirs:
-    image_files = glob.glob(f'{dir_name}/*.png')
-    for image_file in image_files:
-        image = cv2.imread(image_file)
-        aligned = align_face(image)
-        resized = cv2.resize(aligned, (224, 224))  # type: ignore
-        images.append(resized)
+    # Converting images to a numpy array
+    images = np.array(images)
 
-# Converting images to a numpy array
-images = np.array(images)
+    # Calculating the average face
+    average_face = np.mean(images, axis=0).astype("uint8")
 
-# Calculating the average face
-average_face = np.mean(images, axis=0).astype("uint8")
-
-# Displaying the average face
-cv2.imshow("Average Face", average_face)
-cv2.waitKey(0)
+    # Displaying the average face
+    cv2.imshow("Average Face", average_face)  # type: ignore
+    cv2.waitKey(0)  # type: ignore
 

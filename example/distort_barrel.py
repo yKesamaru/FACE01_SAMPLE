@@ -32,7 +32,7 @@ from face01lib.utils import Utils
 
 
 # Initialize
-CONFIG: Dict =  Initialize('DEFAULT', 'info').initialize()
+CONFIG: Dict =  Initialize('EFFICIENTNETV2_ARCFACE_MODEL_GUI', 'info').initialize()
 # Set up logger
 logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
 """Initialize and Setup logger.
@@ -44,9 +44,8 @@ utils = Utils(CONFIG['log_level'])
 
 
 def main(
-    path: str,
-    size: int = 224,
-    padding: float = 0.1,
+    dir_path: str,
+    align_and_resize_bool: bool = False,
     initial_value: float = -0.1,
     closing_value: float = 0.1,
     step_value: float = 0.1
@@ -60,6 +59,7 @@ def main(
     
     Args:
         path (str): absolute path
+        align_and_resize_bool (bool, optional): Whether to align and resize. Defaults to False.
         size (int, optional): Width and height. Defaults to 224.
         initial_value (float): Initial value. Default is -0.05.
         closing_value (float): Closing value. Default is 0.05.
@@ -82,18 +82,20 @@ def main(
     Image:
         `Pakutaso <https://www.pakutaso.com/20220158028post-38602.html>`_ 
     """
-    os.chdir(path)
+    os.chdir(dir_path)
     # pathディレクトリをrootとして、pathディレクトリ以下のディレクトリを取得
-    dir_list = os.listdir(path)
+    dir_list = os.listdir(dir_path)
     for dir in tqdm(dir_list):
-        utils.distort_barrel(dir, size)
+        utils.distort_barrel(dir, align_and_resize_bool)
 
 
 if __name__ == '__main__':
     args: list = sys.argv
+    os.chdir(args[1])
     main(
-        args[1],
-        size=224,
-        padding=0.1,
-        step_value=0.1
+        dir_path = args[1],
+        align_and_resize_bool = False,
+        initial_value = -0.1,
+        closing_value = 0.1,
+        step_value = 0.1
         )

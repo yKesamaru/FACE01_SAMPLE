@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>face01lib package &mdash; FACE01 2.0.02 documentation</title>
+  <title>face01lib package &mdash; FACE01 2.1.05 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico"/>
@@ -20,7 +20,7 @@
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within FACE01 2.0.02 documentation"
+          title="Search within FACE01 2.1.05 documentation"
           href="_static/opensearch.xml"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -124,11 +124,25 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#module-face01lib.combine">face01lib.combine module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#face01lib.combine.Comb"><code class="docutils literal notranslate"><span class="pre">Comb</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.combine.Comb.comb"><code class="docutils literal notranslate"><span class="pre">Comb.comb()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#face01lib-compile-module">face01lib.compile module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-face01lib.draft">face01lib.draft module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-face01lib.load_preset_image">face01lib.load_preset_image module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#face01lib.load_preset_image.LoadPresetImage"><code class="docutils literal notranslate"><span class="pre">LoadPresetImage</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#face01lib.load_preset_image.LoadPresetImage.load_preset_image"><code class="docutils literal notranslate"><span class="pre">LoadPresetImage.load_preset_image()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-face01lib.load_preset_image_bk">face01lib.load_preset_image_bk module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#face01lib.load_preset_image_bk.LoadPresetImage"><code class="docutils literal notranslate"><span class="pre">LoadPresetImage</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.load_preset_image_bk.LoadPresetImage.load_preset_image"><code class="docutils literal notranslate"><span class="pre">LoadPresetImage.load_preset_image()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -149,6 +163,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-face01lib.spoof">face01lib.spoof module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#face01lib.spoof.Spoof"><code class="docutils literal notranslate"><span class="pre">Spoof</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.spoof.Spoof.EyeState"><code class="docutils literal notranslate"><span class="pre">Spoof.EyeState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.spoof.Spoof.detect_eye_blinks"><code class="docutils literal notranslate"><span class="pre">Spoof.detect_eye_blinks()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#face01lib.spoof.Spoof.iris"><code class="docutils literal notranslate"><span class="pre">Spoof.iris()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#face01lib.spoof.Spoof.make_qr_code"><code class="docutils literal notranslate"><span class="pre">Spoof.make_qr_code()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#face01lib.spoof.Spoof.obj_detect"><code class="docutils literal notranslate"><span class="pre">Spoof.obj_detect()</span></code></a></li>
@@ -1135,8 +1151,26 @@ Please refer to the separate license file for the license of the code.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.api.Dlib_api.efficientnetv2_arcface_model_compute_face_descriptor">
-<span class="sig-name descname"><span class="pre">efficientnetv2_arcface_model_compute_face_descriptor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resized_frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw_face_landmark</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">224</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_PADDING</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.api.Dlib_api.efficientnetv2_arcface_model_compute_face_descriptor" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">efficientnetv2_arcface_model_compute_face_descriptor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resized_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw_face_landmark</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">224</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_PADDING</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float32</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.api.Dlib_api.efficientnetv2_arcface_model_compute_face_descriptor" title="Permalink to this definition"></a></dt>
+<dd><p>EfficientNetV2とArcFaceモデルを使用して顔の特徴量を計算します。</p>
+<p>この関数は、与えられた顔の画像データから、EfficientNetV2とArcFaceモデルを使用して顔の特徴量（embedding）を計算します。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>resized_frame</strong> (<em>npt.NDArray</em><em>[</em><em>np.uint8</em><em>]</em>) – リサイズされたフレームの画像データ。</p></li>
+<li><p><strong>raw_face_landmark</strong> (<em>dlib.rectangle</em>) – 顔のランドマーク情報。</p></li>
+<li><p><strong>size</strong> (<em>int</em><em>, </em><em>optional</em>) – 顔のチップのサイズ。デフォルトは224。</p></li>
+<li><p><strong>_PADDING</strong> (<em>float</em><em>, </em><em>optional</em>) – 顔のチップを取得する際のパディング。デフォルトは0.1。</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>顔の特徴量（embedding）。</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>npt.NDArray[np.float32]</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.api.Dlib_api.face_distance">
@@ -1161,7 +1195,7 @@ Please refer to the separate license file for the license of the code.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.api.Dlib_api.face_encodings">
-<span class="sig-name descname"><span class="pre">face_encodings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deep_learning_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resized_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_location_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'small'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.api.Dlib_api.face_encodings" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">face_encodings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deep_learning_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resized_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_location_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'small'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.api.Dlib_api.face_encodings" title="Permalink to this definition"></a></dt>
 <dd><p>Given an image, return the 128-dimension face encoding for each face in the image.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1173,7 +1207,7 @@ Please refer to the separate license file for the license of the code.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><p>A list of 128-dimensional face encodings (one for each face in the image)</p>
+<dd class="field-even"><p><p>A list of 128-dimensional face encodings (one for each face in the image). If deep_learning_model == 1, the size of the list is 512-dimensional face encodings, and the type is List[npt.NDArray[np.float32]]. See Issue # 19.</p>
 <p>Image size, it should be of size 150x150. Also cropping must be done as ‘dlib.get_face_chip’ would do it.
 That is, centered and scaled essentially the same way.</p>
 </p>
@@ -1252,6 +1286,23 @@ That is, centered and scaled essentially the same way.</p>
 </dd></dl>
 
 </section>
+<section id="module-face01lib.combine">
+<span id="face01lib-combine-module"></span><h2>face01lib.combine module<a class="headerlink" href="#module-face01lib.combine" title="Permalink to this heading"></a></h2>
+<p>License for the Code.</p>
+<p>Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="face01lib.combine.Comb">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.combine.</span></span><span class="sig-name descname"><span class="pre">Comb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.combine.Comb" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.combine.Comb.comb">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">comb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.combine.Comb.comb" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
 <section id="face01lib-compile-module">
 <h2>face01lib.compile module<a class="headerlink" href="#face01lib-compile-module" title="Permalink to this heading"></a></h2>
 </section>
@@ -1269,14 +1320,31 @@ Please refer to the separate license file for the license of the code.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.load_preset_image.LoadPresetImage.load_preset_image">
-<span class="sig-name descname"><span class="pre">load_preset_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deep_learning_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RootDir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preset_face_imagesDir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsampling</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'hog'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'small'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.load_preset_image.LoadPresetImage.load_preset_image" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">load_preset_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deep_learning_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RootDir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preset_face_imagesDir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsampling</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'hog'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'small'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.load_preset_image.LoadPresetImage.load_preset_image" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-face01lib.load_preset_image_bk">
+<span id="face01lib-load-preset-image-bk-module"></span><h2>face01lib.load_preset_image_bk module<a class="headerlink" href="#module-face01lib.load_preset_image_bk" title="Permalink to this heading"></a></h2>
+<p>License for the Code.</p>
+<p>Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="face01lib.load_preset_image_bk.LoadPresetImage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.load_preset_image_bk.</span></span><span class="sig-name descname"><span class="pre">LoadPresetImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.load_preset_image_bk.LoadPresetImage" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.load_preset_image_bk.LoadPresetImage.load_preset_image">
+<span class="sig-name descname"><span class="pre">load_preset_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deep_learning_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RootDir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preset_face_imagesDir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsampling</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'hog'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'small'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.load_preset_image_bk.LoadPresetImage.load_preset_image" title="Permalink to this definition"></a></dt>
 <dd><p>Load face image from preset_face_images folder.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>deep_learning_model</strong> (<em>int</em>) – You can select from 0 or 1. 0 is Dlib, 1 is Efficientnetv2_arcface.onnx.</p></li>
-<li><p><strong>RootDir</strong> (<em>str</em>) – Root directory</p></li>
-<li><p><strong>preset_face_imagesDir</strong> (<em>str</em>) – Path to preset_face_images folder</p></li>
+<li><p><strong>RootDir</strong> (<em>str</em>) – Root directory. npKnown.npzが作成されるディレクトリ。</p></li>
+<li><p><strong>preset_face_imagesDir</strong> (<em>str</em>) – Path to preset_face_images folder. pngファイルが存在するディレクトリ。</p></li>
 <li><p><strong>upsampling</strong> (<em>int</em><em>, </em><em>optional</em>) – Value of upsampling. Defaults to 0.</p></li>
 <li><p><strong>jitters</strong> (<em>int</em><em>, </em><em>optional</em>) – Value of jitters. Defaults to 100.</p></li>
 <li><p><strong>mode</strong> (<em>str</em><em>, </em><em>optional</em>) – You can select from hog or cnn. Defaults to ‘hog’.</p></li>
@@ -1403,13 +1471,79 @@ Please refer to the separate license file for the license of the code.</p>
 </section>
 <section id="module-face01lib.spoof">
 <span id="face01lib-spoof-module"></span><h2>face01lib.spoof module<a class="headerlink" href="#module-face01lib.spoof" title="Permalink to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
+<p>Spoof Module.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This module is experimental.</p>
+</div>
+<p>このモジュールは、顔の特徴点の検出、オブジェクトの検出、およびQRコードの生成に関連する機能を提供します。</p>
+<dl class="simple">
+<dt>主なクラス:</dt><dd><ul class="simple">
+<li><p>Spoof: 顔の特徴点の検出、オブジェクトの検出、およびQRコードの生成を行うメソッドを持つクラス。</p></li>
+</ul>
+</dd>
+<dt>主なメソッド:</dt><dd><ul class="simple">
+<li><p>iris: 顔の虹彩を検出し、その特徴点を描画します。</p></li>
+<li><p>obj_detect: オブジェクトを検出し、その特徴点を描画します。</p></li>
+<li><p>make_qr_code: QRコードを生成します。</p></li>
+</ul>
+</dd>
+<dt>使用例:</dt><dd><p>spoof_obj = Spoof()
+spoof_obj.iris()
+spoof_obj.obj_detect()
+spoof_obj.make_qr_code()</p>
+</dd>
+<dt>注意:</dt><dd><ul class="simple">
+<li><p>このモジュールは、実験的なものです。</p></li>
+</ul>
+</dd>
+<dt>License:</dt><dd><p>Copyright Owner: Yoshitsugu Kesamaru
 Please refer to the separate license file for the license of the code.</p>
+</dd>
+</dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.spoof.Spoof">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.spoof.</span></span><span class="sig-name descname"><span class="pre">Spoof</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.spoof.Spoof" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="face01lib.spoof.Spoof.EyeState">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">EyeState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.spoof.Spoof.EyeState" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="face01lib.spoof.Spoof.EyeState.BLINKING">
+<span class="sig-name descname"><span class="pre">BLINKING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#face01lib.spoof.Spoof.EyeState.BLINKING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="face01lib.spoof.Spoof.EyeState.CLOSED">
+<span class="sig-name descname"><span class="pre">CLOSED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#face01lib.spoof.Spoof.EyeState.CLOSED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="face01lib.spoof.Spoof.EyeState.OPEN">
+<span class="sig-name descname"><span class="pre">OPEN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#face01lib.spoof.Spoof.EyeState.OPEN" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.spoof.Spoof.detect_eye_blinks">
+<span class="sig-name descname"><span class="pre">detect_eye_blinks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame_datas_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CONFIG</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#face01lib.spoof.Spoof.detect_eye_blinks" title="Permalink to this definition"></a></dt>
+<dd><p>Return True if eye blink is detected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>frame_datas_array</strong> (<em>array</em><em>[</em><em>Dict</em><em>]</em>) – frame_datas_array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If eye blink is detected, return True. Otherwise, return False.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.spoof.Spoof.iris">
 <span class="sig-name descname"><span class="pre">iris</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#face01lib.spoof.Spoof.iris" title="Permalink to this definition"></a></dt>
@@ -1491,7 +1625,7 @@ Please refer to the separate license file for the license of the code.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.utils.Utils.distort_barrel">
-<span class="sig-name descname"><span class="pre">distort_barrel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">224</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">closing_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.utils.Utils.distort_barrel" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">distort_barrel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">align_and_resize_bool</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">224</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">closing_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.utils.Utils.distort_barrel" title="Permalink to this definition"></a></dt>
 <dd><p>Distort barrel.</p>
 <p>Takes a path which contained png, jpg, jpeg files in the directory,
 distort barrel and saves them.</p>
@@ -1499,6 +1633,7 @@ distort barrel and saves them.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>dir_path</strong> (<em>str</em>) – absolute path of target directory.</p></li>
+<li><p><strong>align_and_resize_bool</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to align and resize. Defaults to False.</p></li>
 <li><p><strong>size</strong> (<em>int</em><em>, </em><em>optional</em>) – Width and height. Defaults to 224.</p></li>
 <li><p><strong>padding</strong> (<em>float</em><em>, </em><em>optional</em>) – Padding. Defaults to 0.1.</p></li>
 <li><p><strong>initial_value</strong> (<em>float</em>) – Initial value. Default is -0.1.</p></li>
@@ -1675,7 +1810,7 @@ Please refer to the separate license file for the license of the code.</p>
 <p>contains methods that initially process the input video data</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.video_capture.VidCap.finalize">
-<span class="sig-name descname"><span class="pre">finalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vcap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">VideoCapture</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#face01lib.video_capture.VidCap.finalize" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">finalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vcap</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#face01lib.video_capture.VidCap.finalize" title="Permalink to this definition"></a></dt>
 <dd><p>Release vcap and Destroy window.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1739,7 +1874,7 @@ Please refer to the separate license file for the license of the code.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.video_capture.VidCap.return_movie_property">
-<span class="sig-name descname"><span class="pre">return_movie_property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">VideoCapture</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.video_capture.VidCap.return_movie_property" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">return_movie_property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcap</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#face01lib.video_capture.VidCap.return_movie_property" title="Permalink to this definition"></a></dt>
 <dd><p>Return input movie file’s property.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

@@ -32,31 +32,33 @@ from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
 from face01lib.utils import Utils
 
-api_obj = Dlib_api()
-utils_obj = Utils()
+if __name__ == '__main__':
+        
+    api_obj = Dlib_api()
+    utils_obj = Utils()
 
-# Initialize
-CONFIG: Dict =  Initialize('EFFICIENTNETV2_ARCFACE_MODEL', 'info')._configure()
-# Set up logger
-logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
-"""Initialize and Setup logger.
-When coding a program that uses FACE01, code `initialize` and `logger` first.
-This will read the configuration file `config.ini` and log errors etc.
-"""
+    # Initialize
+    CONFIG: Dict =  Initialize('EFFICIENTNETV2_ARCFACE_MODEL', 'info')._configure()
+    # Set up logger
+    logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
+    """Initialize and Setup logger.
+    When coding a program that uses FACE01, code `initialize` and `logger` first.
+    This will read the configuration file `config.ini` and log errors etc.
+    """
 
-face_path = 'example/img/麻生太郎_default.png'
+    face_path = 'example/img/麻生太郎_default.png'
 
-# Load '麻生.png' in the example/img folder
-img = dlib.load_rgb_image(face_path)
+    # Load '麻生.png' in the example/img folder
+    img = dlib.load_rgb_image(face_path)
 
-# Convert face_image from BGR to RGB
-face_image = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    # Convert face_image from BGR to RGB
+    face_image = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-face_locations: List = api_obj.face_locations(img, mode="cnn")
-face_encodings: List[npt.NDArray] = api_obj.face_encodings(
-        deep_learning_model=1,
-        resized_frame=img,
-        face_location_list=face_locations
-    )
+    face_locations: List = api_obj.face_locations(img, mode="cnn")
+    face_encodings: List[npt.NDArray] = api_obj.face_encodings(
+            deep_learning_model=1,
+            resized_frame=img,
+            face_location_list=face_locations
+        )
 
-print(face_encodings)
+    print(face_encodings)

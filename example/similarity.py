@@ -38,34 +38,35 @@ from face01lib.api import Dlib_api
 from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
 
-api_obj = Dlib_api()
+if __name__ == '__main__':
+    api_obj = Dlib_api()
 
-# Initialize
-CONFIG: Dict =  Initialize('EFFICIENTNETV2_ARCFACE_MODEL', 'info')._configure()
-# Set up logger
-logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
+    # Initialize
+    CONFIG: Dict =  Initialize('EFFICIENTNETV2_ARCFACE_MODEL', 'info')._configure()
+    # Set up logger
+    logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
 
-face_path_list =[
-    'example/img/麻生太郎_default.png',
-    'example/img/安倍晋三_default.png'
-    ]
+    face_path_list =[
+        'example/img/麻生太郎_default.png',
+        'example/img/安倍晋三_default.png'
+        ]
 
-encoding_list = []
-for face_path in face_path_list:
-    img = dlib.load_rgb_image(face_path)  # type: ignore
+    encoding_list = []
+    for face_path in face_path_list:
+        img = dlib.load_rgb_image(face_path)  # type: ignore
 
-    face_image = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        face_image = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-    face_locations: List = api_obj.face_locations(img, mode="cnn")
-    face_encodings: List[npt.NDArray] = api_obj.face_encodings(
-            deep_learning_model=1,
-            resized_frame=img,
-            face_location_list=face_locations
-        )
-    encoding_list.append(face_encodings[0])
+        face_locations: List = api_obj.face_locations(img, mode="cnn")
+        face_encodings: List[npt.NDArray] = api_obj.face_encodings(
+                deep_learning_model=1,
+                resized_frame=img,
+                face_location_list=face_locations
+            )
+        encoding_list.append(face_encodings[0])
 
-emb0 = encoding_list[0].flatten()
-emb1 = encoding_list[1].flatten()
-cos_sim = np.dot(emb0, emb1) / (np.linalg.norm(emb0) * np.linalg.norm(emb1))
-percentage = api_obj.percentage(cos_sim)
-print(percentage)
+    emb0 = encoding_list[0].flatten()
+    emb1 = encoding_list[1].flatten()
+    cos_sim = np.dot(emb0, emb1) / (np.linalg.norm(emb0) * np.linalg.norm(emb1))
+    percentage = api_obj.percentage(cos_sim)
+    print(percentage)
