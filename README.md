@@ -31,25 +31,27 @@ Audrey Hepburn
 ---
 
 📖 TOC
-1. [About FACE01](#about-face01)
-2. [ℹ️: Note](#ℹ️-note)
-3. [Install](#install)
-   1. [INSTALL\_FACE01.sh](#install_face01sh)
-   2. [Docker](#docker)
-4. [Example](#example)
-5. [Document](#document)
-6. [Configuration](#configuration)
-7. [Update](#update)
-8. [Note](#note)
-9. [Acknowledgments](#acknowledgments)
-10. [References](#references)
+- [About FACE01](#about-face01)
+- [ℹ️: Note](#ℹ️-note)
+- [Install](#install)
+  - [INSTALL\_FACE01.sh](#install_face01sh)
+  - [Docker](#docker)
+- [Example](#example)
+- [Document](#document)
+- [Configuration](#configuration)
+- [Update](#update)
+- [Note](#note)
+- [Acknowledgments](#acknowledgments)
+- [References](#references)
 
 # About FACE01
 ---
 ✨ FACE01 is a **face recognition library** that integrates various functions and can be called from **Python**.
 
-- 🎉 EfficientNetV2 Arcface Model is now available ! 
-  - `EfficientNetV2 Arcface Model`は日本人の顔認証に特化したモデルです。
+- 🎉 まばたき検知を実装しました。簡易なりすまし防止機能として実装可能です。
+- 🎉 JAPANESE FACE v1 is now available !
+  - `JAPANESE FACE v1`は日本人の顔認証に特化したモデルです。
+    - コード中では`EfficientNetV2 Arcface Model`と表現されています。
 - `Real-time face recognition` is possible from face datas of **more than 10,000 people**
 - Super high-speed face coordinate output function
 - Face image saving function with date and time information
@@ -123,7 +125,7 @@ If you want to see the exhaustive document, see [here](https://ykesamaru.github.
 # Update
 ---
 - 🔖 v2.1.05
-  - Add `EfficientNetV2 Arcface Model`
+  - Add function to detect eye blinks.
 
 
 # Note
