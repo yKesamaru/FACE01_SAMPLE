@@ -31,18 +31,18 @@ Audrey Hepburn
 ---
 
 📖 TOC
-- [About FACE01](#about-face01)
-- [ℹ️: Note](#ℹ️-note)
-- [Install](#install)
-  - [INSTALL\_FACE01.sh](#install_face01sh)
-  - [Docker](#docker)
-- [Example](#example)
-- [Document](#document)
-- [Configuration](#configuration)
-- [Update](#update)
-- [Note](#note)
-- [Acknowledgments](#acknowledgments)
-- [References](#references)
+1. [About FACE01](#about-face01)
+2. [ℹ️: Note](#ℹ️-note)
+3. [Install](#install)
+   1. [INSTALL\_FACE01.sh](#install_face01sh)
+   2. [Docker](#docker)
+4. [Example](#example)
+5. [Document](#document)
+6. [Configuration](#configuration)
+7. [Update](#update)
+8. [Note](#note)
+9. [Acknowledgments](#acknowledgments)
+10. [References](#references)
 
 # About FACE01
 ---
@@ -67,6 +67,7 @@ Audrey Hepburn
 > 教育機関でご利用の場合、ソースコードを研究・教育にご利用できます。
 >   詳しくは[日本のAI教育を支援する、顔認識ライブラリ`FACE01`の提供について](docs/academic.md)をご覧ください。
 > - 商用利用にあたっては別途ライセンスが必要です。
+> こちらのサンプルは2024年2月までご使用になれます。これ以降にこのサンプルを試用いただく場合にはご連絡をください。
 
 # Install
 ---
