@@ -1,3 +1,9 @@
+"""License for the Code.
+
+Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.
+"""
+
 """Example of simple face recognition script.
 
 Summary:
@@ -27,7 +33,7 @@ from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
 
 # Initialize
-CONFIG: Dict =  Initialize('DEFAULT', 'info').initialize()
+CONFIG: Dict = Initialize('DEFAULT', 'info').initialize()
 # Set up logger
 logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
 """Initialize and Setup logger.

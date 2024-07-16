@@ -125,7 +125,7 @@
       "cwd": "/home/terms/bin/FACE01/example",
       "program": "/home/terms/bin/FACE01/example/simple.py",
       "console": "integratedTerminal",
-      "python": "/home/terms/bin/FACE01/bin/python3"
+      "python": "/home/terms/bin/DIST/bin/python3"
     },
     {
       "name": "benchmark_GUI_window.py",

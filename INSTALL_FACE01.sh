@@ -65,7 +65,7 @@ pip cache remove dlib
 pip install -U pip
 pip install -U wheel
 pip install -U setuptools
-pip install -r requirements.txt
+pip install .
 
 tar -jxvf dlib-19.24.tar.bz2
 cd dlib-19.24

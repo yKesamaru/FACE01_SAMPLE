@@ -1,11 +1,12 @@
-"""Example of simple face encode script with EfficientNetV2 Arcface model.
+"""JAPANESE FACE V1モデルを使用したQR顔エンコードの例.
 
 Summary:
-    In this example, you can learn how to make ID card sample with QR code for multimodal certification.
+    この例では、マルチモーダル認証のためのQRコード付きIDカードサンプルの作成方法を学ぶことができます。
+    作成された画像ファイルは'example/img/'ディレクトリに保存されます。
 
 Example:
     .. code-block:: bash
-    
+
         python3 example/make_ID_card.py
 
 Results:
@@ -15,6 +16,7 @@ Results:
 Source code:
     `make_ID_card.py <../example/make_ID_card.py>`_
 """
+
 # Operate directory: Common to all examples
 import os.path
 import sys
@@ -40,7 +42,7 @@ utils_obj = Utils()
 
 if __name__ == '__main__':
     # Initialize
-    CONFIG: Dict =  Initialize('EFFICIENTNETV2_ARCFACE_MODEL', 'info')._configure()
+    CONFIG: Dict = Initialize('JAPANESE_FACE_V1_MODEL', 'info')._configure()
     # Set up logger
     logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
     """Initialize and Setup logger.
@@ -63,10 +65,10 @@ if __name__ == '__main__':
 
     face_locations: List = api_obj.face_locations(img, mode="cnn")
     face_encodings: List[npt.NDArray] = api_obj.face_encodings(
-            deep_learning_model=1,
-            resized_frame=img,
-            face_location_list=face_locations
-        )
+        deep_learning_model=1,
+        resized_frame=img,
+        face_location_list=face_locations
+    )
 
     # QRコードを作成
     qr_img_list = utils_obj.return_qr_code(face_encodings[0])

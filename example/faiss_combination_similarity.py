@@ -1,11 +1,18 @@
-"""An example of code that loads all npKnown.npz files in the specified directory, and detects specified combinations of cosine similarities using faiss.
+"""指定されたディレクトリ内のすべての npKnown.npz ファイルを読み込み、faiss を使用して指定された組み合わせのコサイン類似度を検出するコードの例.
 
 Summary:
-    In this example, you can learn how to load all npKnown.npz files in the specified directory below and detect specified combinations of cosine similarities using faiss.
-    
+    この例では、指定されたディレクトリ内のすべての npKnown.npz ファイルを読み込み、faiss を使用して指定された組み合わせのコサイン類似度を検出する方法を学ぶことができます。
+
 Usage:
+    この例では必要になるデータ（ディレクトリ）を予めダウンロードしておく必要があります。
+
+    git clone https://github.com/yKesamaru/FACE01_IOT_dev_assets.git
+
+    FACE01_IOT_devフォルダが作成されます。これを確認した後にこのエグザんプルコードを実行してください。
+
+
     .. code-block:: bash
-    
+
         python3 example/faiss_combination_similarity.py
 
 Source code:
@@ -19,8 +26,6 @@ import sys
 dir: str = os.path.dirname(__file__)
 parent_dir, _ = os.path.split(dir)
 sys.path.append(parent_dir)
-
-
 
 import os
 import time
@@ -39,10 +44,11 @@ if __name__ == '__main__':
     # 量子化器を作成（内積を使用）
     quantizer = faiss.IndexFlatIP(dimension)
     # IVFフラットインデックスを作成
-    index = faiss.IndexIVFFlat(quantizer, dimension, nlist, faiss.METRIC_INNER_PRODUCT)
+    index = faiss.IndexIVFFlat(
+        quantizer, dimension, nlist, faiss.METRIC_INNER_PRODUCT)
 
     # データのルートディレクトリ
-    root_dir = "/media/terms/2TB_Movie/face_data_backup/data"
+    root_dir = "../FACE01_IOT_dev_assets/data"
     # カレントディレクトリを変更
     os.chdir(root_dir)
 
@@ -94,7 +100,6 @@ if __name__ == '__main__':
                 if D[i, j] >= 0.7 and all_dir_list[i] != all_dir_list[I[i, j]] and sorted_pair not in processed_pairs:
                     f.write(f"{all_name_list[i]},{all_name_list[I[i, j]]},{D[i, j]}\n")
                     processed_pairs.add(sorted_pair)  # ペアを処理済みとしてセットに追加
-
 
     # 処理時間を計算して出力
     end_time = time.time()

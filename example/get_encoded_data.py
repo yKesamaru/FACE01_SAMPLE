@@ -1,18 +1,18 @@
-"""Example of to get face encoded data.
+"""顔エンコーディングデータの取得例.
 
 Summary:
     In this example, you can learn how to get face encoded datas.
+    標準出力に顔エンコーディングデータが出力されます。
 
 Example:
     .. code-block:: bash
-    
+
         python3 example/get_encoded_data.py
 
 .. note::
+    Make sure this example must be applied for 'one person'.
+    Not more two persons in same input.
 
-   Make sure this example must be applied for 'one person'.
-   Not more two persons in same input.
-        
 Source code:
     `get_encoded_data.py <../example/get_encoded_data.py>`_
 """
@@ -34,7 +34,7 @@ from face01lib.logger import Logger
 from face01lib.video_capture import VidCap
 
 # Initialize
-CONFIG: Dict =  Initialize('FACE-COORDINATE', 'info').initialize()
+CONFIG: Dict = Initialize('FACE-COORDINATE', 'info').initialize()
 # Set up logger
 logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
 """Initialize and Setup logger.
@@ -54,7 +54,7 @@ def main(exec_times: int = 50) -> None:
     Returns:
         None
 
-    """    
+    """
     # Make generator
     frame_generator_obj = VidCap().frame_generator(CONFIG)
 
@@ -79,4 +79,4 @@ def main(exec_times: int = 50) -> None:
 
 if __name__ == '__main__':
     # Call main function.
-    main(exec_times = 10)
+    main(exec_times=10)
