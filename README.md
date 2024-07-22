@@ -1,5 +1,9 @@
-[!IMPORTANT]
-[FACE01_DEV](https://github.com/yKesamaru/FACE01_DEV)へリポジトリが変更されました。こちらのリポジトリは使用不可となります。恐れ入りますがブックマークの変更をお願いいたします。[FACE01_DEV](https://github.com/yKesamaru/FACE01_DEV)リポジトリではバージョンが新しくなり、全てのコードがオープンソースとなっております。(LICENCEをご参照ください)
+> [!IMPORTANT]
+> [FACE01_DEV](https://github.com/yKesamaru/FACE01_DEV)へリポジトリが変更されました。
+> ***こちらのリポジトリは使用不可となります。***
+> 恐れ入りますがブックマークの変更をお願いいたします。
+> 
+> [FACE01_DEV](https://github.com/yKesamaru/FACE01_DEV)リポジトリではバージョンが新しくなり、全てのコードがオープンソースとなっております。(LICENCEをご参照ください)
 
 ---
 
