@@ -7,7 +7,7 @@ FACE01
 ==================================
 
 .. warning::
-   `FACE01_SAMPLE`リポジトリは[`FACE01_DEV`リポジトリ](https://github.com/yKesamaru/FACE01_DEV/tree/master)に移行したため、このドキュメントページは閉鎖されました。。
+   `FACE01_SAMPLE`リポジトリは[`FACE01_DEV`リポジトリ](https://github.com/yKesamaru/FACE01_DEV/tree/master)に移行したため、このドキュメントページは閉鎖されました。
    最新のドキュメントは[こちら](https://ykesamaru.github.io/FACE01_DEV/)からご参照ください。
 
 .. toctree::
